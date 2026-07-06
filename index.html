@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CivicPulse — Hear What Your City Is Saying</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <section class="hero">
+    <header class="nav">
+      <a class="logo" href="#">CivicPulse</a>
+      <nav class="nav-links">
+        <a href="#signals">Live Signals</a>
+        <a class="btn btn-dark" href="#" id="bookDemoBtn">Book a demo</a>
+      </nav>
+    </header>
+
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <h1>Hear What Your<br>City Is Saying</h1>
+        <p class="hero-sub">
+          AI-powered civic listening for the mayor's office — turning resident
+          voices into a clear operational picture of the city
+        </p>
+        <a class="btn btn-dark btn-lg" href="#signals">See what residents are saying</a>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 520 520" class="globe">
+          <defs>
+            <radialGradient id="sphereShade" cx="38%" cy="32%" r="75%">
+              <stop offset="0%" stop-color="#6f9ff2"/>
+              <stop offset="60%" stop-color="#4f7fe0"/>
+              <stop offset="100%" stop-color="#3a63c4"/>
+            </radialGradient>
+          </defs>
+
+          <!-- top halves of orbit rings (pass behind the globe) -->
+          <g transform="rotate(-24 260 260)">
+            <path d="M 15 260 A 245 88 0 0 1 505 260" fill="none"
+                  stroke="#f0b1a4" stroke-width="10"/>
+          </g>
+          <g transform="rotate(52 260 260)">
+            <path d="M 15 260 A 245 88 0 0 1 505 260" fill="none"
+                  stroke="#f0b1a4" stroke-width="10"/>
+          </g>
+
+          <!-- globe -->
+          <circle cx="260" cy="260" r="172" fill="url(#sphereShade)"/>
+          <g fill="#5f9e4e">
+            <path d="M175 155 q40 -28 82 -18 q20 6 14 24 q-6 16 8 22 q26 8 18 32 q-8 22 -34 18 q-30 -6 -44 12 q-12 18 -34 10 q-26 -10 -28 -40 q-2 -38 18 -60 Z"/>
+            <path d="M300 300 q30 -12 52 6 q18 16 8 40 q-10 26 -36 34 q-22 6 -34 -10 q-12 -18 -4 -40 q6 -20 14 -30 Z"/>
+            <path d="M382 180 q22 8 26 30 q2 16 -14 18 q-18 0 -24 -16 q-6 -18 12 -32 Z"/>
+            <path d="M226 356 q16 -4 22 10 q4 14 -10 20 q-16 6 -24 -6 q-6 -14 12 -24 Z"/>
+          </g>
+
+          <!-- bottom halves of orbit rings (pass in front) with nodes -->
+          <g transform="rotate(-24 260 260)">
+            <path d="M 15 260 A 245 88 0 0 0 505 260" fill="none"
+                  stroke="#f0b1a4" stroke-width="10"/>
+            <circle cx="87" cy="322" r="26" fill="#f5cdb8"/>
+          </g>
+          <g transform="rotate(52 260 260)">
+            <path d="M 15 260 A 245 88 0 0 0 505 260" fill="none"
+                  stroke="#f0b1a4" stroke-width="10"/>
+            <circle cx="433" cy="322" r="26" fill="#f5cdb8"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="signals" id="signals">
+    <div class="signals-inner">
+      <h2>Live civic signals</h2>
+      <p class="signals-sub">The latest resident concerns ingested from social media and local news, classified by issue.</p>
+      <div class="cards" id="signalCards"></div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
