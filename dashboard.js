@@ -117,7 +117,19 @@ const CATEGORY_COLORS = {
   housing: "#3a63c4",
 };
 
-const SOURCE_LABELS = { tiktok: "TikTok", news: "News", reddit: "Reddit" };
+const SOURCE_LABELS = { tiktok: "TikTok", news: "News", reddit: "Reddit", resident: "Resident" };
+
+// Resident reports submitted through report.html (stored locally until a
+// backend /api/reports endpoint exists).
+const REPORTS_STORAGE_KEY = "civicpulse_resident_reports";
+
+function loadResidentReports() {
+  try {
+    return JSON.parse(localStorage.getItem(REPORTS_STORAGE_KEY)) || [];
+  } catch {
+    return [];
+  }
+}
 
 const SCRAPERS = [
   {
@@ -138,7 +150,7 @@ const SCRAPERS = [
 ];
 
 const state = {
-  signals: [...SAMPLE_SIGNALS],
+  signals: [...loadResidentReports(), ...SAMPLE_SIGNALS],
   selectedCategories: new Set(),
   keyword: "",
 };
@@ -176,8 +188,9 @@ function renderStats() {
   const total = state.signals.length;
   const tiktoks = state.signals.filter((s) => s.source === "tiktok").length;
   const articles = state.signals.filter((s) => s.source === "news").length;
+  const reports = state.signals.filter((s) => s.source === "resident").length;
   el.innerHTML = "";
-  for (const [num, label] of [[total, "signals"], [tiktoks, "tiktoks"], [articles, "articles"]]) {
+  for (const [num, label] of [[total, "signals"], [tiktoks, "tiktoks"], [articles, "articles"], [reports, "reports"]]) {
     const stat = document.createElement("div");
     stat.className = "stat";
     const n = document.createElement("span");
@@ -306,6 +319,12 @@ function renderLegend() {
   }
 }
 
+function escapeHtml(text) {
+  const div = document.createElement("div");
+  div.textContent = text;
+  return div.innerHTML;
+}
+
 function renderMarkers() {
   markerLayer.clearLayers();
   for (const record of visibleSignals()) {
@@ -320,11 +339,14 @@ function renderMarkers() {
     const marker = L.marker([lat, lng], { icon }).addTo(markerLayer);
     marker.getElement().style.background = color;
     const link = record.url
-      ? `<a href="${record.url}" target="_blank" rel="noopener noreferrer">Open source ↗</a>`
+      ? `<a href="${escapeHtml(record.url)}" target="_blank" rel="noopener noreferrer">Open source ↗</a>`
+      : "";
+    const address = record.metadata?.address
+      ? `<div class="popup-meta">📍 ${escapeHtml(record.metadata.address)}</div>`
       : "";
     marker.bindPopup(
-      `<div class="popup-title">${record.title}</div>
-       <div class="popup-meta">${record.outlet} · ${record.published_utc}</div>${link}`
+      `<div class="popup-title">${escapeHtml(record.title)}</div>
+       <div class="popup-meta">${escapeHtml(record.outlet)} · ${escapeHtml(record.published_utc)}</div>${address}${link}`
     );
   }
 }

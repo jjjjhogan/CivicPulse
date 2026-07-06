@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CivicPulse — Report an Issue</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="report.css">
+</head>
+<body class="dashboard-body">
+
+  <header class="nav report-nav">
+    <a class="logo" href="index.html">CivicPulse</a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+    </nav>
+  </header>
+
+  <main class="report">
+    <div class="report-head">
+      <h1>Report an Issue</h1>
+      <p class="dash-sub">
+        Tell the city what's happening in your neighborhood. Your report is added
+        to the civic dashboard so it can be tracked alongside other resident signals.
+      </p>
+    </div>
+
+    <form class="panel report-form" id="reportForm" novalidate>
+
+      <fieldset>
+        <legend>Your information</legend>
+        <div class="form-grid">
+          <label class="field">
+            <span class="field-label">Full name <em>*</em></span>
+            <input type="text" name="name" id="fieldName" required autocomplete="name"
+                   placeholder="Jane Resident">
+          </label>
+          <label class="field">
+            <span class="field-label">Email <em>*</em></span>
+            <input type="email" name="email" id="fieldEmail" required autocomplete="email"
+                   placeholder="jane@example.com">
+          </label>
+          <label class="field">
+            <span class="field-label">Phone (optional)</span>
+            <input type="tel" name="phone" id="fieldPhone" autocomplete="tel"
+                   placeholder="(949) 555-0100">
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>The issue</legend>
+        <label class="field">
+          <span class="field-label">Title <em>*</em></span>
+          <input type="text" name="title" id="fieldTitle" required maxlength="120"
+                 placeholder="e.g. Pothole on Culver Dr near Alton Pkwy">
+        </label>
+        <label class="field">
+          <span class="field-label">Description</span>
+          <textarea name="body" id="fieldBody" rows="4"
+                    placeholder="What's going on? How long has it been happening?"></textarea>
+        </label>
+        <div class="field">
+          <span class="field-label">Issue type <em>*</em> <span class="field-hint">choose at least one</span></span>
+          <div class="tag-filters" id="issueTags"></div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Location</legend>
+        <label class="field">
+          <span class="field-label">Address or place <em>*</em></span>
+          <div class="address-row">
+            <input type="text" name="address" id="fieldAddress" required
+                   placeholder="e.g. 4001 Alton Pkwy, Irvine, CA">
+            <button type="button" class="btn btn-sm" id="locateBtn">Find on map</button>
+          </div>
+          <span class="field-hint" id="geoStatus">
+            Enter an address and click “Find on map”, or click the map to drop a pin.
+          </span>
+        </label>
+        <div id="pickerMap"></div>
+      </fieldset>
+
+      <div class="form-actions">
+        <span class="form-error" id="formError" hidden></span>
+        <button type="submit" class="btn btn-lg" id="submitBtn">Submit report</button>
+      </div>
+    </form>
+
+    <div class="panel report-success" id="reportSuccess" hidden>
+      <h2>Thanks — your report is on the map ✅</h2>
+      <p>Your issue was added to the civic dashboard and will appear as a marker on the map of Irvine.</p>
+      <div class="success-actions">
+        <a class="btn" href="dashboard.html#map">View it on the dashboard</a>
+        <button class="link-btn" id="reportAnother">Report another issue</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="report.js"></script>
+</body>
+</html>
