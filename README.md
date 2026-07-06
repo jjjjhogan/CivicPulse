@@ -33,4 +33,15 @@ Outputs:
 - `data/raw/tiktok_scrape.json` — full scrape data
 - `data/signals/feed.json` — landing-page-ready signal cards
 
-See [docs/INTEGRATION.md](docs/INTEGRATION.md) for how this branch merges with `main`.
+## Dashboard
+
+Run the local server to use the Irvine civic dashboard with live TikTok ingestion:
+
+```bash
+pip install -r requirements.txt
+python scripts/dashboard_server.py
+```
+
+Open http://127.0.0.1:8080/dashboard.html — the Scrapers panel runs `scripts/scrape_tiktok.py` and loads results from `data/signals/tiktok.json`.
+
+See [docs/INTEGRATION.md](docs/INTEGRATION.md) for the full signal contract and merge notes.

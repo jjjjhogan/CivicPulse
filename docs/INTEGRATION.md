@@ -77,8 +77,25 @@ For local development, serve the repo root with any static file server so the br
 - Other ingestion sources (Reddit, news) are not on main yet — when added, they should write to `data/signals/<source>.json` using the same `CivicSignal` schema and merge into `feed.json`
 - Shared classification lives in `scrapers/categories.py` so all sources use the same issue taxonomy
 
+## Dashboard server
+
+`scripts/dashboard_server.py` serves the static UI and exposes scraper APIs for `dashboard.js`:
+
+```bash
+python scripts/dashboard_server.py
+```
+
+| Endpoint | Purpose |
+|----------|---------|
+| `GET /api/signals` | Full `CivicSignal` records from `data/signals/tiktok.json` |
+| `GET /api/signals/feed` | Landing-page-compatible `feed.json` |
+| `POST /api/scrape/tiktok` | Run TikTok scraper (default: Irvine + Newport Beach tags) |
+| `GET /api/scrape/status` | Poll scrape progress and logs |
+
+News and Reddit scraper buttons return `501` until those sources are added.
+
 ## Suggested merge order
 
-1. Merge `scraping-tiktok` into `main`
-2. Coworker wires `script.js` to read `data/signals/feed.json`
+1. ~~Merge `scraping-tiktok` into `main`~~
+2. Wire `script.js` to read `data/signals/feed.json` (via static server or API)
 3. Add future scrapers under `scrapers/<source>/` using the same export pattern
