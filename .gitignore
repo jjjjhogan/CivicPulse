@@ -1,0 +1,9 @@
+data/*
+!data/raw/
+!data/raw/.gitkeep
+!data/signals/
+!data/signals/.gitkeep
+.vscode/
+__pycache__/
+*.pyc
+.env
