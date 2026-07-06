@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CivicPulse — Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body class="dashboard-body">
+
+  <div class="dash-layout">
+
+    <!-- ── left side panel ───────────────────────────────── -->
+    <aside class="sidebar">
+      <a class="logo sidebar-logo" href="index.html">CivicPulse</a>
+
+      <nav class="sidebar-nav" id="sidebarNav">
+        <a href="#overview" class="side-link active">
+          <span class="side-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 13h6V4H4v9Zm0 7h6v-5H4v5Zm10 0h6v-9h-6v9Zm0-16v5h6V4h-6Z"/></svg>
+          </span>
+          Overview
+        </a>
+        <a href="#scrapers" class="side-link">
+          <span class="side-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8Z"/></svg>
+          </span>
+          Scrapers
+        </a>
+        <a href="#tags" class="side-link">
+          <span class="side-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M21.4 11.6 12.4 2.6A2 2 0 0 0 11 2H4a2 2 0 0 0-2 2v7c0 .5.2 1 .6 1.4l9 9a2 2 0 0 0 2.8 0l7-7a2 2 0 0 0 0-2.8ZM6.5 8A1.5 1.5 0 1 1 8 6.5 1.5 1.5 0 0 1 6.5 8Z"/></svg>
+          </span>
+          Tags &amp; search
+        </a>
+        <a href="#feed" class="side-link">
+          <span class="side-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 5h16v2H4V5Zm0 6h16v2H4v-2Zm0 6h10v2H4v-2Z"/></svg>
+          </span>
+          Signal feed
+        </a>
+        <a href="#map" class="side-link">
+          <span class="side-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 14.5 9 2.5 2.5 0 0 1 12 11.5Z"/></svg>
+          </span>
+          Map of Irvine
+        </a>
+      </nav>
+
+      <div class="sidebar-foot">
+        <a href="index.html" class="side-link">
+          <span class="side-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="m12 3 9 8h-3v9h-4v-6h-4v6H6v-9H3l9-8Z"/></svg>
+          </span>
+          Back to home
+        </a>
+      </div>
+    </aside>
+
+    <!-- ── main content ──────────────────────────────────── -->
+    <main class="dash">
+
+      <section class="dash-section" id="overview">
+        <div class="dash-head">
+          <div>
+            <h1>Irvine Civic Dashboard</h1>
+            <p class="dash-sub">Resident signals from social media and local news, mapped and classified by issue.</p>
+          </div>
+          <div class="dash-stats" id="dashStats"></div>
+        </div>
+      </section>
+
+      <section class="dash-section panel scraper-panel" id="scrapers">
+        <div class="panel-head">
+          <h2>Scrapers</h2>
+          <span class="panel-hint">Run ingestion sources and pull fresh signals</span>
+        </div>
+        <div class="scraper-grid" id="scraperGrid"></div>
+        <div class="scraper-log" id="scraperLog" hidden></div>
+      </section>
+
+      <section class="dash-section panel" id="tags">
+        <div class="panel-head">
+          <h2>Keyword tags</h2>
+          <button class="link-btn" id="clearFilters">Clear</button>
+        </div>
+        <div class="tag-filters" id="tagFilters"></div>
+        <input type="search" id="keywordSearch" class="keyword-search"
+               placeholder="Search titles &amp; keywords (e.g. pothole, e-bike, rent)…">
+      </section>
+
+      <section class="dash-section panel" id="feed">
+        <div class="panel-head">
+          <h2>Signal feed</h2>
+          <span class="panel-hint" id="feedCount"></span>
+        </div>
+        <div class="feed" id="signalFeed"></div>
+      </section>
+
+      <section class="dash-section panel map-panel" id="map">
+        <div class="panel-head">
+          <h2>Map of Irvine</h2>
+          <span class="panel-hint">Signals with a known location</span>
+        </div>
+        <div id="irvineMap"></div>
+        <div class="map-legend" id="mapLegend"></div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>
