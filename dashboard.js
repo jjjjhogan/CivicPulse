@@ -3,8 +3,8 @@
 // Sample records follow the CivicSignal schema (scrapers/schema.py):
 // { source, outlet, title, body, url, categories, published_utc, metadata }
 // with optional metadata.lat / metadata.lng for map placement.
-// Once main.py exposes scraper output through an API endpoint, replace
-// SAMPLE_SIGNALS with a fetch() against data/signals/.
+// When scripts/dashboard_server.py is running, live TikTok signals load from
+// GET /api/signals and merge with sample news/reddit records below.
 
 const SAMPLE_SIGNALS = [
   {
@@ -361,6 +361,50 @@ function logLine(text) {
   el.scrollTop = el.scrollHeight;
 }
 
+function mergeSignals(tiktokSignals) {
+  const other = SAMPLE_SIGNALS.filter((s) => s.source !== "tiktok");
+  if (!tiktokSignals.length) {
+    state.signals = [...SAMPLE_SIGNALS];
+    return;
+  }
+  state.signals = [...other, ...tiktokSignals];
+}
+
+async function loadSignals() {
+  try {
+    const res = await fetch("/api/signals");
+    if (!res.ok) return;
+    const data = await res.json();
+    mergeSignals(data.signals || []);
+  } catch {
+    state.signals = [...SAMPLE_SIGNALS];
+  }
+}
+
+async function pollScrapeStatus(statusEl) {
+  const logEl = document.getElementById("scraperLog");
+  while (true) {
+    const res = await fetch("/api/scrape/status");
+    const data = await res.json();
+    if (data.log) {
+      logEl.textContent = data.log;
+      logEl.scrollTop = logEl.scrollHeight;
+    }
+    if (data.status === "completed") {
+      statusEl.textContent = "Done";
+      statusEl.className = "scraper-status done";
+      return true;
+    }
+    if (data.status === "failed") {
+      statusEl.textContent = "Failed";
+      statusEl.className = "scraper-status failed";
+      logLine(data.error || "Scrape failed.");
+      return false;
+    }
+    await new Promise((r) => setTimeout(r, 1500));
+  }
+}
+
 async function runScraper(scraper, statusEl, btn) {
   btn.disabled = true;
   statusEl.textContent = "Running…";
@@ -368,25 +412,43 @@ async function runScraper(scraper, statusEl, btn) {
   logLine(`Starting ${scraper.name}…`);
 
   try {
-    // When main.py is wrapped in an API server, this endpoint will trigger
-    // the real scraper and return fresh CivicSignal records.
     const res = await fetch(`/api/scrape/${scraper.id}`, { method: "POST" });
-    if (!res.ok) throw new Error(`API returned ${res.status}`);
-    const fresh = await res.json();
-    state.signals = [...loadResidentReports(), ...fresh];
-    statusEl.textContent = "Done";
-    statusEl.className = "scraper-status done";
-    logLine(`${scraper.name} finished — ${fresh.length} signals ingested.`);
+    if (res.status === 501) {
+      const body = await res.json();
+      statusEl.textContent = "Not available";
+      statusEl.className = "scraper-status";
+      logLine(body.error || `${scraper.name} is not implemented yet.`);
+      btn.disabled = false;
+      return;
+    }
+    if (res.status === 409) {
+      statusEl.textContent = "Busy";
+      statusEl.className = "scraper-status";
+      logLine("Another scrape is already running.");
+      btn.disabled = false;
+      return;
+    }
+    if (!res.ok) {
+      const body = await res.json().catch(() => ({}));
+      throw new Error(body.error || `API returned ${res.status}`);
+    }
+
+    const ok = await pollScrapeStatus(statusEl);
+    if (ok) {
+      await loadSignals();
+      const count = state.signals.filter((s) => s.source === scraper.id).length;
+      logLine(`${scraper.name} finished — ${count} signals in feed.`);
+      render();
+    }
   } catch {
-    // No backend yet — simulate a run so the UI flow can be demoed.
-    await new Promise((r) => setTimeout(r, 1200));
-    statusEl.textContent = "Done (demo)";
-    statusEl.className = "scraper-status done";
-    logLine(`${scraper.name} finished (demo mode — backend API not running, showing sample data).`);
+    statusEl.textContent = "Offline";
+    statusEl.className = "scraper-status";
+    logLine(
+      `${scraper.name} could not start — run python scripts/dashboard_server.py and try again.`
+    );
   }
 
   btn.disabled = false;
-  render();
 }
 
 function renderScrapers() {
@@ -477,4 +539,4 @@ function initSidebar() {
 initSidebar();
 renderScrapers();
 initMap();
-render();
+loadSignals().then(render);
