@@ -10,13 +10,14 @@ from __future__ import annotations
 
 import argparse
 import json
+import socket
 import subprocess
 import sys
 import threading
 import time
 from pathlib import Path
 
-from flask import Flask, abort, jsonify, request, send_from_directory
+from flask import Flask, abort, jsonify, redirect, request, send_from_directory
 
 ROOT = Path(__file__).resolve().parent.parent
 SIGNALS_DIR = ROOT / "data" / "signals"
@@ -45,9 +46,9 @@ TIKTOK_DEFAULTS = {
         "https://www.tiktok.com/tag/irvine",
         "https://www.tiktok.com/tag/newportbeach",
     ],
-    "max_videos": 3,
+    "max_videos": 10,
     "max_comments": 25,
-    "headless": True,
+    "headless": False,
     "include_all_comments": False,
 }
 
@@ -95,7 +96,7 @@ def _build_scrape_command(payload: dict) -> list[str]:
     cmd.extend(["--max-videos", str(max_videos)])
     cmd.extend(["--max-comments", str(max_comments)])
 
-    if payload.get("headless", True):
+    if payload.get("headless", False):
         cmd.append("--headless")
     if payload.get("include_all_comments"):
         cmd.append("--include-all-comments")
@@ -151,14 +152,19 @@ def _start_scrape(payload: dict, *, source: str):
     except ValueError as exc:
         return jsonify({"error": str(exc)}), 400
 
-    thread = threading.Thread(target=_run_scrape, args=(cmd, source), daemon=True)
+    thread = threading.Thread(
+        target=_run_scrape, args=(cmd,), kwargs={"source": source}, daemon=True
+    )
     thread.start()
     return jsonify({"status": "started", "command": " ".join(cmd)}), 202
 
 
 @app.get("/api/signals")
 def api_signals():
-    signals = _read_json(SIGNALS_DIR / "tiktok.json", [])
+    tiktok = _read_json(SIGNALS_DIR / "tiktok.json", [])
+    reddit = _read_json(SIGNALS_DIR / "reddit.json", [])
+    twitter = _read_json(SIGNALS_DIR / "twitter.json", [])
+    signals = tiktok + reddit + twitter
     return jsonify({"count": len(signals), "signals": signals})
 
 
@@ -199,6 +205,11 @@ def api_scrape_source(source: str):
     return jsonify({"error": f"Scraper '{source}' is not implemented yet."}), 501
 
 
+@app.get("/dashboard")
+def dashboard_shortcut():
+    return redirect("/dashboard.html")
+
+
 @app.route("/", defaults={"filename": "index.html"})
 @app.route("/<path:filename>")
 def static_files(filename: str):
@@ -208,6 +219,11 @@ def static_files(filename: str):
     if not path.is_file():
         abort(404)
     return send_from_directory(ROOT, filename)
+
+
+def _port_in_use(host: str, port: int) -> bool:
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+        return sock.connect_ex((host, port)) == 0
 
 
 def parse_args() -> argparse.Namespace:
@@ -220,7 +236,17 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
-    print(f"CivicPulse server: http://{args.host}:{args.port}/dashboard.html")
+    if _port_in_use(args.host, args.port):
+        print(
+            f"Port {args.port} is already in use on {args.host}. "
+            "Stop the other process first, or run with --port 8081."
+        )
+        raise SystemExit(1)
+
+    base = f"http://{args.host}:{args.port}"
+    print(f"CivicPulse server running:")
+    print(f"  Dashboard: {base}/dashboard.html")
+    print(f"  Landing:   {base}/")
     app.run(host=args.host, port=args.port, debug=args.debug, use_reloader=False)
 
 

@@ -117,7 +117,13 @@ const CATEGORY_COLORS = {
   housing: "#3a63c4",
 };
 
-const SOURCE_LABELS = { tiktok: "TikTok", news: "News", reddit: "Reddit", resident: "Resident" };
+const SOURCE_LABELS = {
+  tiktok: "TikTok",
+  news: "News",
+  reddit: "Reddit",
+  twitter: "Twitter",
+  resident: "Resident",
+};
 
 // Resident reports submitted through report.html (stored locally until a
 // backend /api/reports endpoint exists).
@@ -146,6 +152,11 @@ const SCRAPERS = [
     id: "reddit",
     name: "Reddit scraper",
     desc: "r/irvine and r/orangecounty resident posts",
+  },
+  {
+    id: "twitter",
+    name: "Twitter scraper",
+    desc: "X/Twitter search for Irvine civic posts (import via process_twitter_scrape.py)",
   },
 ];
 
@@ -484,14 +495,16 @@ function logLine(text) {
   el.scrollTop = el.scrollHeight;
 }
 
-function mergeSignals(tiktokSignals) {
+function mergeSignals(liveSignals) {
   const reports = loadResidentReports();
-  if (!tiktokSignals.length) {
+  const other = SAMPLE_SIGNALS.filter(
+    (s) => !["tiktok", "reddit", "twitter"].includes(s.source)
+  );
+  if (!liveSignals.length) {
     state.signals = [...reports, ...SAMPLE_SIGNALS];
     return;
   }
-  const other = SAMPLE_SIGNALS.filter((s) => s.source !== "tiktok");
-  state.signals = [...reports, ...other, ...tiktokSignals];
+  state.signals = [...reports, ...other, ...liveSignals];
 }
 
 async function loadSignals() {

@@ -1,0 +1,264 @@
+"""
+Seed Twitter search scrape export into data/raw/twitter_scrape.json.
+
+Usage:
+    python scripts/seed_twitter_scrape.py
+"""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+OUTPUT = ROOT / "data" / "raw" / "twitter_scrape.json"
+
+TWEETS = [
+    {
+        "id": "2074612266197262406",
+        "conversationId": "2074612266197262406",
+        "createdAt": "Tue Jul 07 21:51:23 +0000 2026",
+        "text": (
+            "#IRVINEPDPIO - This morning, around 9:56 a.m., the Orange County Fire Authority and "
+            "the Irvine Police Department responded to a report of a chemical odor coming from a "
+            "residence on Crater. The FBI responded and has joined the investigation. There are "
+            "no evacuations and no known threat to the community."
+        ),
+        "author": {"name": "Irvine Police Department", "handle": "IrvinePolice", "verified": True},
+        "counts": {"replies": 3, "reposts": 8, "likes": 43, "views": 32079},
+    },
+    {
+        "id": "2074865633205088553",
+        "conversationId": "2074865633205088553",
+        "createdAt": "Wed Jul 08 14:38:10 +0000 2026",
+        "text": (
+            "#IRVINEPDPIO- Around 4:45 a.m., the Orange Police Department pursued a vehicle into "
+            "Irvine. The pursuit ended in the area of E. Yale Loop and Woodspring. IPD officers "
+            "assisted with their investigation. Three juveniles were taken into custody by Orange PD."
+        ),
+        "author": {"name": "Irvine Police Department", "handle": "IrvinePolice", "verified": True},
+        "counts": {"replies": 8, "reposts": 6, "likes": 52, "views": 8256},
+    },
+    {
+        "id": "2074714135410155907",
+        "conversationId": "2074714135410155907",
+        "createdAt": "Wed Jul 08 04:36:10 +0000 2026",
+        "text": (
+            "#IRVINEPDPIO - We need help finding Amy Harchol, a 67-year-old woman. She walked away "
+            "from her home near Harcum Ln. and Saginaw Dr. this morning around 9:30 a.m. She was "
+            "wearing a yellow sun hat, a white T-shirt, black pants, carrying a white purse, and "
+            "a gray tote bag."
+        ),
+        "author": {"name": "Irvine Police Department", "handle": "IrvinePolice", "verified": True},
+        "counts": {"replies": 2, "reposts": 11, "likes": 32, "views": 5622},
+    },
+    {
+        "id": "2074748210867032405",
+        "conversationId": "2074714135410155907",
+        "createdAt": "Wed Jul 08 06:51:35 +0000 2026",
+        "text": "UPDATE- Found and home safe. Thank you, everyone!",
+        "inReplyToStatusId": "2074714135410155907",
+        "author": {"name": "Irvine Police Department", "handle": "IrvinePolice", "verified": True},
+        "counts": {"replies": 0, "reposts": 1, "likes": 14, "views": 622},
+    },
+    {
+        "id": "2074212223065772402",
+        "conversationId": "2074212223065772402",
+        "createdAt": "Mon Jul 06 19:21:45 +0000 2026",
+        "text": "#CCYB Schedule this week at Great Park in Irvine. @VarsityShowcase. #TwoWayPlayer",
+        "author": {"name": "Brody Brehm", "handle": "brodybrehm52", "verified": True},
+        "counts": {"replies": 0, "reposts": 3, "likes": 13, "views": 1438},
+    },
+    {
+        "id": "2074681569772732864",
+        "conversationId": "2074681569772732864",
+        "createdAt": "Wed Jul 08 02:26:46 +0000 2026",
+        "text": (
+            "Excited to be heading out to Irvine, California for the CCYB Varsity Showcase "
+            "tournament with Slammers Fiscus 2027's at Great Park Baseball."
+        ),
+        "author": {"name": "Ryan Jenkins", "handle": "RyanJenkins40", "verified": True},
+        "counts": {"replies": 0, "reposts": 4, "likes": 19, "views": 3175},
+    },
+    {
+        "id": "2074921595874021854",
+        "conversationId": "2074921595874021854",
+        "createdAt": "Wed Jul 08 18:20:33 +0000 2026",
+        "text": (
+            "남가주 - 얼바인 콘도 리스 $4,590/month\n"
+            "📍 89 Strawberry, Irvine, CA 92620\n"
+            "💰 List Price: $4,590/month\n"
+            "🛏️ 3 Bed | 🛁 3 Bath | 📐 1,567 Sq Ft"
+        ),
+        "author": {"name": "Jenny Nam", "handle": "newstarjennynam", "verified": False},
+        "counts": {"replies": 0, "reposts": 0, "likes": 0, "views": 3},
+    },
+    {
+        "id": "2074673980938526841",
+        "conversationId": "2074673980938526841",
+        "createdAt": "Wed Jul 08 01:56:37 +0000 2026",
+        "text": (
+            "Thank you, @USMNT! It was an honor to be part of your World Cup journey. "
+            "You brought our community together and inspired future players."
+        ),
+        "author": {"name": "City of Irvine", "handle": "City_of_Irvine", "verified": False},
+        "counts": {"replies": 2, "reposts": 24, "likes": 217, "views": 3271},
+    },
+    {
+        "id": "2074516158007640371",
+        "conversationId": "2074516158007640371",
+        "createdAt": "Tue Jul 07 15:29:29 +0000 2026",
+        "text": (
+            "Can't wait to be back on the road again at the CCYB Varsity Showcase in Irvine, CA. "
+            "Eager to compete against some high level competition."
+        ),
+        "author": {"name": "Carson Reffel", "handle": "CarsonReffel", "verified": True},
+        "counts": {"replies": 0, "reposts": 3, "likes": 19, "views": 580},
+    },
+    {
+        "id": "2074625803422490805",
+        "conversationId": "2074625803422490805",
+        "createdAt": "Tue Jul 07 22:45:10 +0000 2026",
+        "text": (
+            "🚨#Irvine PD says No known threat to the community but the FBI has joined the "
+            "investigation? Seems legit."
+        ),
+        "author": {"name": "CodeThreeNews", "handle": "CodeThreeNews", "verified": True},
+        "counts": {"replies": 3, "reposts": 0, "likes": 24, "views": 5006},
+    },
+    {
+        "id": "2074913741041447121",
+        "conversationId": "2074913741041447121",
+        "createdAt": "Wed Jul 08 17:49:20 +0000 2026",
+        "text": (
+            "when I was in college I started a startup club called @vestucla, "
+            "looking for sponsors to host them all for an event in SF on July 25!"
+        ),
+        "author": {"name": "Kyle Jeong", "handle": "kylejeong", "verified": True},
+        "counts": {"replies": 7, "reposts": 3, "likes": 16, "views": 455},
+    },
+    {
+        "id": "2074919449203794193",
+        "conversationId": "2074913741041447121",
+        "createdAt": "Wed Jul 08 18:12:01 +0000 2026",
+        "text": "@kylejeong @vestucla @OpenAI @tryramp @Whatnot @paradigmai @Netic_AI @cerebras SoCal builders!",
+        "inReplyToStatusId": "2074913741041447121",
+        "author": {"name": "Rishabh Dedhia", "handle": "DedhiaRishabh", "verified": False},
+        "counts": {"replies": 1, "reposts": 0, "likes": 1, "views": 32},
+    },
+    {
+        "id": "2074921310296453313",
+        "conversationId": "2074913741041447121",
+        "createdAt": "Wed Jul 08 18:19:25 +0000 2026",
+        "text": "@DedhiaRishabh @vestucla @OpenAI @tryramp @Whatnot @paradigmai @Netic_AI @cerebras Irvine different",
+        "inReplyToStatusId": "2074919449203794193",
+        "author": {"name": "Kyle Jeong", "handle": "kylejeong", "verified": True},
+        "counts": {"replies": 0, "reposts": 0, "likes": 0, "views": 18},
+    },
+    {
+        "id": "2025203040643326099",
+        "conversationId": "2025203040643326099",
+        "createdAt": "Sat Feb 21 13:36:45 +0000 2026",
+        "text": "The Irvine Police Department releases a video warning people not to drink and drive..",
+        "author": {"name": "American AF 🇺🇸", "handle": "iAnonPatriot", "verified": True},
+        "counts": {"replies": 418, "reposts": 2152, "likes": 29366, "views": 3139439},
+    },
+    {
+        "id": "2074731464004882533",
+        "conversationId": "2074731464004882533",
+        "createdAt": "Wed Jul 08 05:45:02 +0000 2026",
+        "text": "Good morning everyone happy Wednesday ❤️❤️",
+        "author": {"name": "Liz irvine", "handle": "danger2507", "verified": True},
+        "counts": {"replies": 92, "reposts": 17, "likes": 519, "views": 5882},
+    },
+    {
+        "id": "2074465233171783705",
+        "conversationId": "2074465233171783705",
+        "createdAt": "Tue Jul 07 12:07:07 +0000 2026",
+        "text": "for Aidan & Irvine day 2026 🎁",
+        "author": {"name": "hika𖤓", "handle": "scentxdsun", "verified": False},
+        "counts": {"replies": 2, "reposts": 5, "likes": 7, "views": 178},
+    },
+    {
+        "id": "2074738553070706879",
+        "conversationId": "2074738553070706879",
+        "createdAt": "Wed Jul 08 06:13:12 +0000 2026",
+        "text": (
+            "Hazmat response in Irvine is tied to same teen, chemicals from earlier case, attorney says"
+        ),
+        "author": {"name": "ABC7 Eyewitness News", "handle": "ABC7", "verified": True},
+        "counts": {"replies": 2, "reposts": 1, "likes": 6, "views": 13177},
+    },
+    {
+        "id": "2074851447234248725",
+        "conversationId": "2074851447234248725",
+        "createdAt": "Wed Jul 08 13:41:48 +0000 2026",
+        "text": "hehe 🤫",
+        "author": {"name": "irvine", "handle": "mellowszxz", "verified": False},
+        "counts": {"replies": 0, "reposts": 7, "likes": 70, "views": 934},
+    },
+    {
+        "id": "2072645204998324691",
+        "conversationId": "2072645204998324691",
+        "createdAt": "Thu Jul 02 11:34:59 +0000 2026",
+        "text": (
+            "Well just finished in New York on @foxandfriends talking about new show tomorrow "
+            "called American kitchen on Fox."
+        ),
+        "author": {"name": "Robert Irvine", "handle": "RobertIrvine", "verified": True},
+        "counts": {"replies": 10, "reposts": 8, "likes": 170, "views": 5507},
+    },
+    {
+        "id": "2074505574352343060",
+        "conversationId": "2074505574352343060",
+        "createdAt": "Tue Jul 07 14:47:26 +0000 2026",
+        "text": "Set of #TrainspottingMusical",
+        "author": {"name": "Irvine Welsh", "handle": "IrvineWelsh", "verified": False},
+        "counts": {"replies": 6, "reposts": 16, "likes": 182, "views": 10485},
+    },
+    {
+        "id": "2072551679036141704",
+        "conversationId": "2072551679036141704",
+        "createdAt": "Thu Jul 02 05:23:21 +0000 2026",
+        "text": (
+            "Join us as we celebrate #America250 with a month of free, family-friendly events at "
+            "the Irvine Civic Center."
+        ),
+        "author": {"name": "City of Irvine", "handle": "City_of_Irvine", "verified": False},
+        "counts": {"replies": 0, "reposts": 7, "likes": 9, "views": 1567},
+    },
+    {
+        "id": "2074203494345797975",
+        "conversationId": "2074203494345797975",
+        "createdAt": "Mon Jul 06 18:47:04 +0000 2026",
+        "text": (
+            "I'll be starting this Friday 7/10 for Slammers Bitzer at Great Park #8 at the CCYB in "
+            "Irvine vs Trosky National."
+        ),
+        "author": {"name": "Jackson Phillips", "handle": "JacksonPhiLL22", "verified": True},
+        "counts": {"replies": 1, "reposts": 4, "likes": 18, "views": 1399},
+    },
+]
+
+PAYLOAD = {
+    "pageTitle": "Twitter search irvine",
+    "responseStatus": 200,
+    "scrapedAt": "2026-07-08T18:27:37.600Z",
+    "blocked": False,
+    "listingType": "twitter-search",
+    "query": "irvine",
+    "product": "Top",
+    "itemCount": len(TWEETS),
+    "tweets": TWEETS,
+}
+
+
+def main() -> None:
+    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+    with open(OUTPUT, "w", encoding="utf-8") as handle:
+        json.dump(PAYLOAD, handle, indent=2)
+    print(f"Wrote {len(TWEETS)} tweets -> {OUTPUT}")
+
+
+if __name__ == "__main__":
+    main()

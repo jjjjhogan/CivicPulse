@@ -9,7 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
 from scrapers.tiktok.comments import TikTokComment, _load_video_comments
-from scrapers.tiktok.driver import create_tiktok_driver
+from scrapers.tiktok.driver import close_tiktok_driver, create_tiktok_driver
 from scrapers.tiktok.ui import dismiss_overlays
 
 FEED_SCROLL_PAUSE_SEC = 1.5
@@ -194,7 +194,7 @@ def scrape_tag(
             print(f"    author={video.author or 'unknown'} comments={len(video.comments)}")
             videos.append(video)
     finally:
-        driver.quit()
+        close_tiktok_driver(driver)
 
     return TikTokTagResult(
         tag=tag,

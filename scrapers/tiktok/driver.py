@@ -1,6 +1,20 @@
 import undetected_chromedriver as uc
 
 
+def close_tiktok_driver(driver: uc.Chrome | None) -> None:
+    """Shut down Chrome without WinError 6 noise from uc.Chrome.__del__ on Windows."""
+    if driver is None:
+        return
+    try:
+        driver.quit()
+    except OSError:
+        pass
+    except Exception:
+        pass
+    # uc.Chrome.__del__ calls quit() again during GC; no-op avoids invalid-handle errors.
+    driver.quit = lambda *args, **kwargs: None
+
+
 def create_tiktok_driver(*, headless: bool = False) -> uc.Chrome:
     """Create an undetected Chrome driver tuned for TikTok scraping."""
     options = uc.ChromeOptions()
