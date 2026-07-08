@@ -151,7 +151,7 @@ def _start_scrape(payload: dict, *, source: str):
     except ValueError as exc:
         return jsonify({"error": str(exc)}), 400
 
-    thread = threading.Thread(target=_run_scrape, args=(cmd, source), daemon=True)
+    thread = threading.Thread(target=_run_scrape, args=(cmd,), kwargs={"source": source}, daemon=True)
     thread.start()
     return jsonify({"status": "started", "command": " ".join(cmd)}), 202
 
