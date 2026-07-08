@@ -400,6 +400,95 @@ html {
   font-size: 0.9rem;
 }
 
+/* ── verify issues ────────────────────────────────────── */
+
+.verify-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.verify-card {
+  border: 1px solid #eef1ea;
+  border-radius: 14px;
+  padding: 16px 18px;
+  transition: box-shadow 0.15s ease;
+}
+
+.verify-card:hover { box-shadow: 0 4px 14px rgba(40, 60, 25, 0.08); }
+
+.verify-card .feed-top { margin-bottom: 8px; }
+
+.verify-title {
+  font-size: 0.98rem;
+  font-weight: 500;
+  color: var(--ink-deep);
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+
+.verify-meta {
+  font-size: 0.8rem;
+  color: #7a8a6c;
+  margin-bottom: 12px;
+}
+
+.verify-body {
+  font-size: 0.86rem;
+  color: var(--ink);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.verified-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: #e3f0dc;
+  color: #3c6128;
+}
+
+.vote-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.vote-btn {
+  border: 1.5px solid #e4e8de;
+  background: #fff;
+  color: var(--ink-deep);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+
+.vote-btn:hover { transform: translateY(-1px); }
+
+.vote-btn.voted-yes {
+  background: #e3f0dc;
+  border-color: #4c7a34;
+  color: #3c6128;
+}
+
+.vote-btn.voted-no {
+  background: #f7e3df;
+  border-color: #c44f3f;
+  color: #93392c;
+}
+
+.vote-hint {
+  font-size: 0.78rem;
+  color: #7a8a6c;
+  margin-left: auto;
+}
+
 /* ── map ──────────────────────────────────────────────── */
 
 #irvineMap {

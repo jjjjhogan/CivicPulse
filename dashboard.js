@@ -11,7 +11,7 @@ const SAMPLE_SIGNALS = [
     source: "news",
     outlet: "Voice of OC",
     title: "Orange County's Growing E-bike Crackdown Continues Targeting Parents",
-    url: "https://voiceofoc.org/2026/07/orange-countys-growing-e-bike-crackdown/",
+    url: "https://voiceofoc.org/",
     categories: ["public_safety"],
     published_utc: "2026-07-02",
     metadata: { lat: 33.6695, lng: -117.8231 },
@@ -20,7 +20,7 @@ const SAMPLE_SIGNALS = [
     source: "tiktok",
     outlet: "@irvinemoms",
     title: "POV: the pothole on Culver ate my coffee again #irvine #potholes",
-    url: "https://www.tiktok.com/@irvinemoms/video/7350000000000000001",
+    url: "https://www.tiktok.com/tag/irvine",
     categories: ["potholes"],
     published_utc: "2026-07-01",
     metadata: { lat: 33.6846, lng: -117.7998 },
@@ -29,7 +29,7 @@ const SAMPLE_SIGNALS = [
     source: "news",
     outlet: "Irvine Standard",
     title: "No. 3 city in America to raise a family",
-    url: "https://www.irvinestandard.com/2026/no-3-city-to-raise-a-family/",
+    url: "https://www.irvinestandard.com/",
     categories: ["public_safety"],
     published_utc: "2026-07-01",
     metadata: {},
@@ -38,7 +38,7 @@ const SAMPLE_SIGNALS = [
     source: "reddit",
     outlet: "r/irvine",
     title: "Pothole on Culver and Alton has been there for a month now",
-    url: "https://www.reddit.com/r/irvine/comments/pothole_culver_alton/",
+    url: "https://www.reddit.com/r/irvine/",
     categories: ["potholes"],
     published_utc: "2026-06-30",
     metadata: { lat: 33.6603, lng: -117.8005 },
@@ -47,7 +47,7 @@ const SAMPLE_SIGNALS = [
     source: "tiktok",
     outlet: "@ocpulsecheck",
     title: "Rent in Irvine just went up AGAIN — here's what residents told me",
-    url: "https://www.tiktok.com/@ocpulsecheck/video/7350000000000000002",
+    url: "https://www.tiktok.com/tag/irvinehousing",
     categories: ["housing"],
     published_utc: "2026-06-29",
     metadata: { lat: 33.6926, lng: -117.8352 },
@@ -56,7 +56,7 @@ const SAMPLE_SIGNALS = [
     source: "news",
     outlet: "Voice of OC",
     title: "37 People Died 'Without Fixed Abode' in OC in May, the Highest Monthly Total in a Year",
-    url: "https://voiceofoc.org/2026/06/37-people-died-without-fixed-abode/",
+    url: "https://voiceofoc.org/",
     categories: ["housing"],
     published_utc: "2026-06-28",
     metadata: {},
@@ -65,7 +65,7 @@ const SAMPLE_SIGNALS = [
     source: "reddit",
     outlet: "r/irvine",
     title: "Construction noise starting before 7am near Woodbury — anyone else?",
-    url: "https://www.reddit.com/r/irvine/comments/construction_noise_woodbury/",
+    url: "https://www.reddit.com/r/irvine/",
     categories: ["noise"],
     published_utc: "2026-06-27",
     metadata: { lat: 33.7093, lng: -117.7411 },
@@ -74,7 +74,7 @@ const SAMPLE_SIGNALS = [
     source: "tiktok",
     outlet: "@uciweekly",
     title: "Streetlights out near campus for 2 weeks — students walking home in the dark",
-    url: "https://www.tiktok.com/@uciweekly/video/7350000000000000003",
+    url: "https://www.tiktok.com/tag/uci",
     categories: ["public_safety"],
     published_utc: "2026-06-26",
     metadata: { lat: 33.6405, lng: -117.8443 },
@@ -83,7 +83,7 @@ const SAMPLE_SIGNALS = [
     source: "news",
     outlet: "Irvine Weekly",
     title: "City council weighs new recycling and trash pickup schedule",
-    url: "https://irvineweekly.com/city-council-recycling-trash-pickup/",
+    url: "https://irvineweekly.com/",
     categories: ["sanitation"],
     published_utc: "2026-06-25",
     metadata: { lat: 33.6784, lng: -117.7713 },
@@ -92,7 +92,7 @@ const SAMPLE_SIGNALS = [
     source: "reddit",
     outlet: "r/irvine",
     title: "Illegal dumping behind the Northwood shopping plaza is getting worse",
-    url: "https://www.reddit.com/r/irvine/comments/illegal_dumping_northwood/",
+    url: "https://www.reddit.com/r/irvine/",
     categories: ["sanitation"],
     published_utc: "2026-06-24",
     metadata: { lat: 33.7152, lng: -117.7846 },
@@ -289,6 +289,129 @@ function renderFeed() {
   }
 }
 
+// ── verify issues ───────────────────────────────────────
+// Residents vote on whether a reported issue is really there. Votes are
+// stored locally per browser until a backend /api/votes endpoint exists.
+
+const VOTES_STORAGE_KEY = "civicpulse_issue_votes";
+
+function loadVotes() {
+  try {
+    return JSON.parse(localStorage.getItem(VOTES_STORAGE_KEY)) || {};
+  } catch {
+    return {};
+  }
+}
+
+function saveVotes(votes) {
+  localStorage.setItem(VOTES_STORAGE_KEY, JSON.stringify(votes));
+}
+
+// Resident reports have no id, so key votes on fields that identify one.
+function reportKey(report) {
+  const { lat, lng } = report.metadata || {};
+  return `${report.title}|${report.published_utc}|${lat},${lng}`;
+}
+
+function castVote(key, choice) {
+  const votes = loadVotes();
+  const vote = votes[key] || { up: 0, down: 0, mine: null };
+  if (vote.mine === choice) {
+    vote[choice] -= 1;
+    vote.mine = null;
+  } else {
+    if (vote.mine) vote[vote.mine] -= 1;
+    vote[choice] += 1;
+    vote.mine = choice;
+  }
+  votes[key] = vote;
+  saveVotes(votes);
+  renderVerify();
+}
+
+function renderVerify() {
+  const el = document.getElementById("verifyList");
+  const hint = document.getElementById("verifyHint");
+  const reports = state.signals.filter((s) => s.source === "resident");
+  el.innerHTML = "";
+
+  if (reports.length === 0) {
+    hint.textContent = "Vote on whether resident-reported issues are really there";
+    const empty = document.createElement("p");
+    empty.className = "feed-empty";
+    empty.textContent = "No issues right now.";
+    el.appendChild(empty);
+    return;
+  }
+
+  hint.textContent =
+    `${reports.length} resident-reported issue${reports.length === 1 ? "" : "s"} awaiting verification`;
+
+  const votes = loadVotes();
+  for (const report of reports) {
+    const key = reportKey(report);
+    const vote = votes[key] || { up: 0, down: 0, mine: null };
+
+    const card = document.createElement("article");
+    card.className = "verify-card";
+
+    const top = document.createElement("div");
+    top.className = "feed-top";
+    for (const category of report.categories) {
+      const tag = document.createElement("span");
+      tag.className = "tag";
+      tag.textContent = category.replaceAll("_", " ");
+      top.appendChild(tag);
+    }
+    if (vote.up >= 3 && vote.up > vote.down) {
+      const badge = document.createElement("span");
+      badge.className = "verified-badge";
+      badge.textContent = "✓ Verified by community";
+      top.appendChild(badge);
+    }
+
+    const title = document.createElement("h3");
+    title.className = "verify-title";
+    title.textContent = report.title;
+
+    const meta = document.createElement("p");
+    meta.className = "verify-meta";
+    const address = report.metadata?.address ? ` · 📍 ${report.metadata.address}` : "";
+    meta.textContent = `${report.outlet} · ${report.published_utc}${address}`;
+
+    card.append(top, title, meta);
+
+    if (report.body) {
+      const body = document.createElement("p");
+      body.className = "verify-body";
+      body.textContent = report.body;
+      card.appendChild(body);
+    }
+
+    const row = document.createElement("div");
+    row.className = "vote-row";
+
+    const yesBtn = document.createElement("button");
+    yesBtn.className = "vote-btn" + (vote.mine === "up" ? " voted-yes" : "");
+    yesBtn.textContent = `👍 It's there (${vote.up})`;
+    yesBtn.addEventListener("click", () => castVote(key, "up"));
+
+    const noBtn = document.createElement("button");
+    noBtn.className = "vote-btn" + (vote.mine === "down" ? " voted-no" : "");
+    noBtn.textContent = `👎 Not there (${vote.down})`;
+    noBtn.addEventListener("click", () => castVote(key, "down"));
+
+    const voteHint = document.createElement("span");
+    voteHint.className = "vote-hint";
+    voteHint.textContent =
+      vote.mine === null ? "Have you seen this issue?" : "Click again to remove your vote";
+
+    row.append(yesBtn, noBtn, voteHint);
+    card.appendChild(row);
+    el.appendChild(card);
+  }
+}
+
 // ── map ─────────────────────────────────────────────────
 
 const IRVINE_CENTER = [33.6846, -117.8265];
@@ -362,12 +485,13 @@ function logLine(text) {
 }
 
 function mergeSignals(tiktokSignals) {
-  const other = SAMPLE_SIGNALS.filter((s) => s.source !== "tiktok");
+  const reports = loadResidentReports();
   if (!tiktokSignals.length) {
-    state.signals = [...SAMPLE_SIGNALS];
+    state.signals = [...reports, ...SAMPLE_SIGNALS];
     return;
   }
-  state.signals = [...other, ...tiktokSignals];
+  const other = SAMPLE_SIGNALS.filter((s) => s.source !== "tiktok");
+  state.signals = [...reports, ...other, ...tiktokSignals];
 }
 
 async function loadSignals() {
@@ -377,7 +501,7 @@ async function loadSignals() {
     const data = await res.json();
     mergeSignals(data.signals || []);
   } catch {
-    state.signals = [...SAMPLE_SIGNALS];
+    mergeSignals([]);
   }
 }
 
@@ -488,6 +612,7 @@ function render() {
   renderTagFilters();
   renderFeed();
   renderMarkers();
+  renderVerify();
 }
 
 document.getElementById("keywordSearch").addEventListener("input", (event) => {
