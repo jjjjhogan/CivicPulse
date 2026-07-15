@@ -20,12 +20,14 @@ const SCRAPERS = [
   },
   {
     id: "reddit",
+    source: "reddit",
     name: "Reddit import",
     desc: "Paste or upload a Reddit scrape JSON export, then process into signals",
     signalSource: "reddit",
   },
   {
     id: "twitter",
+    source: "twitter",
     name: "Twitter import",
     desc: "Paste or upload a Twitter/X scrape JSON export, then process into signals",
     signalSource: "twitter",
@@ -783,8 +785,16 @@ function renderScrapers() {
 
     const analytics = document.createElement("a");
     analytics.className = "scraper-analytics";
-    analytics.href = `source.html?source=${encodeURIComponent(scraper.source)}`;
+    analytics.href = `source.html?source=${encodeURIComponent(scraper.source || scraper.signalSource || scraper.id)}`;
     analytics.textContent = "View analytics →";
+
+    card.append(name, desc, analytics);
+
+    if (scraper.id === "tiktok") renderTikTokSettings(card);
+    else if (scraper.id === "irvine-news") renderNewsSettings(card);
+    else if (scraper.id === "reddit" || scraper.id === "twitter") {
+      renderImportSettings(card, scraper);
+    }
 
     const row = document.createElement("div");
     row.className = "scraper-row";
@@ -798,7 +808,7 @@ function renderScrapers() {
     btn.addEventListener("click", () => runScraper(scraper, card, status, btn));
     row.append(status, btn);
 
-    card.append(name, desc, analytics, row);
+    card.appendChild(row);
     el.appendChild(card);
   }
 }
