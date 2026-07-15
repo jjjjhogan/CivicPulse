@@ -60,7 +60,12 @@ def scrape_payload_to_signals(
         query = "+".join(payload["queries"])
     signals: list[CivicSignal] = []
 
-    for post in payload.get("items") or []:
+    items = list(payload.get("items") or [])
+    if not items:
+        for scrape in payload.get("scrapes") or []:
+            items.extend(scrape.get("items") or [])
+
+    for post in items:
         signal = post_to_signal(post, subreddit=subreddit, query=query)
         if civic_only and not signal.categories:
             continue
