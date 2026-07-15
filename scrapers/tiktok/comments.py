@@ -8,7 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
 from scrapers.tiktok.config import TikTokScrapeConfig
-from scrapers.tiktok.driver import create_tiktok_driver
+from scrapers.tiktok.driver import close_tiktok_driver, create_tiktok_driver
 from scrapers.tiktok.ui import dismiss_overlays, find_comment_container, open_comments_panel
 
 TIKTOK_SEARCH_URL = "https://www.tiktok.com/search/video"
@@ -250,7 +250,7 @@ def scrape_comments_from_video(
             time.sleep(8)
         return comments
     finally:
-        driver.quit()
+        close_tiktok_driver(driver)
 
 
 def _scrape_video_with_driver(
@@ -301,7 +301,7 @@ def scrape_comments_for_area(config: TikTokScrapeConfig) -> list[TikTokComment]:
                     )
                 )
     finally:
-        driver.quit()
+        close_tiktok_driver(driver)
 
     return all_comments
 
