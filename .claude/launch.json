@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "civicpulse-web",
+      "runtimeExecutable": "powershell",
+      "runtimeArgs": ["-NoProfile", "-Command", "py -m http.server $env:PORT"],
+      "autoPort": true
+    },
+    {
+      "name": "civicpulse-server",
+      "runtimeExecutable": "powershell",
+      "runtimeArgs": ["-NoProfile", "-Command", "py scripts/dashboard_server.py --port $env:PORT"],
+      "autoPort": true
+    }
+  ]
+}

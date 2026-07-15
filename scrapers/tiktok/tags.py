@@ -344,6 +344,19 @@ def scrape_tag(
 
         _scroll_tag_feed(driver, max_videos, skip_urls=skip)
         video_urls = _collect_video_links(driver, max_videos, skip_urls=skip)
+
+        # TikTok intermittently serves a "Something went wrong" shell with no
+        # feed; a reload usually recovers it.
+        for attempt in range(2):
+            if video_urls:
+                break
+            print(f"No videos rendered for #{tag}, refreshing (attempt {attempt + 1}/2)")
+            driver.refresh()
+            time.sleep(5)
+            dismiss_overlays(driver)
+            _scroll_tag_feed(driver, max_videos, skip_urls=skip)
+            video_urls = _collect_video_links(driver, max_videos, skip_urls=skip)
+
         print(f"Found {len(video_urls)} new videos for #{tag}")
 
         for index, video_url in enumerate(video_urls, start=1):

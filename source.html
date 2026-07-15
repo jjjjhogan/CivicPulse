@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CivicPulse — Source analytics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="source.css">
+</head>
+<body class="dashboard-body">
+
+  <div class="dash-layout">
+
+    <!-- ── left side panel ───────────────────────────────── -->
+    <aside class="sidebar">
+      <a class="logo sidebar-logo" href="index.html">CivicPulse</a>
+
+      <nav class="sidebar-nav" id="sourceNav"></nav>
+
+      <div class="sidebar-foot">
+        <a href="dashboard.html" class="side-link">
+          <span class="side-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 13h6V4H4v9Zm0 7h6v-5H4v5Zm10 0h6v-9h-6v9Zm0-16v5h6V4h-6Z"/></svg>
+          </span>
+          Back to dashboard
+        </a>
+        <a href="index.html" class="side-link">
+          <span class="side-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="m12 3 9 8h-3v9h-4v-6h-4v6H6v-9H3l9-8Z"/></svg>
+          </span>
+          Back to home
+        </a>
+      </div>
+    </aside>
+
+    <!-- ── main content ──────────────────────────────────── -->
+    <main class="dash">
+
+      <section class="dash-section" id="overview">
+        <div class="dash-head">
+          <div>
+            <h1 id="sourceTitle">Source analytics</h1>
+            <p class="dash-sub" id="sourceSub"></p>
+          </div>
+          <div class="dash-stats" id="sourceStats"></div>
+        </div>
+      </section>
+
+      <section class="dash-section panel" id="categories">
+        <div class="panel-head">
+          <h2>By category</h2>
+          <span class="panel-hint" id="categoryHint"></span>
+        </div>
+        <div class="cat-bars" id="categoryBars"></div>
+      </section>
+
+      <section class="dash-section panel" id="timeline">
+        <div class="panel-head">
+          <h2>Signals over time</h2>
+          <span class="panel-hint" id="timelineHint">By published date</span>
+        </div>
+        <div class="timeline" id="timelineChart"></div>
+      </section>
+
+      <section class="dash-section panel" id="outlets">
+        <div class="panel-head">
+          <h2>Top outlets</h2>
+          <span class="panel-hint" id="outletHint"></span>
+        </div>
+        <div class="outlet-list" id="outletList"></div>
+      </section>
+
+      <section class="dash-section panel" id="signals">
+        <div class="panel-head">
+          <h2>All signals</h2>
+          <span class="panel-hint" id="listHint"></span>
+        </div>
+        <div class="feed" id="signalList"></div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="signals-data.js"></script>
+  <script src="source.js"></script>
+</body>
+</html>

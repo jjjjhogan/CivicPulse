@@ -1,0 +1,155 @@
+/* ── source analytics page ────────────────────────────── */
+
+/* sidebar source links */
+
+.side-source-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin: 0 4px;
+  background: #9aa88c;
+}
+
+.side-source-dot.tiktok { background: #2b2b2b; }
+.side-source-dot.news { background: var(--peach); }
+.side-source-dot.reddit { background: #ff7f43; }
+.side-source-dot.twitter { background: #6db6e3; }
+.side-source-dot.resident { background: #7fabdc; }
+
+.side-count {
+  margin-left: auto;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.55);
+  color: var(--ink-deep);
+  padding: 2px 9px;
+  border-radius: 999px;
+}
+
+.side-link.active .side-count {
+  background: var(--mint);
+}
+
+/* header badge next to the h1 */
+
+.head-badge {
+  vertical-align: middle;
+  position: relative;
+  top: -4px;
+}
+
+/* category + outlet bars */
+
+.cat-bars,
+.outlet-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cat-row,
+.outlet-row {
+  display: grid;
+  grid-template-columns: 150px 1fr 36px;
+  align-items: center;
+  gap: 14px;
+}
+
+.cat-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--ink-deep);
+  text-transform: capitalize;
+}
+
+.outlet-name {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--ink-deep);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cat-track {
+  background: #f3f6ef;
+  border-radius: 999px;
+  height: 14px;
+  overflow: hidden;
+}
+
+.cat-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+.outlet-fill {
+  background: var(--mint);
+}
+
+.cat-count {
+  font-size: 0.85rem;
+  color: #7a8a6c;
+  text-align: right;
+}
+
+/* timeline bar chart */
+
+.timeline {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  min-height: 170px;
+  overflow-x: auto;
+  padding: 8px 4px 2px;
+}
+
+.timeline .feed-empty {
+  width: 100%;
+}
+
+.tl-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 36px;
+}
+
+.tl-count {
+  font-size: 0.72rem;
+  color: #7a8a6c;
+}
+
+.tl-bar {
+  width: 22px;
+  background: var(--mint);
+  border-radius: 7px 7px 3px 3px;
+}
+
+.tl-date {
+  font-size: 0.68rem;
+  color: #7a8a6c;
+  white-space: nowrap;
+}
+
+/* map-location badge in the signal list */
+
+.pin-badge {
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: #f3f6ef;
+  color: #5a6b4a;
+}
+
+@media (max-width: 900px) {
+  .cat-row,
+  .outlet-row {
+    grid-template-columns: 100px 1fr 30px;
+    gap: 10px;
+  }
+}

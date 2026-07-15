@@ -1,42 +1,80 @@
 """Shared civic issue categories used across ingestion sources."""
 
-from enum import Enum
+from __future__ import annotations
+
 import re
+from enum import Enum
 
 CATEGORY_KEYWORDS: dict[str, list[str]] = {
     "potholes": [
         "pothole",
         "road damage",
         "pavement crack",
+        "pavement",
         "street repair",
         "road repair",
         "street resurfacing",
         "slurry seal",
+        "roadwork",
+        "road work",
+        "sinkhole",
+        "cracked road",
+        "bumpy road",
+        "asphalt",
+        "road closure",
     ],
     "noise": [
         "noise complaint",
+        "noise",
+        "noisy",
         "loud music",
+        "loud party",
+        "loud parties",
         "construction noise",
         "loud neighbors",
         "noise ordinance",
         "helicopter noise",
+        "barking",
+        "fireworks",
+        "leaf blower",
     ],
     "sanitation": [
         "trash pickup",
+        "trash",
         "garbage",
+        "litter",
         "illegal dumping",
         "sanitation",
         "recycling",
         "waste",
-        "litter",
+        "dumpster",
+        "sewage",
+        "sewer",
+        "landfill",
+        "rats",
+        "rodent",
+        "graffiti",
     ],
     "public_safety": [
         "break-in",
+        "burglary",
+        "robbery",
+        "theft",
+        "stolen",
         "shooting",
+        "gunshot",
         "assault",
         "streetlight out",
+        "street light",
         "crime",
         "police",
+        "cops",
+        "sheriff",
+        "arrest",
+        "vandalism",
+        "unsafe",
+        "dangerous",
+        "sketchy",
         "flood",
         "flooding",
         "flash flood",
@@ -58,18 +96,31 @@ CATEGORY_KEYWORDS: dict[str, list[str]] = {
         "first responder",
         "fire department",
         "swatting",
+        "hazmat",
+        "fbi",
+        "hit and run",
+        "speeding",
+        "reckless driving",
+        "car break",
     ],
     "housing": [
         "eviction",
+        "evicted",
         "rent increase",
+        "rent hike",
         "affordable housing",
         "homeless",
+        "unhoused",
         "housing crisis",
         "rent",
         "zoning",
         "housing",
+        "landlord",
+        "lease",
+        "mortgage",
         "apartment",
         "tenant",
+        "overpriced",
     ],
     "immigration": [
         "immigration",
@@ -95,19 +146,23 @@ class CivicIssueCategory(str, Enum):
     IMMIGRATION = "immigration"
 
 
+# City-mode search runs one TikTok query per term, so keep this list short and
+# high-signal instead of reusing the full classification keyword lists above.
 DEFAULT_SEARCH_TERMS: dict[CivicIssueCategory, list[str]] = {
-    CivicIssueCategory.POTHOLES: CATEGORY_KEYWORDS["potholes"],
-    CivicIssueCategory.NOISE: CATEGORY_KEYWORDS["noise"],
-    CivicIssueCategory.SANITATION: CATEGORY_KEYWORDS["sanitation"],
-    CivicIssueCategory.PUBLIC_SAFETY: CATEGORY_KEYWORDS["public_safety"],
-    CivicIssueCategory.HOUSING: CATEGORY_KEYWORDS["housing"],
-    CivicIssueCategory.IMMIGRATION: CATEGORY_KEYWORDS["immigration"],
+    CivicIssueCategory.POTHOLES: ["pothole", "road damage", "street repair"],
+    CivicIssueCategory.NOISE: ["noise complaint", "construction noise", "loud neighbors"],
+    CivicIssueCategory.SANITATION: ["trash pickup", "garbage", "illegal dumping"],
+    CivicIssueCategory.PUBLIC_SAFETY: ["crime", "police", "streetlight out"],
+    CivicIssueCategory.HOUSING: ["rent increase", "affordable housing", "homeless"],
+    CivicIssueCategory.IMMIGRATION: ["immigration", "ice protest", "deportation"],
 }
 
-
-def _matches(keyword: str, text: str) -> bool:
-    # Word-boundary start so short tokens like "rent" match "rents" but not "current".
-    return re.search(r"\b" + re.escape(keyword), text) is not None
+_CATEGORY_PATTERNS: dict[str, re.Pattern[str]] = {
+    # Word-prefix matching: "rent" hits "rent"/"rents"/"rental" but not
+    # "parent"; "crime" hits "crimes"; "rats" doesn't hit "congrats".
+    category: re.compile(r"\b(?:" + "|".join(re.escape(k) for k in keywords) + r")")
+    for category, keywords in CATEGORY_KEYWORDS.items()
+}
 
 
 def classify(text: str) -> list[str]:
@@ -116,6 +171,6 @@ def classify(text: str) -> list[str]:
         return []
     return [
         category
-        for category, keywords in CATEGORY_KEYWORDS.items()
-        if any(_matches(keyword, text_lower) for keyword in keywords)
+        for category, pattern in _CATEGORY_PATTERNS.items()
+        if pattern.search(text_lower)
     ]
