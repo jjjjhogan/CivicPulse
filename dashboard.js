@@ -228,6 +228,12 @@ function reportKey(report) {
   return `${report.title}|${report.published_utc}|${lat},${lng}`;
 }
 
+// Enough community confirmations — the issue is real and leaves the
+// verification queue (it stays in the feed and on the map).
+function isVerified(vote) {
+  return vote.up >= 3 && vote.up > vote.down;
+}
+
 function castVote(key, choice) {
   const votes = loadVotes();
   const vote = votes[key] || { up: 0, down: 0, mine: null };
@@ -259,11 +265,29 @@ function renderVerify() {
     return;
   }
 
-  hint.textContent =
-    `${reports.length} resident-reported issue${reports.length === 1 ? "" : "s"} awaiting verification`;
-
+  // Verified issues leave the queue so it only holds open questions.
   const votes = loadVotes();
-  for (const report of reports) {
+  const pending = reports.filter(
+    (report) => !isVerified(votes[reportKey(report)] || { up: 0, down: 0 })
+  );
+  const verifiedCount = reports.length - pending.length;
+  const verifiedNote = verifiedCount > 0
+    ? ` · ${verifiedCount} verified and cleared`
+    : "";
+
+  if (pending.length === 0) {
+    hint.textContent = `All caught up${verifiedNote}`;
+    const empty = document.createElement("p");
+    empty.className = "feed-empty";
+    empty.textContent = "Every reported issue has been verified by the community.";
+    el.appendChild(empty);
+    return;
+  }
+
+  hint.textContent =
+    `${pending.length} resident-reported issue${pending.length === 1 ? "" : "s"} awaiting verification${verifiedNote}`;
+
+  for (const report of pending) {
     const key = reportKey(report);
     const vote = votes[key] || { up: 0, down: 0, mine: null };
 
@@ -277,12 +301,6 @@ function renderVerify() {
       tag.className = "tag";
       tag.textContent = category.replaceAll("_", " ");
       top.appendChild(tag);
-    }
-    if (vote.up >= 3 && vote.up > vote.down) {
-      const badge = document.createElement("span");
-      badge.className = "verified-badge";
-      badge.textContent = "✓ Verified by community";
-      top.appendChild(badge);
     }
 
     const title = document.createElement("h3");
