@@ -6,21 +6,25 @@
 const SCRAPERS = [
   {
     id: "tiktok",
+    source: "tiktok",
     name: "TikTok scraper",
     desc: "Selenium scraper for Irvine tags & comments (scripts/scrape_tiktok.py)",
   },
   {
     id: "irvine-news",
+    source: "news",
     name: "Irvine news scraper",
     desc: "Local outlets: Voice of OC, Irvine Standard, Irvine Weekly",
   },
   {
     id: "reddit",
+    source: "reddit",
     name: "Reddit scraper",
     desc: "r/irvine and r/orangecounty resident posts",
   },
   {
     id: "twitter",
+    source: "twitter",
     name: "Twitter scraper",
     desc: "X/Twitter search for Irvine civic posts (import via process_twitter_scrape.py)",
   },
@@ -497,6 +501,11 @@ function renderScrapers() {
     desc.className = "scraper-desc";
     desc.textContent = scraper.desc;
 
+    const analytics = document.createElement("a");
+    analytics.className = "scraper-analytics";
+    analytics.href = `source.html?source=${encodeURIComponent(scraper.source)}`;
+    analytics.textContent = "View analytics →";
+
     const row = document.createElement("div");
     row.className = "scraper-row";
     const status = document.createElement("span");
@@ -508,7 +517,7 @@ function renderScrapers() {
     btn.addEventListener("click", () => runScraper(scraper, status, btn));
     row.append(status, btn);
 
-    card.append(name, desc, row);
+    card.append(name, desc, analytics, row);
     el.appendChild(card);
   }
 }
