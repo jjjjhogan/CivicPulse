@@ -4,17 +4,142 @@
 // uses: resident reports from localStorage + sample records, with live
 // scraper data merged in when the Flask backend is running.
 
+// ?source=tiktok or ?source=tiktok,reddit — any mix of sources.
+// An empty selection means all sources combined.
 const params = new URLSearchParams(window.location.search);
-const currentSource = (params.get("source") || "tiktok").toLowerCase();
+const selectedSources = new Set(
+  (params.get("source") || "")
+    .toLowerCase()
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean)
+);
 
 let signals = [];
+
+// ?issue=potholes or ?issue=potholes,noise — pre-selected issue filters.
+const selectedCategories = new Set(
+  (params.get("issue") || "")
+    .toLowerCase()
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean)
+);
+
+// ?outlet=@irvinemoms — drill into one account/outlet's scraped data.
+let selectedOutlet = params.get("outlet") || null;
 
 function sourceLabel(source) {
   return SOURCE_LABELS[source] || source;
 }
 
 function sourceSignals() {
-  return signals.filter((s) => s.source === currentSource);
+  if (selectedSources.size === 0) return [...signals];
+  return signals.filter((s) => selectedSources.has(s.source));
+}
+
+function matchesCategories(signal) {
+  return (
+    selectedCategories.size === 0 ||
+    (signal.categories || []).some((c) => selectedCategories.has(c))
+  );
+}
+
+// Source signals narrowed to the selected issue and outlet filters.
+function filteredSignals() {
+  return sourceSignals().filter(
+    (s) => matchesCategories(s) && (!selectedOutlet || s.outlet === selectedOutlet)
+  );
+}
+
+function syncUrl() {
+  const query = new URLSearchParams();
+  if (selectedSources.size > 0) {
+    query.set("source", [...selectedSources].join(","));
+  }
+  if (selectedCategories.size > 0) {
+    query.set("issue", [...selectedCategories].join(","));
+  }
+  if (selectedOutlet) query.set("outlet", selectedOutlet);
+  const qs = query.toString();
+  history.replaceState(null, "", qs ? `source.html?${qs}` : "source.html");
+}
+
+function toggleSource(source) {
+  if (selectedSources.has(source)) {
+    selectedSources.delete(source);
+  } else {
+    selectedSources.add(source);
+  }
+  syncUrl();
+  render();
+}
+
+function toggleOutlet(outlet) {
+  selectedOutlet = selectedOutlet === outlet ? null : outlet;
+  syncUrl();
+  render();
+}
+
+// ── filter bar ──────────────────────────────────────────
+
+function allSources() {
+  const present = new Set(signals.map((s) => s.source));
+  return [...new Set([...MAIN_SOURCES, ...present, ...selectedSources])];
+}
+
+function renderFilters() {
+  const sourceEl = document.getElementById("sourceFilters");
+  sourceEl.innerHTML = "";
+  for (const source of allSources()) {
+    const count = signals.filter((s) => s.source === source).length;
+    const btn = document.createElement("button");
+    btn.className = "tag-filter" + (selectedSources.has(source) ? " selected" : "");
+    btn.innerHTML = `${sourceLabel(source)}<span class="count">${count}</span>`;
+    btn.addEventListener("click", () => toggleSource(source));
+    sourceEl.appendChild(btn);
+  }
+
+  const issueEl = document.getElementById("issueFilters");
+  issueEl.innerHTML = "";
+  for (const category of Object.keys(CATEGORY_KEYWORDS)) {
+    const count = sourceSignals().filter((s) =>
+      (s.categories || []).includes(category)
+    ).length;
+    const btn = document.createElement("button");
+    btn.className = "tag-filter" + (selectedCategories.has(category) ? " selected" : "");
+    btn.innerHTML = `${category.replaceAll("_", " ")}<span class="count">${count}</span>`;
+    btn.addEventListener("click", () => {
+      if (selectedCategories.has(category)) {
+        selectedCategories.delete(category);
+      } else {
+        selectedCategories.add(category);
+      }
+      syncUrl();
+      render();
+    });
+    issueEl.appendChild(btn);
+  }
+
+  // The outlet row only appears while drilled into one outlet.
+  const outletRow = document.getElementById("outletFilterRow");
+  const outletEl = document.getElementById("outletFilter");
+  outletEl.innerHTML = "";
+  outletRow.hidden = !selectedOutlet;
+  if (selectedOutlet) {
+    const count = sourceSignals().filter((s) => s.outlet === selectedOutlet).length;
+    const btn = document.createElement("button");
+    btn.className = "tag-filter selected";
+    btn.innerHTML = `${escapeText(selectedOutlet)}<span class="count">${count}</span> ✕`;
+    btn.addEventListener("click", () => toggleOutlet(selectedOutlet));
+    outletEl.appendChild(btn);
+  }
+}
+
+function escapeText(text) {
+  const div = document.createElement("div");
+  div.textContent = text;
+  return div.innerHTML;
 }
 
 // ── sidebar: one link per source ────────────────────────
@@ -26,11 +151,21 @@ function renderNav() {
   for (const signal of signals) {
     counts[signal.source] = (counts[signal.source] || 0) + 1;
   }
-  const sources = [...new Set([...MAIN_SOURCES, ...Object.keys(counts), currentSource])];
 
-  for (const source of sources) {
+  const all = document.createElement("a");
+  all.className = "side-link" + (selectedSources.size === 0 ? " active" : "");
+  all.href = "source.html";
+  const allDot = document.createElement("span");
+  allDot.className = "side-source-dot";
+  const allCount = document.createElement("span");
+  allCount.className = "side-count";
+  allCount.textContent = signals.length;
+  all.append(allDot, "All sources", allCount);
+  el.appendChild(all);
+
+  for (const source of allSources()) {
     const link = document.createElement("a");
-    link.className = "side-link" + (source === currentSource ? " active" : "");
+    link.className = "side-link" + (selectedSources.has(source) ? " active" : "");
     link.href = `source.html?source=${encodeURIComponent(source)}`;
 
     const dot = document.createElement("span");
@@ -48,16 +183,22 @@ function renderNav() {
 // ── header stats ────────────────────────────────────────
 
 function renderHead() {
-  const records = sourceSignals();
-  const label = sourceLabel(currentSource);
+  const records = filteredSignals();
+  const chosen = [...selectedSources];
+  const label = chosen.length === 0
+    ? "All sources"
+    : chosen.map(sourceLabel).join(" + ");
   document.title = `CivicPulse — ${label} analytics`;
 
   const title = document.getElementById("sourceTitle");
   title.innerHTML = "";
-  const badge = document.createElement("span");
-  badge.className = `source-badge head-badge ${currentSource}`;
-  badge.textContent = label;
-  title.append(`${label} analytics `, badge);
+  title.append(`${label} analytics`);
+  for (const source of chosen) {
+    const badge = document.createElement("span");
+    badge.className = `source-badge head-badge ${source}`;
+    badge.textContent = sourceLabel(source);
+    title.append(" ", badge);
+  }
 
   const share = signals.length
     ? Math.round((records.length / signals.length) * 100)
@@ -67,8 +208,11 @@ function renderHead() {
   ).length;
   const outlets = new Set(records.map((s) => s.outlet)).size;
 
-  document.getElementById("sourceSub").textContent =
-    `How ${label} signals contribute to the Irvine civic picture — categories, timing, and outlets.`;
+  let sub = chosen.length === 0
+    ? "Signals from every source combined — categories, timing, and outlets."
+    : `How ${label} signals contribute to the Irvine civic picture — categories, timing, and outlets.`;
+  if (selectedOutlet) sub += ` Drilled into ${selectedOutlet}.`;
+  document.getElementById("sourceSub").textContent = sub;
 
   const el = document.getElementById("sourceStats");
   el.innerHTML = "";
@@ -95,7 +239,11 @@ function renderHead() {
 
 function renderCategories() {
   const el = document.getElementById("categoryBars");
-  const records = sourceSignals();
+  // Respect the outlet drill-down but not the issue filters, so all
+  // category bars stay comparable.
+  const records = sourceSignals().filter(
+    (s) => !selectedOutlet || s.outlet === selectedOutlet
+  );
   el.innerHTML = "";
 
   const counts = {};
@@ -113,6 +261,9 @@ function renderCategories() {
   for (const [category, count] of Object.entries(counts)) {
     const row = document.createElement("div");
     row.className = "cat-row";
+    if (selectedCategories.size > 0 && !selectedCategories.has(category)) {
+      row.classList.add("cat-dimmed");
+    }
 
     const label = document.createElement("span");
     label.className = "cat-label";
@@ -142,7 +293,7 @@ function renderTimeline() {
   el.innerHTML = "";
 
   const byDay = new Map();
-  for (const record of sourceSignals()) {
+  for (const record of filteredSignals()) {
     const day = (record.published_utc || "").slice(0, 10);
     if (!day) continue;
     byDay.set(day, (byDay.get(day) || 0) + 1);
@@ -152,7 +303,7 @@ function renderTimeline() {
   if (days.length === 0) {
     const empty = document.createElement("p");
     empty.className = "feed-empty";
-    empty.textContent = "No dated signals for this source yet.";
+    empty.textContent = "No dated signals match the current selection.";
     el.appendChild(empty);
     return;
   }
@@ -186,29 +337,37 @@ function renderOutlets() {
   const el = document.getElementById("outletList");
   el.innerHTML = "";
 
+  // Respect the issue filters but not the outlet drill-down, so the other
+  // outlets stay visible (dimmed) while one is selected.
   const counts = {};
-  for (const record of sourceSignals()) {
+  for (const record of sourceSignals().filter(matchesCategories)) {
     counts[record.outlet] = (counts[record.outlet] || 0) + 1;
   }
   const outlets = Object.entries(counts).sort((a, b) => b[1] - a[1]);
   const top = outlets.slice(0, 8);
 
-  document.getElementById("outletHint").textContent = outlets.length > top.length
-    ? `Top ${top.length} of ${outlets.length} outlets`
-    : `${outlets.length} outlet${outlets.length === 1 ? "" : "s"}`;
+  document.getElementById("outletHint").textContent = selectedOutlet
+    ? `Showing ${selectedOutlet} — click it again to clear`
+    : (outlets.length > top.length
+        ? `Top ${top.length} of ${outlets.length} outlets — click one to drill in`
+        : `${outlets.length} outlet${outlets.length === 1 ? "" : "s"} — click one to drill in`);
 
   if (top.length === 0) {
     const empty = document.createElement("p");
     empty.className = "feed-empty";
-    empty.textContent = "No outlets for this source yet.";
+    empty.textContent = "No outlets match the current selection.";
     el.appendChild(empty);
     return;
   }
 
   const max = top[0][1];
   for (const [outlet, count] of top) {
-    const row = document.createElement("div");
+    const row = document.createElement("button");
     row.className = "outlet-row";
+    if (selectedOutlet === outlet) row.classList.add("outlet-selected");
+    if (selectedOutlet && selectedOutlet !== outlet) row.classList.add("outlet-dimmed");
+    row.title = `View analytics for ${outlet}`;
+    row.addEventListener("click", () => toggleOutlet(outlet));
 
     const name = document.createElement("span");
     name.className = "outlet-name";
@@ -234,20 +393,26 @@ function renderOutlets() {
 
 function renderList() {
   const el = document.getElementById("signalList");
-  const records = [...sourceSignals()].sort((a, b) =>
+  const records = [...filteredSignals()].sort((a, b) =>
     (b.published_utc || "").localeCompare(a.published_utc || "")
   );
+  const all = sourceSignals().length;
   document.getElementById("listHint").textContent =
-    `${records.length} signal${records.length === 1 ? "" : "s"}, newest first`;
+    selectedCategories.size > 0 || selectedOutlet
+      ? `${records.length} of ${all} signals, newest first`
+      : `${records.length} signal${records.length === 1 ? "" : "s"}, newest first`;
   el.innerHTML = "";
 
   if (records.length === 0) {
     const empty = document.createElement("p");
     empty.className = "feed-empty";
-    empty.textContent = "No signals from this source yet.";
+    empty.textContent = "No signals match the current selection.";
     el.appendChild(empty);
     return;
   }
+
+  // With several sources mixed together, badge each signal with its source.
+  const multiSource = selectedSources.size !== 1;
 
   for (const record of records) {
     const item = document.createElement("article");
@@ -255,6 +420,14 @@ function renderList() {
 
     const top = document.createElement("div");
     top.className = "feed-top";
+    if (multiSource) {
+      const badge = document.createElement("a");
+      badge.className = `source-badge ${record.source}`;
+      badge.textContent = sourceLabel(record.source);
+      badge.href = `source.html?source=${encodeURIComponent(record.source)}`;
+      badge.title = `${sourceLabel(record.source)} analytics`;
+      top.appendChild(badge);
+    }
     for (const category of record.categories || []) {
       const tag = document.createElement("span");
       tag.className = "tag";
@@ -269,28 +442,18 @@ function renderList() {
     }
 
     const title = document.createElement("h3");
-    if (record.url) {
-      const link = document.createElement("a");
-      link.href = record.url;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      link.textContent = record.title;
-      title.appendChild(link);
-    } else {
-      title.textContent = record.title;
-    }
+    const link = document.createElement("a");
+    link.href = signalUrl(record);
+    link.textContent = record.title;
+    title.appendChild(link);
 
     const meta = document.createElement("p");
     meta.className = "meta";
     meta.textContent = `${record.outlet} · ${record.published_utc}`;
-    if (record.url) {
-      const open = document.createElement("a");
-      open.href = record.url;
-      open.target = "_blank";
-      open.rel = "noopener noreferrer";
-      open.textContent = record.source === "tiktok" ? "Watch on TikTok ↗" : "Open ↗";
-      meta.append(" · ", open);
-    }
+    const open = document.createElement("a");
+    open.href = signalUrl(record);
+    open.textContent = "View signal →";
+    meta.append(" · ", open);
 
     item.append(top, title, meta);
     el.appendChild(item);
@@ -302,11 +465,20 @@ function renderList() {
 function render() {
   renderNav();
   renderHead();
+  renderFilters();
   renderCategories();
   renderTimeline();
   renderOutlets();
   renderList();
 }
+
+document.getElementById("clearIssueFilters").addEventListener("click", () => {
+  selectedCategories.clear();
+  selectedSources.clear();
+  selectedOutlet = null;
+  syncUrl();
+  render();
+});
 
 async function init() {
   signals = buildSignals(await fetchLiveSignals());

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CivicPulse — Log in</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="login.css">
+</head>
+<body class="login-body">
+
+  <header class="nav login-nav">
+    <a class="logo" href="index.html">CivicPulse</a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+    </nav>
+  </header>
+
+  <main class="login-main">
+    <div class="login-card">
+      <h1 id="loginTitle">Welcome back</h1>
+      <p class="login-sub" id="loginSub">Log in to your CivicPulse account.</p>
+
+      <!-- ── log in ─────────────────────────────────────── -->
+      <form id="loginForm" novalidate>
+        <label class="field">
+          <span class="field-label">Email</span>
+          <input type="email" id="loginEmail" autocomplete="email"
+                 placeholder="you@example.com">
+        </label>
+        <label class="field">
+          <span class="field-label">Password</span>
+          <input type="password" id="loginPassword" autocomplete="current-password"
+                 placeholder="Your password">
+        </label>
+        <p class="form-error" id="loginError" hidden></p>
+        <button type="submit" class="btn btn-lg login-submit">Log in</button>
+      </form>
+
+      <!-- ── create account ─────────────────────────────── -->
+      <form id="signupForm" novalidate hidden>
+        <label class="field">
+          <span class="field-label">Full name</span>
+          <input type="text" id="signupName" autocomplete="name"
+                 placeholder="Jane Resident">
+        </label>
+        <label class="field">
+          <span class="field-label">Email</span>
+          <input type="email" id="signupEmail" autocomplete="email"
+                 placeholder="you@example.com">
+        </label>
+        <label class="field">
+          <span class="field-label">Password</span>
+          <input type="password" id="signupPassword" autocomplete="new-password"
+                 placeholder="At least 6 characters">
+        </label>
+        <label class="field">
+          <span class="field-label">Confirm password</span>
+          <input type="password" id="signupConfirm" autocomplete="new-password"
+                 placeholder="Repeat your password">
+        </label>
+        <p class="form-error" id="signupError" hidden></p>
+        <button type="submit" class="btn btn-lg login-submit">Create account</button>
+      </form>
+
+      <p class="login-toggle">
+        <span id="toggleText">New to CivicPulse?</span>
+        <button class="toggle-btn" id="toggleMode" type="button">Create an account</button>
+      </p>
+    </div>
+  </main>
+
+  <script src="login.js"></script>
+</body>
+</html>

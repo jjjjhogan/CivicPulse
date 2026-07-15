@@ -6,12 +6,14 @@
 const SCRAPERS = [
   {
     id: "tiktok",
+    source: "tiktok",
     name: "TikTok scraper",
     desc: "Selenium scraper for Irvine tags & comments (scripts/scrape_tiktok.py)",
     signalSource: "tiktok",
   },
   {
     id: "irvine-news",
+    source: "news",
     name: "Irvine news scraper",
     desc: "Local outlets: Voice of OC, Irvine Standard, Irvine Weekly",
     signalSource: "news",
@@ -165,28 +167,18 @@ function renderFeed() {
     }
 
     const title = document.createElement("h3");
-    if (record.url) {
-      const link = document.createElement("a");
-      link.href = record.url;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      link.textContent = record.title;
-      title.appendChild(link);
-    } else {
-      title.textContent = record.title;
-    }
+    const link = document.createElement("a");
+    link.href = signalUrl(record);
+    link.textContent = record.title;
+    title.appendChild(link);
 
     const meta = document.createElement("p");
     meta.className = "meta";
     meta.textContent = `${record.outlet} · ${record.published_utc}`;
-    if (record.url) {
-      const open = document.createElement("a");
-      open.href = record.url;
-      open.target = "_blank";
-      open.rel = "noopener noreferrer";
-      open.textContent = record.source === "tiktok" ? "Watch on TikTok ↗" : "Open ↗";
-      meta.append(" · ", open);
-    }
+    const open = document.createElement("a");
+    open.href = signalUrl(record);
+    open.textContent = "View signal →";
+    meta.append(" · ", open);
 
     item.append(top, title, meta);
     el.appendChild(item);
@@ -259,6 +251,12 @@ function reportKey(report) {
   return `${report.title}|${report.published_utc}|${lat},${lng}`;
 }
 
+// Enough community confirmations — the issue is real and leaves the
+// verification queue (it stays in the feed and on the map).
+function isVerified(vote) {
+  return vote.up >= 3 && vote.up > vote.down;
+}
+
 function castVote(key, choice) {
   const votes = loadVotes();
   const vote = votes[key] || { up: 0, down: 0, mine: null };
@@ -290,11 +288,29 @@ function renderVerify() {
     return;
   }
 
-  hint.textContent =
-    `${reports.length} resident-reported issue${reports.length === 1 ? "" : "s"} awaiting verification`;
-
+  // Verified issues leave the queue so it only holds open questions.
   const votes = loadVotes();
-  for (const report of reports) {
+  const pending = reports.filter(
+    (report) => !isVerified(votes[reportKey(report)] || { up: 0, down: 0 })
+  );
+  const verifiedCount = reports.length - pending.length;
+  const verifiedNote = verifiedCount > 0
+    ? ` · ${verifiedCount} verified and cleared`
+    : "";
+
+  if (pending.length === 0) {
+    hint.textContent = `All caught up${verifiedNote}`;
+    const empty = document.createElement("p");
+    empty.className = "feed-empty";
+    empty.textContent = "Every reported issue has been verified by the community.";
+    el.appendChild(empty);
+    return;
+  }
+
+  hint.textContent =
+    `${pending.length} resident-reported issue${pending.length === 1 ? "" : "s"} awaiting verification${verifiedNote}`;
+
+  for (const report of pending) {
     const key = reportKey(report);
     const vote = votes[key] || { up: 0, down: 0, mine: null };
 
@@ -308,12 +324,6 @@ function renderVerify() {
       tag.className = "tag";
       tag.textContent = category.replaceAll("_", " ");
       top.appendChild(tag);
-    }
-    if (vote.up >= 3 && vote.up > vote.down) {
-      const badge = document.createElement("span");
-      badge.className = "verified-badge";
-      badge.textContent = "✓ Verified by community";
-      top.appendChild(badge);
     }
 
     const title = document.createElement("h3");
@@ -407,9 +417,7 @@ function renderMarkers() {
     });
     const marker = L.marker([lat, lng], { icon }).addTo(markerLayer);
     marker.getElement().style.background = color;
-    const link = record.url
-      ? `<a href="${escapeHtml(record.url)}" target="_blank" rel="noopener noreferrer">Open source ↗</a>`
-      : "";
+    const link = `<a href="${escapeHtml(signalUrl(record))}">View signal →</a>`;
     const address = record.metadata?.address
       ? `<div class="popup-meta">📍 ${escapeHtml(record.metadata.address)}</div>`
       : "";
@@ -773,13 +781,10 @@ function renderScrapers() {
     desc.className = "scraper-desc";
     desc.textContent = scraper.desc;
 
-    card.append(name, desc);
-
-    if (scraper.id === "tiktok") renderTikTokSettings(card);
-    else if (scraper.id === "irvine-news") renderNewsSettings(card);
-    else if (scraper.id === "reddit" || scraper.id === "twitter") {
-      renderImportSettings(card, scraper);
-    }
+    const analytics = document.createElement("a");
+    analytics.className = "scraper-analytics";
+    analytics.href = `source.html?source=${encodeURIComponent(scraper.source)}`;
+    analytics.textContent = "View analytics →";
 
     const row = document.createElement("div");
     row.className = "scraper-row";
@@ -793,7 +798,7 @@ function renderScrapers() {
     btn.addEventListener("click", () => runScraper(scraper, card, status, btn));
     row.append(status, btn);
 
-    card.appendChild(row);
+    card.append(name, desc, analytics, row);
     el.appendChild(card);
   }
 }

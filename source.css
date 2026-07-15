@@ -39,6 +39,31 @@
   top: -4px;
 }
 
+/* filter bar */
+
+.filter-row {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.filter-row + .filter-row {
+  margin-top: 12px;
+}
+
+.filter-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #7a8a6c;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  min-width: 58px;
+}
+
+.filter-row .tag-filters {
+  margin-bottom: 0;
+}
+
 /* category + outlet bars */
 
 .cat-bars,
@@ -56,11 +81,41 @@
   gap: 14px;
 }
 
+.cat-dimmed {
+  opacity: 0.35;
+}
+
 .cat-label {
   font-size: 0.85rem;
   font-weight: 500;
   color: var(--ink-deep);
   text-transform: capitalize;
+}
+
+/* outlet rows are buttons — click one to drill into that outlet */
+
+button.outlet-row {
+  background: none;
+  border: none;
+  font-family: inherit;
+  padding: 4px 6px;
+  margin: -4px -6px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s ease, opacity 0.15s ease;
+}
+
+button.outlet-row:hover {
+  background: #f3f6ef;
+}
+
+.outlet-row.outlet-selected {
+  background: #e9f8ec;
+}
+
+.outlet-row.outlet-dimmed {
+  opacity: 0.35;
 }
 
 .outlet-name {

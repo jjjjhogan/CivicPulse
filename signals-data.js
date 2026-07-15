@@ -159,6 +159,15 @@ function buildSignals(liveSignals) {
   return [...reports, ...other, ...liveSignals];
 }
 
+// Signals have no id, so key detail pages on fields that identify one.
+function signalKey(signal) {
+  return [signal.source, signal.published_utc, signal.title].join("|");
+}
+
+function signalUrl(signal) {
+  return `signal.html?id=${encodeURIComponent(signalKey(signal))}`;
+}
+
 // Fetch live signals from the Flask backend; empty when it isn't running.
 async function fetchLiveSignals() {
   try {

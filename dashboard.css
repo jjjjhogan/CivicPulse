@@ -118,6 +118,12 @@ html {
   max-width: 54ch;
 }
 
+.dash-head-btn {
+  margin-top: 18px;
+  font-size: 0.88rem;
+  padding: 11px 22px;
+}
+
 .dash-stats {
   display: flex;
   gap: 14px;
@@ -286,6 +292,18 @@ html {
   font-size: 0.8rem;
   color: #5f6f52;
   cursor: pointer;
+}
+
+.scraper-card .scraper-analytics {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.scraper-card .scraper-analytics:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .scraper-card .scraper-row {
