@@ -16,7 +16,15 @@ const selectedSources = new Set(
 );
 
 let signals = [];
-const selectedCategories = new Set();
+
+// ?issue=potholes or ?issue=potholes,noise — pre-selected issue filters.
+const selectedCategories = new Set(
+  (params.get("issue") || "")
+    .toLowerCase()
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean)
+);
 
 // ?outlet=@irvinemoms — drill into one account/outlet's scraped data.
 let selectedOutlet = params.get("outlet") || null;
@@ -48,6 +56,9 @@ function syncUrl() {
   const query = new URLSearchParams();
   if (selectedSources.size > 0) {
     query.set("source", [...selectedSources].join(","));
+  }
+  if (selectedCategories.size > 0) {
+    query.set("issue", [...selectedCategories].join(","));
   }
   if (selectedOutlet) query.set("outlet", selectedOutlet);
   const qs = query.toString();
@@ -104,6 +115,7 @@ function renderFilters() {
       } else {
         selectedCategories.add(category);
       }
+      syncUrl();
       render();
     });
     issueEl.appendChild(btn);
@@ -430,28 +442,18 @@ function renderList() {
     }
 
     const title = document.createElement("h3");
-    if (record.url) {
-      const link = document.createElement("a");
-      link.href = record.url;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      link.textContent = record.title;
-      title.appendChild(link);
-    } else {
-      title.textContent = record.title;
-    }
+    const link = document.createElement("a");
+    link.href = signalUrl(record);
+    link.textContent = record.title;
+    title.appendChild(link);
 
     const meta = document.createElement("p");
     meta.className = "meta";
     meta.textContent = `${record.outlet} · ${record.published_utc}`;
-    if (record.url) {
-      const open = document.createElement("a");
-      open.href = record.url;
-      open.target = "_blank";
-      open.rel = "noopener noreferrer";
-      open.textContent = record.source === "tiktok" ? "Watch on TikTok ↗" : "Open ↗";
-      meta.append(" · ", open);
-    }
+    const open = document.createElement("a");
+    open.href = signalUrl(record);
+    open.textContent = "View signal →";
+    meta.append(" · ", open);
 
     item.append(top, title, meta);
     el.appendChild(item);

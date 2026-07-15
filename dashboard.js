@@ -144,28 +144,18 @@ function renderFeed() {
     }
 
     const title = document.createElement("h3");
-    if (record.url) {
-      const link = document.createElement("a");
-      link.href = record.url;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      link.textContent = record.title;
-      title.appendChild(link);
-    } else {
-      title.textContent = record.title;
-    }
+    const link = document.createElement("a");
+    link.href = signalUrl(record);
+    link.textContent = record.title;
+    title.appendChild(link);
 
     const meta = document.createElement("p");
     meta.className = "meta";
     meta.textContent = `${record.outlet} · ${record.published_utc}`;
-    if (record.url) {
-      const open = document.createElement("a");
-      open.href = record.url;
-      open.target = "_blank";
-      open.rel = "noopener noreferrer";
-      open.textContent = record.source === "tiktok" ? "Watch on TikTok ↗" : "Open ↗";
-      meta.append(" · ", open);
-    }
+    const open = document.createElement("a");
+    open.href = signalUrl(record);
+    open.textContent = "View signal →";
+    meta.append(" · ", open);
 
     item.append(top, title, meta);
     el.appendChild(item);
@@ -386,9 +376,7 @@ function renderMarkers() {
     });
     const marker = L.marker([lat, lng], { icon }).addTo(markerLayer);
     marker.getElement().style.background = color;
-    const link = record.url
-      ? `<a href="${escapeHtml(record.url)}" target="_blank" rel="noopener noreferrer">Open source ↗</a>`
-      : "";
+    const link = `<a href="${escapeHtml(signalUrl(record))}">View signal →</a>`;
     const address = record.metadata?.address
       ? `<div class="popup-meta">📍 ${escapeHtml(record.metadata.address)}</div>`
       : "";
