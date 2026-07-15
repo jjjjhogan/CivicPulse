@@ -10,7 +10,7 @@ def rebuild_landing_feed(
     signals_dir: Path,
     output_path: Path,
     *,
-    sources: tuple[str, ...] = ("tiktok", "reddit", "twitter"),
+    sources: tuple[str, ...] = ("tiktok", "reddit", "twitter", "news"),
 ) -> int:
     feed: list[dict] = []
     for source in sources:

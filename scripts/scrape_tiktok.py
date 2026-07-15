@@ -14,9 +14,11 @@ import sys
 from dataclasses import asdict
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
 
 from scrapers.categories import CivicIssueCategory
+from scrapers.feed import rebuild_landing_feed
 from scrapers.tiktok.comments import scrape_comments_for_area, scrape_comments_from_video
 from scrapers.tiktok.config import TikTokScrapeConfig
 from scrapers.tiktok.export import (
@@ -25,7 +27,13 @@ from scrapers.tiktok.export import (
     write_ingest_manifest,
     write_signals_json,
 )
-from scrapers.tiktok.tags import scrape_tags
+from scrapers.tiktok.tags import (
+    dedupe_raw_payload,
+    load_raw_payload,
+    merge_tag_results_into_payload,
+    scrape_tags,
+    tag_results_from_payload,
+)
 
 
 def parse_args() -> argparse.Namespace:
@@ -65,7 +73,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--feed-output",
         default="data/signals/feed.json",
-        help="Path to write landing-page-compatible signal cards JSON",
+        help="Path to landing-page feed JSON (rebuilt with all sources)",
     )
     parser.add_argument(
         "--include-all-comments",
@@ -88,10 +96,10 @@ def _write_signal_exports(args: argparse.Namespace, signals) -> None:
     feed_path.parent.mkdir(parents=True, exist_ok=True)
 
     signal_count = write_signals_json(signals, str(signals_path), landing_page=False)
-    feed_count = write_signals_json(signals, str(feed_path), landing_page=True)
     write_ingest_manifest(str(signals_path.parent / "manifest.json"), sources=["tiktok"])
+    feed_count = rebuild_landing_feed(ROOT / "data" / "signals", feed_path)
     print(f"Saved {signal_count} normalized signals to {signals_path}")
-    print(f"Saved {feed_count} landing-page signals to {feed_path}")
+    print(f"Rebuilt landing-page feed with {feed_count} signals -> {feed_path}")
 
 
 def main() -> None:
@@ -104,38 +112,42 @@ def main() -> None:
     civic_only = not args.include_all_comments
 
     if args.tag_urls:
-        results = scrape_tags(
+        existing = load_raw_payload(output_path)
+        existing, removed = dedupe_raw_payload(existing)
+        if removed:
+            print(f"Removed {removed} duplicate video(s) from {output_path}")
+
+        skip_urls = {
+            (video.get("url") or "").split("?", 1)[0].rstrip("/")
+            for tag in existing.get("tags") or []
+            for video in tag.get("videos") or []
+            if video.get("url")
+        }
+        if skip_urls:
+            print(f"Skipping {len(skip_urls)} already-scraped video URL(s)")
+
+        new_results = scrape_tags(
             args.tag_urls,
             max_videos=args.max_videos,
             max_comments_per_video=args.max_comments,
             headless=args.headless,
+            skip_urls=skip_urls,
         )
-        raw_payload = {
-            "tag_count": len(results),
-            "tags": [
-                {
-                    "tag": result.tag,
-                    "tag_url": result.tag_url,
-                    "scraped_at": result.scraped_at,
-                    "video_count": len(result.videos),
-                    "videos": [
-                        {
-                            **{k: v for k, v in asdict(video).items() if k != "comments"},
-                            "comments": [asdict(comment) for comment in video.comments],
-                        }
-                        for video in result.videos
-                    ],
-                }
-                for result in results
-            ],
-        }
-        _write_raw_json(output_path, raw_payload)
-        signals = tag_results_to_signals(results, civic_only=civic_only)
+        payload = merge_tag_results_into_payload(existing, new_results)
+        _write_raw_json(output_path, payload)
+
+        all_results = tag_results_from_payload(payload)
+        signals = tag_results_to_signals(all_results, civic_only=civic_only)
         _write_signal_exports(args, signals)
-        comment_count = sum(len(video.comments) for result in results for video in result.videos)
+
+        new_videos = sum(len(result.videos) for result in new_results)
+        total_videos = sum(len(result.videos) for result in all_results)
+        comment_count = sum(
+            len(video.comments) for result in all_results for video in result.videos
+        )
         print(
-            f"Saved {sum(len(r.videos) for r in results)} videos and "
-            f"{comment_count} comments from {len(results)} tags to {output_path}"
+            f"Saved {new_videos} new videos ({total_videos} total, {comment_count} comments) "
+            f"from {len(all_results)} tags to {output_path}"
         )
     elif args.video_url:
         comments = scrape_comments_from_video(

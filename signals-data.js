@@ -102,11 +102,15 @@ const SAMPLE_SIGNALS = [
 // Mirrors CATEGORY_KEYWORDS in scrapers/categories.py — used so the keyword
 // search also matches category keywords, not just words in the title.
 const CATEGORY_KEYWORDS = {
-  potholes: ["pothole", "road damage", "pavement crack", "street repair"],
-  noise: ["noise complaint", "loud music", "construction noise", "loud neighbors"],
-  sanitation: ["trash pickup", "garbage", "illegal dumping", "sanitation"],
-  public_safety: ["break-in", "shooting", "assault", "streetlight out", "crime", "police"],
-  housing: ["eviction", "rent increase", "affordable housing", "homeless", "housing crisis"],
+  potholes: ["pothole", "road damage", "pavement crack", "street repair", "road repair"],
+  noise: ["noise complaint", "loud music", "construction noise", "loud neighbors", "fireworks"],
+  sanitation: ["trash pickup", "garbage", "illegal dumping", "sanitation", "recycling"],
+  public_safety: [
+    "break-in", "shooting", "assault", "streetlight out", "crime", "police",
+    "flood", "flooding", "protest", "crash", "emergency", "pursuit",
+  ],
+  housing: ["eviction", "rent increase", "affordable housing", "homeless", "housing crisis", "rent"],
+  immigration: ["immigration", "immigrant", "deportation", "ice raid", "ice protest", "migrant"],
 };
 
 const CATEGORY_COLORS = {
@@ -115,6 +119,7 @@ const CATEGORY_COLORS = {
   sanitation: "#4c7a34",
   public_safety: "#c44f3f",
   housing: "#3a63c4",
+  immigration: "#2f6f6a",
 };
 
 const SOURCE_LABELS = {
@@ -126,10 +131,10 @@ const SOURCE_LABELS = {
 };
 
 // Sources always shown in source pickers, even with zero signals.
-const MAIN_SOURCES = ["tiktok", "reddit", "news", "resident"];
+const MAIN_SOURCES = ["tiktok", "reddit", "twitter", "news", "resident"];
 
 // Sources whose sample records are replaced by live scraper data.
-const LIVE_SOURCES = ["tiktok", "reddit", "twitter"];
+const LIVE_SOURCES = ["tiktok", "reddit", "twitter", "news"];
 
 // Resident reports submitted through report.html (stored locally until a
 // backend /api/reports endpoint exists).

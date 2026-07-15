@@ -197,7 +197,7 @@ html {
 
 .scraper-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 14px;
 }
 
@@ -219,7 +219,73 @@ html {
 .scraper-card .scraper-desc {
   font-size: 0.82rem;
   color: #7a8a6c;
-  flex: 1;
+}
+
+.scraper-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 4px;
+}
+
+.scraper-fields-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.scraper-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 0.78rem;
+  color: #5f6f52;
+}
+
+.scraper-field-label {
+  font-weight: 600;
+  color: var(--ink-deep);
+}
+
+.scraper-field input[type="number"],
+.scraper-field textarea,
+.scraper-field input[type="file"] {
+  width: 100%;
+  border: 1.5px solid #d9e0d2;
+  border-radius: 10px;
+  padding: 8px 10px;
+  font: inherit;
+  font-size: 0.8rem;
+  color: var(--ink-deep);
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.scraper-field textarea {
+  resize: vertical;
+  min-height: 64px;
+  line-height: 1.35;
+}
+
+.scraper-field input:focus,
+.scraper-field textarea:focus {
+  outline: none;
+  border-color: var(--mint);
+}
+
+.scraper-outlet-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.scraper-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: #5f6f52;
+  cursor: pointer;
 }
 
 .scraper-card .scraper-row {
@@ -227,6 +293,8 @@ html {
   align-items: center;
   justify-content: space-between;
   gap: 10px;
+  margin-top: auto;
+  padding-top: 4px;
 }
 
 .scraper-status {
@@ -236,6 +304,7 @@ html {
 
 .scraper-status.running { color: #b07a1e; }
 .scraper-status.done { color: #4c7a34; }
+.scraper-status.failed,
 .scraper-status.error { color: #b04a3a; }
 
 .btn-sm {
@@ -257,7 +326,7 @@ html {
   font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
   font-size: 0.78rem;
   color: #47603a;
-  max-height: 140px;
+  max-height: 220px;
   overflow-y: auto;
   white-space: pre-wrap;
 }
