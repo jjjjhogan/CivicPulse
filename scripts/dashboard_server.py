@@ -21,10 +21,15 @@ from flask import Flask, abort, jsonify, redirect, request, send_from_directory
 
 ROOT = Path(__file__).resolve().parent.parent
 SIGNALS_DIR = ROOT / "data" / "signals"
-SCRAPE_SCRIPT = ROOT / "scripts" / "scrape_tiktok.py"
+RAW_DIR = ROOT / "data" / "raw"
+SCRAPE_TIKTOK = ROOT / "scripts" / "scrape_tiktok.py"
+SCRAPE_NEWS = ROOT / "scripts" / "scrape_news.py"
+PROCESS_REDDIT = ROOT / "scripts" / "process_reddit_scrape.py"
+PROCESS_TWITTER = ROOT / "scripts" / "process_twitter_scrape.py"
 
 sys.path.insert(0, str(ROOT))
 from scrapers.categories import CivicIssueCategory  # noqa: E402
+from scrapers.news.scrape import NEWS_SOURCES  # noqa: E402
 
 app = Flask(__name__)
 
@@ -52,6 +57,12 @@ TIKTOK_DEFAULTS = {
     "include_all_comments": False,
 }
 
+NEWS_DEFAULTS = {
+    "outlets": [source["id"] for source in NEWS_SOURCES],
+    "max_articles": 50,
+    "require_category_match": True,
+}
+
 
 def _read_json(path: Path, default):
     if not path.is_file():
@@ -60,9 +71,15 @@ def _read_json(path: Path, default):
         return json.load(handle)
 
 
-def _build_scrape_command(payload: dict) -> list[str]:
+def _write_json(path: Path, payload) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "w", encoding="utf-8") as handle:
+        json.dump(payload, handle, indent=2)
+
+
+def _build_tiktok_command(payload: dict) -> list[str]:
     mode = payload.get("mode", "tags")
-    cmd = [sys.executable, str(SCRAPE_SCRIPT)]
+    cmd = [sys.executable, str(SCRAPE_TIKTOK)]
 
     if mode == "video":
         video_url = (payload.get("video_url") or "").strip()
@@ -91,8 +108,8 @@ def _build_scrape_command(payload: dict) -> list[str]:
         for tag_url in tag_urls:
             cmd.extend(["--tag-url", tag_url])
 
-    max_videos = int(payload.get("max_videos", 3))
-    max_comments = int(payload.get("max_comments", 25))
+    max_videos = int(payload.get("max_videos", TIKTOK_DEFAULTS["max_videos"]))
+    max_comments = int(payload.get("max_comments", TIKTOK_DEFAULTS["max_comments"]))
     cmd.extend(["--max-videos", str(max_videos)])
     cmd.extend(["--max-comments", str(max_comments)])
 
@@ -100,6 +117,30 @@ def _build_scrape_command(payload: dict) -> list[str]:
         cmd.append("--headless")
     if payload.get("include_all_comments"):
         cmd.append("--include-all-comments")
+
+    return cmd
+
+
+def _build_news_command(payload: dict) -> list[str]:
+    cmd = [sys.executable, str(SCRAPE_NEWS)]
+    outlets = payload.get("outlets")
+    if outlets is None:
+        outlets = list(NEWS_DEFAULTS["outlets"])
+    outlets = [str(item).strip() for item in outlets if str(item).strip()]
+    if not outlets:
+        raise ValueError("Select at least one news outlet.")
+    for outlet in outlets:
+        cmd.extend(["--outlet", outlet])
+
+    max_articles = payload.get("max_articles", NEWS_DEFAULTS["max_articles"])
+    if max_articles is not None and str(max_articles).strip() != "":
+        cmd.extend(["--max-articles", str(int(max_articles))])
+
+    require_match = payload.get(
+        "require_category_match", NEWS_DEFAULTS["require_category_match"]
+    )
+    if not require_match:
+        cmd.append("--no-require-category")
 
     return cmd
 
@@ -142,15 +183,10 @@ def _run_scrape(cmd: list[str], *, source: str) -> None:
             _scrape_state["error"] = str(exc)
 
 
-def _start_scrape(payload: dict, *, source: str):
+def _start_scrape_cmd(cmd: list[str], *, source: str):
     with _scrape_lock:
         if _scrape_state["status"] == "running":
             return jsonify({"error": "A scrape is already running."}), 409
-
-    try:
-        cmd = _build_scrape_command(payload)
-    except ValueError as exc:
-        return jsonify({"error": str(exc)}), 400
 
     thread = threading.Thread(
         target=_run_scrape, args=(cmd,), kwargs={"source": source}, daemon=True
@@ -159,12 +195,76 @@ def _start_scrape(payload: dict, *, source: str):
     return jsonify({"status": "started", "command": " ".join(cmd)}), 202
 
 
+def _parse_json_payload(raw) -> dict:
+    if raw is None:
+        raise ValueError("JSON payload is required.")
+    if isinstance(raw, dict):
+        return raw
+    if isinstance(raw, str):
+        text = raw.strip()
+        if not text:
+            raise ValueError("JSON payload is empty.")
+        parsed = json.loads(text)
+        if not isinstance(parsed, dict):
+            raise ValueError("JSON payload must be an object.")
+        return parsed
+    raise ValueError("JSON payload must be an object or JSON string.")
+
+
+def _extract_import_payload() -> dict:
+    """Accept pasted JSON, an uploaded file, or a `payload` wrapper."""
+    if request.files:
+        upload = request.files.get("file") or next(iter(request.files.values()), None)
+        if upload and upload.filename:
+            text = upload.read().decode("utf-8", errors="replace")
+            return _parse_json_payload(text)
+
+    body = request.get_json(silent=True)
+    if body is None:
+        raw_text = (request.get_data(as_text=True) or "").strip()
+        if not raw_text:
+            raise ValueError("Paste JSON or upload a .json file.")
+        return _parse_json_payload(raw_text)
+
+    if not isinstance(body, dict):
+        raise ValueError("Request body must be a JSON object.")
+
+    if "payload" in body:
+        return _parse_json_payload(body["payload"])
+    if "data" in body and isinstance(body["data"], (dict, str)):
+        return _parse_json_payload(body["data"])
+    return body
+
+
+def _start_import(*, source: str, raw_name: str, process_script: Path):
+    try:
+        payload = _extract_import_payload()
+    except (ValueError, json.JSONDecodeError) as exc:
+        return jsonify({"error": str(exc)}), 400
+
+    raw_path = RAW_DIR / raw_name
+    try:
+        _write_json(raw_path, payload)
+    except OSError as exc:
+        return jsonify({"error": f"Could not write raw scrape file: {exc}"}), 500
+
+    cmd = [
+        sys.executable,
+        str(process_script),
+        "--input",
+        str(raw_path),
+        "--include-all",
+    ]
+    return _start_scrape_cmd(cmd, source=source)
+
+
 @app.get("/api/signals")
 def api_signals():
     tiktok = _read_json(SIGNALS_DIR / "tiktok.json", [])
     reddit = _read_json(SIGNALS_DIR / "reddit.json", [])
     twitter = _read_json(SIGNALS_DIR / "twitter.json", [])
-    signals = tiktok + reddit + twitter
+    news = _read_json(SIGNALS_DIR / "news.json", [])
+    signals = tiktok + reddit + twitter + news
     return jsonify({"count": len(signals), "signals": signals})
 
 
@@ -186,6 +286,11 @@ def api_config():
         {
             "categories": [c.value for c in CivicIssueCategory],
             "tiktok_defaults": TIKTOK_DEFAULTS,
+            "news_defaults": NEWS_DEFAULTS,
+            "news_outlets": [
+                {"id": source["id"], "name": source["name"], "scope": source["scope"]}
+                for source in NEWS_SOURCES
+            ],
         }
     )
 
@@ -199,9 +304,41 @@ def api_scrape_status():
 @app.post("/api/scrape/<source>")
 def api_scrape_source(source: str):
     if source == "tiktok":
-        payload = request.get_json(silent=True) or dict(TIKTOK_DEFAULTS)
+        payload = request.get_json(silent=True) or {}
+        if not isinstance(payload, dict):
+            return jsonify({"error": "Request body must be a JSON object."}), 400
         merged = {**TIKTOK_DEFAULTS, **payload}
-        return _start_scrape(merged, source="tiktok")
+        try:
+            cmd = _build_tiktok_command(merged)
+        except ValueError as exc:
+            return jsonify({"error": str(exc)}), 400
+        return _start_scrape_cmd(cmd, source="tiktok")
+
+    if source in {"irvine-news", "news"}:
+        payload = request.get_json(silent=True) or {}
+        if not isinstance(payload, dict):
+            return jsonify({"error": "Request body must be a JSON object."}), 400
+        merged = {**NEWS_DEFAULTS, **payload}
+        try:
+            cmd = _build_news_command(merged)
+        except ValueError as exc:
+            return jsonify({"error": str(exc)}), 400
+        return _start_scrape_cmd(cmd, source="irvine-news")
+
+    if source == "reddit":
+        return _start_import(
+            source="reddit",
+            raw_name="reddit_scrape.json",
+            process_script=PROCESS_REDDIT,
+        )
+
+    if source == "twitter":
+        return _start_import(
+            source="twitter",
+            raw_name="twitter_scrape.json",
+            process_script=PROCESS_TWITTER,
+        )
+
     return jsonify({"error": f"Scraper '{source}' is not implemented yet."}), 501
 
 

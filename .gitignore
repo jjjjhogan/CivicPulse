@@ -4,6 +4,7 @@ data/*
 !data/signals/
 !data/signals/.gitkeep
 .vscode/
+.venv/
 __pycache__/
 *.pyc
 .env

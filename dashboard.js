@@ -3,8 +3,8 @@
 // Sample records follow the CivicSignal schema (scrapers/schema.py):
 // { source, outlet, title, body, url, categories, published_utc, metadata }
 // with optional metadata.lat / metadata.lng for map placement.
-// When scripts/dashboard_server.py is running, live TikTok signals load from
-// GET /api/signals and merge with sample news/reddit records below.
+// When scripts/dashboard_server.py is running, live signals load from
+// GET /api/signals (tiktok, reddit, twitter, news) and merge with samples.
 
 const SAMPLE_SIGNALS = [
   {
@@ -102,11 +102,15 @@ const SAMPLE_SIGNALS = [
 // Mirrors CATEGORY_KEYWORDS in scrapers/categories.py — used so the keyword
 // search also matches category keywords, not just words in the title.
 const CATEGORY_KEYWORDS = {
-  potholes: ["pothole", "road damage", "pavement crack", "street repair"],
+  potholes: ["pothole", "road damage", "pavement crack", "street repair", "road repair"],
   noise: ["noise complaint", "loud music", "construction noise", "loud neighbors"],
-  sanitation: ["trash pickup", "garbage", "illegal dumping", "sanitation"],
-  public_safety: ["break-in", "shooting", "assault", "streetlight out", "crime", "police"],
-  housing: ["eviction", "rent increase", "affordable housing", "homeless", "housing crisis"],
+  sanitation: ["trash pickup", "garbage", "illegal dumping", "sanitation", "recycling"],
+  public_safety: [
+    "break-in", "shooting", "assault", "streetlight out", "crime", "police",
+    "flood", "flooding", "protest", "crash", "emergency", "pursuit",
+  ],
+  housing: ["eviction", "rent increase", "affordable housing", "homeless", "housing crisis", "rent"],
+  immigration: ["immigration", "immigrant", "deportation", "ice raid", "ice protest", "migrant"],
 };
 
 const CATEGORY_COLORS = {
@@ -115,6 +119,7 @@ const CATEGORY_COLORS = {
   sanitation: "#4c7a34",
   public_safety: "#c44f3f",
   housing: "#3a63c4",
+  immigration: "#2f6f6a",
 };
 
 const SOURCE_LABELS = {
@@ -142,28 +147,55 @@ const SCRAPERS = [
     id: "tiktok",
     name: "TikTok scraper",
     desc: "Selenium scraper for Irvine tags & comments (scripts/scrape_tiktok.py)",
+    signalSource: "tiktok",
   },
   {
     id: "irvine-news",
     name: "Irvine news scraper",
     desc: "Local outlets: Voice of OC, Irvine Standard, Irvine Weekly",
+    signalSource: "news",
   },
   {
     id: "reddit",
-    name: "Reddit scraper",
-    desc: "r/irvine and r/orangecounty resident posts",
+    name: "Reddit import",
+    desc: "Paste or upload a Reddit scrape JSON export, then process into signals",
+    signalSource: "reddit",
   },
   {
     id: "twitter",
-    name: "Twitter scraper",
-    desc: "X/Twitter search for Irvine civic posts (import via process_twitter_scrape.py)",
+    name: "Twitter import",
+    desc: "Paste or upload a Twitter/X scrape JSON export, then process into signals",
+    signalSource: "twitter",
   },
 ];
+
+const LIVE_SOURCES = ["tiktok", "reddit", "twitter", "news"];
 
 const state = {
   signals: [...loadResidentReports(), ...SAMPLE_SIGNALS],
   selectedCategories: new Set(),
   keyword: "",
+  config: {
+    tiktok_defaults: {
+      tag_urls: [
+        "https://www.tiktok.com/tag/irvine",
+        "https://www.tiktok.com/tag/newportbeach",
+      ],
+      max_videos: 10,
+      max_comments: 25,
+    },
+    news_defaults: {
+      outlets: ["irvine-standard", "irvine-weekly", "voice-of-oc"],
+      max_articles: 50,
+      require_category_match: true,
+    },
+    news_outlets: [
+      { id: "irvine-standard", name: "Irvine Standard" },
+      { id: "irvine-weekly", name: "Irvine Weekly" },
+      { id: "voice-of-oc", name: "Voice of OC" },
+    ],
+  },
+  scrapeRunning: false,
 };
 
 let map;
@@ -497,14 +529,12 @@ function logLine(text) {
 
 function mergeSignals(liveSignals) {
   const reports = loadResidentReports();
-  const other = SAMPLE_SIGNALS.filter(
-    (s) => !["tiktok", "reddit", "twitter"].includes(s.source)
-  );
+  const samples = SAMPLE_SIGNALS.filter((s) => !LIVE_SOURCES.includes(s.source));
   if (!liveSignals.length) {
     state.signals = [...reports, ...SAMPLE_SIGNALS];
     return;
   }
-  state.signals = [...reports, ...other, ...liveSignals];
+  state.signals = [...reports, ...samples, ...liveSignals];
 }
 
 async function loadSignals() {
@@ -518,12 +548,43 @@ async function loadSignals() {
   }
 }
 
+async function loadScraperConfig() {
+  try {
+    const res = await fetch("/api/config");
+    if (!res.ok) return;
+    const data = await res.json();
+    state.config = {
+      ...state.config,
+      ...data,
+      tiktok_defaults: {
+        ...state.config.tiktok_defaults,
+        ...(data.tiktok_defaults || {}),
+      },
+      news_defaults: {
+        ...state.config.news_defaults,
+        ...(data.news_defaults || {}),
+      },
+      news_outlets: data.news_outlets || state.config.news_outlets,
+    };
+  } catch {
+    // Keep offline defaults.
+  }
+}
+
+function setRunButtonsDisabled(disabled) {
+  state.scrapeRunning = disabled;
+  for (const btn of document.querySelectorAll("[data-scraper-run]")) {
+    btn.disabled = disabled;
+  }
+}
+
 async function pollScrapeStatus(statusEl) {
   const logEl = document.getElementById("scraperLog");
   while (true) {
     const res = await fetch("/api/scrape/status");
     const data = await res.json();
     if (data.log) {
+      logEl.hidden = false;
       logEl.textContent = data.log;
       logEl.scrollTop = logEl.scrollHeight;
     }
@@ -542,27 +603,124 @@ async function pollScrapeStatus(statusEl) {
   }
 }
 
-async function runScraper(scraper, statusEl, btn) {
+function collectTikTokPayload(card) {
+  const maxVideos = Number(card.querySelector("[data-field=max_videos]").value);
+  const maxComments = Number(card.querySelector("[data-field=max_comments]").value);
+  const tagUrls = card
+    .querySelector("[data-field=tag_urls]")
+    .value.split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean);
+  return {
+    mode: "tags",
+    max_videos: Number.isFinite(maxVideos) ? maxVideos : state.config.tiktok_defaults.max_videos,
+    max_comments: Number.isFinite(maxComments)
+      ? maxComments
+      : state.config.tiktok_defaults.max_comments,
+    tag_urls: tagUrls,
+  };
+}
+
+function collectNewsPayload(card) {
+  const outlets = [...card.querySelectorAll("[data-outlet]:checked")].map(
+    (input) => input.value
+  );
+  const maxArticles = Number(card.querySelector("[data-field=max_articles]").value);
+  const requireCategory = card.querySelector("[data-field=require_category]").checked;
+  return {
+    outlets,
+    max_articles: Number.isFinite(maxArticles)
+      ? maxArticles
+      : state.config.news_defaults.max_articles,
+    require_category_match: requireCategory,
+  };
+}
+
+async function collectImportBody(card) {
+  const fileInput = card.querySelector("[data-field=file]");
+  const paste = (card.querySelector("[data-field=paste]").value || "").trim();
+  if (fileInput?.files?.length) {
+    const form = new FormData();
+    form.append("file", fileInput.files[0]);
+    return { body: form, isForm: true };
+  }
+  if (!paste) {
+    throw new Error("Paste JSON or choose a .json file first.");
+  }
+  let parsed;
+  try {
+    parsed = JSON.parse(paste);
+  } catch {
+    throw new Error("Pasted text is not valid JSON.");
+  }
+  return {
+    body: JSON.stringify({ payload: parsed }),
+    isForm: false,
+    headers: { "Content-Type": "application/json" },
+  };
+}
+
+async function buildScrapeRequest(scraper, card) {
+  if (scraper.id === "tiktok") {
+    return {
+      body: JSON.stringify(collectTikTokPayload(card)),
+      headers: { "Content-Type": "application/json" },
+    };
+  }
+  if (scraper.id === "irvine-news") {
+    return {
+      body: JSON.stringify(collectNewsPayload(card)),
+      headers: { "Content-Type": "application/json" },
+    };
+  }
+  if (scraper.id === "reddit" || scraper.id === "twitter") {
+    return collectImportBody(card);
+  }
+  return { body: null };
+}
+
+async function runScraper(scraper, card, statusEl, btn) {
+  if (state.scrapeRunning) {
+    statusEl.textContent = "Busy";
+    logLine("Another scrape is already running.");
+    return;
+  }
+
+  let request;
+  try {
+    request = await buildScrapeRequest(scraper, card);
+  } catch (err) {
+    statusEl.textContent = "Needs input";
+    statusEl.className = "scraper-status";
+    logLine(err.message || String(err));
+    return;
+  }
+
+  setRunButtonsDisabled(true);
   btn.disabled = true;
   statusEl.textContent = "Running…";
   statusEl.className = "scraper-status running";
   logLine(`Starting ${scraper.name}…`);
 
   try {
-    const res = await fetch(`/api/scrape/${scraper.id}`, { method: "POST" });
+    const res = await fetch(`/api/scrape/${scraper.id}`, {
+      method: "POST",
+      body: request.body,
+      headers: request.headers,
+    });
     if (res.status === 501) {
       const body = await res.json();
       statusEl.textContent = "Not available";
       statusEl.className = "scraper-status";
       logLine(body.error || `${scraper.name} is not implemented yet.`);
-      btn.disabled = false;
+      setRunButtonsDisabled(false);
       return;
     }
     if (res.status === 409) {
       statusEl.textContent = "Busy";
       statusEl.className = "scraper-status";
       logLine("Another scrape is already running.");
-      btn.disabled = false;
+      setRunButtonsDisabled(false);
       return;
     }
     if (!res.ok) {
@@ -573,26 +731,149 @@ async function runScraper(scraper, statusEl, btn) {
     const ok = await pollScrapeStatus(statusEl);
     if (ok) {
       await loadSignals();
-      const count = state.signals.filter((s) => s.source === scraper.id).length;
-      logLine(`${scraper.name} finished — ${count} signals in feed.`);
+      const source = scraper.signalSource || scraper.id;
+      const count = state.signals.filter((s) => s.source === source).length;
+      logLine(`${scraper.name} finished — ${count} ${source} signals loaded.`);
       render();
     }
-  } catch {
+  } catch (err) {
     statusEl.textContent = "Offline";
     statusEl.className = "scraper-status";
     logLine(
-      `${scraper.name} could not start — run python scripts/dashboard_server.py and try again.`
+      err?.message && !String(err.message).includes("Failed to fetch")
+        ? err.message
+        : `${scraper.name} could not start — run python scripts/dashboard_server.py and try again.`
     );
   }
 
-  btn.disabled = false;
+  setRunButtonsDisabled(false);
+}
+
+function buildField(labelText, input) {
+  const wrap = document.createElement("label");
+  wrap.className = "scraper-field";
+  const label = document.createElement("span");
+  label.className = "scraper-field-label";
+  label.textContent = labelText;
+  wrap.append(label, input);
+  return wrap;
+}
+
+function renderTikTokSettings(card) {
+  const defaults = state.config.tiktok_defaults;
+  const settings = document.createElement("div");
+  settings.className = "scraper-settings";
+
+  const maxVideos = document.createElement("input");
+  maxVideos.type = "number";
+  maxVideos.min = "1";
+  maxVideos.max = "50";
+  maxVideos.value = String(defaults.max_videos ?? 10);
+  maxVideos.dataset.field = "max_videos";
+
+  const maxComments = document.createElement("input");
+  maxComments.type = "number";
+  maxComments.min = "1";
+  maxComments.max = "200";
+  maxComments.value = String(defaults.max_comments ?? 25);
+  maxComments.dataset.field = "max_comments";
+
+  const nums = document.createElement("div");
+  nums.className = "scraper-fields-row";
+  nums.append(
+    buildField("Max videos", maxVideos),
+    buildField("Max comments", maxComments)
+  );
+
+  const tags = document.createElement("textarea");
+  tags.rows = 3;
+  tags.dataset.field = "tag_urls";
+  tags.placeholder = "One TikTok tag URL per line";
+  tags.value = (defaults.tag_urls || []).join("\n");
+
+  settings.append(nums, buildField("Tag URLs", tags));
+  card.appendChild(settings);
+}
+
+function renderNewsSettings(card) {
+  const defaults = state.config.news_defaults;
+  const outlets = state.config.news_outlets || [];
+  const settings = document.createElement("div");
+  settings.className = "scraper-settings";
+
+  const outletList = document.createElement("div");
+  outletList.className = "scraper-outlet-list";
+  const selected = new Set(defaults.outlets || []);
+  for (const outlet of outlets) {
+    const row = document.createElement("label");
+    row.className = "scraper-check";
+    const input = document.createElement("input");
+    input.type = "checkbox";
+    input.value = outlet.id;
+    input.dataset.outlet = outlet.id;
+    input.checked = selected.size === 0 || selected.has(outlet.id);
+    const text = document.createElement("span");
+    text.textContent = outlet.name;
+    row.append(input, text);
+    outletList.appendChild(row);
+  }
+
+  const maxArticles = document.createElement("input");
+  maxArticles.type = "number";
+  maxArticles.min = "1";
+  maxArticles.max = "200";
+  maxArticles.value = String(defaults.max_articles ?? 50);
+  maxArticles.dataset.field = "max_articles";
+
+  const requireCategory = document.createElement("label");
+  requireCategory.className = "scraper-check";
+  const requireInput = document.createElement("input");
+  requireInput.type = "checkbox";
+  requireInput.dataset.field = "require_category";
+  requireInput.checked = defaults.require_category_match !== false;
+  const requireText = document.createElement("span");
+  requireText.textContent = "Require civic category match";
+  requireCategory.append(requireInput, requireText);
+
+  settings.append(
+    buildField("Outlets", outletList),
+    buildField("Max articles", maxArticles),
+    requireCategory
+  );
+  card.appendChild(settings);
+}
+
+function renderImportSettings(card, scraper) {
+  const settings = document.createElement("div");
+  settings.className = "scraper-settings";
+
+  const paste = document.createElement("textarea");
+  paste.rows = 5;
+  paste.dataset.field = "paste";
+  paste.placeholder =
+    scraper.id === "reddit"
+      ? 'Paste Reddit scrape JSON ({ "items": [...] } or nested scrapes)'
+      : 'Paste Twitter scrape JSON ({ "tweets": [...] })';
+
+  const file = document.createElement("input");
+  file.type = "file";
+  file.accept = "application/json,.json";
+  file.dataset.field = "file";
+
+  settings.append(
+    buildField("Paste JSON", paste),
+    buildField("Or upload .json", file)
+  );
+  card.appendChild(settings);
 }
 
 function renderScrapers() {
   const el = document.getElementById("scraperGrid");
+  el.innerHTML = "";
   for (const scraper of SCRAPERS) {
     const card = document.createElement("div");
     card.className = "scraper-card";
+    card.dataset.scraper = scraper.id;
 
     const name = document.createElement("div");
     name.className = "scraper-name";
@@ -602,6 +883,14 @@ function renderScrapers() {
     desc.className = "scraper-desc";
     desc.textContent = scraper.desc;
 
+    card.append(name, desc);
+
+    if (scraper.id === "tiktok") renderTikTokSettings(card);
+    else if (scraper.id === "irvine-news") renderNewsSettings(card);
+    else if (scraper.id === "reddit" || scraper.id === "twitter") {
+      renderImportSettings(card, scraper);
+    }
+
     const row = document.createElement("div");
     row.className = "scraper-row";
     const status = document.createElement("span");
@@ -609,11 +898,12 @@ function renderScrapers() {
     status.textContent = "Idle";
     const btn = document.createElement("button");
     btn.className = "btn btn-sm";
-    btn.textContent = "Run";
-    btn.addEventListener("click", () => runScraper(scraper, status, btn));
+    btn.textContent = scraper.id === "reddit" || scraper.id === "twitter" ? "Import" : "Run";
+    btn.dataset.scraperRun = scraper.id;
+    btn.addEventListener("click", () => runScraper(scraper, card, status, btn));
     row.append(status, btn);
 
-    card.append(name, desc, row);
+    card.appendChild(row);
     el.appendChild(card);
   }
 }
@@ -675,6 +965,10 @@ function initSidebar() {
 }
 
 initSidebar();
-renderScrapers();
 initMap();
-loadSignals().then(render);
+loadScraperConfig()
+  .then(() => {
+    renderScrapers();
+    return loadSignals();
+  })
+  .then(render);
