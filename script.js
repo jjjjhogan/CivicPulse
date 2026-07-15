@@ -64,9 +64,4 @@ function renderSignals(records) {
   }
 }
 
-document.getElementById("bookDemoBtn").addEventListener("click", (event) => {
-  event.preventDefault();
-  alert("Demo booking is coming soon — reach out to the CivicPulse team.");
-});
-
 renderSignals(SAMPLE_SIGNALS);
