@@ -50,6 +50,17 @@ html {
   padding-top: 14px;
 }
 
+.side-user {
+  margin: 0 12px 8px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--ink-deep);
+  opacity: 0.75;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .side-link {
   display: flex;
   align-items: center;

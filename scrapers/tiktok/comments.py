@@ -173,6 +173,15 @@ def _load_video_comments(
         opened = open_comments_panel(driver)
         if not opened:
             print("  warning: could not open comments panel")
+            try:
+                body_text = (driver.find_element(By.TAG_NAME, "body").text or "").lower()
+                if "log in" in body_text:
+                    print(
+                        "  hint: TikTok may be showing a login wall — "
+                        "comments often need a logged-in browser session"
+                    )
+            except Exception:
+                pass
         time.sleep(1.5)
         _scroll_comments(driver, max_comments)
         comments = _parse_comments(

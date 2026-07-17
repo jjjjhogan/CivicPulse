@@ -17,6 +17,15 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
+# Windows job/console hosts often use cp1252; TikTok captions include emoji.
+for _stream in (sys.stdout, sys.stderr):
+    reconfigure = getattr(_stream, "reconfigure", None)
+    if callable(reconfigure):
+        try:
+            reconfigure(encoding="utf-8", errors="replace")
+        except Exception:  # noqa: BLE001
+            pass
+
 from scrapers.categories import CivicIssueCategory
 from scrapers.feed import rebuild_landing_feed
 from scrapers.tiktok.comments import scrape_comments_for_area, scrape_comments_from_video

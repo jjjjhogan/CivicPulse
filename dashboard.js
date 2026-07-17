@@ -59,6 +59,8 @@ const state = {
     ],
   },
   scrapeRunning: false,
+  activeJobId: null,
+  user: null,
 };
 
 let map;
@@ -478,10 +480,14 @@ function setRunButtonsDisabled(disabled) {
   }
 }
 
-async function pollScrapeStatus(statusEl) {
+async function pollJobStatus(jobId, statusEl) {
   const logEl = document.getElementById("scraperLog");
   while (true) {
-    const res = await fetch("/api/scrape/status");
+    const res = await fetch(`/api/jobs/${jobId}`, { credentials: "same-origin" });
+    if (res.status === 401) {
+      window.location.href = "login.html";
+      return false;
+    }
     const data = await res.json();
     if (data.log) {
       logEl.hidden = false;
@@ -536,45 +542,47 @@ function collectNewsPayload(card) {
   };
 }
 
-async function collectImportBody(card) {
-  const fileInput = card.querySelector("[data-field=file]");
-  const paste = (card.querySelector("[data-field=paste]").value || "").trim();
-  if (fileInput?.files?.length) {
-    const form = new FormData();
-    form.append("file", fileInput.files[0]);
-    return { body: form, isForm: true };
-  }
-  if (!paste) {
-    throw new Error("Paste JSON or choose a .json file first.");
-  }
-  let parsed;
-  try {
-    parsed = JSON.parse(paste);
-  } catch {
-    throw new Error("Pasted text is not valid JSON.");
-  }
-  return {
-    body: JSON.stringify({ payload: parsed }),
-    isForm: false,
-    headers: { "Content-Type": "application/json" },
-  };
-}
-
-async function buildScrapeRequest(scraper, card) {
+async function buildJobRequest(scraper, card) {
   if (scraper.id === "tiktok") {
     return {
-      body: JSON.stringify(collectTikTokPayload(card)),
+      body: JSON.stringify({ source: "tiktok", settings: collectTikTokPayload(card) }),
       headers: { "Content-Type": "application/json" },
     };
   }
   if (scraper.id === "irvine-news") {
     return {
-      body: JSON.stringify(collectNewsPayload(card)),
+      body: JSON.stringify({
+        source: "irvine-news",
+        settings: collectNewsPayload(card),
+      }),
       headers: { "Content-Type": "application/json" },
     };
   }
   if (scraper.id === "reddit" || scraper.id === "twitter") {
-    return collectImportBody(card);
+    const fileInput = card.querySelector("[data-field=file]");
+    const paste = (card.querySelector("[data-field=paste]").value || "").trim();
+    if (fileInput?.files?.length) {
+      const form = new FormData();
+      form.append("source", scraper.id);
+      form.append("file", fileInput.files[0]);
+      return { body: form, isForm: true };
+    }
+    if (!paste) {
+      throw new Error("Paste JSON or choose a .json file first.");
+    }
+    let parsed;
+    try {
+      parsed = JSON.parse(paste);
+    } catch {
+      throw new Error("Pasted text is not valid JSON.");
+    }
+    return {
+      body: JSON.stringify({
+        source: scraper.id,
+        settings: { payload: parsed },
+      }),
+      headers: { "Content-Type": "application/json" },
+    };
   }
   return { body: null };
 }
@@ -588,7 +596,7 @@ async function runScraper(scraper, card, statusEl, btn) {
 
   let request;
   try {
-    request = await buildScrapeRequest(scraper, card);
+    request = await buildJobRequest(scraper, card);
   } catch (err) {
     statusEl.textContent = "Needs input";
     statusEl.className = "scraper-status";
@@ -603,11 +611,16 @@ async function runScraper(scraper, card, statusEl, btn) {
   logLine(`Starting ${scraper.name}…`);
 
   try {
-    const res = await fetch(`/api/scrape/${scraper.id}`, {
+    const res = await fetch("/api/jobs", {
       method: "POST",
+      credentials: "same-origin",
       body: request.body,
       headers: request.headers,
     });
+    if (res.status === 401) {
+      window.location.href = "login.html";
+      return;
+    }
     if (res.status === 501) {
       const body = await res.json();
       statusEl.textContent = "Not available";
@@ -628,7 +641,9 @@ async function runScraper(scraper, card, statusEl, btn) {
       throw new Error(body.error || `API returned ${res.status}`);
     }
 
-    const ok = await pollScrapeStatus(statusEl);
+    const started = await res.json();
+    logLine(`Job #${started.id} started.`);
+    const ok = await pollJobStatus(started.id, statusEl);
     if (ok) {
       await loadSignals();
       const source = scraper.signalSource || scraper.id;
@@ -870,11 +885,56 @@ function initSidebar() {
   }
 }
 
+async function requireAuth() {
+  try {
+    const res = await fetch("/api/auth/me", { credentials: "same-origin" });
+    const data = await res.json();
+    if (!data.authenticated) {
+      window.location.href = "login.html";
+      return null;
+    }
+    return data.user;
+  } catch {
+    window.location.href = "login.html";
+    return null;
+  }
+}
+
+async function logout() {
+  try {
+    await fetch("/api/auth/logout", {
+      method: "POST",
+      credentials: "same-origin",
+      headers: { Accept: "application/json" },
+    });
+  } catch {
+    // Still leave the dashboard.
+  }
+  window.location.href = "login.html";
+}
+
+function showSignedInUser(user) {
+  const el = document.getElementById("signedInUser");
+  if (el && user) {
+    el.textContent = user.name || user.email;
+    el.hidden = false;
+  }
+}
+
 initSidebar();
 initMap();
-loadScraperConfig()
-  .then(() => {
-    renderScrapers();
-    return loadSignals();
-  })
-  .then(render);
+requireAuth().then((user) => {
+  if (!user) return;
+  showSignedInUser(user);
+  const logoutBtn = document.getElementById("logoutBtn");
+  if (logoutBtn) logoutBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    logout();
+  });
+  return loadScraperConfig()
+    .then(() => {
+      renderScrapers();
+      return loadSignals();
+    })
+    .then(render);
+});
