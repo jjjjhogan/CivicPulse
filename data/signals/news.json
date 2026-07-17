@@ -8,7 +8,13 @@
     "categories": [],
     "published_utc": "2026-06-30",
     "metadata": {
-      "outlet_id": "irvine-standard"
+      "outlet_id": "irvine-standard",
+      "classification": {
+        "scores": {},
+        "confidence": 0.772,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -20,7 +26,13 @@
     "categories": [],
     "published_utc": "2026-06-30",
     "metadata": {
-      "outlet_id": "irvine-standard"
+      "outlet_id": "irvine-standard",
+      "classification": {
+        "scores": {},
+        "confidence": 0.825,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -32,7 +44,13 @@
     "categories": [],
     "published_utc": "2026-06-30",
     "metadata": {
-      "outlet_id": "irvine-standard"
+      "outlet_id": "irvine-standard",
+      "classification": {
+        "scores": {},
+        "confidence": 0.78,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -44,7 +62,13 @@
     "categories": [],
     "published_utc": "2026-06-30",
     "metadata": {
-      "outlet_id": "irvine-standard"
+      "outlet_id": "irvine-standard",
+      "classification": {
+        "scores": {},
+        "confidence": 0.752,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -56,7 +80,13 @@
     "categories": [],
     "published_utc": "2026-06-30",
     "metadata": {
-      "outlet_id": "irvine-standard"
+      "outlet_id": "irvine-standard",
+      "classification": {
+        "scores": {},
+        "confidence": 0.737,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -68,7 +98,13 @@
     "categories": [],
     "published_utc": "2026-06-30",
     "metadata": {
-      "outlet_id": "irvine-standard"
+      "outlet_id": "irvine-standard",
+      "classification": {
+        "scores": {},
+        "confidence": 0.931,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -80,7 +116,13 @@
     "categories": [],
     "published_utc": "2026-06-30",
     "metadata": {
-      "outlet_id": "irvine-standard"
+      "outlet_id": "irvine-standard",
+      "classification": {
+        "scores": {},
+        "confidence": 0.86,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -92,7 +134,13 @@
     "categories": [],
     "published_utc": "2026-06-30",
     "metadata": {
-      "outlet_id": "irvine-standard"
+      "outlet_id": "irvine-standard",
+      "classification": {
+        "scores": {},
+        "confidence": 0.378,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -104,7 +152,13 @@
     "categories": [],
     "published_utc": "2026-06-30",
     "metadata": {
-      "outlet_id": "irvine-standard"
+      "outlet_id": "irvine-standard",
+      "classification": {
+        "scores": {},
+        "confidence": 0.766,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -116,7 +170,13 @@
     "categories": [],
     "published_utc": "2026-06-30",
     "metadata": {
-      "outlet_id": "irvine-standard"
+      "outlet_id": "irvine-standard",
+      "classification": {
+        "scores": {},
+        "confidence": 0.522,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -128,7 +188,13 @@
     "categories": [],
     "published_utc": "2026-06-30",
     "metadata": {
-      "outlet_id": "irvine-standard"
+      "outlet_id": "irvine-standard",
+      "classification": {
+        "scores": {},
+        "confidence": 0.481,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -140,7 +206,13 @@
     "categories": [],
     "published_utc": "2026-06-30",
     "metadata": {
-      "outlet_id": "irvine-standard"
+      "outlet_id": "irvine-standard",
+      "classification": {
+        "scores": {},
+        "confidence": 0.79,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -154,7 +226,15 @@
     ],
     "published_utc": "2026-06-30",
     "metadata": {
-      "outlet_id": "irvine-standard"
+      "outlet_id": "irvine-standard",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -166,7 +246,13 @@
     "categories": [],
     "published_utc": "2026-06-30",
     "metadata": {
-      "outlet_id": "irvine-standard"
+      "outlet_id": "irvine-standard",
+      "classification": {
+        "scores": {},
+        "confidence": 0.576,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -178,7 +264,13 @@
     "categories": [],
     "published_utc": "2026-06-30",
     "metadata": {
-      "outlet_id": "irvine-standard"
+      "outlet_id": "irvine-standard",
+      "classification": {
+        "scores": {},
+        "confidence": 0.842,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
     }
   }
 ]

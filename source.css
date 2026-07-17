@@ -201,6 +201,26 @@ button.outlet-row:hover {
   color: #5a6b4a;
 }
 
+/* classifier confidence filter dots (chips live in dashboard.css) */
+
+.conf-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  margin-right: 7px;
+}
+
+.conf-dot.high { background: #4c7a34; }
+.conf-dot.medium { background: #b07a1e; }
+.conf-dot.low { background: #c44f3f; }
+.conf-dot.unscored { background: #8a8f98; }
+
+.missed-filter.selected {
+  background: #6a4fa3;
+  border-color: #6a4fa3;
+}
+
 @media (max-width: 900px) {
   .cat-row,
   .outlet-row {

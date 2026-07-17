@@ -6,7 +6,10 @@
     "body": "Do Irvine Residents Feel Safer with Flock Cameras everywhere?\nAre the security risks, constant monitoring, the fact that a private corporation is in control of the data as you cant own a flock device only rent it, and this information being used for issues unrelated to motor vehicles worth it? Just check the logs for these cameras to see how many requests are made for immigration instead of actual crimes.",
     "url": "https://old.reddit.com/r/irvine/comments/1uqoc80/do_irvine_residents_feel_safer_with_flock_cameras/",
     "categories": [
-      "public_safety"
+      "property_crime",
+      "public_safety",
+      "housing",
+      "immigration"
     ],
     "published_utc": "2026-07-08",
     "metadata": {
@@ -15,7 +18,180 @@
       "score": 50,
       "comment_count": 62,
       "search_query": "news+irvine",
-      "flair": null
+      "flair": null,
+      "classification": {
+        "scores": {
+          "public_safety": 0.7,
+          "housing": 0.7,
+          "immigration": 0.7,
+          "property_crime": 0.73
+        },
+        "confidence": 0.708,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "reddit",
+    "outlet": "r/irvine",
+    "title": "Missing Person!",
+    "body": "Missing Person!\nUPDATE - Found and home safe. Thank you, everyone! We need help finding Amy Harchol, a 67-year-old woman. She walked away from her home near Harcum Ln. and Saginaw Dr. this morning around 9:30 a.m. Please call 9-1-1 if you see Amy.",
+    "url": "https://old.reddit.com/r/irvine/comments/1uqilbd/missing_person/",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-07-08",
+    "metadata": {
+      "author": "Irvinepd",
+      "post_id": "1uqilbd",
+      "score": 92,
+      "comment_count": 7,
+      "search_query": "news+irvine",
+      "flair": null,
+      "classification": {
+        "scores": {
+          "public_safety": 0.77
+        },
+        "confidence": 0.77,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "reddit",
+    "outlet": "r/irvine",
+    "title": "Our lovely new slurry seal",
+    "body": "Our lovely new slurry seal\nHow is the slurry seal from last week already ruined? Is it melting from the heat? Did it get wet? Did they remove the cones too soon? It still feels soft.",
+    "url": "https://old.reddit.com/r/irvine/comments/1uqam9g/our_lovely_new_slurry_seal/",
+    "categories": [
+      "potholes"
+    ],
+    "published_utc": "2026-07-07",
+    "metadata": {
+      "author": "capriciousguacamole",
+      "post_id": "1uqam9g",
+      "score": 16,
+      "comment_count": 15,
+      "search_query": "news+irvine",
+      "flair": null,
+      "classification": {
+        "scores": {
+          "potholes": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "reddit",
+    "outlet": "r/irvine",
+    "title": "The Drone Show/ Fireworks were pretty good in Woodbridge",
+    "body": "The Drone Show/ Fireworks were pretty good in Woodbridge\nWoodbridge Village Association had their first drone show and fireworks this year for their 50th anniversary.",
+    "url": "https://old.reddit.com/r/irvine/comments/1uoakdq/the_drone_show_fireworks_were_pretty_good_in/",
+    "categories": [
+      "noise"
+    ],
+    "published_utc": "2026-07-05",
+    "metadata": {
+      "author": "MichaelUramMFT",
+      "post_id": "1uoakdq",
+      "score": 281,
+      "comment_count": 25,
+      "search_query": "news+irvine",
+      "flair": null,
+      "classification": {
+        "scores": {
+          "noise": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "reddit",
+    "outlet": "r/irvine",
+    "title": "Is Mike Ward park a good place to watch July 4th fireworks?",
+    "body": "Is Mike Ward park a good place to watch July 4th fireworks?\nLooking for the best place to watch the Woodbridge fireworks with an emphasis on keeping my sanity when it comes to parking",
+    "url": "https://old.reddit.com/r/irvine/comments/1uln6t6/is_mike_ward_park_a_good_place_to_watch_july_4th/",
+    "categories": [
+      "noise"
+    ],
+    "published_utc": "2026-07-02",
+    "metadata": {
+      "author": "AccomplishedTitle836",
+      "post_id": "1uln6t6",
+      "score": 9,
+      "comment_count": 10,
+      "search_query": "news+irvine",
+      "flair": null,
+      "classification": {
+        "scores": {
+          "noise": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "reddit",
+    "outlet": "r/irvine",
+    "title": "New Signal at Harvard and Berkeley Intersection",
+    "body": "New Signal at Harvard and Berkeley Intersection\nMonths ago I submitted a complaint with the city of Irvine for the four way stop sign intersection at Harvard and Berkeley. Cars speed through it without stopping all the time. Today I got a voicemail saying that a new signal would be installed there!",
+    "url": "https://old.reddit.com/r/irvine/comments/1uku663/new_signal_at_harvard_and_berkeley_intersection/",
+    "categories": [
+      "traffic_safety"
+    ],
+    "published_utc": "2026-07-01",
+    "metadata": {
+      "author": "sc0202",
+      "post_id": "1uku663",
+      "score": 157,
+      "comment_count": 16,
+      "search_query": "news+irvine",
+      "flair": null,
+      "classification": {
+        "scores": {
+          "traffic_safety": 0.77
+        },
+        "confidence": 0.77,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "reddit",
+    "outlet": "r/irvine",
+    "title": "1A \"Auditors\" in Woodbridge?",
+    "body": "1A \"Auditors\" in Woodbridge?\nJust drove on E Yale Loop and it looked like some \"auditors\" were taking pics/videos of cars on the street.",
+    "url": "https://old.reddit.com/r/irvine/comments/1ukrowc/1a_auditors_in_woodbridge/",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-07-01",
+    "metadata": {
+      "author": "BionicSix",
+      "post_id": "1ukrowc",
+      "score": 22,
+      "comment_count": 25,
+      "search_query": "news+irvine",
+      "flair": null,
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -25,6 +201,7 @@
     "body": "Aggressive coyote in Turtle Rock, south Irvine, killed pet >:(\nMy parents live in the Turtle Rock neighborhood in southern Irvine, and sadly one of their cats was likely killed last night. A coyote punched through a screen door. We've reported the incident to the Irvine Police department and animal control.",
     "url": "https://old.reddit.com/r/irvine/comments/1tltzaq/aggressive_coyote_in_turtle_rock_south_irvine/",
     "categories": [
+      "violent_crime",
       "public_safety"
     ],
     "published_utc": "2026-05-23",
@@ -34,7 +211,70 @@
       "score": 106,
       "comment_count": 39,
       "search_query": "news+irvine",
-      "flair": null
+      "flair": null,
+      "classification": {
+        "scores": {
+          "public_safety": 0.7,
+          "violent_crime": 0.9
+        },
+        "confidence": 0.8,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "reddit",
+    "outlet": "r/irvine",
+    "title": "A love letter to capitalism [Irvine, California, 4/19/2026]",
+    "body": "A love letter to capitalism [Irvine, California, 4/19/2026]\nAverage rent prices have risen from about $300 per month 40 years ago to over $2,000 per month today. It's incredible how dozens of unhoused people are mocked or blamed for their difficulties. Thank you, Capitalism, for normalizing victim-shaming.",
+    "url": "https://old.reddit.com/r/irvine/comments/1sqr1zd/a_love_letter_to_capitalism_irvine_california/",
+    "categories": [
+      "housing"
+    ],
+    "published_utc": "2026-04-20",
+    "metadata": {
+      "author": "NicolasCageFan492",
+      "post_id": "1sqr1zd",
+      "score": 371,
+      "comment_count": 87,
+      "search_query": "news+irvine",
+      "flair": null,
+      "classification": {
+        "scores": {
+          "housing": 0.87
+        },
+        "confidence": 0.87,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "reddit",
+    "outlet": "r/irvine",
+    "title": "\u201c1st Amendment\u201d frauditors at Woodbury shopping center today.",
+    "body": "\u201c1st Amendment\u201d frauditors at Woodbury shopping center today.\nWhen we drove by they were in front of Ralph's - a bunch of cops were also there arguing with them. They're being assholes as per usual, masked and aggressive, filming license plates, getting in people's faces.",
+    "url": "https://old.reddit.com/r/irvine/comments/1sbsc8p/1st_amendment_frauditors_at_woodbury_shopping/",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-04-03",
+    "metadata": {
+      "author": "ThePrefect0fWanganui",
+      "post_id": "1sbsc8p",
+      "score": 98,
+      "comment_count": 44,
+      "search_query": "news+irvine",
+      "flair": null,
+      "classification": {
+        "scores": {
+          "public_safety": 0.77
+        },
+        "confidence": 0.77,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -44,6 +284,7 @@
     "body": "Great Park standoff\nhttps://www.cbsnews.com/losangeles/news/man-irvine-family-hostage-captive-police-standoff/",
     "url": "https://old.reddit.com/r/irvine/comments/1r2gjjb/great_park_standoff/",
     "categories": [
+      "violent_crime",
       "public_safety"
     ],
     "published_utc": "2026-02-12",
@@ -53,7 +294,16 @@
       "score": 84,
       "comment_count": 28,
       "search_query": "news+irvine",
-      "flair": null
+      "flair": null,
+      "classification": {
+        "scores": {
+          "violent_crime": 0.8,
+          "public_safety": 0.7
+        },
+        "confidence": 0.75,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -72,7 +322,15 @@
       "score": 221,
       "comment_count": 65,
       "search_query": "news+irvine",
-      "flair": null
+      "flair": null,
+      "classification": {
+        "scores": {
+          "public_safety": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -82,6 +340,7 @@
     "body": "Two People Arrested After the Death of Ten Dogs\nOn Thursday, Detectives arrested an animal trainer and his girlfriend after ten dogs in his care died. The Irvine Police Department was contacted and Detectives arrested Kwong (Tony) Chun Sit, 53, of Irvine, for animal cruelty and destruction of evidence.",
     "url": "https://old.reddit.com/r/irvine/comments/1lglj78/two_people_arrested_after_the_death_of_ten_dogs/",
     "categories": [
+      "violent_crime",
       "public_safety"
     ],
     "published_utc": "2025-06-21",
@@ -91,7 +350,44 @@
       "score": 235,
       "comment_count": 33,
       "search_query": "news+irvine",
-      "flair": null
+      "flair": null,
+      "classification": {
+        "scores": {
+          "public_safety": 0.8,
+          "violent_crime": 0.9
+        },
+        "confidence": 0.85,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "reddit",
+    "outlet": "r/irvine",
+    "title": "Altair Raid (Videos)",
+    "body": "Altair Raid (Videos)\nFYI - Videos provided by neighbors witnessing the Altair raid (not my content). Still haven't seen any news articles posted.",
+    "url": "https://old.reddit.com/r/irvine/comments/1km4u9e/altair_raid_videos/",
+    "categories": [
+      "immigration"
+    ],
+    "published_utc": "2025-05-14",
+    "metadata": {
+      "author": "CaliKoukla",
+      "post_id": "1km4u9e",
+      "score": 398,
+      "comment_count": 122,
+      "search_query": "news+irvine",
+      "flair": null,
+      "classification": {
+        "scores": {
+          "immigration": 0.78
+        },
+        "confidence": 0.78,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
     }
   },
   {
@@ -110,7 +406,42 @@
       "score": 16,
       "comment_count": 4,
       "search_query": "news+irvine",
-      "flair": null
+      "flair": null,
+      "classification": {
+        "scores": {
+          "housing": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "reddit",
+    "outlet": "r/irvine",
+    "title": "Irvine: Two Motorcyclists Die In Freeway Crash (credit: Miles Madison @CountyNewsTV)",
+    "body": "Irvine: Two Motorcyclists Die In Freeway Crash (credit: Miles Madison @CountyNewsTV)\nTwo motorcyclists died in a freeway crash following reports of reckless riding involving a group of over 50 riders, early Sunday morning on the northbound I-5 Freeway just south of Culver Drive.",
+    "url": "https://old.reddit.com/r/irvine/comments/1f1jvtt/irvine_two_motorcyclists_die_in_freeway_crash/",
+    "categories": [
+      "traffic_safety"
+    ],
+    "published_utc": "2024-08-26",
+    "metadata": {
+      "author": "ApexGyrl",
+      "post_id": "1f1jvtt",
+      "score": 19,
+      "comment_count": 13,
+      "search_query": "news+irvine",
+      "flair": null,
+      "classification": {
+        "scores": {
+          "traffic_safety": 0.77
+        },
+        "confidence": 0.77,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -120,6 +451,7 @@
     "body": "[News] Irvine man tried to avenge crimes against Asians by kidnapping and trying to sexually assault a woman",
     "url": "https://old.reddit.com/r/irvine/comments/mo5i01/news_irvine_man_tried_to_avenge_crimes_against/",
     "categories": [
+      "violent_crime",
       "public_safety"
     ],
     "published_utc": "2021-04-10",
@@ -129,7 +461,44 @@
       "score": 25,
       "comment_count": 14,
       "search_query": "news+irvine",
-      "flair": null
+      "flair": null,
+      "classification": {
+        "scores": {
+          "violent_crime": 0.8,
+          "public_safety": 0.7
+        },
+        "confidence": 0.75,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "reddit",
+    "outlet": "r/irvine",
+    "title": "Does anyone know these 1st amendment auditors?",
+    "body": "Does anyone know these 1st amendment auditors?\nI constantly see posts on the Orange County and Irvine subreddits about people with masks filming others at the Sand Canyon Post office.",
+    "url": "https://old.reddit.com/r/irvine/comments/1c1ut1k/does_anyone_know_these_1st_amendment_auditors/",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2024-04-12",
+    "metadata": {
+      "author": "Sweaty_Analysis5607",
+      "post_id": "1c1ut1k",
+      "score": 60,
+      "comment_count": 190,
+      "search_query": "news+irvine",
+      "flair": null,
+      "classification": {
+        "scores": {
+          "public_safety": 0.77
+        },
+        "confidence": 0.77,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
     }
   }
 ]

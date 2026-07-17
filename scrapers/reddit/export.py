@@ -3,7 +3,7 @@
 import json
 from datetime import datetime
 
-from scrapers.categories import classify
+from scrapers.classifier import classify_signal
 from scrapers.schema import CivicSignal
 
 
@@ -28,7 +28,7 @@ def _published_date(post: dict) -> str:
 
 def post_to_signal(post: dict, *, subreddit: str, query: str) -> CivicSignal:
     body = _post_text(post)
-    categories = classify(body)
+    classification = classify_signal(body)
     prefixed = post.get("subredditPrefixed") or f"r/{subreddit}"
     return CivicSignal(
         source="reddit",
@@ -36,7 +36,7 @@ def post_to_signal(post: dict, *, subreddit: str, query: str) -> CivicSignal:
         title=_truncate(post.get("title") or body),
         body=body,
         url=post.get("permalink") or post.get("url") or "",
-        categories=categories,
+        categories=classification.categories,
         published_utc=_published_date(post),
         metadata={
             "author": post.get("author") or "unknown",
@@ -45,6 +45,7 @@ def post_to_signal(post: dict, *, subreddit: str, query: str) -> CivicSignal:
             "comment_count": post.get("commentCount"),
             "search_query": query,
             "flair": post.get("flair"),
+            "classification": classification.to_dict(),
         },
     )
 
