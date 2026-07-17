@@ -5,7 +5,6 @@ from __future__ import annotations
 import json
 from datetime import datetime, timezone
 
-from scrapers.categories import classify
 from scrapers.classifier import classify_signal, inherited_classification
 from scrapers.schema import CivicSignal, timestamp_to_date
 from scrapers.tiktok.comments import TikTokComment
@@ -31,7 +30,10 @@ def video_context_text(video: TikTokVideo) -> str:
 
 
 def classify_video(video: TikTokVideo) -> list[str]:
-    return classify(video_context_text(video))
+    # Full keywords+model pass: comments inherit the video's categories, so
+    # a model-classified caption gives its comments a specific category
+    # instead of the trusted-outlet "public_safety" default.
+    return classify_signal(video_context_text(video)).categories
 
 
 def comment_to_signal(
@@ -146,6 +148,13 @@ def tag_results_to_signals(
                 signals.append(caption_signal)
 
             trusted = is_trusted_news_outlet(video.author)
+            if not video_categories and trusted and video.comments:
+                # Caption scrapes fail often; a newsroom video's comment
+                # thread usually names the incident ("hazmat", "the fire").
+                # Classify the thread as a whole so its comments inherit a
+                # specific category instead of the public_safety default.
+                thread = "\n".join(c.text for c in video.comments)
+                video_categories = classify_signal(thread).categories
             for comment in video.comments:
                 signal = comment_to_signal(
                     comment,
@@ -154,11 +163,16 @@ def tag_results_to_signals(
                 )
                 if civic_only and not signal.categories:
                     continue
+                # No direct match and nothing to inherit — the caption said
+                # nothing and neither did the comment thread as a whole. The
+                # old rule kept these anyway for trusted newsrooms, but the
+                # thread consensus above already looked at all the evidence:
+                # a civic-silent thread under a news account (a food video,
+                # say) isn't a civic signal.
                 if (
                     civic_only
                     and signal.metadata.get("inherited_from_video")
                     and not video_categories
-                    and not trusted
                 ):
                     continue
                 signals.append(signal)

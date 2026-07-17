@@ -63,14 +63,21 @@ def _signal_text(row: dict) -> str:
     return "\n".join(unique)
 
 
-def reclassify_row(row: dict) -> dict:
+def reclassify_row(row: dict, thread_categories: dict | None = None) -> dict:
     """Update a row's categories + metadata.classification in place."""
     meta = row.setdefault("metadata", {})
     result = classify_signal(_signal_text(row))
 
+    consensus = (thread_categories or {}).get(row.get("url") or "")
     if result.categories:
         row["categories"] = result.categories
         meta["classification"] = result.to_dict()
+    elif consensus:
+        # The signal's own text says nothing, but the comment thread it
+        # belongs to does — inherit the thread's categories (mirrors the
+        # comment-consensus fallback in scrapers/tiktok/export.py).
+        row["categories"] = consensus
+        meta["classification"] = inherited_classification(consensus)
     elif meta.get("weak_trusted_default"):
         meta["classification"] = inherited_classification(
             row.get("categories") or [], outlet_default=True
@@ -98,6 +105,22 @@ def reclassify_row(row: dict) -> dict:
 
 def _row_key(row: dict) -> tuple:
     return (row.get("source"), row.get("published_utc"), row.get("title"))
+
+
+def thread_consensus(rows: list[dict]) -> dict[str, list[str]]:
+    """Classify each TikTok video's stored comment thread as one text, for
+    rows whose own text classifies to nothing (legacy scrapes without raw
+    data). Returns url -> categories for threads that classified."""
+    threads: dict[str, list[str]] = {}
+    for row in rows:
+        url = row.get("url") or ""
+        if url:
+            threads.setdefault(url, []).append(row.get("body") or row.get("title") or "")
+    return {
+        url: result.categories
+        for url, bodies in threads.items()
+        if (result := classify_signal("\n".join(bodies))).categories
+    }
 
 
 def rescue_missed(source: str, civic_rows: list[dict]) -> list[dict]:
@@ -160,8 +183,9 @@ def main() -> None:
             print(f"{source:8s} no {path.name}, skipped")
             continue
 
+        consensus = thread_consensus(rows) if source == "tiktok" else None
         for row in rows:
-            reclassify_row(row)
+            reclassify_row(row, consensus)
 
         recovered = []
         if not args.no_rescue and source in ALL_FILES:

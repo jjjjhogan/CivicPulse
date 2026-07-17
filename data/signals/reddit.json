@@ -6,6 +6,7 @@
     "body": "Do Irvine Residents Feel Safer with Flock Cameras everywhere?\nAre the security risks, constant monitoring, the fact that a private corporation is in control of the data as you cant own a flock device only rent it, and this information being used for issues unrelated to motor vehicles worth it? Just check the logs for these cameras to see how many requests are made for immigration instead of actual crimes.",
     "url": "https://old.reddit.com/r/irvine/comments/1uqoc80/do_irvine_residents_feel_safer_with_flock_cameras/",
     "categories": [
+      "property_crime",
       "public_safety",
       "housing",
       "immigration"
@@ -22,10 +23,11 @@
         "scores": {
           "public_safety": 0.7,
           "housing": 0.7,
-          "immigration": 0.7
+          "immigration": 0.7,
+          "property_crime": 0.73
         },
-        "confidence": 0.7,
-        "method": "keywords",
+        "confidence": 0.708,
+        "method": "keywords+model",
         "model_version": "nb-v1"
       }
     }
@@ -49,10 +51,10 @@
       "flair": null,
       "classification": {
         "scores": {
-          "public_safety": 0.7
+          "public_safety": 0.77
         },
-        "confidence": 0.7,
-        "method": "keywords",
+        "confidence": 0.77,
+        "method": "keywords+model",
         "model_version": "nb-v1"
       }
     }
@@ -145,7 +147,7 @@
     "body": "New Signal at Harvard and Berkeley Intersection\nMonths ago I submitted a complaint with the city of Irvine for the four way stop sign intersection at Harvard and Berkeley. Cars speed through it without stopping all the time. Today I got a voicemail saying that a new signal would be installed there!",
     "url": "https://old.reddit.com/r/irvine/comments/1uku663/new_signal_at_harvard_and_berkeley_intersection/",
     "categories": [
-      "public_safety"
+      "traffic_safety"
     ],
     "published_utc": "2026-07-01",
     "metadata": {
@@ -157,12 +159,11 @@
       "flair": null,
       "classification": {
         "scores": {
-          "public_safety": 0.9
+          "traffic_safety": 0.77
         },
-        "confidence": 0.9,
-        "method": "model",
-        "model_version": "nb-v1",
-        "rescued": true
+        "confidence": 0.77,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
       }
     }
   },
@@ -185,12 +186,11 @@
       "flair": null,
       "classification": {
         "scores": {
-          "public_safety": 0.789
+          "public_safety": 0.6
         },
-        "confidence": 0.789,
-        "method": "model",
-        "model_version": "nb-v1",
-        "rescued": true
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
       }
     }
   },
@@ -201,6 +201,7 @@
     "body": "Aggressive coyote in Turtle Rock, south Irvine, killed pet >:(\nMy parents live in the Turtle Rock neighborhood in southern Irvine, and sadly one of their cats was likely killed last night. A coyote punched through a screen door. We've reported the incident to the Irvine Police department and animal control.",
     "url": "https://old.reddit.com/r/irvine/comments/1tltzaq/aggressive_coyote_in_turtle_rock_south_irvine/",
     "categories": [
+      "violent_crime",
       "public_safety"
     ],
     "published_utc": "2026-05-23",
@@ -213,9 +214,10 @@
       "flair": null,
       "classification": {
         "scores": {
-          "public_safety": 0.77
+          "public_safety": 0.7,
+          "violent_crime": 0.9
         },
-        "confidence": 0.77,
+        "confidence": 0.8,
         "method": "keywords+model",
         "model_version": "nb-v1"
       }
@@ -282,6 +284,7 @@
     "body": "Great Park standoff\nhttps://www.cbsnews.com/losangeles/news/man-irvine-family-hostage-captive-police-standoff/",
     "url": "https://old.reddit.com/r/irvine/comments/1r2gjjb/great_park_standoff/",
     "categories": [
+      "violent_crime",
       "public_safety"
     ],
     "published_utc": "2026-02-12",
@@ -294,9 +297,10 @@
       "flair": null,
       "classification": {
         "scores": {
-          "public_safety": 0.9
+          "violent_crime": 0.8,
+          "public_safety": 0.7
         },
-        "confidence": 0.9,
+        "confidence": 0.75,
         "method": "keywords",
         "model_version": "nb-v1"
       }
@@ -309,7 +313,6 @@
     "body": "ICE and IPD/Irvine Company\nI've been doing some reading after seeing ICE at spectrum, and it seems like the camera system used by Irvine police and Irvine Company is known to be accessible by ICE.",
     "url": "https://old.reddit.com/r/irvine/comments/1m8qitb/ice_and_ipdirvine_company/",
     "categories": [
-      "immigration",
       "public_safety"
     ],
     "published_utc": "2025-07-25",
@@ -322,11 +325,10 @@
       "flair": null,
       "classification": {
         "scores": {
-          "public_safety": 0.7,
-          "immigration": 0.718
+          "public_safety": 0.7
         },
-        "confidence": 0.709,
-        "method": "keywords+model",
+        "confidence": 0.7,
+        "method": "keywords",
         "model_version": "nb-v1"
       }
     }
@@ -338,6 +340,7 @@
     "body": "Two People Arrested After the Death of Ten Dogs\nOn Thursday, Detectives arrested an animal trainer and his girlfriend after ten dogs in his care died. The Irvine Police Department was contacted and Detectives arrested Kwong (Tony) Chun Sit, 53, of Irvine, for animal cruelty and destruction of evidence.",
     "url": "https://old.reddit.com/r/irvine/comments/1lglj78/two_people_arrested_after_the_death_of_ten_dogs/",
     "categories": [
+      "violent_crime",
       "public_safety"
     ],
     "published_utc": "2025-06-21",
@@ -350,10 +353,11 @@
       "flair": null,
       "classification": {
         "scores": {
-          "public_safety": 0.8
+          "public_safety": 0.8,
+          "violent_crime": 0.9
         },
-        "confidence": 0.8,
-        "method": "keywords",
+        "confidence": 0.85,
+        "method": "keywords+model",
         "model_version": "nb-v1"
       }
     }
@@ -377,9 +381,9 @@
       "flair": null,
       "classification": {
         "scores": {
-          "immigration": 0.847
+          "immigration": 0.78
         },
-        "confidence": 0.847,
+        "confidence": 0.78,
         "method": "model",
         "model_version": "nb-v1",
         "rescued": true
@@ -420,7 +424,7 @@
     "body": "Irvine: Two Motorcyclists Die In Freeway Crash (credit: Miles Madison @CountyNewsTV)\nTwo motorcyclists died in a freeway crash following reports of reckless riding involving a group of over 50 riders, early Sunday morning on the northbound I-5 Freeway just south of Culver Drive.",
     "url": "https://old.reddit.com/r/irvine/comments/1f1jvtt/irvine_two_motorcyclists_die_in_freeway_crash/",
     "categories": [
-      "public_safety"
+      "traffic_safety"
     ],
     "published_utc": "2024-08-26",
     "metadata": {
@@ -432,10 +436,10 @@
       "flair": null,
       "classification": {
         "scores": {
-          "public_safety": 0.7
+          "traffic_safety": 0.77
         },
-        "confidence": 0.7,
-        "method": "keywords",
+        "confidence": 0.77,
+        "method": "keywords+model",
         "model_version": "nb-v1"
       }
     }
@@ -447,6 +451,7 @@
     "body": "[News] Irvine man tried to avenge crimes against Asians by kidnapping and trying to sexually assault a woman",
     "url": "https://old.reddit.com/r/irvine/comments/mo5i01/news_irvine_man_tried_to_avenge_crimes_against/",
     "categories": [
+      "violent_crime",
       "public_safety"
     ],
     "published_utc": "2021-04-10",
@@ -459,9 +464,10 @@
       "flair": null,
       "classification": {
         "scores": {
-          "public_safety": 0.8
+          "violent_crime": 0.8,
+          "public_safety": 0.7
         },
-        "confidence": 0.8,
+        "confidence": 0.75,
         "method": "keywords",
         "model_version": "nb-v1"
       }
@@ -474,7 +480,7 @@
     "body": "Does anyone know these 1st amendment auditors?\nI constantly see posts on the Orange County and Irvine subreddits about people with masks filming others at the Sand Canyon Post office.",
     "url": "https://old.reddit.com/r/irvine/comments/1c1ut1k/does_anyone_know_these_1st_amendment_auditors/",
     "categories": [
-      "immigration"
+      "public_safety"
     ],
     "published_utc": "2024-04-12",
     "metadata": {
@@ -486,9 +492,9 @@
       "flair": null,
       "classification": {
         "scores": {
-          "immigration": 0.785
+          "public_safety": 0.77
         },
-        "confidence": 0.785,
+        "confidence": 0.77,
         "method": "model",
         "model_version": "nb-v1",
         "rescued": true

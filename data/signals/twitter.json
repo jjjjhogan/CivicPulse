@@ -6,7 +6,8 @@
     "body": "#IRVINEPDPIO - This morning, around 9:56 a.m., the Orange County Fire Authority and the Irvine Police Department responded to a report of a chemical odor coming from a residence on Crater. The FBI responded and has joined the investigation. There are no evacuations and no known threat to the community.",
     "url": "https://x.com/IrvinePolice/status/2074612266197262406",
     "categories": [
-      "public_safety"
+      "public_safety",
+      "emergencies"
     ],
     "published_utc": "2026-07-07",
     "metadata": {
@@ -22,10 +23,11 @@
       "verified": true,
       "classification": {
         "scores": {
-          "public_safety": 0.9
+          "emergencies": 0.7,
+          "public_safety": 0.87
         },
-        "confidence": 0.9,
-        "method": "keywords",
+        "confidence": 0.785,
+        "method": "keywords+model",
         "model_version": "nb-v1"
       }
     }
@@ -37,7 +39,8 @@
     "body": "#IRVINEPDPIO- Around 4:45 a.m., the Orange Police Department pursued a vehicle into Irvine. The pursuit ended in the area of E. Yale Loop and Woodspring. IPD officers assisted with their investigation. Three juveniles were taken into custody by Orange PD.",
     "url": "https://x.com/IrvinePolice/status/2074865633205088553",
     "categories": [
-      "public_safety"
+      "public_safety",
+      "traffic_safety"
     ],
     "published_utc": "2026-07-08",
     "metadata": {
@@ -53,10 +56,11 @@
       "verified": true,
       "classification": {
         "scores": {
-          "public_safety": 0.8
+          "traffic_safety": 0.7,
+          "public_safety": 0.77
         },
-        "confidence": 0.8,
-        "method": "keywords",
+        "confidence": 0.735,
+        "method": "keywords+model",
         "model_version": "nb-v1"
       }
     }
@@ -162,7 +166,7 @@
     "body": "Hazmat response in Irvine is tied to same teen, chemicals from earlier case, attorney says",
     "url": "https://x.com/ABC7/status/2074738553070706879",
     "categories": [
-      "public_safety"
+      "emergencies"
     ],
     "published_utc": "2026-07-08",
     "metadata": {
@@ -178,7 +182,7 @@
       "verified": true,
       "classification": {
         "scores": {
-          "public_safety": 0.7
+          "emergencies": 0.7
         },
         "confidence": 0.7,
         "method": "keywords",

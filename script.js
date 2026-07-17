@@ -5,7 +5,7 @@ const SAMPLE_SIGNALS = [
   {
     outlet: "Voice of OC",
     title: "Orange County's Growing E-bike Crackdown Continues Targeting Parents",
-    categories: ["public_safety"],
+    categories: ["traffic_safety"],
     published_utc: "2026-07-02",
   },
   {
