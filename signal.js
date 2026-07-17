@@ -153,6 +153,34 @@ function renderIssue(record) {
     );
   }
 
+  const classification = signalClassification(record);
+  if (classification) {
+    const value = document.createElement("span");
+    const confidence = signalConfidence(record);
+    if (confidence != null) {
+      const chip = document.createElement("span");
+      chip.className = `conf-chip ${confidenceBand(record)}`;
+      chip.textContent = `${Math.round(confidence * 100)}%`;
+      value.append(chip, " ");
+    }
+    value.append(
+      CLASSIFICATION_METHODS[classification.method] || classification.method
+    );
+    if (classification.rescued) {
+      const badge = document.createElement("span");
+      badge.className = "rescued-badge";
+      badge.textContent = "missed by keywords";
+      badge.title =
+        "The keyword filter would have dropped this — the model pass caught it";
+      value.append(" ", badge);
+    }
+    el.appendChild(
+      classification.rescued
+        ? infoRow("Classifier", value, "source.html?missed=1", "View missed stories →")
+        : infoRow("Classifier", value)
+    );
+  }
+
   if (record.body) {
     const body = document.createElement("p");
     body.className = "signal-body";
