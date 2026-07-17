@@ -9,7 +9,7 @@ from time import mktime
 import feedparser
 from bs4 import BeautifulSoup
 
-from scrapers.categories import classify
+from scrapers.classifier import classify_signal
 
 # "citywide" outlets are treated as Irvine-focused; "county" outlets are
 # filtered down to Irvine-relevant stories via LOCAL_TERMS.
@@ -103,8 +103,8 @@ def fetch_news(
             if source["scope"] == "county" and not is_local(text):
                 continue
 
-            categories = classify(text)
-            if require_category_match and not categories:
+            classification = classify_signal(text)
+            if require_category_match and not classification.categories:
                 continue
 
             records.append(
@@ -116,7 +116,8 @@ def fetch_news(
                     "body": summary or title,
                     "url": entry.get("link", ""),
                     "published_utc": entry_timestamp(entry),
-                    "categories": categories,
+                    "categories": classification.categories,
+                    "metadata": {"classification": classification.to_dict()},
                 }
             )
             if max_articles is not None and len(records) >= max_articles:

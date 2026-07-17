@@ -19,7 +19,15 @@
       "reposts": 8,
       "replies": 3,
       "views": 32079,
-      "verified": true
+      "verified": true,
+      "classification": {
+        "scores": {
+          "public_safety": 0.9
+        },
+        "confidence": 0.9,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -42,7 +50,15 @@
       "reposts": 6,
       "replies": 8,
       "views": 8256,
-      "verified": true
+      "verified": true,
+      "classification": {
+        "scores": {
+          "public_safety": 0.8
+        },
+        "confidence": 0.8,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -65,7 +81,109 @@
       "reposts": 2152,
       "replies": 418,
       "views": 3139439,
-      "verified": true
+      "verified": true,
+      "classification": {
+        "scores": {
+          "public_safety": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "twitter",
+    "outlet": "@newstarjennynam",
+    "title": "\ub0a8\uac00\uc8fc - \uc5bc\ubc14\uc778 \ucf58\ub3c4 \ub9ac\uc2a4 $4,590/month \ud83d\udccd 89 Strawberry, Irvine, CA 92620 \ud83d\udcb0 List Price: $4,590/month \ud83d\udecf\ufe0f 3 Bed | \ud83d\udec1 3 Bath | \ud83d\udcd0 1,567 Sq Ft",
+    "body": "\ub0a8\uac00\uc8fc - \uc5bc\ubc14\uc778 \ucf58\ub3c4 \ub9ac\uc2a4 $4,590/month\n\ud83d\udccd 89 Strawberry, Irvine, CA 92620\n\ud83d\udcb0 List Price: $4,590/month\n\ud83d\udecf\ufe0f 3 Bed | \ud83d\udec1 3 Bath | \ud83d\udcd0 1,567 Sq Ft",
+    "url": "https://x.com/newstarjennynam/status/2074921595874021854",
+    "categories": [
+      "housing"
+    ],
+    "published_utc": "2026-07-08",
+    "metadata": {
+      "author_name": "Jenny Nam",
+      "tweet_id": "2074921595874021854",
+      "conversation_id": "2074921595874021854",
+      "search_query": "irvine",
+      "in_reply_to": null,
+      "likes": 0,
+      "reposts": 0,
+      "replies": 0,
+      "views": 3,
+      "verified": false,
+      "classification": {
+        "scores": {
+          "housing": 0.9
+        },
+        "confidence": 0.9,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
+  },
+  {
+    "source": "twitter",
+    "outlet": "@CodeThreeNews",
+    "title": "\ud83d\udea8#Irvine PD says No known threat to the community but the FBI has joined the investigation? Seems legit.",
+    "body": "\ud83d\udea8#Irvine PD says No known threat to the community but the FBI has joined the investigation? Seems legit.",
+    "url": "https://x.com/CodeThreeNews/status/2074625803422490805",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-07-07",
+    "metadata": {
+      "author_name": "CodeThreeNews",
+      "tweet_id": "2074625803422490805",
+      "conversation_id": "2074625803422490805",
+      "search_query": "irvine",
+      "in_reply_to": null,
+      "likes": 24,
+      "reposts": 0,
+      "replies": 3,
+      "views": 5006,
+      "verified": true,
+      "classification": {
+        "scores": {
+          "public_safety": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "twitter",
+    "outlet": "@ABC7",
+    "title": "Hazmat response in Irvine is tied to same teen, chemicals from earlier case, attorney says",
+    "body": "Hazmat response in Irvine is tied to same teen, chemicals from earlier case, attorney says",
+    "url": "https://x.com/ABC7/status/2074738553070706879",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-07-08",
+    "metadata": {
+      "author_name": "ABC7 Eyewitness News",
+      "tweet_id": "2074738553070706879",
+      "conversation_id": "2074738553070706879",
+      "search_query": "irvine",
+      "in_reply_to": null,
+      "likes": 6,
+      "reposts": 1,
+      "replies": 2,
+      "views": 13177,
+      "verified": true,
+      "classification": {
+        "scores": {
+          "public_safety": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
     }
   }
 ]

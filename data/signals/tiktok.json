@@ -20,7 +20,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -44,7 +52,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -68,7 +84,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -92,7 +116,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -116,7 +148,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -140,7 +180,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -164,7 +212,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -188,7 +244,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -212,7 +276,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -236,7 +308,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -260,7 +340,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -284,7 +372,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -308,7 +404,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -332,7 +436,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -356,7 +468,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -380,7 +500,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -404,7 +532,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -428,7 +564,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -452,7 +596,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -476,7 +628,15 @@
       "inherited_from_video": false,
       "trusted_outlet": false,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "housing": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -500,7 +660,15 @@
       "inherited_from_video": false,
       "trusted_outlet": false,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "housing": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -524,7 +692,15 @@
       "inherited_from_video": false,
       "trusted_outlet": false,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "housing": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -548,7 +724,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -572,7 +756,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -596,7 +788,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -620,7 +820,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -644,7 +852,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -668,7 +884,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -692,7 +916,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -716,7 +948,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -740,7 +980,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -764,7 +1012,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -788,7 +1044,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -812,7 +1076,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -836,7 +1108,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -860,7 +1140,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -884,7 +1172,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -908,7 +1204,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -932,7 +1236,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -956,7 +1268,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -980,7 +1300,15 @@
       "inherited_from_video": false,
       "trusted_outlet": false,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "sanitation": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1004,7 +1332,15 @@
       "inherited_from_video": false,
       "trusted_outlet": false,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "housing": 0.9
+        },
+        "confidence": 0.9,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1028,7 +1364,15 @@
       "inherited_from_video": false,
       "trusted_outlet": false,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.8
+        },
+        "confidence": 0.8,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1052,7 +1396,15 @@
       "inherited_from_video": false,
       "trusted_outlet": false,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.8
+        },
+        "confidence": 0.8,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1076,7 +1428,15 @@
       "inherited_from_video": false,
       "trusted_outlet": false,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.8
+        },
+        "confidence": 0.8,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1100,7 +1460,15 @@
       "inherited_from_video": false,
       "trusted_outlet": false,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.8
+        },
+        "confidence": 0.8,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1124,7 +1492,15 @@
       "inherited_from_video": false,
       "trusted_outlet": false,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.77
+        },
+        "confidence": 0.77,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1148,7 +1524,15 @@
       "inherited_from_video": false,
       "trusted_outlet": false,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.8
+        },
+        "confidence": 0.8,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1172,7 +1556,15 @@
       "inherited_from_video": false,
       "trusted_outlet": false,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1196,7 +1588,15 @@
       "inherited_from_video": false,
       "trusted_outlet": false,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "housing": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1220,7 +1620,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1244,7 +1652,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1268,7 +1684,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1292,7 +1716,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1316,7 +1748,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1340,7 +1780,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1350,7 +1798,7 @@
     "body": "Ban fireworks!!!!!!!",
     "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
     "categories": [
-      "public_safety"
+      "noise"
     ],
     "published_utc": "2026-07-15",
     "metadata": {
@@ -1364,7 +1812,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "noise": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1388,7 +1844,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1412,7 +1876,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1436,7 +1908,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1460,7 +1940,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1484,7 +1972,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1508,7 +2004,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1532,7 +2036,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1556,7 +2068,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1580,7 +2100,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1604,7 +2132,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1628,7 +2164,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1652,7 +2196,15 @@
       "inherited_from_video": false,
       "trusted_outlet": false,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.8
+        },
+        "confidence": 0.8,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1676,7 +2228,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1700,7 +2260,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1724,7 +2292,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1748,7 +2324,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1772,7 +2356,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1796,7 +2388,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1820,7 +2420,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1844,7 +2452,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1868,7 +2484,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1892,7 +2516,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1916,7 +2548,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1940,7 +2580,15 @@
       "inherited_from_video": false,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1964,7 +2612,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -1988,7 +2644,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2012,7 +2676,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2036,7 +2708,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2060,7 +2740,15 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [],
-      "hashtags": []
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2075,7 +2763,15 @@
     "published_utc": "2026-07-08",
     "metadata": {
       "tag": "irvine",
-      "content_type": "video_caption"
+      "content_type": "video_caption",
+      "classification": {
+        "scores": {
+          "public_safety": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2094,7 +2790,15 @@
       "tag": "irvine",
       "search_query": "tag:irvine",
       "like_count": "404",
-      "comment_count": "21"
+      "comment_count": "21",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2113,7 +2817,15 @@
       "tag": "irvine",
       "search_query": "tag:irvine",
       "like_count": "404",
-      "comment_count": "21"
+      "comment_count": "21",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2132,7 +2844,15 @@
       "tag": "irvine",
       "search_query": "tag:irvine",
       "like_count": "404",
-      "comment_count": "21"
+      "comment_count": "21",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2151,7 +2871,15 @@
       "tag": "irvine",
       "search_query": "tag:irvine",
       "like_count": "404",
-      "comment_count": "21"
+      "comment_count": "21",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2170,7 +2898,15 @@
       "tag": "irvine",
       "search_query": "tag:irvine",
       "like_count": "404",
-      "comment_count": "21"
+      "comment_count": "21",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2189,7 +2925,15 @@
       "tag": "irvine",
       "search_query": "tag:irvine",
       "like_count": "404",
-      "comment_count": "21"
+      "comment_count": "21",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2208,7 +2952,15 @@
       "tag": "irvine",
       "search_query": "tag:irvine",
       "like_count": "404",
-      "comment_count": "21"
+      "comment_count": "21",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2227,7 +2979,15 @@
       "tag": "irvine",
       "search_query": "tag:irvine",
       "like_count": "404",
-      "comment_count": "21"
+      "comment_count": "21",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2246,7 +3006,15 @@
       "tag": "irvine",
       "search_query": "tag:irvine",
       "like_count": "404",
-      "comment_count": "21"
+      "comment_count": "21",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2265,7 +3033,15 @@
       "tag": "irvine",
       "search_query": "tag:irvine",
       "like_count": "404",
-      "comment_count": "21"
+      "comment_count": "21",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2284,7 +3060,15 @@
       "tag": "irvine",
       "search_query": "tag:irvine",
       "like_count": "404",
-      "comment_count": "21"
+      "comment_count": "21",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2303,7 +3087,15 @@
       "tag": "irvine",
       "search_query": "tag:irvine",
       "like_count": "404",
-      "comment_count": "21"
+      "comment_count": "21",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2322,7 +3114,15 @@
       "tag": "irvine",
       "search_query": "tag:irvine",
       "like_count": "404",
-      "comment_count": "21"
+      "comment_count": "21",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2341,7 +3141,15 @@
       "tag": "irvine",
       "search_query": "tag:irvine",
       "like_count": "404",
-      "comment_count": "21"
+      "comment_count": "21",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2360,7 +3168,15 @@
       "tag": "irvine",
       "search_query": "tag:irvine",
       "like_count": "404",
-      "comment_count": "21"
+      "comment_count": "21",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2370,6 +3186,7 @@
     "body": "His first house was 2.5 million second house was 4 million : his new house is 5.5 million : kid / student ; ruins house = insurance - (no harm intended; no threat to public safety) no crime no harm done =insurance money",
     "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
     "categories": [
+      "immigration",
       "public_safety"
     ],
     "published_utc": "2026-07-08",
@@ -2379,7 +3196,16 @@
       "tag": "irvine",
       "search_query": "tag:irvine",
       "like_count": "404",
-      "comment_count": "21"
+      "comment_count": "21",
+      "classification": {
+        "scores": {
+          "public_safety": 0.7,
+          "immigration": 0.79
+        },
+        "confidence": 0.745,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2398,7 +3224,15 @@
       "tag": "irvine",
       "search_query": "tag:irvine",
       "like_count": "404",
-      "comment_count": "21"
+      "comment_count": "21",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2417,7 +3251,15 @@
       "tag": "irvine",
       "search_query": "tag:irvine",
       "like_count": "404",
-      "comment_count": "21"
+      "comment_count": "21",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2432,7 +3274,15 @@
     "published_utc": "2026-07-08",
     "metadata": {
       "tag": "newportbeach",
-      "content_type": "video_caption"
+      "content_type": "video_caption",
+      "classification": {
+        "scores": {
+          "public_safety": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2451,7 +3301,15 @@
       "tag": "newportbeach",
       "search_query": "tag:newportbeach",
       "like_count": "12.8K",
-      "comment_count": "490"
+      "comment_count": "490",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2470,7 +3328,15 @@
       "tag": "newportbeach",
       "search_query": "tag:newportbeach",
       "like_count": "12.8K",
-      "comment_count": "490"
+      "comment_count": "490",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2489,7 +3355,15 @@
       "tag": "newportbeach",
       "search_query": "tag:newportbeach",
       "like_count": "12.8K",
-      "comment_count": "490"
+      "comment_count": "490",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2508,7 +3382,15 @@
       "tag": "newportbeach",
       "search_query": "tag:newportbeach",
       "like_count": "12.8K",
-      "comment_count": "490"
+      "comment_count": "490",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2527,7 +3409,15 @@
       "tag": "newportbeach",
       "search_query": "tag:newportbeach",
       "like_count": "12.8K",
-      "comment_count": "490"
+      "comment_count": "490",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2546,7 +3436,15 @@
       "tag": "newportbeach",
       "search_query": "tag:newportbeach",
       "like_count": "12.8K",
-      "comment_count": "490"
+      "comment_count": "490",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2565,7 +3463,15 @@
       "tag": "newportbeach",
       "search_query": "tag:newportbeach",
       "like_count": "12.8K",
-      "comment_count": "490"
+      "comment_count": "490",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2584,7 +3490,15 @@
       "tag": "newportbeach",
       "search_query": "tag:newportbeach",
       "like_count": "12.8K",
-      "comment_count": "490"
+      "comment_count": "490",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2603,7 +3517,15 @@
       "tag": "newportbeach",
       "search_query": "tag:newportbeach",
       "like_count": "12.8K",
-      "comment_count": "490"
+      "comment_count": "490",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2622,7 +3544,15 @@
       "tag": "newportbeach",
       "search_query": "tag:newportbeach",
       "like_count": "12.8K",
-      "comment_count": "490"
+      "comment_count": "490",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2641,7 +3571,15 @@
       "tag": "newportbeach",
       "search_query": "tag:newportbeach",
       "like_count": "12.8K",
-      "comment_count": "490"
+      "comment_count": "490",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2660,7 +3598,15 @@
       "tag": "newportbeach",
       "search_query": "tag:newportbeach",
       "like_count": "12.8K",
-      "comment_count": "490"
+      "comment_count": "490",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2679,7 +3625,15 @@
       "tag": "newportbeach",
       "search_query": "tag:newportbeach",
       "like_count": "12.8K",
-      "comment_count": "490"
+      "comment_count": "490",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2698,7 +3652,15 @@
       "tag": "newportbeach",
       "search_query": "tag:newportbeach",
       "like_count": "12.8K",
-      "comment_count": "490"
+      "comment_count": "490",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2717,7 +3679,15 @@
       "tag": "newportbeach",
       "search_query": "tag:newportbeach",
       "like_count": "12.8K",
-      "comment_count": "490"
+      "comment_count": "490",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2736,7 +3706,15 @@
       "tag": "newportbeach",
       "search_query": "tag:newportbeach",
       "like_count": "12.8K",
-      "comment_count": "490"
+      "comment_count": "490",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2755,7 +3733,15 @@
       "tag": "newportbeach",
       "search_query": "tag:newportbeach",
       "like_count": "12.8K",
-      "comment_count": "490"
+      "comment_count": "490",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2774,7 +3760,15 @@
       "tag": "newportbeach",
       "search_query": "tag:newportbeach",
       "like_count": "12.8K",
-      "comment_count": "490"
+      "comment_count": "490",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2793,7 +3787,15 @@
       "tag": "newportbeach",
       "search_query": "tag:newportbeach",
       "like_count": "12.8K",
-      "comment_count": "490"
+      "comment_count": "490",
+      "classification": {
+        "scores": {
+          "public_safety": 0.6
+        },
+        "confidence": 0.6,
+        "method": "legacy",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2803,7 +3805,8 @@
     "body": "inland city kids ,just rich people live here, their parents work 3 jobs so they are never around because the greedy landlords keep raising the rent because the taxes keep going up t,it's only going to get worse,anyone with real money has already left, .and emotionally charged ego media has divided our country . .and Jesus isn't going to save anybody,only we are , solution mode . so let's make things nice again, remove lawyers,court,release all non violent prisoners on endless probation, start fresh Swith county everything,non violent Unity WE ARE ONE . remove probation, they have created a culture that does all the damage, politicians need to be removed, NOT SOCIAL ISM. look after each other love respect and protect",
     "url": "https://www.tiktok.com/@mkorkutata/video/7659261534392028429",
     "categories": [
-      "housing"
+      "housing",
+      "immigration"
     ],
     "published_utc": "2026-07-08",
     "metadata": {
@@ -2812,7 +3815,16 @@
       "tag": "newportbeach",
       "search_query": "tag:newportbeach",
       "like_count": "2332",
-      "comment_count": "97"
+      "comment_count": "97",
+      "classification": {
+        "scores": {
+          "housing": 0.8,
+          "immigration": 0.712
+        },
+        "confidence": 0.756,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -2831,7 +3843,15 @@
       "tag": "newportbeach",
       "search_query": "tag:newportbeach",
       "like_count": "2332",
-      "comment_count": "97"
+      "comment_count": "97",
+      "classification": {
+        "scores": {
+          "public_safety": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
     }
   }
 ]

@@ -451,7 +451,7 @@
     "outlet": "TikTok #newportbeach",
     "title": "Ban fireworks!!!!!!!",
     "categories": [
-      "public_safety"
+      "noise"
     ],
     "published_utc": "2026-07-15"
   },
@@ -819,6 +819,7 @@
     "outlet": "TikTok #irvine",
     "title": "His first house was 2.5 million second house was 4 million : his new house is 5.5 million : kid / student ; ruins house = insurance - (no...",
     "categories": [
+      "immigration",
       "public_safety"
     ],
     "published_utc": "2026-07-08"
@@ -1003,7 +1004,8 @@
     "outlet": "TikTok #newportbeach",
     "title": "inland city kids ,just rich people live here, their parents work 3 jobs so they are never around because the greedy landlords keep raisin...",
     "categories": [
-      "housing"
+      "housing",
+      "immigration"
     ],
     "published_utc": "2026-07-08"
   },
@@ -1019,9 +1021,59 @@
     "outlet": "r/irvine",
     "title": "Do Irvine Residents Feel Safer with Flock Cameras everywhere?",
     "categories": [
+      "public_safety",
+      "housing",
+      "immigration"
+    ],
+    "published_utc": "2026-07-08"
+  },
+  {
+    "outlet": "r/irvine",
+    "title": "Missing Person!",
+    "categories": [
       "public_safety"
     ],
     "published_utc": "2026-07-08"
+  },
+  {
+    "outlet": "r/irvine",
+    "title": "Our lovely new slurry seal",
+    "categories": [
+      "potholes"
+    ],
+    "published_utc": "2026-07-07"
+  },
+  {
+    "outlet": "r/irvine",
+    "title": "The Drone Show/ Fireworks were pretty good in Woodbridge",
+    "categories": [
+      "noise"
+    ],
+    "published_utc": "2026-07-05"
+  },
+  {
+    "outlet": "r/irvine",
+    "title": "Is Mike Ward park a good place to watch July 4th fireworks?",
+    "categories": [
+      "noise"
+    ],
+    "published_utc": "2026-07-02"
+  },
+  {
+    "outlet": "r/irvine",
+    "title": "New Signal at Harvard and Berkeley Intersection",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-07-01"
+  },
+  {
+    "outlet": "r/irvine",
+    "title": "1A \"Auditors\" in Woodbridge?",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-07-01"
   },
   {
     "outlet": "r/irvine",
@@ -1030,6 +1082,22 @@
       "public_safety"
     ],
     "published_utc": "2026-05-23"
+  },
+  {
+    "outlet": "r/irvine",
+    "title": "A love letter to capitalism [Irvine, California, 4/19/2026]",
+    "categories": [
+      "housing"
+    ],
+    "published_utc": "2026-04-20"
+  },
+  {
+    "outlet": "r/irvine",
+    "title": "\u201c1st Amendment\u201d frauditors at Woodbury shopping center today.",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-04-03"
   },
   {
     "outlet": "r/irvine",
@@ -1043,6 +1111,7 @@
     "outlet": "r/irvine",
     "title": "ICE and IPD/Irvine Company",
     "categories": [
+      "immigration",
       "public_safety"
     ],
     "published_utc": "2025-07-25"
@@ -1057,6 +1126,14 @@
   },
   {
     "outlet": "r/irvine",
+    "title": "Altair Raid (Videos)",
+    "categories": [
+      "immigration"
+    ],
+    "published_utc": "2025-05-14"
+  },
+  {
+    "outlet": "r/irvine",
     "title": "Wow! Happy $tory for an Irvine humble hero. Saw a post on social media, started watching the CBS news video and knew I recognized him! #B...",
     "categories": [
       "housing"
@@ -1065,11 +1142,27 @@
   },
   {
     "outlet": "r/irvine",
+    "title": "Irvine: Two Motorcyclists Die In Freeway Crash (credit: Miles Madison @CountyNewsTV)",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2024-08-26"
+  },
+  {
+    "outlet": "r/irvine",
     "title": "[News] Irvine man tried to avenge crimes against Asians by kidnapping and trying to sexually assault a woman",
     "categories": [
       "public_safety"
     ],
     "published_utc": "2021-04-10"
+  },
+  {
+    "outlet": "r/irvine",
+    "title": "Does anyone know these 1st amendment auditors?",
+    "categories": [
+      "immigration"
+    ],
+    "published_utc": "2024-04-12"
   },
   {
     "outlet": "@IrvinePolice",
@@ -1094,6 +1187,30 @@
       "public_safety"
     ],
     "published_utc": "2026-02-21"
+  },
+  {
+    "outlet": "@newstarjennynam",
+    "title": "\ub0a8\uac00\uc8fc - \uc5bc\ubc14\uc778 \ucf58\ub3c4 \ub9ac\uc2a4 $4,590/month \ud83d\udccd 89 Strawberry, Irvine, CA 92620 \ud83d\udcb0 List Price: $4,590/month \ud83d\udecf\ufe0f 3 Bed | \ud83d\udec1 3 Bath | \ud83d\udcd0 1,567 Sq Ft",
+    "categories": [
+      "housing"
+    ],
+    "published_utc": "2026-07-08"
+  },
+  {
+    "outlet": "@CodeThreeNews",
+    "title": "\ud83d\udea8#Irvine PD says No known threat to the community but the FBI has joined the investigation? Seems legit.",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-07-07"
+  },
+  {
+    "outlet": "@ABC7",
+    "title": "Hazmat response in Irvine is tied to same teen, chemicals from earlier case, attorney says",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-07-08"
   },
   {
     "outlet": "Irvine Standard",

@@ -19,7 +19,15 @@
       "reposts": 8,
       "replies": 3,
       "views": 32079,
-      "verified": true
+      "verified": true,
+      "classification": {
+        "scores": {
+          "public_safety": 0.9
+        },
+        "confidence": 0.9,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -42,7 +50,15 @@
       "reposts": 6,
       "replies": 8,
       "views": 8256,
-      "verified": true
+      "verified": true,
+      "classification": {
+        "scores": {
+          "public_safety": 0.8
+        },
+        "confidence": 0.8,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -63,7 +79,13 @@
       "reposts": 11,
       "replies": 2,
       "views": 5622,
-      "verified": true
+      "verified": true,
+      "classification": {
+        "scores": {},
+        "confidence": 0.342,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -84,7 +106,13 @@
       "reposts": 1,
       "replies": 0,
       "views": 622,
-      "verified": true
+      "verified": true,
+      "classification": {
+        "scores": {},
+        "confidence": 0.754,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -105,7 +133,13 @@
       "reposts": 3,
       "replies": 0,
       "views": 1438,
-      "verified": true
+      "verified": true,
+      "classification": {
+        "scores": {},
+        "confidence": 0.601,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -126,7 +160,13 @@
       "reposts": 4,
       "replies": 0,
       "views": 3175,
-      "verified": true
+      "verified": true,
+      "classification": {
+        "scores": {},
+        "confidence": 0.796,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -135,7 +175,9 @@
     "title": "\ub0a8\uac00\uc8fc - \uc5bc\ubc14\uc778 \ucf58\ub3c4 \ub9ac\uc2a4 $4,590/month \ud83d\udccd 89 Strawberry, Irvine, CA 92620 \ud83d\udcb0 List Price: $4,590/month \ud83d\udecf\ufe0f 3 Bed | \ud83d\udec1 3 Bath | \ud83d\udcd0 1,567 Sq Ft",
     "body": "\ub0a8\uac00\uc8fc - \uc5bc\ubc14\uc778 \ucf58\ub3c4 \ub9ac\uc2a4 $4,590/month\n\ud83d\udccd 89 Strawberry, Irvine, CA 92620\n\ud83d\udcb0 List Price: $4,590/month\n\ud83d\udecf\ufe0f 3 Bed | \ud83d\udec1 3 Bath | \ud83d\udcd0 1,567 Sq Ft",
     "url": "https://x.com/newstarjennynam/status/2074921595874021854",
-    "categories": [],
+    "categories": [
+      "housing"
+    ],
     "published_utc": "2026-07-08",
     "metadata": {
       "author_name": "Jenny Nam",
@@ -147,7 +189,16 @@
       "reposts": 0,
       "replies": 0,
       "views": 3,
-      "verified": false
+      "verified": false,
+      "classification": {
+        "scores": {
+          "housing": 0.9
+        },
+        "confidence": 0.9,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
     }
   },
   {
@@ -168,7 +219,13 @@
       "reposts": 24,
       "replies": 2,
       "views": 3271,
-      "verified": false
+      "verified": false,
+      "classification": {
+        "scores": {},
+        "confidence": 0.832,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -189,7 +246,13 @@
       "reposts": 3,
       "replies": 0,
       "views": 580,
-      "verified": true
+      "verified": true,
+      "classification": {
+        "scores": {},
+        "confidence": 0.695,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -198,7 +261,9 @@
     "title": "\ud83d\udea8#Irvine PD says No known threat to the community but the FBI has joined the investigation? Seems legit.",
     "body": "\ud83d\udea8#Irvine PD says No known threat to the community but the FBI has joined the investigation? Seems legit.",
     "url": "https://x.com/CodeThreeNews/status/2074625803422490805",
-    "categories": [],
+    "categories": [
+      "public_safety"
+    ],
     "published_utc": "2026-07-07",
     "metadata": {
       "author_name": "CodeThreeNews",
@@ -210,7 +275,15 @@
       "reposts": 0,
       "replies": 3,
       "views": 5006,
-      "verified": true
+      "verified": true,
+      "classification": {
+        "scores": {
+          "public_safety": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -231,7 +304,13 @@
       "reposts": 3,
       "replies": 7,
       "views": 455,
-      "verified": true
+      "verified": true,
+      "classification": {
+        "scores": {},
+        "confidence": 0.742,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -252,7 +331,13 @@
       "reposts": 0,
       "replies": 1,
       "views": 32,
-      "verified": false
+      "verified": false,
+      "classification": {
+        "scores": {},
+        "confidence": 0.857,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -273,7 +358,13 @@
       "reposts": 0,
       "replies": 0,
       "views": 18,
-      "verified": true
+      "verified": true,
+      "classification": {
+        "scores": {},
+        "confidence": 0.857,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -296,7 +387,15 @@
       "reposts": 2152,
       "replies": 418,
       "views": 3139439,
-      "verified": true
+      "verified": true,
+      "classification": {
+        "scores": {
+          "public_safety": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -317,7 +416,13 @@
       "reposts": 17,
       "replies": 92,
       "views": 5882,
-      "verified": true
+      "verified": true,
+      "classification": {
+        "scores": {},
+        "confidence": 0.761,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -338,7 +443,13 @@
       "reposts": 5,
       "replies": 2,
       "views": 178,
-      "verified": false
+      "verified": false,
+      "classification": {
+        "scores": {},
+        "confidence": 0.843,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -347,7 +458,9 @@
     "title": "Hazmat response in Irvine is tied to same teen, chemicals from earlier case, attorney says",
     "body": "Hazmat response in Irvine is tied to same teen, chemicals from earlier case, attorney says",
     "url": "https://x.com/ABC7/status/2074738553070706879",
-    "categories": [],
+    "categories": [
+      "public_safety"
+    ],
     "published_utc": "2026-07-08",
     "metadata": {
       "author_name": "ABC7 Eyewitness News",
@@ -359,7 +472,15 @@
       "reposts": 1,
       "replies": 2,
       "views": 13177,
-      "verified": true
+      "verified": true,
+      "classification": {
+        "scores": {
+          "public_safety": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -380,7 +501,13 @@
       "reposts": 7,
       "replies": 0,
       "views": 934,
-      "verified": false
+      "verified": false,
+      "classification": {
+        "scores": {},
+        "confidence": 0.857,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -401,7 +528,13 @@
       "reposts": 8,
       "replies": 10,
       "views": 5507,
-      "verified": true
+      "verified": true,
+      "classification": {
+        "scores": {},
+        "confidence": 0.81,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -422,7 +555,13 @@
       "reposts": 16,
       "replies": 6,
       "views": 10485,
-      "verified": false
+      "verified": false,
+      "classification": {
+        "scores": {},
+        "confidence": 0.857,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -443,7 +582,13 @@
       "reposts": 7,
       "replies": 0,
       "views": 1567,
-      "verified": false
+      "verified": false,
+      "classification": {
+        "scores": {},
+        "confidence": 0.785,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
     }
   },
   {
@@ -464,7 +609,13 @@
       "reposts": 4,
       "replies": 1,
       "views": 1399,
-      "verified": true
+      "verified": true,
+      "classification": {
+        "scores": {},
+        "confidence": 0.796,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
     }
   }
 ]

@@ -3,6 +3,7 @@ data/*
 !data/raw/.gitkeep
 !data/signals/
 !data/signals/.gitkeep
+!data/labels/
 .vscode/
 .venv/
 __pycache__/
