@@ -24,13 +24,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from scrapers.classifier import classify_signal, inherited_classification  # noqa: E402
 from scrapers.feed import rebuild_landing_feed  # noqa: E402
+from scrapers.reprocess import reclassify_row, thread_consensus  # noqa: E402
 
 SIGNALS_DIR = ROOT / "data" / "signals"
 SOURCES = ("tiktok", "reddit", "twitter", "news")
-# Sources whose --include-all runs keep the keyword-rejected posts around;
-# those files are what the rescue pass mines for missed stories.
 ALL_FILES = {"reddit": "reddit_all.json", "twitter": "twitter_all.json"}
 
 
@@ -46,81 +44,8 @@ def _write_rows(path: Path, rows: list[dict] | dict) -> None:
         json.dump(rows, handle, indent=2)
 
 
-def _signal_text(row: dict) -> str:
-    """Best classification surface we can rebuild from a stored signal."""
-    meta = row.get("metadata") or {}
-    parts = [row.get("title") or "", row.get("body") or ""]
-    parts.extend(f"#{tag}" for tag in meta.get("hashtags") or [])
-    if meta.get("tag"):
-        parts.append(f"#{meta['tag']}")
-    seen: set[str] = set()
-    unique = []
-    for part in parts:
-        cleaned = part.strip()
-        if cleaned and cleaned not in seen:
-            seen.add(cleaned)
-            unique.append(cleaned)
-    return "\n".join(unique)
-
-
-def reclassify_row(row: dict, thread_categories: dict | None = None) -> dict:
-    """Update a row's categories + metadata.classification in place."""
-    meta = row.setdefault("metadata", {})
-    result = classify_signal(_signal_text(row))
-
-    consensus = (thread_categories or {}).get(row.get("url") or "")
-    if result.categories:
-        row["categories"] = result.categories
-        meta["classification"] = result.to_dict()
-    elif consensus:
-        # The signal's own text says nothing, but the comment thread it
-        # belongs to does — inherit the thread's categories (mirrors the
-        # comment-consensus fallback in scrapers/tiktok/export.py).
-        row["categories"] = consensus
-        meta["classification"] = inherited_classification(consensus)
-    elif meta.get("weak_trusted_default"):
-        meta["classification"] = inherited_classification(
-            row.get("categories") or [], outlet_default=True
-        )
-    elif meta.get("inherited_from_video"):
-        outlet_default = not (meta.get("video_categories") or [])
-        meta["classification"] = inherited_classification(
-            row.get("categories") or [], outlet_default=outlet_default
-        )
-    elif row.get("categories"):
-        # Classified under an earlier pipeline from text we no longer have
-        # (e.g. a TikTok comment matched via its video caption). Keep the
-        # labels but flag that this run couldn't reproduce them.
-        meta["classification"] = {
-            "scores": {category: 0.6 for category in row["categories"]},
-            "confidence": 0.6,
-            "method": "legacy",
-            "model_version": result.to_dict()["model_version"],
-        }
-    else:
-        row["categories"] = []
-        meta["classification"] = result.to_dict()
-    return row
-
-
 def _row_key(row: dict) -> tuple:
     return (row.get("source"), row.get("published_utc"), row.get("title"))
-
-
-def thread_consensus(rows: list[dict]) -> dict[str, list[str]]:
-    """Classify each TikTok video's stored comment thread as one text, for
-    rows whose own text classifies to nothing (legacy scrapes without raw
-    data). Returns url -> categories for threads that classified."""
-    threads: dict[str, list[str]] = {}
-    for row in rows:
-        url = row.get("url") or ""
-        if url:
-            threads.setdefault(url, []).append(row.get("body") or row.get("title") or "")
-    return {
-        url: result.categories
-        for url, bodies in threads.items()
-        if (result := classify_signal("\n".join(bodies))).categories
-    }
 
 
 def rescue_missed(source: str, civic_rows: list[dict]) -> list[dict]:
@@ -198,8 +123,6 @@ def main() -> None:
 
     if processed:
         feed_count = rebuild_landing_feed(SIGNALS_DIR, SIGNALS_DIR / "feed.json")
-        # Same shape as scrapers.tiktok.export.write_ingest_manifest, written
-        # inline because importing scrapers.tiktok pulls in the Selenium driver.
         _write_rows(
             SIGNALS_DIR / "manifest.json",
             {

@@ -1,0 +1,22 @@
+[
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "City plans street resurfacing after resident complaints",
+    "body": "Council discussed road damage and pothole repairs on Culver",
+    "url": "https://example.com/news/1",
+    "categories": ["potholes"],
+    "published_utc": "2026-07-07",
+    "metadata": {}
+  },
+  {
+    "source": "news",
+    "outlet": "Voice of OC",
+    "title": "Weekend festival draws crowds downtown",
+    "body": "Music and food trucks filled the plaza",
+    "url": "https://example.com/news/2",
+    "categories": [],
+    "published_utc": "2026-07-08",
+    "metadata": {}
+  }
+]

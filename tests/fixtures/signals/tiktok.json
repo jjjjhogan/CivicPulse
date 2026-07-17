@@ -1,0 +1,44 @@
+[
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "Huge pothole on Culver wrecked my tire",
+    "body": "Huge pothole on Culver wrecked my tire near the exit",
+    "url": "https://www.tiktok.com/@user/video/1001",
+    "categories": ["potholes"],
+    "published_utc": "2026-07-01",
+    "metadata": {
+      "tag": "irvine",
+      "hashtags": ["irvine", "pothole"],
+      "content_type": "comment"
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "lol same",
+    "body": "lol same",
+    "url": "https://www.tiktok.com/@user/video/1001",
+    "categories": ["potholes"],
+    "published_utc": "2026-07-01",
+    "metadata": {
+      "tag": "irvine",
+      "inherited_from_video": true,
+      "video_categories": ["potholes"],
+      "content_type": "comment"
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "nice collab",
+    "body": "nice collab",
+    "url": "https://www.tiktok.com/@user/video/1002",
+    "categories": [],
+    "published_utc": "2026-07-02",
+    "metadata": {
+      "tag": "irvine",
+      "content_type": "comment"
+    }
+  }
+]

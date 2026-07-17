@@ -1,0 +1,22 @@
+[
+  {
+    "source": "reddit",
+    "outlet": "r/irvine",
+    "title": "Trash bins overflowing on my street for two weeks",
+    "body": "Garbage pickup missed again, overflowing trash and illegal dumping behind the plaza",
+    "url": "https://reddit.com/r/irvine/comments/abc",
+    "categories": ["sanitation"],
+    "published_utc": "2026-07-03",
+    "metadata": {}
+  },
+  {
+    "source": "reddit",
+    "outlet": "r/irvine",
+    "title": "Neighbors blasting music until 2am again",
+    "body": "Third weekend of loud neighbors and construction noise at 6am",
+    "url": "https://reddit.com/r/irvine/comments/def",
+    "categories": ["noise"],
+    "published_utc": "2026-07-04",
+    "metadata": {}
+  }
+]

@@ -129,6 +129,22 @@ def create_job():
     return _create_and_start_job(source=source, settings=settings)
 
 
+@bp.get("/api/jobs")
+@login_required
+def list_jobs():
+    """Recent jobs (newest first). Browser GET /api/jobs used to 404 without this."""
+    limit = request.args.get("limit", 20, type=int)
+    limit = max(1, min(limit or 20, 100))
+    db = get_session()
+    jobs = (
+        db.query(ScrapeJob)
+        .order_by(ScrapeJob.id.desc())
+        .limit(limit)
+        .all()
+    )
+    return jsonify({"count": len(jobs), "jobs": [job.to_dict() for job in jobs]})
+
+
 @bp.get("/api/jobs/<int:job_id>")
 @login_required
 def get_job(job_id: int):

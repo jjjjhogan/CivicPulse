@@ -1,0 +1,22 @@
+[
+  {
+    "source": "twitter",
+    "outlet": "@irvinewatcher",
+    "title": "Rent increase just hit our complex again",
+    "body": "Landlord raised the lease renewal, affordable housing is gone",
+    "url": "https://twitter.com/irvinewatcher/status/1",
+    "categories": ["housing"],
+    "published_utc": "2026-07-05",
+    "metadata": {}
+  },
+  {
+    "source": "twitter",
+    "outlet": "@irvinewatcher",
+    "title": "Hit and run near the Spectrum last night",
+    "body": "Speeding car crash and hit and run on Irvine Center Drive",
+    "url": "https://twitter.com/irvinewatcher/status/2",
+    "categories": ["traffic_safety"],
+    "published_utc": "2026-07-06",
+    "metadata": {}
+  }
+]

@@ -33,4 +33,12 @@ python scripts/dashboard_server.py
 
 Open http://127.0.0.1:8080/login.html, create an account, then use the dashboard Scrapers panel.
 
+## Testing
+
+```bash
+pytest -q
+```
+
+Covers auth, SQLite signal import, mocked scrape jobs, and classifier/reprocess helpers (no Selenium).
+
 See [docs/INTEGRATION.md](docs/INTEGRATION.md) for endpoints, CLI examples, and the signal contract.

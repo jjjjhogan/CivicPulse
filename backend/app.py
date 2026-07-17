@@ -11,13 +11,13 @@ from pathlib import Path
 from dotenv import load_dotenv
 from flask import Flask, abort, redirect, send_from_directory
 
-from backend.db import init_db, remove_session
+from backend.db import configure_engine, init_db, remove_session
 from backend.routes import register_blueprints
 
 ROOT = Path(__file__).resolve().parent.parent
 
 
-def create_app() -> Flask:
+def create_app(test_config: dict | None = None) -> Flask:
     load_dotenv(ROOT / ".env")
 
     app = Flask(__name__)
@@ -25,6 +25,14 @@ def create_app() -> Flask:
     app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(days=14)
     app.config["SESSION_COOKIE_HTTPONLY"] = True
     app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
+
+    if test_config:
+        app.config.update(test_config)
+        db_url = test_config.get("SQLALCHEMY_DATABASE_URI") or test_config.get("DATABASE_URL")
+        if db_url:
+            configure_engine(db_url)
+        if test_config.get("SECRET_KEY"):
+            app.secret_key = test_config["SECRET_KEY"]
 
     init_db()
     register_blueprints(app)
