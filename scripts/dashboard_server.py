@@ -4,12 +4,15 @@ CivicPulse dashboard server — serves the static UI and runs ingestion scrapers
 Usage:
     python scripts/dashboard_server.py
     python scripts/dashboard_server.py --port 8080
+
+Optional env (see .env.example): FLASK_SECRET_KEY, HOST, PORT
 """
 
 from __future__ import annotations
 
 import argparse
 import json
+import os
 import socket
 import subprocess
 import sys
@@ -17,9 +20,12 @@ import threading
 import time
 from pathlib import Path
 
+from dotenv import load_dotenv
 from flask import Flask, abort, jsonify, redirect, request, send_from_directory
 
 ROOT = Path(__file__).resolve().parent.parent
+load_dotenv(ROOT / ".env")
+
 SIGNALS_DIR = ROOT / "data" / "signals"
 RAW_DIR = ROOT / "data" / "raw"
 SCRAPE_TIKTOK = ROOT / "scripts" / "scrape_tiktok.py"
@@ -32,6 +38,7 @@ from scrapers.categories import CivicIssueCategory  # noqa: E402
 from scrapers.news.scrape import NEWS_SOURCES  # noqa: E402
 
 app = Flask(__name__)
+app.secret_key = os.environ.get("FLASK_SECRET_KEY", "civicpulse-dev-only-change-me")
 
 _scrape_lock = threading.Lock()
 _scrape_state: dict = {
@@ -146,19 +153,8 @@ def _build_news_command(payload: dict) -> list[str]:
 
 
 def _run_scrape(cmd: list[str], *, source: str) -> None:
+    """Execute a scrape command. Caller must already mark status as running."""
     global _scrape_state
-    with _scrape_lock:
-        _scrape_state = {
-            "status": "running",
-            "source": source,
-            "started_at": time.time(),
-            "finished_at": None,
-            "exit_code": None,
-            "command": " ".join(cmd),
-            "log": "",
-            "error": None,
-        }
-
     try:
         result = subprocess.run(
             cmd,
@@ -184,9 +180,23 @@ def _run_scrape(cmd: list[str], *, source: str) -> None:
 
 
 def _start_scrape_cmd(cmd: list[str], *, source: str):
+    # Reserve the running slot under the same lock that checks busy so a second
+    # POST cannot get 202 between the check and thread start.
     with _scrape_lock:
         if _scrape_state["status"] == "running":
             return jsonify({"error": "A scrape is already running."}), 409
+        _scrape_state.update(
+            {
+                "status": "running",
+                "source": source,
+                "started_at": time.time(),
+                "finished_at": None,
+                "exit_code": None,
+                "command": " ".join(cmd),
+                "log": "",
+                "error": None,
+            }
+        )
 
     thread = threading.Thread(
         target=_run_scrape, args=(cmd,), kwargs={"source": source}, daemon=True
@@ -365,8 +375,17 @@ def _port_in_use(host: str, port: int) -> bool:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run the CivicPulse dashboard server.")
-    parser.add_argument("--host", default="127.0.0.1")
-    parser.add_argument("--port", type=int, default=8080)
+    parser.add_argument(
+        "--host",
+        default=os.environ.get("HOST", "127.0.0.1"),
+        help="Bind host (default: HOST env or 127.0.0.1)",
+    )
+    parser.add_argument(
+        "--port",
+        type=int,
+        default=int(os.environ.get("PORT", "8080")),
+        help="Bind port (default: PORT env or 8080)",
+    )
     parser.add_argument("--debug", action="store_true")
     return parser.parse_args()
 

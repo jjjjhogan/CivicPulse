@@ -6,3 +6,4 @@ html5lib>=1.1
 flask>=3.0.0
 feedparser>=6.0.0
 setuptools>=69.0.0
+python-dotenv>=1.0.0

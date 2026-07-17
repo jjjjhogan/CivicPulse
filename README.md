@@ -1,47 +1,33 @@
 # CivicPulse
 
-CivicPulse is an AI civic-sentiment research platform for city leadership — ingesting resident voices from social media, classifying issues (potholes, noise, sanitation, public safety, housing), and surfacing geographic clusters on a map.
+CivicPulse is an AI civic-sentiment research platform for city leadership — ingesting resident voices from social media, classifying issues (potholes, noise, sanitation, public safety, housing, immigration), and surfacing geographic clusters on a map.
 
 ## Repository layout
 
 ```
-index.html / script.js / styles.css   # landing page (on main)
-scrapers/
-  categories.py                       # shared issue taxonomy
-  schema.py                           # CivicSignal output contract
-  tiktok/                             # TikTok Selenium scraper (this branch)
-scripts/scrape_tiktok.py             # TikTok CLI
-data/
-  raw/                                # full scrape payloads
-  signals/                            # normalized output for the UI
-docs/INTEGRATION.md                   # merge guide for main
+index.html / script.js / styles.css   # landing page
+dashboard.html / dashboard.js         # Irvine civic dashboard
+scrapers/                             # categories, schema, tiktok/news/reddit/twitter
+scripts/                              # dashboard_server + scrape/process CLIs
+data/raw/                             # scrape / import payloads
+data/signals/                         # normalized CivicSignal JSON
+docs/INTEGRATION.md                   # API + signal contract
+.env.example                          # optional HOST / PORT / FLASK_SECRET_KEY
 ```
 
-## TikTok scraper
+Note: root `main.py` is a legacy UCLA Selenium prototype, unrelated to CivicPulse ingestion.
+
+## Quick start
 
 ```bash
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1   # Windows
 pip install -r requirements.txt
+copy .env.example .env         # optional
 
-python scripts/scrape_tiktok.py \
-  --tag-url "https://www.tiktok.com/tag/irvine" \
-  --tag-url "https://www.tiktok.com/tag/newportbeach" \
-  --max-videos 3 \
-  --max-comments 10
-```
-
-Outputs:
-- `data/raw/tiktok_scrape.json` — full scrape data
-- `data/signals/feed.json` — landing-page-ready signal cards
-
-## Dashboard
-
-Run the local server to use the Irvine civic dashboard with live TikTok ingestion:
-
-```bash
-pip install -r requirements.txt
 python scripts/dashboard_server.py
 ```
 
-Open http://127.0.0.1:8080/dashboard.html — the Scrapers panel runs `scripts/scrape_tiktok.py` and loads results from `data/signals/tiktok.json`.
+Open http://127.0.0.1:8080/dashboard.html — Scrapers panel runs TikTok, news RSS, and Reddit/Twitter JSON import.
 
-See [docs/INTEGRATION.md](docs/INTEGRATION.md) for the full signal contract and merge notes.
+See [docs/INTEGRATION.md](docs/INTEGRATION.md) for endpoints, CLI examples, and the signal contract.

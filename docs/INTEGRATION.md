@@ -1,65 +1,99 @@
-# Integration guide: scraping-tiktok -> main
+# Integration guide: scrapers, signals, and dashboard API
 
-This branch is structured to merge cleanly with `main`, which already contains the CivicPulse landing page (`index.html`, `script.js`, `styles.css`).
+CivicPulse ingests resident signals from social/news sources, normalizes them to `CivicSignal`, and serves them through the dashboard.
 
-## What is on main today
-
-- Prototype landing page with hardcoded `SAMPLE_SIGNALS` in `script.js`
-- Legacy `main.py` UCLA prototype (unrelated to CivicPulse ingestion)
-
-## What this branch adds
+## Repository pieces
 
 ```
 scrapers/
   categories.py      # shared issue categories + classify()
   schema.py          # CivicSignal output contract
+  feed.py            # rebuild data/signals/feed.json
   tiktok/            # Selenium TikTok scraper
+  news/              # Irvine RSS news scraper
+  reddit/            # Reddit JSON → signals
+  twitter/           # Twitter JSON → signals
 scripts/
-  scrape_tiktok.py   # CLI entry point
+  dashboard_server.py
+  scrape_tiktok.py
+  scrape_news.py
+  process_reddit_scrape.py
+  process_twitter_scrape.py
 data/
-  raw/               # full scrape payloads
+  raw/               # full scrape / import payloads
   signals/           # normalized output for the UI
 ```
 
+Legacy note: root `main.py` is an unrelated UCLA Selenium prototype — not part of CivicPulse ingestion. Prefer leaving it alone or removing it in a dedicated cleanup PR.
+
 ## Shared signal contract
 
-The landing page expects records shaped like:
+Full records (`data/signals/<source>.json`) follow `scrapers/schema.py`:
 
 ```json
 {
+  "source": "tiktok",
   "outlet": "TikTok #irvine",
   "title": "Pothole on Culver and Alton has been there for a month now",
+  "body": "...",
+  "url": "https://...",
   "categories": ["potholes"],
-  "published_utc": "2026-07-06"
+  "published_utc": "2026-07-06",
+  "metadata": {}
 }
 ```
 
-TikTok scraping writes two files after each run:
+Landing feed (`data/signals/feed.json`) uses the slim card shape (`outlet`, `title`, `categories`, `published_utc`).
 
 | File | Purpose |
 |------|---------|
-| `data/raw/tiktok_scrape.json` | Full scrape payload (videos, comments, metadata) |
-| `data/signals/tiktok.json` | Normalized `CivicSignal` records with full fields |
-| `data/signals/feed.json` | Landing-page-compatible array for `script.js` |
-| `data/signals/manifest.json` | Lists which sources have been ingested |
+| `data/raw/<source>_scrape.json` | Raw scrape or import payload |
+| `data/signals/tiktok.json` | Normalized TikTok signals |
+| `data/signals/news.json` | Normalized news signals |
+| `data/signals/reddit.json` | Normalized Reddit signals |
+| `data/signals/twitter.json` | Normalized Twitter signals |
+| `data/signals/feed.json` | Merged landing-page feed |
+| `data/signals/manifest.json` | Ingest metadata |
 
-## Run TikTok ingestion
+## Run ingestion (CLI)
 
 ```bash
 pip install -r requirements.txt
+# optional: copy .env.example → .env
 
 python scripts/scrape_tiktok.py \
   --tag-url "https://www.tiktok.com/tag/irvine" \
-  --tag-url "https://www.tiktok.com/tag/newportbeach" \
-  --max-videos 3 \
-  --max-comments 10
+  --max-videos 3 --max-comments 10
+
+python scripts/scrape_news.py --outlet irvine-standard --max-articles 20
+
+python scripts/process_reddit_scrape.py --input data/raw/reddit_scrape.json
+python scripts/process_twitter_scrape.py --input data/raw/twitter_scrape.json
 ```
 
-By default only comments matching a civic category are exported. Use `--include-all-comments` to export everything.
+## Dashboard server
+
+```bash
+python scripts/dashboard_server.py
+# or: HOST / PORT / FLASK_SECRET_KEY from .env; CLI --host/--port override
+```
+
+Open http://127.0.0.1:8080/dashboard.html — Scrapers panel configures and runs sources.
+
+| Endpoint | Purpose |
+|----------|---------|
+| `GET /api/signals` | Concatenated signals from tiktok + reddit + twitter + news |
+| `GET /api/signals/feed` | Landing-page `feed.json` |
+| `GET /api/config` | Categories, TikTok/news defaults, news outlets |
+| `POST /api/scrape/tiktok` | Run TikTok scraper (JSON body: tags, max_videos, max_comments, …) |
+| `POST /api/scrape/irvine-news` | Run news RSS scraper (outlets, max_articles, require_category_match) |
+| `POST /api/scrape/reddit` | Import Reddit scrape JSON (paste body or upload file) → process |
+| `POST /api/scrape/twitter` | Import Twitter scrape JSON → process |
+| `GET /api/scrape/status` | Poll scrape progress and logs (one job at a time; `409` if busy) |
+
+Auth is still client-side demo login (`login.js` localStorage). Real auth / DB / job IDs belong on `feature/backend-platform`.
 
 ## Wiring the landing page
-
-On `main`, replace `SAMPLE_SIGNALS` in `script.js` with a fetch to the generated feed:
 
 ```js
 fetch("data/signals/feed.json")
@@ -68,34 +102,8 @@ fetch("data/signals/feed.json")
   .catch(() => renderSignals(SAMPLE_SIGNALS));
 ```
 
-For local development, serve the repo root with any static file server so the browser can load the JSON file.
+Or use `GET /api/signals/feed` when the Flask server is running.
 
-## Merge notes
+## Source conventions
 
-- No changes required to `index.html` / `styles.css` for the first integration
-- `main.py` on main is legacy; leave it or remove in a separate cleanup PR
-- Other ingestion sources (Reddit, news) are not on main yet — when added, they should write to `data/signals/<source>.json` using the same `CivicSignal` schema and merge into `feed.json`
-- Shared classification lives in `scrapers/categories.py` so all sources use the same issue taxonomy
-
-## Dashboard server
-
-`scripts/dashboard_server.py` serves the static UI and exposes scraper APIs for `dashboard.js`:
-
-```bash
-python scripts/dashboard_server.py
-```
-
-| Endpoint | Purpose |
-|----------|---------|
-| `GET /api/signals` | Full `CivicSignal` records from `data/signals/tiktok.json` |
-| `GET /api/signals/feed` | Landing-page-compatible `feed.json` |
-| `POST /api/scrape/tiktok` | Run TikTok scraper (default: Irvine + Newport Beach tags) |
-| `GET /api/scrape/status` | Poll scrape progress and logs |
-
-News and Reddit scraper buttons return `501` until those sources are added.
-
-## Suggested merge order
-
-1. ~~Merge `scraping-tiktok` into `main`~~
-2. Wire `script.js` to read `data/signals/feed.json` (via static server or API)
-3. Add future scrapers under `scrapers/<source>/` using the same export pattern
+New scrapers should live under `scrapers/<source>/`, write `data/signals/<source>.json` using `CivicSignal`, and rebuild `feed.json` via `scrapers/feed.py`. Classification stays in `scrapers/categories.py`.
