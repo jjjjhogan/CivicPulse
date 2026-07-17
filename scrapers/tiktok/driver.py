@@ -53,3 +53,12 @@ def create_tiktok_driver(*, headless: bool = False) -> uc.Chrome:
     )
     driver.set_window_size(1920, 1080)
     return driver
+
+
+def close_tiktok_driver(driver: uc.Chrome) -> None:
+    """Quit the driver, swallowing the WinError noise undetected_chromedriver
+    sometimes raises when Chrome is already gone."""
+    try:
+        driver.quit()
+    except Exception:  # noqa: BLE001
+        pass
