@@ -75,23 +75,30 @@ python scripts/process_twitter_scrape.py --input data/raw/twitter_scrape.json
 
 ```bash
 python scripts/dashboard_server.py
-# or: HOST / PORT / FLASK_SECRET_KEY from .env; CLI --host/--port override
+# or: HOST / PORT / FLASK_SECRET_KEY / DATABASE_URL from .env; CLI --host/--port override
+
+# One-time (or after regenerating JSON): load signals into SQLite
+python scripts/import_signals.py
+python scripts/import_signals.py --replace   # wipe Signal table first
 ```
 
-Open http://127.0.0.1:8080/dashboard.html — Scrapers panel configures and runs sources.
+Open http://127.0.0.1:8080/login.html — create an account, then use the dashboard Scrapers panel.
 
 | Endpoint | Purpose |
 |----------|---------|
-| `GET /api/signals` | Concatenated signals from tiktok + reddit + twitter + news |
-| `GET /api/signals/feed` | Landing-page `feed.json` |
+| `POST /api/auth/signup` | Create account (hashed password + session cookie) |
+| `POST /api/auth/login` | Log in |
+| `POST /api/auth/logout` | Log out |
+| `GET /api/auth/me` | Current session user |
+| `GET /api/signals` | Signals from SQLite (falls back to JSON if empty) |
+| `GET /api/signals/feed` | Landing-page feed shape |
 | `GET /api/config` | Categories, TikTok/news defaults, news outlets |
-| `POST /api/scrape/tiktok` | Run TikTok scraper (JSON body: tags, max_videos, max_comments, …) |
-| `POST /api/scrape/irvine-news` | Run news RSS scraper (outlets, max_articles, require_category_match) |
-| `POST /api/scrape/reddit` | Import Reddit scrape JSON (paste body or upload file) → process |
-| `POST /api/scrape/twitter` | Import Twitter scrape JSON → process |
-| `GET /api/scrape/status` | Poll scrape progress and logs (one job at a time; `409` if busy) |
+| `POST /api/jobs` | Start scrape job `{source, settings}` → `{id, status}` (auth required) |
+| `GET /api/jobs/<id>` | Job status + log (auth required) |
+| `POST /api/scrape/<source>` | Legacy scrape API (auth required; creates a job) |
+| `GET /api/scrape/status` | Legacy status poll (auth required) |
 
-Auth is still client-side demo login (`login.js` localStorage). Real auth / DB / job IDs belong on `feature/backend-platform`.
+Package layout: `backend/` (models, auth, jobs, routes). Entry point remains `scripts/dashboard_server.py`.
 
 ## Wiring the landing page
 
@@ -106,4 +113,4 @@ Or use `GET /api/signals/feed` when the Flask server is running.
 
 ## Source conventions
 
-New scrapers should live under `scrapers/<source>/`, write `data/signals/<source>.json` using `CivicSignal`, and rebuild `feed.json` via `scrapers/feed.py`. Classification stays in `scrapers/categories.py`.
+New scrapers should live under `scrapers/<source>/`, write `data/signals/<source>.json` using `CivicSignal`, and rebuild `feed.json` via `scrapers/feed.py`. Classification stays in `scrapers/categories.py`. Completed scrape jobs re-sync JSON into SQLite automatically.

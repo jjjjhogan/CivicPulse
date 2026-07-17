@@ -1,33 +1,6 @@
-// CivicPulse login / sign-up page.
-//
-// Demo-only auth: accounts live in localStorage until a backend
-// /api/auth endpoint exists. Do not reuse a real password here —
-// passwords are stored in plain text in this browser.
+// CivicPulse login / sign-up page — talks to /api/auth.
 
-const ACCOUNTS_KEY = "civicpulse_accounts";
-const SESSION_KEY = "civicpulse_session";
-
-function loadAccounts() {
-  try {
-    return JSON.parse(localStorage.getItem(ACCOUNTS_KEY)) || [];
-  } catch {
-    return [];
-  }
-}
-
-function saveAccounts(accounts) {
-  localStorage.setItem(ACCOUNTS_KEY, JSON.stringify(accounts));
-}
-
-function startSession(account) {
-  localStorage.setItem(
-    SESSION_KEY,
-    JSON.stringify({ name: account.name, email: account.email })
-  );
-  window.location.href = "dashboard.html";
-}
-
-// ── mode toggle ─────────────────────────────────────────
+const FETCH_OPTS = { credentials: "same-origin" };
 
 let mode = "login";
 
@@ -56,8 +29,6 @@ document.getElementById("toggleMode").addEventListener("click", () => {
   setMode(mode === "login" ? "signup" : "login");
 });
 
-// ── validation helpers ──────────────────────────────────
-
 function showError(id, message) {
   const el = document.getElementById(id);
   el.hidden = !message;
@@ -75,9 +46,33 @@ function isValidEmail(email) {
   return email !== "" && probe.checkValidity();
 }
 
-// ── log in ──────────────────────────────────────────────
+async function postAuth(path, body) {
+  const res = await fetch(path, {
+    ...FETCH_OPTS,
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    throw new Error(data.error || `Request failed (${res.status})`);
+  }
+  return data;
+}
 
-document.getElementById("loginForm").addEventListener("submit", (event) => {
+function goDashboard() {
+  window.location.href = "dashboard.html";
+}
+
+// Redirect if already logged in.
+fetch("/api/auth/me", FETCH_OPTS)
+  .then((res) => res.json())
+  .then((data) => {
+    if (data.authenticated && data.user) goDashboard();
+  })
+  .catch(() => {});
+
+document.getElementById("loginForm").addEventListener("submit", async (event) => {
   event.preventDefault();
   const email = normalizeEmail(document.getElementById("loginEmail").value);
   const password = document.getElementById("loginPassword").value;
@@ -91,18 +86,18 @@ document.getElementById("loginForm").addEventListener("submit", (event) => {
     return;
   }
 
-  const account = loadAccounts().find((a) => a.email === email);
-  if (!account || account.password !== password) {
-    showError("loginError", "Wrong email or password. New here? Create an account below.");
-    return;
+  try {
+    await postAuth("/api/auth/login", { email, password });
+    goDashboard();
+  } catch (err) {
+    showError(
+      "loginError",
+      err.message || "Wrong email or password. New here? Create an account below."
+    );
   }
-
-  startSession(account);
 });
 
-// ── create account ──────────────────────────────────────
-
-document.getElementById("signupForm").addEventListener("submit", (event) => {
+document.getElementById("signupForm").addEventListener("submit", async (event) => {
   event.preventDefault();
   const name = document.getElementById("signupName").value.trim();
   const email = normalizeEmail(document.getElementById("signupEmail").value);
@@ -126,16 +121,12 @@ document.getElementById("signupForm").addEventListener("submit", (event) => {
     return;
   }
 
-  const accounts = loadAccounts();
-  if (accounts.some((a) => a.email === email)) {
-    showError("signupError", "An account with that email already exists — log in instead.");
-    return;
+  try {
+    await postAuth("/api/auth/signup", { name, email, password });
+    goDashboard();
+  } catch (err) {
+    showError("signupError", err.message || "Could not create account.");
   }
-
-  const account = { name, email, password };
-  accounts.push(account);
-  saveAccounts(accounts);
-  startSession(account);
 });
 
 setMode("login");
