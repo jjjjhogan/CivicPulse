@@ -720,3 +720,27 @@ a.source-badge:hover {
   .dash { padding: 32px 24px 70px; }
   #irvineMap { height: 380px; }
 }
+
+/* ── classifier confidence (shared by source + signal pages) ── */
+
+.conf-chip {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.conf-chip.high { background: #e9f3e2; color: #4c7a34; }
+.conf-chip.medium { background: #f7eedd; color: #93650f; }
+.conf-chip.low { background: #f8e7e4; color: #a83f30; }
+
+/* "missed story" — rescued by the model pass after keywords dropped it */
+
+.rescued-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: #eee9f8;
+  color: #6a4fa3;
+}

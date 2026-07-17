@@ -3,7 +3,7 @@
 import json
 from datetime import datetime
 
-from scrapers.categories import classify
+from scrapers.classifier import classify_signal
 from scrapers.schema import CivicSignal
 
 
@@ -37,7 +37,7 @@ def tweet_to_signal(tweet: dict, *, query: str) -> CivicSignal:
     author = tweet.get("author") or {}
     handle = author.get("handle") or "unknown"
     counts = tweet.get("counts") or {}
-    categories = classify(text)
+    classification = classify_signal(text)
 
     return CivicSignal(
         source="twitter",
@@ -45,7 +45,7 @@ def tweet_to_signal(tweet: dict, *, query: str) -> CivicSignal:
         title=_truncate(text),
         body=text,
         url=_tweet_url(tweet),
-        categories=categories,
+        categories=classification.categories,
         published_utc=_published_date(tweet),
         metadata={
             "author_name": author.get("name") or handle,
@@ -58,6 +58,7 @@ def tweet_to_signal(tweet: dict, *, query: str) -> CivicSignal:
             "replies": counts.get("replies"),
             "views": counts.get("views"),
             "verified": author.get("verified"),
+            "classification": classification.to_dict(),
         },
     )
 

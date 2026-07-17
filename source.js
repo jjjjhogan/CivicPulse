@@ -29,6 +29,19 @@ const selectedCategories = new Set(
 // ?outlet=@irvinemoms — drill into one account/outlet's scraped data.
 let selectedOutlet = params.get("outlet") || null;
 
+// ?conf=high,low — classifier confidence bands (see confidenceBand()).
+const selectedBands = new Set(
+  (params.get("conf") || "")
+    .toLowerCase()
+    .split(",")
+    .map((s) => s.trim())
+    .filter((band) => band in CONFIDENCE_BANDS)
+);
+
+// ?missed=1 — only "missed stories" the keyword pass dropped and the
+// model pass rescued.
+let missedOnly = params.get("missed") === "1";
+
 function sourceLabel(source) {
   return SOURCE_LABELS[source] || source;
 }
@@ -45,10 +58,19 @@ function matchesCategories(signal) {
   );
 }
 
-// Source signals narrowed to the selected issue and outlet filters.
+function matchesConfidence(signal) {
+  return selectedBands.size === 0 || selectedBands.has(confidenceBand(signal));
+}
+
+// Source signals narrowed to the selected issue, outlet, confidence, and
+// missed-story filters.
 function filteredSignals() {
   return sourceSignals().filter(
-    (s) => matchesCategories(s) && (!selectedOutlet || s.outlet === selectedOutlet)
+    (s) =>
+      matchesCategories(s) &&
+      (!selectedOutlet || s.outlet === selectedOutlet) &&
+      matchesConfidence(s) &&
+      (!missedOnly || isRescuedSignal(s))
   );
 }
 
@@ -61,6 +83,10 @@ function syncUrl() {
     query.set("issue", [...selectedCategories].join(","));
   }
   if (selectedOutlet) query.set("outlet", selectedOutlet);
+  if (selectedBands.size > 0) {
+    query.set("conf", [...selectedBands].join(","));
+  }
+  if (missedOnly) query.set("missed", "1");
   const qs = query.toString();
   history.replaceState(null, "", qs ? `source.html?${qs}` : "source.html");
 }
@@ -120,6 +146,40 @@ function renderFilters() {
     });
     issueEl.appendChild(btn);
   }
+
+  const confEl = document.getElementById("confFilters");
+  confEl.innerHTML = "";
+  for (const [band, meta] of Object.entries(CONFIDENCE_BANDS)) {
+    const count = sourceSignals().filter((s) => confidenceBand(s) === band).length;
+    const btn = document.createElement("button");
+    btn.className = "tag-filter" + (selectedBands.has(band) ? " selected" : "");
+    btn.innerHTML = `<span class="conf-dot ${band}"></span>${meta.label}<span class="count">${count}</span>`;
+    btn.addEventListener("click", () => {
+      if (selectedBands.has(band)) {
+        selectedBands.delete(band);
+      } else {
+        selectedBands.add(band);
+      }
+      syncUrl();
+      render();
+    });
+    confEl.appendChild(btn);
+  }
+
+  // Missed stories: signals the keyword pass dropped, rescued by the model.
+  const missedEl = document.getElementById("missedFilter");
+  missedEl.innerHTML = "";
+  const missedCount = sourceSignals().filter(isRescuedSignal).length;
+  const missedBtn = document.createElement("button");
+  missedBtn.className = "tag-filter missed-filter" + (missedOnly ? " selected" : "");
+  missedBtn.innerHTML = `Missed stories<span class="count">${missedCount}</span>`;
+  missedBtn.title = "Signals the keyword filter would have dropped — caught by the model pass";
+  missedBtn.addEventListener("click", () => {
+    missedOnly = !missedOnly;
+    syncUrl();
+    render();
+  });
+  missedEl.appendChild(missedBtn);
 
   // The outlet row only appears while drilled into one outlet.
   const outletRow = document.getElementById("outletFilterRow");
@@ -214,6 +274,13 @@ function renderHead() {
   if (selectedOutlet) sub += ` Drilled into ${selectedOutlet}.`;
   document.getElementById("sourceSub").textContent = sub;
 
+  const scored = records
+    .map(signalConfidence)
+    .filter((confidence) => confidence != null);
+  const avgConfidence = scored.length
+    ? `${Math.round((scored.reduce((a, b) => a + b, 0) / scored.length) * 100)}%`
+    : "—";
+
   const el = document.getElementById("sourceStats");
   el.innerHTML = "";
   for (const [num, statLabel] of [
@@ -221,6 +288,7 @@ function renderHead() {
     [`${share}%`, "of all signals"],
     [mapped, "on the map"],
     [outlets, "outlets"],
+    [avgConfidence, "avg confidence"],
   ]) {
     const stat = document.createElement("div");
     stat.className = "stat";
@@ -398,7 +466,7 @@ function renderList() {
   );
   const all = sourceSignals().length;
   document.getElementById("listHint").textContent =
-    selectedCategories.size > 0 || selectedOutlet
+    selectedCategories.size > 0 || selectedOutlet || selectedBands.size > 0 || missedOnly
       ? `${records.length} of ${all} signals, newest first`
       : `${records.length} signal${records.length === 1 ? "" : "s"}, newest first`;
   el.innerHTML = "";
@@ -440,6 +508,21 @@ function renderList() {
       pin.textContent = "📍 on the map";
       top.appendChild(pin);
     }
+    const confidence = signalConfidence(record);
+    if (confidence != null) {
+      const chip = document.createElement("span");
+      chip.className = `conf-chip ${confidenceBand(record)}`;
+      chip.textContent = `${Math.round(confidence * 100)}%`;
+      chip.title = `Classifier confidence: ${CLASSIFICATION_METHODS[signalClassification(record)?.method] || "unknown"}`;
+      top.appendChild(chip);
+    }
+    if (isRescuedSignal(record)) {
+      const badge = document.createElement("span");
+      badge.className = "rescued-badge";
+      badge.textContent = "missed by keywords";
+      badge.title = "The keyword filter would have dropped this — the model pass caught it";
+      top.appendChild(badge);
+    }
 
     const title = document.createElement("h3");
     const link = document.createElement("a");
@@ -476,6 +559,8 @@ document.getElementById("clearIssueFilters").addEventListener("click", () => {
   selectedCategories.clear();
   selectedSources.clear();
   selectedOutlet = null;
+  selectedBands.clear();
+  missedOnly = false;
   syncUrl();
   render();
 });

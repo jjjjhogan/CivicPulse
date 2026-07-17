@@ -1,7 +1,10 @@
 {
-  "generated_at": "2026-07-15T18:08:21.207688+00:00",
+  "generated_at": "2026-07-17T17:53:32.773611+00:00",
   "sources": [
-    "tiktok"
+    "tiktok",
+    "reddit",
+    "twitter",
+    "news"
   ],
   "landing_page_feed": "data/signals/feed.json"
 }

@@ -8,7 +8,17 @@
 const STORAGE_KEY = "civicpulse_resident_reports";
 
 // Mirrors CATEGORY_KEYWORDS in scrapers/categories.py
-const ISSUE_CATEGORIES = ["potholes", "noise", "sanitation", "public_safety", "housing"];
+const ISSUE_CATEGORIES = [
+  "potholes",
+  "noise",
+  "sanitation",
+  "violent_crime",
+  "property_crime",
+  "traffic_safety",
+  "emergencies",
+  "public_safety",
+  "housing",
+];
 
 const IRVINE_CENTER = [33.6846, -117.8265];
 // Rough bounding box around Irvine used to bias/limit geocoding results.
