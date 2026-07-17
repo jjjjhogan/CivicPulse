@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 import threading
@@ -162,6 +163,9 @@ def is_job_running() -> bool:
 def _run_job(job_id: int, cmd: list[str]) -> None:
     global _running_job_id
     try:
+        env = os.environ.copy()
+        env.setdefault("PYTHONIOENCODING", "utf-8")
+        env.setdefault("PYTHONUTF8", "1")
         result = subprocess.run(
             cmd,
             cwd=str(ROOT),
@@ -169,6 +173,7 @@ def _run_job(job_id: int, cmd: list[str]) -> None:
             text=True,
             encoding="utf-8",
             errors="replace",
+            env=env,
         )
         log = (result.stdout or "") + (result.stderr or "")
         sync_source = None

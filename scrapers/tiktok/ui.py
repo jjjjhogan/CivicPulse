@@ -74,14 +74,24 @@ def open_comments_panel(driver) -> bool:
     _click_if_present(driver, By.CSS_SELECTOR, "button[aria-label='Close toast']")
     dismiss_overlays(driver)
 
+    # Login / signup walls block the comments panel entirely.
+    try:
+        body_text = (driver.find_element(By.TAG_NAME, "body").text or "").lower()
+        if "log in to" in body_text or "log in to comment" in body_text:
+            return False
+    except Exception:
+        pass
+
     locators = (
         (By.XPATH, "//button[contains(@aria-label, 'comments')]"),
         (By.XPATH, "//button[contains(@aria-label, 'Comments')]"),
+        (By.XPATH, "//button[contains(@aria-label, 'Read or add comments')]"),
         (By.CSS_SELECTOR, "div[data-e2e='comment-icon']"),
         (By.XPATH, "//*[@data-e2e='comment-icon']"),
         (By.XPATH, "//*[contains(@aria-label, 'comments')]"),
         (By.CSS_SELECTOR, "button[data-e2e='browse-comment']"),
         (By.CSS_SELECTOR, "button[data-e2e='comment-icon']"),
+        (By.CSS_SELECTOR, "span[data-e2e='comment-icon']"),
     )
     for by, value in locators:
         try:

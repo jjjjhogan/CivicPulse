@@ -25,6 +25,34 @@ MORE_BUTTON_XPATHS = (
     "//*[@data-e2e='video-desc']//*[contains(translate(., 'MORE', 'more'), 'more')]",
 )
 
+# TikTok sometimes surfaces analytics / route tokens instead of the real caption.
+_JUNK_CAPTION_RE = re.compile(
+    r"^(pc_web_|webapp\.|tiktok://|https?://)",
+    re.IGNORECASE,
+)
+_JUNK_CAPTIONS = {
+    "more",
+    "less",
+    "follow",
+    "log in",
+    "login",
+    "sign up",
+}
+
+
+def is_plausible_caption(text: str) -> bool:
+    text = (text or "").strip()
+    if len(text) < 2:
+        return False
+    if text.lower() in _JUNK_CAPTIONS:
+        return False
+    if _JUNK_CAPTION_RE.search(text):
+        return False
+    # Internal tokens like pc_web_explorePage_all (no spaces, camel/snake mix).
+    if " " not in text and "_" in text and not text.startswith("#"):
+        return False
+    return True
+
 
 def _visible_text(element) -> str:
     try:
@@ -64,7 +92,7 @@ def _caption_from_dom(driver) -> str:
         try:
             for element in driver.find_elements(By.CSS_SELECTOR, selector):
                 text = _visible_text(element)
-                if text:
+                if is_plausible_caption(text):
                     return text
         except Exception:
             continue
@@ -75,14 +103,14 @@ def _caption_from_og(driver) -> str:
     try:
         meta = driver.find_element(By.CSS_SELECTOR, 'meta[property="og:description"]')
         content = (meta.get_attribute("content") or "").strip()
-        if content:
+        if is_plausible_caption(content):
             return content
     except Exception:
         pass
     try:
         meta = driver.find_element(By.CSS_SELECTOR, 'meta[name="description"]')
         content = (meta.get_attribute("content") or "").strip()
-        if content:
+        if is_plausible_caption(content):
             return content
     except Exception:
         pass
@@ -94,7 +122,7 @@ def _walk_for_desc(node, depth: int = 0):
         return ""
     for key in ("desc", "description", "text", "title"):
         value = node.get(key)
-        if isinstance(value, str) and value.strip() and key != "title":
+        if isinstance(value, str) and is_plausible_caption(value) and key != "title":
             return value.strip()
     for value in node.values():
         if isinstance(value, dict):
@@ -181,6 +209,8 @@ def extract_caption(driver) -> tuple[str, list[str]]:
         caption = _caption_from_og(driver)
     if not caption:
         caption = _caption_from_page_json(driver)
+    if caption and not is_plausible_caption(caption):
+        caption = ""
 
     hashtags = extract_hashtags(driver, caption)
     if hashtags and caption:

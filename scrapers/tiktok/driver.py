@@ -53,3 +53,20 @@ def create_tiktok_driver(*, headless: bool = False) -> uc.Chrome:
     )
     driver.set_window_size(1920, 1080)
     return driver
+
+
+def close_tiktok_driver(driver) -> None:
+    """Quit the Chrome session; ignore cleanup errors from undetected-chromedriver."""
+    if driver is None:
+        return
+    try:
+        driver.quit()
+    except OSError:
+        pass
+    except Exception:  # noqa: BLE001
+        pass
+    # Prevent undetected_chromedriver.__del__ from calling quit() again on Windows.
+    try:
+        object.__setattr__(driver, "quit", lambda: None)
+    except Exception:  # noqa: BLE001
+        pass

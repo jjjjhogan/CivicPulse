@@ -1,5 +1,6 @@
 import json
 import re
+import sys
 import time
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
@@ -15,6 +16,15 @@ from scrapers.tiktok.driver import close_tiktok_driver, create_tiktok_driver
 from scrapers.tiktok.ui import dismiss_overlays
 
 FEED_SCROLL_PAUSE_SEC = 1.5
+
+
+def _log(message: str) -> None:
+    """Print without crashing on Windows cp1252 when captions include emoji."""
+    try:
+        print(message)
+    except UnicodeEncodeError:
+        encoding = getattr(sys.stdout, "encoding", None) or "ascii"
+        print(message.encode(encoding, errors="replace").decode(encoding, errors="replace"))
 
 
 @dataclass
@@ -290,11 +300,11 @@ def _parse_video_page(
     share_count = _first_text(driver, ("strong[data-e2e='share-count']",))
 
     if caption:
-        print(f"    caption={caption[:90]!r}")
+        _log(f"    caption={caption[:90]!r}")
     else:
-        print("    caption=(empty)")
+        _log("    caption=(empty)")
     if hashtags:
-        print(f"    hashtags={', '.join(hashtags[:8])}")
+        _log(f"    hashtags={', '.join(hashtags[:8])}")
 
     comments = _load_video_comments(
         driver,
