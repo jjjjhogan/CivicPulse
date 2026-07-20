@@ -288,49 +288,64 @@ function renderSources() {
 }
 
 // ── verify issues ───────────────────────────────────────
-// Residents vote on whether a reported issue is really there. Votes are
-// stored locally per browser until a backend /api/votes endpoint exists.
+// Community votes on whether a resident-reported issue is really there.
+// Tallies live in SQLite via /api/votes (per logged-in user).
 
-const VOTES_STORAGE_KEY = "civicpulse_issue_votes";
+let voteState = {}; // { [signalId]: { up, down, mine } }
 
-function loadVotes() {
-  try {
-    return JSON.parse(localStorage.getItem(VOTES_STORAGE_KEY)) || {};
-  } catch {
-    return {};
-  }
-}
-
-function saveVotes(votes) {
-  localStorage.setItem(VOTES_STORAGE_KEY, JSON.stringify(votes));
-}
-
-// Resident reports have no id, so key votes on fields that identify one.
-function reportKey(report) {
+function reportVoteKey(report) {
+  if (report.id != null) return String(report.id);
   const { lat, lng } = report.metadata || {};
   return `${report.title}|${report.published_utc}|${lat},${lng}`;
 }
 
-// Enough community confirmations — the issue is real and leaves the
-// verification queue (it stays in the feed and on the map).
 function isVerified(vote) {
   return vote.up >= 3 && vote.up > vote.down;
 }
 
-function castVote(key, choice) {
-  const votes = loadVotes();
-  const vote = votes[key] || { up: 0, down: 0, mine: null };
-  if (vote.mine === choice) {
-    vote[choice] -= 1;
-    vote.mine = null;
-  } else {
-    if (vote.mine) vote[vote.mine] -= 1;
-    vote[choice] += 1;
-    vote.mine = choice;
+async function loadVotesFromServer() {
+  try {
+    const res = await fetch("/api/votes", { credentials: "same-origin" });
+    if (!res.ok) return;
+    const data = await res.json();
+    voteState = data.votes || {};
+  } catch {
+    // Keep last known tallies if the request fails.
   }
-  votes[key] = vote;
-  saveVotes(votes);
-  renderVerify();
+}
+
+async function castVote(report, choice) {
+  const signalId = report.id;
+  if (signalId == null) {
+    logLine("This report has no server id yet — reopen the dashboard after submitting via /api/reports.");
+    return;
+  }
+  try {
+    const res = await fetch("/api/votes", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "same-origin",
+      body: JSON.stringify({ signal_id: signalId, choice }),
+    });
+    if (res.status === 401) {
+      logLine("Log in to vote on resident reports.");
+      return;
+    }
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      logLine(data.error || "Vote failed.");
+      return;
+    }
+    const data = await res.json();
+    voteState[String(signalId)] = {
+      up: data.up || 0,
+      down: data.down || 0,
+      mine: data.mine ?? null,
+    };
+    renderVerify();
+  } catch (err) {
+    logLine(err.message || "Vote failed.");
+  }
 }
 
 function renderVerify() {
@@ -348,10 +363,8 @@ function renderVerify() {
     return;
   }
 
-  // Verified issues leave the queue so it only holds open questions.
-  const votes = loadVotes();
   const pending = reports.filter(
-    (report) => !isVerified(votes[reportKey(report)] || { up: 0, down: 0 })
+    (report) => !isVerified(voteState[reportVoteKey(report)] || { up: 0, down: 0 })
   );
   const verifiedCount = reports.length - pending.length;
   const verifiedNote = verifiedCount > 0
@@ -371,8 +384,8 @@ function renderVerify() {
     `${pending.length} resident-reported issue${pending.length === 1 ? "" : "s"} awaiting verification${verifiedNote}`;
 
   for (const report of pending) {
-    const key = reportKey(report);
-    const vote = votes[key] || { up: 0, down: 0, mine: null };
+    const key = reportVoteKey(report);
+    const vote = voteState[key] || { up: 0, down: 0, mine: null };
 
     const card = document.createElement("article");
     card.className = "verify-card";
@@ -410,12 +423,12 @@ function renderVerify() {
     const yesBtn = document.createElement("button");
     yesBtn.className = "vote-btn" + (vote.mine === "up" ? " voted-yes" : "");
     yesBtn.textContent = `👍 It's there (${vote.up})`;
-    yesBtn.addEventListener("click", () => castVote(key, "up"));
+    yesBtn.addEventListener("click", () => castVote(report, "up"));
 
     const noBtn = document.createElement("button");
     noBtn.className = "vote-btn" + (vote.mine === "down" ? " voted-no" : "");
     noBtn.textContent = `👎 Not there (${vote.down})`;
-    noBtn.addEventListener("click", () => castVote(key, "down"));
+    noBtn.addEventListener("click", () => castVote(report, "down"));
 
     const voteHint = document.createElement("span");
     voteHint.className = "vote-hint";
@@ -508,6 +521,7 @@ function focusOnMap(record) {
 
 function logLine(text) {
   const el = document.getElementById("scraperLog");
+  if (!el) return;
   el.hidden = false;
   const time = new Date().toLocaleTimeString();
   el.textContent += `[${time}] ${text}\n`;
@@ -519,9 +533,23 @@ function mergeSignals(liveSignals) {
 }
 
 async function loadSignals() {
-  const live = await fetchLiveSignals();
-  state.live = live == null ? "offline" : live.length ? "live" : "empty";
-  mergeSignals(live);
+  const migrated = await migrateLocalReportsToServer();
+  if (migrated > 0) {
+    logLine(`Migrated ${migrated} local resident report(s) into SQLite.`);
+  }
+  const { signals, storage } = await fetchLiveSignalsResult();
+  mergeSignals(signals);
+  await loadVotesFromServer();
+  renderVerify();
+  if (storage === "db") {
+    logLine(`Loaded ${signals.length} signals from SQLite.`);
+  } else if (storage === "json") {
+    logLine(
+      `Loaded ${signals.length} signals from JSON fallback (run import_signals.py to use SQLite).`
+    );
+  } else if (!signals.length) {
+    logLine("No live signals from API — showing sample / resident data.");
+  }
 }
 
 async function loadScraperConfig() {

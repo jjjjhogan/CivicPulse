@@ -71,18 +71,24 @@ python scripts/process_reddit_scrape.py --input data/raw/reddit_scrape.json
 python scripts/process_twitter_scrape.py --input data/raw/twitter_scrape.json
 ```
 
-## Dashboard server
+## Dashboard server (local demo)
+
+Cold start (SQLite is the dashboard source of truth):
 
 ```bash
-python scripts/dashboard_server.py
-# or: HOST / PORT / FLASK_SECRET_KEY / DATABASE_URL from .env; CLI --host/--port override
-
-# One-time (or after regenerating JSON): load signals into SQLite
+pip install -r requirements.txt
 python scripts/import_signals.py
-python scripts/import_signals.py --replace   # wipe Signal table first
+python scripts/reprocess_signals.py   # updates JSON + re-syncs SQLite
+python scripts/dashboard_server.py
+# HOST / PORT / FLASK_SECRET_KEY / DATABASE_URL from .env; CLI --host/--port override
 ```
 
-Open http://127.0.0.1:8080/login.html — create an account, then use the dashboard Scrapers panel.
+```bash
+python scripts/import_signals.py --replace   # wipe Signal table first
+pytest -q                                    # auth, import, mocked jobs (no Selenium)
+```
+
+Open http://127.0.0.1:8080/login.html — create an account (session cookie), then use the dashboard Scrapers panel.
 
 | Endpoint | Purpose |
 |----------|---------|
@@ -90,26 +96,34 @@ Open http://127.0.0.1:8080/login.html — create an account, then use the dashbo
 | `POST /api/auth/login` | Log in |
 | `POST /api/auth/logout` | Log out |
 | `GET /api/auth/me` | Current session user |
-| `GET /api/signals` | Signals from SQLite (falls back to JSON if empty) |
-| `GET /api/signals/feed` | Landing-page feed shape |
+| `GET /api/signals` | Signals from SQLite when present (`storage: "db"`); else JSON fallback (`storage: "json"`). Includes `source: "resident"` reports. |
+| `GET /api/signals/feed` | Landing-page feed shape (same DB-first rule) |
+| `POST /api/reports` | Create resident report → SQLite `Signal` (`source: resident`) |
+| `GET /api/reports` | List resident signals only |
+| `GET /api/votes` | Vote tallies for resident reports (`mine` when logged in) |
+| `POST /api/votes` | Toggle up/down vote `{signal_id, choice}` (auth required) |
 | `GET /api/config` | Categories, TikTok/news defaults, news outlets |
 | `POST /api/jobs` | Start scrape job `{source, settings}` → `{id, status}` (auth required) |
-| `GET /api/jobs/<id>` | Job status + log (auth required) |
+| `GET /api/jobs/<id>` | Job status + log (auth required); TikTok/Chrome failures include readable `error` text |
 | `POST /api/scrape/<source>` | Legacy scrape API (auth required; creates a job) |
 | `GET /api/scrape/status` | Legacy status poll (auth required) |
 
 Package layout: `backend/` (models, auth, jobs, routes). Entry point remains `scripts/dashboard_server.py`.
 
+TikTok desktop Chrome profile + login-wall notes: [TIKTOK_SCRAPE.md](TIKTOK_SCRAPE.md).
+
 ## Wiring the landing page
 
+When the Flask server is running, prefer the API (DB-backed after import):
+
 ```js
-fetch("data/signals/feed.json")
+fetch("/api/signals/feed")
   .then((res) => res.json())
-  .then(renderSignals)
+  .then((data) => renderSignals(data.signals || []))
   .catch(() => renderSignals(SAMPLE_SIGNALS));
 ```
 
-Or use `GET /api/signals/feed` when the Flask server is running.
+Static fallback without the server: `data/signals/feed.json`.
 
 ## Source conventions
 

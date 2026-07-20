@@ -1,6 +1,6 @@
 // Sample records in the shape produced by the ingestion scrapers
-// (reddit_scraper.py / irvine_news_scraper.py). Once those are exposed
-// through an API endpoint, replace this array with a fetch() call.
+// (reddit_scraper.py / irvine_news_scraper.py). Prefer GET /api/signals/feed
+// when dashboard_server.py is running (SQLite after import).
 const SAMPLE_SIGNALS = [
   {
     outlet: "Voice of OC",
@@ -64,4 +64,21 @@ function renderSignals(records) {
   }
 }
 
-renderSignals(SAMPLE_SIGNALS);
+async function loadLandingSignals() {
+  try {
+    const res = await fetch("/api/signals/feed");
+    if (res.ok) {
+      const data = await res.json();
+      const signals = data.signals || [];
+      if (signals.length) {
+        renderSignals(signals);
+        return;
+      }
+    }
+  } catch {
+    // Server not running — fall through to samples.
+  }
+  renderSignals(SAMPLE_SIGNALS);
+}
+
+loadLandingSignals();

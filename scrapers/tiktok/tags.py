@@ -6,14 +6,19 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from urllib.parse import urlparse
 
+from selenium.common.exceptions import NoSuchWindowException, WebDriverException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
 from scrapers.tiktok.caption import extract_caption
 from scrapers.tiktok.comments import TikTokComment, _load_video_comments
-from scrapers.tiktok.driver import close_tiktok_driver, create_tiktok_driver
-from scrapers.tiktok.ui import dismiss_overlays
+from scrapers.tiktok.driver import (
+    ChromeUnavailableError,
+    close_tiktok_driver,
+    create_tiktok_driver,
+)
+from scrapers.tiktok.ui import dismiss_login_interstitial, dismiss_overlays, window_is_alive
 
 FEED_SCROLL_PAUSE_SEC = 1.5
 
@@ -337,7 +342,10 @@ def scrape_tag(
     skip_urls: set[str] | None = None,
 ) -> TikTokTagResult:
     tag = _tag_name_from_url(tag_url)
-    driver = create_tiktok_driver(headless=headless)
+    try:
+        driver = create_tiktok_driver(headless=headless)
+    except ChromeUnavailableError:
+        raise
     videos: list[TikTokVideo] = []
     skip = {_normalize_video_url(url) for url in (skip_urls or set()) if url}
 
@@ -370,21 +378,33 @@ def scrape_tag(
         print(f"Found {len(video_urls)} new videos for #{tag}")
 
         for index, video_url in enumerate(video_urls, start=1):
+            if not window_is_alive(driver):
+                print("Browser window closed — stopping tag scrape early.")
+                break
             print(f"  [{index}/{len(video_urls)}] {video_url}")
-            driver.get(video_url)
-            WebDriverWait(driver, 20).until(
-                EC.presence_of_element_located((By.TAG_NAME, "body"))
-            )
-            time.sleep(3)
-            dismiss_overlays(driver)
+            try:
+                driver.get(video_url)
+                WebDriverWait(driver, 20).until(
+                    EC.presence_of_element_located((By.TAG_NAME, "body"))
+                )
+                time.sleep(3)
+                dismiss_overlays(driver)
+                dismiss_login_interstitial(driver)
 
-            video = _parse_video_page(
-                driver,
-                video_url,
-                tag=tag,
-                tag_url=tag_url,
-                max_comments=max_comments_per_video,
-            )
+                video = _parse_video_page(
+                    driver,
+                    video_url,
+                    tag=tag,
+                    tag_url=tag_url,
+                    max_comments=max_comments_per_video,
+                )
+            except NoSuchWindowException:
+                print("  warning: browser window closed — stopping tag scrape early.")
+                break
+            except WebDriverException as exc:
+                print(f"  warning: video scrape failed ({exc.__class__.__name__}): {exc}")
+                continue
+
             print(f"    author={video.author or 'unknown'} comments={len(video.comments)}")
             videos.append(video)
             skip.add(_normalize_video_url(video_url))

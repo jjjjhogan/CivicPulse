@@ -4,7 +4,8 @@
 // { source, outlet, title, body, url, categories, published_utc, metadata }
 // with optional metadata.lat / metadata.lng for map placement.
 // When scripts/dashboard_server.py is running, live signals load from
-// GET /api/signals and replace the sample social records below.
+// GET /api/signals (SQLite after import; JSON only if the DB table is empty)
+// and replace the sample social records below.
 
 const SAMPLE_SIGNALS = [
   {
@@ -226,11 +227,12 @@ const SOURCE_LABELS = {
 // Sources always shown in source pickers, even with zero signals.
 const MAIN_SOURCES = ["tiktok", "reddit", "twitter", "news", "resident"];
 
-// Sources whose sample records are replaced by live scraper data.
-const LIVE_SOURCES = ["tiktok", "reddit", "twitter", "news"];
+// Sources whose sample records are replaced by live scraper / API data.
+// Resident reports live in SQLite via POST /api/reports and come back on
+// GET /api/signals — do not also merge localStorage when the API has rows.
+const LIVE_SOURCES = ["tiktok", "reddit", "twitter", "news", "resident"];
 
-// Resident reports submitted through report.html (stored locally until a
-// backend /api/reports endpoint exists).
+// Legacy localStorage key — offline fallback + one-time migrate to SQLite.
 const REPORTS_STORAGE_KEY = "civicpulse_resident_reports";
 
 function loadResidentReports() {
@@ -241,15 +243,46 @@ function loadResidentReports() {
   }
 }
 
-// Combine resident reports, sample records, and live scraper signals into
-// one signal list. With no live data the samples stand in for everything.
+function clearLocalResidentReports() {
+  try {
+    localStorage.removeItem(REPORTS_STORAGE_KEY);
+  } catch {
+    // ignore
+  }
+}
+
+// Push any leftover browser-local reports into SQLite, then clear localStorage.
+async function migrateLocalReportsToServer() {
+  const local = loadResidentReports();
+  if (!local.length) return 0;
+  let migrated = 0;
+  for (const report of local) {
+    try {
+      const res = await fetch("/api/reports", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
+        body: JSON.stringify(report),
+      });
+      if (res.ok) migrated += 1;
+    } catch {
+      // Keep local copy if the server is down.
+      return migrated;
+    }
+  }
+  if (migrated === local.length) clearLocalResidentReports();
+  return migrated;
+}
+
+// Combine sample records and live API signals. When the API returns rows
+// (including source=resident from SQLite), those replace samples for LIVE_SOURCES.
+// Offline-only: merge leftover localStorage reports with SAMPLE_SIGNALS.
 function buildSignals(liveSignals) {
-  const reports = loadResidentReports();
   if (!liveSignals || !liveSignals.length) {
-    return [...reports, ...SAMPLE_SIGNALS];
+    return [...loadResidentReports(), ...SAMPLE_SIGNALS];
   }
   const other = SAMPLE_SIGNALS.filter((s) => !LIVE_SOURCES.includes(s.source));
-  return [...reports, ...other, ...liveSignals];
+  return [...other, ...liveSignals];
 }
 
 // Classification metadata written by scrapers/classifier.py — scores,
@@ -356,16 +389,24 @@ function signalUrl(signal) {
   return `signal.html?id=${encodeURIComponent(signalKey(signal))}`;
 }
 
-// Fetch live signals from the Flask backend. Returns null when the API is
-// unreachable (server down) and [] when it answered with no signals, so
-// callers can tell "offline" apart from "nothing scraped yet".
-async function fetchLiveSignals() {
+// Fetch live signals from the Flask backend (SQLite when imported).
+// Returns { signals, storage } where storage is "db" | "json" | null.
+async function fetchLiveSignalsResult() {
   try {
     const res = await fetch("/api/signals");
-    if (!res.ok) return null;
+    if (!res.ok) return { signals: [], storage: null };
     const data = await res.json();
-    return data.signals || [];
+    return {
+      signals: data.signals || [],
+      storage: data.storage || null,
+    };
   } catch {
-    return null;
+    return { signals: [], storage: null };
   }
+}
+
+// Fetch live signals from the Flask backend; empty when it isn't running.
+async function fetchLiveSignals() {
+  const { signals } = await fetchLiveSignalsResult();
+  return signals;
 }

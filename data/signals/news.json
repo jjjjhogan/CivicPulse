@@ -8,13 +8,7 @@
     "categories": [],
     "published_utc": "2026-06-30",
     "metadata": {
-      "outlet_id": "irvine-standard",
-      "classification": {
-        "scores": {},
-        "confidence": 0.772,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
+      "outlet_id": "irvine-standard"
     }
   },
   {
@@ -26,13 +20,7 @@
     "categories": [],
     "published_utc": "2026-06-30",
     "metadata": {
-      "outlet_id": "irvine-standard",
-      "classification": {
-        "scores": {},
-        "confidence": 0.825,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
+      "outlet_id": "irvine-standard"
     }
   },
   {
@@ -44,13 +32,7 @@
     "categories": [],
     "published_utc": "2026-06-30",
     "metadata": {
-      "outlet_id": "irvine-standard",
-      "classification": {
-        "scores": {},
-        "confidence": 0.78,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
+      "outlet_id": "irvine-standard"
     }
   },
   {
@@ -62,13 +44,7 @@
     "categories": [],
     "published_utc": "2026-06-30",
     "metadata": {
-      "outlet_id": "irvine-standard",
-      "classification": {
-        "scores": {},
-        "confidence": 0.752,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
+      "outlet_id": "irvine-standard"
     }
   },
   {
@@ -83,16 +59,424 @@
     ],
     "published_utc": "2026-06-30",
     "metadata": {
-      "outlet_id": "irvine-standard",
-      "classification": {
-        "scores": {
-          "traffic_safety": 0.6,
-          "emergencies": 0.6
-        },
-        "confidence": 0.6,
-        "method": "legacy",
-        "model_version": "nb-v1"
-      }
+      "outlet_id": "irvine-standard"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "Irvine softball teams win championships",
+    "body": "Northwood High School\u2019s softball team won the Division 5 final to earn its first CIF title. Irvine High School captured its second CIF softball title with a victory in the [\u2026]",
+    "url": "https://www.irvinestandard.com/2026/irvine-softball-teams-win-championships/",
+    "categories": [
+      "traffic_safety"
+    ],
+    "published_utc": "2026-06-30",
+    "metadata": {
+      "outlet_id": "irvine-standard"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "New SunWheel on the horizon",
+    "body": "The new Spectrum SunWheel is coming to Irvine Spectrum Center this summer. Like its predecessor, it was handcrafted in Casale di Scodosia, Italy \u2013 an area just south of Venice [\u2026]",
+    "url": "https://www.irvinestandard.com/2026/new-sunwheel-on-the-horizon/",
+    "categories": [],
+    "published_utc": "2026-06-30",
+    "metadata": {
+      "outlet_id": "irvine-standard"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "Celebrating Small Business: Woodbridge Village Center",
+    "body": "Students find their rhythm at Focus Dance Center Leah Lederman began taking lessons at Focus Dance Center when she was 3 years old and never really left. \u201cFor most of [\u2026]",
+    "url": "https://www.irvinestandard.com/2026/celebrating-small-business-woodbridge-village-center/",
+    "categories": [],
+    "published_utc": "2026-06-30",
+    "metadata": {
+      "outlet_id": "irvine-standard"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "How freeway improvements impact Irvine",
+    "body": "Mobility in Irvine is about more than getting from point A to point B; it is about the integration of neighborhoods, retail centers, schools, parks and primary business hubs. Central [\u2026]",
+    "url": "https://www.irvinestandard.com/2026/how-freeway-improvements-impact-irvine/",
+    "categories": [
+      "traffic_safety"
+    ],
+    "published_utc": "2026-06-30",
+    "metadata": {
+      "outlet_id": "irvine-standard"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "Try these 5 over-the-top sandwich creations",
+    "body": "It has been said that life is a sandwich \u2013 what happens between slices of the past and future. We say sandwiches are life. The great ones are pinnacles of [\u2026]",
+    "url": "https://www.irvinestandard.com/2026/try-these-5-over-the-top-sandwich-creations/",
+    "categories": [],
+    "published_utc": "2026-06-30",
+    "metadata": {
+      "outlet_id": "irvine-standard"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "Irvine parks are ranked second highest in nation again",
+    "body": "Allison Plette-Dalton grew up in Irvine, where some of her most important memories \u2013 including birthday parties, learning to ride her bike and after-school playdates \u2013 all took place in [\u2026]",
+    "url": "https://www.irvinestandard.com/2026/irvine-parks-are-ranked-second-highest-in-nation-again/",
+    "categories": [
+      "sanitation"
+    ],
+    "published_utc": "2026-06-30",
+    "metadata": {
+      "outlet_id": "irvine-standard"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "Q&A: Swim star credits Irvine\u2019s summer swim league for success",
+    "body": "Ella Eastin won 12 NCAA titles, broke four American and NCAA records and helped the Stanford swim team win three NCAA championships. She started at Irvine Swim League and still [\u2026]",
+    "url": "https://www.irvinestandard.com/2026/qa-swim-star-credits-irvines-summer-swim-league-for-success/",
+    "categories": [],
+    "published_utc": "2026-06-30",
+    "metadata": {
+      "outlet_id": "irvine-standard"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "No. 3 city in America to raise a family",
+    "body": "Irvine landed at No. 3 on Wallet\u00adHub\u2019s national \u201cBest Places to Raise a Family\u201d ranking, driven by its safety record, strong schools and low divorce rates. Analysts compared 182 U.S. [\u2026]",
+    "url": "https://www.irvinestandard.com/2026/no-3-city-in-america-to-raise-a-family-2/",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-06-30",
+    "metadata": {
+      "outlet_id": "irvine-standard"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "Four named National Merit Scholars",
+    "body": "Irvine high school students accounted for four of 11 seniors in the county who were awarded prestigious college-sponsored National Merit Scholarships. The Irvine winners are Xiao Jiang (University High), Pragnya [\u2026]",
+    "url": "https://www.irvinestandard.com/2026/four-named-national-merit-scholars/",
+    "categories": [
+      "traffic_safety"
+    ],
+    "published_utc": "2026-06-30",
+    "metadata": {
+      "outlet_id": "irvine-standard"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "10 happenings in July",
+    "body": "1. \u2018C.S. Lewis on Stage\u2019Experience a multimedia performance capturing the magnetic personality, eloquence and sharp wit of C.S. Lewis. Award-winning actor Max McLean uses Lewis\u2019 writings to explore the author\u2019s [\u2026]",
+    "url": "https://www.irvinestandard.com/2026/10-happenings-in-july/",
+    "categories": [],
+    "published_utc": "2026-06-30",
+    "metadata": {
+      "outlet_id": "irvine-standard"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "Splash into summer",
+    "body": "It\u2019s the perfect time to get outside and enjoy the treats of the season \u2013 concerts in the park, movies under the stars, hikes on nearby trails, community events at [\u2026]",
+    "url": "https://www.irvinestandard.com/2026/splash-into-summer/",
+    "categories": [
+      "housing"
+    ],
+    "published_utc": "2026-06-30",
+    "metadata": {
+      "outlet_id": "irvine-standard"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "Cutting-Edge Connectivity",
+    "body": "New Irvine Community Pacifica Place Debuts First-of-Its-Kind 3 Gig Wi-Fi 7 Network as High-Speed Internet Becomes a Must-Have Residential Amenity",
+    "url": "https://www.irvinestandard.com/2026/cutting-edge-connectivity/",
+    "categories": [
+      "housing"
+    ],
+    "published_utc": "2026-06-17",
+    "metadata": {
+      "outlet_id": "irvine-standard"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "Getting wild at OC Zoo for a day",
+    "body": "About 455 runners of all ages took part in the Run Wild 5K event at the OC Zoo in Irvine Regional Park last month. Proceeds from the 5K are earmarked [\u2026]",
+    "url": "https://www.irvinestandard.com/2026/getting-wild-at-oc-zoo-for-a-day/",
+    "categories": [
+      "traffic_safety"
+    ],
+    "published_utc": "2026-06-05",
+    "metadata": {
+      "outlet_id": "irvine-standard"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "Amenities abound at Spectrum Terrace",
+    "body": "Some folks spend work breaks gulping coffee, gobbling doughnuts or playing word games on their phones. Bharat Ananth hits the trails. \u201cI\u2019m a big outdoor person,\u201d says Ananth, vice president [\u2026]",
+    "url": "https://www.irvinestandard.com/2026/amenities-abound-at-spectrum-terrace/",
+    "categories": [
+      "public_safety",
+      "housing"
+    ],
+    "published_utc": "2026-06-04",
+    "metadata": {
+      "outlet_id": "irvine-standard"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "A linear park journey",
+    "body": "Jeffrey Open Space Trail is a portal to the past and a connection in the present",
+    "url": "https://www.irvinestandard.com/2026/a-linear-park-journey/",
+    "categories": [],
+    "published_utc": "2026-06-04",
+    "metadata": {
+      "outlet_id": "irvine-standard"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Weekly",
+    "title": "After an Accident: What Helps a Personal Injury Claim Most",
+    "body": "Details start slipping faster than people expect after an accident. A street name goes fuzzy, the weather becomes a blur, and the exact order of events starts to wobble by the time the day is over. That\u2019s usually why early documents are important. For anyone trying to understand what may help a claim later, the [\u2026] \n The post  After an Accident: What Helps a Personal Injury Claim Most  appeared first on  Irvine Weekly .",
+    "url": "https://irvineweekly.com/after-an-accident-what-helps-a-personal-injury-claim-most/?utm_source=rss&utm_medium=rss&utm_campaign=after-an-accident-what-helps-a-personal-injury-claim-most",
+    "categories": [
+      "sanitation",
+      "traffic_safety",
+      "public_safety"
+    ],
+    "published_utc": "2026-03-24",
+    "metadata": {
+      "outlet_id": "irvine-weekly"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Weekly",
+    "title": "AITEX Summit Winter 2026 to Spotlight Applied Data Analytics for Real-World Decisions",
+    "body": "Summary: The upcoming AITEX Summit Winter 2026 will bring data analytics and AI professionals together for an online event focused on building applied, decision-focused analytics projects. The Association of Information Technology Experts (AITEX), a California-based organization, will host the AITEX Summit Winter 2026 later this month, on Feb. 27 and 28, as a two-day online [\u2026] \n The post  AITEX Summit Winter 2026 to Spotlight Applied Data Analytics for Real-World Decisions  appeared first on  Irvine Weekly .",
+    "url": "https://irvineweekly.com/aitex-summit-winter-2026-to-spotlight-applied-data-analytics-for-real-world-decisions/?utm_source=rss&utm_medium=rss&utm_campaign=aitex-summit-winter-2026-to-spotlight-applied-data-analytics-for-real-world-decisions",
+    "categories": [],
+    "published_utc": "2026-02-11",
+    "metadata": {
+      "outlet_id": "irvine-weekly"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Weekly",
+    "title": "Local Wellness Entrepreneur Launches $250K Initiative Supporting California Firefighters",
+    "body": "Dialed Labs Founder Hosts Linda Isle Gala to Debut Dialed & Defend Charity; Fountain Valley and Pechanga Fire Stations First to Receive Recovery Equipment When Ali Garawi watched firefighters battle the devastating January 2025 Los Angeles wildfires, he knew he\u2019d found the cause he and his brother had been waiting for. The brothers had built [\u2026] \n The post  Local Wellness Entrepreneur Launches $250K Initiative Supporting California Firefighters  appeared first on  Irvine Weekly .",
+    "url": "https://irvineweekly.com/local-wellness-entrepreneur-launches-250k-initiative-supporting-california-firefighters/?utm_source=rss&utm_medium=rss&utm_campaign=local-wellness-entrepreneur-launches-250k-initiative-supporting-california-firefighters",
+    "categories": [
+      "emergencies",
+      "violent_crime",
+      "traffic_safety",
+      "public_safety"
+    ],
+    "published_utc": "2026-01-10",
+    "metadata": {
+      "outlet_id": "irvine-weekly"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Weekly",
+    "title": "AITEX Summit Fall 2025: Where Professionals Build the Future of AI",
+    "body": "This November, top IT professionals from around the world will put their skills to the test in a global AI sprint. AITEX Summit Fall 2025, taking place online November 1\u20132, is organized by AITEX, the Association of Information Technology Experts, a California based community that brings together technology leaders across the United States, Europe, and [\u2026] \n The post  AITEX Summit Fall 2025: Where Professionals Build the Future of AI  appeared first on  Irvine Weekly .",
+    "url": "https://irvineweekly.com/aitex-summit-fall-2025-where-professionals-build-the-future-of-ai/?utm_source=rss&utm_medium=rss&utm_campaign=aitex-summit-fall-2025-where-professionals-build-the-future-of-ai",
+    "categories": [],
+    "published_utc": "2025-09-30",
+    "metadata": {
+      "outlet_id": "irvine-weekly"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Weekly",
+    "title": "Menopause Isn\u2019t the End: Fem Excel\u2019s Proven Path to a Vibrant Summer (and Beyond)",
+    "body": "For many women, menopause is framed as an ending, a slow decline marked by exhaustion, weight gain, and hot flashes. And when summer rolls around, that narrative can feel especially cruel, making it hard to enjoy travel or outdoor fun. But Fem Excel is helping rewrite that story by offering a new path forward that [\u2026] \n The post  Menopause Isn\u2019t the End: Fem Excel\u2019s Proven Path to a Vibrant Summer (and Beyond)  appeared first on  Irvine Weekly .",
+    "url": "https://irvineweekly.com/menopause-isnt-the-end-fem-excels-proven-path-to-a-vibrant-summer-and-beyond/?utm_source=rss&utm_medium=rss&utm_campaign=menopause-isnt-the-end-fem-excels-proven-path-to-a-vibrant-summer-and-beyond",
+    "categories": [],
+    "published_utc": "2025-07-16",
+    "metadata": {
+      "outlet_id": "irvine-weekly"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Weekly",
+    "title": "The Emotional Sobriety Method for Professional Women Who Drink Too Much",
+    "body": "As founder and CEO of Emotional Sobriety Coaching\u00a9, an intuitive drinking coach, and host of the top 1% podcast It\u2019s Not About the Alcohol, Colleen Freeland Kachmann is changing the way women engage with alcohol. Colleen\u2019s holistic approach helps her professional female clients, including entrepreneurs, executives and career moms, correct the dysfunctional thinking patterns that [\u2026] \n The post  The Emotional Sobriety Method for Professional Women Who Drink Too Much  appeared first on  Irvine Weekly .",
+    "url": "https://irvineweekly.com/the-emotional-sobriety-method-for-professional-women-who-drink-too-much/?utm_source=rss&utm_medium=rss&utm_campaign=the-emotional-sobriety-method-for-professional-women-who-drink-too-much",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2025-06-10",
+    "metadata": {
+      "outlet_id": "irvine-weekly"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Weekly",
+    "title": "America: Illegal Immigrants Are Bankrolling You",
+    "body": "Step into any restaurant kitchen, construction site, or agricultural field, and you\u2019ll find them\u2014working tirelessly in the shadows, sustaining the industries that make American life comfortable. The undocumented workforce is not a faceless statistic; it is the silent engine of the U.S. economy. Yet in national debates, they are scapegoated, demonized, and used as political [\u2026] \n The post  America: Illegal Immigrants Are Bankrolling You  appeared first on  Irvine Weekly .",
+    "url": "https://irvineweekly.com/america-illegal-immigrants-are-bankrolling-you/?utm_source=rss&utm_medium=rss&utm_campaign=america-illegal-immigrants-are-bankrolling-you",
+    "categories": [
+      "immigration",
+      "housing"
+    ],
+    "published_utc": "2025-06-05",
+    "metadata": {
+      "outlet_id": "irvine-weekly"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Weekly",
+    "title": "Karns and Karns Personal Injury and Accident Attorneys Enhances Presence in Orange County, California",
+    "body": "Karns and Karns Personal Injury and Accident Attorneys, a leading personal injury law firm, is proud to announce expanding its services with new locations throughout Orange County, California. This strategic growth strengthens the firm\u2019s commitment to providing accessible and exceptional legal representation to accident victims across the vibrant communities of Orange County and the surrounding [\u2026] \n The post  Karns and Karns Personal Injury and Accident Attorneys Enhances Presence in Orange County, California  appeared first on  Irvine Weekly .",
+    "url": "https://irvineweekly.com/karns-and-karns-personal-injury-and-accident-attorneys-enhances-presence-in-orange-county-california/?utm_source=rss&utm_medium=rss&utm_campaign=karns-and-karns-personal-injury-and-accident-attorneys-enhances-presence-in-orange-county-california",
+    "categories": [
+      "traffic_safety"
+    ],
+    "published_utc": "2025-06-04",
+    "metadata": {
+      "outlet_id": "irvine-weekly"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Weekly",
+    "title": "Richard Sullivan: Four Decades of Leadership in Family Law",
+    "body": "For almost 50 years,\u00a0Richard P. Sullivan, Esq.\u00a0has stood as a pillar of strength, advocacy, and legal excellence in Orange County\u2019s family law community. As the founder and managing attorney of\u00a0Sullivan Law & Associates, Sullivan has built a legacy defined by unwavering dedication to the families he serves, integrity, and courtroom excellence. A Legacy of Legal [\u2026] \n The post  Richard Sullivan: Four Decades of Leadership in Family Law  appeared first on  Irvine Weekly .",
+    "url": "https://irvineweekly.com/richard-sullivan-four-decades-of-leadership-in-family-law/?utm_source=rss&utm_medium=rss&utm_campaign=richard-sullivan-four-decades-of-leadership-in-family-law",
+    "categories": [
+      "violent_crime"
+    ],
+    "published_utc": "2025-05-14",
+    "metadata": {
+      "outlet_id": "irvine-weekly"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Weekly",
+    "title": "Reclaim Your Vitality: How Male Excel\u2019s Innovative Approach to Testosterone Therapy Is Changing Lives",
+    "body": "Testosterone is one of the most important hormones in a man\u2019s body, but it doesn\u2019t stay stable forever. As men get older, testosterone levels naturally begin to decline. This drop can trigger a cascade of symptoms: fatigue, weight gain, muscle loss, low libido, mood changes, and difficulty focusing. These changes are common, but they\u2019re often [\u2026] \n The post  Reclaim Your Vitality: How Male Excel\u2019s Innovative Approach to Testosterone Therapy Is Changing Lives  appeared first on  Irvine Weekly .",
+    "url": "https://irvineweekly.com/reclaim-your-vitality-how-male-excels-innovative-approach-to-testosterone-therapy-is-changing-lives/?utm_source=rss&utm_medium=rss&utm_campaign=reclaim-your-vitality-how-male-excels-innovative-approach-to-testosterone-therapy-is-changing-lives",
+    "categories": [
+      "housing",
+      "traffic_safety"
+    ],
+    "published_utc": "2025-04-24",
+    "metadata": {
+      "outlet_id": "irvine-weekly"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Voice of OC",
+    "title": "Irvine Asks Voters to Change Election System While Budget Deficit Looms",
+    "body": "Irvine voters will be able to weigh in during November\u2019s election about whether or not they want their city to start using ranked choice voting in 2028. \n Voice of OC is Orange County's nonprofit newsroom. We rely on donations from people like you to sustain our news agency. Please make a contribution today: https://voiceofoc.org/donate",
+    "url": "https://voiceofoc.org/2026/07/irvine-asks-voters-to-change-election-system-while-budget-deficit-looms/",
+    "categories": [
+      "noise",
+      "emergencies"
+    ],
+    "published_utc": "2026-07-20",
+    "metadata": {
+      "outlet_id": "voice-of-oc"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Voice of OC",
+    "title": "Orange County\u2019s Biggest Civic News as the OC Fair Opens",
+    "body": "The Orange County Fair opens with higher prices that officials say are from increased costs, more Airbnb regulations could be coming to Newport Beach after the Fourth of July chaos \u2013 these are some of OC\u2019s biggest civic headlines.  \n Voice of OC is Orange County's nonprofit newsroom. We rely on donations from people like you to sustain our news agency. Please make a contribution today: https://voiceofoc.org/donate",
+    "url": "https://voiceofoc.org/2026/07/orange-countys-biggest-civic-news-as-the-oc-fair-opens/",
+    "categories": [
+      "housing",
+      "public_safety",
+      "property_crime"
+    ],
+    "published_utc": "2026-07-17",
+    "metadata": {
+      "outlet_id": "voice-of-oc"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Voice of OC",
+    "title": "Two More Orange County Cities Eye Police Drones",
+    "body": "Stanton and Cypress are latest in OC to move forward with drones \u2013 a move officials say will keep officers safe and improve response times amid privacy concerns. \n Voice of OC is Orange County's nonprofit newsroom. We rely on donations from people like you to sustain our news agency. Please make a contribution today: https://voiceofoc.org/donate",
+    "url": "https://voiceofoc.org/2026/07/two-more-orange-county-cities-eye-police-drones/",
+    "categories": [
+      "public_safety",
+      "emergencies",
+      "property_crime",
+      "immigration"
+    ],
+    "published_utc": "2026-07-17",
+    "metadata": {
+      "outlet_id": "voice-of-oc"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Voice of OC",
+    "title": "Santa Ana College Students Shoot For The Stars in NASA Competition",
+    "body": "A group of Santa Ana College students are off to Houston this week to compete as finalists in a NASA competition aimed at getting students to invent new technology for space exploration. \n Voice of OC is Orange County's nonprofit newsroom. We rely on donations from people like you to sustain our news agency. Please make a contribution today: https://voiceofoc.org/donate",
+    "url": "https://voiceofoc.org/2026/07/santa-ana-college-students-shoot-for-the-stars-in-nasa-competition/",
+    "categories": [
+      "noise"
+    ],
+    "published_utc": "2026-07-15",
+    "metadata": {
+      "outlet_id": "voice-of-oc"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Voice of OC",
+    "title": "Coleman: What Should Irvine\u2019s Library Budget Look Like? Newport Beach Already Shows Us.",
+    "body": "Newport Beach publishes its library budget line by line, branch by branch, down to how much is spent on collections, staffing, and support services. Irvine asks residents to assemble theirs from scattered budget documents \n Voice of OC is Orange County's nonprofit newsroom. We rely on donations from people like you to sustain our news agency. Please make a contribution today: https://voiceofoc.org/donate",
+    "url": "https://voiceofoc.org/2026/07/coleman-what-should-irvines-library-budget-look-like-newport-beach-already-shows-us/",
+    "categories": [
+      "property_crime",
+      "housing"
+    ],
+    "published_utc": "2026-07-14",
+    "metadata": {
+      "outlet_id": "voice-of-oc"
     }
   }
 ]

@@ -160,6 +160,54 @@ def is_job_running() -> bool:
         return _running_job_id is not None
 
 
+def friendly_scraper_error(*, source: str | None, returncode: int, log: str) -> str:
+    """Map scraper stdout/stderr to a clear job.error for the dashboard."""
+    text = log or ""
+    lower = text.lower()
+
+    if (
+        "chromeunavailable" in lower
+        or "chrome is not available" in lower
+        or "chromedriver failed" in lower
+        or "sessionnotcreated" in lower
+        or ("cannot find chrome" in lower)
+        or ("chrome binary" in lower and "not" in lower)
+    ):
+        return (
+            "Chrome is not available or ChromeDriver failed to start. "
+            "Install Google Chrome on this desktop and retry. "
+            "TikTok scrape is not supported headless on a server. "
+            "See docs/TIKTOK_SCRAPE.md."
+        )
+
+    if (
+        "login wall" in lower
+        or "tiktokloginwall" in lower
+        or "log in to see comments" in lower
+        or "log in to comment" in lower
+    ):
+        return (
+            "TikTok blocked comments (login gate). "
+            "Anonymous scrape is preferred — dismiss any login popup and retry. "
+            "Only log in via data/chrome/tiktok_profile if comments stay blocked. "
+            "See docs/TIKTOK_SCRAPE.md."
+        )
+
+    # Prefer the last non-empty log line when it already looks explanatory.
+    for line in reversed(text.splitlines()):
+        stripped = line.strip()
+        if stripped and not stripped.startswith("Traceback"):
+            if len(stripped) <= 280 and (
+                "error" in stripped.lower()
+                or "failed" in stripped.lower()
+                or "wall" in stripped.lower()
+                or "chrome" in stripped.lower()
+            ):
+                return stripped
+
+    return f"Scraper exited with code {returncode}"
+
+
 def _run_job(job_id: int, cmd: list[str]) -> None:
     global _running_job_id
     try:
@@ -191,7 +239,11 @@ def _run_job(job_id: int, cmd: list[str]) -> None:
                 job.error = None
             else:
                 job.status = "failed"
-                job.error = f"Scraper exited with code {result.returncode}"
+                job.error = friendly_scraper_error(
+                    source=sync_source,
+                    returncode=result.returncode,
+                    log=log,
+                )
             db.commit()
         finally:
             db.close()
@@ -216,7 +268,11 @@ def _run_job(job_id: int, cmd: list[str]) -> None:
             job = db.get(ScrapeJob, job_id)
             if job is not None:
                 job.status = "failed"
-                job.error = str(exc)
+                job.error = friendly_scraper_error(
+                    source=job.source,
+                    returncode=-1,
+                    log=str(exc),
+                )
                 job.finished_at = utcnow()
                 db.commit()
         finally:
