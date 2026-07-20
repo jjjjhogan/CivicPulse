@@ -133,6 +133,14 @@ def main() -> None:
         )
         print(f"Rebuilt landing-page feed with {feed_count} signals")
 
+        # Keep SQLite as source of truth for the dashboard API.
+        from backend.signals_import import import_signals_from_dir
+
+        totals = import_signals_from_dir(sources=tuple(processed))
+        print(
+            f"Synced SQLite: inserted={totals['inserted']} updated={totals['updated']}"
+        )
+
 
 if __name__ == "__main__":
     main()

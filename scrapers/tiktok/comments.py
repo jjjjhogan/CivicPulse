@@ -3,13 +3,26 @@ import time
 import urllib.parse
 from dataclasses import asdict, dataclass
 
+from selenium.common.exceptions import NoSuchWindowException, WebDriverException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
 from scrapers.tiktok.config import TikTokScrapeConfig
-from scrapers.tiktok.driver import close_tiktok_driver, create_tiktok_driver
-from scrapers.tiktok.ui import dismiss_overlays, find_comment_container, open_comments_panel
+from scrapers.tiktok.driver import (
+    ChromeUnavailableError,
+    close_tiktok_driver,
+    create_tiktok_driver,
+)
+from scrapers.tiktok.ui import (
+    dismiss_login_interstitial,
+    dismiss_overlays,
+    find_comment_container,
+    is_login_wall,
+    open_comments_panel,
+    warn_login_hint,
+    window_is_alive,
+)
 
 TIKTOK_SEARCH_URL = "https://www.tiktok.com/search/video"
 COMMENT_SCROLL_PAUSE_SEC = 1.5
@@ -46,6 +59,8 @@ def _collect_video_links(driver, limit: int) -> list[str]:
 
 
 def _scroll_comments(driver, max_comments: int) -> None:
+    if not window_is_alive(driver):
+        return
     last_count = 0
     stagnant_rounds = 0
     comment_container = find_comment_container(driver)
@@ -56,7 +71,12 @@ def _scroll_comments(driver, max_comments: int) -> None:
     )
 
     while stagnant_rounds < 3:
-        comments = driver.find_elements(By.CSS_SELECTOR, comment_selector)
+        if not window_is_alive(driver):
+            return
+        try:
+            comments = driver.find_elements(By.CSS_SELECTOR, comment_selector)
+        except (NoSuchWindowException, WebDriverException):
+            return
         if len(comments) >= max_comments:
             break
         if len(comments) == last_count:
@@ -65,13 +85,16 @@ def _scroll_comments(driver, max_comments: int) -> None:
             stagnant_rounds = 0
             last_count = len(comments)
 
-        if comment_container:
-            driver.execute_script(
-                "arguments[0].scrollTop = arguments[0].scrollHeight",
-                comment_container,
-            )
-        else:
-            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        try:
+            if comment_container:
+                driver.execute_script(
+                    "arguments[0].scrollTop = arguments[0].scrollHeight",
+                    comment_container,
+                )
+            else:
+                driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        except (NoSuchWindowException, WebDriverException):
+            return
         time.sleep(COMMENT_SCROLL_PAUSE_SEC)
 
 
@@ -168,21 +191,54 @@ def _load_video_comments(
     """Open the comments panel and parse comments, with retries if blocked by overlays."""
 
     def attempt(label: str) -> list[TikTokComment]:
+        if not window_is_alive(driver):
+            print("  warning: browser window closed — skipping comments")
+            return []
         print(f"  {label}")
         dismiss_overlays(driver)
+        dismiss_login_interstitial(driver)
         opened = open_comments_panel(driver)
         if not opened:
             print("  warning: could not open comments panel")
-            try:
-                body_text = (driver.find_element(By.TAG_NAME, "body").text or "").lower()
-                if "log in" in body_text:
-                    print(
-                        "  hint: TikTok may be showing a login wall — "
-                        "comments often need a logged-in browser session"
-                    )
-            except Exception:
-                pass
+            if window_is_alive(driver) and is_login_wall(driver):
+                dismiss_login_interstitial(driver)
+                opened = open_comments_panel(driver, retries=1)
+                if not opened and is_login_wall(driver):
+                    warn_login_hint("comments panel")
+        if not window_is_alive(driver):
+            print("  warning: browser window closed — skipping comments")
+            return []
+        time.sleep(1.0)
+        _scroll_comments(driver, max_comments)
+        try:
+            comments = _parse_comments(
+                driver,
+                video_url=video_url,
+                search_query=search_query,
+                limit=max_comments,
+            )
+        except (NoSuchWindowException, WebDriverException):
+            print("  warning: browser window closed while reading comments")
+            return []
+        print(f"  found {len(comments)} comments")
+        return comments
+
+    try:
+        comments = attempt("loading comments")
+        if comments:
+            return comments
+
+        if not window_is_alive(driver):
+            return []
+
+        print("  retry: dismissing login interstitial / overlays, reopening comments")
         time.sleep(1.5)
+        dismiss_login_interstitial(driver)
+        dismiss_overlays(driver)
+        open_comments_panel(driver)
+        time.sleep(1.5)
+        if not window_is_alive(driver):
+            return []
         _scroll_comments(driver, max_comments)
         comments = _parse_comments(
             driver,
@@ -190,41 +246,30 @@ def _load_video_comments(
             search_query=search_query,
             limit=max_comments,
         )
-        print(f"  found {len(comments)} comments")
-        return comments
-
-    comments = attempt("loading comments")
-    if comments:
-        return comments
-
-    print("  retry: dismissing overlays and reopening comments panel")
-    time.sleep(2)
-    dismiss_overlays(driver)
-    open_comments_panel(driver)
-    time.sleep(2)
-    _scroll_comments(driver, max_comments)
-    comments = _parse_comments(
-        driver,
-        video_url=video_url,
-        search_query=search_query,
-        limit=max_comments,
-    )
-    if comments:
-        print(f"  retry succeeded with {len(comments)} comments")
-        return comments
-
-    if reload_on_retry:
-        print("  retry: reloading video page")
-        driver.get(video_url)
-        WebDriverWait(driver, 20).until(
-            EC.presence_of_element_located((By.TAG_NAME, "body"))
-        )
-        time.sleep(4)
-        comments = attempt("loading comments after reload")
         if comments:
+            print(f"  retry succeeded with {len(comments)} comments")
             return comments
 
-    return []
+        if reload_on_retry and window_is_alive(driver):
+            print("  retry: reloading video page")
+            driver.get(video_url)
+            WebDriverWait(driver, 20).until(
+                EC.presence_of_element_located((By.TAG_NAME, "body"))
+            )
+            time.sleep(3)
+            dismiss_overlays(driver)
+            dismiss_login_interstitial(driver)
+            comments = attempt("loading comments after reload")
+            if comments:
+                return comments
+
+        if window_is_alive(driver) and is_login_wall(driver):
+            warn_login_hint("no comments after retries")
+        return []
+    except NoSuchWindowException:
+        print("  warning: browser window closed — skipping comments for this video")
+        return []
+
 
 
 def scrape_comments_from_video(
@@ -240,7 +285,10 @@ def scrape_comments_from_video(
     TikTok may still gate comments behind a login wall — if that happens,
     the browser will stay open long enough to inspect, and you'll get 0 comments.
     """
-    driver = create_tiktok_driver(headless=headless)
+    try:
+        driver = create_tiktok_driver(headless=headless)
+    except ChromeUnavailableError:
+        raise
     try:
         print(f"Opening {video_url}")
         comments = _scrape_video_with_driver(
@@ -253,6 +301,7 @@ def scrape_comments_from_video(
         if not comments:
             print(
                 "No comments found. A TikTok overlay may still be blocking the page, "
+                "login may be required (see docs/TIKTOK_SCRAPE.md), "
                 "or the comment selectors need updating."
             )
             # Keep the window open briefly so you can see what TikTok showed.

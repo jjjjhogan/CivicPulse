@@ -1,10 +1,10 @@
-"""ORM models: User, Signal, ScrapeJob."""
+"""ORM models: User, Signal, ScrapeJob, IssueVote."""
 
 from __future__ import annotations
 
 from datetime import datetime, timezone
 
-from sqlalchemy import DateTime, ForeignKey, Integer, String, Text
+from sqlalchemy import DateTime, ForeignKey, Integer, String, Text, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.types import JSON
 
@@ -25,6 +25,7 @@ class User(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
 
     jobs: Mapped[list[ScrapeJob]] = relationship(back_populates="user")
+    votes: Mapped[list[IssueVote]] = relationship(back_populates="user")
 
     def to_public_dict(self) -> dict:
         return {"id": self.id, "email": self.email, "name": self.name}
@@ -43,6 +44,8 @@ class Signal(Base):
     published_utc: Mapped[str] = mapped_column(String(64), nullable=False, default="")
     extra: Mapped[dict] = mapped_column("metadata", JSON, nullable=False, default=dict)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+    votes: Mapped[list[IssueVote]] = relationship(back_populates="signal")
 
     def to_dict(self) -> dict:
         return {
@@ -99,3 +102,28 @@ class ScrapeJob(Base):
             "started_at": self.started_at.isoformat() if self.started_at else None,
             "finished_at": self.finished_at.isoformat() if self.finished_at else None,
         }
+
+
+class IssueVote(Base):
+    """Community verification vote on a resident-reported Signal."""
+
+    __tablename__ = "issue_votes"
+    __table_args__ = (
+        UniqueConstraint("signal_id", "user_id", name="uq_issue_vote_signal_user"),
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    signal_id: Mapped[int] = mapped_column(
+        ForeignKey("signals.id", ondelete="CASCADE"), nullable=False, index=True
+    )
+    user_id: Mapped[int] = mapped_column(
+        ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True
+    )
+    choice: Mapped[str] = mapped_column(String(8), nullable=False)  # up | down
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=utcnow, onupdate=utcnow
+    )
+
+    signal: Mapped[Signal] = relationship(back_populates="votes")
+    user: Mapped[User] = relationship(back_populates="votes")

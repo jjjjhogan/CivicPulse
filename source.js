@@ -1,7 +1,7 @@
 // CivicPulse source analytics page (source.html?source=tiktok).
 //
 // Shows per-source stats computed from the same signal list the dashboard
-// uses: resident reports from localStorage + sample records, with live
+// uses: resident reports from SQLite (/api/reports → /api/signals) + sample
 // scraper data merged in when the Flask backend is running.
 
 // ?source=tiktok or ?source=tiktok,reddit — any mix of sources.

@@ -71,6 +71,72 @@ def test_invalid_source(auth_client):
     assert res.status_code == 400
 
 
+def test_friendly_scraper_error_chrome():
+    from backend.jobs import friendly_scraper_error
+
+    msg = friendly_scraper_error(
+        source="tiktok",
+        returncode=1,
+        log="ChromeUnavailableError: Chrome is not available or ChromeDriver failed to start",
+    )
+    assert "Chrome is not available" in msg
+    assert "TIKTOK_SCRAPE" in msg
+
+
+def test_friendly_scraper_error_login_wall():
+    from backend.jobs import friendly_scraper_error
+
+    msg = friendly_scraper_error(
+        source="tiktok",
+        returncode=1,
+        log="ERROR: tag page #irvine: TikTok login wall is blocking this page.",
+    )
+    assert "login" in msg.lower()
+    assert "TIKTOK_SCRAPE" in msg
+
+
+def test_failed_tiktok_job_surfaces_login_wall(auth_client, monkeypatch):
+    monkeypatch.setattr(
+        "backend.jobs.subprocess.run",
+        lambda *a, **k: subprocess.CompletedProcess(
+            args=a[0] if a else [],
+            returncode=1,
+            stdout="",
+            stderr="ERROR: TikTok login wall is blocking this page. See docs/TIKTOK_SCRAPE.md.\n",
+        ),
+    )
+    monkeypatch.setattr("backend.jobs.threading.Thread", _inline_thread)
+
+    res = auth_client.post(
+        "/api/jobs",
+        json={
+            "source": "tiktok",
+            "settings": {
+                "mode": "tags",
+                "tag_urls": ["https://www.tiktok.com/tag/irvine"],
+                "max_videos": 1,
+                "max_comments": 5,
+            },
+        },
+    )
+    assert res.status_code == 202, res.get_json()
+    job_id = res.get_json()["id"]
+
+    status = None
+    for _ in range(20):
+        poll = auth_client.get(f"/api/jobs/{job_id}")
+        assert poll.status_code == 200
+        status = poll.get_json()
+        if status["status"] in {"completed", "failed"}:
+            break
+        time.sleep(0.05)
+
+    assert status is not None
+    assert status["status"] == "failed"
+    assert status["exit_code"] == 1
+    assert "login" in (status.get("error") or "").lower()
+
+
 def test_concurrent_job_rejected(auth_client, monkeypatch):
     import backend.jobs as jobs
 

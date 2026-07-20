@@ -1055,9 +1055,9 @@
       "hashtags": [],
       "classification": {
         "scores": {
-          "violent_crime": 0.9
+          "violent_crime": 0.891
         },
-        "confidence": 0.9,
+        "confidence": 0.891,
         "method": "model",
         "model_version": "nb-v1",
         "rescued": true
@@ -1828,9 +1828,9 @@
       "hashtags": [],
       "classification": {
         "scores": {
-          "noise": 0.9
+          "noise": 0.775
         },
-        "confidence": 0.9,
+        "confidence": 0.775,
         "method": "model",
         "model_version": "nb-v1",
         "rescued": true
@@ -2466,17 +2466,32 @@
   },
   {
     "source": "tiktok",
-    "outlet": "TikTok @nbcla",
-    "title": "The Irvine teenager whose science experiment started a federal investigation and a hazardous materials response a few months ago is once ...",
-    "body": "The Irvine teenager whose science experiment started a federal investigation and a hazardous materials response a few months ago is once again at the center of an FBI investigation, the family attorney confirmed with NBC Los Angeles Tuesday.",
-    "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
+    "outlet": "TikTok #newportbeach",
+    "title": "Why r there metal rods in the sand thats so dangerous",
+    "body": "Why r there metal rods in the sand thats so dangerous",
+    "url": "https://www.tiktok.com/@koarothman/video/7663169398705835294",
     "categories": [
       "public_safety"
     ],
-    "published_utc": "2026-07-08",
+    "published_utc": "2026-07-20",
     "metadata": {
-      "tag": "irvine",
-      "content_type": "video_caption",
+      "author": "unknown",
+      "video_author": "koarothman",
+      "tag": "newportbeach",
+      "search_query": "tag:newportbeach",
+      "like_count": "14.8K",
+      "comment_count": "163",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [],
+      "hashtags": [
+        "surfing",
+        "oceanvibes",
+        "beachlife",
+        "surfculture",
+        "goodtimes"
+      ],
       "classification": {
         "scores": {
           "public_safety": 0.7
@@ -2489,485 +2504,206 @@
   },
   {
     "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "[Sticker] Sheldon????",
-    "body": "[Sticker] Sheldon????",
-    "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
+    "outlet": "TikTok @spain7174",
+    "title": "\ud83c\udf0a A large Fourth of July gathering in Newport Beach devolved into severe chaos and violence\u2014at least 100 arrests and multiple officers in...",
+    "body": "\ud83c\udf0a A large Fourth of July gathering in Newport Beach devolved into severe chaos and violence\u2014at least 100 arrests and multiple officers injured! \ud83d\ude94 #usa #newportbeach #fourthofjuly #chaos #riot #china #africa #laborrights #humanrights",
+    "url": "https://www.tiktok.com/@spain7174/video/7664638696594885902",
     "categories": [
       "public_safety"
     ],
-    "published_utc": "2026-07-08",
+    "published_utc": "2026-07-20",
     "metadata": {
-      "author": "unknown",
-      "video_author": "nbcla",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "404",
-      "comment_count": "21",
+      "tag": "newportbeach",
+      "content_type": "video_caption",
+      "trusted_outlet": false,
+      "hashtags": [
+        "usa",
+        "newportbeach",
+        "fourthofjuly",
+        "chaos",
+        "riot",
+        "china",
+        "africa",
+        "laborrights",
+        "humanrights"
+      ],
+      "weak_trusted_default": false,
       "classification": {
         "scores": {
-          "public_safety": 0.4
+          "public_safety": 0.7
         },
-        "confidence": 0.4,
-        "method": "inherited",
+        "confidence": 0.7,
+        "method": "keywords",
         "model_version": "nb-v1"
       }
     }
   },
   {
     "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "Erlenmeyer flask\u2705",
-    "body": "Erlenmeyer flask\u2705",
-    "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
+    "outlet": "TikTok #newportbeach",
+    "title": "nope",
+    "body": "nope",
+    "url": "https://www.tiktok.com/@spain7174/video/7664638696594885902",
     "categories": [
       "public_safety"
     ],
-    "published_utc": "2026-07-08",
+    "published_utc": "2026-07-20",
     "metadata": {
       "author": "unknown",
-      "video_author": "nbcla",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "404",
-      "comment_count": "21",
+      "video_author": "spain7174",
+      "tag": "newportbeach",
+      "search_query": "tag:newportbeach",
+      "like_count": "3",
+      "comment_count": "1",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "public_safety"
+      ],
+      "hashtags": [
+        "usa",
+        "newportbeach",
+        "fourthofjuly",
+        "chaos",
+        "riot",
+        "china",
+        "africa",
+        "laborrights",
+        "humanrights"
+      ],
       "classification": {
         "scores": {
-          "public_safety": 0.4
+          "public_safety": 0.7
         },
-        "confidence": 0.4,
-        "method": "inherited",
+        "confidence": 0.7,
+        "method": "keywords",
         "model_version": "nb-v1"
       }
     }
   },
   {
     "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "Damn it Shelly!",
-    "body": "Damn it Shelly!",
-    "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
+    "outlet": "TikTok #uci",
+    "title": "may I ask how you found your roommates? and if you know how themed housing works :)",
+    "body": "may I ask how you found your roommates? and if you know how themed housing works :)",
+    "url": "https://www.tiktok.com/@irenek4ng/video/7348686958173916458",
     "categories": [
-      "public_safety"
+      "housing"
     ],
-    "published_utc": "2026-07-08",
+    "published_utc": "2026-07-20",
     "metadata": {
       "author": "unknown",
-      "video_author": "nbcla",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "404",
-      "comment_count": "21",
+      "video_author": "irenek4ng",
+      "tag": "uci",
+      "search_query": "tag:uci",
+      "like_count": "11.1K",
+      "comment_count": "91",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [],
+      "hashtags": [
+        "uci",
+        "dormtour",
+        "freshmandorm",
+        "mesacourt",
+        "mesatowers",
+        "ucidorms",
+        "irvine",
+        "anteater",
+        "dorm",
+        "freshmanyear",
+        "college",
+        "leaving",
+        "fyp"
+      ],
       "classification": {
         "scores": {
-          "public_safety": 0.4
+          "housing": 0.7
         },
-        "confidence": 0.4,
-        "method": "inherited",
+        "confidence": 0.7,
+        "method": "keywords",
         "model_version": "nb-v1"
       }
     }
   },
   {
     "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "Ouu shii\ud83d\udc40",
-    "body": "Ouu shii\ud83d\udc40",
-    "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
+    "outlet": "TikTok @vlogsfromlen",
+    "title": "Trying to get back into regular vlogging again! #ucirvine #uci #university #student #college #icecream #oc #socal #dessert #food",
+    "body": "Trying to get back into regular vlogging again! #ucirvine #uci #university #student #college #icecream #oc #socal #dessert #food",
+    "url": "https://www.tiktok.com/@vlogsfromlen/video/7661184449589103902",
     "categories": [
-      "public_safety"
+      "sanitation"
     ],
-    "published_utc": "2026-07-08",
+    "published_utc": "2026-07-20",
     "metadata": {
-      "author": "unknown",
-      "video_author": "nbcla",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "404",
-      "comment_count": "21",
+      "tag": "uci",
+      "content_type": "video_caption",
+      "trusted_outlet": false,
+      "hashtags": [
+        "ucirvine",
+        "uci",
+        "university",
+        "student",
+        "college",
+        "icecream",
+        "oc",
+        "socal",
+        "dessert",
+        "food"
+      ],
+      "weak_trusted_default": false,
       "classification": {
         "scores": {
-          "public_safety": 0.4
+          "sanitation": 0.702
         },
-        "confidence": 0.4,
-        "method": "inherited",
-        "model_version": "nb-v1"
+        "confidence": 0.702,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
       }
     }
   },
   {
     "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "land of the free",
-    "body": "land of the free",
-    "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
+    "outlet": "TikTok #uci",
+    "title": "wait what did you get at cafe espresso",
+    "body": "wait what did you get at cafe espresso",
+    "url": "https://www.tiktok.com/@vlogsfromlen/video/7661184449589103902",
     "categories": [
-      "public_safety"
+      "sanitation"
     ],
-    "published_utc": "2026-07-08",
+    "published_utc": "2026-07-20",
     "metadata": {
       "author": "unknown",
-      "video_author": "nbcla",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "404",
-      "comment_count": "21",
+      "video_author": "vlogsfromlen",
+      "tag": "uci",
+      "search_query": "tag:uci",
+      "like_count": "217",
+      "comment_count": "2",
+      "content_type": "comment",
+      "inherited_from_video": true,
+      "trusted_outlet": false,
+      "video_categories": [
+        "sanitation"
+      ],
+      "hashtags": [
+        "ucirvine",
+        "uci",
+        "university",
+        "student",
+        "college",
+        "icecream",
+        "oc",
+        "socal",
+        "dessert",
+        "food"
+      ],
       "classification": {
         "scores": {
-          "public_safety": 0.4
-        },
-        "confidence": 0.4,
-        "method": "inherited",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "but when it's a data center nobody can do a thing",
-    "body": "but when it's a data center nobody can do a thing",
-    "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
-    "categories": [
-      "public_safety"
-    ],
-    "published_utc": "2026-07-08",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "nbcla",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "404",
-      "comment_count": "21",
-      "classification": {
-        "scores": {
-          "public_safety": 0.4
-        },
-        "confidence": 0.4,
-        "method": "inherited",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "Someone hire that young genius, already!",
-    "body": "Someone hire that young genius, already!",
-    "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
-    "categories": [
-      "public_safety"
-    ],
-    "published_utc": "2026-07-08",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "nbcla",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "404",
-      "comment_count": "21",
-      "classification": {
-        "scores": {
-          "public_safety": 0.4
-        },
-        "confidence": 0.4,
-        "method": "inherited",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "wtf if he concocting today!?",
-    "body": "wtf if he concocting today!?",
-    "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
-    "categories": [
-      "public_safety"
-    ],
-    "published_utc": "2026-07-08",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "nbcla",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "404",
-      "comment_count": "21",
-      "classification": {
-        "scores": {
-          "public_safety": 0.4
-        },
-        "confidence": 0.4,
-        "method": "inherited",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "Right! He didn\u2019t do anything wrong except live",
-    "body": "Right! He didn\u2019t do anything wrong except live",
-    "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
-    "categories": [
-      "public_safety"
-    ],
-    "published_utc": "2026-07-08",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "nbcla",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "404",
-      "comment_count": "21",
-      "classification": {
-        "scores": {
-          "public_safety": 0.4
-        },
-        "confidence": 0.4,
-        "method": "inherited",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "give the kid a lab",
-    "body": "give the kid a lab",
-    "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
-    "categories": [
-      "public_safety"
-    ],
-    "published_utc": "2026-07-08",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "nbcla",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "404",
-      "comment_count": "21",
-      "classification": {
-        "scores": {
-          "public_safety": 0.4
-        },
-        "confidence": 0.4,
-        "method": "inherited",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "Government doesn\u2019t want smart people",
-    "body": "Government doesn\u2019t want smart people",
-    "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
-    "categories": [
-      "public_safety"
-    ],
-    "published_utc": "2026-07-08",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "nbcla",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "404",
-      "comment_count": "21",
-      "classification": {
-        "scores": {
-          "public_safety": 0.4
-        },
-        "confidence": 0.4,
-        "method": "inherited",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "so my guess is hes figured out something and the government wants it for themselves to profit off of",
-    "body": "so my guess is hes figured out something and the government wants it for themselves to profit off of",
-    "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
-    "categories": [
-      "public_safety"
-    ],
-    "published_utc": "2026-07-08",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "nbcla",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "404",
-      "comment_count": "21",
-      "classification": {
-        "scores": {
-          "public_safety": 0.4
-        },
-        "confidence": 0.4,
-        "method": "inherited",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "Look up Die Hard movie.",
-    "body": "Look up Die Hard movie.",
-    "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
-    "categories": [
-      "public_safety"
-    ],
-    "published_utc": "2026-07-08",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "nbcla",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "404",
-      "comment_count": "21",
-      "classification": {
-        "scores": {
-          "public_safety": 0.4
-        },
-        "confidence": 0.4,
-        "method": "inherited",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "So elaborate on the again part?? \ud83e\udd23 Neighbors must not like the science experiments \ud83d\ude0f",
-    "body": "So elaborate on the again part?? \ud83e\udd23 Neighbors must not like the science experiments \ud83d\ude0f",
-    "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
-    "categories": [
-      "public_safety"
-    ],
-    "published_utc": "2026-07-08",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "nbcla",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "404",
-      "comment_count": "21",
-      "classification": {
-        "scores": {
-          "public_safety": 0.4
-        },
-        "confidence": 0.4,
-        "method": "inherited",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "big emphasis on the AGAIN",
-    "body": "big emphasis on the AGAIN",
-    "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
-    "categories": [
-      "public_safety"
-    ],
-    "published_utc": "2026-07-08",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "nbcla",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "404",
-      "comment_count": "21",
-      "classification": {
-        "scores": {
-          "public_safety": 0.4
-        },
-        "confidence": 0.4,
-        "method": "inherited",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "His first house was 2.5 million second house was 4 million : his new house is 5.5 million : kid / student ; ruins house = insurance - (no...",
-    "body": "His first house was 2.5 million second house was 4 million : his new house is 5.5 million : kid / student ; ruins house = insurance - (no harm intended; no threat to public safety) no crime no harm done =insurance money",
-    "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
-    "categories": [
-      "violent_crime",
-      "public_safety"
-    ],
-    "published_utc": "2026-07-08",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "nbcla",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "404",
-      "comment_count": "21",
-      "classification": {
-        "scores": {
-          "public_safety": 0.7,
-          "violent_crime": 0.9
-        },
-        "confidence": 0.8,
-        "method": "keywords+model",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "And what does those ingredients do when mixed? I mean I have no clue to lazy to look it up",
-    "body": "And what does those ingredients do when mixed? I mean I have no clue to lazy to look it up",
-    "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
-    "categories": [
-      "public_safety"
-    ],
-    "published_utc": "2026-07-08",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "nbcla",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "404",
-      "comment_count": "21",
-      "classification": {
-        "scores": {
-          "public_safety": 0.4
-        },
-        "confidence": 0.4,
-        "method": "inherited",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "Dude was solving fuel shortage",
-    "body": "Dude was solving fuel shortage",
-    "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
-    "categories": [
-      "public_safety"
-    ],
-    "published_utc": "2026-07-08",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "nbcla",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "404",
-      "comment_count": "21",
-      "classification": {
-        "scores": {
-          "public_safety": 0.4
+          "sanitation": 0.4
         },
         "confidence": 0.4,
         "method": "inherited",

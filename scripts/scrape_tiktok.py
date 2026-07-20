@@ -30,6 +30,7 @@ from scrapers.categories import CivicIssueCategory
 from scrapers.feed import rebuild_landing_feed
 from scrapers.tiktok.comments import scrape_comments_for_area, scrape_comments_from_video
 from scrapers.tiktok.config import TikTokScrapeConfig
+from scrapers.tiktok.driver import ChromeUnavailableError
 from scrapers.tiktok.export import (
     comments_to_signals,
     tag_results_to_signals,
@@ -43,6 +44,7 @@ from scrapers.tiktok.tags import (
     scrape_tags,
     tag_results_from_payload,
 )
+from scrapers.tiktok.ui import TikTokLoginWallError
 
 
 def parse_args() -> argparse.Namespace:
@@ -120,80 +122,84 @@ def main() -> None:
     output_path = Path(args.output)
     civic_only = not args.include_all_comments
 
-    if args.tag_urls:
-        existing = load_raw_payload(output_path)
-        existing, removed = dedupe_raw_payload(existing)
-        if removed:
-            print(f"Removed {removed} duplicate video(s) from {output_path}")
+    try:
+        if args.tag_urls:
+            existing = load_raw_payload(output_path)
+            existing, removed = dedupe_raw_payload(existing)
+            if removed:
+                print(f"Removed {removed} duplicate video(s) from {output_path}")
 
-        skip_urls = {
-            (video.get("url") or "").split("?", 1)[0].rstrip("/")
-            for tag in existing.get("tags") or []
-            for video in tag.get("videos") or []
-            if video.get("url")
-        }
-        if skip_urls:
-            print(f"Skipping {len(skip_urls)} already-scraped video URL(s)")
+            skip_urls = {
+                (video.get("url") or "").split("?", 1)[0].rstrip("/")
+                for tag in existing.get("tags") or []
+                for video in tag.get("videos") or []
+                if video.get("url")
+            }
+            if skip_urls:
+                print(f"Skipping {len(skip_urls)} already-scraped video URL(s)")
 
-        new_results = scrape_tags(
-            args.tag_urls,
-            max_videos=args.max_videos,
-            max_comments_per_video=args.max_comments,
-            headless=args.headless,
-            skip_urls=skip_urls,
-        )
-        payload = merge_tag_results_into_payload(existing, new_results)
-        _write_raw_json(output_path, payload)
+            new_results = scrape_tags(
+                args.tag_urls,
+                max_videos=args.max_videos,
+                max_comments_per_video=args.max_comments,
+                headless=args.headless,
+                skip_urls=skip_urls,
+            )
+            payload = merge_tag_results_into_payload(existing, new_results)
+            _write_raw_json(output_path, payload)
 
-        all_results = tag_results_from_payload(payload)
-        signals = tag_results_to_signals(all_results, civic_only=civic_only)
-        _write_signal_exports(args, signals)
+            all_results = tag_results_from_payload(payload)
+            signals = tag_results_to_signals(all_results, civic_only=civic_only)
+            _write_signal_exports(args, signals)
 
-        new_videos = sum(len(result.videos) for result in new_results)
-        total_videos = sum(len(result.videos) for result in all_results)
-        comment_count = sum(
-            len(video.comments) for result in all_results for video in result.videos
-        )
-        print(
-            f"Saved {new_videos} new videos ({total_videos} total, {comment_count} comments) "
-            f"from {len(all_results)} tags to {output_path}"
-        )
-    elif args.video_url:
-        comments = scrape_comments_from_video(
-            args.video_url,
-            max_comments=args.max_comments,
-            headless=args.headless,
-        )
-        _write_raw_json(output_path, [asdict(comment) for comment in comments])
-        author = args.video_url.split("/@")[1].split("/")[0]
-        signals = comments_to_signals(
-            comments,
-            video_url=args.video_url,
-            outlet=f"TikTok @{author}",
-            civic_only=civic_only,
-        )
-        _write_signal_exports(args, signals)
-        print(f"Saved {len(comments)} comments to {output_path}")
-    else:
-        config = TikTokScrapeConfig(
-            city=args.city,
-            state=args.state,
-            neighborhood=args.neighborhood,
-            categories=[CivicIssueCategory(c) for c in args.categories],
-            max_videos_per_query=args.max_videos,
-            max_comments_per_video=args.max_comments,
-            headless=args.headless,
-        )
-        comments = scrape_comments_for_area(config)
-        _write_raw_json(output_path, [asdict(comment) for comment in comments])
-        signals = comments_to_signals(
-            comments,
-            video_url="",
-            outlet=f"TikTok search: {config.location_label()}",
-            civic_only=civic_only,
-        )
-        _write_signal_exports(args, signals)
-        print(f"Saved {len(comments)} comments to {output_path}")
+            new_videos = sum(len(result.videos) for result in new_results)
+            total_videos = sum(len(result.videos) for result in all_results)
+            comment_count = sum(
+                len(video.comments) for result in all_results for video in result.videos
+            )
+            print(
+                f"Saved {new_videos} new videos ({total_videos} total, {comment_count} comments) "
+                f"from {len(all_results)} tags to {output_path}"
+            )
+        elif args.video_url:
+            comments = scrape_comments_from_video(
+                args.video_url,
+                max_comments=args.max_comments,
+                headless=args.headless,
+            )
+            _write_raw_json(output_path, [asdict(comment) for comment in comments])
+            author = args.video_url.split("/@")[1].split("/")[0]
+            signals = comments_to_signals(
+                comments,
+                video_url=args.video_url,
+                outlet=f"TikTok @{author}",
+                civic_only=civic_only,
+            )
+            _write_signal_exports(args, signals)
+            print(f"Saved {len(comments)} comments to {output_path}")
+        else:
+            config = TikTokScrapeConfig(
+                city=args.city,
+                state=args.state,
+                neighborhood=args.neighborhood,
+                categories=[CivicIssueCategory(c) for c in args.categories],
+                max_videos_per_query=args.max_videos,
+                max_comments_per_video=args.max_comments,
+                headless=args.headless,
+            )
+            comments = scrape_comments_for_area(config)
+            _write_raw_json(output_path, [asdict(comment) for comment in comments])
+            signals = comments_to_signals(
+                comments,
+                video_url="",
+                outlet=f"TikTok search: {config.location_label()}",
+                civic_only=civic_only,
+            )
+            _write_signal_exports(args, signals)
+            print(f"Saved {len(comments)} comments to {output_path}")
+    except (ChromeUnavailableError, TikTokLoginWallError) as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        raise SystemExit(1) from exc
 
 
 if __name__ == "__main__":

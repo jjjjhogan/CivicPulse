@@ -37,21 +37,24 @@ def _signals_from_json() -> list[dict]:
 
 @bp.get("/api/signals")
 def api_signals():
+    """Prefer SQLite after import; JSON files are fallback only when the table is empty."""
     signals = _signals_from_db()
-    if not signals:
-        signals = _signals_from_json()
-    return jsonify({"count": len(signals), "signals": signals})
+    if signals:
+        return jsonify({"count": len(signals), "signals": signals, "storage": "db"})
+    signals = _signals_from_json()
+    return jsonify({"count": len(signals), "signals": signals, "storage": "json"})
 
 
 @bp.get("/api/signals/feed")
 def api_feed():
+    """Landing feed from SQLite when present; else data/signals/feed.json."""
     db = get_session()
     rows = db.query(Signal).order_by(Signal.id.asc()).all()
     if rows:
         feed = [row.to_feed_dict() for row in rows]
-    else:
-        feed = _read_json(SIGNALS_DIR / "feed.json", [])
-    return jsonify({"count": len(feed), "signals": feed})
+        return jsonify({"count": len(feed), "signals": feed, "storage": "db"})
+    feed = _read_json(SIGNALS_DIR / "feed.json", [])
+    return jsonify({"count": len(feed), "signals": feed, "storage": "json"})
 
 
 @bp.get("/api/manifest")

@@ -1,9 +1,7 @@
 // CivicPulse resident issue report form.
 //
-// Submitted reports are stored in localStorage as CivicSignal-shaped
-// records (scrapers/schema.py) with source "resident", and the dashboard
-// merges them into its feed and map. When a backend exists, swap
-// saveReport() for a POST to an /api/reports endpoint.
+// Submitted reports POST to /api/reports (SQLite Signal rows, source=resident).
+// Falls back to localStorage only if the server is unreachable.
 
 const STORAGE_KEY = "civicpulse_resident_reports";
 
@@ -146,7 +144,7 @@ function clearErrors() {
   for (const el of document.querySelectorAll(".invalid")) el.classList.remove("invalid");
 }
 
-function loadReports() {
+function loadLocalReports() {
   try {
     return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
   } catch {
@@ -154,19 +152,42 @@ function loadReports() {
   }
 }
 
-function saveReport(report) {
-  const reports = loadReports();
+function saveReportLocally(report) {
+  const reports = loadLocalReports();
   reports.unshift(report);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(reports));
 }
 
-document.getElementById("reportForm").addEventListener("submit", (event) => {
+async function saveReport(report) {
+  let res;
+  try {
+    res = await fetch("/api/reports", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "same-origin",
+      body: JSON.stringify(report),
+    });
+  } catch {
+    saveReportLocally(report);
+    console.warn("Saved report locally; server unreachable.");
+    return { signal: report, storage: "local" };
+  }
+
+  if (!res.ok) {
+    const data = await res.json().catch(() => ({}));
+    throw new Error(data.error || `Server returned ${res.status}`);
+  }
+  return res.json();
+}
+
+document.getElementById("reportForm").addEventListener("submit", async (event) => {
   event.preventDefault();
   clearErrors();
 
   const name = document.getElementById("fieldName");
   const email = document.getElementById("fieldEmail");
   const title = document.getElementById("fieldTitle");
+  const submitBtn = document.getElementById("submitBtn");
 
   if (!name.value.trim()) return showError("Please enter your name.", name);
   if (!email.value.trim() || !email.checkValidity())
@@ -198,10 +219,17 @@ document.getElementById("reportForm").addEventListener("submit", (event) => {
     },
   };
 
-  saveReport(report);
-  document.getElementById("reportForm").hidden = true;
-  document.getElementById("reportSuccess").hidden = false;
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  submitBtn.disabled = true;
+  try {
+    await saveReport(report);
+    document.getElementById("reportForm").hidden = true;
+    document.getElementById("reportSuccess").hidden = false;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  } catch (err) {
+    showError(err.message || "Could not submit report. Please try again.");
+  } finally {
+    submitBtn.disabled = false;
+  }
 });
 
 document.getElementById("reportAnother").addEventListener("click", () => {
