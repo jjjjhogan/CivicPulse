@@ -34,10 +34,14 @@ const SCRAPERS = [
   },
 ];
 
+// Feed items rendered per page; "Show more" reveals the next batch.
+const FEED_PAGE_SIZE = 20;
+
 const state = {
   signals: buildSignals([]),
   selectedCategories: new Set(),
   keyword: "",
+  feedShown: FEED_PAGE_SIZE,
   config: {
     tiktok_defaults: {
       tag_urls: [
@@ -125,13 +129,16 @@ function renderTagFilters() {
     const count = state.signals.filter((s) => s.categories.includes(category)).length;
     const btn = document.createElement("button");
     btn.className = "tag-filter" + (state.selectedCategories.has(category) ? " selected" : "");
-    btn.innerHTML = `${category.replaceAll("_", " ")}<span class="count">${count}</span>`;
+    btn.innerHTML =
+      `<span class="tag-dot" style="background:${CATEGORY_COLORS[category] || "#666"}"></span>` +
+      `${category.replaceAll("_", " ")}<span class="count">${count}</span>`;
     btn.addEventListener("click", () => {
       if (state.selectedCategories.has(category)) {
         state.selectedCategories.delete(category);
       } else {
         state.selectedCategories.add(category);
       }
+      state.feedShown = FEED_PAGE_SIZE;
       render();
     });
     el.appendChild(btn);
@@ -153,7 +160,9 @@ function feedNotice() {
 
 function renderFeed() {
   const el = document.getElementById("signalFeed");
-  const records = visibleSignals();
+  const records = [...visibleSignals()].sort((a, b) =>
+    (b.published_utc || "").localeCompare(a.published_utc || "")
+  );
   document.getElementById("feedCount").textContent =
     `${records.length} of ${state.signals.length} signals`;
   el.innerHTML = "";
@@ -174,7 +183,7 @@ function renderFeed() {
     return;
   }
 
-  for (const record of records) {
+  for (const record of records.slice(0, state.feedShown)) {
     const item = document.createElement("article");
     item.className = "feed-item";
 
@@ -210,6 +219,21 @@ function renderFeed() {
 
     item.append(top, title, meta);
     el.appendChild(item);
+  }
+
+  const remaining = records.length - state.feedShown;
+  if (remaining > 0) {
+    const wrap = document.createElement("div");
+    wrap.className = "feed-more";
+    const btn = document.createElement("button");
+    btn.className = "btn btn-sm";
+    btn.textContent = `Show ${Math.min(FEED_PAGE_SIZE, remaining)} more (${remaining} left)`;
+    btn.addEventListener("click", () => {
+      state.feedShown += FEED_PAGE_SIZE;
+      renderFeed();
+    });
+    wrap.appendChild(btn);
+    el.appendChild(wrap);
   }
 }
 
@@ -524,6 +548,70 @@ function readableJobFailure(data) {
   const detail = errorLine || lines[lines.length - 1] || "";
   const base = data.error || "Scrape failed.";
   return detail && !base.includes(detail) ? `${base} — ${detail}` : base;
+}
+
+// Relative "2h ago" for job timestamps (ISO strings from /api/jobs).
+// Timestamps are UTC but may arrive without an offset (SQLite drops the
+// tzinfo on round-trip), so offset-less strings are read as UTC.
+function timeAgo(iso) {
+  if (!iso) return "";
+  const hasOffset = /(?:Z|[+-]\d{2}:?\d{2})$/.test(iso);
+  const then = new Date(hasOffset ? iso : `${iso}Z`);
+  if (Number.isNaN(then.getTime())) return "";
+  const secs = Math.max(0, (Date.now() - then.getTime()) / 1000);
+  if (secs < 60) return "just now";
+  if (secs < 3600) return `${Math.round(secs / 60)}m ago`;
+  if (secs < 86400) return `${Math.round(secs / 3600)}h ago`;
+  return `${Math.round(secs / 86400)}d ago`;
+}
+
+// Show each scraper card's most recent job outcome instead of "Idle", and
+// resume watching a job that is still running (e.g. after a page reload).
+async function showLastJobs() {
+  let jobs;
+  try {
+    const res = await fetch("/api/jobs?limit=50", { credentials: "same-origin" });
+    if (!res.ok) return;
+    jobs = (await res.json()).jobs || [];
+  } catch {
+    return;
+  }
+
+  // Jobs come newest-first, so the first one seen per source is the latest.
+  const newestBySource = {};
+  for (const job of jobs) {
+    if (!newestBySource[job.source]) newestBySource[job.source] = job;
+  }
+
+  for (const scraper of SCRAPERS) {
+    const job = newestBySource[scraper.id];
+    if (!job) continue;
+    const statusEl = document.querySelector(
+      `[data-scraper="${scraper.id}"] .scraper-status`
+    );
+    if (!statusEl) continue;
+
+    const when = timeAgo(job.finished_at || job.started_at || job.created_at);
+    if (job.status === "completed") {
+      statusEl.textContent = when ? `Done ${when}` : "Done";
+      statusEl.className = "scraper-status done";
+    } else if (job.status === "failed") {
+      statusEl.textContent = when ? `Failed ${when}` : "Failed";
+      statusEl.className = "scraper-status failed";
+      statusEl.title = readableJobFailure(job);
+    } else if (job.status === "running" || job.status === "pending") {
+      statusEl.textContent = "Running…";
+      statusEl.className = "scraper-status running";
+      setRunButtonsDisabled(true);
+      pollJobStatus(job.id, statusEl).then(async (ok) => {
+        if (ok) {
+          await loadSignals();
+          render();
+        }
+        setRunButtonsDisabled(false);
+      });
+    }
+  }
 }
 
 async function pollJobStatus(jobId, statusEl) {
@@ -909,6 +997,7 @@ function render() {
 
 document.getElementById("keywordSearch").addEventListener("input", (event) => {
   state.keyword = event.target.value.trim();
+  state.feedShown = FEED_PAGE_SIZE;
   renderFeed();
   renderMarkers();
 });
@@ -916,6 +1005,7 @@ document.getElementById("keywordSearch").addEventListener("input", (event) => {
 document.getElementById("clearFilters").addEventListener("click", () => {
   state.selectedCategories.clear();
   state.keyword = "";
+  state.feedShown = FEED_PAGE_SIZE;
   document.getElementById("keywordSearch").value = "";
   render();
 });
@@ -1015,6 +1105,7 @@ requireAuth().then((user) => {
   return loadScraperConfig()
     .then(() => {
       renderScrapers();
+      showLastJobs();
       return loadSignals();
     })
     .then(render);

@@ -440,6 +440,16 @@ html {
   margin-left: 4px;
 }
 
+/* Category color swatch inside a tag pill — matches the map legend. */
+.tag-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 7px;
+  vertical-align: 1px;
+}
+
 .keyword-search {
   width: 100%;
   border: 1.5px solid #e4e8de;
@@ -553,6 +563,13 @@ a.source-badge:hover {
   color: #7a8a6c;
   padding: 32px 0;
   font-size: 0.9rem;
+}
+
+/* "Show more" button row at the bottom of the paginated feed. */
+.feed-more {
+  display: flex;
+  justify-content: center;
+  padding: 14px 0 4px;
 }
 
 /* Banner above the feed when sample data is standing in for live data. */

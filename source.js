@@ -134,7 +134,9 @@ function renderFilters() {
     ).length;
     const btn = document.createElement("button");
     btn.className = "tag-filter" + (selectedCategories.has(category) ? " selected" : "");
-    btn.innerHTML = `${category.replaceAll("_", " ")}<span class="count">${count}</span>`;
+    btn.innerHTML =
+      `<span class="tag-dot" style="background:${CATEGORY_COLORS[category] || "#666"}"></span>` +
+      `${category.replaceAll("_", " ")}<span class="count">${count}</span>`;
     btn.addEventListener("click", () => {
       if (selectedCategories.has(category)) {
         selectedCategories.delete(category);
