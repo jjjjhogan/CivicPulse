@@ -5,18 +5,9 @@
 
 const STORAGE_KEY = "civicpulse_resident_reports";
 
-// Mirrors CATEGORY_KEYWORDS in scrapers/categories.py
-const ISSUE_CATEGORIES = [
-  "potholes",
-  "noise",
-  "sanitation",
-  "violent_crime",
-  "property_crime",
-  "traffic_safety",
-  "emergencies",
-  "public_safety",
-  "housing",
-];
+// Reportable issue types — derived from CATEGORY_KEYWORDS (signals-data.js)
+// so the report form can't drift from the dashboard's category list.
+const ISSUE_CATEGORIES = Object.keys(CATEGORY_KEYWORDS);
 
 const IRVINE_CENTER = [33.6846, -117.8265];
 // Rough bounding box around Irvine used to bias/limit geocoding results.
@@ -225,7 +216,20 @@ document.getElementById("reportForm").addEventListener("submit", async (event) =
 
   submitBtn.disabled = true;
   try {
-    await saveReport(report);
+    const result = await saveReport(report);
+    const saved = result.signal || report;
+
+    // Deep-link the success button to the new pin on the dashboard map.
+    const { lat, lng } = saved.metadata || {};
+    if (lat != null && lng != null) {
+      document.getElementById("viewOnDashboard").href =
+        `dashboard.html?focus=${lat},${lng}`;
+    }
+    document.getElementById("successNote").textContent =
+      result.storage === "local"
+        ? "The server was unreachable, so this report is saved in your browser only for now."
+        : "Saved to CivicPulse — other residents can now see and verify it.";
+
     document.getElementById("reportForm").hidden = true;
     document.getElementById("reportSuccess").hidden = false;
     window.scrollTo({ top: 0, behavior: "smooth" });

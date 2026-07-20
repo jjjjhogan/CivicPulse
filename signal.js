@@ -199,9 +199,13 @@ function renderLocation(record) {
     return;
   }
   panel.hidden = false;
-  document.getElementById("locationHint").textContent = address
-    ? `📍 ${address}`
-    : `${lat.toFixed(4)}, ${lng.toFixed(4)}`;
+  const hint = document.getElementById("locationHint");
+  hint.textContent = address ? `📍 ${address}` : `${lat.toFixed(4)}, ${lng.toFixed(4)}`;
+  const jump = document.createElement("a");
+  jump.className = "info-link";
+  jump.href = `dashboard.html?focus=${lat},${lng}`;
+  jump.textContent = "Open on the dashboard map →";
+  hint.append(" · ", jump);
 
   if (map) {
     map.remove();
@@ -267,9 +271,7 @@ function renderRelated(record) {
     link.textContent = rel.title;
     title.appendChild(link);
 
-    const meta = document.createElement("p");
-    meta.className = "meta";
-    meta.textContent = `${rel.outlet} · ${rel.published_utc}`;
+    const meta = buildSignalMeta(rel);
 
     item.append(top, title, meta);
     el.appendChild(item);

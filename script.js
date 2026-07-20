@@ -1,7 +1,9 @@
 // Sample records in the shape produced by the ingestion scrapers
 // (reddit_scraper.py / irvine_news_scraper.py). Prefer GET /api/signals/feed
 // when dashboard_server.py is running (SQLite after import).
-const SAMPLE_SIGNALS = [
+// Named LANDING_* because signals-data.js (loaded first) already defines
+// its own SAMPLE_SIGNALS.
+const LANDING_SAMPLE_SIGNALS = [
   {
     outlet: "Voice of OC",
     title: "Orange County's Growing E-bike Crackdown Continues Targeting Parents",
@@ -57,7 +59,8 @@ function renderSignals(records) {
 
     const meta = document.createElement("p");
     meta.className = "meta";
-    meta.textContent = `${record.outlet} · ${record.published_utc}`;
+    meta.textContent = `${record.outlet} · ${publishedAgo(record.published_utc)}`;
+    meta.title = record.published_utc || "";
 
     card.append(tag, title, meta);
     container.appendChild(card);
@@ -78,7 +81,7 @@ async function loadLandingSignals() {
   } catch {
     // Server not running — fall through to samples.
   }
-  renderSignals(SAMPLE_SIGNALS);
+  renderSignals(LANDING_SAMPLE_SIGNALS);
 }
 
 loadLandingSignals();

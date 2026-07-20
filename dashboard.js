@@ -517,6 +517,24 @@ function focusOnMap(record) {
   marker.openPopup();
 }
 
+// ?focus=lat,lng — deep link from the report success page or a signal
+// detail page: pan the map there and open the matching marker's popup.
+function focusFromUrl() {
+  const focus = new URLSearchParams(window.location.search).get("focus");
+  if (!focus) return;
+  const [lat, lng] = focus.split(",").map(Number);
+  if (!Number.isFinite(lat) || !Number.isFinite(lng)) return;
+  document.getElementById("map").scrollIntoView({ block: "center" });
+  map.setView([lat, lng], 16, { animate: false });
+  for (const marker of markersByKey.values()) {
+    const pos = marker.getLatLng();
+    if (Math.abs(pos.lat - lat) < 1e-6 && Math.abs(pos.lng - lng) < 1e-6) {
+      marker.openPopup();
+      break;
+    }
+  }
+}
+
 // ── scraper panel ───────────────────────────────────────
 
 function logLine(text) {
@@ -1080,6 +1098,21 @@ document.getElementById("clearFilters").addEventListener("click", () => {
   render();
 });
 
+// "/" focuses the keyword search, unless already typing somewhere.
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "/" || event.ctrlKey || event.metaKey || event.altKey) return;
+  const target = event.target;
+  if (
+    target instanceof HTMLInputElement ||
+    target instanceof HTMLTextAreaElement ||
+    target.isContentEditable
+  ) {
+    return;
+  }
+  event.preventDefault();
+  searchInput.focus();
+});
+
 // ── sidebar active-section highlighting ────────────────
 
 function initSidebar() {
@@ -1178,5 +1211,6 @@ requireAuth().then((user) => {
       showLastJobs();
       return loadSignals();
     })
-    .then(render);
+    .then(render)
+    .then(focusFromUrl);
 });
