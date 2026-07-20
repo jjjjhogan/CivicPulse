@@ -329,6 +329,57 @@ const CLASSIFICATION_METHODS = {
   none: "No civic issue detected",
 };
 
+// Append the classifier chips (confidence % + "missed by keywords") to a
+// signal card's top row. Unscored signals get nothing, keeping cards clean.
+// Styles: .conf-chip / .rescued-badge in dashboard.css.
+function appendClassificationBadges(top, record) {
+  const confidence = signalConfidence(record);
+  if (confidence != null) {
+    const chip = document.createElement("span");
+    chip.className = `conf-chip ${confidenceBand(record)}`;
+    chip.textContent = `${Math.round(confidence * 100)}%`;
+    chip.title = `Classifier confidence: ${
+      CLASSIFICATION_METHODS[signalClassification(record)?.method] || "unknown"
+    }`;
+    top.appendChild(chip);
+  }
+  if (isRescuedSignal(record)) {
+    const badge = document.createElement("span");
+    badge.className = "rescued-badge";
+    badge.textContent = "missed by keywords";
+    badge.title = "The keyword filter would have dropped this — the model pass caught it";
+    top.appendChild(badge);
+  }
+}
+
+// Human-friendly age for a signal's published date ("today", "5d ago",
+// "3w ago"); falls back to the raw date beyond ~2 months, where a
+// relative phrase stops being more readable than the date itself.
+function publishedAgo(dateStr) {
+  const day = (dateStr || "").slice(0, 10);
+  const then = new Date(`${day}T00:00:00`);
+  if (Number.isNaN(then.getTime())) return dateStr || "";
+  const days = Math.floor((Date.now() - then.getTime()) / 86400000);
+  if (days < 0) return day;
+  if (days === 0) return "today";
+  if (days === 1) return "yesterday";
+  if (days < 14) return `${days}d ago`;
+  if (days < 61) return `${Math.round(days / 7)}w ago`;
+  return day;
+}
+
+// "<outlet> · <relative date>" meta line for a signal card, with the
+// exact date in the tooltip.
+function buildSignalMeta(record) {
+  const meta = document.createElement("p");
+  meta.className = "meta";
+  const when = document.createElement("span");
+  when.textContent = publishedAgo(record.published_utc);
+  when.title = record.published_utc || "";
+  meta.append(`${record.outlet} · `, when);
+  return meta;
+}
+
 // Signals have no id, so key detail pages on fields that identify one.
 function signalKey(signal) {
   return [signal.source, signal.published_utc, signal.title].join("|");

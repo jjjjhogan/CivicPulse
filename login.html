@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CivicPulse — Log in</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
@@ -34,8 +35,12 @@
         </label>
         <label class="field">
           <span class="field-label">Password</span>
-          <input type="password" id="loginPassword" autocomplete="current-password"
-                 placeholder="Your password">
+          <div class="pw-row">
+            <input type="password" id="loginPassword" autocomplete="current-password"
+                   placeholder="Your password">
+            <button type="button" class="pw-toggle" data-toggle="loginPassword"
+                    aria-label="Show password">Show</button>
+          </div>
         </label>
         <p class="form-error" id="loginError" hidden></p>
         <button type="submit" class="btn btn-lg login-submit">Log in</button>
@@ -55,13 +60,21 @@
         </label>
         <label class="field">
           <span class="field-label">Password</span>
-          <input type="password" id="signupPassword" autocomplete="new-password"
-                 placeholder="At least 6 characters">
+          <div class="pw-row">
+            <input type="password" id="signupPassword" autocomplete="new-password"
+                   placeholder="At least 6 characters">
+            <button type="button" class="pw-toggle" data-toggle="signupPassword"
+                    aria-label="Show password">Show</button>
+          </div>
         </label>
         <label class="field">
           <span class="field-label">Confirm password</span>
-          <input type="password" id="signupConfirm" autocomplete="new-password"
-                 placeholder="Repeat your password">
+          <div class="pw-row">
+            <input type="password" id="signupConfirm" autocomplete="new-password"
+                   placeholder="Repeat your password">
+            <button type="button" class="pw-toggle" data-toggle="signupConfirm"
+                    aria-label="Show password">Show</button>
+          </div>
         </label>
         <p class="form-error" id="signupError" hidden></p>
         <button type="submit" class="btn btn-lg login-submit">Create account</button>

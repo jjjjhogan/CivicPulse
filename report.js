@@ -34,7 +34,11 @@ for (const category of ISSUE_CATEGORIES) {
   const btn = document.createElement("button");
   btn.type = "button";
   btn.className = "tag-filter";
-  btn.textContent = category.replaceAll("_", " ");
+  const dot = document.createElement("span");
+  dot.className = "tag-dot";
+  // CATEGORY_COLORS comes from signals-data.js (loaded by report.html).
+  dot.style.background = CATEGORY_COLORS[category] || "#666";
+  btn.append(dot, category.replaceAll("_", " "));
   btn.addEventListener("click", () => {
     if (selectedTags.has(category)) {
       selectedTags.delete(category);

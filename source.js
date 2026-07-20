@@ -134,7 +134,9 @@ function renderFilters() {
     ).length;
     const btn = document.createElement("button");
     btn.className = "tag-filter" + (selectedCategories.has(category) ? " selected" : "");
-    btn.innerHTML = `${category.replaceAll("_", " ")}<span class="count">${count}</span>`;
+    btn.innerHTML =
+      `<span class="tag-dot" style="background:${CATEGORY_COLORS[category] || "#666"}"></span>` +
+      `${category.replaceAll("_", " ")}<span class="count">${count}</span>`;
     btn.addEventListener("click", () => {
       if (selectedCategories.has(category)) {
         selectedCategories.delete(category);
@@ -508,21 +510,7 @@ function renderList() {
       pin.textContent = "📍 on the map";
       top.appendChild(pin);
     }
-    const confidence = signalConfidence(record);
-    if (confidence != null) {
-      const chip = document.createElement("span");
-      chip.className = `conf-chip ${confidenceBand(record)}`;
-      chip.textContent = `${Math.round(confidence * 100)}%`;
-      chip.title = `Classifier confidence: ${CLASSIFICATION_METHODS[signalClassification(record)?.method] || "unknown"}`;
-      top.appendChild(chip);
-    }
-    if (isRescuedSignal(record)) {
-      const badge = document.createElement("span");
-      badge.className = "rescued-badge";
-      badge.textContent = "missed by keywords";
-      badge.title = "The keyword filter would have dropped this — the model pass caught it";
-      top.appendChild(badge);
-    }
+    appendClassificationBadges(top, record);
 
     const title = document.createElement("h3");
     const link = document.createElement("a");
@@ -530,9 +518,7 @@ function renderList() {
     link.textContent = record.title;
     title.appendChild(link);
 
-    const meta = document.createElement("p");
-    meta.className = "meta";
-    meta.textContent = `${record.outlet} · ${record.published_utc}`;
+    const meta = buildSignalMeta(record);
     const open = document.createElement("a");
     open.href = signalUrl(record);
     open.textContent = "View signal →";
