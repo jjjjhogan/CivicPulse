@@ -319,6 +319,34 @@ function appendClassificationBadges(top, record) {
   }
 }
 
+// Human-friendly age for a signal's published date ("today", "5d ago",
+// "3w ago"); falls back to the raw date beyond ~2 months, where a
+// relative phrase stops being more readable than the date itself.
+function publishedAgo(dateStr) {
+  const day = (dateStr || "").slice(0, 10);
+  const then = new Date(`${day}T00:00:00`);
+  if (Number.isNaN(then.getTime())) return dateStr || "";
+  const days = Math.floor((Date.now() - then.getTime()) / 86400000);
+  if (days < 0) return day;
+  if (days === 0) return "today";
+  if (days === 1) return "yesterday";
+  if (days < 14) return `${days}d ago`;
+  if (days < 61) return `${Math.round(days / 7)}w ago`;
+  return day;
+}
+
+// "<outlet> · <relative date>" meta line for a signal card, with the
+// exact date in the tooltip.
+function buildSignalMeta(record) {
+  const meta = document.createElement("p");
+  meta.className = "meta";
+  const when = document.createElement("span");
+  when.textContent = publishedAgo(record.published_utc);
+  when.title = record.published_utc || "";
+  meta.append(`${record.outlet} · `, when);
+  return meta;
+}
+
 // Signals have no id, so key detail pages on fields that identify one.
 function signalKey(signal) {
   return [signal.source, signal.published_utc, signal.title].join("|");

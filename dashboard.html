@@ -120,8 +120,11 @@
           <button class="link-btn" id="clearFilters">Clear</button>
         </div>
         <div class="tag-filters" id="tagFilters"></div>
-        <input type="search" id="keywordSearch" class="keyword-search"
-               placeholder="Search titles &amp; keywords (e.g. pothole, e-bike, rent)…">
+        <div class="search-wrap">
+          <input type="search" id="keywordSearch" class="keyword-search"
+                 placeholder="Search titles, posts &amp; keywords (e.g. pothole, e-bike, rent)…">
+          <button type="button" class="search-clear" id="searchClear" aria-label="Clear search" hidden>✕</button>
+        </div>
       </section>
 
       <section class="dash-section panel" id="feed">

@@ -84,11 +84,12 @@ function matchesFilters(signal) {
   if (state.keyword) {
     const kw = state.keyword.toLowerCase();
     const inTitle = signal.title.toLowerCase().includes(kw);
+    const inBody = (signal.body || "").toLowerCase().includes(kw);
     const inOutlet = signal.outlet.toLowerCase().includes(kw);
     const inCategoryKeywords = signal.categories.some((c) =>
       (CATEGORY_KEYWORDS[c] || []).some((k) => k.includes(kw))
     );
-    if (!inTitle && !inOutlet && !inCategoryKeywords) return false;
+    if (!inTitle && !inBody && !inOutlet && !inCategoryKeywords) return false;
   }
   return true;
 }
@@ -202,6 +203,15 @@ function renderFeed() {
       top.appendChild(tag);
     }
     appendClassificationBadges(top, record);
+    if (record.metadata?.lat != null && record.metadata?.lng != null) {
+      const pin = document.createElement("button");
+      pin.type = "button";
+      pin.className = "pin-link";
+      pin.textContent = "📍 map";
+      pin.title = "Show this signal on the map";
+      pin.addEventListener("click", () => focusOnMap(record));
+      top.appendChild(pin);
+    }
 
     const title = document.createElement("h3");
     const link = document.createElement("a");
@@ -209,9 +219,7 @@ function renderFeed() {
     link.textContent = record.title;
     title.appendChild(link);
 
-    const meta = document.createElement("p");
-    meta.className = "meta";
-    meta.textContent = `${record.outlet} · ${record.published_utc}`;
+    const meta = buildSignalMeta(record);
     const open = document.createElement("a");
     open.href = signalUrl(record);
     open.textContent = "View signal →";
@@ -456,8 +464,12 @@ function escapeHtml(text) {
   return div.innerHTML;
 }
 
+// Markers keyed by signalKey() so feed cards can jump to their marker.
+const markersByKey = new Map();
+
 function renderMarkers() {
   markerLayer.clearLayers();
+  markersByKey.clear();
   for (const record of visibleSignals()) {
     const { lat, lng } = record.metadata || {};
     if (lat == null || lng == null) continue;
@@ -477,7 +489,19 @@ function renderMarkers() {
       `<div class="popup-title">${escapeHtml(record.title)}</div>
        <div class="popup-meta">${escapeHtml(record.outlet)} · ${escapeHtml(record.published_utc)}</div>${address}${link}`
     );
+    markersByKey.set(signalKey(record), marker);
   }
+}
+
+// Jump from a feed card to its marker: scroll the map into view, pan to
+// the signal, and open its popup.
+function focusOnMap(record) {
+  const marker = markersByKey.get(signalKey(record));
+  if (!marker) return;
+  document.getElementById("map").scrollIntoView({ behavior: "smooth", block: "center" });
+  // No animation: openPopup()'s auto-pan would cancel an animated setView.
+  map.setView(marker.getLatLng(), 15, { animate: false });
+  marker.openPopup();
 }
 
 // ── scraper panel ───────────────────────────────────────
@@ -995,18 +1019,36 @@ function render() {
   renderVerify();
 }
 
-document.getElementById("keywordSearch").addEventListener("input", (event) => {
-  state.keyword = event.target.value.trim();
+const searchInput = document.getElementById("keywordSearch");
+const searchClear = document.getElementById("searchClear");
+let searchTimer;
+
+function applyKeyword(value) {
+  state.keyword = value.trim();
   state.feedShown = FEED_PAGE_SIZE;
+  searchClear.hidden = state.keyword === "";
   renderFeed();
   renderMarkers();
+}
+
+// Debounced so a 120-item feed isn't re-rendered on every keystroke.
+searchInput.addEventListener("input", (event) => {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => applyKeyword(event.target.value), 200);
+});
+
+searchClear.addEventListener("click", () => {
+  searchInput.value = "";
+  applyKeyword("");
+  searchInput.focus();
 });
 
 document.getElementById("clearFilters").addEventListener("click", () => {
   state.selectedCategories.clear();
   state.keyword = "";
   state.feedShown = FEED_PAGE_SIZE;
-  document.getElementById("keywordSearch").value = "";
+  searchInput.value = "";
+  searchClear.hidden = true;
   render();
 });
 

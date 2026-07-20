@@ -464,6 +464,23 @@ html {
 
 .keyword-search:focus { border-color: var(--mint); }
 
+.search-wrap { position: relative; }
+
+.search-clear {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #7a8a6c;
+  font-size: 0.85rem;
+  padding: 4px 6px;
+}
+
+.search-clear:hover { color: var(--ink-deep); }
+
 /* ── signal feed ──────────────────────────────────────── */
 
 .feed {
@@ -563,6 +580,23 @@ a.source-badge:hover {
   color: #7a8a6c;
   padding: 32px 0;
   font-size: 0.9rem;
+}
+
+/* "📍 map" jump button on feed cards that have coordinates. */
+.pin-link {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.75rem;
+  color: #7a8a6c;
+  padding: 2px 4px;
+  border-radius: 6px;
+}
+
+.pin-link:hover {
+  color: var(--ink-deep);
+  background: #eef5e9;
 }
 
 /* "Show more" button row at the bottom of the paginated feed. */

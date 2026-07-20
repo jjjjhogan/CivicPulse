@@ -23,6 +23,18 @@ function setMode(next) {
     : "Log in";
   showError("loginError", null);
   showError("signupError", null);
+  document.getElementById(login ? "loginEmail" : "signupName").focus();
+}
+
+// Show/Hide toggles next to password inputs.
+for (const btn of document.querySelectorAll(".pw-toggle")) {
+  btn.addEventListener("click", () => {
+    const input = document.getElementById(btn.dataset.toggle);
+    const show = input.type === "password";
+    input.type = show ? "text" : "password";
+    btn.textContent = show ? "Hide" : "Show";
+    btn.setAttribute("aria-label", show ? "Hide password" : "Show password");
+  });
 }
 
 document.getElementById("toggleMode").addEventListener("click", () => {

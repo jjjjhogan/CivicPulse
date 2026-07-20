@@ -518,9 +518,7 @@ function renderList() {
     link.textContent = record.title;
     title.appendChild(link);
 
-    const meta = document.createElement("p");
-    meta.className = "meta";
-    meta.textContent = `${record.outlet} · ${record.published_utc}`;
+    const meta = buildSignalMeta(record);
     const open = document.createElement("a");
     open.href = signalUrl(record);
     open.textContent = "View signal →";
