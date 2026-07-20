@@ -146,6 +146,14 @@ function clearErrors() {
   for (const el of document.querySelectorAll(".invalid")) el.classList.remove("invalid");
 }
 
+// Typing in a flagged field clears its error styling right away instead
+// of waiting for the next submit attempt.
+document.getElementById("reportForm").addEventListener("input", (event) => {
+  if (event.target.classList?.contains("invalid")) {
+    event.target.classList.remove("invalid");
+  }
+});
+
 function loadReports() {
   try {
     return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];

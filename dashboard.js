@@ -61,6 +61,10 @@ const state = {
   scrapeRunning: false,
   activeJobId: null,
   user: null,
+  // Where the signal list came from: "loading" until the first fetch
+  // resolves, then "live", "empty" (API up, nothing scraped yet), or
+  // "offline" (API unreachable — samples stand in).
+  live: "loading",
 };
 
 let map;
@@ -136,12 +140,31 @@ function renderTagFilters() {
 
 // ── feed ────────────────────────────────────────────────
 
+// One-line banner above the feed when the list isn't real live data.
+function feedNotice() {
+  if (state.live === "offline") {
+    return "Couldn't reach the live signals API — showing sample data. Start the server with: python scripts/dashboard_server.py";
+  }
+  if (state.live === "empty") {
+    return "No live signals yet — showing sample data. Run a scraper above to populate the feed.";
+  }
+  return null;
+}
+
 function renderFeed() {
   const el = document.getElementById("signalFeed");
   const records = visibleSignals();
   document.getElementById("feedCount").textContent =
     `${records.length} of ${state.signals.length} signals`;
   el.innerHTML = "";
+
+  const notice = feedNotice();
+  if (notice) {
+    const note = document.createElement("p");
+    note.className = "feed-notice";
+    note.textContent = notice;
+    el.appendChild(note);
+  }
 
   if (records.length === 0) {
     const empty = document.createElement("p");
@@ -169,6 +192,7 @@ function renderFeed() {
       tag.textContent = category.replaceAll("_", " ");
       top.appendChild(tag);
     }
+    appendClassificationBadges(top, record);
 
     const title = document.createElement("h3");
     const link = document.createElement("a");
@@ -447,7 +471,9 @@ function mergeSignals(liveSignals) {
 }
 
 async function loadSignals() {
-  mergeSignals(await fetchLiveSignals());
+  const live = await fetchLiveSignals();
+  state.live = live == null ? "offline" : live.length ? "live" : "empty";
+  mergeSignals(live);
 }
 
 async function loadScraperConfig() {
@@ -480,18 +506,58 @@ function setRunButtonsDisabled(disabled) {
   }
 }
 
+// Python colorizes tracebacks with ANSI escapes; strip them for the browser.
+function stripAnsi(text) {
+  return (text || "").replace(/\u001b\[[0-9;]*m/g, "");
+}
+
+// Pull the most informative line out of a failed job's output so the log
+// reads like a sentence, not just "exited with code 1".
+function readableJobFailure(data) {
+  const lines = stripAnsi(data.log)
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean);
+  const errorLine = [...lines]
+    .reverse()
+    .find((line) => /error|exception|failed|traceback|invalid|not found/i.test(line));
+  const detail = errorLine || lines[lines.length - 1] || "";
+  const base = data.error || "Scrape failed.";
+  return detail && !base.includes(detail) ? `${base} — ${detail}` : base;
+}
+
 async function pollJobStatus(jobId, statusEl) {
   const logEl = document.getElementById("scraperLog");
+  let misses = 0;
   while (true) {
-    const res = await fetch(`/api/jobs/${jobId}`, { credentials: "same-origin" });
-    if (res.status === 401) {
-      window.location.href = "login.html";
-      return false;
+    let data;
+    try {
+      const res = await fetch(`/api/jobs/${jobId}`, { credentials: "same-origin" });
+      if (res.status === 401) {
+        window.location.href = "login.html";
+        return false;
+      }
+      if (!res.ok) throw new Error(`API returned ${res.status}`);
+      data = await res.json();
+      misses = 0;
+    } catch {
+      // A transient blip shouldn't kill the poll, but after ~15s of
+      // silence stop with an honest message instead of spinning forever.
+      misses += 1;
+      if (misses >= 6) {
+        statusEl.textContent = "Unknown";
+        statusEl.className = "scraper-status error";
+        logLine(
+          `Lost contact with the server while job #${jobId} was running — refresh the page to check on it.`
+        );
+        return false;
+      }
+      await new Promise((r) => setTimeout(r, 2500));
+      continue;
     }
-    const data = await res.json();
     if (data.log) {
       logEl.hidden = false;
-      logEl.textContent = data.log;
+      logEl.textContent = stripAnsi(data.log);
       logEl.scrollTop = logEl.scrollHeight;
     }
     if (data.status === "completed") {
@@ -500,9 +566,11 @@ async function pollJobStatus(jobId, statusEl) {
       return true;
     }
     if (data.status === "failed") {
+      const reason = readableJobFailure(data);
       statusEl.textContent = "Failed";
       statusEl.className = "scraper-status failed";
-      logLine(data.error || "Scrape failed.");
+      statusEl.title = reason;
+      logLine(`Job #${jobId} failed: ${reason}`);
       return false;
     }
     await new Promise((r) => setTimeout(r, 1500));
@@ -921,8 +989,21 @@ function showSignedInUser(user) {
   }
 }
 
+// Shown between page load and the first successful signals fetch, so the
+// feed isn't just blank while auth + data requests are in flight.
+function renderLoadingPlaceholder() {
+  document.getElementById("feedCount").textContent = "loading…";
+  const el = document.getElementById("signalFeed");
+  el.innerHTML = "";
+  const p = document.createElement("p");
+  p.className = "feed-empty";
+  p.textContent = "Loading signals…";
+  el.appendChild(p);
+}
+
 initSidebar();
 initMap();
+renderLoadingPlaceholder();
 requireAuth().then((user) => {
   if (!user) return;
   showSignedInUser(user);

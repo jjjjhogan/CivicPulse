@@ -296,6 +296,29 @@ const CLASSIFICATION_METHODS = {
   none: "No civic issue detected",
 };
 
+// Append the classifier chips (confidence % + "missed by keywords") to a
+// signal card's top row. Unscored signals get nothing, keeping cards clean.
+// Styles: .conf-chip / .rescued-badge in dashboard.css.
+function appendClassificationBadges(top, record) {
+  const confidence = signalConfidence(record);
+  if (confidence != null) {
+    const chip = document.createElement("span");
+    chip.className = `conf-chip ${confidenceBand(record)}`;
+    chip.textContent = `${Math.round(confidence * 100)}%`;
+    chip.title = `Classifier confidence: ${
+      CLASSIFICATION_METHODS[signalClassification(record)?.method] || "unknown"
+    }`;
+    top.appendChild(chip);
+  }
+  if (isRescuedSignal(record)) {
+    const badge = document.createElement("span");
+    badge.className = "rescued-badge";
+    badge.textContent = "missed by keywords";
+    badge.title = "The keyword filter would have dropped this — the model pass caught it";
+    top.appendChild(badge);
+  }
+}
+
 // Signals have no id, so key detail pages on fields that identify one.
 function signalKey(signal) {
   return [signal.source, signal.published_utc, signal.title].join("|");
@@ -305,14 +328,16 @@ function signalUrl(signal) {
   return `signal.html?id=${encodeURIComponent(signalKey(signal))}`;
 }
 
-// Fetch live signals from the Flask backend; empty when it isn't running.
+// Fetch live signals from the Flask backend. Returns null when the API is
+// unreachable (server down) and [] when it answered with no signals, so
+// callers can tell "offline" apart from "nothing scraped yet".
 async function fetchLiveSignals() {
   try {
     const res = await fetch("/api/signals");
-    if (!res.ok) return [];
+    if (!res.ok) return null;
     const data = await res.json();
     return data.signals || [];
   } catch {
-    return [];
+    return null;
   }
 }

@@ -508,21 +508,7 @@ function renderList() {
       pin.textContent = "📍 on the map";
       top.appendChild(pin);
     }
-    const confidence = signalConfidence(record);
-    if (confidence != null) {
-      const chip = document.createElement("span");
-      chip.className = `conf-chip ${confidenceBand(record)}`;
-      chip.textContent = `${Math.round(confidence * 100)}%`;
-      chip.title = `Classifier confidence: ${CLASSIFICATION_METHODS[signalClassification(record)?.method] || "unknown"}`;
-      top.appendChild(chip);
-    }
-    if (isRescuedSignal(record)) {
-      const badge = document.createElement("span");
-      badge.className = "rescued-badge";
-      badge.textContent = "missed by keywords";
-      badge.title = "The keyword filter would have dropped this — the model pass caught it";
-      top.appendChild(badge);
-    }
+    appendClassificationBadges(top, record);
 
     const title = document.createElement("h3");
     const link = document.createElement("a");

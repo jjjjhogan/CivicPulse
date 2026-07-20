@@ -555,6 +555,17 @@ a.source-badge:hover {
   font-size: 0.9rem;
 }
 
+/* Banner above the feed when sample data is standing in for live data. */
+.feed-notice {
+  margin: 0 0 12px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  background: #f7eedd;
+  border: 1px solid #ecd9b4;
+  color: #93650f;
+  font-size: 0.85rem;
+}
+
 /* ── verify issues ────────────────────────────────────── */
 
 .verify-list {
