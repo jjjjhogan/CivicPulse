@@ -34,10 +34,14 @@ const SCRAPERS = [
   },
 ];
 
+// Feed items rendered per page; "Show more" reveals the next batch.
+const FEED_PAGE_SIZE = 20;
+
 const state = {
   signals: buildSignals([]),
   selectedCategories: new Set(),
   keyword: "",
+  feedShown: FEED_PAGE_SIZE,
   config: {
     tiktok_defaults: {
       tag_urls: [
@@ -61,6 +65,10 @@ const state = {
   scrapeRunning: false,
   activeJobId: null,
   user: null,
+  // Where the signal list came from: "loading" until the first fetch
+  // resolves, then "live", "empty" (API up, nothing scraped yet), or
+  // "offline" (API unreachable — samples stand in).
+  live: "loading",
 };
 
 let map;
@@ -76,11 +84,12 @@ function matchesFilters(signal) {
   if (state.keyword) {
     const kw = state.keyword.toLowerCase();
     const inTitle = signal.title.toLowerCase().includes(kw);
+    const inBody = (signal.body || "").toLowerCase().includes(kw);
     const inOutlet = signal.outlet.toLowerCase().includes(kw);
     const inCategoryKeywords = signal.categories.some((c) =>
       (CATEGORY_KEYWORDS[c] || []).some((k) => k.includes(kw))
     );
-    if (!inTitle && !inOutlet && !inCategoryKeywords) return false;
+    if (!inTitle && !inBody && !inOutlet && !inCategoryKeywords) return false;
   }
   return true;
 }
@@ -121,13 +130,16 @@ function renderTagFilters() {
     const count = state.signals.filter((s) => s.categories.includes(category)).length;
     const btn = document.createElement("button");
     btn.className = "tag-filter" + (state.selectedCategories.has(category) ? " selected" : "");
-    btn.innerHTML = `${category.replaceAll("_", " ")}<span class="count">${count}</span>`;
+    btn.innerHTML =
+      `<span class="tag-dot" style="background:${CATEGORY_COLORS[category] || "#666"}"></span>` +
+      `${category.replaceAll("_", " ")}<span class="count">${count}</span>`;
     btn.addEventListener("click", () => {
       if (state.selectedCategories.has(category)) {
         state.selectedCategories.delete(category);
       } else {
         state.selectedCategories.add(category);
       }
+      state.feedShown = FEED_PAGE_SIZE;
       render();
     });
     el.appendChild(btn);
@@ -136,12 +148,33 @@ function renderTagFilters() {
 
 // ── feed ────────────────────────────────────────────────
 
+// One-line banner above the feed when the list isn't real live data.
+function feedNotice() {
+  if (state.live === "offline") {
+    return "Couldn't reach the live signals API — showing sample data. Start the server with: python scripts/dashboard_server.py";
+  }
+  if (state.live === "empty") {
+    return "No live signals yet — showing sample data. Run a scraper above to populate the feed.";
+  }
+  return null;
+}
+
 function renderFeed() {
   const el = document.getElementById("signalFeed");
-  const records = visibleSignals();
+  const records = [...visibleSignals()].sort((a, b) =>
+    (b.published_utc || "").localeCompare(a.published_utc || "")
+  );
   document.getElementById("feedCount").textContent =
     `${records.length} of ${state.signals.length} signals`;
   el.innerHTML = "";
+
+  const notice = feedNotice();
+  if (notice) {
+    const note = document.createElement("p");
+    note.className = "feed-notice";
+    note.textContent = notice;
+    el.appendChild(note);
+  }
 
   if (records.length === 0) {
     const empty = document.createElement("p");
@@ -151,7 +184,7 @@ function renderFeed() {
     return;
   }
 
-  for (const record of records) {
+  for (const record of records.slice(0, state.feedShown)) {
     const item = document.createElement("article");
     item.className = "feed-item";
 
@@ -169,6 +202,16 @@ function renderFeed() {
       tag.textContent = category.replaceAll("_", " ");
       top.appendChild(tag);
     }
+    appendClassificationBadges(top, record);
+    if (record.metadata?.lat != null && record.metadata?.lng != null) {
+      const pin = document.createElement("button");
+      pin.type = "button";
+      pin.className = "pin-link";
+      pin.textContent = "📍 map";
+      pin.title = "Show this signal on the map";
+      pin.addEventListener("click", () => focusOnMap(record));
+      top.appendChild(pin);
+    }
 
     const title = document.createElement("h3");
     const link = document.createElement("a");
@@ -176,9 +219,7 @@ function renderFeed() {
     link.textContent = record.title;
     title.appendChild(link);
 
-    const meta = document.createElement("p");
-    meta.className = "meta";
-    meta.textContent = `${record.outlet} · ${record.published_utc}`;
+    const meta = buildSignalMeta(record);
     const open = document.createElement("a");
     open.href = signalUrl(record);
     open.textContent = "View signal →";
@@ -186,6 +227,21 @@ function renderFeed() {
 
     item.append(top, title, meta);
     el.appendChild(item);
+  }
+
+  const remaining = records.length - state.feedShown;
+  if (remaining > 0) {
+    const wrap = document.createElement("div");
+    wrap.className = "feed-more";
+    const btn = document.createElement("button");
+    btn.className = "btn btn-sm";
+    btn.textContent = `Show ${Math.min(FEED_PAGE_SIZE, remaining)} more (${remaining} left)`;
+    btn.addEventListener("click", () => {
+      state.feedShown += FEED_PAGE_SIZE;
+      renderFeed();
+    });
+    wrap.appendChild(btn);
+    el.appendChild(wrap);
   }
 }
 
@@ -408,8 +464,12 @@ function escapeHtml(text) {
   return div.innerHTML;
 }
 
+// Markers keyed by signalKey() so feed cards can jump to their marker.
+const markersByKey = new Map();
+
 function renderMarkers() {
   markerLayer.clearLayers();
+  markersByKey.clear();
   for (const record of visibleSignals()) {
     const { lat, lng } = record.metadata || {};
     if (lat == null || lng == null) continue;
@@ -429,7 +489,19 @@ function renderMarkers() {
       `<div class="popup-title">${escapeHtml(record.title)}</div>
        <div class="popup-meta">${escapeHtml(record.outlet)} · ${escapeHtml(record.published_utc)}</div>${address}${link}`
     );
+    markersByKey.set(signalKey(record), marker);
   }
+}
+
+// Jump from a feed card to its marker: scroll the map into view, pan to
+// the signal, and open its popup.
+function focusOnMap(record) {
+  const marker = markersByKey.get(signalKey(record));
+  if (!marker) return;
+  document.getElementById("map").scrollIntoView({ behavior: "smooth", block: "center" });
+  // No animation: openPopup()'s auto-pan would cancel an animated setView.
+  map.setView(marker.getLatLng(), 15, { animate: false });
+  marker.openPopup();
 }
 
 // ── scraper panel ───────────────────────────────────────
@@ -447,7 +519,9 @@ function mergeSignals(liveSignals) {
 }
 
 async function loadSignals() {
-  mergeSignals(await fetchLiveSignals());
+  const live = await fetchLiveSignals();
+  state.live = live == null ? "offline" : live.length ? "live" : "empty";
+  mergeSignals(live);
 }
 
 async function loadScraperConfig() {
@@ -480,18 +554,122 @@ function setRunButtonsDisabled(disabled) {
   }
 }
 
+// Python colorizes tracebacks with ANSI escapes; strip them for the browser.
+function stripAnsi(text) {
+  return (text || "").replace(/\u001b\[[0-9;]*m/g, "");
+}
+
+// Pull the most informative line out of a failed job's output so the log
+// reads like a sentence, not just "exited with code 1".
+function readableJobFailure(data) {
+  const lines = stripAnsi(data.log)
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean);
+  const errorLine = [...lines]
+    .reverse()
+    .find((line) => /error|exception|failed|traceback|invalid|not found/i.test(line));
+  const detail = errorLine || lines[lines.length - 1] || "";
+  const base = data.error || "Scrape failed.";
+  return detail && !base.includes(detail) ? `${base} — ${detail}` : base;
+}
+
+// Relative "2h ago" for job timestamps (ISO strings from /api/jobs).
+// Timestamps are UTC but may arrive without an offset (SQLite drops the
+// tzinfo on round-trip), so offset-less strings are read as UTC.
+function timeAgo(iso) {
+  if (!iso) return "";
+  const hasOffset = /(?:Z|[+-]\d{2}:?\d{2})$/.test(iso);
+  const then = new Date(hasOffset ? iso : `${iso}Z`);
+  if (Number.isNaN(then.getTime())) return "";
+  const secs = Math.max(0, (Date.now() - then.getTime()) / 1000);
+  if (secs < 60) return "just now";
+  if (secs < 3600) return `${Math.round(secs / 60)}m ago`;
+  if (secs < 86400) return `${Math.round(secs / 3600)}h ago`;
+  return `${Math.round(secs / 86400)}d ago`;
+}
+
+// Show each scraper card's most recent job outcome instead of "Idle", and
+// resume watching a job that is still running (e.g. after a page reload).
+async function showLastJobs() {
+  let jobs;
+  try {
+    const res = await fetch("/api/jobs?limit=50", { credentials: "same-origin" });
+    if (!res.ok) return;
+    jobs = (await res.json()).jobs || [];
+  } catch {
+    return;
+  }
+
+  // Jobs come newest-first, so the first one seen per source is the latest.
+  const newestBySource = {};
+  for (const job of jobs) {
+    if (!newestBySource[job.source]) newestBySource[job.source] = job;
+  }
+
+  for (const scraper of SCRAPERS) {
+    const job = newestBySource[scraper.id];
+    if (!job) continue;
+    const statusEl = document.querySelector(
+      `[data-scraper="${scraper.id}"] .scraper-status`
+    );
+    if (!statusEl) continue;
+
+    const when = timeAgo(job.finished_at || job.started_at || job.created_at);
+    if (job.status === "completed") {
+      statusEl.textContent = when ? `Done ${when}` : "Done";
+      statusEl.className = "scraper-status done";
+    } else if (job.status === "failed") {
+      statusEl.textContent = when ? `Failed ${when}` : "Failed";
+      statusEl.className = "scraper-status failed";
+      statusEl.title = readableJobFailure(job);
+    } else if (job.status === "running" || job.status === "pending") {
+      statusEl.textContent = "Running…";
+      statusEl.className = "scraper-status running";
+      setRunButtonsDisabled(true);
+      pollJobStatus(job.id, statusEl).then(async (ok) => {
+        if (ok) {
+          await loadSignals();
+          render();
+        }
+        setRunButtonsDisabled(false);
+      });
+    }
+  }
+}
+
 async function pollJobStatus(jobId, statusEl) {
   const logEl = document.getElementById("scraperLog");
+  let misses = 0;
   while (true) {
-    const res = await fetch(`/api/jobs/${jobId}`, { credentials: "same-origin" });
-    if (res.status === 401) {
-      window.location.href = "login.html";
-      return false;
+    let data;
+    try {
+      const res = await fetch(`/api/jobs/${jobId}`, { credentials: "same-origin" });
+      if (res.status === 401) {
+        window.location.href = "login.html";
+        return false;
+      }
+      if (!res.ok) throw new Error(`API returned ${res.status}`);
+      data = await res.json();
+      misses = 0;
+    } catch {
+      // A transient blip shouldn't kill the poll, but after ~15s of
+      // silence stop with an honest message instead of spinning forever.
+      misses += 1;
+      if (misses >= 6) {
+        statusEl.textContent = "Unknown";
+        statusEl.className = "scraper-status error";
+        logLine(
+          `Lost contact with the server while job #${jobId} was running — refresh the page to check on it.`
+        );
+        return false;
+      }
+      await new Promise((r) => setTimeout(r, 2500));
+      continue;
     }
-    const data = await res.json();
     if (data.log) {
       logEl.hidden = false;
-      logEl.textContent = data.log;
+      logEl.textContent = stripAnsi(data.log);
       logEl.scrollTop = logEl.scrollHeight;
     }
     if (data.status === "completed") {
@@ -500,9 +678,11 @@ async function pollJobStatus(jobId, statusEl) {
       return true;
     }
     if (data.status === "failed") {
+      const reason = readableJobFailure(data);
       statusEl.textContent = "Failed";
       statusEl.className = "scraper-status failed";
-      logLine(data.error || "Scrape failed.");
+      statusEl.title = reason;
+      logLine(`Job #${jobId} failed: ${reason}`);
       return false;
     }
     await new Promise((r) => setTimeout(r, 1500));
@@ -839,16 +1019,36 @@ function render() {
   renderVerify();
 }
 
-document.getElementById("keywordSearch").addEventListener("input", (event) => {
-  state.keyword = event.target.value.trim();
+const searchInput = document.getElementById("keywordSearch");
+const searchClear = document.getElementById("searchClear");
+let searchTimer;
+
+function applyKeyword(value) {
+  state.keyword = value.trim();
+  state.feedShown = FEED_PAGE_SIZE;
+  searchClear.hidden = state.keyword === "";
   renderFeed();
   renderMarkers();
+}
+
+// Debounced so a 120-item feed isn't re-rendered on every keystroke.
+searchInput.addEventListener("input", (event) => {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => applyKeyword(event.target.value), 200);
+});
+
+searchClear.addEventListener("click", () => {
+  searchInput.value = "";
+  applyKeyword("");
+  searchInput.focus();
 });
 
 document.getElementById("clearFilters").addEventListener("click", () => {
   state.selectedCategories.clear();
   state.keyword = "";
-  document.getElementById("keywordSearch").value = "";
+  state.feedShown = FEED_PAGE_SIZE;
+  searchInput.value = "";
+  searchClear.hidden = true;
   render();
 });
 
@@ -921,8 +1121,21 @@ function showSignedInUser(user) {
   }
 }
 
+// Shown between page load and the first successful signals fetch, so the
+// feed isn't just blank while auth + data requests are in flight.
+function renderLoadingPlaceholder() {
+  document.getElementById("feedCount").textContent = "loading…";
+  const el = document.getElementById("signalFeed");
+  el.innerHTML = "";
+  const p = document.createElement("p");
+  p.className = "feed-empty";
+  p.textContent = "Loading signals…";
+  el.appendChild(p);
+}
+
 initSidebar();
 initMap();
+renderLoadingPlaceholder();
 requireAuth().then((user) => {
   if (!user) return;
   showSignedInUser(user);
@@ -934,6 +1147,7 @@ requireAuth().then((user) => {
   return loadScraperConfig()
     .then(() => {
       renderScrapers();
+      showLastJobs();
       return loadSignals();
     })
     .then(render);

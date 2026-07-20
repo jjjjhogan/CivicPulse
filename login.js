@@ -23,6 +23,18 @@ function setMode(next) {
     : "Log in";
   showError("loginError", null);
   showError("signupError", null);
+  document.getElementById(login ? "loginEmail" : "signupName").focus();
+}
+
+// Show/Hide toggles next to password inputs.
+for (const btn of document.querySelectorAll(".pw-toggle")) {
+  btn.addEventListener("click", () => {
+    const input = document.getElementById(btn.dataset.toggle);
+    const show = input.type === "password";
+    input.type = show ? "text" : "password";
+    btn.textContent = show ? "Hide" : "Show";
+    btn.setAttribute("aria-label", show ? "Hide password" : "Show password");
+  });
 }
 
 document.getElementById("toggleMode").addEventListener("click", () => {
@@ -47,17 +59,39 @@ function isValidEmail(email) {
 }
 
 async function postAuth(path, body) {
-  const res = await fetch(path, {
-    ...FETCH_OPTS,
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-  });
+  let res;
+  try {
+    res = await fetch(path, {
+      ...FETCH_OPTS,
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+  } catch {
+    throw new Error(
+      "Can't reach the CivicPulse server — start it with python scripts/dashboard_server.py and try again."
+    );
+  }
   const data = await res.json().catch(() => ({}));
   if (!res.ok) {
     throw new Error(data.error || `Request failed (${res.status})`);
   }
   return data;
+}
+
+// Disable the submit button while the request is in flight so double
+// clicks can't fire duplicate logins/signups.
+async function withBusy(form, busyText, action) {
+  const btn = form.querySelector("button[type=submit]");
+  const idleText = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = busyText;
+  try {
+    await action();
+  } finally {
+    btn.disabled = false;
+    btn.textContent = idleText;
+  }
 }
 
 function goDashboard() {
@@ -87,8 +121,10 @@ document.getElementById("loginForm").addEventListener("submit", async (event) =>
   }
 
   try {
-    await postAuth("/api/auth/login", { email, password });
-    goDashboard();
+    await withBusy(event.target, "Logging in…", async () => {
+      await postAuth("/api/auth/login", { email, password });
+      goDashboard();
+    });
   } catch (err) {
     showError(
       "loginError",
@@ -122,8 +158,10 @@ document.getElementById("signupForm").addEventListener("submit", async (event) =
   }
 
   try {
-    await postAuth("/api/auth/signup", { name, email, password });
-    goDashboard();
+    await withBusy(event.target, "Creating account…", async () => {
+      await postAuth("/api/auth/signup", { name, email, password });
+      goDashboard();
+    });
   } catch (err) {
     showError("signupError", err.message || "Could not create account.");
   }

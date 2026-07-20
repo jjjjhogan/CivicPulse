@@ -36,7 +36,11 @@ for (const category of ISSUE_CATEGORIES) {
   const btn = document.createElement("button");
   btn.type = "button";
   btn.className = "tag-filter";
-  btn.textContent = category.replaceAll("_", " ");
+  const dot = document.createElement("span");
+  dot.className = "tag-dot";
+  // CATEGORY_COLORS comes from signals-data.js (loaded by report.html).
+  dot.style.background = CATEGORY_COLORS[category] || "#666";
+  btn.append(dot, category.replaceAll("_", " "));
   btn.addEventListener("click", () => {
     if (selectedTags.has(category)) {
       selectedTags.delete(category);
@@ -145,6 +149,14 @@ function clearErrors() {
   document.getElementById("formError").hidden = true;
   for (const el of document.querySelectorAll(".invalid")) el.classList.remove("invalid");
 }
+
+// Typing in a flagged field clears its error styling right away instead
+// of waiting for the next submit attempt.
+document.getElementById("reportForm").addEventListener("input", (event) => {
+  if (event.target.classList?.contains("invalid")) {
+    event.target.classList.remove("invalid");
+  }
+});
 
 function loadReports() {
   try {

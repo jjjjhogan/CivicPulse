@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CivicPulse — Dashboard</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
@@ -119,8 +120,11 @@
           <button class="link-btn" id="clearFilters">Clear</button>
         </div>
         <div class="tag-filters" id="tagFilters"></div>
-        <input type="search" id="keywordSearch" class="keyword-search"
-               placeholder="Search titles &amp; keywords (e.g. pothole, e-bike, rent)…">
+        <div class="search-wrap">
+          <input type="search" id="keywordSearch" class="keyword-search"
+                 placeholder="Search titles, posts &amp; keywords (e.g. pothole, e-bike, rent)…">
+          <button type="button" class="search-clear" id="searchClear" aria-label="Clear search" hidden>✕</button>
+        </div>
       </section>
 
       <section class="dash-section panel" id="feed">
