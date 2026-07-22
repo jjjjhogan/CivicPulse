@@ -10,7 +10,7 @@
     {
       "name": "civicpulse-server",
       "runtimeExecutable": "powershell",
-      "runtimeArgs": ["-NoProfile", "-Command", "py scripts/dashboard_server.py --port $env:PORT"],
+      "runtimeArgs": ["-NoProfile", "-Command", ".venv/Scripts/python scripts/dashboard_server.py --port $env:PORT"],
       "autoPort": true
     }
   ]

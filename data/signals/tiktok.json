@@ -1055,9 +1055,9 @@
       "hashtags": [],
       "classification": {
         "scores": {
-          "violent_crime": 0.891
+          "violent_crime": 0.9
         },
-        "confidence": 0.891,
+        "confidence": 0.9,
         "method": "model",
         "model_version": "nb-v1",
         "rescued": true
@@ -1828,9 +1828,9 @@
       "hashtags": [],
       "classification": {
         "scores": {
-          "noise": 0.775
+          "noise": 0.9
         },
-        "confidence": 0.775,
+        "confidence": 0.9,
         "method": "model",
         "model_version": "nb-v1",
         "rescued": true
@@ -2574,10 +2574,10 @@
       ],
       "classification": {
         "scores": {
-          "public_safety": 0.7
+          "public_safety": 0.4
         },
-        "confidence": 0.7,
-        "method": "keywords",
+        "confidence": 0.4,
+        "method": "inherited",
         "model_version": "nb-v1"
       }
     }
