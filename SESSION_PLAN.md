@@ -26,42 +26,44 @@
 ### Checklist
 
 #### A. Pull latest & set up
-- [ ] `git pull origin main`
-- [ ] `python -m venv .venv` (if no venv yet)
-- [ ] Activate venv: `.\.venv\Scripts\Activate.ps1` (Windows) or `source .venv/bin/activate`
-- [ ] `pip install -r requirements.txt`
-- [ ] `copy .env.example .env` (optional; defaults are fine for local SQLite)
+- [x] `git pull origin main`
+- [x] `python -m venv .venv` (if no venv yet)
+- [x] Activate venv: `.\.venv\Scripts\Activate.ps1` (Windows) or `source .venv/bin/activate`
+- [x] `pip install -r requirements.txt`
+- [x] `copy .env.example .env` (optional; defaults are fine for local SQLite)
 
 #### B. Load SQLite & run server
-- [ ] `python scripts/import_signals.py`
-- [ ] `python scripts/reprocess_signals.py`
-- [ ] `python scripts/dashboard_server.py`
-- [ ] Open http://127.0.0.1:8080/login.html — **create an account**, then open the dashboard
+- [x] `python scripts/import_signals.py` — 137 signals (78 tiktok, 18 reddit, 6 twitter, 35 news)
+- [x] `python scripts/reprocess_signals.py` — classification applied, avg confidence 0.51–0.75 per source
+- [x] `python scripts/dashboard_server.py` — started on port 3000
+- [x] Open login.html — created account "Soak Tester", redirected to dashboard
 
 #### C. Verify DB-backed dashboard
-- [ ] http://127.0.0.1:8080/api/signals → JSON includes `"storage": "db"` and a non-zero `count`
-- [ ] Dashboard feed/map show live signals (not only empty/broken UI)
-- [ ] Submit one report via `report.html` → appears after dashboard refresh
-- [ ] Cast one vote on a resident report in Verify → reload → vote tallies still there
+- [x] `/api/signals` → `{"count":137,"storage":"db",...}` ✓
+- [x] Dashboard feed shows 20 items (paginated), map has Leaflet markers ✓
+- [x] Submitted report "Broken streetlight on Alton Pkwy near Jeffrey" → appears in feed + Verify section ✓
+- [x] Cast upvote on report → shows "👍 It's there (1)" → reload → vote persists ✓
 
 #### D. Optional soak (if time)
-- [ ] One **news** job from Scrapers panel → job completes or fails with a readable message
-- [ ] TikTok only if Chrome is available; headed, short run — do not debug Selenium deeply today
-- [ ] `pytest -q` green
+- [x] News job from Scrapers panel → completed successfully (job #3, polled 3 times, all 200s)
+- [ ] TikTok — skipped (no headed Chrome set up)
+- [x] `pytest -q` → 41 passed in 29s ✓
 
 #### E. Wrap-up
-- [ ] Add **Soak notes** below (what worked / what broke)
+- [x] Add **Soak notes** below (what worked / what broke)
 - [ ] If you fixed a blocker: commit on a branch or main per team habit and push
-- [ ] Do **not** start Session 3 / Phase A / Firebase today unless Session 2 is fully green
+- [x] Do **not** start Session 3 / Phase A / Firebase today unless Session 2 is fully green
 
-### Soak notes (coworker fills in)
+### Soak notes
 
-- Date / machine:
-- Cold start OK? (Y/N)
-- `/api/signals` storage:
-- Report + vote persist? (Y/N)
-- Bugs / blockers:
--
+- Date / machine: 2026-07-22 / Windows 11, Python 3.14.6
+- Cold start OK? **Y** — venv + pip + import + reprocess + server all clean on first try
+- `/api/signals` storage: **db** (137 signals, then 138 after resident report)
+- Report + vote persist? **Y** — both survive full page reload
+- News scraper: completed (job #3), no new signals (all duplicates of existing imports)
+- Bugs / blockers: none found
+- Minor: `/favicon.ico` returns 404 (browser auto-request); we serve `favicon.svg` via `<link>` tag so this is cosmetic only
+- pytest: 41 passed, 0 failed
 
 **Done when:** Coworker can demo login → dashboard → DB signals from a fresh terminal without asking for help.
 
@@ -88,11 +90,11 @@
 ## Week 1 remaining (Sessions 2–4)
 
 ### Session 2 — Platform soak + docs polish
-→ **In progress today** (see “Today — Coworker Session 2” above).
+→ **Completed 2026-07-22** (see “Today — Coworker Session 2” above).
 
-- [ ] Cold-start: import → reprocess → server → login → dashboard
-- [ ] Report + vote persist; `/api/signals` → `storage: "db"`
-- [ ] Short TikTok + one news job; fix only soak bugs
+- [x] Cold-start: import → reprocess → server → login → dashboard
+- [x] Report + vote persist; `/api/signals` → `storage: “db”`
+- [x] One news job (TikTok skipped — no headed Chrome); no soak bugs found
 - [ ] Smoke checklist in README or `docs/` (use README cold-start section; expand only if gaps found)
 
 ### Session 3 — Dashboard UX harden
