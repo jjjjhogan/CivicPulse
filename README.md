@@ -14,7 +14,9 @@ scripts/                              # dashboard_server, import_signals, scrape
 data/raw/                             # scrape / import payloads
 data/signals/                         # normalized CivicSignal JSON (imported into SQLite)
 docs/INTEGRATION.md                   # API + signal contract
-docs/TIKTOK_SCRAPE.md                 # Chrome profile + login-wall notes
+docs/TWO_MONTH_ROADMAP.md             # 8-week strategy (canonical)
+docs/TIKTOK_SCRAPE.md                 # Chrome profile + TikTok operator notes
+SESSION_PLAN.md                       # Day-to-day session checklist / coworker prompts
 .env.example                          # HOST / PORT / FLASK_SECRET_KEY / DATABASE_URL
 ```
 
