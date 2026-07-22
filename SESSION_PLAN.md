@@ -5,71 +5,87 @@
 
 **Pace:** One theme per session → PR → manual QA → merge.
 
-**North star:** Research workspace on **Firestore** → **Render**; plus **classifier quality loop** (Phases A–E in the roadmap) so categories are trustworthy enough for demos.
+**North star:** Research workspace on **Firestore** → **Render**; plus **classifier quality loop** (Phases A–E) so categories are trustworthy enough for demos.
 
 ---
 
-## Today — Coworker Session 2 (2026-07-22)
+## Today — Session 3: Dashboard UX harden (2026-07-22)
 
-**Owner:** coworker  
-**Goal:** Cold-start CivicPulse on **his machine** with **SQLite**, prove the dashboard works end-to-end. **No new features** — soak + note bugs only.
+**Theme:** Empty / loading / error paths + readable scrape failures. **No redesign, no NLP, no Firebase, no Research.**  
+**Why now:** Session 2 cold-start passed cleanly (unusually simple) — still do this pass so demos don’t look broken when the API is down or a job fails.
+
+### Split
+
+| Person | Focus |
+|--------|--------|
+| **Coworker** | Scrapers panel + job failure UX; stop-server / API-down behavior for scrapers |
+| **Jack** | Feed, map, verify panel loading/empty/error; light CSS; optional favicon 404 note from soak |
+
+Work on branch `feature/dashboard-ux-harden-s3` (or agree one shared branch). Keep PRs small; `pytest -q` still green.
+
+---
 
 ### Coworker prompt (copy/paste)
 
-> Repo: CivicPulse (`Ryan/`). Do **Session 2 only** from `SESSION_PLAN.md`.  
-> Cold-start on this PC with SQLite: venv → pip → import → reprocess → dashboard_server → login → dashboard.  
-> Verify `/api/signals` shows `"storage": "db"`. Submit one resident report and one vote; reload and confirm they persist.  
-> Optional if time: one news job from Scrapers panel (skip TikTok unless headed Chrome is set up).  
-> Fix only blockers that prevent the cold start. No Firebase, Research UI, or classifier rewrite.  
-> Write any failures as bullets under “Soak notes” in `SESSION_PLAN.md` and commit if you fixed something.
+> Repo: CivicPulse (`Ryan/`). **Session 3 only** — Dashboard UX harden.  
+> Pull `main`, create/use branch `feature/dashboard-ux-harden-s3`.  
+> Focus: **Scrapers panel** in `dashboard.js` / related CSS.  
+> Goals:  
+> 1) When a scrape job fails, show a **readable** `error` (and useful last log lines) — no raw Tracebacks/stack dumps in the panel UI.  
+> 2) Status chips for running / done / failed stay clear.  
+> 3) If the server is stopped mid-poll or `/api/jobs` returns 401/5xx, the scrapers UI fails **gracefully** (message, not a blank/broken panel).  
+> Stay inside existing design language — light CSS only.  
+> Do **not** change classifier, keywords, Firebase, or Research.  
+> Manual test: start a news job then kill the server / force a failed job; confirm the UI stays understandable.  
+> Leave notes under Session 3 “Coworker notes” in `SESSION_PLAN.md`. Commit on the feature branch when ready.
 
-### Checklist
+### Coworker checklist
 
-#### A. Pull latest & set up
-- [x] `git pull origin main`
-- [x] `python -m venv .venv` (if no venv yet)
-- [x] Activate venv: `.\.venv\Scripts\Activate.ps1` (Windows) or `source .venv/bin/activate`
-- [x] `pip install -r requirements.txt`
-- [x] `copy .env.example .env` (optional; defaults are fine for local SQLite)
+- [ ] `git pull origin main` (+ sync feature branch if already created)
+- [ ] Audit scrapers panel: running / completed / failed states
+- [ ] `readableJobFailure` (or equivalent) never surfaces full stack traces in the panel
+- [ ] Polling errors (network / 401 / 500) show a short user-facing message
+- [ ] Manual: fail a job or stop server during poll → UI still usable
+- [ ] `pytest -q` green
+- [ ] Notes + commit on feature branch
 
-#### B. Load SQLite & run server
-- [x] `python scripts/import_signals.py` — 137 signals (78 tiktok, 18 reddit, 6 twitter, 35 news)
-- [x] `python scripts/reprocess_signals.py` — classification applied, avg confidence 0.51–0.75 per source
-- [x] `python scripts/dashboard_server.py` — started on port 3000
-- [x] Open login.html — created account "Soak Tester", redirected to dashboard
+### Coworker notes
 
-#### C. Verify DB-backed dashboard
-- [x] `/api/signals` → `{"count":137,"storage":"db",...}` ✓
-- [x] Dashboard feed shows 20 items (paginated), map has Leaflet markers ✓
-- [x] Submitted report "Broken streetlight on Alton Pkwy near Jeffrey" → appears in feed + Verify section ✓
-- [x] Cast upvote on report → shows "👍 It's there (1)" → reload → vote persists ✓
-
-#### D. Optional soak (if time)
-- [x] News job from Scrapers panel → completed successfully (job #3, polled 3 times, all 200s)
-- [ ] TikTok — skipped (no headed Chrome set up)
-- [x] `pytest -q` → 41 passed in 29s ✓
-
-#### E. Wrap-up
-- [x] Add **Soak notes** below (what worked / what broke)
-- [ ] If you fixed a blocker: commit on a branch or main per team habit and push
-- [x] Do **not** start Session 3 / Phase A / Firebase today unless Session 2 is fully green
-
-### Soak notes
-
-- Date / machine: 2026-07-22 / Windows 11, Python 3.14.6
-- Cold start OK? **Y** — venv + pip + import + reprocess + server all clean on first try
-- `/api/signals` storage: **db** (137 signals, then 138 after resident report)
-- Report + vote persist? **Y** — both survive full page reload
-- News scraper: completed (job #3), no new signals (all duplicates of existing imports)
-- Bugs / blockers: none found
-- Minor: `/favicon.ico` returns 404 (browser auto-request); we serve `favicon.svg` via `<link>` tag so this is cosmetic only
-- pytest: 41 passed, 0 failed
-
-**Done when:** Coworker can demo login → dashboard → DB signals from a fresh terminal without asking for help.
+-
 
 ---
 
-## Done — Week 1 Session 1 (do not re-open unless regressing)
+### Your checklist (Jack) — see chat for full agent prompt
+
+- [ ] Feed: loading vs empty vs error when `/api/signals` fails or returns []
+- [ ] Map: sensible empty/error (no silent blank map)
+- [ ] Verify panel: empty when zero resident reports; clear copy if votes can’t load
+- [ ] Light CSS only; optional fix cosmetic `/favicon.ico` 404 from Session 2 soak
+- [ ] Manual: stop `dashboard_server` and reload dashboard sections — graceful messages
+- [ ] Coordinate merge with coworker’s scrapers changes; `pytest -q` green
+
+### Shared done when
+
+- [ ] Stop the API / break a job → dashboard still explains what happened (feed/map/verify/scrapers)
+- [ ] No NLP/Firebase/Research scope creep
+- [ ] Feature branch ready to PR into `main`
+
+---
+
+## Done — Week 1 Session 2 (2026-07-22)
+
+Cold-start soak on coworker PC: **passed**.
+
+- [x] import → reprocess → server → login → dashboard
+- [x] `/api/signals` → `storage: "db"` (137+ signals)
+- [x] Report + vote persist across reload
+- [x] News job completed; TikTok skipped (no headed Chrome)
+- [x] `pytest -q` — 41 passed
+- Notes: favicon.ico 404 cosmetic only; no blockers
+
+---
+
+## Done — Week 1 Session 1
 
 - [x] SQLite `/api/signals`, runbook, TikTok desktop harden
 - [x] Reports + votes APIs, UI polish, pytest for new APIs
@@ -82,27 +98,15 @@
 2. Done means demoed on this PC.
 3. `pytest -q` green when behavior changes.
 4. Docs in the same PR when ops change.
-5. After any keyword/label change: **reprocess** + re-check the **gold sample** (Phase A list).
+5. After any keyword/label change: **reprocess** + re-check the gold sample (Phase A).
 6. Don’t start Firebase/Research UI before the week tables say so.
 
 ---
 
-## Week 1 remaining (Sessions 2–4)
-
-### Session 2 — Platform soak + docs polish
-→ **Completed 2026-07-22** (see “Today — Coworker Session 2” above).
-
-- [x] Cold-start: import → reprocess → server → login → dashboard
-- [x] Report + vote persist; `/api/signals` → `storage: “db”`
-- [x] One news job (TikTok skipped — no headed Chrome); no soak bugs found
-- [ ] Smoke checklist in README or `docs/` (use README cold-start section; expand only if gaps found)
+## Week 1 remaining
 
 ### Session 3 — Dashboard UX harden
-- [ ] Empty/loading/error for feed, map, verify, scrapers
-- [ ] Readable job `error` + log (no stack dumps in panel)
-- [ ] Light CSS only
-
-**Prompt:** Session 3 only — failure UX. No NLP changes.
+→ **Today** (see above).
 
 ### Session 4 — Phase A measure (+ light test debt)
 - [ ] Gold sample ~50–100 live signals; mark correct/wrong/none
@@ -111,8 +115,6 @@
 - [ ] Optional: small reports/votes test gaps if time
 
 **Prompt:** Phase A only — measure classification errors. Do not edit keywords/model yet unless a one-line typo. No Firebase/Research.
-
-**Done when:** Reusable gold sample + top failure modes written down.
 
 ---
 
@@ -140,9 +142,9 @@
 
 ---
 
-## Later (see roadmap tables)
+## Later (see roadmap)
 
-- **Weeks 3–4:** Firestore → Render; Person B continues Phase C batches  
+- **Weeks 3–4:** Firestore → Render; Phase C continues  
 - **Weeks 5–6:** Full Research workspace + gather jobs  
 - **Weeks 7–8:** Summary, map-by-research, Phase D polish, demo freeze  
 - **Phase E:** embeddings/stronger model — month 3 unless blocked  
