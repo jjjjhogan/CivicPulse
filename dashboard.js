@@ -150,11 +150,14 @@ function renderTagFilters() {
 
 // One-line banner above the feed when the list isn't real live data.
 function feedNotice() {
+  if (state.live === "loading") {
+    return null; // placeholder is already showing
+  }
   if (state.live === "offline") {
-    return "Couldn't reach the live signals API — showing sample data. Start the server with: python scripts/dashboard_server.py";
+    return "Couldn't reach the signals API — showing sample data. Start the server and refresh.";
   }
   if (state.live === "empty") {
-    return "No live signals yet — showing sample data. Run a scraper above to populate the feed.";
+    return "No signals scraped yet — showing sample data. Run a scraper above to populate the feed.";
   }
   return null;
 }
@@ -303,14 +306,20 @@ function isVerified(vote) {
   return vote.up >= 3 && vote.up > vote.down;
 }
 
+let votesLoadFailed = false;
+
 async function loadVotesFromServer() {
   try {
     const res = await fetch("/api/votes", { credentials: "same-origin" });
-    if (!res.ok) return;
+    if (!res.ok) {
+      votesLoadFailed = true;
+      return;
+    }
     const data = await res.json();
     voteState = data.votes || {};
+    votesLoadFailed = false;
   } catch {
-    // Keep last known tallies if the request fails.
+    votesLoadFailed = true;
   }
 }
 
@@ -354,13 +363,33 @@ function renderVerify() {
   const reports = state.signals.filter((s) => s.source === "resident");
   el.innerHTML = "";
 
+  if (state.live === "offline") {
+    hint.textContent = "Vote on whether resident-reported issues are really there";
+    const msg = document.createElement("p");
+    msg.className = "feed-empty";
+    msg.textContent = "Can't load resident reports — the server is offline.";
+    el.appendChild(msg);
+    return;
+  }
+
   if (reports.length === 0) {
     hint.textContent = "Vote on whether resident-reported issues are really there";
     const empty = document.createElement("p");
     empty.className = "feed-empty";
-    empty.textContent = "No issues right now.";
-    el.appendChild(empty);
+    empty.textContent = "No resident reports yet — submit one from the report page.";
+    const link = document.createElement("a");
+    link.href = "report.html";
+    link.className = "verify-report-link";
+    link.textContent = "Report an issue →";
+    el.append(empty, link);
     return;
+  }
+
+  if (votesLoadFailed) {
+    const note = document.createElement("p");
+    note.className = "feed-notice";
+    note.textContent = "Vote tallies couldn't be loaded — totals may be out of date.";
+    el.appendChild(note);
   }
 
   const pending = reports.filter(
@@ -483,9 +512,32 @@ const markersByKey = new Map();
 function renderMarkers() {
   markerLayer.clearLayers();
   markersByKey.clear();
-  for (const record of visibleSignals()) {
-    const { lat, lng } = record.metadata || {};
-    if (lat == null || lng == null) continue;
+  const mapOverlay = document.getElementById("mapOverlay");
+  const geoSignals = visibleSignals().filter(
+    (r) => r.metadata?.lat != null && r.metadata?.lng != null
+  );
+
+  if (state.live === "offline") {
+    if (mapOverlay) {
+      mapOverlay.textContent = "Map data unavailable — the signals API is offline.";
+      mapOverlay.hidden = false;
+    }
+    return;
+  }
+  if (geoSignals.length === 0) {
+    if (mapOverlay) {
+      mapOverlay.textContent =
+        state.live === "empty"
+          ? "No signals with locations yet — run a scraper or submit a report to populate the map."
+          : "No signals match the current filters, or none have location data.";
+      mapOverlay.hidden = false;
+    }
+    return;
+  }
+  if (mapOverlay) mapOverlay.hidden = true;
+
+  for (const record of geoSignals) {
+    const { lat, lng } = record.metadata;
     const color = CATEGORY_COLORS[record.categories[0]] || "#666";
     const icon = L.divIcon({
       className: "civic-marker",
@@ -539,6 +591,13 @@ async function loadSignals() {
   }
   const { signals, storage } = await fetchLiveSignalsResult();
   mergeSignals(signals);
+  if (storage != null && signals.length > 0) {
+    state.live = "live";
+  } else if (storage != null && signals.length === 0) {
+    state.live = "empty";
+  } else {
+    state.live = "offline";
+  }
   await loadVotesFromServer();
   renderVerify();
   if (storage === "db") {
@@ -623,9 +682,13 @@ async function showLastJobs() {
   let jobs;
   try {
     const res = await fetch("/api/jobs?limit=50", { credentials: "same-origin" });
-    if (!res.ok) return;
+    if (!res.ok) {
+      logLine("Couldn't load job history — the server returned an error.");
+      return;
+    }
     jobs = (await res.json()).jobs || [];
   } catch {
+    logLine("Couldn't load job history — the server may be offline.");
     return;
   }
 
