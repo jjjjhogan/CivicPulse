@@ -99,3 +99,44 @@ def test_vote_toggle(auth_client):
     votes = listing.get_json()["votes"]
     assert votes[str(signal_id)]["down"] == 1
     assert votes[str(signal_id)]["mine"] == "down"
+
+
+def test_vote_on_nonexistent_signal(auth_client):
+    res = auth_client.post(
+        "/api/votes",
+        json={"signal_id": 99999, "choice": "up"},
+    )
+    assert res.status_code == 404
+
+
+def test_vote_invalid_choice(auth_client):
+    created = auth_client.post("/api/reports", json=_sample_report()).get_json()
+    signal_id = created["signal"]["id"]
+    res = auth_client.post(
+        "/api/votes",
+        json={"signal_id": signal_id, "choice": "sideways"},
+    )
+    assert res.status_code == 400
+
+
+def test_votes_list_without_auth(client):
+    client.post("/api/reports", json=_sample_report())
+    res = client.get("/api/votes")
+    assert res.status_code == 200
+    data = res.get_json()
+    assert "votes" in data
+
+
+def test_report_missing_location(client):
+    payload = _sample_report()
+    del payload["metadata"]["lat"]
+    del payload["metadata"]["lng"]
+    res = client.post("/api/reports", json=payload)
+    assert res.status_code == 400
+
+
+def test_report_missing_address(client):
+    payload = _sample_report()
+    payload["metadata"]["address"] = ""
+    res = client.post("/api/reports", json=payload)
+    assert res.status_code == 400

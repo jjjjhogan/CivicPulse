@@ -9,7 +9,7 @@
 
 ---
 
-## Today — Session 3: Dashboard UX harden (2026-07-22)
+## Today — Session 4: Phase A classification audit (2026-07-22)
 
 **Theme:** Empty / loading / error paths + readable scrape failures. **No redesign, no NLP, no Firebase, no Research.**  
 **Why now:** Session 2 cold-start passed cleanly (unusually simple) — still do this pass so demos don’t look broken when the API is down or a job fails.
@@ -109,12 +109,12 @@ Cold-start soak on coworker PC: **passed**.
 → **Today** (see above).
 
 ### Session 4 — Phase A measure (+ light test debt)
-- [ ] Gold sample ~50–100 live signals; mark correct/wrong/none
-- [ ] Note `method` + obvious bad keywords; write failure-mode summary
-- [ ] Save review list for reuse (sheet or `data/labels/review_batch_*.md`)
-- [ ] Optional: small reports/votes test gaps if time
+- [x] Gold sample — all 138 live signals reviewed; marked correct/wrong/none/partial
+- [x] Method + failure-mode summary written (5 failure modes identified)
+- [x] Saved as `data/labels/review_batch_01.md`
+- [x] Added 5 edge-case tests for reports/votes (nonexistent signal, invalid choice, unauthenticated votes list, missing location, missing address) — 46 passed
 
-**Prompt:** Phase A only — measure classification errors. Do not edit keywords/model yet unless a one-line typo. No Firebase/Research.
+**Results:** 34% correct, 25% wrong, 30% none (no civic content), 12% partial. Top failures: inherited TikTok comments (24% of total — chatter inherits parent category), legacy news labels (8/13 wrong), broad keywords ("waste" → sanitation, "housing" → university dorms). See `data/labels/review_batch_01.md` for full review.
 
 ---
 
