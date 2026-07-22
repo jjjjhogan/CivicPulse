@@ -57,12 +57,12 @@ Work on branch `feature/dashboard-ux-harden-s3` (or agree one shared branch). Ke
 
 ### Your checklist (Jack) — see chat for full agent prompt
 
-- [ ] Feed: loading vs empty vs error when `/api/signals` fails or returns []
-- [ ] Map: sensible empty/error (no silent blank map)
-- [ ] Verify panel: empty when zero resident reports; clear copy if votes can’t load
-- [ ] Light CSS only; optional fix cosmetic `/favicon.ico` 404 from Session 2 soak
-- [ ] Manual: stop `dashboard_server` and reload dashboard sections — graceful messages
-- [ ] Coordinate merge with coworker’s scrapers changes; `pytest -q` green
+- [x] Feed: loading placeholder → live / empty notice / offline notice; "No signals match" when filters yield zero
+- [x] Map: overlay message for offline, empty, and no-match-with-location states (centered on map, semi-transparent)
+- [x] Verify panel: offline message; zero-reports shows "No resident reports yet" + link to report page; votes-load-failed notice
+- [x] Light CSS only; fixed `/favicon.ico` 404 with 301 redirect to `favicon.svg` in Flask
+- [x] Manual: simulated offline/empty/filter-no-match states in browser — all show graceful messages
+- [x] `pytest -q` — 41 passed; awaiting coworker’s scrapers branch for merge coordination
 
 ### Shared done when
 

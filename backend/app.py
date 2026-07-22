@@ -45,6 +45,10 @@ def create_app(test_config: dict | None = None) -> Flask:
     def dashboard_shortcut():
         return redirect("/dashboard.html")
 
+    @app.get("/favicon.ico")
+    def favicon_redirect():
+        return redirect("/favicon.svg", code=301)
+
     @app.route("/", defaults={"filename": "index.html"})
     @app.route("/<path:filename>")
     def static_files(filename: str):
