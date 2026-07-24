@@ -9,74 +9,67 @@
 
 ---
 
-## Today — Session 3: Dashboard UX harden (2026-07-22)
+## Today — Session 4: Phase A hand gold sample (2026-07-24)
 
-**Theme:** Empty / loading / error paths + readable scrape failures. **No redesign, no NLP, no Firebase, no Research.**  
-**Why now:** Session 2 cold-start passed cleanly (unusually simple) — still do this pass so demos don’t look broken when the API is down or a job fails.
+**Theme:** Build a **human-labeled** gold sample so Session 5+ fixes are measured against real judgments — not an AI auto-pass.  
+**Scope:** Measure only. **No** keyword surgery, model retrain, Firebase, or Research.
 
-### Split
+**Context:** Phase A audit work (PR #13 / `feature/phase-a-audit-s4`) produced an **AI-assisted** first pass now on `main` as [`data/labels/review_batch_01.md`](data/labels/review_batch_01.md) (~138 signals, auto verdicts). That file is a **draft / scaffold only**. It is **not** the gold sample until Jack + coworker have marked each row by hand.
 
-| Person | Focus |
-|--------|--------|
-| **Coworker** | Scrapers panel + job failure UX; stop-server / API-down behavior for scrapers |
-| **Jack** | Feed, map, verify panel loading/empty/error; light CSS; optional favicon 404 note from soak |
+### How we work today (one agent)
 
-Work on branch `feature/dashboard-ux-harden-s3` (or agree one shared branch). Keep PRs small; `pytest -q` still green.
+| Role | Job |
+|------|-----|
+| **One coding agent** | Prep the review worksheet, pull live signal text/IDs/method, keep tally + failure-mode notes, commit when asked. Does **not** invent correct/wrong/none labels. |
+| **Jack + coworker (humans)** | Together, hand-classify each gold-sample signal: **correct / wrong / none / partial**; note obvious bad keywords or `method` when useful. |
 
----
+No coworker/Jack code split this session — both people label; one agent supports the worksheet.
 
-### Coworker prompt (copy/paste)
+**Suggested branch:** `feature/phase-a-gold-hand-s4` (from current `main`). Prefer a new review file (e.g. `data/labels/review_batch_02_hand.md`) or clearly mark hand-verified rows in the draft so AI vs human judgments stay distinct.
 
-> Repo: CivicPulse (`Ryan/`). **Session 3 only** — Dashboard UX harden.  
-> Pull `main`, create/use branch `feature/dashboard-ux-harden-s3`.  
-> Focus: **Scrapers panel** in `dashboard.js` / related CSS.  
-> Goals:  
-> 1) When a scrape job fails, show a **readable** `error` (and useful last log lines) — no raw Tracebacks/stack dumps in the panel UI.  
-> 2) Status chips for running / done / failed stay clear.  
-> 3) If the server is stopped mid-poll or `/api/jobs` returns 401/5xx, the scrapers UI fails **gracefully** (message, not a blank/broken panel).  
-> Stay inside existing design language — light CSS only.  
-> Do **not** change classifier, keywords, Firebase, or Research.  
-> Manual test: start a news job then kill the server / force a failed job; confirm the UI stays understandable.  
-> Leave notes under Session 3 “Coworker notes” in `SESSION_PLAN.md`. Commit on the feature branch when ready.
+### Agent prompt (copy/paste)
 
-### Coworker checklist
+> Repo: CivicPulse (`Ryan/`). **Session 4 only** — Phase A **hand** gold sample.  
+> Pull `main`. Use/create branch `feature/phase-a-gold-hand-s4`.  
+> The AI first-pass in `review_batch_01.md` (if present) is draft only — do not treat its verdicts as ground truth.  
+> Help Jack + coworker hand-label ~50–100 live signals (mix of sources). For each: show id, source, title/body snippet, assigned categories, `method`. Record **their** verdict (correct / wrong / none / partial) + short note.  
+> After a solid batch: tally + top failure modes (still measurement only).  
+> Do **not** edit `CATEGORY_KEYWORDS`, classifier, labels training set, Firebase, or Research.  
+> `pytest -q` green if you touch tests; commit only when asked.
 
-- [ ] `git pull origin main` (+ sync feature branch if already created)
-- [ ] Audit scrapers panel: running / completed / failed states
-- [ ] `readableJobFailure` (or equivalent) never surfaces full stack traces in the panel
-- [ ] Polling errors (network / 401 / 500) show a short user-facing message
-- [ ] Manual: fail a job or stop server during poll → UI still usable
-- [ ] `pytest -q` green
-- [ ] Notes + commit on feature branch
+### Shared checklist
 
-### Coworker notes
+- [ ] Branch from latest `main`; draft AI review treated as scaffold only
+- [ ] Hand-label gold sample (~50–100; mix TikTok / news / reddit / twitter / resident)
+- [ ] Each row: verdict + note; capture `method` / bad keyword when obvious
+- [ ] Save reusable hand review (`data/labels/review_batch_02_hand.md` or equivalent)
+- [ ] Short failure-mode summary (enough to drive Session 5 Phase B)
+- [ ] No keyword / model / Firebase / Research edits
+- [ ] `pytest -q` green; PR when the hand sample is usable
+
+### Session notes
 
 -
 
----
-
-### Your checklist (Jack) — see chat for full agent prompt
-
-- [x] Feed: loading placeholder → live / empty notice / offline notice; "No signals match" when filters yield zero
-- [x] Map: overlay message for offline, empty, and no-match-with-location states (centered on map, semi-transparent)
-- [x] Verify panel: offline message; zero-reports shows "No resident reports yet" + link to report page; votes-load-failed notice
-- [x] Light CSS only; fixed `/favicon.ico` 404 with 301 redirect to `favicon.svg` in Flask
-- [x] Manual: simulated offline/empty/filter-no-match states in browser — all show graceful messages
-- [x] `pytest -q` — 41 passed; awaiting coworker’s scrapers branch for merge coordination
-
-### Follow-up (Jack) — `feature/dashboard-offline-auth-s3`
-
-- [x] When `/api/auth/me` is unreachable or non-OK, stay on dashboard (don’t bounce to login) so feed/map/verify can explain the outage
-- [x] Distinguish signals API `error` vs `offline` in `fetchLiveSignalsResult` / panel copy
-- [ ] Manual: stop `dashboard_server`, reload dashboard → panels explain (not login redirect)
-- [x] `pytest -q` green
-- [ ] Commit + open small PR into `main`
-
 ### Shared done when
 
-- [ ] Stop the API / break a job → dashboard still explains what happened (feed/map/verify/scrapers)
-- [ ] No NLP/Firebase/Research scope creep
-- [ ] Feature branch ready to PR into `main`
+- [ ] Hand-labeled gold sample committed (reuse for Session 5 re-score)
+- [ ] Failure modes written from **human** verdicts
+- [ ] AI draft not confused with gold
+- [ ] No Phase B scope creep
+
+---
+
+## Done — Week 1 Session 3 (2026-07-22)
+
+Dashboard UX harden + offline-auth follow-up.
+
+- [x] Feed / map / verify loading, empty, offline, error states (PR #12)
+- [x] Scrapers-oriented job failure copy (as landed with UX harden)
+- [x] Offline auth: stay on dashboard when API down (PR #14)
+- [x] Reddit/Twitter import: lenient JSON + DevTools dump paste parser (PR #14)
+- [x] Favicon `/favicon.ico` → `/favicon.svg`
+- [x] `pytest -q` green on merge
 
 ---
 
@@ -114,15 +107,10 @@ Cold-start soak on coworker PC: **passed**.
 ## Week 1 remaining
 
 ### Session 3 — Dashboard UX harden
-→ **Today** (see above).
+→ **Done** (see above).
 
 ### Session 4 — Phase A measure (+ light test debt)
-- [ ] Gold sample ~50–100 live signals; mark correct/wrong/none
-- [ ] Note `method` + obvious bad keywords; write failure-mode summary
-- [ ] Save review list for reuse (sheet or `data/labels/review_batch_*.md`)
-- [ ] Optional: small reports/votes test gaps if time
-
-**Prompt:** Phase A only — measure classification errors. Do not edit keywords/model yet unless a one-line typo. No Firebase/Research.
+→ **Today** — hand gold sample (AI draft ≠ ground truth); see above.
 
 ---
 
