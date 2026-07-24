@@ -10,24 +10,16 @@ from backend.auth import get_current_user, login_required
 from backend.db import get_session
 from backend.jobs import build_command, is_job_running, normalize_source, start_job
 from backend.models import ScrapeJob
+from scrapers.json_payload import ImportPayloadError, parse_import_payload
 
 bp = Blueprint("jobs", __name__)
 
 
 def _parse_json_payload(raw) -> dict:
-    if raw is None:
-        raise ValueError("JSON payload is required.")
-    if isinstance(raw, dict):
-        return raw
-    if isinstance(raw, str):
-        text = raw.strip()
-        if not text:
-            raise ValueError("JSON payload is empty.")
-        parsed = json.loads(text)
-        if not isinstance(parsed, dict):
-            raise ValueError("JSON payload must be an object.")
-        return parsed
-    raise ValueError("JSON payload must be an object or JSON string.")
+    try:
+        return parse_import_payload(raw)
+    except ImportPayloadError as exc:
+        raise ValueError(str(exc)) from exc
 
 
 def _extract_import_payload() -> dict:

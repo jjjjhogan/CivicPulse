@@ -173,3 +173,38 @@ def test_concurrent_job_rejected(auth_client, monkeypatch):
 
     with jobs._job_lock:
         jobs._running_job_id = None
+
+
+def test_reddit_import_accepts_devtools_dump(auth_client, monkeypatch, tmp_path):
+    """Pasted DevTools tree dumps should be coerced before the process script runs."""
+    written = {}
+
+    def fake_run(cmd, *a, **k):
+        # build_import_command writes data/raw/reddit_scrape.json then runs process script.
+        import json
+        from pathlib import Path
+
+        from backend.config import RAW_DIR
+
+        raw = Path(RAW_DIR) / "reddit_scrape.json"
+        written["payload"] = json.loads(raw.read_text(encoding="utf-8"))
+        return subprocess.CompletedProcess(args=cmd, returncode=0, stdout="ok\n", stderr="")
+
+    monkeypatch.setattr("backend.jobs.subprocess.run", fake_run)
+    monkeypatch.setattr("backend.jobs.threading.Thread", _inline_thread)
+    monkeypatch.setattr(
+        "backend.signals_import.sync_signals_after_scrape",
+        lambda source=None: {"inserted": 0, "updated": 0},
+    )
+
+    dump = (
+        '{3}blocked: falsequery: "irvine"items: [1]'
+        '0: {3}id: "abc"title: "Pothole on Culver"previewText: "Still open"'
+    )
+    res = auth_client.post(
+        "/api/jobs",
+        json={"source": "reddit", "settings": {"payload": dump}},
+    )
+    assert res.status_code == 202, res.get_json()
+    assert written["payload"]["query"] == "irvine"
+    assert written["payload"]["items"][0]["id"] == "abc"

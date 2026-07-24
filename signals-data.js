@@ -390,18 +390,24 @@ function signalUrl(signal) {
 }
 
 // Fetch live signals from the Flask backend (SQLite when imported).
-// Returns { signals, storage } where storage is "db" | "json" | null.
+// Returns { signals, storage, status } where:
+//   status  — "live" | "empty" | "error" | "offline"
+//   storage — "db" | "json" | null
 async function fetchLiveSignalsResult() {
   try {
     const res = await fetch("/api/signals");
-    if (!res.ok) return { signals: [], storage: null };
+    if (!res.ok) {
+      return { signals: [], storage: null, status: "error" };
+    }
     const data = await res.json();
+    const signals = data.signals || [];
     return {
-      signals: data.signals || [],
+      signals,
       storage: data.storage || null,
+      status: signals.length ? "live" : "empty",
     };
   } catch {
-    return { signals: [], storage: null };
+    return { signals: [], storage: null, status: "offline" };
   }
 }
 

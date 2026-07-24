@@ -2,31 +2,27 @@
   {
     "source": "reddit",
     "outlet": "r/irvine",
-    "title": "Do Irvine Residents Feel Safer with Flock Cameras everywhere?",
-    "body": "Do Irvine Residents Feel Safer with Flock Cameras everywhere?\nAre the security risks, constant monitoring, the fact that a private corporation is in control of the data as you cant own a flock device only rent it, and this information being used for issues unrelated to motor vehicles worth it? Just check the logs for these cameras to see how many requests are made for immigration instead of actual crimes.",
-    "url": "https://old.reddit.com/r/irvine/comments/1uqoc80/do_irvine_residents_feel_safer_with_flock_cameras/",
+    "title": "Smoking on Property: Irvine Company\u2019s Refusal to Enforce City Law",
+    "body": "Smoking on Property: Irvine Company\u2019s Refusal to Enforce City Law\nHello. I live in Irvine company housing near Spectrum and had reported make-shift smoking areas I had found on the property. It has now been one full week with no response from Irvine Company other th Hello. I live in Irvine company housing near Spectrum and had reported make-shift smoking areas I had found on the property. It has now been one full week with no response from Irvine Company other than the \u201cwe will look into it\u201d response.\nIn the meantime, the smoking areas are still being used and cigarette butts and trash are littered all around\nGiven how clear the city laws are pertaining to smoking cigarettes in public areas, can I just report them to the city? What is the process here?",
+    "url": "https://old.reddit.com/r/irvine/comments/1v3njdq/smoking_on_property_irvine_companys_refusal_to/",
     "categories": [
-      "property_crime",
-      "public_safety",
-      "housing",
-      "immigration"
+      "sanitation",
+      "housing"
     ],
-    "published_utc": "2026-07-08",
+    "published_utc": "2026-07-22",
     "metadata": {
-      "author": "robyobyobyoby",
-      "post_id": "1uqoc80",
-      "score": 50,
-      "comment_count": 62,
-      "search_query": "news+irvine",
+      "author": "StonedBooty",
+      "post_id": "1v3njdq",
+      "score": null,
+      "comment_count": 6,
+      "search_query": "irvine",
       "flair": null,
       "classification": {
         "scores": {
-          "public_safety": 0.7,
-          "housing": 0.7,
-          "immigration": 0.7,
-          "property_crime": 0.73
+          "sanitation": 0.87,
+          "housing": 0.7
         },
-        "confidence": 0.708,
+        "confidence": 0.785,
         "method": "keywords+model",
         "model_version": "nb-v1"
       }
@@ -35,261 +31,51 @@
   {
     "source": "reddit",
     "outlet": "r/irvine",
-    "title": "Missing Person!",
-    "body": "Missing Person!\nUPDATE - Found and home safe. Thank you, everyone! We need help finding Amy Harchol, a 67-year-old woman. She walked away from her home near Harcum Ln. and Saginaw Dr. this morning around 9:30 a.m. Please call 9-1-1 if you see Amy.",
-    "url": "https://old.reddit.com/r/irvine/comments/1uqilbd/missing_person/",
+    "title": "5 Frwy N. between Lake Forest and Irvine",
+    "body": "5 Frwy N. between Lake Forest and Irvine\nAround 11:30 PM I saw a lot of firetrucks and the freeway was shut down northbound on the five between Lake Forest and Irvine so go ahead five north does anyone know what happened? I know the chat on  Around 11:30 PM I saw a lot of firetrucks and the freeway was shut down northbound on the five between Lake Forest and Irvine so go ahead five north does anyone know what happened? I know the chat on the freeway I hope everyone is OK.",
+    "url": "https://old.reddit.com/r/irvine/comments/1v38c3z/5_frwy_n_between_lake_forest_and_irvine/",
     "categories": [
       "public_safety"
     ],
-    "published_utc": "2026-07-08",
+    "published_utc": "2026-07-22",
     "metadata": {
-      "author": "Irvinepd",
-      "post_id": "1uqilbd",
-      "score": 92,
-      "comment_count": 7,
-      "search_query": "news+irvine",
+      "author": "Ok_Cele2025",
+      "post_id": "1v38c3z",
+      "score": 10,
+      "comment_count": 2,
+      "search_query": "irvine",
       "flair": null,
       "classification": {
         "scores": {
-          "public_safety": 0.77
+          "public_safety": 0.817
         },
-        "confidence": 0.77,
-        "method": "keywords+model",
-        "model_version": "nb-v1"
+        "confidence": 0.817,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
       }
     }
   },
   {
     "source": "reddit",
     "outlet": "r/irvine",
-    "title": "Pregnancy journey doctor recommendations",
-    "body": "Pregnancy journey doctor recommendations\nWife and I are blessed with our first born but the birth was very difficult. Every pregnancy since then has been a miscarriage. Any good doctor or IVF recommendations?",
-    "url": "https://old.reddit.com/r/irvine/comments/1uqhn8m/pregnancy_journey_doctor_recommendations/",
-    "categories": [],
-    "published_utc": "2026-07-08",
-    "metadata": {
-      "author": "loneMnM",
-      "post_id": "1uqhn8m",
-      "score": 2,
-      "comment_count": 3,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 0.952,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "Altair in the news again?",
-    "body": "Altair in the news again?\nThree helicopters hovering in place over the community",
-    "url": "https://old.reddit.com/r/irvine/comments/1uqb87z/altair_in_the_news_again/",
-    "categories": [],
-    "published_utc": "2026-07-07",
-    "metadata": {
-      "author": "Salty-Employment6229",
-      "post_id": "1uqb87z",
-      "score": 43,
-      "comment_count": 24,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 0.809,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "Our lovely new slurry seal",
-    "body": "Our lovely new slurry seal\nHow is the slurry seal from last week already ruined? Is it melting from the heat? Did it get wet? Did they remove the cones too soon? It still feels soft.",
-    "url": "https://old.reddit.com/r/irvine/comments/1uqam9g/our_lovely_new_slurry_seal/",
+    "title": "Google Fiber Installation Process at new Avella (Irvine Company Apartment)",
+    "body": "Google Fiber Installation Process at new Avella (Irvine Company Apartment)\nHello all\nI am thinking of self installation of Google Fiber because I was told that the new Avella II comes with Google Fiber infrastructure by default. I thought I can do self install of GFiber, but Hello all\nI am thinking of self installation of Google Fiber because I was told that the new Avella II comes with Google Fiber infrastructure by default. I thought I can do self install of GFiber, but I was told that I should have a professional come over my place. Does anybody know the reason?",
+    "url": "https://old.reddit.com/r/irvine/comments/1v367ek/google_fiber_installation_process_at_new_avella/",
     "categories": [
-      "potholes"
+      "housing"
     ],
-    "published_utc": "2026-07-07",
+    "published_utc": "2026-07-22",
     "metadata": {
-      "author": "capriciousguacamole",
-      "post_id": "1uqam9g",
-      "score": 16,
-      "comment_count": 15,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {
-          "potholes": 0.7
-        },
-        "confidence": 0.7,
-        "method": "keywords",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "Best food spots around Irvine Valley College?",
-    "body": "Best food spots around Irvine Valley College?\nI'm currently a new student at IVC taking summer classes. Do you guys have any recommendations for any good food spots by the area?",
-    "url": "https://old.reddit.com/r/irvine/comments/1upncbx/best_food_spots_around_irvine_valley_college/",
-    "categories": [],
-    "published_utc": "2026-07-07",
-    "metadata": {
-      "author": "hydroblastii2",
-      "post_id": "1upncbx",
-      "score": 29,
-      "comment_count": 33,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 0.975,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "Affordable cat vet in area?",
-    "body": "Affordable cat vet in area?\nAny recs for affordable cat vets in irvine or surrounding area? Ideally somewhere closer to Irvine or within a 30 min drive.",
-    "url": "https://old.reddit.com/r/irvine/comments/1uplzc4/affordable_cat_vet_in_area/",
-    "categories": [],
-    "published_utc": "2026-07-07",
-    "metadata": {
-      "author": "centimetercat8",
-      "post_id": "1uplzc4",
-      "score": 8,
-      "comment_count": 9,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 0.663,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "Beware if Aptive Pest Control Comes to your door for sign up, do not do it.",
-    "body": "Beware if Aptive Pest Control Comes to your door for sign up, do not do it.\nMy elderly parents signed up for Aptive pest control when they came to their door last week. This company is not accredited and have an average 1.07 Star rating with 739 reviews. They are scammers. Do not sign up and tell your elderly parents to NOT open the door.",
-    "url": "https://old.reddit.com/r/irvine/comments/1upevdi/beware_if_aptive_pest_control_comes_to_your_door/",
-    "categories": [],
-    "published_utc": "2026-07-07",
-    "metadata": {
-      "author": "HastenDownTheWind",
-      "post_id": "1upevdi",
-      "score": 81,
-      "comment_count": 13,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 0.401,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "Espresso machine repair recommendations?",
-    "body": "Espresso machine repair recommendations?\nI was wondering if anyone has recommendations for repair services for home espresso machines.",
-    "url": "https://old.reddit.com/r/irvine/comments/1up3gnk/espresso_machine_repair_recommendations/",
-    "categories": [],
-    "published_utc": "2026-07-06",
-    "metadata": {
-      "author": "WeatherInternal3409",
-      "post_id": "1up3gnk",
-      "score": 2,
-      "comment_count": 6,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 0.941,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "School District / Family Move",
-    "body": "School District / Family Move\nWe are looking at a few different neighborhoods but the school boundary maps on the city site are a bit confusing. We're planning to attend Northwood High School.",
-    "url": "https://old.reddit.com/r/irvine/comments/1up220d/school_district_family_move/",
-    "categories": [],
-    "published_utc": "2026-07-06",
-    "metadata": {
-      "author": "Comfortable-Bike9080",
-      "post_id": "1up220d",
-      "score": 8,
+      "author": "CompoteAlternative62",
+      "post_id": "1v367ek",
+      "score": 1,
       "comment_count": 4,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 0.36,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "Lost cat at Jeffrey Trail",
-    "body": "Lost cat at Jeffrey Trail\nFound this guy on the Jeffrey trail leading into Visions.",
-    "url": "https://old.reddit.com/r/irvine/comments/1uonb5y/lost_cat_at_jeffrey_trail/",
-    "categories": [],
-    "published_utc": "2026-07-06",
-    "metadata": {
-      "author": "FarNobody5370",
-      "post_id": "1uonb5y",
-      "score": 54,
-      "comment_count": 6,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 0.631,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "The Drone Show/ Fireworks were pretty good in Woodbridge",
-    "body": "The Drone Show/ Fireworks were pretty good in Woodbridge\nWoodbridge Village Association had their first drone show and fireworks this year for their 50th anniversary.",
-    "url": "https://old.reddit.com/r/irvine/comments/1uoakdq/the_drone_show_fireworks_were_pretty_good_in/",
-    "categories": [
-      "noise"
-    ],
-    "published_utc": "2026-07-05",
-    "metadata": {
-      "author": "MichaelUramMFT",
-      "post_id": "1uoakdq",
-      "score": 281,
-      "comment_count": 25,
-      "search_query": "news+irvine",
+      "search_query": "irvine",
       "flair": null,
       "classification": {
         "scores": {
-          "noise": 0.7
+          "housing": 0.7
         },
         "confidence": 0.7,
         "method": "keywords",
@@ -300,354 +86,20 @@
   {
     "source": "reddit",
     "outlet": "r/irvine",
-    "title": "Where can you fly a drone?",
-    "body": "Where can you fly a drone?\nSince moving to OC I thought I could get some really cool shots of the ocean with my drone. People who have drones where do you fly it?",
-    "url": "https://old.reddit.com/r/irvine/comments/1uo8390/where_can_you_fly_a_drone/",
-    "categories": [],
-    "published_utc": "2026-07-05",
-    "metadata": {
-      "author": "Radiant_Lock_7603",
-      "post_id": "1uo8390",
-      "score": 7,
-      "comment_count": 5,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 0.53,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "July 4th Events in Irvine",
-    "body": "July 4th Events in Irvine\nI noticed Irvine didn't have anything planned. Why can't we get a July 4th event in place?",
-    "url": "https://old.reddit.com/r/irvine/comments/1unankr/july_4th_events_in_irvine/",
-    "categories": [],
-    "published_utc": "2026-07-04",
-    "metadata": {
-      "author": "DependentPuzzled2742",
-      "post_id": "1unankr",
-      "score": 20,
-      "comment_count": 37,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 0.589,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "Irvine Civic Center today",
-    "body": "Irvine Civic Center today\nIt looks amazing!",
-    "url": "https://old.reddit.com/r/irvine/comments/1un91mf/irvine_civic_center_today/",
-    "categories": [],
-    "published_utc": "2026-07-04",
-    "metadata": {
-      "author": "jms1228",
-      "post_id": "1un91mf",
-      "score": 179,
-      "comment_count": 30,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 0.749,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "Last seen June 27: HELP MERLIN COME HOME!",
-    "body": "Last seen June 27: HELP MERLIN COME HOME!\nIf you have seen or even brought in a black cat since then, that might be Merlin. 500 reward to bring him back!!!",
-    "url": "https://old.reddit.com/r/irvine/comments/1umjelf/last_seen_june_27_help_merlin_come_home/",
-    "categories": [],
-    "published_utc": "2026-07-03",
-    "metadata": {
-      "author": "madeyemads",
-      "post_id": "1umjelf",
-      "score": 102,
-      "comment_count": 16,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 0.575,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "Cookie Monster was in Irvine!!",
-    "body": "Cookie Monster was in Irvine!!\nThis bit was For Sure filmed at the Great Park! Did anyone get an opportunity to see Cookie Monster when it was filming?",
-    "url": "https://old.reddit.com/r/irvine/comments/1um2h4m/cookie_monster_was_in_irvine/",
-    "categories": [],
-    "published_utc": "2026-07-03",
-    "metadata": {
-      "author": "TravellingFool123",
-      "post_id": "1um2h4m",
-      "score": 52,
-      "comment_count": 4,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 0.448,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "Does USMNT sign autographs after their practices at Great Park?",
-    "body": "Does USMNT sign autographs after their practices at Great Park?\nDoes USMNT sign autographs after their practices at Great Park? Did anyone get the chance?",
-    "url": "https://old.reddit.com/r/irvine/comments/1um1qku/does_usmnt_sign_autographs_after_their_practices/",
-    "categories": [],
-    "published_utc": "2026-07-03",
-    "metadata": {
-      "author": "Some_Mine5943",
-      "post_id": "1um1qku",
-      "score": 12,
-      "comment_count": 11,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 0.59,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "Cr\u00e8me school tuition costs",
-    "body": "Cr\u00e8me school tuition costs\nHas anybody received tuition costs for cr\u00e8me? Looking for full or part time for an almost 3 year old.",
-    "url": "https://old.reddit.com/r/irvine/comments/1ulyxwo/cr%C3%A8me_school_tuition_costs/",
-    "categories": [],
-    "published_utc": "2026-07-03",
-    "metadata": {
-      "author": "pepperonidingleberry",
-      "post_id": "1ulyxwo",
-      "score": 3,
-      "comment_count": 10,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 0.75,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "Is Mike Ward park a good place to watch July 4th fireworks?",
-    "body": "Is Mike Ward park a good place to watch July 4th fireworks?\nLooking for the best place to watch the Woodbridge fireworks with an emphasis on keeping my sanity when it comes to parking",
-    "url": "https://old.reddit.com/r/irvine/comments/1uln6t6/is_mike_ward_park_a_good_place_to_watch_july_4th/",
-    "categories": [
-      "noise"
-    ],
-    "published_utc": "2026-07-02",
-    "metadata": {
-      "author": "AccomplishedTitle836",
-      "post_id": "1uln6t6",
-      "score": 9,
-      "comment_count": 10,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {
-          "noise": 0.7
-        },
-        "confidence": 0.7,
-        "method": "keywords",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "Irvine Co forces to use Parcel Pending for packages and now we are going to get charged if packages aren't picked up in two days (email I...",
-    "body": "Irvine Co forces to use Parcel Pending for packages and now we are going to get charged if packages aren't picked up in two days (email I got today)\nIrvine Company forces residents to use Parcel Pending for packages and now we are going to get charged if packages aren't picked up in two days.",
-    "url": "https://old.reddit.com/r/irvine/comments/1ul39f4/irvine_co_forces_to_use_parcel_pending_for/",
-    "categories": [],
-    "published_utc": "2026-07-02",
-    "metadata": {
-      "author": "DenverToCali",
-      "post_id": "1ul39f4",
-      "score": 100,
-      "comment_count": 105,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 0.378,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "Happy 4th from the Friends of Katie Wheeler Library!",
-    "body": "Happy 4th from the Friends of Katie Wheeler Library!\nLibrary closed 3rd & 4th, bookstore reopens Monday the 6th 10-4.",
-    "url": "https://old.reddit.com/r/irvine/comments/1ukxhxa/happy_4th_from_the_friends_of_katie_wheeler/",
-    "categories": [],
-    "published_utc": "2026-07-01",
-    "metadata": {
-      "author": "Ambitious-Accident14",
-      "post_id": "1ukxhxa",
-      "score": 25,
-      "comment_count": 1,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 0.945,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "New Signal at Harvard and Berkeley Intersection",
-    "body": "New Signal at Harvard and Berkeley Intersection\nMonths ago I submitted a complaint with the city of Irvine for the four way stop sign intersection at Harvard and Berkeley. Cars speed through it without stopping all the time. Today I got a voicemail saying that a new signal would be installed there!",
-    "url": "https://old.reddit.com/r/irvine/comments/1uku663/new_signal_at_harvard_and_berkeley_intersection/",
-    "categories": [
-      "traffic_safety"
-    ],
-    "published_utc": "2026-07-01",
-    "metadata": {
-      "author": "sc0202",
-      "post_id": "1uku663",
-      "score": 157,
-      "comment_count": 16,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {
-          "traffic_safety": 0.77
-        },
-        "confidence": 0.77,
-        "method": "keywords+model",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "1A \"Auditors\" in Woodbridge?",
-    "body": "1A \"Auditors\" in Woodbridge?\nJust drove on E Yale Loop and it looked like some \"auditors\" were taking pics/videos of cars on the street.",
-    "url": "https://old.reddit.com/r/irvine/comments/1ukrowc/1a_auditors_in_woodbridge/",
-    "categories": [
-      "public_safety"
-    ],
-    "published_utc": "2026-07-01",
-    "metadata": {
-      "author": "BionicSix",
-      "post_id": "1ukrowc",
-      "score": 22,
-      "comment_count": 25,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {
-          "public_safety": 0.6
-        },
-        "confidence": 0.6,
-        "method": "legacy",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "Mr. Moto Pizza Oak Creek, Irvine",
-    "body": "Mr. Moto Pizza Oak Creek, Irvine\nIt has been almost two years and still no signs of opening. What's going on??",
-    "url": "https://old.reddit.com/r/irvine/comments/1ukcke2/mr_moto_pizza_oak_creek_irvine/",
-    "categories": [],
-    "published_utc": "2026-07-01",
-    "metadata": {
-      "author": "socalguy31",
-      "post_id": "1ukcke2",
-      "score": 20,
-      "comment_count": 19,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 0.68,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "Great Park Ducklings: Final Update, only 1/6 ducklings seen",
-    "body": "Great Park Ducklings: Final Update, only 1/6 ducklings seen\nI only saw 1 duckling the hour I was there today, when there were originally 6. I saw 1 duckling deceased and floating in the pond. Irvine Animal Services left me a voicemail saying they were going to address the issue and add sandbags in.",
-    "url": "https://old.reddit.com/r/irvine/comments/1ty708u/great_park_ducklings_final_update_only_16/",
-    "categories": [],
-    "published_utc": "2026-06-06",
-    "metadata": {
-      "author": "sunsetsillybet",
-      "post_id": "1ty708u",
-      "score": 53,
-      "comment_count": 9,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 0.93,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "Aggressive coyote in Turtle Rock, south Irvine, killed pet >:(",
-    "body": "Aggressive coyote in Turtle Rock, south Irvine, killed pet >:(\nMy parents live in the Turtle Rock neighborhood in southern Irvine, and sadly one of their cats was likely killed last night. A coyote punched through a screen door. We've reported the incident to the Irvine Police department and animal control.",
-    "url": "https://old.reddit.com/r/irvine/comments/1tltzaq/aggressive_coyote_in_turtle_rock_south_irvine/",
+    "title": "Armed man shot and killed by Irvine police called 911, was having a mental health crisis, police say",
+    "body": "Armed man shot and killed by Irvine police called 911, was having a mental health crisis, police say",
+    "url": "https://old.reddit.com/r/irvine/comments/1v2z8km/armed_man_shot_and_killed_by_irvine_police_called/",
     "categories": [
       "violent_crime",
       "public_safety"
     ],
-    "published_utc": "2026-05-23",
+    "published_utc": "2026-07-21",
     "metadata": {
-      "author": "_myst",
-      "post_id": "1tltzaq",
-      "score": 106,
-      "comment_count": 39,
-      "search_query": "news+irvine",
+      "author": "hrnyorlbttm",
+      "post_id": "1v2z8km",
+      "score": 189,
+      "comment_count": 57,
+      "search_query": "irvine",
       "flair": null,
       "classification": {
         "scores": {
@@ -663,194 +115,47 @@
   {
     "source": "reddit",
     "outlet": "r/irvine",
-    "title": "Mailed 4 times a year. This one weighs in at 120 pages.",
-    "body": "Mailed 4 times a year. This one weighs in at 120 pages.\nIrvine has a budget shortfall. Let's start by ending this massive printed guide sent to all Irvine households. Isn't it easier to look up programs online?",
-    "url": "https://old.reddit.com/r/irvine/comments/1th434n/mailed_4_times_a_year_this_one_weighs_in_at_120/",
-    "categories": [],
-    "published_utc": "2026-05-18",
-    "metadata": {
-      "author": "OC_Observer",
-      "post_id": "1th434n",
-      "score": 48,
-      "comment_count": 29,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 0.712,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "A love letter to capitalism [Irvine, California, 4/19/2026]",
-    "body": "A love letter to capitalism [Irvine, California, 4/19/2026]\nAverage rent prices have risen from about $300 per month 40 years ago to over $2,000 per month today. It's incredible how dozens of unhoused people are mocked or blamed for their difficulties. Thank you, Capitalism, for normalizing victim-shaming.",
-    "url": "https://old.reddit.com/r/irvine/comments/1sqr1zd/a_love_letter_to_capitalism_irvine_california/",
+    "title": "Cybertruck signals its turning right and proceeds to u-turn left, block the road, and almost backs into into another vehicle",
+    "body": "Cybertruck signals its turning right and proceeds to u-turn left, block the road, and almost backs into into another vehicle\nProbably hard to tell on dashcam. But the white cybertruck signals that it\u2019s turning right. Then proceeds to u-turn (left) blocks the road and almost backs into another driver.",
+    "url": "https://old.reddit.com/r/irvine/comments/1v2yngu/cybertruck_signals_its_turning_right_and_proceeds/",
     "categories": [
-      "housing"
+      "traffic_safety"
     ],
-    "published_utc": "2026-04-20",
+    "published_utc": "2026-07-21",
     "metadata": {
-      "author": "NicolasCageFan492",
-      "post_id": "1sqr1zd",
-      "score": 371,
-      "comment_count": 87,
-      "search_query": "news+irvine",
+      "author": "PurpleFanto",
+      "post_id": "1v2yngu",
+      "score": 28,
+      "comment_count": 17,
+      "search_query": "irvine",
       "flair": null,
       "classification": {
         "scores": {
-          "housing": 0.87
+          "traffic_safety": 0.9
         },
-        "confidence": 0.87,
-        "method": "keywords+model",
-        "model_version": "nb-v1"
+        "confidence": 0.9,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
       }
     }
   },
   {
     "source": "reddit",
     "outlet": "r/irvine",
-    "title": "\u201c1st Amendment\u201d frauditors at Woodbury shopping center today.",
-    "body": "\u201c1st Amendment\u201d frauditors at Woodbury shopping center today.\nWhen we drove by they were in front of Ralph's - a bunch of cops were also there arguing with them. They're being assholes as per usual, masked and aggressive, filming license plates, getting in people's faces.",
-    "url": "https://old.reddit.com/r/irvine/comments/1sbsc8p/1st_amendment_frauditors_at_woodbury_shopping/",
+    "title": "Irvine Police - We are asking our community for help to identify this man",
+    "body": "Irvine Police - We are asking our community for help to identify this man",
+    "url": "https://old.reddit.com/r/irvine/comments/1v20c3o/irvine_police_we_are_asking_our_community_for/",
     "categories": [
       "public_safety"
     ],
-    "published_utc": "2026-04-03",
+    "published_utc": "2026-07-20",
     "metadata": {
-      "author": "ThePrefect0fWanganui",
-      "post_id": "1sbsc8p",
-      "score": 98,
-      "comment_count": 44,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {
-          "public_safety": 0.77
-        },
-        "confidence": 0.77,
-        "method": "keywords+model",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "Great Park standoff",
-    "body": "Great Park standoff\nhttps://www.cbsnews.com/losangeles/news/man-irvine-family-hostage-captive-police-standoff/",
-    "url": "https://old.reddit.com/r/irvine/comments/1r2gjjb/great_park_standoff/",
-    "categories": [
-      "violent_crime",
-      "public_safety"
-    ],
-    "published_utc": "2026-02-12",
-    "metadata": {
-      "author": "EarTotal3258",
-      "post_id": "1r2gjjb",
-      "score": 84,
-      "comment_count": 28,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {
-          "violent_crime": 0.8,
-          "public_safety": 0.7
-        },
-        "confidence": 0.75,
-        "method": "keywords",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "Irvine Company Announces Nature Park Plans",
-    "body": "Irvine Company Announces Nature Park Plans\nIrvine Company officials announced plans for a new nature park on the Oak Creek Golf Club property, expected to link with the Jeffrey Open Space Trail.",
-    "url": "https://old.reddit.com/r/irvine/comments/1qnuwi3/irvine_company_announces_nature_park_plans/",
-    "categories": [],
-    "published_utc": "2026-01-26",
-    "metadata": {
-      "author": "vluong",
-      "post_id": "1qnuwi3",
-      "score": 41,
-      "comment_count": 31,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 0.972,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "What's the latest news about the soil contamination in the great park neighborhoods?",
-    "body": "What's the latest news about the soil contamination in the great park neighborhoods?\nHi all, I've been looking into the new toll brothers homes in great park but through my research of the area I came across the former military base and concerns about soil contamination and subsequent health risks. What's the latest news about the clean up? Do residents in Irvine feel comfortable about its progress?",
-    "url": "https://old.reddit.com/r/irvine/comments/1pb7sba/whats_the_latest_news_about_the_soil/",
-    "categories": [],
-    "published_utc": "2025-12-01",
-    "metadata": {
-      "author": "ShirtFew146",
-      "post_id": "1pb7sba",
-      "score": 30,
-      "comment_count": 22,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 0.917,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "Where do you find real time news updates?",
-    "body": "Where do you find real time news updates?\n3 helicopters just flew over my neighborhood and I heard sirens but I just realized I have no idea where to find local breaking news to see what is happening. Got any links?",
-    "url": "https://old.reddit.com/r/irvine/comments/1nflmpr/where_do_you_find_real_time_news_updates/",
-    "categories": [],
-    "published_utc": "2025-09-13",
-    "metadata": {
-      "author": "trifelin",
-      "post_id": "1nflmpr",
-      "score": 19,
-      "comment_count": 15,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 0.923,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "ICE and IPD/Irvine Company",
-    "body": "ICE and IPD/Irvine Company\nI've been doing some reading after seeing ICE at spectrum, and it seems like the camera system used by Irvine police and Irvine Company is known to be accessible by ICE.",
-    "url": "https://old.reddit.com/r/irvine/comments/1m8qitb/ice_and_ipdirvine_company/",
-    "categories": [
-      "public_safety"
-    ],
-    "published_utc": "2025-07-25",
-    "metadata": {
-      "author": "Background-Formal598",
-      "post_id": "1m8qitb",
-      "score": 221,
-      "comment_count": 65,
-      "search_query": "news+irvine",
+      "author": "818whealthy",
+      "post_id": "1v20c3o",
+      "score": 32,
+      "comment_count": 23,
+      "search_query": "irvine",
       "flair": null,
       "classification": {
         "scores": {
@@ -865,28 +170,22 @@
   {
     "source": "reddit",
     "outlet": "r/irvine",
-    "title": "Two People Arrested After the Death of Ten Dogs",
-    "body": "Two People Arrested After the Death of Ten Dogs\nOn Thursday, Detectives arrested an animal trainer and his girlfriend after ten dogs in his care died. The Irvine Police Department was contacted and Detectives arrested Kwong (Tony) Chun Sit, 53, of Irvine, for animal cruelty and destruction of evidence.",
-    "url": "https://old.reddit.com/r/irvine/comments/1lglj78/two_people_arrested_after_the_death_of_ten_dogs/",
-    "categories": [
-      "violent_crime",
-      "public_safety"
-    ],
-    "published_utc": "2025-06-21",
+    "title": "Indian Vegan Cafe",
+    "body": "Indian Vegan Cafe\nUPDATE!\nIndian Vegan Cafe is gone. Confirmed on phone with Southern Spice yesterday. \ud83d\ude2d\nDoes anyone know if Indian vegan Cafe still exists? It was a ghost kitchen running out of Southern spice on Barr UPDATE!\nIndian Vegan Cafe is gone. Confirmed on phone with Southern Spice yesterday. \ud83d\ude2d\nDoes anyone know if Indian vegan Cafe still exists? It was a ghost kitchen running out of Southern spice on Barranca but it can't seem to find any information on it..",
+    "url": "https://old.reddit.com/r/irvine/comments/1v1rw1c/indian_vegan_cafe/",
+    "categories": [],
+    "published_utc": "2026-07-20",
     "metadata": {
-      "author": "Irvinepd",
-      "post_id": "1lglj78",
-      "score": 235,
-      "comment_count": 33,
-      "search_query": "news+irvine",
+      "author": "ReggaeDawn",
+      "post_id": "1v1rw1c",
+      "score": 11,
+      "comment_count": 3,
+      "search_query": "irvine",
       "flair": null,
       "classification": {
-        "scores": {
-          "public_safety": 0.8,
-          "violent_crime": 0.9
-        },
-        "confidence": 0.85,
-        "method": "keywords+model",
+        "scores": {},
+        "confidence": 0.781,
+        "method": "none",
         "model_version": "nb-v1"
       }
     }
@@ -894,25 +193,75 @@
   {
     "source": "reddit",
     "outlet": "r/irvine",
-    "title": "Altair Raid (Videos)",
-    "body": "Altair Raid (Videos)\nFYI - Videos provided by neighbors witnessing the Altair raid (not my content). Still haven't seen any news articles posted.",
-    "url": "https://old.reddit.com/r/irvine/comments/1km4u9e/altair_raid_videos/",
-    "categories": [
-      "immigration"
-    ],
-    "published_utc": "2025-05-14",
+    "title": "Photographers at San Joaquin Marsh",
+    "body": "Photographers at San Joaquin Marsh\nFor a little over a week, I\u2019ve seen so many photographers parked along Campus Drive with their huge cameras pointed in the same direction at the marsh. It\u2019s always around 8am on my way to work, so I u For a little over a week, I\u2019ve seen so many photographers parked along Campus Drive with their huge cameras pointed in the same direction at the marsh. It\u2019s always around 8am on my way to work, so I unfortunately haven\u2019t had time to stop and ask what they\u2019re looking at.\nDoes anyone know what\u2019s going on?",
+    "url": "https://old.reddit.com/r/irvine/comments/1v1ol3b/photographers_at_san_joaquin_marsh/",
+    "categories": [],
+    "published_utc": "2026-07-20",
     "metadata": {
-      "author": "CaliKoukla",
-      "post_id": "1km4u9e",
-      "score": 398,
-      "comment_count": 122,
-      "search_query": "news+irvine",
+      "author": "ExactStudio5666",
+      "post_id": "1v1ol3b",
+      "score": 29,
+      "comment_count": 9,
+      "search_query": "irvine",
+      "flair": null,
+      "classification": {
+        "scores": {},
+        "confidence": 0.336,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "reddit",
+    "outlet": "r/irvine",
+    "title": "Preschool Program Recs",
+    "body": "Preschool Program Recs\nAre we looking for a unicorn or something??\n Well credentialed Educators (No day care set ups)\n Real grass + dirt + more nature based large outdoor play space (No artificial turf - big on this - no  Are we looking for a unicorn or something??\n Well credentialed Educators (No day care set ups)\n Real grass + dirt + more nature based large outdoor play space (No artificial turf - big on this - no institutional type play spaces of soley asphalt & crumb rubber)\n Non-denominational (promotes diversity & inclusion with no religious affiliation)\n Curriculum: STEAM type - Not strictly Montessori but not just all play - our child most likely would not thrive with the rigidity of mont but does need structure & autonomy promoting lessons.\n Offers part time + drop off/pick up situation without a requirement to volunteer.\n In the Irvine area I work in cdm so potentially on the way. We are in east Irvine.\nOpen to suggestions. Please mind the aforementioned. We are going crazy trying to find an appropriate program that tiks our boxes. We don\u2019t think it\u2019s asking too much\u2026 why does Irvine seem to be lacking so badly??? Hopefully there are some great ones out there we just haven\u2019t heard of.\nHere are the ones we have looked into & liked with the reasons we did not choose them:\n Annelisse- loved but right up against canyon traffic was a hard no for us & our slippery adventurer who would/could easily make it out. Especially with the gate opening/closing so often.\n Turtle Rock- Accepted but waitlisted\n Childsworld- Soo fun but play yard vomit. We did not get a good grasp on any structure or curriculum. A little too loose/kid led. Glorified outdoor daycare.\n ECEC: too many observers in & out constantly.\n Woodbridge children\u2019s school/IUCC- We felt personally discriminated against by the directors. Then neighbors warned us after they pulled their child as they witnessed the new director yelling at kids.\n De Colores- Artificial Turf\n SCC: Too far",
+    "url": "https://old.reddit.com/r/irvine/comments/1v1gsqv/preschool_program_recs/",
+    "categories": [
+      "potholes"
+    ],
+    "published_utc": "2026-07-20",
+    "metadata": {
+      "author": "justagirl-intheworld",
+      "post_id": "1v1gsqv",
+      "score": 4,
+      "comment_count": 16,
+      "search_query": "irvine",
       "flair": null,
       "classification": {
         "scores": {
-          "immigration": 0.78
+          "potholes": 0.7
         },
-        "confidence": 0.78,
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "reddit",
+    "outlet": "r/irvine",
+    "title": "Irvine Valley College Public Access Channel - Looking for a screenshot",
+    "body": "Irvine Valley College Public Access Channel - Looking for a screenshot\nHello friends, when I lived in Irvine about 15 years ago, my (then) newborn daughter really enjoyed the IVC Public Access Channel - I think it was Channel 31 on Cox.\nMy wife and I called it the \"Circl Hello friends, when I lived in Irvine about 15 years ago, my (then) newborn daughter really enjoyed the IVC Public Access Channel - I think it was Channel 31 on Cox.\nMy wife and I called it the \"Circles and Music channel\" because it seemed like pretty non-stop that channel would play soothing music with colorful circles on the screen.\nFast forward 15 years later and I'm trying to find that image to use in a slideshow celebrating my daughter's birthday. If anyone happening to read this knows what I'm talking about and happens to have a link/video still from that ancient public access channel, I'd be extremely grateful!",
+    "url": "https://old.reddit.com/r/irvine/comments/1v1el6b/irvine_valley_college_public_access_channel/",
+    "categories": [
+      "violent_crime"
+    ],
+    "published_utc": "2026-07-20",
+    "metadata": {
+      "author": "komplete",
+      "post_id": "1v1el6b",
+      "score": 10,
+      "comment_count": 2,
+      "search_query": "irvine",
+      "flair": null,
+      "classification": {
+        "scores": {
+          "violent_crime": 0.875
+        },
+        "confidence": 0.875,
         "method": "model",
         "model_version": "nb-v1",
         "rescued": true
@@ -922,21 +271,21 @@
   {
     "source": "reddit",
     "outlet": "r/irvine",
-    "title": "Where did the coyote attack happen that is in the news?",
-    "body": "Where did the coyote attack happen that is in the news?\nhttps://abc7.com/post/orange-county-coyote-attack-irvine-neighbors-spring-action-rescue-dog/16360484/",
-    "url": "https://old.reddit.com/r/irvine/comments/1kiy5mm/where_did_the_coyote_attack_happen_that_is_in_the/",
+    "title": "Spotted at Irvine Spectrum",
+    "body": "Spotted at Irvine Spectrum\nSaw this in the plants outside the Verizon store. Irvine Company wya",
+    "url": "https://old.reddit.com/r/irvine/comments/1v0ggnx/spotted_at_irvine_spectrum/",
     "categories": [],
-    "published_utc": "2025-05-10",
+    "published_utc": "2026-07-19",
     "metadata": {
-      "author": "UnlikelyLeague8589",
-      "post_id": "1kiy5mm",
-      "score": 12,
-      "comment_count": 6,
-      "search_query": "news+irvine",
+      "author": "rfcheezy",
+      "post_id": "1v0ggnx",
+      "score": 193,
+      "comment_count": 81,
+      "search_query": "irvine",
       "flair": null,
       "classification": {
         "scores": {},
-        "confidence": 0.775,
+        "confidence": 0.839,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -945,19 +294,74 @@
   {
     "source": "reddit",
     "outlet": "r/irvine",
-    "title": "Wow! Happy $tory for an Irvine humble hero. Saw a post on social media, started watching the CBS news video and knew I recognized him! #B...",
-    "body": "Wow! Happy $tory for an Irvine humble hero. Saw a post on social media, started watching the CBS news video and knew I recognized him! #BeKind + #payitforward, indeed.\nhttps://www.cbsnews.com/amp/losangeles/news/homeless-man-in-irvine-gifted-nearly-100k-after-donating-his-last-dollar/",
-    "url": "https://old.reddit.com/r/irvine/comments/1kb93jz/wow_happy_tory_for_an_irvine_humble_hero_saw_a/",
+    "title": "Kittens",
+    "body": "Kittens\nHey guys, my sibling found a stray with kittens and has been taking care of them, and we are trying to find them good homes now that they are old enough! They are ready to come inside and get off the  Hey guys, my sibling found a stray with kittens and has been taking care of them, and we are trying to find them good homes now that they are old enough! They are ready to come inside and get off the mean streets and be loved! Very friendly. Rehoming is the cost of spay/neuter and vaccinations to keep them safe. We just want the best for them. If you or anyone you know might be interested, please reach out and I will give you the contact number!\nhttps://preview.redd.it/g8fpsvy3t3eh1.jpg?width=810&format=pjpg&auto=webp&s=767bb7f69d883c2027cf41c461a8be602a035d77\nhttps://preview.redd.it/clgp8zy3t3eh1.jpg?width=810&format=pjpg&auto=webp&s=0f47375a2ddc7576886deb07fc8bec98cb479ef4\nhttps://preview.redd.it/vykpj3z3t3eh1.jpg?width=1124&format=pjpg&auto=webp&s=9a2e41519b61ce1d101ed3718e0191a80823d9f1\nhttps://preview.redd.it/vl1073z3t3eh1.jpg?width=1200&format=pjpg&auto=webp&s=1bdba92a19d06705e6685f8d9f2369eb399b1108\nhttps://preview.redd.it/41fgj6z3t3eh1.jpg?width=960&format=pjpg&auto=webp&s=a4f9ab02a6aaa1c20eaa8468eeda8784dabbb43a\nhttps://preview.redd.it/w9h8xcz3t3eh1.jpg?width=960&format=pjpg&auto=webp&s=62aedbfe3219a819e29a2fa595c21c07a4ec290c\nhttps://preview.redd.it/eeyusdz3t3eh1.jpg?width=1080&format=pjpg&auto=webp&s=4846c1fc7910a9ccacbaca29eb0d018b6ffc7560\nhttps://preview.redd.it/kmri7jz3t3eh1.jpg?width=960&format=pjpg&auto=webp&s=08b7c8017cb2adb83d789e83c6f388bfbd8ac565\nhttps://preview.redd.it/hgii9lz3t3eh1.jpg?width=1080&format=pjpg&auto=webp&s=498608890ec6011ed5b04055b0bc745596527908\nhttps://preview.redd.it/cvhu2nz3t3eh1.jpg?width=1080&format=pjpg&auto=webp&s=47039bd580f5a0651d148d95893059650e599e86\nhttps://preview.redd.it/ytx7bz68t3eh1.jpg?width=810&format=pjpg&auto=webp&s=6b0d42ac602a546dbf9309bc40fed2208060ebce",
+    "url": "https://old.reddit.com/r/irvine/comments/1v0ffxd/kittens/",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-07-19",
+    "metadata": {
+      "author": "idkwhatever98",
+      "post_id": "1v0ffxd",
+      "score": 31,
+      "comment_count": 9,
+      "search_query": "irvine",
+      "flair": null,
+      "classification": {
+        "scores": {
+          "public_safety": 0.9
+        },
+        "confidence": 0.9,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
+  },
+  {
+    "source": "reddit",
+    "outlet": "r/irvine",
+    "title": "Overturned Jeep - Accident near Plaza Vista",
+    "body": "Overturned Jeep - Accident near Plaza Vista\nAs the title suggests, been here 2+ decades and have never witnessed such a catastrophic accident ESPECIALLY on 20/25mph streets",
+    "url": "https://old.reddit.com/r/irvine/comments/1v05vr1/overturned_jeep_accident_near_plaza_vista/",
+    "categories": [
+      "traffic_safety"
+    ],
+    "published_utc": "2026-07-18",
+    "metadata": {
+      "author": "Smooth_Respond1731",
+      "post_id": "1v05vr1",
+      "score": 99,
+      "comment_count": 19,
+      "search_query": "irvine",
+      "flair": null,
+      "classification": {
+        "scores": {
+          "traffic_safety": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "reddit",
+    "outlet": "r/irvine",
+    "title": "Public park shelter rentals",
+    "body": "Public park shelter rentals\nAre the shelter rentals/reservations at the public parks free? I am looking for somewhere to have my daughters 3rd bday party and was working on the application, but couldn\u2019t figure out if it costs an Are the shelter rentals/reservations at the public parks free? I am looking for somewhere to have my daughters 3rd bday party and was working on the application, but couldn\u2019t figure out if it costs anything to rent the shelter",
+    "url": "https://old.reddit.com/r/irvine/comments/1uzlaac/public_park_shelter_rentals/",
     "categories": [
       "housing"
     ],
-    "published_utc": "2025-04-30",
+    "published_utc": "2026-07-18",
     "metadata": {
-      "author": "deadpanhandling",
-      "post_id": "1kb93jz",
-      "score": 16,
+      "author": "Big-Independence1191",
+      "post_id": "1uzlaac",
+      "score": 12,
       "comment_count": 4,
-      "search_query": "news+irvine",
+      "search_query": "irvine",
       "flair": null,
       "classification": {
         "scores": {
@@ -972,21 +376,21 @@
   {
     "source": "reddit",
     "outlet": "r/irvine",
-    "title": "News helicopters over UCI",
-    "body": "News helicopters over UCI\nAnybody know what's up?",
-    "url": "https://old.reddit.com/r/irvine/comments/1gklc75/news_helicopters_over_uci/",
+    "title": "Get a life, \u201cauditors\u201d.",
+    "body": "Get a life, \u201cauditors\u201d.\nEmbarrassing.\nLocation: Woodbridge, Yale Loop/S. Blue Lake",
+    "url": "https://old.reddit.com/r/irvine/comments/1uz3ii2/get_a_life_auditors/",
     "categories": [],
-    "published_utc": "2024-11-06",
+    "published_utc": "2026-07-17",
     "metadata": {
-      "author": "SadSongStreet",
-      "post_id": "1gklc75",
-      "score": 11,
-      "comment_count": 5,
-      "search_query": "news+irvine",
+      "author": "londondxb",
+      "post_id": "1uz3ii2",
+      "score": 376,
+      "comment_count": 100,
+      "search_query": "irvine",
       "flair": null,
       "classification": {
         "scores": {},
-        "confidence": 0.748,
+        "confidence": 0.833,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -995,98 +399,25 @@
   {
     "source": "reddit",
     "outlet": "r/irvine",
-    "title": "2024 Mayor Election Candidates Analysis, via Vine City News",
-    "body": "2024 Mayor Election Candidates Analysis, via Vine City News\nSeeing how biased many news publications are towards the Election Day, ie. Irvine Community News & Views, I wanted to share a source that is more on the facts.",
-    "url": "https://old.reddit.com/r/irvine/comments/1fhk2vn/2024_mayor_election_candidates_analysis_via_vine/",
-    "categories": [],
-    "published_utc": "2024-09-15",
-    "metadata": {
-      "author": "rickiethedoog",
-      "post_id": "1fhk2vn",
-      "score": 19,
-      "comment_count": 2,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 0.774,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "Irvine: Two Motorcyclists Die In Freeway Crash (credit: Miles Madison @CountyNewsTV)",
-    "body": "Irvine: Two Motorcyclists Die In Freeway Crash (credit: Miles Madison @CountyNewsTV)\nTwo motorcyclists died in a freeway crash following reports of reckless riding involving a group of over 50 riders, early Sunday morning on the northbound I-5 Freeway just south of Culver Drive.",
-    "url": "https://old.reddit.com/r/irvine/comments/1f1jvtt/irvine_two_motorcyclists_die_in_freeway_crash/",
+    "title": "Smoke this morning | Stonegate",
+    "body": "Smoke this morning | Stonegate\nI know there's a fire NEAR Corona, but anywhere else close by that is generating all the smoke this morning? Checked Watch Duty, nothing I can directly attribute it to, other than the Little Pine Fire I know there's a fire NEAR Corona, but anywhere else close by that is generating all the smoke this morning? Checked Watch Duty, nothing I can directly attribute it to, other than the Little Pine Fire near the Prado Basin.\nedited to indicate near Corona, a 22 minute drive from Chino Hills, and a GASP 7 minute drive from Prado Basin",
+    "url": "https://old.reddit.com/r/irvine/comments/1uz2t2h/smoke_this_morning_stonegate/",
     "categories": [
-      "traffic_safety"
+      "emergencies"
     ],
-    "published_utc": "2024-08-26",
+    "published_utc": "2026-07-17",
     "metadata": {
-      "author": "ApexGyrl",
-      "post_id": "1f1jvtt",
-      "score": 19,
-      "comment_count": 13,
-      "search_query": "news+irvine",
+      "author": "SarcasticServal",
+      "post_id": "1uz2t2h",
+      "score": 27,
+      "comment_count": 8,
+      "search_query": "irvine",
       "flair": null,
       "classification": {
         "scores": {
-          "traffic_safety": 0.77
+          "emergencies": 0.768
         },
-        "confidence": 0.77,
-        "method": "keywords+model",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "Irvine on CBS News \ud83d\udc40",
-    "body": "Irvine on CBS News \ud83d\udc40\nKCAL9 did an entire segment on the iConnect bus",
-    "url": "https://old.reddit.com/r/irvine/comments/1c7ypcb/irvine_on_cbs_news/",
-    "categories": [],
-    "published_utc": "2024-04-19",
-    "metadata": {
-      "author": "flatirez",
-      "post_id": "1c7ypcb",
-      "score": 40,
-      "comment_count": 6,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 0.842,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "Does anyone know these 1st amendment auditors?",
-    "body": "Does anyone know these 1st amendment auditors?\nI constantly see posts on the Orange County and Irvine subreddits about people with masks filming others at the Sand Canyon Post office.",
-    "url": "https://old.reddit.com/r/irvine/comments/1c1ut1k/does_anyone_know_these_1st_amendment_auditors/",
-    "categories": [
-      "public_safety"
-    ],
-    "published_utc": "2024-04-12",
-    "metadata": {
-      "author": "Sweaty_Analysis5607",
-      "post_id": "1c1ut1k",
-      "score": 60,
-      "comment_count": 190,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {
-          "public_safety": 0.77
-        },
-        "confidence": 0.77,
+        "confidence": 0.768,
         "method": "model",
         "model_version": "nb-v1",
         "rescued": true
@@ -1096,120 +427,216 @@
   {
     "source": "reddit",
     "outlet": "r/irvine",
-    "title": "Tesla Rival Rivian Finally Has Good News on Its Electric Vehicles",
-    "body": "Tesla Rival Rivian Finally Has Good News on Its Electric Vehicles",
-    "url": "https://old.reddit.com/r/irvine/comments/14j5wzk/tesla_rival_rivian_finally_has_good_news_on_its/",
-    "categories": [],
-    "published_utc": "2023-06-26",
-    "metadata": {
-      "author": "audiomuse1",
-      "post_id": "14j5wzk",
-      "score": 11,
-      "comment_count": 1,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 0.94,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "Good news- all of the above candidates have their head screwed on in the right direction",
-    "body": "Good news- all of the above candidates have their head screwed on in the right direction",
-    "url": "https://old.reddit.com/r/irvine/comments/ynymrv/good_news_all_of_the_above_candidates_have_their/",
-    "categories": [],
-    "published_utc": "2022-11-06",
-    "metadata": {
-      "author": "Shawnj2",
-      "post_id": "ynymrv",
-      "score": 64,
-      "comment_count": 16,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 0.853,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "Any news on Google and AT&T Fiber?",
-    "body": "Any news on Google and AT&T Fiber?\nHas anyone heard any updates on whether either Google or AT&T have plans to expand their fiber services in Irvine? It'd be so nice to get out from under Cox.",
-    "url": "https://old.reddit.com/r/irvine/comments/xjig1j/any_news_on_google_and_att_fiber/",
-    "categories": [],
-    "published_utc": "2022-09-20",
-    "metadata": {
-      "author": "solarbeat",
-      "post_id": "xjig1j",
-      "score": 10,
-      "comment_count": 23,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 0.965,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "Sad news in Irvine",
-    "body": "Sad news in Irvine\nSam Woo's Seafood and BBQ restaurant on Culver is closing! Thanks to the Irvine Company, as usual. And Mr. Zwart, Northwood High School crossing guard, passed away. He had a fall while crossing on Yale and Portola.",
-    "url": "https://old.reddit.com/r/irvine/comments/qpa9jy/sad_news_in_irvine/",
-    "categories": [],
-    "published_utc": "2021-11-08",
-    "metadata": {
-      "author": "charmed2",
-      "post_id": "qpa9jy",
-      "score": 65,
-      "comment_count": 57,
-      "search_query": "news+irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 0.934,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "[News] Irvine man tried to avenge crimes against Asians by kidnapping and trying to sexually assault a woman",
-    "body": "[News] Irvine man tried to avenge crimes against Asians by kidnapping and trying to sexually assault a woman",
-    "url": "https://old.reddit.com/r/irvine/comments/mo5i01/news_irvine_man_tried_to_avenge_crimes_against/",
+    "title": "I\u2019ve never seen so many black Tesla cars in a row",
+    "body": "I\u2019ve never seen so many black Tesla cars in a row\nEvery single Tesla car at this Tesla charging station next to LA Fitness here in Irvine off of Michelson Dr. and Jamboree Rd. is black except for the one at the tail end..",
+    "url": "https://old.reddit.com/r/irvine/comments/1uys7nh/ive_never_seen_so_many_black_tesla_cars_in_a_row/",
     "categories": [
-      "violent_crime",
-      "public_safety"
+      "property_crime"
     ],
-    "published_utc": "2021-04-10",
+    "published_utc": "2026-07-17",
     "metadata": {
-      "author": "ST012Mi",
-      "post_id": "mo5i01",
-      "score": 25,
-      "comment_count": 14,
-      "search_query": "news+irvine",
+      "author": "redzone_05",
+      "post_id": "1uys7nh",
+      "score": 116,
+      "comment_count": 17,
+      "search_query": "irvine",
       "flair": null,
       "classification": {
         "scores": {
-          "violent_crime": 0.8,
-          "public_safety": 0.7
+          "property_crime": 0.734
         },
-        "confidence": 0.75,
-        "method": "keywords",
+        "confidence": 0.734,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
+  },
+  {
+    "source": "reddit",
+    "outlet": "r/irvine",
+    "title": "Looking for camera repair service in OC",
+    "body": "Looking for camera repair service in OC\nHi all, I have a specialty camera I need repaired and haven't had any luck at the local camera shops. Its a camera attached to a microscope used for research at UCI that is made by a tiny European com Hi all, I have a specialty camera I need repaired and haven't had any luck at the local camera shops. Its a camera attached to a microscope used for research at UCI that is made by a tiny European company that cannot service the camera themselves. The issue is a broken seal that let condensation form inside the camera. If you have any leads on a repair service or person, please share, and thank you in advance.",
+    "url": "https://old.reddit.com/r/irvine/comments/1uyfwjw/looking_for_camera_repair_service_in_oc/",
+    "categories": [
+      "property_crime"
+    ],
+    "published_utc": "2026-07-16",
+    "metadata": {
+      "author": "coastalkatie",
+      "post_id": "1uyfwjw",
+      "score": 3,
+      "comment_count": 5,
+      "search_query": "irvine",
+      "flair": null,
+      "classification": {
+        "scores": {
+          "property_crime": 0.9
+        },
+        "confidence": 0.9,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
+  },
+  {
+    "source": "reddit",
+    "outlet": "r/irvine",
+    "title": "HVAC Recommendation with financing option",
+    "body": "HVAC Recommendation with financing option\nAs the post says, does anyone have HVAC recommendations with a financing option?\nWe may need the whole thing replaced.",
+    "url": "https://old.reddit.com/r/irvine/comments/1uxua42/hvac_recommendation_with_financing_option/",
+    "categories": [],
+    "published_utc": "2026-07-16",
+    "metadata": {
+      "author": "ZanyAppleMaple",
+      "post_id": "1uxua42",
+      "score": 6,
+      "comment_count": 6,
+      "search_query": "irvine",
+      "flair": null,
+      "classification": {
+        "scores": {},
+        "confidence": 0.899,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "reddit",
+    "outlet": "r/irvine",
+    "title": "OC Register: Ranked-choice voting for Irvine elections? It\u2019ll be up to voters",
+    "body": "OC Register: Ranked-choice voting for Irvine elections? It\u2019ll be up to voters",
+    "url": "https://old.reddit.com/r/irvine/comments/1uxqfp3/oc_register_rankedchoice_voting_for_irvine/",
+    "categories": [],
+    "published_utc": "2026-07-16",
+    "metadata": {
+      "author": "ryandack",
+      "post_id": "1uxqfp3",
+      "score": 71,
+      "comment_count": 7,
+      "search_query": "irvine",
+      "flair": null,
+      "classification": {
+        "scores": {},
+        "confidence": 0.762,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "reddit",
+    "outlet": "r/irvine",
+    "title": "\ud83d\udea7 Traffic Alert: Culver Drive Closures \ud83d\udea7",
+    "body": "\ud83d\udea7 Traffic Alert: Culver Drive Closures \ud83d\udea7\nAs part of the OCTA Culver/ I-5 Bridge Improvement Project, Culver Drive closures are scheduled through July 17.\nPlease plan ahead, allow extra travel time, and follow posted detour routes.",
+    "url": "https://old.reddit.com/r/irvine/comments/1uwkx6l/traffic_alert_culver_drive_closures/",
+    "categories": [],
+    "published_utc": "2026-07-14",
+    "metadata": {
+      "author": "CouncilmemberLiu",
+      "post_id": "1uwkx6l",
+      "score": 51,
+      "comment_count": 9,
+      "search_query": "irvine",
+      "flair": null,
+      "classification": {
+        "scores": {},
+        "confidence": 0.726,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "reddit",
+    "outlet": "r/irvine",
+    "title": "Another coyote in Oak Creek. San Diego Wash/Creek. Video included.",
+    "body": "Another coyote in Oak Creek. San Diego Wash/Creek. Video included.\nI know not everybody wants to see these but I think some people do. So I'll post this video.\nI saw 2 separate coyotes today which is the first time that has ever happened. I captured video of both. 2n I know not everybody wants to see these but I think some people do. So I'll post this video.\nI saw 2 separate coyotes today which is the first time that has ever happened. I captured video of both. 2nd video in another post.\nI'm no expert - maybe because of the heat and lack of water availability they're out looking for a good meal and some water?? They look pretty healthy to me.\nAgain, it was more scared of me. Wanted to go up the wall but too many people. That's why it was just standing there. Waiting for us to leave...",
+    "url": "https://old.reddit.com/r/irvine/comments/1uwiix4/another_coyote_in_oak_creek_san_diego_washcreek/",
+    "categories": [],
+    "published_utc": "2026-07-14",
+    "metadata": {
+      "author": "plepster",
+      "post_id": "1uwiix4",
+      "score": 41,
+      "comment_count": 84,
+      "search_query": "irvine",
+      "flair": null,
+      "classification": {
+        "scores": {},
+        "confidence": 0.77,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "reddit",
+    "outlet": "r/irvine",
+    "title": "Who's going to watch the World Cup semi-finals and where?",
+    "body": "Who's going to watch the World Cup semi-finals and where?\nI had gone to Great Park Live for some of the evening games. But sitting out in the open at 12PM is not my idea of a good time.",
+    "url": "https://old.reddit.com/r/irvine/comments/1uwdmpf/whos_going_to_watch_the_world_cup_semifinals_and/",
+    "categories": [],
+    "published_utc": "2026-07-14",
+    "metadata": {
+      "author": "random92618",
+      "post_id": "1uwdmpf",
+      "score": 9,
+      "comment_count": 2,
+      "search_query": "irvine",
+      "flair": null,
+      "classification": {
+        "scores": {},
+        "confidence": 0.963,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "reddit",
+    "outlet": "r/irvine",
+    "title": "Volunteer opportunities in Irvine?",
+    "body": "Volunteer opportunities in Irvine?\nDoes anyone know of any open Volunteer Opportunities within the city of Irvine (for adults over 18)?\nMy son is 22 with autism and I would like to find some volunteer opportunities for he and I to do t Does anyone know of any open Volunteer Opportunities within the city of Irvine (for adults over 18)?\nMy son is 22 with autism and I would like to find some volunteer opportunities for he and I to do together, while he is on a waiting list for supportive employment support services. He has good skills and work ethic and likes to do things like cleaning, cooking, and basic maintenance type tasks. He is verbal and has no behavioral issues at all. I would accompany him as a volunteer as well, as he does need a support person to sort of keep him on task.\nI'd like to get him off his computer and out into the world at least a couple times a week!\nAny ideas?",
+    "url": "https://old.reddit.com/r/irvine/comments/1uwcq4e/volunteer_opportunities_in_irvine/",
+    "categories": [],
+    "published_utc": "2026-07-14",
+    "metadata": {
+      "author": "brergnat",
+      "post_id": "1uwcq4e",
+      "score": 46,
+      "comment_count": 41,
+      "search_query": "irvine",
+      "flair": null,
+      "classification": {
+        "scores": {},
+        "confidence": 0.579,
+        "method": "none",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "reddit",
+    "outlet": "r/irvine",
+    "title": "Good ways to find players to play soccer",
+    "body": "Good ways to find players to play soccer\nI\u2019m new to the Orange County soccer scene and captain a Sunday rec team. We need a goalkeeper, but I haven\u2019t had much luck finding one.\nWhere do people usually find keepers around here besides Faceboo I\u2019m new to the Orange County soccer scene and captain a Sunday rec team. We need a goalkeeper, but I haven\u2019t had much luck finding one.\nWhere do people usually find keepers around here besides Facebook groups, pickup games? Any advice would be appreciated.",
+    "url": "https://old.reddit.com/r/irvine/comments/1uvelga/good_ways_to_find_players_to_play_soccer/",
+    "categories": [],
+    "published_utc": "2026-07-13",
+    "metadata": {
+      "author": "Comfortable-Day-7275",
+      "post_id": "1uvelga",
+      "score": 9,
+      "comment_count": 11,
+      "search_query": "irvine",
+      "flair": null,
+      "classification": {
+        "scores": {},
+        "confidence": 1.0,
+        "method": "none",
         "model_version": "nb-v1"
       }
     }

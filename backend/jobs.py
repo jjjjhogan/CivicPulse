@@ -20,6 +20,7 @@ from backend.config import (
 )
 from backend.db import SessionLocal
 from backend.models import ScrapeJob, utcnow
+from scrapers.json_payload import ImportPayloadError, parse_import_payload
 
 _job_lock = threading.Lock()
 _running_job_id: int | None = None
@@ -140,10 +141,10 @@ def build_command(source: str, settings: dict) -> list[str]:
         payload = (settings or {}).get("payload")
         if payload is None:
             raise ValueError("settings.payload is required for import jobs.")
-        if isinstance(payload, str):
-            payload = json.loads(payload)
-        if not isinstance(payload, dict):
-            raise ValueError("settings.payload must be a JSON object.")
+        try:
+            payload = parse_import_payload(payload)
+        except ImportPayloadError as exc:
+            raise ValueError(str(exc)) from exc
         return build_import_command(source=source, payload=payload)
 
     raise ValueError(f"Scraper '{source}' is not implemented yet.")

@@ -66,10 +66,14 @@ const state = {
   activeJobId: null,
   user: null,
   // Where the signal list came from: "loading" until the first fetch
-  // resolves, then "live", "empty" (API up, nothing scraped yet), or
-  // "offline" (API unreachable — samples stand in).
+  // resolves, then "live", "empty" (API up, nothing scraped yet),
+  // "error" (API returned non-OK), or "offline" (unreachable — samples).
   live: "loading",
 };
+
+function signalsUnavailable() {
+  return state.live === "offline" || state.live === "error";
+}
 
 let map;
 let markerLayer;
@@ -155,6 +159,9 @@ function feedNotice() {
   }
   if (state.live === "offline") {
     return "Couldn't reach the signals API — showing sample data. Start the server and refresh.";
+  }
+  if (state.live === "error") {
+    return "The signals API returned an error — showing sample data. Check the server and refresh.";
   }
   if (state.live === "empty") {
     return "No signals scraped yet — showing sample data. Run a scraper above to populate the feed.";
@@ -363,11 +370,14 @@ function renderVerify() {
   const reports = state.signals.filter((s) => s.source === "resident");
   el.innerHTML = "";
 
-  if (state.live === "offline") {
+  if (signalsUnavailable()) {
     hint.textContent = "Vote on whether resident-reported issues are really there";
     const msg = document.createElement("p");
     msg.className = "feed-empty";
-    msg.textContent = "Can't load resident reports — the server is offline.";
+    msg.textContent =
+      state.live === "error"
+        ? "Can't load resident reports — the signals API returned an error."
+        : "Can't load resident reports — the server is offline.";
     el.appendChild(msg);
     return;
   }
@@ -517,9 +527,12 @@ function renderMarkers() {
     (r) => r.metadata?.lat != null && r.metadata?.lng != null
   );
 
-  if (state.live === "offline") {
+  if (signalsUnavailable()) {
     if (mapOverlay) {
-      mapOverlay.textContent = "Map data unavailable — the signals API is offline.";
+      mapOverlay.textContent =
+        state.live === "error"
+          ? "Map data unavailable — the signals API returned an error."
+          : "Map data unavailable — the signals API is offline.";
       mapOverlay.hidden = false;
     }
     return;
@@ -589,15 +602,9 @@ async function loadSignals() {
   if (migrated > 0) {
     logLine(`Migrated ${migrated} local resident report(s) into SQLite.`);
   }
-  const { signals, storage } = await fetchLiveSignalsResult();
+  const { signals, storage, status } = await fetchLiveSignalsResult();
   mergeSignals(signals);
-  if (storage != null && signals.length > 0) {
-    state.live = "live";
-  } else if (storage != null && signals.length === 0) {
-    state.live = "empty";
-  } else {
-    state.live = "offline";
-  }
+  state.live = status || "offline";
   await loadVotesFromServer();
   renderVerify();
   if (storage === "db") {
@@ -606,8 +613,12 @@ async function loadSignals() {
     logLine(
       `Loaded ${signals.length} signals from JSON fallback (run import_signals.py to use SQLite).`
     );
-  } else if (!signals.length) {
-    logLine("No live signals from API — showing sample / resident data.");
+  } else if (state.live === "empty") {
+    logLine("API is up but returned no signals — showing sample / resident data.");
+  } else if (state.live === "error") {
+    logLine("Signals API returned an error — showing sample / resident data.");
+  } else if (state.live === "offline") {
+    logLine("Couldn't reach the signals API — showing sample / resident data.");
   }
 }
 
@@ -839,18 +850,14 @@ async function buildJobRequest(scraper, card) {
       return { body: form, isForm: true };
     }
     if (!paste) {
-      throw new Error("Paste JSON or choose a .json file first.");
+      throw new Error("Paste JSON (or a DevTools object dump) or choose a .json file first.");
     }
-    let parsed;
-    try {
-      parsed = JSON.parse(paste);
-    } catch {
-      throw new Error("Pasted text is not valid JSON.");
-    }
+    // Send the raw paste — the server accepts strict JSON, missing braces,
+    // and browser DevTools tree dumps (leading ▾ / {N} size markers).
     return {
       body: JSON.stringify({
         source: scraper.id,
-        settings: { payload: parsed },
+        settings: { payload: paste },
       }),
       headers: { "Content-Type": "application/json" },
     };
@@ -1038,8 +1045,8 @@ function renderImportSettings(card, scraper) {
   paste.dataset.field = "paste";
   paste.placeholder =
     scraper.id === "reddit"
-      ? 'Paste Reddit scrape JSON ({ "items": [...] } or nested scrapes)'
-      : 'Paste Twitter scrape JSON ({ "tweets": [...] })';
+      ? 'Paste Reddit scrape JSON or DevTools dump ({ "items": [...] } or tree copy)'
+      : 'Paste Twitter scrape JSON or DevTools dump ({ "tweets": [...] } or tree copy)';
 
   const file = document.createElement("input");
   file.type = "file";
@@ -1179,6 +1186,11 @@ function initSidebar() {
 async function requireAuth() {
   try {
     const res = await fetch("/api/auth/me", { credentials: "same-origin" });
+    // API unhealthy but reachable: stay on the dashboard so feed/map/verify
+    // can show their own error states instead of bouncing to login.
+    if (!res.ok) {
+      return { name: "Unavailable", offline: true };
+    }
     const data = await res.json();
     if (!data.authenticated) {
       window.location.href = "login.html";
@@ -1186,8 +1198,9 @@ async function requireAuth() {
     }
     return data.user;
   } catch {
-    window.location.href = "login.html";
-    return null;
+    // Server unreachable (e.g. dashboard_server stopped) — stay put so
+    // panels can explain the outage rather than redirecting to login.
+    return { name: "Offline", offline: true };
   }
 }
 
@@ -1230,6 +1243,12 @@ renderLoadingPlaceholder();
 requireAuth().then((user) => {
   if (!user) return;
   showSignedInUser(user);
+  if (user.offline) {
+    // Skip scraper config / job polling when the API is unreachable;
+    // still paint scraper cards and load sample signal states.
+    renderScrapers();
+    return loadSignals().then(render);
+  }
   const logoutBtn = document.getElementById("logoutBtn");
   if (logoutBtn) logoutBtn.addEventListener("click", (event) => {
     event.preventDefault();

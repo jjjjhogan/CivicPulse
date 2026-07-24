@@ -64,6 +64,14 @@ Work on branch `feature/dashboard-ux-harden-s3` (or agree one shared branch). Ke
 - [x] Manual: simulated offline/empty/filter-no-match states in browser — all show graceful messages
 - [x] `pytest -q` — 41 passed; awaiting coworker’s scrapers branch for merge coordination
 
+### Follow-up (Jack) — `feature/dashboard-offline-auth-s3`
+
+- [x] When `/api/auth/me` is unreachable or non-OK, stay on dashboard (don’t bounce to login) so feed/map/verify can explain the outage
+- [x] Distinguish signals API `error` vs `offline` in `fetchLiveSignalsResult` / panel copy
+- [ ] Manual: stop `dashboard_server`, reload dashboard → panels explain (not login redirect)
+- [x] `pytest -q` green
+- [ ] Commit + open small PR into `main`
+
 ### Shared done when
 
 - [ ] Stop the API / break a job → dashboard still explains what happened (feed/map/verify/scrapers)
