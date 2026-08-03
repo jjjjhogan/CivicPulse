@@ -63,7 +63,11 @@
 
 ### Session notes
 
--
+- Keyword surgery: removed broad single-token keywords from `housing` (rent, mortgage, apartment, housing, lease) and `sanitation` (waste). Replaced with multi-word phrases (rent price, rent control, housing cost, waste collection, etc.). Targets clusters 4+7.
+- Reprocess fix: `reclassify_row()` now clears categories when old method was `keywords`/`keywords+model` and new classifier returns nothing (instead of preserving as `legacy`).
+- Re-score (79/96 matched, 17 unmatched due to DB reimport): correct 42%→47%, 5 FPs fixed, 0 regressions.
+- Clusters 1+3 (inherited chatter): **deferred to Session 6**. Fixing inheritance requires checking whether comment text has civic content before inheriting video categories — touches `tiktok/export.py` and `reprocess.py` with non-trivial edge cases (partial civic comments, short reactions). Too risky for a keyword-only session. The 27 affected signals are all `partial` or `wrong` verdicts on TikTok comments; keyword surgery doesn't help since their method is `inherited`, not `keywords`.
+- Phase D UI: method chip visible on cards, confidence shows "Strong"/"Moderate"/"Weak" (not raw %), tooltip says "Match strength: XX%", rescued badge says "model catch".
 
 ---
 

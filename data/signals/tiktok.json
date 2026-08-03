@@ -651,9 +651,7 @@
     "title": "Only thing scary about Irvine is the home prices and monthly rent! \ud83d\ude2d \ud83d\udcb4 \ud83d\udcb4 \ud83d\udcb4 \ud83d\udcb4",
     "body": "Only thing scary about Irvine is the home prices and monthly rent! \ud83d\ude2d \ud83d\udcb4 \ud83d\udcb4 \ud83d\udcb4 \ud83d\udcb4",
     "url": "https://www.tiktok.com/@1kjaylive/video/7655861903234747679",
-    "categories": [
-      "housing"
-    ],
+    "categories": [],
     "published_utc": "2026-07-15",
     "metadata": {
       "author": "unknown",
@@ -668,11 +666,9 @@
       "video_categories": [],
       "hashtags": [],
       "classification": {
-        "scores": {
-          "housing": 0.7
-        },
-        "confidence": 0.7,
-        "method": "keywords",
+        "scores": {},
+        "confidence": 0.707,
+        "method": "none",
         "model_version": "nb-v1"
       }
     }
@@ -683,9 +679,7 @@
     "title": "The rent is the scariest thing in Irvine!",
     "body": "The rent is the scariest thing in Irvine!",
     "url": "https://www.tiktok.com/@1kjaylive/video/7655861903234747679",
-    "categories": [
-      "housing"
-    ],
+    "categories": [],
     "published_utc": "2026-07-15",
     "metadata": {
       "author": "unknown",
@@ -700,11 +694,9 @@
       "video_categories": [],
       "hashtags": [],
       "classification": {
-        "scores": {
-          "housing": 0.7
-        },
-        "confidence": 0.7,
-        "method": "keywords",
+        "scores": {},
+        "confidence": 0.77,
+        "method": "none",
         "model_version": "nb-v1"
       }
     }
@@ -715,9 +707,7 @@
     "title": "Irvine if Irvine Company Apartments didnt exist",
     "body": "Irvine if Irvine Company Apartments didnt exist",
     "url": "https://www.tiktok.com/@globalgags7/video/7654610369373080854",
-    "categories": [
-      "housing"
-    ],
+    "categories": [],
     "published_utc": "2026-07-15",
     "metadata": {
       "author": "unknown",
@@ -732,11 +722,9 @@
       "video_categories": [],
       "hashtags": [],
       "classification": {
-        "scores": {
-          "housing": 0.7
-        },
-        "confidence": 0.7,
-        "method": "keywords",
+        "scores": {},
+        "confidence": 0.833,
+        "method": "none",
         "model_version": "nb-v1"
       }
     }
@@ -747,9 +735,7 @@
     "title": "I\u2019m in Orange County and I just wasted my time watching this useless TikTok. \ud83d\ude0f",
     "body": "I\u2019m in Orange County and I just wasted my time watching this useless TikTok. \ud83d\ude0f",
     "url": "https://www.tiktok.com/@kimiaskravings/video/7659407282488315150",
-    "categories": [
-      "sanitation"
-    ],
+    "categories": [],
     "published_utc": "2026-07-15",
     "metadata": {
       "author": "unknown",
@@ -764,11 +750,9 @@
       "video_categories": [],
       "hashtags": [],
       "classification": {
-        "scores": {
-          "sanitation": 0.7
-        },
-        "confidence": 0.7,
-        "method": "keywords",
+        "scores": {},
+        "confidence": 0.857,
+        "method": "none",
         "model_version": "nb-v1"
       }
     }
@@ -779,9 +763,7 @@
     "title": "Um none of these are true except the mortgage lol",
     "body": "Um none of these are true except the mortgage lol",
     "url": "https://www.tiktok.com/@kimiaskravings/video/7659407282488315150",
-    "categories": [
-      "housing"
-    ],
+    "categories": [],
     "published_utc": "2026-07-15",
     "metadata": {
       "author": "unknown",
@@ -796,11 +778,9 @@
       "video_categories": [],
       "hashtags": [],
       "classification": {
-        "scores": {
-          "housing": 0.7
-        },
-        "confidence": 0.7,
-        "method": "keywords",
+        "scores": {},
+        "confidence": 0.909,
+        "method": "none",
         "model_version": "nb-v1"
       }
     }
@@ -1135,7 +1115,9 @@
     "body": "What happened will have a wide effect on many\u2026anyone who rented out homes to unsupervised youth, parents that made those accommodations, fines will be tripled because the order to disburse was not followed. Home renters will lose their licenses.",
     "url": "https://www.tiktok.com/@skylarensign_/video/7659574575864286494",
     "categories": [
-      "housing"
+      "violent_crime",
+      "sanitation",
+      "public_safety"
     ],
     "published_utc": "2026-07-15",
     "metadata": {
@@ -1152,10 +1134,12 @@
       "hashtags": [],
       "classification": {
         "scores": {
-          "housing": 0.7
+          "violent_crime": 0.4,
+          "sanitation": 0.4,
+          "public_safety": 0.4
         },
-        "confidence": 0.7,
-        "method": "keywords",
+        "confidence": 0.4,
+        "method": "inherited",
         "model_version": "nb-v1"
       }
     }
@@ -2588,9 +2572,7 @@
     "title": "may I ask how you found your roommates? and if you know how themed housing works :)",
     "body": "may I ask how you found your roommates? and if you know how themed housing works :)",
     "url": "https://www.tiktok.com/@irenek4ng/video/7348686958173916458",
-    "categories": [
-      "housing"
-    ],
+    "categories": [],
     "published_utc": "2026-07-20",
     "metadata": {
       "author": "unknown",
@@ -2619,11 +2601,9 @@
         "fyp"
       ],
       "classification": {
-        "scores": {
-          "housing": 0.7
-        },
-        "confidence": 0.7,
-        "method": "keywords",
+        "scores": {},
+        "confidence": 0.876,
+        "method": "none",
         "model_version": "nb-v1"
       }
     }

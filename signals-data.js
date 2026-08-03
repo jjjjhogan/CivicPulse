@@ -304,9 +304,9 @@ function isRescuedSignal(signal) {
 }
 
 const CONFIDENCE_BANDS = {
-  high: { label: "High", min: 0.75, color: "#4c7a34" },
-  medium: { label: "Medium", min: 0.5, color: "#b07a1e" },
-  low: { label: "Low", min: 0, color: "#c44f3f" },
+  high: { label: "Strong", min: 0.75, color: "#4c7a34" },
+  medium: { label: "Moderate", min: 0.5, color: "#b07a1e" },
+  low: { label: "Weak", min: 0, color: "#c44f3f" },
   unscored: { label: "Unscored", color: "#8a8f98" },
 };
 
@@ -329,24 +329,42 @@ const CLASSIFICATION_METHODS = {
   none: "No civic issue detected",
 };
 
-// Append the classifier chips (confidence % + "missed by keywords") to a
+// Short labels for the method chip on feed cards.
+const METHOD_SHORT_LABELS = {
+  keywords: "keywords",
+  "keywords+model": "keywords + model",
+  model: "model",
+  inherited: "inherited",
+  outlet_default: "outlet default",
+  legacy: "legacy",
+};
+
+// Append the classifier chips (method label + match strength) to a
 // signal card's top row. Unscored signals get nothing, keeping cards clean.
-// Styles: .conf-chip / .rescued-badge in dashboard.css.
+// Styles: .conf-chip / .method-chip / .rescued-badge in dashboard.css.
 function appendClassificationBadges(top, record) {
-  const confidence = signalConfidence(record);
-  if (confidence != null) {
+  const cls = signalClassification(record);
+  const method = cls?.method;
+  if (method && method !== "none") {
     const chip = document.createElement("span");
-    chip.className = `conf-chip ${confidenceBand(record)}`;
-    chip.textContent = `${Math.round(confidence * 100)}%`;
-    chip.title = `Classifier confidence: ${
-      CLASSIFICATION_METHODS[signalClassification(record)?.method] || "unknown"
-    }`;
+    chip.className = "method-chip";
+    chip.textContent = METHOD_SHORT_LABELS[method] || method;
+    chip.title = CLASSIFICATION_METHODS[method] || method;
+    top.appendChild(chip);
+  }
+  const confidence = signalConfidence(record);
+  if (confidence != null && method && method !== "none") {
+    const band = confidenceBand(record);
+    const chip = document.createElement("span");
+    chip.className = `conf-chip ${band}`;
+    chip.textContent = CONFIDENCE_BANDS[band].label;
+    chip.title = `Match strength: ${Math.round(confidence * 100)}%`;
     top.appendChild(chip);
   }
   if (isRescuedSignal(record)) {
     const badge = document.createElement("span");
     badge.className = "rescued-badge";
-    badge.textContent = "missed by keywords";
+    badge.textContent = "model catch";
     badge.title = "The keyword filter would have dropped this — the model pass caught it";
     top.appendChild(badge);
   }

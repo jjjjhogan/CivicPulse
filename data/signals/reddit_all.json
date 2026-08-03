@@ -6,8 +6,7 @@
     "body": "Smoking on Property: Irvine Company\u2019s Refusal to Enforce City Law\nHello. I live in Irvine company housing near Spectrum and had reported make-shift smoking areas I had found on the property. It has now been one full week with no response from Irvine Company other th Hello. I live in Irvine company housing near Spectrum and had reported make-shift smoking areas I had found on the property. It has now been one full week with no response from Irvine Company other than the \u201cwe will look into it\u201d response.\nIn the meantime, the smoking areas are still being used and cigarette butts and trash are littered all around\nGiven how clear the city laws are pertaining to smoking cigarettes in public areas, can I just report them to the city? What is the process here?",
     "url": "https://old.reddit.com/r/irvine/comments/1v3njdq/smoking_on_property_irvine_companys_refusal_to/",
     "categories": [
-      "sanitation",
-      "housing"
+      "sanitation"
     ],
     "published_utc": "2026-07-22",
     "metadata": {
@@ -19,10 +18,9 @@
       "flair": null,
       "classification": {
         "scores": {
-          "sanitation": 0.87,
-          "housing": 0.7
+          "sanitation": 0.87
         },
-        "confidence": 0.785,
+        "confidence": 0.87,
         "method": "keywords+model",
         "model_version": "nb-v1"
       }
@@ -62,9 +60,7 @@
     "title": "Google Fiber Installation Process at new Avella (Irvine Company Apartment)",
     "body": "Google Fiber Installation Process at new Avella (Irvine Company Apartment)\nHello all\nI am thinking of self installation of Google Fiber because I was told that the new Avella II comes with Google Fiber infrastructure by default. I thought I can do self install of GFiber, but Hello all\nI am thinking of self installation of Google Fiber because I was told that the new Avella II comes with Google Fiber infrastructure by default. I thought I can do self install of GFiber, but I was told that I should have a professional come over my place. Does anybody know the reason?",
     "url": "https://old.reddit.com/r/irvine/comments/1v367ek/google_fiber_installation_process_at_new_avella/",
-    "categories": [
-      "housing"
-    ],
+    "categories": [],
     "published_utc": "2026-07-22",
     "metadata": {
       "author": "CompoteAlternative62",
@@ -74,11 +70,9 @@
       "search_query": "irvine",
       "flair": null,
       "classification": {
-        "scores": {
-          "housing": 0.7
-        },
-        "confidence": 0.7,
-        "method": "keywords",
+        "scores": {},
+        "confidence": 0.666,
+        "method": "none",
         "model_version": "nb-v1"
       }
     }
@@ -259,9 +253,9 @@
       "flair": null,
       "classification": {
         "scores": {
-          "violent_crime": 0.875
+          "violent_crime": 0.825
         },
-        "confidence": 0.875,
+        "confidence": 0.825,
         "method": "model",
         "model_version": "nb-v1",
         "rescued": true
@@ -352,9 +346,7 @@
     "title": "Public park shelter rentals",
     "body": "Public park shelter rentals\nAre the shelter rentals/reservations at the public parks free? I am looking for somewhere to have my daughters 3rd bday party and was working on the application, but couldn\u2019t figure out if it costs an Are the shelter rentals/reservations at the public parks free? I am looking for somewhere to have my daughters 3rd bday party and was working on the application, but couldn\u2019t figure out if it costs anything to rent the shelter",
     "url": "https://old.reddit.com/r/irvine/comments/1uzlaac/public_park_shelter_rentals/",
-    "categories": [
-      "housing"
-    ],
+    "categories": [],
     "published_utc": "2026-07-18",
     "metadata": {
       "author": "Big-Independence1191",
@@ -364,11 +356,9 @@
       "search_query": "irvine",
       "flair": null,
       "classification": {
-        "scores": {
-          "housing": 0.7
-        },
-        "confidence": 0.7,
-        "method": "keywords",
+        "scores": {},
+        "confidence": 0.737,
+        "method": "none",
         "model_version": "nb-v1"
       }
     }
@@ -390,7 +380,7 @@
       "flair": null,
       "classification": {
         "scores": {},
-        "confidence": 0.833,
+        "confidence": 0.712,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -415,9 +405,9 @@
       "flair": null,
       "classification": {
         "scores": {
-          "emergencies": 0.768
+          "emergencies": 0.762
         },
-        "confidence": 0.768,
+        "confidence": 0.762,
         "method": "model",
         "model_version": "nb-v1",
         "rescued": true
@@ -443,9 +433,9 @@
       "flair": null,
       "classification": {
         "scores": {
-          "property_crime": 0.734
+          "property_crime": 0.859
         },
-        "confidence": 0.734,
+        "confidence": 0.859,
         "method": "model",
         "model_version": "nb-v1",
         "rescued": true
@@ -497,7 +487,7 @@
       "flair": null,
       "classification": {
         "scores": {},
-        "confidence": 0.899,
+        "confidence": 0.872,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -543,7 +533,7 @@
       "flair": null,
       "classification": {
         "scores": {},
-        "confidence": 0.726,
+        "confidence": 0.625,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -566,7 +556,7 @@
       "flair": null,
       "classification": {
         "scores": {},
-        "confidence": 0.77,
+        "confidence": 0.779,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -589,7 +579,7 @@
       "flair": null,
       "classification": {
         "scores": {},
-        "confidence": 0.963,
+        "confidence": 0.943,
         "method": "none",
         "model_version": "nb-v1"
       }
