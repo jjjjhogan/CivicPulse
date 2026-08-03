@@ -11,52 +11,25 @@
 
 ## Today — Session 4: Phase A hand gold sample (2026-07-24)
 
-**Theme:** Build a **human-labeled** gold sample so Session 5+ fixes are measured against real judgments — not an AI auto-pass.  
-**Scope:** Measure only. **No** keyword surgery, model retrain, Firebase, or Research.
+→ **Wrapping** — gold + failure modes ready for PR (see Done below when merged).
 
-**Context:** Phase A audit work (PR #13 / `feature/phase-a-audit-s4`) produced an **AI-assisted** first pass now on `main` as [`data/labels/review_batch_01.md`](data/labels/review_batch_01.md) (~138 signals, auto verdicts). That file is a **draft / scaffold only**. It is **not** the gold sample until Jack + coworker have marked each row by hand.
+---
 
-### How we work today (one agent)
+## Done — Week 1 Session 4 (2026-08-03)
 
-| Role | Job |
-|------|-----|
-| **One coding agent** | Prep the review worksheet, pull live signal text/IDs/method, keep tally + failure-mode notes, commit when asked. Does **not** invent correct/wrong/none labels. |
-| **Jack + coworker (humans)** | Together, hand-classify each gold-sample signal: **correct / wrong / none / partial**; note obvious bad keywords or `method` when useful. |
+Phase A **hand** gold sample (measurement only).
 
-No coworker/Jack code split this session — both people label; one agent supports the worksheet.
-
-**Suggested branch:** `feature/phase-a-gold-hand-s4` (from current `main`). Prefer a new review file (e.g. `data/labels/review_batch_02_hand.md`) or clearly mark hand-verified rows in the draft so AI vs human judgments stay distinct.
-
-### Agent prompt (copy/paste)
-
-> Repo: CivicPulse (`Ryan/`). **Session 4 only** — Phase A **hand** gold sample.  
-> Pull `main`. Use/create branch `feature/phase-a-gold-hand-s4`.  
-> The AI first-pass in `review_batch_01.md` (if present) is draft only — do not treat its verdicts as ground truth.  
-> Help Jack + coworker hand-label ~50–100 live signals (mix of sources). For each: show id, source, title/body snippet, assigned categories, `method`. Record **their** verdict (correct / wrong / none / partial) + short note.  
-> After a solid batch: tally + top failure modes (still measurement only).  
-> Do **not** edit `CATEGORY_KEYWORDS`, classifier, labels training set, Firebase, or Research.  
-> `pytest -q` green if you touch tests; commit only when asked.
-
-### Shared checklist
-
-- [ ] Branch from latest `main`; draft AI review treated as scaffold only
-- [ ] Hand-label gold sample (~50–100; mix TikTok / news / reddit / twitter / resident)
-- [ ] Each row: verdict + note; capture `method` / bad keyword when obvious
-- [ ] Save reusable hand review (`data/labels/review_batch_02_hand.md` or equivalent)
-- [ ] Short failure-mode summary (enough to drive Session 5 Phase B)
-- [ ] No keyword / model / Firebase / Research edits
-- [ ] `pytest -q` green; PR when the hand sample is usable
+- [x] Branch `feature/phase-a-gold-hand-s4`; AI `review_batch_01.md` kept as draft only
+- [x] Hand-label 96 signals (part A TikTok + part B mix)
+- [x] Gold file: `data/labels/review_batch_02_hand.md` (+ `.json`)
+- [x] Human tallies: correct 41 / partial 28 / none 20 / wrong 7
+- [x] Failure modes 1–7 approved in `data/labels/failure_clusters_draft.md`
+- [x] No keyword / classifier / Firebase / Research edits
+- [x] Ready for PR → Session 5 Phase B uses this gold for re-score
 
 ### Session notes
 
--
-
-### Shared done when
-
-- [ ] Hand-labeled gold sample committed (reuse for Session 5 re-score)
-- [ ] Failure modes written from **human** verdicts
-- [ ] AI draft not confused with gold
-- [ ] No Phase B scope creep
+- 2026-08-03: Promoted part A/B → gold. Human re-bucketed clusters (dropped empty 5/9; renumbered 1–7).
 
 ---
 
@@ -110,7 +83,7 @@ Cold-start soak on coworker PC: **passed**.
 → **Done** (see above).
 
 ### Session 4 — Phase A measure (+ light test debt)
-→ **Today** — hand gold sample (AI draft ≠ ground truth); see above.
+→ **Done** (hand gold + failure modes; see above). PR to merge.
 
 ---
 

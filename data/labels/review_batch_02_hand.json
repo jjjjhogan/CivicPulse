@@ -1,8 +1,15 @@
 {
-  "version": 1,
-  "date": "2026-07-24",
-  "storage": "db",
-  "db_count": 170,
+  "version": 2,
+  "date": "2026-08-03",
+  "status": "human_gold",
+  "reviewers": "Jack + coworker",
+  "source_parts": [
+    "batch_01_answers_part_a.txt",
+    "batch_01_answers_part_b.txt"
+  ],
+  "note": "Human hand labels. review_batch_01.md remains AI draft only.",
+  "storage": "worksheet",
+  "db_count_at_promote": 0,
   "signals": [
     {
       "id": 116,
@@ -10,38 +17,25 @@
       "method": "none",
       "categories": [],
       "snippet": "Soak Up the serenity \u2014 Tai chi, tall trees and turtles at Heritage Park",
-      "title": "Soak Up the serenity",
-      "body": "Tai chi, tall trees and turtles at Heritage Park",
-      "verdict": "",
-      "note": "",
+      "title": "Soak Up the serenity \u2014 Tai chi, tall trees and turtles at Heritage Park",
+      "body": "",
       "url": "https://www.irvinestandard.com/2026/soak-up-the-serenity/",
-      "outlet": "Irvine Standard"
+      "verdict": "none",
+      "note": "news article of different events in the park.",
+      "part": "batch_01_answers_part_b.txt"
     },
     {
-      "id": 117,
+      "id": 118,
       "source": "news",
       "method": "none",
       "categories": [],
-      "snippet": "Elixir, Mixue now open in Irvine \u2014 The retail landscape in Irvine continues to grow, welcoming global flavors and wellness-focused dining. Health-conscious diners can head to University Center to try \u2026",
-      "title": "Elixir, Mixue now open in Irvine",
-      "body": "The retail landscape in Irvine continues to grow, welcoming global flavors and wellness-focused dining. Health-conscious diners can head to University Center to try Elixir Superfood & Juice. The 100% naturally [\u2026]",
-      "verdict": "",
-      "note": "",
-      "url": "https://www.irvinestandard.com/2026/elixir-mixue-now-open-in-irvine/",
-      "outlet": "Irvine Standard"
-    },
-    {
-      "id": 119,
-      "source": "news",
-      "method": "none",
-      "categories": [],
-      "snippet": "Q&A: New Swan returns to UC Irvine \u2014 This year\u2019s New Swan Shakespeare Festival features \u201cThe Merry Wives of Windsor Cove\u201d and \u201cRomeo & Juliet.\u201d Actor Evan Lugo, an alumnus of UCI\u2019s master of fine arts\u2026",
-      "title": "Q&A: New Swan returns to UC Irvine",
-      "body": "This year\u2019s New Swan Shakespeare Festival features \u201cThe Merry Wives of Windsor Cove\u201d and \u201cRomeo & Juliet.\u201d Actor Evan Lugo, an alumnus of UCI\u2019s master of fine arts acting program, [\u2026]",
-      "verdict": "",
-      "note": "",
-      "url": "https://www.irvinestandard.com/2026/qa-new-swan-returns-to-uc-irvine/",
-      "outlet": "Irvine Standard"
+      "snippet": "Making the most of a 40-year run at The Barclay \u2014 Ginny Hayward probably doesn\u2019t have a copy of the classified ad that ran in a local newspaper in late 1985. Bu\u2026",
+      "title": "Making the most of a 40-year run at The Barclay \u2014 Ginny Hayward probably doesn\u2019t have a copy of the classified ad that ran in a local newspaper in late 1985. Bu\u2026",
+      "body": "",
+      "url": "https://www.irvinestandard.com/2026/making-the-most-of-a-40-year-run-at-the-barclay/",
+      "verdict": "none",
+      "note": "article about barclay theater",
+      "part": "batch_01_answers_part_b.txt"
     },
     {
       "id": 120,
@@ -51,82 +45,54 @@
         "traffic_safety",
         "emergencies"
       ],
-      "snippet": "Wide-open opportunities for volunteers \u2014 A nestling red-tailed hawk, its white head visible above a large nest atop a coast live oak, seems to stand sentry over its two siblings while their parents ar\u2026",
-      "title": "Wide-open opportunities for volunteers",
-      "body": "A nestling red-tailed hawk, its white head visible above a large nest atop a coast live oak, seems to stand sentry over its two siblings while their parents are off [\u2026]",
-      "verdict": "",
-      "note": "",
+      "snippet": "Wide-open opportunities for volunteers \u2014 A nestling red-tailed hawk, its white head visible above a large nest atop a coast live oak, seems to stand sentry over\u2026",
+      "title": "Wide-open opportunities for volunteers \u2014 A nestling red-tailed hawk, its white head visible above a large nest atop a coast live oak, seems to stand sentry over\u2026",
+      "body": "",
       "url": "https://www.irvinestandard.com/2026/wide-open-opportunities-for-volunteers/",
-      "outlet": "Irvine Standard"
-    },
-    {
-      "id": 121,
-      "source": "news",
-      "method": "none",
-      "categories": [
-        "traffic_safety"
-      ],
-      "snippet": "Irvine softball teams win championships \u2014 Northwood High School\u2019s softball team won the Division 5 final to earn its first CIF title. Irvine High School captured its second CIF softball title with a v\u2026",
-      "title": "Irvine softball teams win championships",
-      "body": "Northwood High School\u2019s softball team won the Division 5 final to earn its first CIF title. Irvine High School captured its second CIF softball title with a victory in the [\u2026]",
-      "verdict": "",
-      "note": "",
-      "url": "https://www.irvinestandard.com/2026/irvine-softball-teams-win-championships/",
-      "outlet": "Irvine Standard"
+      "verdict": "wrong",
+      "note": "public safeety, emergencies potentially: news article talking about need for more fire watcher volunteers and their importance",
+      "part": "batch_01_answers_part_b.txt"
     },
     {
       "id": 123,
       "source": "news",
       "method": "none",
       "categories": [],
-      "snippet": "Celebrating Small Business: Woodbridge Village Center \u2014 Students find their rhythm at Focus Dance Center Leah Lederman began taking lessons at Focus Dance Center when she was 3 years old and never rea\u2026",
-      "title": "Celebrating Small Business: Woodbridge Village Center",
-      "body": "Students find their rhythm at Focus Dance Center Leah Lederman began taking lessons at Focus Dance Center when she was 3 years old and never really left. \u201cFor most of [\u2026]",
-      "verdict": "",
-      "note": "",
+      "snippet": "Celebrating Small Business: Woodbridge Village Center \u2014 Students find their rhythm at Focus Dance Center Leah Lederman began taking lessons at Focus Dance Cente\u2026",
+      "title": "Celebrating Small Business: Woodbridge Village Center \u2014 Students find their rhythm at Focus Dance Center Leah Lederman began taking lessons at Focus Dance Cente\u2026",
+      "body": "",
       "url": "https://www.irvinestandard.com/2026/celebrating-small-business-woodbridge-village-center/",
-      "outlet": "Irvine Standard"
-    },
-    {
-      "id": 124,
-      "source": "news",
-      "method": "none",
-      "categories": [
-        "traffic_safety"
-      ],
-      "snippet": "How freeway improvements impact Irvine \u2014 Mobility in Irvine is about more than getting from point A to point B; it is about the integration of neighborhoods, retail centers, schools, parks and primary\u2026",
-      "title": "How freeway improvements impact Irvine",
-      "body": "Mobility in Irvine is about more than getting from point A to point B; it is about the integration of neighborhoods, retail centers, schools, parks and primary business hubs. Central [\u2026]",
-      "verdict": "",
-      "note": "",
-      "url": "https://www.irvinestandard.com/2026/how-freeway-improvements-impact-irvine/",
-      "outlet": "Irvine Standard"
+      "verdict": "none",
+      "note": "small business article talking about town",
+      "part": "batch_01_answers_part_b.txt"
     },
     {
       "id": 125,
       "source": "news",
       "method": "none",
       "categories": [],
-      "snippet": "Try these 5 over-the-top sandwich creations \u2014 It has been said that life is a sandwich \u2013 what happens between slices of the past and future. We say sandwiches are life. The great ones are pinnacles of\u2026",
-      "title": "Try these 5 over-the-top sandwich creations",
-      "body": "It has been said that life is a sandwich \u2013 what happens between slices of the past and future. We say sandwiches are life. The great ones are pinnacles of [\u2026]",
-      "verdict": "",
-      "note": "",
+      "snippet": "Try these 5 over-the-top sandwich creations \u2014 It has been said that life is a sandwich \u2013 what happens between slices of the past and future. We say sandwiches a\u2026",
+      "title": "Try these 5 over-the-top sandwich creations \u2014 It has been said that life is a sandwich \u2013 what happens between slices of the past and future. We say sandwiches a\u2026",
+      "body": "",
       "url": "https://www.irvinestandard.com/2026/try-these-5-over-the-top-sandwich-creations/",
-      "outlet": "Irvine Standard"
+      "verdict": "none",
+      "note": "ad for 5 small businesses article",
+      "part": "batch_01_answers_part_b.txt"
     },
     {
-      "id": 127,
+      "id": 128,
       "source": "news",
       "method": "none",
-      "categories": [],
-      "snippet": "Q&A: Swim star credits Irvine\u2019s summer swim league for success \u2014 Ella Eastin won 12 NCAA titles, broke four American and NCAA records and helped the Stanford swim team win three NCAA championships. Sh\u2026",
-      "title": "Q&A: Swim star credits Irvine\u2019s summer swim league for success",
-      "body": "Ella Eastin won 12 NCAA titles, broke four American and NCAA records and helped the Stanford swim team win three NCAA championships. She started at Irvine Swim League and still [\u2026]",
-      "verdict": "",
-      "note": "",
-      "url": "https://www.irvinestandard.com/2026/qa-swim-star-credits-irvines-summer-swim-league-for-success/",
-      "outlet": "Irvine Standard"
+      "categories": [
+        "public_safety"
+      ],
+      "snippet": "No. 3 city in America to raise a family \u2014 Irvine landed at No. 3 on Wallet\u00adHub\u2019s national \u201cBest Places to Raise a Family\u201d ranking, driven by its safety record, \u2026",
+      "title": "No. 3 city in America to raise a family \u2014 Irvine landed at No. 3 on Wallet\u00adHub\u2019s national \u201cBest Places to Raise a Family\u201d ranking, driven by its safety record, \u2026",
+      "body": "",
+      "url": "https://www.irvinestandard.com/2026/no-3-city-in-america-to-raise-a-family-2/",
+      "verdict": "correct",
+      "note": "article talking about a ranking of irvine as no.3 city to raise a family",
+      "part": "batch_01_answers_part_b.txt"
     },
     {
       "id": 129,
@@ -135,13 +101,41 @@
       "categories": [
         "traffic_safety"
       ],
-      "snippet": "Four named National Merit Scholars \u2014 Irvine high school students accounted for four of 11 seniors in the county who were awarded prestigious college-sponsored National Merit Scholarships. The Irvine w\u2026",
-      "title": "Four named National Merit Scholars",
-      "body": "Irvine high school students accounted for four of 11 seniors in the county who were awarded prestigious college-sponsored National Merit Scholarships. The Irvine winners are Xiao Jiang (University High), Pragnya [\u2026]",
-      "verdict": "",
-      "note": "",
+      "snippet": "Four named National Merit Scholars \u2014 Irvine high school students accounted for four of 11 seniors in the county who were awarded prestigious college-sponsored N\u2026",
+      "title": "Four named National Merit Scholars \u2014 Irvine high school students accounted for four of 11 seniors in the county who were awarded prestigious college-sponsored N\u2026",
+      "body": "",
       "url": "https://www.irvinestandard.com/2026/four-named-national-merit-scholars/",
-      "outlet": "Irvine Standard"
+      "verdict": "none",
+      "note": "article congratulating 4 scholars for their achievement in merit awards",
+      "part": "batch_01_answers_part_b.txt"
+    },
+    {
+      "id": 130,
+      "source": "news",
+      "method": "none",
+      "categories": [],
+      "snippet": "10 happenings in July \u2014 1. \u2018C.S. Lewis on Stage\u2019Experience a multimedia performance capturing the magnetic personality, eloquence and sharp wit of C.S. Lewis. A\u2026",
+      "title": "10 happenings in July \u2014 1. \u2018C.S. Lewis on Stage\u2019Experience a multimedia performance capturing the magnetic personality, eloquence and sharp wit of C.S. Lewis. A\u2026",
+      "body": "",
+      "url": "https://www.irvinestandard.com/2026/10-happenings-in-july/",
+      "verdict": "correct",
+      "note": "july news listings",
+      "part": "batch_01_answers_part_b.txt"
+    },
+    {
+      "id": 131,
+      "source": "news",
+      "method": "none",
+      "categories": [
+        "housing"
+      ],
+      "snippet": "Splash into summer \u2014 It\u2019s the perfect time to get outside and enjoy the treats of the season \u2013 concerts in the park, movies under the stars, hikes on nearby tra\u2026",
+      "title": "Splash into summer \u2014 It\u2019s the perfect time to get outside and enjoy the treats of the season \u2013 concerts in the park, movies under the stars, hikes on nearby tra\u2026",
+      "body": "",
+      "url": "https://www.irvinestandard.com/2026/splash-into-summer/",
+      "verdict": "none",
+      "note": "summer event ad",
+      "part": "batch_01_answers_part_b.txt"
     },
     {
       "id": 132,
@@ -150,13 +144,44 @@
       "categories": [
         "housing"
       ],
-      "snippet": "Cutting-Edge Connectivity \u2014 New Irvine Community Pacifica Place Debuts First-of-Its-Kind 3 Gig Wi-Fi 7 Network as High-Speed Internet Becomes a Must-Have Residential Amenity",
-      "title": "Cutting-Edge Connectivity",
-      "body": "New Irvine Community Pacifica Place Debuts First-of-Its-Kind 3 Gig Wi-Fi 7 Network as High-Speed Internet Becomes a Must-Have Residential Amenity",
-      "verdict": "",
-      "note": "",
+      "snippet": "Cutting-Edge Connectivity \u2014 New Irvine Community Pacifica Place Debuts First-of-Its-Kind 3 Gig Wi-Fi 7 Network as High-Speed Internet Becomes a Must-Have Reside\u2026",
+      "title": "Cutting-Edge Connectivity \u2014 New Irvine Community Pacifica Place Debuts First-of-Its-Kind 3 Gig Wi-Fi 7 Network as High-Speed Internet Becomes a Must-Have Reside\u2026",
+      "body": "",
       "url": "https://www.irvinestandard.com/2026/cutting-edge-connectivity/",
-      "outlet": "Irvine Standard"
+      "verdict": "none",
+      "note": "talking about updated internet speeds",
+      "part": "batch_01_answers_part_b.txt"
+    },
+    {
+      "id": 133,
+      "source": "news",
+      "method": "none",
+      "categories": [
+        "traffic_safety"
+      ],
+      "snippet": "Getting wild at OC Zoo for a day \u2014 About 455 runners of all ages took part in the Run Wild 5K event at the OC Zoo in Irvine Regional Park last month. Proceeds f\u2026",
+      "title": "Getting wild at OC Zoo for a day \u2014 About 455 runners of all ages took part in the Run Wild 5K event at the OC Zoo in Irvine Regional Park last month. Proceeds f\u2026",
+      "body": "",
+      "url": "https://www.irvinestandard.com/2026/getting-wild-at-oc-zoo-for-a-day/",
+      "verdict": "none",
+      "note": "article talking about 5k at zoo",
+      "part": "batch_01_answers_part_b.txt"
+    },
+    {
+      "id": 134,
+      "source": "news",
+      "method": "none",
+      "categories": [
+        "public_safety",
+        "housing"
+      ],
+      "snippet": "Amenities abound at Spectrum Terrace \u2014 Some folks spend work breaks gulping coffee, gobbling doughnuts or playing word games on their phones. Bharat Ananth hits\u2026",
+      "title": "Amenities abound at Spectrum Terrace \u2014 Some folks spend work breaks gulping coffee, gobbling doughnuts or playing word games on their phones. Bharat Ananth hits\u2026",
+      "body": "",
+      "url": "https://www.irvinestandard.com/2026/amenities-abound-at-spectrum-terrace/",
+      "verdict": "none",
+      "note": "ads talking about amenities at apartment complex",
+      "part": "batch_01_answers_part_b.txt"
     },
     {
       "id": 135,
@@ -164,135 +189,42 @@
       "method": "none",
       "categories": [],
       "snippet": "A linear park journey \u2014 Jeffrey Open Space Trail is a portal to the past and a connection in the present",
-      "title": "A linear park journey",
-      "body": "Jeffrey Open Space Trail is a portal to the past and a connection in the present",
-      "verdict": "",
-      "note": "",
+      "title": "A linear park journey \u2014 Jeffrey Open Space Trail is a portal to the past and a connection in the present",
+      "body": "",
       "url": "https://www.irvinestandard.com/2026/a-linear-park-journey/",
-      "outlet": "Irvine Standard"
+      "verdict": "none",
+      "note": "new park opening",
+      "part": "batch_01_answers_part_b.txt"
+    },
+    {
+      "id": 136,
+      "source": "news",
+      "method": "none",
+      "categories": [
+        "sanitation",
+        "traffic_safety",
+        "public_safety"
+      ],
+      "snippet": "After an Accident: What Helps a Personal Injury Claim Most \u2014 Details start slipping faster than people expect after an accident. A street name goes fuzzy, the w\u2026",
+      "title": "After an Accident: What Helps a Personal Injury Claim Most \u2014 Details start slipping faster than people expect after an accident. A street name goes fuzzy, the w\u2026",
+      "body": "",
+      "url": "https://irvineweekly.com/after-an-accident-what-helps-a-personal-injury-claim-most/?utm_source=rss&utm_medium=rss&utm_campaign=after-an-accident-what-helps-a-personal-injury-claim-most",
+      "verdict": "partial",
+      "note": "good news source of what to do if in an accident to keep good details, traffic and public safety potential",
+      "part": "batch_01_answers_part_b.txt"
     },
     {
       "id": 137,
       "source": "news",
       "method": "none",
       "categories": [],
-      "snippet": "AITEX Summit Winter 2026 to Spotlight Applied Data Analytics for Real-World Decisions \u2014 Summary: The upcoming AITEX Summit Winter 2026 will bring data analytics and AI professionals together for an on\u2026",
-      "title": "AITEX Summit Winter 2026 to Spotlight Applied Data Analytics for Real-World Decisions",
-      "body": "Summary: The upcoming AITEX Summit Winter 2026 will bring data analytics and AI professionals together for an online event focused on building applied, decision-focused analytics projects. The Association of Information Technology Experts (AITEX), a California-based organization, will host the AITEX Summit Winter 2026 later this month, on Feb. 27 and 28, as a two-day online [\u2026] \n The post  AITEX Summit Winter 2026 to Spotlight Applied Data Analytics for Real-World Decisions  appeared first on  I",
-      "verdict": "",
-      "note": "",
+      "snippet": "AITEX Summit Winter 2026 to Spotlight Applied Data Analytics for Real-World Decisions \u2014 Summary: The upcoming AITEX Summit Winter 2026 will bring data analytics\u2026",
+      "title": "AITEX Summit Winter 2026 to Spotlight Applied Data Analytics for Real-World Decisions \u2014 Summary: The upcoming AITEX Summit Winter 2026 will bring data analytics\u2026",
+      "body": "",
       "url": "https://irvineweekly.com/aitex-summit-winter-2026-to-spotlight-applied-data-analytics-for-real-world-decisions/?utm_source=rss&utm_medium=rss&utm_campaign=aitex-summit-winter-2026-to-spotlight-applied-data-analytics-for-real-world-decisions",
-      "outlet": "Irvine Weekly"
-    },
-    {
-      "id": 139,
-      "source": "news",
-      "method": "none",
-      "categories": [],
-      "snippet": "AITEX Summit Fall 2025: Where Professionals Build the Future of AI \u2014 This November, top IT professionals from around the world will put their skills to the test in a global AI sprint. AITEX Summit Fal\u2026",
-      "title": "AITEX Summit Fall 2025: Where Professionals Build the Future of AI",
-      "body": "This November, top IT professionals from around the world will put their skills to the test in a global AI sprint. AITEX Summit Fall 2025, taking place online November 1\u20132, is organized by AITEX, the Association of Information Technology Experts, a California based community that brings together technology leaders across the United States, Europe, and [\u2026] \n The post  AITEX Summit Fall 2025: Where Professionals Build the Future of AI  appeared first on  Irvine Weekly .",
-      "verdict": "",
-      "note": "",
-      "url": "https://irvineweekly.com/aitex-summit-fall-2025-where-professionals-build-the-future-of-ai/?utm_source=rss&utm_medium=rss&utm_campaign=aitex-summit-fall-2025-where-professionals-build-the-future-of-ai",
-      "outlet": "Irvine Weekly"
-    },
-    {
-      "id": 142,
-      "source": "news",
-      "method": "none",
-      "categories": [
-        "immigration",
-        "housing"
-      ],
-      "snippet": "America: Illegal Immigrants Are Bankrolling You \u2014 Step into any restaurant kitchen, construction site, or agricultural field, and you\u2019ll find them\u2014working tirelessly in the shadows, sustaining the ind\u2026",
-      "title": "America: Illegal Immigrants Are Bankrolling You",
-      "body": "Step into any restaurant kitchen, construction site, or agricultural field, and you\u2019ll find them\u2014working tirelessly in the shadows, sustaining the industries that make American life comfortable. The undocumented workforce is not a faceless statistic; it is the silent engine of the U.S. economy. Yet in national debates, they are scapegoated, demonized, and used as political [\u2026] \n The post  America: Illegal Immigrants Are Bankrolling You  appeared first on  Irvine Weekly .",
-      "verdict": "",
-      "note": "",
-      "url": "https://irvineweekly.com/america-illegal-immigrants-are-bankrolling-you/?utm_source=rss&utm_medium=rss&utm_campaign=america-illegal-immigrants-are-bankrolling-you",
-      "outlet": "Irvine Weekly"
-    },
-    {
-      "id": 143,
-      "source": "news",
-      "method": "none",
-      "categories": [
-        "traffic_safety"
-      ],
-      "snippet": "Karns and Karns Personal Injury and Accident Attorneys Enhances Presence in Orange County, California \u2014 Karns and Karns Personal Injury and Accident Attorneys, a leading personal injury law firm, is p\u2026",
-      "title": "Karns and Karns Personal Injury and Accident Attorneys Enhances Presence in Orange County, California",
-      "body": "Karns and Karns Personal Injury and Accident Attorneys, a leading personal injury law firm, is proud to announce expanding its services with new locations throughout Orange County, California. This strategic growth strengthens the firm\u2019s commitment to providing accessible and exceptional legal representation to accident victims across the vibrant communities of Orange County and the surrounding [\u2026] \n The post  Karns and Karns Personal Injury and Accident Attorneys Enhances Presence in Orange Cou",
-      "verdict": "",
-      "note": "",
-      "url": "https://irvineweekly.com/karns-and-karns-personal-injury-and-accident-attorneys-enhances-presence-in-orange-county-california/?utm_source=rss&utm_medium=rss&utm_campaign=karns-and-karns-personal-injury-and-accident-attorneys-enhances-presence-in-orange-county-california",
-      "outlet": "Irvine Weekly"
-    },
-    {
-      "id": 144,
-      "source": "news",
-      "method": "none",
-      "categories": [
-        "violent_crime"
-      ],
-      "snippet": "Richard Sullivan: Four Decades of Leadership in Family Law \u2014 For almost 50 years, Richard P. Sullivan, Esq. has stood as a pillar of strength, advocacy, and legal excellence in Orange County\u2019s family \u2026",
-      "title": "Richard Sullivan: Four Decades of Leadership in Family Law",
-      "body": "For almost 50 years,\u00a0Richard P. Sullivan, Esq.\u00a0has stood as a pillar of strength, advocacy, and legal excellence in Orange County\u2019s family law community. As the founder and managing attorney of\u00a0Sullivan Law & Associates, Sullivan has built a legacy defined by unwavering dedication to the families he serves, integrity, and courtroom excellence. A Legacy of Legal [\u2026] \n The post  Richard Sullivan: Four Decades of Leadership in Family Law  appeared first on  Irvine Weekly .",
-      "verdict": "",
-      "note": "",
-      "url": "https://irvineweekly.com/richard-sullivan-four-decades-of-leadership-in-family-law/?utm_source=rss&utm_medium=rss&utm_campaign=richard-sullivan-four-decades-of-leadership-in-family-law",
-      "outlet": "Irvine Weekly"
-    },
-    {
-      "id": 146,
-      "source": "news",
-      "method": "none",
-      "categories": [
-        "noise",
-        "emergencies"
-      ],
-      "snippet": "Irvine Asks Voters to Change Election System While Budget Deficit Looms \u2014 Irvine voters will be able to weigh in during November\u2019s election about whether or not they want their city to start using ran\u2026",
-      "title": "Irvine Asks Voters to Change Election System While Budget Deficit Looms",
-      "body": "Irvine voters will be able to weigh in during November\u2019s election about whether or not they want their city to start using ranked choice voting in 2028. \n Voice of OC is Orange County's nonprofit newsroom. We rely on donations from people like you to sustain our news agency. Please make a contribution today: https://voiceofoc.org/donate",
-      "verdict": "",
-      "note": "",
-      "url": "https://voiceofoc.org/2026/07/irvine-asks-voters-to-change-election-system-while-budget-deficit-looms/",
-      "outlet": "Voice of OC"
-    },
-    {
-      "id": 147,
-      "source": "news",
-      "method": "none",
-      "categories": [
-        "housing",
-        "public_safety",
-        "property_crime"
-      ],
-      "snippet": "Orange County\u2019s Biggest Civic News as the OC Fair Opens \u2014 The Orange County Fair opens with higher prices that officials say are from increased costs, more Airbnb regulations could be coming to Newpor\u2026",
-      "title": "Orange County\u2019s Biggest Civic News as the OC Fair Opens",
-      "body": "The Orange County Fair opens with higher prices that officials say are from increased costs, more Airbnb regulations could be coming to Newport Beach after the Fourth of July chaos \u2013 these are some of OC\u2019s biggest civic headlines.  \n Voice of OC is Orange County's nonprofit newsroom. We rely on donations from people like you to sustain our news agency. Please make a contribution today: https://voiceofoc.org/donate",
-      "verdict": "",
-      "note": "",
-      "url": "https://voiceofoc.org/2026/07/orange-countys-biggest-civic-news-as-the-oc-fair-opens/",
-      "outlet": "Voice of OC"
-    },
-    {
-      "id": 148,
-      "source": "news",
-      "method": "none",
-      "categories": [
-        "public_safety",
-        "emergencies",
-        "property_crime",
-        "immigration"
-      ],
-      "snippet": "Two More Orange County Cities Eye Police Drones \u2014 Stanton and Cypress are latest in OC to move forward with drones \u2013 a move officials say will keep officers safe and improve response times amid privac\u2026",
-      "title": "Two More Orange County Cities Eye Police Drones",
-      "body": "Stanton and Cypress are latest in OC to move forward with drones \u2013 a move officials say will keep officers safe and improve response times amid privacy concerns. \n Voice of OC is Orange County's nonprofit newsroom. We rely on donations from people like you to sustain our news agency. Please make a contribution today: https://voiceofoc.org/donate",
-      "verdict": "",
-      "note": "",
-      "url": "https://voiceofoc.org/2026/07/two-more-orange-county-cities-eye-police-drones/",
-      "outlet": "Voice of OC"
+      "verdict": "none",
+      "note": "ad for tech summet",
+      "part": "batch_01_answers_part_b.txt"
     },
     {
       "id": 92,
@@ -304,13 +236,58 @@
         "housing",
         "immigration"
       ],
-      "snippet": "Do Irvine Residents Feel Safer with Flock Cameras everywhere? \u2014 Do Irvine Residents Feel Safer with Flock Cameras everywhere? Are the security risks, constant monitoring, the fact that a private corpo\u2026",
-      "title": "Do Irvine Residents Feel Safer with Flock Cameras everywhere?",
-      "body": "Do Irvine Residents Feel Safer with Flock Cameras everywhere?\nAre the security risks, constant monitoring, the fact that a private corporation is in control of the data as you cant own a flock device only rent it, and this information being used for issues unrelated to motor vehicles worth it? Just check the logs for these cameras to see how many requests are made for immigration instead of actual crimes.",
-      "verdict": "",
-      "note": "",
+      "snippet": "Do Irvine Residents Feel Safer with Flock Cameras everywhere? \u2014 Do Irvine Residents Feel Safer with Flock Cameras everywhere? Are the security risks, constant m\u2026",
+      "title": "Do Irvine Residents Feel Safer with Flock Cameras everywhere? \u2014 Do Irvine Residents Feel Safer with Flock Cameras everywhere? Are the security risks, constant m\u2026",
+      "body": "",
       "url": "https://old.reddit.com/r/irvine/comments/1uqoc80/do_irvine_residents_feel_safer_with_flock_cameras/",
-      "outlet": "r/irvine"
+      "verdict": "partial",
+      "note": "housing, public_safety is correct, issue with 'invasive' cameras being installed by city",
+      "part": "batch_01_answers_part_b.txt"
+    },
+    {
+      "id": 93,
+      "source": "reddit",
+      "method": "keywords+model",
+      "categories": [
+        "public_safety"
+      ],
+      "snippet": "Missing Person! \u2014 Missing Person! UPDATE - Found and home safe. Thank you, everyone! We need help finding Amy Harchol, a 67-year-old woman. She walked away from\u2026",
+      "title": "Missing Person! \u2014 Missing Person! UPDATE - Found and home safe. Thank you, everyone! We need help finding Amy Harchol, a 67-year-old woman. She walked away from\u2026",
+      "body": "",
+      "url": "https://old.reddit.com/r/irvine/comments/1uqilbd/missing_person/",
+      "verdict": "correct",
+      "note": "missing persons post, who was later found and this is the comment made by irvine pd",
+      "part": "batch_01_answers_part_b.txt"
+    },
+    {
+      "id": 94,
+      "source": "reddit",
+      "method": "keywords",
+      "categories": [
+        "potholes"
+      ],
+      "snippet": "Our lovely new slurry seal \u2014 Our lovely new slurry seal How is the slurry seal from last week already ruined? Is it melting from the heat? Did it get wet? Did t\u2026",
+      "title": "Our lovely new slurry seal \u2014 Our lovely new slurry seal How is the slurry seal from last week already ruined? Is it melting from the heat? Did it get wet? Did t\u2026",
+      "body": "",
+      "url": "https://old.reddit.com/r/irvine/comments/1uqam9g/our_lovely_new_slurry_seal/",
+      "verdict": "correct",
+      "note": "bad paving job, pothole adjacent news",
+      "part": "batch_01_answers_part_b.txt"
+    },
+    {
+      "id": 95,
+      "source": "reddit",
+      "method": "keywords",
+      "categories": [
+        "noise"
+      ],
+      "snippet": "The Drone Show/ Fireworks were pretty good in Woodbridge \u2014 The Drone Show/ Fireworks were pretty good in Woodbridge Woodbridge Village Association had their fir\u2026",
+      "title": "The Drone Show/ Fireworks were pretty good in Woodbridge \u2014 The Drone Show/ Fireworks were pretty good in Woodbridge Woodbridge Village Association had their fir\u2026",
+      "body": "",
+      "url": "https://old.reddit.com/r/irvine/comments/1uoakdq/the_drone_show_fireworks_were_pretty_good_in/",
+      "verdict": "correct",
+      "note": "firework show is potential noise issue",
+      "part": "batch_01_answers_part_b.txt"
     },
     {
       "id": 96,
@@ -319,13 +296,28 @@
       "categories": [
         "noise"
       ],
-      "snippet": "Is Mike Ward park a good place to watch July 4th fireworks? \u2014 Is Mike Ward park a good place to watch July 4th fireworks? Looking for the best place to watch the Woodbridge fireworks with an emphasis \u2026",
-      "title": "Is Mike Ward park a good place to watch July 4th fireworks?",
-      "body": "Is Mike Ward park a good place to watch July 4th fireworks?\nLooking for the best place to watch the Woodbridge fireworks with an emphasis on keeping my sanity when it comes to parking",
-      "verdict": "",
-      "note": "",
+      "snippet": "Is Mike Ward park a good place to watch July 4th fireworks? \u2014 Is Mike Ward park a good place to watch July 4th fireworks? Looking for the best place to watch th\u2026",
+      "title": "Is Mike Ward park a good place to watch July 4th fireworks? \u2014 Is Mike Ward park a good place to watch July 4th fireworks? Looking for the best place to watch th\u2026",
+      "body": "",
       "url": "https://old.reddit.com/r/irvine/comments/1uln6t6/is_mike_ward_park_a_good_place_to_watch_july_4th/",
-      "outlet": "r/irvine"
+      "verdict": "correct",
+      "note": "firework show",
+      "part": "batch_01_answers_part_b.txt"
+    },
+    {
+      "id": 97,
+      "source": "reddit",
+      "method": "keywords+model",
+      "categories": [
+        "traffic_safety"
+      ],
+      "snippet": "New Signal at Harvard and Berkeley Intersection \u2014 New Signal at Harvard and Berkeley Intersection Months ago I submitted a complaint with the city of Irvine for\u2026",
+      "title": "New Signal at Harvard and Berkeley Intersection \u2014 New Signal at Harvard and Berkeley Intersection Months ago I submitted a complaint with the city of Irvine for\u2026",
+      "body": "",
+      "url": "https://old.reddit.com/r/irvine/comments/1uku663/new_signal_at_harvard_and_berkeley_intersection/",
+      "verdict": "correct",
+      "note": "the user is talking about the response from the city on adding in a new stoplight, and their excitement for change at this intersection",
+      "part": "batch_01_answers_part_b.txt"
     },
     {
       "id": 98,
@@ -334,13 +326,29 @@
       "categories": [
         "public_safety"
       ],
-      "snippet": "1A \"Auditors\" in Woodbridge? \u2014 1A \"Auditors\" in Woodbridge? Just drove on E Yale Loop and it looked like some \"auditors\" were taking pics/videos of cars on the street.",
-      "title": "1A \"Auditors\" in Woodbridge?",
-      "body": "1A \"Auditors\" in Woodbridge?\nJust drove on E Yale Loop and it looked like some \"auditors\" were taking pics/videos of cars on the street.",
-      "verdict": "",
-      "note": "",
+      "snippet": "1A \"Auditors\" in Woodbridge? \u2014 1A \"Auditors\" in Woodbridge? Just drove on E Yale Loop and it looked like some \"auditors\" were taking pics/videos of cars on the \u2026",
+      "title": "1A \"Auditors\" in Woodbridge? \u2014 1A \"Auditors\" in Woodbridge? Just drove on E Yale Loop and it looked like some \"auditors\" were taking pics/videos of cars on the \u2026",
+      "body": "",
       "url": "https://old.reddit.com/r/irvine/comments/1ukrowc/1a_auditors_in_woodbridge/",
-      "outlet": "r/irvine"
+      "verdict": "correct",
+      "note": "potential protest or group of individuals being abrasive",
+      "part": "batch_01_answers_part_b.txt"
+    },
+    {
+      "id": 99,
+      "source": "reddit",
+      "method": "keywords+model",
+      "categories": [
+        "violent_crime",
+        "public_safety"
+      ],
+      "snippet": "Aggressive coyote in Turtle Rock, south Irvine, killed pet >:( \u2014 Aggressive coyote in Turtle Rock, south Irvine, killed pet >:( My parents live in the Turtle Ro\u2026",
+      "title": "Aggressive coyote in Turtle Rock, south Irvine, killed pet >:( \u2014 Aggressive coyote in Turtle Rock, south Irvine, killed pet >:( My parents live in the Turtle Ro\u2026",
+      "body": "",
+      "url": "https://old.reddit.com/r/irvine/comments/1tltzaq/aggressive_coyote_in_turtle_rock_south_irvine/",
+      "verdict": "partial",
+      "note": "public safety, coyote on loose killing pets",
+      "part": "batch_01_answers_part_b.txt"
     },
     {
       "id": 100,
@@ -349,13 +357,13 @@
       "categories": [
         "housing"
       ],
-      "snippet": "A love letter to capitalism [Irvine, California, 4/19/2026] \u2014 A love letter to capitalism [Irvine, California, 4/19/2026] Average rent prices have risen from about $300 per month 40 years ago to over \u2026",
-      "title": "A love letter to capitalism [Irvine, California, 4/19/2026]",
-      "body": "A love letter to capitalism [Irvine, California, 4/19/2026]\nAverage rent prices have risen from about $300 per month 40 years ago to over $2,000 per month today. It's incredible how dozens of unhoused people are mocked or blamed for their difficulties. Thank you, Capitalism, for normalizing victim-shaming.",
-      "verdict": "",
-      "note": "",
+      "snippet": "A love letter to capitalism [Irvine, California, 4/19/2026] \u2014 A love letter to capitalism [Irvine, California, 4/19/2026] Average rent prices have risen from ab\u2026",
+      "title": "A love letter to capitalism [Irvine, California, 4/19/2026] \u2014 A love letter to capitalism [Irvine, California, 4/19/2026] Average rent prices have risen from ab\u2026",
+      "body": "",
       "url": "https://old.reddit.com/r/irvine/comments/1sqr1zd/a_love_letter_to_capitalism_irvine_california/",
-      "outlet": "r/irvine"
+      "verdict": "correct",
+      "note": "complaints about rising costs in inflation, housing",
+      "part": "batch_01_answers_part_b.txt"
     },
     {
       "id": 101,
@@ -364,13 +372,13 @@
       "categories": [
         "public_safety"
       ],
-      "snippet": "\u201c1st Amendment\u201d frauditors at Woodbury shopping center today. \u2014 \u201c1st Amendment\u201d frauditors at Woodbury shopping center today. When we drove by they were in front of Ralph's - a bunch of cops were also\u2026",
-      "title": "\u201c1st Amendment\u201d frauditors at Woodbury shopping center today.",
-      "body": "\u201c1st Amendment\u201d frauditors at Woodbury shopping center today.\nWhen we drove by they were in front of Ralph's - a bunch of cops were also there arguing with them. They're being assholes as per usual, masked and aggressive, filming license plates, getting in people's faces.",
-      "verdict": "",
-      "note": "",
+      "snippet": "\u201c1st Amendment\u201d frauditors at Woodbury shopping center today. \u2014 \u201c1st Amendment\u201d frauditors at Woodbury shopping center today. When we drove by they were in fron\u2026",
+      "title": "\u201c1st Amendment\u201d frauditors at Woodbury shopping center today. \u2014 \u201c1st Amendment\u201d frauditors at Woodbury shopping center today. When we drove by they were in fron\u2026",
+      "body": "",
       "url": "https://old.reddit.com/r/irvine/comments/1sbsc8p/1st_amendment_frauditors_at_woodbury_shopping/",
-      "outlet": "r/irvine"
+      "verdict": "correct",
+      "note": "first admendment protestors arguing with police and causing issues",
+      "part": "batch_01_answers_part_b.txt"
     },
     {
       "id": 102,
@@ -381,12 +389,58 @@
         "public_safety"
       ],
       "snippet": "Great Park standoff \u2014 Great Park standoff https://www.cbsnews.com/losangeles/news/man-irvine-family-hostage-captive-police-standoff/",
-      "title": "Great Park standoff",
-      "body": "Great Park standoff\nhttps://www.cbsnews.com/losangeles/news/man-irvine-family-hostage-captive-police-standoff/",
-      "verdict": "",
-      "note": "",
+      "title": "Great Park standoff \u2014 Great Park standoff https://www.cbsnews.com/losangeles/news/man-irvine-family-hostage-captive-police-standoff/",
+      "body": "",
       "url": "https://old.reddit.com/r/irvine/comments/1r2gjjb/great_park_standoff/",
-      "outlet": "r/irvine"
+      "verdict": "correct",
+      "note": "police response to man holding family hostage",
+      "part": "batch_01_answers_part_b.txt"
+    },
+    {
+      "id": 103,
+      "source": "reddit",
+      "method": "keywords",
+      "categories": [
+        "public_safety"
+      ],
+      "snippet": "ICE and IPD/Irvine Company \u2014 ICE and IPD/Irvine Company I've been doing some reading after seeing ICE at spectrum, and it seems like the camera system used by I\u2026",
+      "title": "ICE and IPD/Irvine Company \u2014 ICE and IPD/Irvine Company I've been doing some reading after seeing ICE at spectrum, and it seems like the camera system used by I\u2026",
+      "body": "",
+      "url": "https://old.reddit.com/r/irvine/comments/1m8qitb/ice_and_ipdirvine_company/",
+      "verdict": "wrong",
+      "note": "immigration and public safety categories are correct",
+      "part": "batch_01_answers_part_b.txt"
+    },
+    {
+      "id": 104,
+      "source": "reddit",
+      "method": "keywords+model",
+      "categories": [
+        "violent_crime",
+        "public_safety"
+      ],
+      "snippet": "Two People Arrested After the Death of Ten Dogs \u2014 Two People Arrested After the Death of Ten Dogs On Thursday, Detectives arrested an animal trainer and his gir\u2026",
+      "title": "Two People Arrested After the Death of Ten Dogs \u2014 Two People Arrested After the Death of Ten Dogs On Thursday, Detectives arrested an animal trainer and his gir\u2026",
+      "body": "",
+      "url": "https://old.reddit.com/r/irvine/comments/1lglj78/two_people_arrested_after_the_death_of_ten_dogs/",
+      "verdict": "correct",
+      "note": "dog trainers arrested for killing over 10 dogs",
+      "part": "batch_01_answers_part_b.txt"
+    },
+    {
+      "id": 105,
+      "source": "reddit",
+      "method": "model",
+      "categories": [
+        "immigration"
+      ],
+      "snippet": "Altair Raid (Videos) \u2014 Altair Raid (Videos) FYI - Videos provided by neighbors witnessing the Altair raid (not my content). Still haven't seen any news articles\u2026",
+      "title": "Altair Raid (Videos) \u2014 Altair Raid (Videos) FYI - Videos provided by neighbors witnessing the Altair raid (not my content). Still haven't seen any news articles\u2026",
+      "body": "",
+      "url": "https://old.reddit.com/r/irvine/comments/1km4u9e/altair_raid_videos/",
+      "verdict": "wrong",
+      "note": "public safety, video of police raid",
+      "part": "batch_01_answers_part_b.txt"
     },
     {
       "id": 106,
@@ -395,13 +449,13 @@
       "categories": [
         "housing"
       ],
-      "snippet": "Wow! Happy $tory for an Irvine humble hero. Saw a post on social media, started watching the CBS news video and knew I recognized him! #B... \u2014 Wow! Happy $tory for an Irvine humble hero. Saw a post on\u2026",
-      "title": "Wow! Happy $tory for an Irvine humble hero. Saw a post on social media, started watching the CBS news video and knew I recognized him! #B...",
-      "body": "Wow! Happy $tory for an Irvine humble hero. Saw a post on social media, started watching the CBS news video and knew I recognized him! #BeKind + #payitforward, indeed.\nhttps://www.cbsnews.com/amp/losangeles/news/homeless-man-in-irvine-gifted-nearly-100k-after-donating-his-last-dollar/",
-      "verdict": "",
-      "note": "",
+      "snippet": "Wow! Happy $tory for an Irvine humble hero. Saw a post on social media, started watching the CBS news video and knew I recognized him! #B... \u2014 Wow! Happy $tory \u2026",
+      "title": "Wow! Happy $tory for an Irvine humble hero. Saw a post on social media, started watching the CBS news video and knew I recognized him! #B... \u2014 Wow! Happy $tory \u2026",
+      "body": "",
       "url": "https://old.reddit.com/r/irvine/comments/1kb93jz/wow_happy_tory_for_an_irvine_humble_hero_saw_a/",
-      "outlet": "r/irvine"
+      "verdict": "none",
+      "note": "story about homeless man getting donation, not civic signal",
+      "part": "batch_01_answers_part_b.txt"
     },
     {
       "id": 107,
@@ -410,13 +464,29 @@
       "categories": [
         "traffic_safety"
       ],
-      "snippet": "Irvine: Two Motorcyclists Die In Freeway Crash (credit: Miles Madison @CountyNewsTV) \u2014 Irvine: Two Motorcyclists Die In Freeway Crash (credit: Miles Madison @CountyNewsTV) Two motorcyclists died in a \u2026",
-      "title": "Irvine: Two Motorcyclists Die In Freeway Crash (credit: Miles Madison @CountyNewsTV)",
-      "body": "Irvine: Two Motorcyclists Die In Freeway Crash (credit: Miles Madison @CountyNewsTV)\nTwo motorcyclists died in a freeway crash following reports of reckless riding involving a group of over 50 riders, early Sunday morning on the northbound I-5 Freeway just south of Culver Drive.",
-      "verdict": "",
-      "note": "",
+      "snippet": "Irvine: Two Motorcyclists Die In Freeway Crash (credit: Miles Madison @CountyNewsTV) \u2014 Irvine: Two Motorcyclists Die In Freeway Crash (credit: Miles Madison @Co\u2026",
+      "title": "Irvine: Two Motorcyclists Die In Freeway Crash (credit: Miles Madison @CountyNewsTV) \u2014 Irvine: Two Motorcyclists Die In Freeway Crash (credit: Miles Madison @Co\u2026",
+      "body": "",
       "url": "https://old.reddit.com/r/irvine/comments/1f1jvtt/irvine_two_motorcyclists_die_in_freeway_crash/",
-      "outlet": "r/irvine"
+      "verdict": "correct",
+      "note": "traffic collision that caused death",
+      "part": "batch_01_answers_part_b.txt"
+    },
+    {
+      "id": 108,
+      "source": "reddit",
+      "method": "keywords",
+      "categories": [
+        "violent_crime",
+        "public_safety"
+      ],
+      "snippet": "[News] Irvine man tried to avenge crimes against Asians by kidnapping and trying to sexually assault a woman",
+      "title": "[News] Irvine man tried to avenge crimes against Asians by kidnapping and trying to sexually assault a woman",
+      "body": "",
+      "url": "https://old.reddit.com/r/irvine/comments/mo5i01/news_irvine_man_tried_to_avenge_crimes_against/",
+      "verdict": "correct",
+      "note": "violent man arrested for crime",
+      "part": "batch_01_answers_part_b.txt"
     },
     {
       "id": 109,
@@ -425,150 +495,28 @@
       "categories": [
         "public_safety"
       ],
-      "snippet": "Does anyone know these 1st amendment auditors? \u2014 Does anyone know these 1st amendment auditors? I constantly see posts on the Orange County and Irvine subreddits about people with masks filming others\u2026",
-      "title": "Does anyone know these 1st amendment auditors?",
-      "body": "Does anyone know these 1st amendment auditors?\nI constantly see posts on the Orange County and Irvine subreddits about people with masks filming others at the Sand Canyon Post office.",
-      "verdict": "",
-      "note": "",
+      "snippet": "Does anyone know these 1st amendment auditors? \u2014 Does anyone know these 1st amendment auditors? I constantly see posts on the Orange County and Irvine subreddit\u2026",
+      "title": "Does anyone know these 1st amendment auditors? \u2014 Does anyone know these 1st amendment auditors? I constantly see posts on the Orange County and Irvine subreddit\u2026",
+      "body": "",
       "url": "https://old.reddit.com/r/irvine/comments/1c1ut1k/does_anyone_know_these_1st_amendment_auditors/",
-      "outlet": "r/irvine"
+      "verdict": "correct",
+      "note": "1st amendment auditors filming onpassers and causing issues",
+      "part": "batch_01_answers_part_b.txt"
     },
     {
-      "id": 157,
-      "source": "reddit",
-      "method": "keywords+model",
+      "id": 1,
+      "source": "tiktok",
+      "method": "inherited",
       "categories": [
-        "sanitation",
-        "housing"
-      ],
-      "snippet": "Smoking on Property: Irvine Company\u2019s Refusal to Enforce City Law \u2014 Smoking on Property: Irvine Company\u2019s Refusal to Enforce City Law Hello. I live in Irvine company housing near Spectrum and had repo\u2026",
-      "title": "Smoking on Property: Irvine Company\u2019s Refusal to Enforce City Law",
-      "body": "Smoking on Property: Irvine Company\u2019s Refusal to Enforce City Law\nHello. I live in Irvine company housing near Spectrum and had reported make-shift smoking areas I had found on the property. It has now been one full week with no response from Irvine Company other th Hello. I live in Irvine company housing near Spectrum and had reported make-shift smoking areas I had found on the property. It has now been one full week with no response from Irvine Company other than the \u201cwe will look into it\u201d res",
-      "verdict": "",
-      "note": "",
-      "url": "https://old.reddit.com/r/irvine/comments/1v3njdq/smoking_on_property_irvine_companys_refusal_to/",
-      "outlet": "r/irvine"
-    },
-    {
-      "id": 159,
-      "source": "reddit",
-      "method": "keywords",
-      "categories": [
-        "housing"
-      ],
-      "snippet": "Google Fiber Installation Process at new Avella (Irvine Company Apartment) \u2014 Google Fiber Installation Process at new Avella (Irvine Company Apartment) Hello all I am thinking of self installation of \u2026",
-      "title": "Google Fiber Installation Process at new Avella (Irvine Company Apartment)",
-      "body": "Google Fiber Installation Process at new Avella (Irvine Company Apartment)\nHello all\nI am thinking of self installation of Google Fiber because I was told that the new Avella II comes with Google Fiber infrastructure by default. I thought I can do self install of GFiber, but Hello all\nI am thinking of self installation of Google Fiber because I was told that the new Avella II comes with Google Fiber infrastructure by default. I thought I can do self install of GFiber, but I was told that I shoul",
-      "verdict": "",
-      "note": "",
-      "url": "https://old.reddit.com/r/irvine/comments/1v367ek/google_fiber_installation_process_at_new_avella/",
-      "outlet": "r/irvine"
-    },
-    {
-      "id": 160,
-      "source": "reddit",
-      "method": "keywords+model",
-      "categories": [
-        "violent_crime",
         "public_safety"
       ],
-      "snippet": "Armed man shot and killed by Irvine police called 911, was having a mental health crisis, police say",
-      "title": "Armed man shot and killed by Irvine police called 911, was having a mental health crisis, police say",
-      "body": "Armed man shot and killed by Irvine police called 911, was having a mental health crisis, police say",
-      "verdict": "",
-      "note": "",
-      "url": "https://old.reddit.com/r/irvine/comments/1v2z8km/armed_man_shot_and_killed_by_irvine_police_called/",
-      "outlet": "r/irvine"
-    },
-    {
-      "id": 161,
-      "source": "reddit",
-      "method": "model",
-      "categories": [
-        "traffic_safety"
-      ],
-      "snippet": "Cybertruck signals its turning right and proceeds to u-turn left, block the road, and almost backs into into another vehicle \u2014 Cybertruck signals its turning right and proceeds to u-turn left, block t\u2026",
-      "title": "Cybertruck signals its turning right and proceeds to u-turn left, block the road, and almost backs into into another vehicle",
-      "body": "Cybertruck signals its turning right and proceeds to u-turn left, block the road, and almost backs into into another vehicle\nProbably hard to tell on dashcam. But the white cybertruck signals that it\u2019s turning right. Then proceeds to u-turn (left) blocks the road and almost backs into another driver.",
-      "verdict": "",
-      "note": "",
-      "url": "https://old.reddit.com/r/irvine/comments/1v2yngu/cybertruck_signals_its_turning_right_and_proceeds/",
-      "outlet": "r/irvine"
-    },
-    {
-      "id": 163,
-      "source": "reddit",
-      "method": "keywords",
-      "categories": [
-        "potholes"
-      ],
-      "snippet": "Preschool Program Recs \u2014 Preschool Program Recs Are we looking for a unicorn or something?? Well credentialed Educators (No day care set ups) Real grass + dirt + more nature based large outdoor play s\u2026",
-      "title": "Preschool Program Recs",
-      "body": "Preschool Program Recs\nAre we looking for a unicorn or something??\n Well credentialed Educators (No day care set ups)\n Real grass + dirt + more nature based large outdoor play space (No artificial turf - big on this - no  Are we looking for a unicorn or something??\n Well credentialed Educators (No day care set ups)\n Real grass + dirt + more nature based large outdoor play space (No artificial turf - big on this - no institutional type play spaces of soley asphalt & crumb rubber)\n Non-denominatio",
-      "verdict": "",
-      "note": "",
-      "url": "https://old.reddit.com/r/irvine/comments/1v1gsqv/preschool_program_recs/",
-      "outlet": "r/irvine"
-    },
-    {
-      "id": 164,
-      "source": "reddit",
-      "method": "model",
-      "categories": [
-        "violent_crime"
-      ],
-      "snippet": "Irvine Valley College Public Access Channel - Looking for a screenshot \u2014 Irvine Valley College Public Access Channel - Looking for a screenshot Hello friends, when I lived in Irvine about 15 years ago\u2026",
-      "title": "Irvine Valley College Public Access Channel - Looking for a screenshot",
-      "body": "Irvine Valley College Public Access Channel - Looking for a screenshot\nHello friends, when I lived in Irvine about 15 years ago, my (then) newborn daughter really enjoyed the IVC Public Access Channel - I think it was Channel 31 on Cox.\nMy wife and I called it the \"Circl Hello friends, when I lived in Irvine about 15 years ago, my (then) newborn daughter really enjoyed the IVC Public Access Channel - I think it was Channel 31 on Cox.\nMy wife and I called it the \"Circles and Music channel\" becaus",
-      "verdict": "",
-      "note": "",
-      "url": "https://old.reddit.com/r/irvine/comments/1v1el6b/irvine_valley_college_public_access_channel/",
-      "outlet": "r/irvine"
-    },
-    {
-      "id": 166,
-      "source": "reddit",
-      "method": "keywords",
-      "categories": [
-        "traffic_safety"
-      ],
-      "snippet": "Overturned Jeep - Accident near Plaza Vista \u2014 Overturned Jeep - Accident near Plaza Vista As the title suggests, been here 2+ decades and have never witnessed such a catastrophic accident ESPECIALLY o\u2026",
-      "title": "Overturned Jeep - Accident near Plaza Vista",
-      "body": "Overturned Jeep - Accident near Plaza Vista\nAs the title suggests, been here 2+ decades and have never witnessed such a catastrophic accident ESPECIALLY on 20/25mph streets",
-      "verdict": "",
-      "note": "",
-      "url": "https://old.reddit.com/r/irvine/comments/1v05vr1/overturned_jeep_accident_near_plaza_vista/",
-      "outlet": "r/irvine"
-    },
-    {
-      "id": 168,
-      "source": "reddit",
-      "method": "model",
-      "categories": [
-        "emergencies"
-      ],
-      "snippet": "Smoke this morning | Stonegate \u2014 Smoke this morning | Stonegate I know there's a fire NEAR Corona, but anywhere else close by that is generating all the smoke this morning? Checked Watch Duty, nothing\u2026",
-      "title": "Smoke this morning | Stonegate",
-      "body": "Smoke this morning | Stonegate\nI know there's a fire NEAR Corona, but anywhere else close by that is generating all the smoke this morning? Checked Watch Duty, nothing I can directly attribute it to, other than the Little Pine Fire I know there's a fire NEAR Corona, but anywhere else close by that is generating all the smoke this morning? Checked Watch Duty, nothing I can directly attribute it to, other than the Little Pine Fire near the Prado Basin.\nedited to indicate near Corona, a 22 minute d",
-      "verdict": "",
-      "note": "",
-      "url": "https://old.reddit.com/r/irvine/comments/1uz2t2h/smoke_this_morning_stonegate/",
-      "outlet": "r/irvine"
-    },
-    {
-      "id": 170,
-      "source": "reddit",
-      "method": "model",
-      "categories": [
-        "property_crime"
-      ],
-      "snippet": "Looking for camera repair service in OC \u2014 Looking for camera repair service in OC Hi all, I have a specialty camera I need repaired and haven't had any luck at the local camera shops. Its a camera att\u2026",
-      "title": "Looking for camera repair service in OC",
-      "body": "Looking for camera repair service in OC\nHi all, I have a specialty camera I need repaired and haven't had any luck at the local camera shops. Its a camera attached to a microscope used for research at UCI that is made by a tiny European com Hi all, I have a specialty camera I need repaired and haven't had any luck at the local camera shops. Its a camera attached to a microscope used for research at UCI that is made by a tiny European company that cannot service the camera themselves. The issue i",
-      "verdict": "",
-      "note": "",
-      "url": "https://old.reddit.com/r/irvine/comments/1uyfwjw/looking_for_camera_repair_service_in_oc/",
-      "outlet": "r/irvine"
+      "snippet": "That\u2019s the most excitement Irvine pd has ever gotten in their career",
+      "title": "That\u2019s the most excitement Irvine pd has ever gotten in their career",
+      "body": "",
+      "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
+      "verdict": "partial",
+      "note": "generic comment about police excitement, video shows traffic issue",
+      "part": "batch_01_answers_part_a.txt"
     },
     {
       "id": 2,
@@ -579,11 +527,56 @@
       ],
       "snippet": "Don\u2019t mess with Irvine cops, they are bored",
       "title": "Don\u2019t mess with Irvine cops, they are bored",
-      "body": "Don\u2019t mess with Irvine cops, they are bored",
-      "verdict": "",
-      "note": "",
+      "body": "",
       "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
-      "outlet": "TikTok #irvine"
+      "verdict": "partial",
+      "note": "\"cops\" keyword, comment is about Irvine police",
+      "part": "batch_01_answers_part_a.txt"
+    },
+    {
+      "id": 3,
+      "source": "tiktok",
+      "method": "inherited",
+      "categories": [
+        "public_safety"
+      ],
+      "snippet": "its on the 5 freeway. is it really Irvine? \ud83d\ude01",
+      "title": "its on the 5 freeway. is it really Irvine? \ud83d\ude01",
+      "body": "",
+      "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
+      "verdict": "partial",
+      "note": "video is traffic safety",
+      "part": "batch_01_answers_part_a.txt"
+    },
+    {
+      "id": 4,
+      "source": "tiktok",
+      "method": "inherited",
+      "categories": [
+        "public_safety"
+      ],
+      "snippet": "That's Tustin \ud83d\ude02\ud83d\ude02\ud83d\ude02",
+      "title": "That's Tustin \ud83d\ude02\ud83d\ude02\ud83d\ude02",
+      "body": "",
+      "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
+      "verdict": "partial",
+      "note": "traffic issue",
+      "part": "batch_01_answers_part_a.txt"
+    },
+    {
+      "id": 5,
+      "source": "tiktok",
+      "method": "inherited",
+      "categories": [
+        "public_safety"
+      ],
+      "snippet": "Irvine has been on the news too much lately. Oh how things have changed.",
+      "title": "Irvine has been on the news too much lately. Oh how things have changed.",
+      "body": "",
+      "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
+      "verdict": "partial",
+      "note": "\"been on the news too much\" \u2014 shows issues",
+      "part": "batch_01_answers_part_a.txt"
     },
     {
       "id": 6,
@@ -594,11 +587,41 @@
       ],
       "snippet": "Did she have to make that statement? God forbid it happen in Irvine",
       "title": "Did she have to make that statement? God forbid it happen in Irvine",
-      "body": "Did she have to make that statement? God forbid it happen in Irvine",
-      "verdict": "",
-      "note": "",
+      "body": "",
       "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
-      "outlet": "TikTok #irvine"
+      "verdict": "partial",
+      "note": "reaction comment, no civic content",
+      "part": "batch_01_answers_part_a.txt"
+    },
+    {
+      "id": 7,
+      "source": "tiktok",
+      "method": "inherited",
+      "categories": [
+        "public_safety"
+      ],
+      "snippet": "NEVER woulda happened in a Ford Ranger \ud83d\udcaa",
+      "title": "NEVER woulda happened in a Ford Ranger \ud83d\udcaa",
+      "body": "",
+      "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
+      "verdict": "partial",
+      "note": "\"Ford Ranger\" joke, zero civic content",
+      "part": "batch_01_answers_part_a.txt"
+    },
+    {
+      "id": 8,
+      "source": "tiktok",
+      "method": "inherited",
+      "categories": [
+        "public_safety"
+      ],
+      "snippet": "The man can\u2019t be from Irvine. I see a truck and not a Tesla.",
+      "title": "The man can\u2019t be from Irvine. I see a truck and not a Tesla.",
+      "body": "",
+      "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
+      "verdict": "partial",
+      "note": "car/Tesla joke",
+      "part": "batch_01_answers_part_a.txt"
     },
     {
       "id": 9,
@@ -609,11 +632,116 @@
       ],
       "snippet": "I saw this going home . On irvine and Sand Canyon.",
       "title": "I saw this going home . On irvine and Sand Canyon.",
-      "body": "I saw this going home . On irvine and Sand Canyon.",
-      "verdict": "",
-      "note": "",
+      "body": "",
       "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
-      "outlet": "TikTok #irvine"
+      "verdict": "partial",
+      "note": "\"I saw this going home\" \u2014 no civic issue",
+      "part": "batch_01_answers_part_a.txt"
+    },
+    {
+      "id": 10,
+      "source": "tiktok",
+      "method": "inherited",
+      "categories": [
+        "public_safety"
+      ],
+      "snippet": "Kidnap at Bake parkway and Irvine Blvd? That's scary What's the suspect's history?",
+      "title": "Kidnap at Bake parkway and Irvine Blvd? That's scary What's the suspect's history?",
+      "body": "",
+      "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
+      "verdict": "correct",
+      "note": "\"Kidnap at Bake parkway\" \u2014 real public safety concern",
+      "part": "batch_01_answers_part_a.txt"
+    },
+    {
+      "id": 11,
+      "source": "tiktok",
+      "method": "inherited",
+      "categories": [
+        "public_safety"
+      ],
+      "snippet": "Did the OC blame this on LA too!!\ud83d\ude02\ud83d\ude02",
+      "title": "Did the OC blame this on LA too!!\ud83d\ude02\ud83d\ude02",
+      "body": "",
+      "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
+      "verdict": "partial",
+      "note": "\"blame this on LA\" \u2014 joke",
+      "part": "batch_01_answers_part_a.txt"
+    },
+    {
+      "id": 12,
+      "source": "tiktok",
+      "method": "inherited",
+      "categories": [
+        "public_safety"
+      ],
+      "snippet": "*** Tustin \ud83d\ude06",
+      "title": "*** Tustin \ud83d\ude06",
+      "body": "",
+      "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
+      "verdict": "partial",
+      "note": "\"Tustin\" \u2014 one word correction",
+      "part": "batch_01_answers_part_a.txt"
+    },
+    {
+      "id": 13,
+      "source": "tiktok",
+      "method": "inherited",
+      "categories": [
+        "public_safety"
+      ],
+      "snippet": "\ud83d\udc4f\ud83d\udc4f\ud83d\udc4fIPD\ud83d\udc4f\ud83d\udc4f\ud83d\udc4f",
+      "title": "\ud83d\udc4f\ud83d\udc4f\ud83d\udc4fIPD\ud83d\udc4f\ud83d\udc4f\ud83d\udc4f",
+      "body": "",
+      "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
+      "verdict": "partial",
+      "note": "emoji reaction only",
+      "part": "batch_01_answers_part_a.txt"
+    },
+    {
+      "id": 14,
+      "source": "tiktok",
+      "method": "inherited",
+      "categories": [
+        "public_safety"
+      ],
+      "snippet": "So it wasn\u2019t successful lol",
+      "title": "So it wasn\u2019t successful lol",
+      "body": "",
+      "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
+      "verdict": "partial",
+      "note": "\"wasn't successful\" \u2014 vague",
+      "part": "batch_01_answers_part_a.txt"
+    },
+    {
+      "id": 15,
+      "source": "tiktok",
+      "method": "inherited",
+      "categories": [
+        "public_safety"
+      ],
+      "snippet": "Thats where i work jeesh",
+      "title": "Thats where i work jeesh",
+      "body": "",
+      "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
+      "verdict": "partial",
+      "note": "\"Thats where i work\" \u2014 no civic content",
+      "part": "batch_01_answers_part_a.txt"
+    },
+    {
+      "id": 16,
+      "source": "tiktok",
+      "method": "inherited",
+      "categories": [
+        "public_safety"
+      ],
+      "snippet": "At least they got him fast",
+      "title": "At least they got him fast",
+      "body": "",
+      "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
+      "verdict": "partial",
+      "note": "\"at least they got him fast\" \u2014 vague reaction",
+      "part": "batch_01_answers_part_a.txt"
     },
     {
       "id": 17,
@@ -624,11 +752,11 @@
       ],
       "snippet": "So is she OK??",
       "title": "So is she OK??",
-      "body": "So is she OK??",
-      "verdict": "",
-      "note": "",
+      "body": "",
       "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
-      "outlet": "TikTok #irvine"
+      "verdict": "partial",
+      "note": "\"is she OK??\" \u2014 concern but no civic content",
+      "part": "batch_01_answers_part_a.txt"
     },
     {
       "id": 18,
@@ -639,11 +767,26 @@
       ],
       "snippet": "GAAASSSSPPP. I was just there!",
       "title": "GAAASSSSPPP. I was just there!",
-      "body": "GAAASSSSPPP. I was just there!",
-      "verdict": "",
-      "note": "",
+      "body": "",
       "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
-      "outlet": "TikTok #irvine"
+      "verdict": "partial",
+      "note": "reaction exclamation",
+      "part": "batch_01_answers_part_a.txt"
+    },
+    {
+      "id": 19,
+      "source": "tiktok",
+      "method": "inherited",
+      "categories": [
+        "public_safety"
+      ],
+      "snippet": "I had a front row view when he got caught!",
+      "title": "I had a front row view when he got caught!",
+      "body": "",
+      "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
+      "verdict": "partial",
+      "note": "\"front row view when he got caught\" \u2014 vague",
+      "part": "batch_01_answers_part_a.txt"
     },
     {
       "id": 20,
@@ -654,11 +797,11 @@
       ],
       "snippet": "Only thing scary about Irvine is the home prices and monthly rent! \ud83d\ude2d \ud83d\udcb4 \ud83d\udcb4 \ud83d\udcb4 \ud83d\udcb4",
       "title": "Only thing scary about Irvine is the home prices and monthly rent! \ud83d\ude2d \ud83d\udcb4 \ud83d\udcb4 \ud83d\udcb4 \ud83d\udcb4",
-      "body": "Only thing scary about Irvine is the home prices and monthly rent! \ud83d\ude2d \ud83d\udcb4 \ud83d\udcb4 \ud83d\udcb4 \ud83d\udcb4",
-      "verdict": "",
-      "note": "",
+      "body": "",
       "url": "https://www.tiktok.com/@1kjaylive/video/7655861903234747679",
-      "outlet": "TikTok #irvine"
+      "verdict": "none",
+      "note": "\"home prices and monthly rent\" \u2014 housing concern",
+      "part": "batch_01_answers_part_a.txt"
     },
     {
       "id": 21,
@@ -669,11 +812,26 @@
       ],
       "snippet": "The rent is the scariest thing in Irvine!",
       "title": "The rent is the scariest thing in Irvine!",
-      "body": "The rent is the scariest thing in Irvine!",
-      "verdict": "",
-      "note": "",
+      "body": "",
       "url": "https://www.tiktok.com/@1kjaylive/video/7655861903234747679",
-      "outlet": "TikTok #irvine"
+      "verdict": "none",
+      "note": "\"rent is the scariest thing\" \u2014 housing complaint",
+      "part": "batch_01_answers_part_a.txt"
+    },
+    {
+      "id": 22,
+      "source": "tiktok",
+      "method": "keywords",
+      "categories": [
+        "housing"
+      ],
+      "snippet": "Irvine if Irvine Company Apartments didnt exist",
+      "title": "Irvine if Irvine Company Apartments didnt exist",
+      "body": "",
+      "url": "https://www.tiktok.com/@globalgags7/video/7654610369373080854",
+      "verdict": "none",
+      "note": "\"Irvine Company Apartments\" \u2014 housing topic",
+      "part": "batch_01_answers_part_a.txt"
     },
     {
       "id": 23,
@@ -684,11 +842,26 @@
       ],
       "snippet": "I\u2019m in Orange County and I just wasted my time watching this useless TikTok. \ud83d\ude0f",
       "title": "I\u2019m in Orange County and I just wasted my time watching this useless TikTok. \ud83d\ude0f",
-      "body": "I\u2019m in Orange County and I just wasted my time watching this useless TikTok. \ud83d\ude0f",
-      "verdict": "",
-      "note": "",
+      "body": "",
       "url": "https://www.tiktok.com/@kimiaskravings/video/7659407282488315150",
-      "outlet": "TikTok #irvine"
+      "verdict": "none",
+      "note": "\"wasted my time\" \u2014 not sanitation",
+      "part": "batch_01_answers_part_a.txt"
+    },
+    {
+      "id": 24,
+      "source": "tiktok",
+      "method": "keywords",
+      "categories": [
+        "housing"
+      ],
+      "snippet": "Um none of these are true except the mortgage lol",
+      "title": "Um none of these are true except the mortgage lol",
+      "body": "",
+      "url": "https://www.tiktok.com/@kimiaskravings/video/7659407282488315150",
+      "verdict": "none",
+      "note": "\"mortgage\" appears casually, not a housing issue",
+      "part": "batch_01_answers_part_a.txt"
     },
     {
       "id": 25,
@@ -697,13 +870,13 @@
       "categories": [
         "housing"
       ],
-      "snippet": "hi kaitlyn! I believe you didn\u2019t mean any harm by this video. As a fellow Asian person from Irvine, I totally get the privilege being rai... \u2014 hi kaitlyn! I believe you didn\u2019t mean any harm by this vi\u2026",
-      "title": "hi kaitlyn! I believe you didn\u2019t mean any harm by this video. As a fellow Asian person from Irvine, I totally get the privilege being rai...",
-      "body": "hi kaitlyn! I believe you didn\u2019t mean any harm by this video. As a fellow Asian person from Irvine, I totally get the privilege being raised in a comfortable environment like Irvine and peers taking that for granted. Kids from irvine are spoiled af they talk like their mom\u2019s money isn\u2019t paying for their education. Though, it is important to know the reason why irvine is the way it is: ethnic and economic discrimination. Irvine tries to price out other minorities with steep housing costs, and it\u2019",
-      "verdict": "",
-      "note": "",
+      "snippet": "hi kaitlyn! I believe you didn\u2019t mean any harm by this video. As a fellow Asian person from Irvine, I totally get the privilege being rai... \u2014 hi kaitlyn! I bel\u2026",
+      "title": "hi kaitlyn! I believe you didn\u2019t mean any harm by this video. As a fellow Asian person from Irvine, I totally get the privilege being rai... \u2014 hi kaitlyn! I bel\u2026",
+      "body": "",
       "url": "https://www.tiktok.com/@miffy_lover6186/video/7647254312330005790",
-      "outlet": "TikTok #irvine"
+      "verdict": "none",
+      "note": "about Asian identity/privilege, not housing",
+      "part": "batch_01_answers_part_a.txt"
     },
     {
       "id": 26,
@@ -714,11 +887,26 @@
       ],
       "snippet": "\ud83d\ude33\ud83d\ude33\ud83d\ude33that flooding is crazy! Glad it\u2019s not like that all the time",
       "title": "\ud83d\ude33\ud83d\ude33\ud83d\ude33that flooding is crazy! Glad it\u2019s not like that all the time",
-      "body": "\ud83d\ude33\ud83d\ude33\ud83d\ude33that flooding is crazy! Glad it\u2019s not like that all the time",
-      "verdict": "",
-      "note": "",
+      "body": "",
       "url": "https://www.tiktok.com/@theslickestsu/video/7662468657640951071",
-      "outlet": "TikTok #newportbeach"
+      "verdict": "correct",
+      "note": "\"flooding is crazy\" \u2014 emergency topic",
+      "part": "batch_01_answers_part_a.txt"
+    },
+    {
+      "id": 27,
+      "source": "tiktok",
+      "method": "keywords",
+      "categories": [
+        "emergencies"
+      ],
+      "snippet": "[Sticker] Oh no, the flooding",
+      "title": "[Sticker] Oh no, the flooding",
+      "body": "",
+      "url": "https://www.tiktok.com/@theslickestsu/video/7662468657640951071",
+      "verdict": "correct",
+      "note": "\"the flooding\" \u2014 emergency topic",
+      "part": "batch_01_answers_part_a.txt"
     },
     {
       "id": 28,
@@ -729,11 +917,11 @@
       ],
       "snippet": "Love the beach wow about the flooding",
       "title": "Love the beach wow about the flooding",
-      "body": "Love the beach wow about the flooding",
-      "verdict": "",
-      "note": "",
+      "body": "",
       "url": "https://www.tiktok.com/@theslickestsu/video/7662468657640951071",
-      "outlet": "TikTok #newportbeach"
+      "verdict": "correct",
+      "note": "\"about the flooding\" \u2014 emergency topic",
+      "part": "batch_01_answers_part_a.txt"
     },
     {
       "id": 29,
@@ -744,11 +932,11 @@
       ],
       "snippet": "No flooding at all I live in Newport Beach \ud83d\ude02",
       "title": "No flooding at all I live in Newport Beach \ud83d\ude02",
-      "body": "No flooding at all I live in Newport Beach \ud83d\ude02",
-      "verdict": "",
-      "note": "",
+      "body": "",
       "url": "https://www.tiktok.com/@vikkzavalaa/video/7662453144110009614",
-      "outlet": "TikTok #newportbeach"
+      "verdict": "correct",
+      "note": "\"flooding\" mentioned (though denying it) \u2014 borderline correct",
+      "part": "batch_01_answers_part_a.txt"
     },
     {
       "id": 30,
@@ -760,11 +948,11 @@
       ],
       "snippet": "It was flooded by the lido bottle last night the 13th",
       "title": "It was flooded by the lido bottle last night the 13th",
-      "body": "It was flooded by the lido bottle last night the 13th",
-      "verdict": "",
-      "note": "",
+      "body": "",
       "url": "https://www.tiktok.com/@vikkzavalaa/video/7662453144110009614",
-      "outlet": "TikTok #newportbeach"
+      "verdict": "partial",
+      "note": "\"flooded\" correct for emergencies, violent_crime is wrong",
+      "part": "batch_01_answers_part_a.txt"
     },
     {
       "id": 32,
@@ -773,13 +961,28 @@
       "categories": [
         "violent_crime"
       ],
-      "snippet": "I was there and I live in Newport Beach. It was a lot of locals there. Don\u2019t mean they was destroying things, but it was a lot of locals ... \u2014 I was there and I live in Newport Beach. It was a lot of \u2026",
-      "title": "I was there and I live in Newport Beach. It was a lot of locals there. Don\u2019t mean they was destroying things, but it was a lot of locals ...",
-      "body": "I was there and I live in Newport Beach. It was a lot of locals there. Don\u2019t mean they was destroying things, but it was a lot of locals that I know personally there.",
-      "verdict": "",
-      "note": "",
+      "snippet": "I was there and I live in Newport Beach. It was a lot of locals there. Don\u2019t mean they was destroying things, but it was a lot of locals ... \u2014 I was there and I\u2026",
+      "title": "I was there and I live in Newport Beach. It was a lot of locals there. Don\u2019t mean they was destroying things, but it was a lot of locals ... \u2014 I was there and I\u2026",
+      "body": "",
       "url": "https://www.tiktok.com/@skylarensign_/video/7659574575864286494",
-      "outlet": "TikTok #newportbeach"
+      "verdict": "correct",
+      "note": "\"destroying things\" and yes violence",
+      "part": "batch_01_answers_part_a.txt"
+    },
+    {
+      "id": 33,
+      "source": "tiktok",
+      "method": "keywords",
+      "categories": [
+        "public_safety"
+      ],
+      "snippet": "At least you had police",
+      "title": "At least you had police",
+      "body": "",
+      "url": "https://www.tiktok.com/@skylarensign_/video/7659574575864286494",
+      "verdict": "correct",
+      "note": "\"police\" \u2014 correct",
+      "part": "batch_01_answers_part_a.txt"
     },
     {
       "id": 34,
@@ -788,28 +991,13 @@
       "categories": [
         "sanitation"
       ],
-      "snippet": "Its ruins it for the lovely tourists who truly come to have a nice time too. The trash left behind and the complete disregard for others ... \u2014 Its ruins it for the lovely tourists who truly come to ha\u2026",
-      "title": "Its ruins it for the lovely tourists who truly come to have a nice time too. The trash left behind and the complete disregard for others ...",
-      "body": "Its ruins it for the lovely tourists who truly come to have a nice time too. The trash left behind and the complete disregard for others is mind boggling. The degradation of society is happening fast",
-      "verdict": "",
-      "note": "",
+      "snippet": "Its ruins it for the lovely tourists who truly come to have a nice time too. The trash left behind and the complete disregard for others ... \u2014 Its ruins it for \u2026",
+      "title": "Its ruins it for the lovely tourists who truly come to have a nice time too. The trash left behind and the complete disregard for others ... \u2014 Its ruins it for \u2026",
+      "body": "",
       "url": "https://www.tiktok.com/@skylarensign_/video/7659574575864286494",
-      "outlet": "TikTok #newportbeach"
-    },
-    {
-      "id": 35,
-      "source": "tiktok",
-      "method": "keywords",
-      "categories": [
-        "housing"
-      ],
-      "snippet": "What happened will have a wide effect on many\u2026anyone who rented out homes to unsupervised youth, parents that made those accommodations, ... \u2014 What happened will have a wide effect on many\u2026anyone who \u2026",
-      "title": "What happened will have a wide effect on many\u2026anyone who rented out homes to unsupervised youth, parents that made those accommodations, ...",
-      "body": "What happened will have a wide effect on many\u2026anyone who rented out homes to unsupervised youth, parents that made those accommodations, fines will be tripled because the order to disburse was not followed. Home renters will lose their licenses.",
-      "verdict": "",
-      "note": "",
-      "url": "https://www.tiktok.com/@skylarensign_/video/7659574575864286494",
-      "outlet": "TikTok #newportbeach"
+      "verdict": "correct",
+      "note": "\"trash left behind\" \u2014 sanitation issue",
+      "part": "batch_01_answers_part_a.txt"
     },
     {
       "id": 36,
@@ -820,26 +1008,41 @@
       ],
       "snippet": "Social media ruined us",
       "title": "Social media ruined us",
-      "body": "Social media ruined us",
-      "verdict": "",
-      "note": "",
+      "body": "",
       "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
-      "outlet": "TikTok #newportbeach"
+      "verdict": "wrong",
+      "note": "video is about public safety and violence in newport",
+      "part": "batch_01_answers_part_a.txt"
     },
     {
-      "id": 38,
+      "id": 37,
       "source": "tiktok",
       "method": "inherited",
       "categories": [
         "noise"
       ],
-      "snippet": "We\u2019re the kids parents",
-      "title": "We\u2019re the kids parents",
-      "body": "We\u2019re the kids parents",
-      "verdict": "",
-      "note": "",
+      "snippet": "Orange County is the Florida of California",
+      "title": "Orange County is the Florida of California",
+      "body": "",
       "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
-      "outlet": "TikTok #newportbeach"
+      "verdict": "wrong",
+      "note": "video on public safety and violence in newport",
+      "part": "batch_01_answers_part_a.txt"
+    },
+    {
+      "id": 39,
+      "source": "tiktok",
+      "method": "inherited",
+      "categories": [
+        "noise"
+      ],
+      "snippet": "I wish I could have two homes",
+      "title": "I wish I could have two homes",
+      "body": "",
+      "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
+      "verdict": "wrong",
+      "note": "video on firework saftey at newport",
+      "part": "batch_01_answers_part_a.txt"
     },
     {
       "id": 40,
@@ -850,56 +1053,71 @@
       ],
       "snippet": "well well well",
       "title": "well well well",
-      "body": "well well well",
-      "verdict": "",
-      "note": "",
+      "body": "",
       "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
-      "outlet": "TikTok #newportbeach"
+      "verdict": "partial",
+      "note": "video on public safety in newport",
+      "part": "batch_01_answers_part_a.txt"
     },
     {
-      "id": 49,
-      "source": "tiktok",
-      "method": "inherited",
-      "categories": [
-        "noise"
-      ],
-      "snippet": "Thoughts and prayers",
-      "title": "Thoughts and prayers",
-      "body": "Thoughts and prayers",
-      "verdict": "",
-      "note": "",
-      "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
-      "outlet": "TikTok #newportbeach"
-    },
-    {
-      "id": 52,
-      "source": "tiktok",
-      "method": "inherited",
-      "categories": [
-        "noise"
-      ],
-      "snippet": "OMGG im fatigueddd",
-      "title": "OMGG im fatigueddd",
-      "body": "OMGG im fatigueddd",
-      "verdict": "",
-      "note": "",
-      "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
-      "outlet": "TikTok #newportbeach"
-    },
-    {
-      "id": 54,
+      "id": 42,
       "source": "tiktok",
       "method": "keywords",
       "categories": [
-        "emergencies"
+        "noise"
       ],
-      "snippet": "I saw lido flooding earlier",
-      "title": "I saw lido flooding earlier",
-      "body": "I saw lido flooding earlier",
-      "verdict": "",
-      "note": "",
-      "url": "https://www.tiktok.com/@currently8586/video/7662260856268360974",
-      "outlet": "TikTok #newportbeach"
+      "snippet": "Ban fireworks!!!!!!!",
+      "title": "Ban fireworks!!!!!!!",
+      "body": "",
+      "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
+      "verdict": "partial",
+      "note": "noise complaints and public safety",
+      "part": "batch_01_answers_part_a.txt"
+    },
+    {
+      "id": 47,
+      "source": "tiktok",
+      "method": "inherited",
+      "categories": [
+        "noise"
+      ],
+      "snippet": "Arizona?!",
+      "title": "Arizona?!",
+      "body": "",
+      "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
+      "verdict": "partial",
+      "note": "video on public safety",
+      "part": "batch_01_answers_part_a.txt"
+    },
+    {
+      "id": 50,
+      "source": "tiktok",
+      "method": "inherited",
+      "categories": [
+        "noise"
+      ],
+      "snippet": "I\u2019m tired",
+      "title": "I\u2019m tired",
+      "body": "",
+      "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
+      "verdict": "partial",
+      "note": "video on public safety",
+      "part": "batch_01_answers_part_a.txt"
+    },
+    {
+      "id": 53,
+      "source": "tiktok",
+      "method": "inherited",
+      "categories": [
+        "noise"
+      ],
+      "snippet": "it took four hours to get off the peninsula \ud83d\ude2d",
+      "title": "it took four hours to get off the peninsula \ud83d\ude2d",
+      "body": "",
+      "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
+      "verdict": "wrong",
+      "note": "vdeo on public safety",
+      "part": "batch_01_answers_part_a.txt"
     },
     {
       "id": 55,
@@ -908,61 +1126,28 @@
       "categories": [
         "noise"
       ],
-      "snippet": "Joey is open until midnight weekdays and 1 am on weekends. Decent food but definitely better than fast food. Gelsons is open until 11 if ... \u2014 Joey is open until midnight weekdays and 1 am on weekends\u2026",
-      "title": "Joey is open until midnight weekdays and 1 am on weekends. Decent food but definitely better than fast food. Gelsons is open until 11 if ...",
-      "body": "Joey is open until midnight weekdays and 1 am on weekends. Decent food but definitely better than fast food. Gelsons is open until 11 if you want a good grocery store otherwise Ralph\u2019s is open until midnight everyday as well \u2764\ufe0f",
-      "verdict": "",
-      "note": "",
+      "snippet": "Joey is open until midnight weekdays and 1 am on weekends. Decent food but definitely better than fast food. Gelsons is open until 11 if ... \u2014 Joey is open unti\u2026",
+      "title": "Joey is open until midnight weekdays and 1 am on weekends. Decent food but definitely better than fast food. Gelsons is open until 11 if ... \u2014 Joey is open unti\u2026",
+      "body": "",
       "url": "https://www.tiktok.com/@emma.erdman/video/7660299880019152158",
-      "outlet": "TikTok #newportbeach"
+      "verdict": "none",
+      "note": "useless video",
+      "part": "batch_01_answers_part_a.txt"
     },
     {
-      "id": 57,
+      "id": 73,
       "source": "tiktok",
-      "method": "inherited",
+      "method": "keywords",
       "categories": [
-        "traffic_safety",
         "public_safety"
       ],
-      "snippet": "Most of those kids are local",
-      "title": "Most of those kids are local",
-      "body": "Most of those kids are local",
-      "verdict": "",
-      "note": "",
-      "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
-      "outlet": "TikTok #newportbeach"
-    },
-    {
-      "id": 60,
-      "source": "tiktok",
-      "method": "inherited",
-      "categories": [
-        "traffic_safety",
-        "public_safety"
-      ],
-      "snippet": "OH NOOOOOO THE KIDS WERE OUTSIDE BEING TEENAGERS .",
-      "title": "OH NOOOOOO THE KIDS WERE OUTSIDE BEING TEENAGERS .",
-      "body": "OH NOOOOOO THE KIDS WERE OUTSIDE BEING TEENAGERS .",
-      "verdict": "",
-      "note": "",
-      "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
-      "outlet": "TikTok #newportbeach"
-    },
-    {
-      "id": 72,
-      "source": "tiktok",
-      "method": "inherited",
-      "categories": [
-        "traffic_safety",
-        "public_safety"
-      ],
-      "snippet": "Well well well\u2026\u2026.",
-      "title": "Well well well\u2026\u2026.",
-      "body": "Well well well\u2026\u2026.",
-      "verdict": "",
-      "note": "",
-      "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
-      "outlet": "TikTok #newportbeach"
+      "snippet": "The Irvine teenager whose science experiment started a federal investigation and a hazardous materials response a few months ago is once ... \u2014 The Irvine teenag\u2026",
+      "title": "The Irvine teenager whose science experiment started a federal investigation and a hazardous materials response a few months ago is once ... \u2014 The Irvine teenag\u2026",
+      "body": "",
+      "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
+      "verdict": "correct",
+      "note": "metal rods in sand = safety issue",
+      "part": "batch_01_answers_part_a.txt"
     },
     {
       "id": 74,
@@ -973,11 +1158,116 @@
       ],
       "snippet": "[Sticker] Sheldon????",
       "title": "[Sticker] Sheldon????",
-      "body": "[Sticker] Sheldon????",
-      "verdict": "",
-      "note": "",
+      "body": "",
       "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
-      "outlet": "TikTok #irvine"
+      "verdict": "correct",
+      "note": "Fourth of July chaos, arrests",
+      "part": "batch_01_answers_part_a.txt"
+    },
+    {
+      "id": 76,
+      "source": "tiktok",
+      "method": "inherited",
+      "categories": [
+        "public_safety"
+      ],
+      "snippet": "Damn it Shelly!",
+      "title": "Damn it Shelly!",
+      "body": "",
+      "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
+      "verdict": "correct",
+      "note": "video is public safety issue",
+      "part": "batch_01_answers_part_a.txt"
+    },
+    {
+      "id": 77,
+      "source": "tiktok",
+      "method": "inherited",
+      "categories": [
+        "public_safety"
+      ],
+      "snippet": "Ouu shii\ud83d\udc40",
+      "title": "Ouu shii\ud83d\udc40",
+      "body": "",
+      "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
+      "verdict": "correct",
+      "note": "public safety issue",
+      "part": "batch_01_answers_part_a.txt"
+    },
+    {
+      "id": 78,
+      "source": "tiktok",
+      "method": "inherited",
+      "categories": [
+        "public_safety"
+      ],
+      "snippet": "land of the free",
+      "title": "land of the free",
+      "body": "",
+      "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
+      "verdict": "correct",
+      "note": "video is public safety",
+      "part": "batch_01_answers_part_a.txt"
+    },
+    {
+      "id": 79,
+      "source": "tiktok",
+      "method": "inherited",
+      "categories": [
+        "public_safety"
+      ],
+      "snippet": "but when it's a data center nobody can do a thing",
+      "title": "but when it's a data center nobody can do a thing",
+      "body": "",
+      "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
+      "verdict": "correct",
+      "note": "issues is public safety",
+      "part": "batch_01_answers_part_a.txt"
+    },
+    {
+      "id": 80,
+      "source": "tiktok",
+      "method": "inherited",
+      "categories": [
+        "public_safety"
+      ],
+      "snippet": "Someone hire that young genius, already!",
+      "title": "Someone hire that young genius, already!",
+      "body": "",
+      "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
+      "verdict": "correct",
+      "note": "comment not reliable but video is from news",
+      "part": "batch_01_answers_part_b.txt"
+    },
+    {
+      "id": 81,
+      "source": "tiktok",
+      "method": "inherited",
+      "categories": [
+        "public_safety"
+      ],
+      "snippet": "wtf if he concocting today!?",
+      "title": "wtf if he concocting today!?",
+      "body": "",
+      "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
+      "verdict": "correct",
+      "note": "joking comment, good video",
+      "part": "batch_01_answers_part_b.txt"
+    },
+    {
+      "id": 82,
+      "source": "tiktok",
+      "method": "inherited",
+      "categories": [
+        "public_safety"
+      ],
+      "snippet": "Right! He didn\u2019t do anything wrong except live",
+      "title": "Right! He didn\u2019t do anything wrong except live",
+      "body": "",
+      "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
+      "verdict": "correct",
+      "note": "comment disagreeing with arrest, important video",
+      "part": "batch_01_answers_part_b.txt"
     },
     {
       "id": 83,
@@ -988,11 +1278,71 @@
       ],
       "snippet": "give the kid a lab",
       "title": "give the kid a lab",
-      "body": "give the kid a lab",
-      "verdict": "",
-      "note": "",
+      "body": "",
       "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
-      "outlet": "TikTok #irvine"
+      "verdict": "correct",
+      "note": "joking comment, satirical insight on news",
+      "part": "batch_01_answers_part_b.txt"
+    },
+    {
+      "id": 84,
+      "source": "tiktok",
+      "method": "inherited",
+      "categories": [
+        "public_safety"
+      ],
+      "snippet": "Government doesn\u2019t want smart people",
+      "title": "Government doesn\u2019t want smart people",
+      "body": "",
+      "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
+      "verdict": "correct",
+      "note": "comment not interesting, inherited important video",
+      "part": "batch_01_answers_part_b.txt"
+    },
+    {
+      "id": 85,
+      "source": "tiktok",
+      "method": "inherited",
+      "categories": [
+        "public_safety"
+      ],
+      "snippet": "so my guess is hes figured out something and the government wants it for themselves to profit off of",
+      "title": "so my guess is hes figured out something and the government wants it for themselves to profit off of",
+      "body": "",
+      "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
+      "verdict": "correct",
+      "note": "conspiracy adjacent comment, video important and inherited",
+      "part": "batch_01_answers_part_b.txt"
+    },
+    {
+      "id": 86,
+      "source": "tiktok",
+      "method": "inherited",
+      "categories": [
+        "public_safety"
+      ],
+      "snippet": "Look up Die Hard movie.",
+      "title": "Look up Die Hard movie.",
+      "body": "",
+      "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
+      "verdict": "correct",
+      "note": "comment has no substance but video is important",
+      "part": "batch_01_answers_part_b.txt"
+    },
+    {
+      "id": 87,
+      "source": "tiktok",
+      "method": "inherited",
+      "categories": [
+        "public_safety"
+      ],
+      "snippet": "So elaborate on the again part?? \ud83e\udd23 Neighbors must not like the science experiments \ud83d\ude0f",
+      "title": "So elaborate on the again part?? \ud83e\udd23 Neighbors must not like the science experiments \ud83d\ude0f",
+      "body": "",
+      "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
+      "verdict": "correct",
+      "note": "joking comment, points out that this is a repeat of similar story with same kid",
+      "part": "batch_01_answers_part_b.txt"
     },
     {
       "id": 88,
@@ -1003,11 +1353,11 @@
       ],
       "snippet": "big emphasis on the AGAIN",
       "title": "big emphasis on the AGAIN",
-      "body": "big emphasis on the AGAIN",
-      "verdict": "",
-      "note": "",
+      "body": "",
       "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
-      "outlet": "TikTok #irvine"
+      "verdict": "correct",
+      "note": "point out repeat story",
+      "part": "batch_01_answers_part_b.txt"
     },
     {
       "id": 89,
@@ -1017,104 +1367,43 @@
         "violent_crime",
         "public_safety"
       ],
-      "snippet": "His first house was 2.5 million second house was 4 million : his new house is 5.5 million : kid / student ; ruins house = insurance - (no... \u2014 His first house was 2.5 million second house was 4 millio\u2026",
-      "title": "His first house was 2.5 million second house was 4 million : his new house is 5.5 million : kid / student ; ruins house = insurance - (no...",
-      "body": "His first house was 2.5 million second house was 4 million : his new house is 5.5 million : kid / student ; ruins house = insurance - (no harm intended; no threat to public safety) no crime no harm done =insurance money",
-      "verdict": "",
-      "note": "",
+      "snippet": "His first house was 2.5 million second house was 4 million : his new house is 5.5 million : kid / student ; ruins house = insurance - (no... \u2014 His first house w\u2026",
+      "title": "His first house was 2.5 million second house was 4 million : his new house is 5.5 million : kid / student ; ruins house = insurance - (no... \u2014 His first house w\u2026",
+      "body": "",
       "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
-      "outlet": "TikTok #irvine"
+      "verdict": "partial",
+      "note": "this comment is a conspiracy about insurance fraud, same public_safety signal as other i would maybe add property_crime here due to the comments information",
+      "part": "batch_01_answers_part_b.txt"
     },
     {
-      "id": 151,
+      "id": 90,
       "source": "tiktok",
-      "method": "keywords",
+      "method": "inherited",
       "categories": [
         "public_safety"
       ],
-      "snippet": "Why r there metal rods in the sand thats so dangerous",
-      "title": "Why r there metal rods in the sand thats so dangerous",
-      "body": "Why r there metal rods in the sand thats so dangerous",
-      "verdict": "",
-      "note": "",
-      "url": "https://www.tiktok.com/@koarothman/video/7663169398705835294",
-      "outlet": "TikTok #newportbeach"
+      "snippet": "And what does those ingredients do when mixed? I mean I have no clue to lazy to look it up",
+      "title": "And what does those ingredients do when mixed? I mean I have no clue to lazy to look it up",
+      "body": "",
+      "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
+      "verdict": "correct",
+      "note": "important comment that showcases this is a chemical issue, mixing chemicals",
+      "part": "batch_01_answers_part_b.txt"
     },
     {
-      "id": 152,
+      "id": 91,
       "source": "tiktok",
-      "method": "keywords",
+      "method": "inherited",
       "categories": [
         "public_safety"
       ],
-      "snippet": "\ud83c\udf0a A large Fourth of July gathering in Newport Beach devolved into severe chaos and violence\u2014at least 100 arrests and multiple officers in... \u2014 \ud83c\udf0a A large Fourth of July gathering in Newport Beach devol\u2026",
-      "title": "\ud83c\udf0a A large Fourth of July gathering in Newport Beach devolved into severe chaos and violence\u2014at least 100 arrests and multiple officers in...",
-      "body": "\ud83c\udf0a A large Fourth of July gathering in Newport Beach devolved into severe chaos and violence\u2014at least 100 arrests and multiple officers injured! \ud83d\ude94 #usa #newportbeach #fourthofjuly #chaos #riot #china #africa #laborrights #humanrights",
-      "verdict": "",
-      "note": "",
-      "url": "https://www.tiktok.com/@spain7174/video/7664638696594885902",
-      "outlet": "TikTok @spain7174"
-    },
-    {
-      "id": 153,
-      "source": "tiktok",
-      "method": "keywords",
-      "categories": [
-        "public_safety"
-      ],
-      "snippet": "nope",
-      "title": "nope",
-      "body": "nope",
-      "verdict": "",
-      "note": "",
-      "url": "https://www.tiktok.com/@spain7174/video/7664638696594885902",
-      "outlet": "TikTok #newportbeach"
-    },
-    {
-      "id": 154,
-      "source": "tiktok",
-      "method": "keywords",
-      "categories": [
-        "housing"
-      ],
-      "snippet": "may I ask how you found your roommates? and if you know how themed housing works :)",
-      "title": "may I ask how you found your roommates? and if you know how themed housing works :)",
-      "body": "may I ask how you found your roommates? and if you know how themed housing works :)",
-      "verdict": "",
-      "note": "",
-      "url": "https://www.tiktok.com/@irenek4ng/video/7348686958173916458",
-      "outlet": "TikTok #uci"
-    },
-    {
-      "id": 155,
-      "source": "tiktok",
-      "method": "model",
-      "categories": [
-        "sanitation"
-      ],
-      "snippet": "Trying to get back into regular vlogging again! #ucirvine #uci #university #student #college #icecream #oc #socal #dessert #food",
-      "title": "Trying to get back into regular vlogging again! #ucirvine #uci #university #student #college #icecream #oc #socal #dessert #food",
-      "body": "Trying to get back into regular vlogging again! #ucirvine #uci #university #student #college #icecream #oc #socal #dessert #food",
-      "verdict": "",
-      "note": "",
-      "url": "https://www.tiktok.com/@vlogsfromlen/video/7661184449589103902",
-      "outlet": "TikTok @vlogsfromlen"
-    },
-    {
-      "id": 110,
-      "source": "twitter",
-      "method": "keywords+model",
-      "categories": [
-        "public_safety",
-        "emergencies"
-      ],
-      "snippet": "#IRVINEPDPIO - This morning, around 9:56 a.m., the Orange County Fire Authority and the Irvine Police Department responded to a report of... \u2014 #IRVINEPDPIO - This morning, around 9:56 a.m., the Orange\u2026",
-      "title": "#IRVINEPDPIO - This morning, around 9:56 a.m., the Orange County Fire Authority and the Irvine Police Department responded to a report of...",
-      "body": "#IRVINEPDPIO - This morning, around 9:56 a.m., the Orange County Fire Authority and the Irvine Police Department responded to a report of a chemical odor coming from a residence on Crater. The FBI responded and has joined the investigation. There are no evacuations and no known threat to the community.",
-      "verdict": "",
-      "note": "",
-      "url": "https://x.com/IrvinePolice/status/2074612266197262406",
-      "outlet": "@IrvinePolice"
+      "snippet": "Dude was solving fuel shortage",
+      "title": "Dude was solving fuel shortage",
+      "body": "",
+      "url": "https://www.tiktok.com/@nbcla/video/7659982657522027790",
+      "verdict": "correct",
+      "note": "satirical comment about fuel prices, another showcase of scientific chemical part of story.",
+      "part": "batch_01_answers_part_b.txt"
     },
     {
       "id": 111,
@@ -1124,28 +1413,13 @@
         "public_safety",
         "traffic_safety"
       ],
-      "snippet": "#IRVINEPDPIO- Around 4:45 a.m., the Orange Police Department pursued a vehicle into Irvine. The pursuit ended in the area of E. Yale Loop... \u2014 #IRVINEPDPIO- Around 4:45 a.m., the Orange Police Departm\u2026",
-      "title": "#IRVINEPDPIO- Around 4:45 a.m., the Orange Police Department pursued a vehicle into Irvine. The pursuit ended in the area of E. Yale Loop...",
-      "body": "#IRVINEPDPIO- Around 4:45 a.m., the Orange Police Department pursued a vehicle into Irvine. The pursuit ended in the area of E. Yale Loop and Woodspring. IPD officers assisted with their investigation. Three juveniles were taken into custody by Orange PD.",
-      "verdict": "",
-      "note": "",
+      "snippet": "#IRVINEPDPIO- Around 4:45 a.m., the Orange Police Department pursued a vehicle into Irvine. The pursuit ended in the area of E. Yale Loop... \u2014 #IRVINEPDPIO- Aro\u2026",
+      "title": "#IRVINEPDPIO- Around 4:45 a.m., the Orange Police Department pursued a vehicle into Irvine. The pursuit ended in the area of E. Yale Loop... \u2014 #IRVINEPDPIO- Aro\u2026",
+      "body": "",
       "url": "https://x.com/IrvinePolice/status/2074865633205088553",
-      "outlet": "@IrvinePolice"
-    },
-    {
-      "id": 112,
-      "source": "twitter",
-      "method": "keywords",
-      "categories": [
-        "public_safety"
-      ],
-      "snippet": "The Irvine Police Department releases a video warning people not to drink and drive..",
-      "title": "The Irvine Police Department releases a video warning people not to drink and drive..",
-      "body": "The Irvine Police Department releases a video warning people not to drink and drive..",
-      "verdict": "",
-      "note": "",
-      "url": "https://x.com/iAnonPatriot/status/2025203040643326099",
-      "outlet": "@iAnonPatriot"
+      "verdict": "correct",
+      "note": "police pursuit and arrest of 3 individuals",
+      "part": "batch_01_answers_part_b.txt"
     },
     {
       "id": 113,
@@ -1156,41 +1430,27 @@
       ],
       "snippet": "\ub0a8\uac00\uc8fc - \uc5bc\ubc14\uc778 \ucf58\ub3c4 \ub9ac\uc2a4 $4,590/month \ud83d\udccd 89 Strawberry, Irvine, CA 92620 \ud83d\udcb0 List Price: $4,590/month \ud83d\udecf\ufe0f 3 Bed | \ud83d\udec1 3 Bath | \ud83d\udcd0 1,567 Sq Ft",
       "title": "\ub0a8\uac00\uc8fc - \uc5bc\ubc14\uc778 \ucf58\ub3c4 \ub9ac\uc2a4 $4,590/month \ud83d\udccd 89 Strawberry, Irvine, CA 92620 \ud83d\udcb0 List Price: $4,590/month \ud83d\udecf\ufe0f 3 Bed | \ud83d\udec1 3 Bath | \ud83d\udcd0 1,567 Sq Ft",
-      "body": "\ub0a8\uac00\uc8fc - \uc5bc\ubc14\uc778 \ucf58\ub3c4 \ub9ac\uc2a4 $4,590/month\n\ud83d\udccd 89 Strawberry, Irvine, CA 92620\n\ud83d\udcb0 List Price: $4,590/month\n\ud83d\udecf\ufe0f 3 Bed | \ud83d\udec1 3 Bath | \ud83d\udcd0 1,567 Sq Ft",
-      "verdict": "",
-      "note": "",
+      "body": "",
       "url": "https://x.com/newstarjennynam/status/2074921595874021854",
-      "outlet": "@newstarjennynam"
-    },
-    {
-      "id": 114,
-      "source": "twitter",
-      "method": "keywords",
-      "categories": [
-        "public_safety"
-      ],
-      "snippet": "\ud83d\udea8#Irvine PD says No known threat to the community but the FBI has joined the investigation? Seems legit.",
-      "title": "\ud83d\udea8#Irvine PD says No known threat to the community but the FBI has joined the investigation? Seems legit.",
-      "body": "\ud83d\udea8#Irvine PD says No known threat to the community but the FBI has joined the investigation? Seems legit.",
-      "verdict": "",
-      "note": "",
-      "url": "https://x.com/CodeThreeNews/status/2074625803422490805",
-      "outlet": "@CodeThreeNews"
+      "verdict": "none",
+      "note": "housing ad",
+      "part": "batch_01_answers_part_b.txt"
     },
     {
       "id": 115,
       "source": "twitter",
       "method": "keywords",
       "categories": [
-        "emergencies"
+        "emergencies",
+        "public safety"
       ],
       "snippet": "Hazmat response in Irvine is tied to same teen, chemicals from earlier case, attorney says",
       "title": "Hazmat response in Irvine is tied to same teen, chemicals from earlier case, attorney says",
-      "body": "Hazmat response in Irvine is tied to same teen, chemicals from earlier case, attorney says",
-      "verdict": "",
-      "note": "",
+      "body": "",
       "url": "https://x.com/ABC7/status/2074738553070706879",
-      "outlet": "@ABC7"
+      "verdict": "partial",
+      "note": "hazmat response to chemical issue in house",
+      "part": "batch_01_answers_part_b.txt"
     }
   ]
 }
