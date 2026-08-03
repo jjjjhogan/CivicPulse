@@ -9,289 +9,289 @@
 # Sources: {'tiktok': 12, 'reddit': 18, 'twitter': 3, 'news': 15}
 # Pair file: batch_01_answers_part_a.txt
 #
-80:correct:missing person
+80:correct:comment not reliable but video is from news
 # cats: public_safety
 # method: inherited
 # text: Someone hire that young genius, already!
 # url: https://www.tiktok.com/@nbcla/video/7659982657522027790
 
-81:correct:slurry seal / road repair
+81:correct:joking comment, good video
 # cats: public_safety
 # method: inherited
 # text: wtf if he concocting today!?
 # url: https://www.tiktok.com/@nbcla/video/7659982657522027790
 
-82:correct:fireworks event
+82:correct:comment disagreeing with arrest, important video
 # cats: public_safety
 # method: inherited
 # text: Right! He didn’t do anything wrong except live
 # url: https://www.tiktok.com/@nbcla/video/7659982657522027790
 
-83:correct:fireworks viewing
+83:correct:joking comment, satirical insight on news
 # cats: public_safety
 # method: inherited
 # text: give the kid a lab
 # url: https://www.tiktok.com/@nbcla/video/7659982657522027790
 
-84:correct:new traffic signal
+84:correct:comment not interesting, inherited important video
 # cats: public_safety
 # method: inherited
 # text: Government doesn’t want smart people
 # url: https://www.tiktok.com/@nbcla/video/7659982657522027790
 
-85:correct:1A auditors, public safety adjacent
+85:correct:conspiracy adjacent comment, video important and inherited
 # cats: public_safety
 # method: inherited
 # text: so my guess is hes figured out something and the government wants it for themselves to profit off of
 # url: https://www.tiktok.com/@nbcla/video/7659982657522027790
 
-86:partial:coyote attack on pet — public_safety correct, violent_crime is a stretch
+86:correct:comment has no substance but video is important
 # cats: public_safety
 # method: inherited
 # text: Look up Die Hard movie.
 # url: https://www.tiktok.com/@nbcla/video/7659982657522027790
 
-87:correct:rent prices discussion
+87:correct:joking comment, points out that this is a repeat of similar story with same kid
 # cats: public_safety
 # method: inherited
 # text: So elaborate on the again part?? 🤣 Neighbors must not like the science experiments 😏
 # url: https://www.tiktok.com/@nbcla/video/7659982657522027790
 
-88:correct:1st amendment auditors
+88:correct:point out repeat story
 # cats: public_safety
 # method: inherited
 # text: big emphasis on the AGAIN
 # url: https://www.tiktok.com/@nbcla/video/7659982657522027790
 
-89:correct:police standoff
+89:partial:this comment is a conspiracy about insurance fraud, same public_safety signal as other i would maybe add property_crime here due to the comments information
 # cats: violent_crime, public_safety
 # method: keywords+model
 # text: His first house was 2.5 million second house was 4 million : his new house is 5.5 million : kid / student ; ruins house = insurance - (no... — His first house w…
 # url: https://www.tiktok.com/@nbcla/video/7659982657522027790
 
-90:correct:ICE at Spectrum, surveillance
+90:correct:important comment that showcases this is a chemical issue, mixing chemicals
 # cats: public_safety
 # method: inherited
 # text: And what does those ingredients do when mixed? I mean I have no clue to lazy to look it up
 # url: https://www.tiktok.com/@nbcla/video/7659982657522027790
 
-91:correct:animal cruelty arrests
+91:correct:satirical comment about fuel prices, another showcase of scientific chemical part of story.
 # cats: public_safety
 # method: inherited
 # text: Dude was solving fuel shortage
 # url: https://www.tiktok.com/@nbcla/video/7659982657522027790
 
-92:correct:Altair ICE raid
+92:partial:housing, public_safety is correct, issue with 'invasive' cameras being installed by city
 # cats: property_crime, public_safety, housing, immigration
 # method: keywords+model
 # text: Do Irvine Residents Feel Safer with Flock Cameras everywhere? — Do Irvine Residents Feel Safer with Flock Cameras everywhere? Are the security risks, constant m…
 # url: https://old.reddit.com/r/irvine/comments/1uqoc80/do_irvine_residents_feel_safer_with_flock_cameras/
 
-93:wrong:hero story, "rent" incidental mention
+93:correct:missing persons post, who was later found and this is the comment made by irvine pd
 # cats: public_safety
 # method: keywords+model
 # text: Missing Person! — Missing Person! UPDATE - Found and home safe. Thank you, everyone! We need help finding Amy Harchol, a 67-year-old woman. She walked away from…
 # url: https://old.reddit.com/r/irvine/comments/1uqilbd/missing_person/
 
-94:correct:motorcycle fatality
+94:correct:bad paving job, pothole adjacent news
 # cats: potholes
 # method: keywords
 # text: Our lovely new slurry seal — Our lovely new slurry seal How is the slurry seal from last week already ruined? Is it melting from the heat? Did it get wet? Did t…
 # url: https://old.reddit.com/r/irvine/comments/1uqam9g/our_lovely_new_slurry_seal/
 
-95:correct:kidnapping/assault
+95:correct:firework show is potential noise issue
 # cats: noise
 # method: keywords
 # text: The Drone Show/ Fireworks were pretty good in Woodbridge — The Drone Show/ Fireworks were pretty good in Woodbridge Woodbridge Village Association had their fir…
 # url: https://old.reddit.com/r/irvine/comments/1uoakdq/the_drone_show_fireworks_were_pretty_good_in/
 
-96:correct:1A auditors discussion
+96:correct:firework show
 # cats: noise
 # method: keywords
 # text: Is Mike Ward park a good place to watch July 4th fireworks? — Is Mike Ward park a good place to watch July 4th fireworks? Looking for the best place to watch th…
 # url: https://old.reddit.com/r/irvine/comments/1uln6t6/is_mike_ward_park_a_good_place_to_watch_july_4th/
 
-97:correct:fire authority response
+97:correct:the user is talking about the response from the city on adding in a new stoplight, and their excitement for change at this intersection
 # cats: traffic_safety
 # method: keywords+model
 # text: New Signal at Harvard and Berkeley Intersection — New Signal at Harvard and Berkeley Intersection Months ago I submitted a complaint with the city of Irvine for…
 # url: https://old.reddit.com/r/irvine/comments/1uku663/new_signal_at_harvard_and_berkeley_intersection/
 
-98:correct:police pursuit
+98:correct:potential protest or group of individuals being abrasive
 # cats: public_safety
 # method: legacy
 # text: 1A "Auditors" in Woodbridge? — 1A "Auditors" in Woodbridge? Just drove on E Yale Loop and it looked like some "auditors" were taking pics/videos of cars on the …
 # url: https://old.reddit.com/r/irvine/comments/1ukrowc/1a_auditors_in_woodbridge/
 
-99:correct:police DUI warning
+99:partial:public safety, coyote on loose killing pets
 # cats: violent_crime, public_safety
 # method: keywords+model
 # text: Aggressive coyote in Turtle Rock, south Irvine, killed pet >:( — Aggressive coyote in Turtle Rock, south Irvine, killed pet >:( My parents live in the Turtle Ro…
 # url: https://old.reddit.com/r/irvine/comments/1tltzaq/aggressive_coyote_in_turtle_rock_south_irvine/
 
-100:correct:condo listing
+100:correct:complaints about rising costs in inflation, housing
 # cats: housing
 # method: keywords+model
 # text: A love letter to capitalism [Irvine, California, 4/19/2026] — A love letter to capitalism [Irvine, California, 4/19/2026] Average rent prices have risen from ab…
 # url: https://old.reddit.com/r/irvine/comments/1sqr1zd/a_love_letter_to_capitalism_irvine_california/
 
-101:correct:FBI investigation
+101:correct:first admendment protestors arguing with police and causing issues
 # cats: public_safety
 # method: keywords+model
 # text: “1st Amendment” frauditors at Woodbury shopping center today. — “1st Amendment” frauditors at Woodbury shopping center today. When we drove by they were in fron…
 # url: https://old.reddit.com/r/irvine/comments/1sbsc8p/1st_amendment_frauditors_at_woodbury_shopping/
 
-102:correct:hazmat response
+102:correct:police response to man holding family hostage
 # cats: violent_crime, public_safety
 # method: keywords
 # text: Great Park standoff — Great Park standoff https://www.cbsnews.com/losangeles/news/man-irvine-family-hostage-captive-police-standoff/
 # url: https://old.reddit.com/r/irvine/comments/1r2gjjb/great_park_standoff/
 
-103:correct-none:serenity/tai chi — no civic issue
+103:wrong:immigration and public safety categories are correct
 # cats: public_safety
 # method: keywords
 # text: ICE and IPD/Irvine Company — ICE and IPD/Irvine Company I've been doing some reading after seeing ICE at spectrum, and it seems like the camera system used by I…
 # url: https://old.reddit.com/r/irvine/comments/1m8qitb/ice_and_ipdirvine_company/
 
-104:correct-none:restaurant openings — no civic issue
+104:correct:dog trainers arrested for killing over 10 dogs
 # cats: violent_crime, public_safety
 # method: keywords+model
 # text: Two People Arrested After the Death of Ten Dogs — Two People Arrested After the Death of Ten Dogs On Thursday, Detectives arrested an animal trainer and his gir…
 # url: https://old.reddit.com/r/irvine/comments/1lglj78/two_people_arrested_after_the_death_of_ten_dogs/
 
-105:correct-none:theater history — no civic issue
+105:wrong:public safety, video of police raid
 # cats: immigration
 # method: model
 # text: Altair Raid (Videos) — Altair Raid (Videos) FYI - Videos provided by neighbors witnessing the Altair raid (not my content). Still haven't seen any news articles…
 # url: https://old.reddit.com/r/irvine/comments/1km4u9e/altair_raid_videos/
 
-106:correct-none:Shakespeare festival — no civic issue
+106:none:story about homeless man getting donation, not civic signal
 # cats: housing
 # method: keywords
 # text: Wow! Happy $tory for an Irvine humble hero. Saw a post on social media, started watching the CBS news video and knew I recognized him! #B... — Wow! Happy $tory …
 # url: https://old.reddit.com/r/irvine/comments/1kb93jz/wow_happy_tory_for_an_irvine_humble_hero_saw_a/
 
-107:wrong:volunteering article, not traffic/emergency
+107:correct:traffic collision that caused death
 # cats: traffic_safety
 # method: keywords+model
 # text: Irvine: Two Motorcyclists Die In Freeway Crash (credit: Miles Madison @CountyNewsTV) — Irvine: Two Motorcyclists Die In Freeway Crash (credit: Miles Madison @Co…
 # url: https://old.reddit.com/r/irvine/comments/1f1jvtt/irvine_two_motorcyclists_die_in_freeway_crash/
 
-108:wrong:softball championships, not traffic
+108:correct:violent man arrested for crime
 # cats: violent_crime, public_safety
 # method: keywords
 # text: [News] Irvine man tried to avenge crimes against Asians by kidnapping and trying to sexually assault a woman
 # url: https://old.reddit.com/r/irvine/comments/mo5i01/news_irvine_man_tried_to_avenge_crimes_against/
 
-109:correct-none:SunWheel amusement — no civic issue
+109:correct:1st amendment auditors filming onpassers and causing issues
 # cats: public_safety
 # method: model
 # text: Does anyone know these 1st amendment auditors? — Does anyone know these 1st amendment auditors? I constantly see posts on the Orange County and Irvine subreddit…
 # url: https://old.reddit.com/r/irvine/comments/1c1ut1k/does_anyone_know_these_1st_amendment_auditors/
 
-111:correct:freeway improvements — traffic topic
+111:correct:police pursuit and arrest of 3 individuals
 # cats: public_safety, traffic_safety
 # method: keywords+model
 # text: #IRVINEPDPIO- Around 4:45 a.m., the Orange Police Department pursued a vehicle into Irvine. The pursuit ended in the area of E. Yale Loop... — #IRVINEPDPIO- Aro…
 # url: https://x.com/IrvinePolice/status/2074865633205088553
 
-113:wrong:parks ranking, not sanitation
+113:none:housing ad
 # cats: housing
 # method: model
 # text: 남가주 - 얼바인 콘도 리스 $4,590/month 📍 89 Strawberry, Irvine, CA 92620 💰 List Price: $4,590/month 🛏️ 3 Bed | 🛁 3 Bath | 📐 1,567 Sq Ft
 # url: https://x.com/newstarjennynam/status/2074921595874021854
 
-115:partial:"safety record" mentioned but article is broader
-# cats: emergencies
+115:partial:hazmat response to chemical issue in house
+# cats: emergencies, public safety
 # method: keywords
 # text: Hazmat response in Irvine is tied to same teen, chemicals from earlier case, attorney says
 # url: https://x.com/ABC7/status/2074738553070706879
 
-116:wrong:National Merit scholars — education
+116:none:news article of different events in the park.
 # cats: []
 # method: none
 # text: Soak Up the serenity — Tai chi, tall trees and turtles at Heritage Park
 # url: https://www.irvinestandard.com/2026/soak-up-the-serenity/
 
-118:wrong:summer events guide
+118:none:article about barclay theater
 # cats: []
 # method: none
 # text: Making the most of a 40-year run at The Barclay — Ginny Hayward probably doesn’t have a copy of the classified ad that ran in a local newspaper in late 1985. Bu…
 # url: https://www.irvinestandard.com/2026/making-the-most-of-a-40-year-run-at-the-barclay/
 
-120:wrong:OC Zoo event
+120:wrong:public safeety, emergencies potentially: news article talking about need for more fire watcher volunteers and their importance
 # cats: traffic_safety, emergencies
 # method: none
 # text: Wide-open opportunities for volunteers — A nestling red-tailed hawk, its white head visible above a large nest atop a coast live oak, seems to stand sentry over…
 # url: https://www.irvinestandard.com/2026/wide-open-opportunities-for-volunteers/
 
-123:correct:personal injury / accident article
+123:none:small business article talking about town
 # cats: []
 # method: none
 # text: Celebrating Small Business: Woodbridge Village Center — Students find their rhythm at Focus Dance Center Leah Lederman began taking lessons at Focus Dance Cente…
 # url: https://www.irvinestandard.com/2026/celebrating-small-business-woodbridge-village-center/
 
-125:correct:firefighter charity
+125:none:ad for 5 small businesses article
 # cats: []
 # method: none
 # text: Try these 5 over-the-top sandwich creations — It has been said that life is a sandwich – what happens between slices of the past and future. We say sandwiches a…
 # url: https://www.irvinestandard.com/2026/try-these-5-over-the-top-sandwich-creations/
 
-128:wrong:sobriety/health article
+128:correct:article talking about a ranking of irvine as no.3 city to raise a family
 # cats: public_safety
 # method: none
 # text: No. 3 city in America to raise a family — Irvine landed at No. 3 on Wallet­Hub’s national “Best Places to Raise a Family” ranking, driven by its safety record, …
 # url: https://www.irvinestandard.com/2026/no-3-city-in-america-to-raise-a-family-2/
 
-129:correct:immigration article
+129:none:article congratulating 4 scholars for their achievement in merit awards
 # cats: traffic_safety
 # method: none
 # text: Four named National Merit Scholars — Irvine high school students accounted for four of 11 seniors in the county who were awarded prestigious college-sponsored N…
 # url: https://www.irvinestandard.com/2026/four-named-national-merit-scholars/
 
-130:correct:accident attorneys article
+130:correct:july news listings
 # cats: []
 # method: none
 # text: 10 happenings in July — 1. ‘C.S. Lewis on Stage’Experience a multimedia performance capturing the magnetic personality, eloquence and sharp wit of C.S. Lewis. A…
 # url: https://www.irvinestandard.com/2026/10-happenings-in-july/
 
-131:wrong:family law attorney profile
+131:none:summer event ad
 # cats: housing
 # method: none
 # text: Splash into summer — It’s the perfect time to get outside and enjoy the treats of the season – concerts in the park, movies under the stars, hikes on nearby tra…
 # url: https://www.irvinestandard.com/2026/splash-into-summer/
 
-132:wrong:health/testosterone article
+132:none:talking about updated internet speeds
 # cats: housing
 # method: none
 # text: Cutting-Edge Connectivity — New Irvine Community Pacifica Place Debuts First-of-Its-Kind 3 Gig Wi-Fi 7 Network as High-Speed Internet Becomes a Must-Have Reside…
 # url: https://www.irvinestandard.com/2026/cutting-edge-connectivity/
 
-133:wrong:election system article
+133:none:article talking about 5k at zoo
 # cats: traffic_safety
 # method: none
 # text: Getting wild at OC Zoo for a day — About 455 runners of all ages took part in the Run Wild 5K event at the OC Zoo in Irvine Regional Park last month. Proceeds f…
 # url: https://www.irvinestandard.com/2026/getting-wild-at-oc-zoo-for-a-day/
 
-134:partial:OC Fair + Airbnb + crime mentioned
+134:none:ads talking about amenities at apartment complex
 # cats: public_safety, housing
 # method: none
 # text: Amenities abound at Spectrum Terrace — Some folks spend work breaks gulping coffee, gobbling doughnuts or playing word games on their phones. Bharat Ananth hits…
 # url: https://www.irvinestandard.com/2026/amenities-abound-at-spectrum-terrace/
 
-135:correct:police drones
+135:none:new park opening 
 # cats: []
 # method: none
 # text: A linear park journey — Jeffrey Open Space Trail is a portal to the past and a connection in the present
 # url: https://www.irvinestandard.com/2026/a-linear-park-journey/
 
-136:wrong:NASA competition — not noise
+136:partial:good news source of what to do if in an accident to keep good details, traffic and public safety potential 
 # cats: sanitation, traffic_safety, public_safety
 # method: none
 # text: After an Accident: What Helps a Personal Injury Claim Most — Details start slipping faster than people expect after an accident. A street name goes fuzzy, the w…
 # url: https://irvineweekly.com/after-an-accident-what-helps-a-personal-injury-claim-most/?utm_source=rss&utm_medium=rss&utm_campaign=after-an-accident-what-helps-a-personal-injury-claim-most
 
-137:wrong:library budget article
+137:none:ad for tech summet
 # cats: []
 # method: none
 # text: AITEX Summit Winter 2026 to Spotlight Applied Data Analytics for Real-World Decisions — Summary: The upcoming AITEX Summit Winter 2026 will bring data analytics…
