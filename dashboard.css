@@ -813,7 +813,16 @@ a.source-badge:hover {
   #irvineMap { height: 380px; }
 }
 
-/* ── classifier confidence (shared by source + signal pages) ── */
+/* ── classifier method + match strength (shared by source + signal pages) ── */
+
+.method-chip {
+  font-size: 0.68rem;
+  font-weight: 500;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #f0f1f3;
+  color: #5a6070;
+}
 
 .conf-chip {
   font-size: 0.72rem;

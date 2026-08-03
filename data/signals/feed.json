@@ -154,41 +154,31 @@
   {
     "outlet": "TikTok #irvine",
     "title": "Only thing scary about Irvine is the home prices and monthly rent! \ud83d\ude2d \ud83d\udcb4 \ud83d\udcb4 \ud83d\udcb4 \ud83d\udcb4",
-    "categories": [
-      "housing"
-    ],
+    "categories": [],
     "published_utc": "2026-07-15"
   },
   {
     "outlet": "TikTok #irvine",
     "title": "The rent is the scariest thing in Irvine!",
-    "categories": [
-      "housing"
-    ],
+    "categories": [],
     "published_utc": "2026-07-15"
   },
   {
     "outlet": "TikTok #irvine",
     "title": "Irvine if Irvine Company Apartments didnt exist",
-    "categories": [
-      "housing"
-    ],
+    "categories": [],
     "published_utc": "2026-07-15"
   },
   {
     "outlet": "TikTok #irvine",
     "title": "I\u2019m in Orange County and I just wasted my time watching this useless TikTok. \ud83d\ude0f",
-    "categories": [
-      "sanitation"
-    ],
+    "categories": [],
     "published_utc": "2026-07-15"
   },
   {
     "outlet": "TikTok #irvine",
     "title": "Um none of these are true except the mortgage lol",
-    "categories": [
-      "housing"
-    ],
+    "categories": [],
     "published_utc": "2026-07-15"
   },
   {
@@ -276,7 +266,9 @@
     "outlet": "TikTok #newportbeach",
     "title": "What happened will have a wide effect on many\u2026anyone who rented out homes to unsupervised youth, parents that made those accommodations, ...",
     "categories": [
-      "housing"
+      "violent_crime",
+      "sanitation",
+      "public_safety"
     ],
     "published_utc": "2026-07-15"
   },
@@ -619,9 +611,7 @@
   {
     "outlet": "TikTok #uci",
     "title": "may I ask how you found your roommates? and if you know how themed housing works :)",
-    "categories": [
-      "housing"
-    ],
+    "categories": [],
     "published_utc": "2026-07-20"
   },
   {
@@ -644,8 +634,7 @@
     "outlet": "r/irvine",
     "title": "Smoking on Property: Irvine Company\u2019s Refusal to Enforce City Law",
     "categories": [
-      "sanitation",
-      "housing"
+      "sanitation"
     ],
     "published_utc": "2026-07-22"
   },
@@ -660,9 +649,7 @@
   {
     "outlet": "r/irvine",
     "title": "Google Fiber Installation Process at new Avella (Irvine Company Apartment)",
-    "categories": [
-      "housing"
-    ],
+    "categories": [],
     "published_utc": "2026-07-22"
   },
   {
@@ -725,9 +712,7 @@
   {
     "outlet": "r/irvine",
     "title": "Public park shelter rentals",
-    "categories": [
-      "housing"
-    ],
+    "categories": [],
     "published_utc": "2026-07-18"
   },
   {

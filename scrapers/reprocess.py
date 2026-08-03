@@ -44,12 +44,17 @@ def reclassify_row(row: dict, thread_categories: dict | None = None) -> dict:
             row.get("categories") or [], outlet_default=outlet_default
         )
     elif row.get("categories"):
-        meta["classification"] = {
-            "scores": {category: 0.6 for category in row["categories"]},
-            "confidence": 0.6,
-            "method": "legacy",
-            "model_version": result.to_dict()["model_version"],
-        }
+        old_method = (meta.get("classification") or {}).get("method", "")
+        if old_method in {"keywords", "keywords+model"}:
+            row["categories"] = []
+            meta["classification"] = result.to_dict()
+        else:
+            meta["classification"] = {
+                "scores": {category: 0.6 for category in row["categories"]},
+                "confidence": 0.6,
+                "method": "legacy",
+                "model_version": result.to_dict()["model_version"],
+            }
     else:
         row["categories"] = []
         meta["classification"] = result.to_dict()
