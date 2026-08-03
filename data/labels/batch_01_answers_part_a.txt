@@ -1,0 +1,298 @@
+# From review_batch_01.md (AI DRAFT — not gold) + live signal fields
+# Each block:
+#   id:verdict:comment
+#   # cats: <assigned categories>
+#   # method: <classification method>
+#   # text: <title/body snippet>
+#   # url: <source url>
+# PART A — 48 signals · id range 1–79
+# Sources: {'tiktok': 48}
+# Pair file: batch_01_answers_part_b.txt
+#
+1:partial:generic comment about police excitement, video shows traffic issue
+# cats: public_safety
+# method: inherited
+# text: That’s the most excitement Irvine pd has ever gotten in their career
+# url: https://www.tiktok.com/@ktlanews/video/7662503385417010446
+
+2:Partial:"cops" keyword, comment is about Irvine police
+# cats: public_safety
+# method: keywords
+# text: Don’t mess with Irvine cops, they are bored
+# url: https://www.tiktok.com/@ktlanews/video/7662503385417010446
+
+3:partial:video is traffic safety
+# cats: public_safety
+# method: inherited
+# text: its on the 5 freeway. is it really Irvine? 😁
+# url: https://www.tiktok.com/@ktlanews/video/7662503385417010446
+
+4:partial:traffic issue
+# cats: public_safety
+# method: inherited
+# text: That's Tustin 😂😂😂
+# url: https://www.tiktok.com/@ktlanews/video/7662503385417010446
+
+5:partial:"been on the news too much" — shows issues
+# cats: public_safety
+# method: inherited
+# text: Irvine has been on the news too much lately. Oh how things have changed.
+# url: https://www.tiktok.com/@ktlanews/video/7662503385417010446
+
+6:partial:reaction comment, no civic content
+# cats: public_safety
+# method: inherited
+# text: Did she have to make that statement? God forbid it happen in Irvine
+# url: https://www.tiktok.com/@ktlanews/video/7662503385417010446
+
+7:partial:"Ford Ranger" joke, zero civic content
+# cats: public_safety
+# method: inherited
+# text: NEVER woulda happened in a Ford Ranger 💪
+# url: https://www.tiktok.com/@ktlanews/video/7662503385417010446
+
+8:partial:car/Tesla joke
+# cats: public_safety
+# method: inherited
+# text: The man can’t be from Irvine. I see a truck and not a Tesla.
+# url: https://www.tiktok.com/@ktlanews/video/7662503385417010446
+
+9:partial:"I saw this going home" — no civic issue
+# cats: public_safety
+# method: inherited
+# text: I saw this going home . On irvine and Sand Canyon.
+# url: https://www.tiktok.com/@ktlanews/video/7662503385417010446
+
+10:correct:"Kidnap at Bake parkway" — real public safety concern
+# cats: public_safety
+# method: inherited
+# text: Kidnap at Bake parkway and Irvine Blvd? That's scary What's the suspect's history?
+# url: https://www.tiktok.com/@ktlanews/video/7662503385417010446
+
+11:partial:"blame this on LA" — joke
+# cats: public_safety
+# method: inherited
+# text: Did the OC blame this on LA too!!😂😂
+# url: https://www.tiktok.com/@ktlanews/video/7662503385417010446
+
+12:partial:"Tustin" — one word correction
+# cats: public_safety
+# method: inherited
+# text: *** Tustin 😆
+# url: https://www.tiktok.com/@ktlanews/video/7662503385417010446
+
+13:partial:emoji reaction only
+# cats: public_safety
+# method: inherited
+# text: 👏👏👏IPD👏👏👏
+# url: https://www.tiktok.com/@ktlanews/video/7662503385417010446
+
+14:partial:"wasn't successful" — vague
+# cats: public_safety
+# method: inherited
+# text: So it wasn’t successful lol
+# url: https://www.tiktok.com/@ktlanews/video/7662503385417010446
+
+15:partial:"Thats where i work" — no civic content
+# cats: public_safety
+# method: inherited
+# text: Thats where i work jeesh
+# url: https://www.tiktok.com/@ktlanews/video/7662503385417010446
+
+16:partial:"at least they got him fast" — vague reaction
+# cats: public_safety
+# method: inherited
+# text: At least they got him fast
+# url: https://www.tiktok.com/@ktlanews/video/7662503385417010446
+
+17:partial:"is she OK??" — concern but no civic content
+# cats: public_safety
+# method: inherited
+# text: So is she OK??
+# url: https://www.tiktok.com/@ktlanews/video/7662503385417010446
+
+18:partial:reaction exclamation
+# cats: public_safety
+# method: inherited
+# text: GAAASSSSPPP. I was just there!
+# url: https://www.tiktok.com/@ktlanews/video/7662503385417010446
+
+19:partial:"front row view when he got caught" — vague
+# cats: public_safety
+# method: inherited
+# text: I had a front row view when he got caught!
+# url: https://www.tiktok.com/@ktlanews/video/7662503385417010446
+
+20:none:"home prices and monthly rent" — housing concern
+# cats: housing
+# method: keywords
+# text: Only thing scary about Irvine is the home prices and monthly rent! 😭 💴 💴 💴 💴
+# url: https://www.tiktok.com/@1kjaylive/video/7655861903234747679
+
+21:none:"rent is the scariest thing" — housing complaint
+# cats: housing
+# method: keywords
+# text: The rent is the scariest thing in Irvine!
+# url: https://www.tiktok.com/@1kjaylive/video/7655861903234747679
+
+22:none:"Irvine Company Apartments" — housing topic
+# cats: housing
+# method: keywords
+# text: Irvine if Irvine Company Apartments didnt exist
+# url: https://www.tiktok.com/@globalgags7/video/7654610369373080854
+
+23:none:"wasted my time" — not sanitation
+# cats: sanitation
+# method: keywords
+# text: I’m in Orange County and I just wasted my time watching this useless TikTok. 😏
+# url: https://www.tiktok.com/@kimiaskravings/video/7659407282488315150
+
+24:none:"mortgage" appears casually, not a housing issue
+# cats: housing
+# method: keywords
+# text: Um none of these are true except the mortgage lol
+# url: https://www.tiktok.com/@kimiaskravings/video/7659407282488315150
+
+25:none:about Asian identity/privilege, not housing
+# cats: housing
+# method: keywords
+# text: hi kaitlyn! I believe you didn’t mean any harm by this video. As a fellow Asian person from Irvine, I totally get the privilege being rai... — hi kaitlyn! I bel…
+# url: https://www.tiktok.com/@miffy_lover6186/video/7647254312330005790
+
+26:correct:"flooding is crazy" — emergency topic
+# cats: emergencies
+# method: keywords
+# text: 😳😳😳that flooding is crazy! Glad it’s not like that all the time
+# url: https://www.tiktok.com/@theslickestsu/video/7662468657640951071
+
+27:correct:"the flooding" — emergency topic
+# cats: emergencies
+# method: keywords
+# text: [Sticker] Oh no, the flooding
+# url: https://www.tiktok.com/@theslickestsu/video/7662468657640951071
+
+28:correct:"about the flooding" — emergency topic
+# cats: emergencies
+# method: keywords
+# text: Love the beach wow about the flooding
+# url: https://www.tiktok.com/@theslickestsu/video/7662468657640951071
+
+29:correct:"flooding" mentioned (though denying it) — borderline correct
+# cats: emergencies
+# method: keywords
+# text: No flooding at all I live in Newport Beach 😂
+# url: https://www.tiktok.com/@vikkzavalaa/video/7662453144110009614
+
+30:partial:"flooded" correct for emergencies, violent_crime is wrong
+# cats: violent_crime, emergencies
+# method: keywords+model
+# text: It was flooded by the lido bottle last night the 13th
+# url: https://www.tiktok.com/@vikkzavalaa/video/7662453144110009614
+
+32:correct:"destroying things" and yes violence
+# cats: violent_crime
+# method: model
+# text: I was there and I live in Newport Beach. It was a lot of locals there. Don’t mean they was destroying things, but it was a lot of locals ... — I was there and I…
+# url: https://www.tiktok.com/@skylarensign_/video/7659574575864286494
+
+33:correct:"police" — correct
+# cats: public_safety
+# method: keywords
+# text: At least you had police
+# url: https://www.tiktok.com/@skylarensign_/video/7659574575864286494
+
+34:correct:"trash left behind" — sanitation issue
+# cats: sanitation
+# method: keywords+model
+# text: Its ruins it for the lovely tourists who truly come to have a nice time too. The trash left behind and the complete disregard for others ... — Its ruins it for …
+# url: https://www.tiktok.com/@skylarensign_/video/7659574575864286494
+
+36:wrong:video is about public safety and violence in newport
+# cats: noise
+# method: inherited
+# text: Social media ruined us
+# url: https://www.tiktok.com/@abc7la/video/7660348129555844366
+
+37:wrong:video on public safety and violence in newport
+# cats: noise
+# method: inherited
+# text: Orange County is the Florida of California
+# url: https://www.tiktok.com/@abc7la/video/7660348129555844366
+
+39:wrong:video on firework saftey at newport
+# cats: noise
+# method: inherited
+# text: I wish I could have two homes
+# url: https://www.tiktok.com/@abc7la/video/7660348129555844366
+
+40:partial:video on public safety in newport
+# cats: noise
+# method: inherited
+# text: well well well
+# url: https://www.tiktok.com/@abc7la/video/7660348129555844366
+
+42:partial:noise complaints and public safety
+# cats: noise
+# method: keywords
+# text: Ban fireworks!!!!!!!
+# url: https://www.tiktok.com/@abc7la/video/7660348129555844366
+
+47:partial:video on public safety
+# cats: noise
+# method: inherited
+# text: Arizona?!
+# url: https://www.tiktok.com/@abc7la/video/7660348129555844366
+
+50:partial:video on public safety
+# cats: noise
+# method: inherited
+# text: I’m tired
+# url: https://www.tiktok.com/@abc7la/video/7660348129555844366
+
+53:wrong:vdeo on public safety
+# cats: noise
+# method: inherited
+# text: it took four hours to get off the peninsula 😭
+# url: https://www.tiktok.com/@abc7la/video/7660348129555844366
+
+55:none:useless video
+# cats: noise
+# method: model
+# text: Joey is open until midnight weekdays and 1 am on weekends. Decent food but definitely better than fast food. Gelsons is open until 11 if ... — Joey is open unti…
+# url: https://www.tiktok.com/@emma.erdman/video/7660299880019152158
+
+73:correct:metal rods in sand = safety issue
+# cats: public_safety
+# method: keywords
+# text: The Irvine teenager whose science experiment started a federal investigation and a hazardous materials response a few months ago is once ... — The Irvine teenag…
+# url: https://www.tiktok.com/@nbcla/video/7659982657522027790
+
+74:correct:Fourth of July chaos, arrests
+# cats: public_safety
+# method: inherited
+# text: [Sticker] Sheldon????
+# url: https://www.tiktok.com/@nbcla/video/7659982657522027790
+
+76:correct:video is public safety issue
+# cats: public_safety
+# method: inherited
+# text: Damn it Shelly!
+# url: https://www.tiktok.com/@nbcla/video/7659982657522027790
+
+77:correct:public safety issue
+# cats: public_safety
+# method: inherited
+# text: Ouu shii👀
+# url: https://www.tiktok.com/@nbcla/video/7659982657522027790
+
+78:correct:video is public safety
+# cats: public_safety
+# method: inherited
+# text: land of the free
+# url: https://www.tiktok.com/@nbcla/video/7659982657522027790
+
+79:correct:issues is public safety
+# cats: public_safety
+# method: inherited
+# text: but when it's a data center nobody can do a thing
+# url: https://www.tiktok.com/@nbcla/video/7659982657522027790
