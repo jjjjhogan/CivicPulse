@@ -1,43 +1,77 @@
 {
-  "pageTitle": "Twitter search irvine",
+  "pageTitle": "Twitter search irvine news",
   "responseStatus": 200,
-  "scrapedAt": "2026-07-22T18:49:30.755Z",
+  "scrapedAt": "2026-08-05T17:43:17.204Z",
   "rawIncluded": false,
   "blocked": false,
   "listingType": "twitter-search",
-  "query": "irvine",
-  "product": "Latest",
+  "query": "irvine news",
+  "product": "Top",
   "itemCount": 20,
-  "nextCursor": "DAADDAABCgABHN2moiiWAbIKAAIc3ZKMglqACgAIAAIAAAACCAADAAAAAAgABAAAAAAKAAUc3acU9AAnEAoABhzdpxTz_9jwAAA",
+  "nextCursor": "DAACCgACHO-eLpCAJxAKAAMc754ukH_Y8AgABAAAAAILAAUAAADwRW1QQzZ3QUFBZlEvZ0dKTjB2R3AvQUFBQUJRYzdrVUI5NXRSL2h6bncxcy9saEhYSE9lQmxUdldZVFljNXQ3bldWZlFmaHpuMDk4VkdyRnpIT2ZBTlN6V3dCY2M3bmVuOEJid0Z4em83YVk5V25F DAACCgACHO-eLpCAJxAKAAMc754ukH_Y8AgABAAAAAILAAUAAADwRW1QQzZ3QUFBZlEvZ0dKTjB2R3AvQUFBQUJRYzdrVUI5NXRSL2h6bncxcy9saEhYSE9lQmxUdldZVFljNXQ3bldWZlFmaHpuMDk4VkdyRnpIT2ZBTlN6V3dCY2M3bmVuOEJid0Z4em83YVk5V25FekhPNTM3VVpYRVlVYzV0dC85NWFCL2h6cFFYK1kxb0dmSE9rT0QyUFgwRXNjNmlsQi90c0FWUnp1aHR5S2xtR2lITzZCeFE0V0VOOGM3bjMzODlieFpoenVkQitxVm9HVEhPbFNKSlhYRVdjYzU0NU5VRmFnd0J6bzhLRE1sNUQwCAAGAAAAAAgABwAAAAAMAAgKAAEc5tt_95aB_gAAAA",
   "tweets": [
     {
-      "id": "2080001818310869426",
-      "conversationId": "2079434749160898927",
-      "createdAt": "Wed Jul 22 18:47:32 +0000 2026",
-      "text": "@JMichaelWaller UC Irvine will go belly up.",
+      "id": "2084679552270553598",
+      "conversationId": "2084679552270553598",
+      "createdAt": "Tue Aug 04 16:35:11 +0000 2026",
+      "text": "Irvine Homes for Sale \u2013 Live Update\n\nIrvine continues to stand out for buyers who value planning, lifestyle, schools, and long-term stability.\n\n\ud83d\udccc View today's Irvine homes\n\ud83d\udc49 https://t.co/FT9wj1sTbd\n Irvine Homes for Sale \u2013 Live Update\n\nIrvine continues to stand out for buyers who value planning, lifestyle, schools, and long-term stability.\n\n\ud83d\udccc View today's Irvine homes\n\ud83d\udc49 https://t.co/FT9wj1sTbd\n\nIf something stands out, message me and I'll help you\nhttps://t.co/SrDlDgtnaU https://t.co/qMJb1asYSd",
       "lang": "en",
       "source": null,
-      "inReplyToStatusId": "2079448726955786635",
-      "inReplyToUserId": "1858882886",
+      "inReplyToStatusId": null,
+      "inReplyToUserId": null,
       "author": {
-        "id": "350018443",
-        "name": "Word Monger",
-        "handle": "Tazatator",
-        "description": "Editor. #Veterans #Guitars #Dermatology \n#SoldiersofOdin #getarug \n#outthedonors #Extortion17: https://t.co/RbP8wfynE6",
-        "followersCount": 5824,
-        "followingCount": 5476,
+        "id": "4851749567",
+        "name": "Amin Haghighat | Luxury Real Estate Agent",
+        "handle": "haghighatusa",
+        "description": null,
+        "followersCount": null,
+        "followingCount": null,
         "verified": false
       },
       "counts": {
         "replies": 0,
-        "reposts": 0,
-        "likes": 0,
+        "reposts": 1,
+        "likes": 2,
         "quotes": 0,
         "bookmarks": 0,
-        "views": 1
+        "views": 58
       },
-      "media": "[]1: {11}"
+      "media": [
+        {
+          "type": "photo",
+          "mediaUrl": "https://pbs.twimg.com/media/HO5EjIsb0AA0H6M.jpg",
+          "expandedUrl": "https://x.com/haghighatusa/status/2084679552270553598/photo/1"
+        }
+      ]
+    },
+    {
+      "id": "2082593220366598654",
+      "conversationId": "2082593220366598654",
+      "createdAt": "Wed Jul 29 22:24:51 +0000 2026",
+      "text": "#BREAKING: Serial vandalism suspect arrested after 13 Teslas tagged with spray paint, Irvine police say https://t.co/DFxoGgRc2E",
+      "lang": "en",
+      "source": null,
+      "inReplyToStatusId": null,
+      "inReplyToUserId": null,
+      "author": {
+        "id": "16374678",
+        "name": "ABC7 Eyewitness News",
+        "handle": "ABC7",
+        "description": null,
+        "followersCount": null,
+        "followingCount": null,
+        "verified": true
+      },
+      "counts": {
+        "replies": 16,
+        "reposts": 17,
+        "likes": 74,
+        "quotes": 5,
+        "bookmarks": 10,
+        "views": 57612
+      },
+      "media": "[]2: {11}"
     }
   ],
-  "id": "2080000731164168667"
+  "id": "2082844687300214807"
 }

@@ -1,27 +1,60 @@
 [
   {
     "source": "twitter",
-    "outlet": "@Tazatator",
-    "title": "@JMichaelWaller UC Irvine will go belly up.",
-    "body": "@JMichaelWaller UC Irvine will go belly up.",
-    "url": "https://x.com/Tazatator/status/2080001818310869426",
+    "outlet": "@haghighatusa",
+    "title": "Irvine Homes for Sale \u2013 Live Update Irvine continues to stand out for buyers who value planning, lifestyle, schools, and long-term stabil...",
+    "body": "Irvine Homes for Sale \u2013 Live Update\n\nIrvine continues to stand out for buyers who value planning, lifestyle, schools, and long-term stability.\n\n\ud83d\udccc View today's Irvine homes\n\ud83d\udc49 https://t.co/FT9wj1sTbd\n Irvine Homes for Sale \u2013 Live Update\n\nIrvine continues to stand out for buyers who value planning, lifestyle, schools, and long-term stability.\n\n\ud83d\udccc View today's Irvine homes\n\ud83d\udc49 https://t.co/FT9wj1sTbd\n\nIf something stands out, message me and I'll help you\nhttps://t.co/SrDlDgtnaU https://t.co/qMJb1asYSd",
+    "url": "https://x.com/haghighatusa/status/2084679552270553598",
     "categories": [],
-    "published_utc": "2026-07-22",
+    "published_utc": "2026-08-04",
     "metadata": {
-      "author_name": "Word Monger",
-      "tweet_id": "2080001818310869426",
-      "conversation_id": "2079434749160898927",
-      "search_query": "irvine",
-      "in_reply_to": "2079448726955786635",
-      "likes": 0,
-      "reposts": 0,
+      "author_name": "Amin Haghighat | Luxury Real Estate Agent",
+      "tweet_id": "2084679552270553598",
+      "conversation_id": "2084679552270553598",
+      "search_query": "irvine news",
+      "in_reply_to": null,
+      "likes": 2,
+      "reposts": 1,
       "replies": 0,
-      "views": 1,
+      "views": 58,
       "verified": false,
       "classification": {
         "scores": {},
-        "confidence": 0.745,
+        "confidence": 0.639,
         "method": "none",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "twitter",
+    "outlet": "@ABC7",
+    "title": "#BREAKING: Serial vandalism suspect arrested after 13 Teslas tagged with spray paint, Irvine police say https://t.co/DFxoGgRc2E",
+    "body": "#BREAKING: Serial vandalism suspect arrested after 13 Teslas tagged with spray paint, Irvine police say https://t.co/DFxoGgRc2E",
+    "url": "https://x.com/ABC7/status/2082593220366598654",
+    "categories": [
+      "public_safety",
+      "property_crime"
+    ],
+    "published_utc": "2026-07-29",
+    "metadata": {
+      "author_name": "ABC7 Eyewitness News",
+      "tweet_id": "2082593220366598654",
+      "conversation_id": "2082593220366598654",
+      "search_query": "irvine news",
+      "in_reply_to": null,
+      "likes": 74,
+      "reposts": 17,
+      "replies": 16,
+      "views": 57612,
+      "verified": true,
+      "classification": {
+        "scores": {
+          "property_crime": 0.7,
+          "public_safety": 0.8
+        },
+        "confidence": 0.75,
+        "method": "keywords",
         "model_version": "nb-v1"
       }
     }

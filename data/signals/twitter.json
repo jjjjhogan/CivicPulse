@@ -1,1 +1,35 @@
-[]
+[
+  {
+    "source": "twitter",
+    "outlet": "@ABC7",
+    "title": "#BREAKING: Serial vandalism suspect arrested after 13 Teslas tagged with spray paint, Irvine police say https://t.co/DFxoGgRc2E",
+    "body": "#BREAKING: Serial vandalism suspect arrested after 13 Teslas tagged with spray paint, Irvine police say https://t.co/DFxoGgRc2E",
+    "url": "https://x.com/ABC7/status/2082593220366598654",
+    "categories": [
+      "public_safety",
+      "property_crime"
+    ],
+    "published_utc": "2026-07-29",
+    "metadata": {
+      "author_name": "ABC7 Eyewitness News",
+      "tweet_id": "2082593220366598654",
+      "conversation_id": "2082593220366598654",
+      "search_query": "irvine news",
+      "in_reply_to": null,
+      "likes": 74,
+      "reposts": 17,
+      "replies": 16,
+      "views": 57612,
+      "verified": true,
+      "classification": {
+        "scores": {
+          "property_crime": 0.7,
+          "public_safety": 0.8
+        },
+        "confidence": 0.75,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
+    }
+  }
+]

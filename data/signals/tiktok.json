@@ -73,7 +73,9 @@
     "title": "its on the 5 freeway. is it really Irvine? \ud83d\ude01",
     "body": "its on the 5 freeway. is it really Irvine? \ud83d\ude01",
     "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
-    "categories": [],
+    "categories": [
+      "public_safety"
+    ],
     "published_utc": "2026-07-15",
     "metadata": {
       "author": "unknown",
@@ -90,9 +92,11 @@
       ],
       "hashtags": [],
       "classification": {
-        "scores": {},
-        "confidence": 0.848,
-        "method": "none",
+        "scores": {
+          "public_safety": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
         "model_version": "nb-v1"
       }
     }
@@ -103,7 +107,9 @@
     "title": "That's Tustin \ud83d\ude02\ud83d\ude02\ud83d\ude02",
     "body": "That's Tustin \ud83d\ude02\ud83d\ude02\ud83d\ude02",
     "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
-    "categories": [],
+    "categories": [
+      "public_safety"
+    ],
     "published_utc": "2026-07-15",
     "metadata": {
       "author": "unknown",
@@ -120,9 +126,11 @@
       ],
       "hashtags": [],
       "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
+        "scores": {
+          "public_safety": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
         "model_version": "nb-v1"
       }
     }
@@ -235,7 +243,9 @@
     "title": "The man can\u2019t be from Irvine. I see a truck and not a Tesla.",
     "body": "The man can\u2019t be from Irvine. I see a truck and not a Tesla.",
     "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
-    "categories": [],
+    "categories": [
+      "public_safety"
+    ],
     "published_utc": "2026-07-15",
     "metadata": {
       "author": "unknown",
@@ -252,9 +262,11 @@
       ],
       "hashtags": [],
       "classification": {
-        "scores": {},
-        "confidence": 0.675,
-        "method": "none",
+        "scores": {
+          "public_safety": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
         "model_version": "nb-v1"
       }
     }
@@ -333,7 +345,9 @@
     "title": "Did the OC blame this on LA too!!\ud83d\ude02\ud83d\ude02",
     "body": "Did the OC blame this on LA too!!\ud83d\ude02\ud83d\ude02",
     "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
-    "categories": [],
+    "categories": [
+      "public_safety"
+    ],
     "published_utc": "2026-07-15",
     "metadata": {
       "author": "unknown",
@@ -350,9 +364,11 @@
       ],
       "hashtags": [],
       "classification": {
-        "scores": {},
-        "confidence": 0.912,
-        "method": "none",
+        "scores": {
+          "public_safety": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
         "model_version": "nb-v1"
       }
     }
@@ -363,7 +379,9 @@
     "title": "*** Tustin \ud83d\ude06",
     "body": "*** Tustin \ud83d\ude06",
     "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
-    "categories": [],
+    "categories": [
+      "public_safety"
+    ],
     "published_utc": "2026-07-15",
     "metadata": {
       "author": "unknown",
@@ -380,9 +398,11 @@
       ],
       "hashtags": [],
       "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
+        "scores": {
+          "public_safety": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
         "model_version": "nb-v1"
       }
     }
@@ -393,7 +413,9 @@
     "title": "\ud83d\udc4f\ud83d\udc4f\ud83d\udc4fIPD\ud83d\udc4f\ud83d\udc4f\ud83d\udc4f",
     "body": "\ud83d\udc4f\ud83d\udc4f\ud83d\udc4fIPD\ud83d\udc4f\ud83d\udc4f\ud83d\udc4f",
     "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
-    "categories": [],
+    "categories": [
+      "public_safety"
+    ],
     "published_utc": "2026-07-15",
     "metadata": {
       "author": "unknown",
@@ -410,9 +432,11 @@
       ],
       "hashtags": [],
       "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
+        "scores": {
+          "public_safety": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
         "model_version": "nb-v1"
       }
     }
@@ -423,7 +447,9 @@
     "title": "So it wasn\u2019t successful lol",
     "body": "So it wasn\u2019t successful lol",
     "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
-    "categories": [],
+    "categories": [
+      "public_safety"
+    ],
     "published_utc": "2026-07-15",
     "metadata": {
       "author": "unknown",
@@ -440,9 +466,11 @@
       ],
       "hashtags": [],
       "classification": {
-        "scores": {},
-        "confidence": 0.918,
-        "method": "none",
+        "scores": {
+          "public_safety": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
         "model_version": "nb-v1"
       }
     }
@@ -453,7 +481,9 @@
     "title": "Thats where i work jeesh",
     "body": "Thats where i work jeesh",
     "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
-    "categories": [],
+    "categories": [
+      "public_safety"
+    ],
     "published_utc": "2026-07-15",
     "metadata": {
       "author": "unknown",
@@ -470,9 +500,11 @@
       ],
       "hashtags": [],
       "classification": {
-        "scores": {},
-        "confidence": 0.85,
-        "method": "none",
+        "scores": {
+          "public_safety": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
         "model_version": "nb-v1"
       }
     }
@@ -483,7 +515,9 @@
     "title": "At least they got him fast",
     "body": "At least they got him fast",
     "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
-    "categories": [],
+    "categories": [
+      "public_safety"
+    ],
     "published_utc": "2026-07-15",
     "metadata": {
       "author": "unknown",
@@ -500,9 +534,11 @@
       ],
       "hashtags": [],
       "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
+        "scores": {
+          "public_safety": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
         "model_version": "nb-v1"
       }
     }
@@ -513,7 +549,9 @@
     "title": "So is she OK??",
     "body": "So is she OK??",
     "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
-    "categories": [],
+    "categories": [
+      "public_safety"
+    ],
     "published_utc": "2026-07-15",
     "metadata": {
       "author": "unknown",
@@ -530,9 +568,11 @@
       ],
       "hashtags": [],
       "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
+        "scores": {
+          "public_safety": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
         "model_version": "nb-v1"
       }
     }
@@ -543,7 +583,9 @@
     "title": "GAAASSSSPPP. I was just there!",
     "body": "GAAASSSSPPP. I was just there!",
     "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
-    "categories": [],
+    "categories": [
+      "public_safety"
+    ],
     "published_utc": "2026-07-15",
     "metadata": {
       "author": "unknown",
@@ -560,9 +602,11 @@
       ],
       "hashtags": [],
       "classification": {
-        "scores": {},
-        "confidence": 0.796,
-        "method": "none",
+        "scores": {
+          "public_safety": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
         "model_version": "nb-v1"
       }
     }
@@ -573,7 +617,9 @@
     "title": "I had a front row view when he got caught!",
     "body": "I had a front row view when he got caught!",
     "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
-    "categories": [],
+    "categories": [
+      "public_safety"
+    ],
     "published_utc": "2026-07-15",
     "metadata": {
       "author": "unknown",
@@ -590,149 +636,11 @@
       ],
       "hashtags": [],
       "classification": {
-        "scores": {},
-        "confidence": 0.847,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "Only thing scary about Irvine is the home prices and monthly rent! \ud83d\ude2d \ud83d\udcb4 \ud83d\udcb4 \ud83d\udcb4 \ud83d\udcb4",
-    "body": "Only thing scary about Irvine is the home prices and monthly rent! \ud83d\ude2d \ud83d\udcb4 \ud83d\udcb4 \ud83d\udcb4 \ud83d\udcb4",
-    "url": "https://www.tiktok.com/@1kjaylive/video/7655861903234747679",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "1kjaylive",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "37.7K",
-      "comment_count": "1547",
-      "content_type": "comment",
-      "inherited_from_video": false,
-      "trusted_outlet": false,
-      "video_categories": [],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.795,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "The rent is the scariest thing in Irvine!",
-    "body": "The rent is the scariest thing in Irvine!",
-    "url": "https://www.tiktok.com/@1kjaylive/video/7655861903234747679",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "1kjaylive",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "37.7K",
-      "comment_count": "1547",
-      "content_type": "comment",
-      "inherited_from_video": false,
-      "trusted_outlet": false,
-      "video_categories": [],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.846,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "Irvine if Irvine Company Apartments didnt exist",
-    "body": "Irvine if Irvine Company Apartments didnt exist",
-    "url": "https://www.tiktok.com/@globalgags7/video/7654610369373080854",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "globalgags7",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "19.7K",
-      "comment_count": "378",
-      "content_type": "comment",
-      "inherited_from_video": false,
-      "trusted_outlet": false,
-      "video_categories": [],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.853,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "I\u2019m in Orange County and I just wasted my time watching this useless TikTok. \ud83d\ude0f",
-    "body": "I\u2019m in Orange County and I just wasted my time watching this useless TikTok. \ud83d\ude0f",
-    "url": "https://www.tiktok.com/@kimiaskravings/video/7659407282488315150",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "kimiaskravings",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "2975",
-      "comment_count": "198",
-      "content_type": "comment",
-      "inherited_from_video": false,
-      "trusted_outlet": false,
-      "video_categories": [],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.876,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "Um none of these are true except the mortgage lol",
-    "body": "Um none of these are true except the mortgage lol",
-    "url": "https://www.tiktok.com/@kimiaskravings/video/7659407282488315150",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "kimiaskravings",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "2975",
-      "comment_count": "198",
-      "content_type": "comment",
-      "inherited_from_video": false,
-      "trusted_outlet": false,
-      "video_categories": [],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.988,
-        "method": "none",
+        "scores": {
+          "public_safety": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
         "model_version": "nb-v1"
       }
     }
@@ -764,6 +672,161 @@
           "housing": 0.9
         },
         "confidence": 0.9,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "Longest red lights in the game. I\u2019m dying. It does feel that way.",
+    "body": "Longest red lights in the game. I\u2019m dying. It does feel that way.",
+    "url": "https://www.tiktok.com/@rot_bot/video/7669955646128721182",
+    "categories": [
+      "traffic_safety"
+    ],
+    "published_utc": "2026-08-05",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "rot_bot",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "50.8K",
+      "comment_count": "1311",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [],
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "traffic_safety": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "Little does he know that IRVINE POLICE DEPT. Office Is right behind that water fountain",
+    "body": "Little does he know that IRVINE POLICE DEPT. Office Is right behind that water fountain",
+    "url": "https://www.tiktok.com/@notge0rg3/video/7668614075621985566",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-05",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "notge0rg3",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "36.8K",
+      "comment_count": "513",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [],
+      "hashtags": [
+        "xyzbca",
+        "irvine",
+        "wtf",
+        "funny",
+        "wetzelpretzels",
+        "shopwithme",
+        "shopwithus",
+        "comeshoppingwithme",
+        "irvinespectrumcenter",
+        "shopping"
+      ],
+      "classification": {
+        "scores": {
+          "public_safety": 0.77
+        },
+        "confidence": 0.77,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "As long as he isn\u2019t harming anyone feeling like a championship swimmer shouldn\u2019t be a crime \u2728",
+    "body": "As long as he isn\u2019t harming anyone feeling like a championship swimmer shouldn\u2019t be a crime \u2728",
+    "url": "https://www.tiktok.com/@notge0rg3/video/7668614075621985566",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-05",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "notge0rg3",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "36.8K",
+      "comment_count": "513",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [],
+      "hashtags": [
+        "xyzbca",
+        "irvine",
+        "wtf",
+        "funny",
+        "wetzelpretzels",
+        "shopwithme",
+        "shopwithus",
+        "comeshoppingwithme",
+        "irvinespectrumcenter",
+        "shopping"
+      ],
+      "classification": {
+        "scores": {
+          "public_safety": 0.77
+        },
+        "confidence": 0.77,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "Moved out of HB when I was younger to Irvine and now Laguna\ud83d\ude02 HB was the trashiest of the trash. Only correct Answer would be ghetto Santa...",
+    "body": "Moved out of HB when I was younger to Irvine and now Laguna\ud83d\ude02 HB was the trashiest of the trash. Only correct Answer would be ghetto Santa Ana",
+    "url": "https://www.tiktok.com/@zillasksofficial/video/7669837181824797982",
+    "categories": [
+      "sanitation"
+    ],
+    "published_utc": "2026-08-05",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "zillasksofficial",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "1711",
+      "comment_count": "358",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [],
+      "hashtags": [
+        "zillasks",
+        "streetinterview",
+        "irvine",
+        "streetinterviews"
+      ],
+      "classification": {
+        "scores": {
+          "sanitation": 0.7
+        },
+        "confidence": 0.7,
         "method": "keywords",
         "model_version": "nb-v1"
       }
@@ -923,9 +986,9 @@
       "classification": {
         "scores": {
           "emergencies": 0.7,
-          "violent_crime": 0.856
+          "violent_crime": 0.736
         },
-        "confidence": 0.778,
+        "confidence": 0.718,
         "method": "keywords+model",
         "model_version": "nb-v1"
       }
@@ -987,9 +1050,9 @@
       "hashtags": [],
       "classification": {
         "scores": {
-          "violent_crime": 0.9
+          "violent_crime": 0.891
         },
-        "confidence": 0.9,
+        "confidence": 0.891,
         "method": "model",
         "model_version": "nb-v1",
         "rescued": true
@@ -1063,32 +1126,30 @@
   {
     "source": "tiktok",
     "outlet": "TikTok #newportbeach",
-    "title": "What happened will have a wide effect on many\u2026anyone who rented out homes to unsupervised youth, parents that made those accommodations, ...",
-    "body": "What happened will have a wide effect on many\u2026anyone who rented out homes to unsupervised youth, parents that made those accommodations, fines will be tripled because the order to disburse was not followed. Home renters will lose their licenses.",
-    "url": "https://www.tiktok.com/@skylarensign_/video/7659574575864286494",
+    "title": "Social media ruined us",
+    "body": "Social media ruined us",
+    "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
     "categories": [
-      "violent_crime",
-      "sanitation",
-      "public_safety"
+      "noise"
     ],
     "published_utc": "2026-07-15",
     "metadata": {
       "author": "unknown",
-      "video_author": "skylarensign_",
+      "video_author": "abc7la",
       "tag": "newportbeach",
       "search_query": "tag:newportbeach",
-      "like_count": "343",
-      "comment_count": "61",
+      "like_count": "60K",
+      "comment_count": "497",
       "content_type": "comment",
-      "inherited_from_video": false,
-      "trusted_outlet": false,
-      "video_categories": [],
+      "inherited_from_video": true,
+      "trusted_outlet": true,
+      "video_categories": [
+        "noise"
+      ],
       "hashtags": [],
       "classification": {
         "scores": {
-          "violent_crime": 0.4,
-          "sanitation": 0.4,
-          "public_safety": 0.4
+          "noise": 0.4
         },
         "confidence": 0.4,
         "method": "inherited",
@@ -1099,40 +1160,12 @@
   {
     "source": "tiktok",
     "outlet": "TikTok #newportbeach",
-    "title": "Social media ruined us",
-    "body": "Social media ruined us",
-    "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "60K",
-      "comment_count": "497",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "noise"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
     "title": "Orange County is the Florida of California",
     "body": "Orange County is the Florida of California",
     "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
-    "categories": [],
+    "categories": [
+      "noise"
+    ],
     "published_utc": "2026-07-15",
     "metadata": {
       "author": "unknown",
@@ -1149,9 +1182,11 @@
       ],
       "hashtags": [],
       "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
+        "scores": {
+          "noise": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
         "model_version": "nb-v1"
       }
     }
@@ -1162,7 +1197,9 @@
     "title": "We\u2019re the kids parents",
     "body": "We\u2019re the kids parents",
     "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
-    "categories": [],
+    "categories": [
+      "noise"
+    ],
     "published_utc": "2026-07-15",
     "metadata": {
       "author": "unknown",
@@ -1179,9 +1216,11 @@
       ],
       "hashtags": [],
       "classification": {
-        "scores": {},
-        "confidence": 0.759,
-        "method": "none",
+        "scores": {
+          "noise": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
         "model_version": "nb-v1"
       }
     }
@@ -1192,7 +1231,9 @@
     "title": "I wish I could have two homes",
     "body": "I wish I could have two homes",
     "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
-    "categories": [],
+    "categories": [
+      "noise"
+    ],
     "published_utc": "2026-07-15",
     "metadata": {
       "author": "unknown",
@@ -1209,9 +1250,11 @@
       ],
       "hashtags": [],
       "classification": {
-        "scores": {},
-        "confidence": 0.759,
-        "method": "none",
+        "scores": {
+          "noise": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
         "model_version": "nb-v1"
       }
     }
@@ -1222,7 +1265,9 @@
     "title": "well well well",
     "body": "well well well",
     "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
-    "categories": [],
+    "categories": [
+      "noise"
+    ],
     "published_utc": "2026-07-15",
     "metadata": {
       "author": "unknown",
@@ -1239,9 +1284,11 @@
       ],
       "hashtags": [],
       "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
+        "scores": {
+          "noise": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
         "model_version": "nb-v1"
       }
     }
@@ -1252,7 +1299,9 @@
     "title": "Kids enjoying the beach on a holiday",
     "body": "Kids enjoying the beach on a holiday",
     "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
-    "categories": [],
+    "categories": [
+      "noise"
+    ],
     "published_utc": "2026-07-15",
     "metadata": {
       "author": "unknown",
@@ -1269,9 +1318,11 @@
       ],
       "hashtags": [],
       "classification": {
-        "scores": {},
-        "confidence": 0.766,
-        "method": "none",
+        "scores": {
+          "noise": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
         "model_version": "nb-v1"
       }
     }
@@ -1317,7 +1368,6 @@
     "body": "Where are the fatigued comments must be still a lil early like my comment I\u2019ll be back around 8",
     "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
     "categories": [
-      "public_safety",
       "noise"
     ],
     "published_utc": "2026-07-15",
@@ -1337,7 +1387,6 @@
       "hashtags": [],
       "classification": {
         "scores": {
-          "public_safety": 0.4,
           "noise": 0.4
         },
         "confidence": 0.4,
@@ -1352,38 +1401,7 @@
     "title": "And other 1/2 local??",
     "body": "And other 1/2 local??",
     "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "60K",
-      "comment_count": "497",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "noise"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.851,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "wow NOT COOL!! how dare everyone do that",
-    "body": "wow NOT COOL!! how dare everyone do that",
-    "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
     "categories": [
-      "public_safety",
       "noise"
     ],
     "published_utc": "2026-07-15",
@@ -1403,7 +1421,40 @@
       "hashtags": [],
       "classification": {
         "scores": {
-          "public_safety": 0.4,
+          "noise": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #newportbeach",
+    "title": "wow NOT COOL!! how dare everyone do that",
+    "body": "wow NOT COOL!! how dare everyone do that",
+    "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
+    "categories": [
+      "noise"
+    ],
+    "published_utc": "2026-07-15",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "abc7la",
+      "tag": "newportbeach",
+      "search_query": "tag:newportbeach",
+      "like_count": "60K",
+      "comment_count": "497",
+      "content_type": "comment",
+      "inherited_from_video": true,
+      "trusted_outlet": true,
+      "video_categories": [
+        "noise"
+      ],
+      "hashtags": [],
+      "classification": {
+        "scores": {
           "noise": 0.4
         },
         "confidence": 0.4,
@@ -1419,7 +1470,6 @@
     "body": "I'm just fatigued from reading the fatigue COMMENTS",
     "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
     "categories": [
-      "public_safety",
       "noise"
     ],
     "published_utc": "2026-07-15",
@@ -1439,7 +1489,6 @@
       "hashtags": [],
       "classification": {
         "scores": {
-          "public_safety": 0.4,
           "noise": 0.4
         },
         "confidence": 0.4,
@@ -1454,38 +1503,7 @@
     "title": "Arizona?!",
     "body": "Arizona?!",
     "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "60K",
-      "comment_count": "497",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "noise"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "Holy shit I\u2019ve lived my whole life in OC never seen this",
-    "body": "Holy shit I\u2019ve lived my whole life in OC never seen this",
-    "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
     "categories": [
-      "public_safety",
       "noise"
     ],
     "published_utc": "2026-07-15",
@@ -1505,7 +1523,40 @@
       "hashtags": [],
       "classification": {
         "scores": {
-          "public_safety": 0.4,
+          "noise": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #newportbeach",
+    "title": "Holy shit I\u2019ve lived my whole life in OC never seen this",
+    "body": "Holy shit I\u2019ve lived my whole life in OC never seen this",
+    "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
+    "categories": [
+      "noise"
+    ],
+    "published_utc": "2026-07-15",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "abc7la",
+      "tag": "newportbeach",
+      "search_query": "tag:newportbeach",
+      "like_count": "60K",
+      "comment_count": "497",
+      "content_type": "comment",
+      "inherited_from_video": true,
+      "trusted_outlet": true,
+      "video_categories": [
+        "noise"
+      ],
+      "hashtags": [],
+      "classification": {
+        "scores": {
           "noise": 0.4
         },
         "confidence": 0.4,
@@ -1520,68 +1571,7 @@
     "title": "Thoughts and prayers",
     "body": "Thoughts and prayers",
     "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "60K",
-      "comment_count": "497",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "noise"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "I\u2019m tired",
-    "body": "I\u2019m tired",
-    "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "60K",
-      "comment_count": "497",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "noise"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "I used to live in Costa Mesa and we avoided Newport beach during tourist season.",
-    "body": "I used to live in Costa Mesa and we avoided Newport beach during tourist season.",
-    "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
     "categories": [
-      "public_safety",
       "noise"
     ],
     "published_utc": "2026-07-15",
@@ -1601,7 +1591,74 @@
       "hashtags": [],
       "classification": {
         "scores": {
-          "public_safety": 0.4,
+          "noise": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #newportbeach",
+    "title": "I\u2019m tired",
+    "body": "I\u2019m tired",
+    "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
+    "categories": [
+      "noise"
+    ],
+    "published_utc": "2026-07-15",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "abc7la",
+      "tag": "newportbeach",
+      "search_query": "tag:newportbeach",
+      "like_count": "60K",
+      "comment_count": "497",
+      "content_type": "comment",
+      "inherited_from_video": true,
+      "trusted_outlet": true,
+      "video_categories": [
+        "noise"
+      ],
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "noise": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #newportbeach",
+    "title": "I used to live in Costa Mesa and we avoided Newport beach during tourist season.",
+    "body": "I used to live in Costa Mesa and we avoided Newport beach during tourist season.",
+    "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
+    "categories": [
+      "noise"
+    ],
+    "published_utc": "2026-07-15",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "abc7la",
+      "tag": "newportbeach",
+      "search_query": "tag:newportbeach",
+      "like_count": "60K",
+      "comment_count": "497",
+      "content_type": "comment",
+      "inherited_from_video": true,
+      "trusted_outlet": true,
+      "video_categories": [
+        "noise"
+      ],
+      "hashtags": [],
+      "classification": {
+        "scores": {
           "noise": 0.4
         },
         "confidence": 0.4,
@@ -1616,38 +1673,7 @@
     "title": "OMGG im fatigueddd",
     "body": "OMGG im fatigueddd",
     "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "60K",
-      "comment_count": "497",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "noise"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "it took four hours to get off the peninsula \ud83d\ude2d",
-    "body": "it took four hours to get off the peninsula \ud83d\ude2d",
-    "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
     "categories": [
-      "public_safety",
       "noise"
     ],
     "published_utc": "2026-07-15",
@@ -1667,7 +1693,40 @@
       "hashtags": [],
       "classification": {
         "scores": {
-          "public_safety": 0.4,
+          "noise": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #newportbeach",
+    "title": "it took four hours to get off the peninsula \ud83d\ude2d",
+    "body": "it took four hours to get off the peninsula \ud83d\ude2d",
+    "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
+    "categories": [
+      "noise"
+    ],
+    "published_utc": "2026-07-15",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "abc7la",
+      "tag": "newportbeach",
+      "search_query": "tag:newportbeach",
+      "like_count": "60K",
+      "comment_count": "497",
+      "content_type": "comment",
+      "inherited_from_video": true,
+      "trusted_outlet": true,
+      "video_categories": [
+        "noise"
+      ],
+      "hashtags": [],
+      "classification": {
+        "scores": {
           "noise": 0.4
         },
         "confidence": 0.4,
@@ -1732,9 +1791,9 @@
       "hashtags": [],
       "classification": {
         "scores": {
-          "noise": 0.818
+          "noise": 0.775
         },
-        "confidence": 0.818,
+        "confidence": 0.775,
         "method": "model",
         "model_version": "nb-v1",
         "rescued": true
@@ -1747,131 +1806,8 @@
     "title": "What no fatigue comments? That's weird \ud83e\udd14",
     "body": "What no fatigue comments? That's weird \ud83e\udd14",
     "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "14K",
-      "comment_count": "746",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "traffic_safety",
-        "public_safety"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "Most of those kids are local",
-    "body": "Most of those kids are local",
-    "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "14K",
-      "comment_count": "746",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "traffic_safety",
-        "public_safety"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.793,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "extremely fatigued",
-    "body": "extremely fatigued",
-    "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "14K",
-      "comment_count": "746",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "traffic_safety",
-        "public_safety"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "Those kid do not live in Newport",
-    "body": "Those kid do not live in Newport",
-    "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "14K",
-      "comment_count": "746",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "traffic_safety",
-        "public_safety"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.759,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "OH NOOOOOO THE KIDS WERE OUTSIDE BEING TEENAGERS .",
-    "body": "OH NOOOOOO THE KIDS WERE OUTSIDE BEING TEENAGERS .",
-    "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
     "categories": [
+      "traffic_safety",
       "public_safety"
     ],
     "published_utc": "2026-07-15",
@@ -1892,6 +1828,155 @@
       "hashtags": [],
       "classification": {
         "scores": {
+          "traffic_safety": 0.4,
+          "public_safety": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #newportbeach",
+    "title": "Most of those kids are local",
+    "body": "Most of those kids are local",
+    "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
+    "categories": [
+      "traffic_safety",
+      "public_safety"
+    ],
+    "published_utc": "2026-07-15",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "abc7la",
+      "tag": "newportbeach",
+      "search_query": "tag:newportbeach",
+      "like_count": "14K",
+      "comment_count": "746",
+      "content_type": "comment",
+      "inherited_from_video": true,
+      "trusted_outlet": true,
+      "video_categories": [
+        "traffic_safety",
+        "public_safety"
+      ],
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "traffic_safety": 0.4,
+          "public_safety": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #newportbeach",
+    "title": "extremely fatigued",
+    "body": "extremely fatigued",
+    "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
+    "categories": [
+      "traffic_safety",
+      "public_safety"
+    ],
+    "published_utc": "2026-07-15",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "abc7la",
+      "tag": "newportbeach",
+      "search_query": "tag:newportbeach",
+      "like_count": "14K",
+      "comment_count": "746",
+      "content_type": "comment",
+      "inherited_from_video": true,
+      "trusted_outlet": true,
+      "video_categories": [
+        "traffic_safety",
+        "public_safety"
+      ],
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "traffic_safety": 0.4,
+          "public_safety": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #newportbeach",
+    "title": "Those kid do not live in Newport",
+    "body": "Those kid do not live in Newport",
+    "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
+    "categories": [
+      "traffic_safety",
+      "public_safety"
+    ],
+    "published_utc": "2026-07-15",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "abc7la",
+      "tag": "newportbeach",
+      "search_query": "tag:newportbeach",
+      "like_count": "14K",
+      "comment_count": "746",
+      "content_type": "comment",
+      "inherited_from_video": true,
+      "trusted_outlet": true,
+      "video_categories": [
+        "traffic_safety",
+        "public_safety"
+      ],
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "traffic_safety": 0.4,
+          "public_safety": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #newportbeach",
+    "title": "OH NOOOOOO THE KIDS WERE OUTSIDE BEING TEENAGERS .",
+    "body": "OH NOOOOOO THE KIDS WERE OUTSIDE BEING TEENAGERS .",
+    "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
+    "categories": [
+      "traffic_safety",
+      "public_safety"
+    ],
+    "published_utc": "2026-07-15",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "abc7la",
+      "tag": "newportbeach",
+      "search_query": "tag:newportbeach",
+      "like_count": "14K",
+      "comment_count": "746",
+      "content_type": "comment",
+      "inherited_from_video": true,
+      "trusted_outlet": true,
+      "video_categories": [
+        "traffic_safety",
+        "public_safety"
+      ],
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "traffic_safety": 0.4,
           "public_safety": 0.4
         },
         "confidence": 0.4,
@@ -1906,38 +1991,8 @@
     "title": "well well well",
     "body": "well well well",
     "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "14K",
-      "comment_count": "746",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "traffic_safety",
-        "public_safety"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "The comments are so calm they\u2019re just misunderstood. Having a bad day. This happened in Daytona plenty of times lack of media coverage.",
-    "body": "The comments are so calm they\u2019re just misunderstood. Having a bad day. This happened in Daytona plenty of times lack of media coverage.",
-    "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
     "categories": [
+      "traffic_safety",
       "public_safety"
     ],
     "published_utc": "2026-07-15",
@@ -1958,6 +2013,44 @@
       "hashtags": [],
       "classification": {
         "scores": {
+          "traffic_safety": 0.4,
+          "public_safety": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #newportbeach",
+    "title": "The comments are so calm they\u2019re just misunderstood. Having a bad day. This happened in Daytona plenty of times lack of media coverage.",
+    "body": "The comments are so calm they\u2019re just misunderstood. Having a bad day. This happened in Daytona plenty of times lack of media coverage.",
+    "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
+    "categories": [
+      "traffic_safety",
+      "public_safety"
+    ],
+    "published_utc": "2026-07-15",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "abc7la",
+      "tag": "newportbeach",
+      "search_query": "tag:newportbeach",
+      "like_count": "14K",
+      "comment_count": "746",
+      "content_type": "comment",
+      "inherited_from_video": true,
+      "trusted_outlet": true,
+      "video_categories": [
+        "traffic_safety",
+        "public_safety"
+      ],
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "traffic_safety": 0.4,
           "public_safety": 0.4
         },
         "confidence": 0.4,
@@ -1973,6 +2066,7 @@
     "body": "this is so sad what's happening to the young people in this country",
     "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
     "categories": [
+      "traffic_safety",
       "public_safety"
     ],
     "published_utc": "2026-07-15",
@@ -1993,6 +2087,7 @@
       "hashtags": [],
       "classification": {
         "scores": {
+          "traffic_safety": 0.4,
           "public_safety": 0.4
         },
         "confidence": 0.4,
@@ -2008,6 +2103,7 @@
     "body": "how do thy know they were kids that didnt live in New Port.???",
     "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
     "categories": [
+      "traffic_safety",
       "public_safety"
     ],
     "published_utc": "2026-07-15",
@@ -2028,6 +2124,7 @@
       "hashtags": [],
       "classification": {
         "scores": {
+          "traffic_safety": 0.4,
           "public_safety": 0.4
         },
         "confidence": 0.4,
@@ -2042,38 +2139,8 @@
     "title": "[Sticker]",
     "body": "[Sticker]",
     "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "14K",
-      "comment_count": "746",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "traffic_safety",
-        "public_safety"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "I\u2019m sure a lot of the kids do live there",
-    "body": "I\u2019m sure a lot of the kids do live there",
-    "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
     "categories": [
+      "traffic_safety",
       "public_safety"
     ],
     "published_utc": "2026-07-15",
@@ -2094,6 +2161,44 @@
       "hashtags": [],
       "classification": {
         "scores": {
+          "traffic_safety": 0.4,
+          "public_safety": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #newportbeach",
+    "title": "I\u2019m sure a lot of the kids do live there",
+    "body": "I\u2019m sure a lot of the kids do live there",
+    "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
+    "categories": [
+      "traffic_safety",
+      "public_safety"
+    ],
+    "published_utc": "2026-07-15",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "abc7la",
+      "tag": "newportbeach",
+      "search_query": "tag:newportbeach",
+      "like_count": "14K",
+      "comment_count": "746",
+      "content_type": "comment",
+      "inherited_from_video": true,
+      "trusted_outlet": true,
+      "video_categories": [
+        "traffic_safety",
+        "public_safety"
+      ],
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "traffic_safety": 0.4,
           "public_safety": 0.4
         },
         "confidence": 0.4,
@@ -2143,7 +2248,10 @@
     "title": "Folks too gentle with the comments.",
     "body": "Folks too gentle with the comments.",
     "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
-    "categories": [],
+    "categories": [
+      "traffic_safety",
+      "public_safety"
+    ],
     "published_utc": "2026-07-15",
     "metadata": {
       "author": "unknown",
@@ -2161,9 +2269,12 @@
       ],
       "hashtags": [],
       "classification": {
-        "scores": {},
-        "confidence": 0.912,
-        "method": "none",
+        "scores": {
+          "traffic_safety": 0.4,
+          "public_safety": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
         "model_version": "nb-v1"
       }
     }
@@ -2174,7 +2285,10 @@
     "title": "stay safe officers \u2705\ufe0f\ud83d\udc4d \u2764\ufe0f\ud83c\uddfa\ud83c\uddf8",
     "body": "stay safe officers \u2705\ufe0f\ud83d\udc4d \u2764\ufe0f\ud83c\uddfa\ud83c\uddf8",
     "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
-    "categories": [],
+    "categories": [
+      "traffic_safety",
+      "public_safety"
+    ],
     "published_utc": "2026-07-15",
     "metadata": {
       "author": "unknown",
@@ -2192,9 +2306,12 @@
       ],
       "hashtags": [],
       "classification": {
-        "scores": {},
-        "confidence": 0.838,
-        "method": "none",
+        "scores": {
+          "traffic_safety": 0.4,
+          "public_safety": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
         "model_version": "nb-v1"
       }
     }
@@ -2205,7 +2322,10 @@
     "title": "Well well well.",
     "body": "Well well well.",
     "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
-    "categories": [],
+    "categories": [
+      "traffic_safety",
+      "public_safety"
+    ],
     "published_utc": "2026-07-15",
     "metadata": {
       "author": "unknown",
@@ -2223,9 +2343,12 @@
       ],
       "hashtags": [],
       "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
+        "scores": {
+          "traffic_safety": 0.4,
+          "public_safety": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
         "model_version": "nb-v1"
       }
     }
@@ -2236,7 +2359,10 @@
     "title": "Well Well Well",
     "body": "Well Well Well",
     "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
-    "categories": [],
+    "categories": [
+      "traffic_safety",
+      "public_safety"
+    ],
     "published_utc": "2026-07-15",
     "metadata": {
       "author": "unknown",
@@ -2254,9 +2380,12 @@
       ],
       "hashtags": [],
       "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
+        "scores": {
+          "traffic_safety": 0.4,
+          "public_safety": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
         "model_version": "nb-v1"
       }
     }
@@ -2267,7 +2396,10 @@
     "title": "Well well well\u2026\u2026.",
     "body": "Well well well\u2026\u2026.",
     "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
-    "categories": [],
+    "categories": [
+      "traffic_safety",
+      "public_safety"
+    ],
     "published_utc": "2026-07-15",
     "metadata": {
       "author": "unknown",
@@ -2285,9 +2417,12 @@
       ],
       "hashtags": [],
       "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
+        "scores": {
+          "traffic_safety": 0.4,
+          "public_safety": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
         "model_version": "nb-v1"
       }
     }
@@ -2372,7 +2507,9 @@
     "title": "nope",
     "body": "nope",
     "url": "https://www.tiktok.com/@spain7174/video/7664638696594885902",
-    "categories": [],
+    "categories": [
+      "public_safety"
+    ],
     "published_utc": "2026-07-20",
     "metadata": {
       "author": "unknown",
@@ -2399,51 +2536,128 @@
         "humanrights"
       ],
       "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
+        "scores": {
+          "public_safety": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
         "model_version": "nb-v1"
       }
     }
   },
   {
     "source": "tiktok",
-    "outlet": "TikTok #uci",
-    "title": "may I ask how you found your roommates? and if you know how themed housing works :)",
-    "body": "may I ask how you found your roommates? and if you know how themed housing works :)",
-    "url": "https://www.tiktok.com/@irenek4ng/video/7348686958173916458",
-    "categories": [],
-    "published_utc": "2026-07-20",
+    "outlet": "TikTok #newportbeach",
+    "title": "They need to immediately remove all those dangerous hazards! If someone gets hurt, they could sue Newport. The city needs to fix this imm...",
+    "body": "They need to immediately remove all those dangerous hazards! If someone gets hurt, they could sue Newport. The city needs to fix this immediately.",
+    "url": "https://www.tiktok.com/@yucca.fins/video/7668891132708867358",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-05",
     "metadata": {
       "author": "unknown",
-      "video_author": "irenek4ng",
-      "tag": "uci",
-      "search_query": "tag:uci",
-      "like_count": "11.1K",
-      "comment_count": "91",
+      "video_author": "yucca.fins",
+      "tag": "newportbeach",
+      "search_query": "tag:newportbeach",
+      "like_count": "1315",
+      "comment_count": "34",
       "content_type": "comment",
       "inherited_from_video": false,
       "trusted_outlet": false,
       "video_categories": [],
       "hashtags": [
-        "uci",
-        "dormtour",
-        "freshmandorm",
-        "mesacourt",
-        "mesatowers",
-        "ucidorms",
-        "irvine",
-        "anteater",
-        "dorm",
-        "freshmanyear",
-        "college",
-        "leaving",
-        "fyp"
+        "yuccafins",
+        "bigwaves",
+        "erosion",
+        "surftok",
+        "newportbeach",
+        "765lt"
       ],
       "classification": {
-        "scores": {},
-        "confidence": 0.881,
-        "method": "none",
+        "scores": {
+          "public_safety": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #newportbeach",
+    "title": "In Australia health and safety would be all over that (aka the fun police) and shut the beach down until after a digger could get and rem...",
+    "body": "In Australia health and safety would be all over that (aka the fun police) and shut the beach down until after a digger could get and remove it all",
+    "url": "https://www.tiktok.com/@yucca.fins/video/7668891132708867358",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-05",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "yucca.fins",
+      "tag": "newportbeach",
+      "search_query": "tag:newportbeach",
+      "like_count": "1315",
+      "comment_count": "34",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [],
+      "hashtags": [
+        "yuccafins",
+        "bigwaves",
+        "erosion",
+        "surftok",
+        "newportbeach",
+        "765lt"
+      ],
+      "classification": {
+        "scores": {
+          "public_safety": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #newportbeach",
+    "title": "it makes you sad seeing the ice plant go into the ocean???? we can't vibe then dude\ud83d\ude2d that stuff is garbage for our coast",
+    "body": "it makes you sad seeing the ice plant go into the ocean???? we can't vibe then dude\ud83d\ude2d that stuff is garbage for our coast",
+    "url": "https://www.tiktok.com/@yucca.fins/video/7668891132708867358",
+    "categories": [
+      "sanitation"
+    ],
+    "published_utc": "2026-08-05",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "yucca.fins",
+      "tag": "newportbeach",
+      "search_query": "tag:newportbeach",
+      "like_count": "1315",
+      "comment_count": "34",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [],
+      "hashtags": [
+        "yuccafins",
+        "bigwaves",
+        "erosion",
+        "surftok",
+        "newportbeach",
+        "765lt"
+      ],
+      "classification": {
+        "scores": {
+          "sanitation": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
         "model_version": "nb-v1"
       }
     }
@@ -2454,7 +2668,9 @@
     "title": "Trying to get back into regular vlogging again! #ucirvine #uci #university #student #college #icecream #oc #socal #dessert #food",
     "body": "Trying to get back into regular vlogging again! #ucirvine #uci #university #student #college #icecream #oc #socal #dessert #food",
     "url": "https://www.tiktok.com/@vlogsfromlen/video/7661184449589103902",
-    "categories": [],
+    "categories": [
+      "sanitation"
+    ],
     "published_utc": "2026-07-20",
     "metadata": {
       "tag": "uci",
@@ -2474,10 +2690,13 @@
       ],
       "weak_trusted_default": false,
       "classification": {
-        "scores": {},
-        "confidence": 0.443,
-        "method": "none",
-        "model_version": "nb-v1"
+        "scores": {
+          "sanitation": 0.702
+        },
+        "confidence": 0.702,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
       }
     }
   },
@@ -2487,7 +2706,9 @@
     "title": "wait what did you get at cafe espresso",
     "body": "wait what did you get at cafe espresso",
     "url": "https://www.tiktok.com/@vlogsfromlen/video/7661184449589103902",
-    "categories": [],
+    "categories": [
+      "sanitation"
+    ],
     "published_utc": "2026-07-20",
     "metadata": {
       "author": "unknown",
@@ -2515,9 +2736,11 @@
         "food"
       ],
       "classification": {
-        "scores": {},
-        "confidence": 0.811,
-        "method": "none",
+        "scores": {
+          "sanitation": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
         "model_version": "nb-v1"
       }
     }
