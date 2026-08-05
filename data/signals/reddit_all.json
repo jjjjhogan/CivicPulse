@@ -18,10 +18,10 @@
       "flair": null,
       "classification": {
         "scores": {
-          "sanitation": 0.87
+          "sanitation": 0.8
         },
-        "confidence": 0.87,
-        "method": "keywords+model",
+        "confidence": 0.8,
+        "method": "keywords",
         "model_version": "nb-v1"
       }
     }
@@ -45,9 +45,9 @@
       "flair": null,
       "classification": {
         "scores": {
-          "public_safety": 0.817
+          "public_safety": 0.9
         },
-        "confidence": 0.817,
+        "confidence": 0.9,
         "method": "model",
         "model_version": "nb-v1",
         "rescued": true
@@ -71,7 +71,7 @@
       "flair": null,
       "classification": {
         "scores": {},
-        "confidence": 0.666,
+        "confidence": 0.467,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -178,7 +178,7 @@
       "flair": null,
       "classification": {
         "scores": {},
-        "confidence": 0.781,
+        "confidence": 0.62,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -201,7 +201,7 @@
       "flair": null,
       "classification": {
         "scores": {},
-        "confidence": 0.336,
+        "confidence": 0.556,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -214,6 +214,7 @@
     "body": "Preschool Program Recs\nAre we looking for a unicorn or something??\n Well credentialed Educators (No day care set ups)\n Real grass + dirt + more nature based large outdoor play space (No artificial turf - big on this - no  Are we looking for a unicorn or something??\n Well credentialed Educators (No day care set ups)\n Real grass + dirt + more nature based large outdoor play space (No artificial turf - big on this - no institutional type play spaces of soley asphalt & crumb rubber)\n Non-denominational (promotes diversity & inclusion with no religious affiliation)\n Curriculum: STEAM type - Not strictly Montessori but not just all play - our child most likely would not thrive with the rigidity of mont but does need structure & autonomy promoting lessons.\n Offers part time + drop off/pick up situation without a requirement to volunteer.\n In the Irvine area I work in cdm so potentially on the way. We are in east Irvine.\nOpen to suggestions. Please mind the aforementioned. We are going crazy trying to find an appropriate program that tiks our boxes. We don\u2019t think it\u2019s asking too much\u2026 why does Irvine seem to be lacking so badly??? Hopefully there are some great ones out there we just haven\u2019t heard of.\nHere are the ones we have looked into & liked with the reasons we did not choose them:\n Annelisse- loved but right up against canyon traffic was a hard no for us & our slippery adventurer who would/could easily make it out. Especially with the gate opening/closing so often.\n Turtle Rock- Accepted but waitlisted\n Childsworld- Soo fun but play yard vomit. We did not get a good grasp on any structure or curriculum. A little too loose/kid led. Glorified outdoor daycare.\n ECEC: too many observers in & out constantly.\n Woodbridge children\u2019s school/IUCC- We felt personally discriminated against by the directors. Then neighbors warned us after they pulled their child as they witnessed the new director yelling at kids.\n De Colores- Artificial Turf\n SCC: Too far",
     "url": "https://old.reddit.com/r/irvine/comments/1v1gsqv/preschool_program_recs/",
     "categories": [
+      "public_safety",
       "potholes"
     ],
     "published_utc": "2026-07-20",
@@ -226,10 +227,11 @@
       "flair": null,
       "classification": {
         "scores": {
-          "potholes": 0.7
+          "potholes": 0.7,
+          "public_safety": 0.9
         },
-        "confidence": 0.7,
-        "method": "keywords",
+        "confidence": 0.8,
+        "method": "keywords+model",
         "model_version": "nb-v1"
       }
     }
@@ -240,9 +242,7 @@
     "title": "Irvine Valley College Public Access Channel - Looking for a screenshot",
     "body": "Irvine Valley College Public Access Channel - Looking for a screenshot\nHello friends, when I lived in Irvine about 15 years ago, my (then) newborn daughter really enjoyed the IVC Public Access Channel - I think it was Channel 31 on Cox.\nMy wife and I called it the \"Circl Hello friends, when I lived in Irvine about 15 years ago, my (then) newborn daughter really enjoyed the IVC Public Access Channel - I think it was Channel 31 on Cox.\nMy wife and I called it the \"Circles and Music channel\" because it seemed like pretty non-stop that channel would play soothing music with colorful circles on the screen.\nFast forward 15 years later and I'm trying to find that image to use in a slideshow celebrating my daughter's birthday. If anyone happening to read this knows what I'm talking about and happens to have a link/video still from that ancient public access channel, I'd be extremely grateful!",
     "url": "https://old.reddit.com/r/irvine/comments/1v1el6b/irvine_valley_college_public_access_channel/",
-    "categories": [
-      "violent_crime"
-    ],
+    "categories": [],
     "published_utc": "2026-07-20",
     "metadata": {
       "author": "komplete",
@@ -252,13 +252,10 @@
       "search_query": "irvine",
       "flair": null,
       "classification": {
-        "scores": {
-          "violent_crime": 0.825
-        },
-        "confidence": 0.825,
-        "method": "model",
-        "model_version": "nb-v1",
-        "rescued": true
+        "scores": {},
+        "confidence": 0.584,
+        "method": "none",
+        "model_version": "nb-v1"
       }
     }
   },
@@ -279,7 +276,7 @@
       "flair": null,
       "classification": {
         "scores": {},
-        "confidence": 0.839,
+        "confidence": 0.67,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -304,9 +301,9 @@
       "flair": null,
       "classification": {
         "scores": {
-          "public_safety": 0.9
+          "public_safety": 0.802
         },
-        "confidence": 0.9,
+        "confidence": 0.802,
         "method": "model",
         "model_version": "nb-v1",
         "rescued": true
@@ -357,7 +354,7 @@
       "flair": null,
       "classification": {
         "scores": {},
-        "confidence": 0.737,
+        "confidence": 0.875,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -380,7 +377,7 @@
       "flair": null,
       "classification": {
         "scores": {},
-        "confidence": 0.712,
+        "confidence": 0.692,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -392,9 +389,7 @@
     "title": "Smoke this morning | Stonegate",
     "body": "Smoke this morning | Stonegate\nI know there's a fire NEAR Corona, but anywhere else close by that is generating all the smoke this morning? Checked Watch Duty, nothing I can directly attribute it to, other than the Little Pine Fire I know there's a fire NEAR Corona, but anywhere else close by that is generating all the smoke this morning? Checked Watch Duty, nothing I can directly attribute it to, other than the Little Pine Fire near the Prado Basin.\nedited to indicate near Corona, a 22 minute drive from Chino Hills, and a GASP 7 minute drive from Prado Basin",
     "url": "https://old.reddit.com/r/irvine/comments/1uz2t2h/smoke_this_morning_stonegate/",
-    "categories": [
-      "emergencies"
-    ],
+    "categories": [],
     "published_utc": "2026-07-17",
     "metadata": {
       "author": "SarcasticServal",
@@ -404,13 +399,10 @@
       "search_query": "irvine",
       "flair": null,
       "classification": {
-        "scores": {
-          "emergencies": 0.762
-        },
-        "confidence": 0.762,
-        "method": "model",
-        "model_version": "nb-v1",
-        "rescued": true
+        "scores": {},
+        "confidence": 0.369,
+        "method": "none",
+        "model_version": "nb-v1"
       }
     }
   },
@@ -420,9 +412,7 @@
     "title": "I\u2019ve never seen so many black Tesla cars in a row",
     "body": "I\u2019ve never seen so many black Tesla cars in a row\nEvery single Tesla car at this Tesla charging station next to LA Fitness here in Irvine off of Michelson Dr. and Jamboree Rd. is black except for the one at the tail end..",
     "url": "https://old.reddit.com/r/irvine/comments/1uys7nh/ive_never_seen_so_many_black_tesla_cars_in_a_row/",
-    "categories": [
-      "property_crime"
-    ],
+    "categories": [],
     "published_utc": "2026-07-17",
     "metadata": {
       "author": "redzone_05",
@@ -432,13 +422,10 @@
       "search_query": "irvine",
       "flair": null,
       "classification": {
-        "scores": {
-          "property_crime": 0.859
-        },
-        "confidence": 0.859,
-        "method": "model",
-        "model_version": "nb-v1",
-        "rescued": true
+        "scores": {},
+        "confidence": 0.35,
+        "method": "none",
+        "model_version": "nb-v1"
       }
     }
   },
@@ -487,7 +474,7 @@
       "flair": null,
       "classification": {
         "scores": {},
-        "confidence": 0.872,
+        "confidence": 0.86,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -510,7 +497,7 @@
       "flair": null,
       "classification": {
         "scores": {},
-        "confidence": 0.762,
+        "confidence": 0.757,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -533,7 +520,7 @@
       "flair": null,
       "classification": {
         "scores": {},
-        "confidence": 0.625,
+        "confidence": 0.627,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -545,7 +532,9 @@
     "title": "Another coyote in Oak Creek. San Diego Wash/Creek. Video included.",
     "body": "Another coyote in Oak Creek. San Diego Wash/Creek. Video included.\nI know not everybody wants to see these but I think some people do. So I'll post this video.\nI saw 2 separate coyotes today which is the first time that has ever happened. I captured video of both. 2n I know not everybody wants to see these but I think some people do. So I'll post this video.\nI saw 2 separate coyotes today which is the first time that has ever happened. I captured video of both. 2nd video in another post.\nI'm no expert - maybe because of the heat and lack of water availability they're out looking for a good meal and some water?? They look pretty healthy to me.\nAgain, it was more scared of me. Wanted to go up the wall but too many people. That's why it was just standing there. Waiting for us to leave...",
     "url": "https://old.reddit.com/r/irvine/comments/1uwiix4/another_coyote_in_oak_creek_san_diego_washcreek/",
-    "categories": [],
+    "categories": [
+      "public_safety"
+    ],
     "published_utc": "2026-07-14",
     "metadata": {
       "author": "plepster",
@@ -555,10 +544,13 @@
       "search_query": "irvine",
       "flair": null,
       "classification": {
-        "scores": {},
-        "confidence": 0.779,
-        "method": "none",
-        "model_version": "nb-v1"
+        "scores": {
+          "public_safety": 0.9
+        },
+        "confidence": 0.9,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
       }
     }
   },
@@ -579,7 +571,7 @@
       "flair": null,
       "classification": {
         "scores": {},
-        "confidence": 0.943,
+        "confidence": 0.978,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -591,7 +583,9 @@
     "title": "Volunteer opportunities in Irvine?",
     "body": "Volunteer opportunities in Irvine?\nDoes anyone know of any open Volunteer Opportunities within the city of Irvine (for adults over 18)?\nMy son is 22 with autism and I would like to find some volunteer opportunities for he and I to do t Does anyone know of any open Volunteer Opportunities within the city of Irvine (for adults over 18)?\nMy son is 22 with autism and I would like to find some volunteer opportunities for he and I to do together, while he is on a waiting list for supportive employment support services. He has good skills and work ethic and likes to do things like cleaning, cooking, and basic maintenance type tasks. He is verbal and has no behavioral issues at all. I would accompany him as a volunteer as well, as he does need a support person to sort of keep him on task.\nI'd like to get him off his computer and out into the world at least a couple times a week!\nAny ideas?",
     "url": "https://old.reddit.com/r/irvine/comments/1uwcq4e/volunteer_opportunities_in_irvine/",
-    "categories": [],
+    "categories": [
+      "public_safety"
+    ],
     "published_utc": "2026-07-14",
     "metadata": {
       "author": "brergnat",
@@ -601,10 +595,13 @@
       "search_query": "irvine",
       "flair": null,
       "classification": {
-        "scores": {},
-        "confidence": 0.579,
-        "method": "none",
-        "model_version": "nb-v1"
+        "scores": {
+          "public_safety": 0.9
+        },
+        "confidence": 0.9,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
       }
     }
   },
@@ -625,7 +622,7 @@
       "flair": null,
       "classification": {
         "scores": {},
-        "confidence": 1.0,
+        "confidence": 0.992,
         "method": "none",
         "model_version": "nb-v1"
       }

@@ -2,7 +2,12 @@
 
 from __future__ import annotations
 
-from scrapers.classifier import classify_signal, inherited_classification
+from scrapers.classifier import (
+    MIN_INHERIT_WORDS,
+    _content_words,
+    classify_signal,
+    inherited_classification,
+)
 
 
 def signal_text(row: dict) -> str:
@@ -32,29 +37,31 @@ def reclassify_row(row: dict, thread_categories: dict | None = None) -> dict:
         row["categories"] = result.categories
         meta["classification"] = result.to_dict()
     elif consensus:
-        row["categories"] = consensus
-        meta["classification"] = inherited_classification(consensus)
+        comment_text = (row.get("body") or row.get("title") or "")
+        if len(_content_words(comment_text)) < MIN_INHERIT_WORDS:
+            row["categories"] = []
+            meta["classification"] = result.to_dict()
+        else:
+            row["categories"] = consensus
+            meta["classification"] = inherited_classification(consensus)
     elif meta.get("weak_trusted_default"):
         meta["classification"] = inherited_classification(
             row.get("categories") or [], outlet_default=True
         )
     elif meta.get("inherited_from_video"):
-        outlet_default = not (meta.get("video_categories") or [])
-        meta["classification"] = inherited_classification(
-            row.get("categories") or [], outlet_default=outlet_default
-        )
-    elif row.get("categories"):
-        old_method = (meta.get("classification") or {}).get("method", "")
-        if old_method in {"keywords", "keywords+model"}:
+        comment_text = (row.get("body") or row.get("title") or "")
+        words = _content_words(comment_text)
+        if len(words) < MIN_INHERIT_WORDS:
             row["categories"] = []
             meta["classification"] = result.to_dict()
         else:
-            meta["classification"] = {
-                "scores": {category: 0.6 for category in row["categories"]},
-                "confidence": 0.6,
-                "method": "legacy",
-                "model_version": result.to_dict()["model_version"],
-            }
+            outlet_default = not (meta.get("video_categories") or [])
+            meta["classification"] = inherited_classification(
+                row.get("categories") or [], outlet_default=outlet_default
+            )
+    elif row.get("categories"):
+        row["categories"] = []
+        meta["classification"] = result.to_dict()
     else:
         row["categories"] = []
         meta["classification"] = result.to_dict()

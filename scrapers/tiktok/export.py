@@ -5,7 +5,12 @@ from __future__ import annotations
 import json
 from datetime import datetime, timezone
 
-from scrapers.classifier import classify_signal, inherited_classification
+from scrapers.classifier import (
+    MIN_INHERIT_WORDS,
+    _content_words,
+    classify_signal,
+    inherited_classification,
+)
 from scrapers.schema import CivicSignal, timestamp_to_date
 from scrapers.tiktok.comments import TikTokComment
 from scrapers.tiktok.outlets import is_trusted_news_outlet, normalize_handle
@@ -51,9 +56,14 @@ def comment_to_signal(
         categories = direct.categories
         classification = direct.to_dict()
     elif video_cats:
-        categories = video_cats
-        classification = inherited_classification(video_cats)
-        inherited = True
+        words = _content_words(comment.text)
+        if len(words) < MIN_INHERIT_WORDS:
+            categories = []
+            classification = direct.to_dict()
+        else:
+            categories = video_cats
+            classification = inherited_classification(video_cats)
+            inherited = True
     elif trusted:
         # Newsrooms under civic tags: keep reaction comments even when caption
         # scrape failed and the comment itself has no keywords.
