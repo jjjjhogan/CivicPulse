@@ -5,9 +5,7 @@
     "title": "Another Irvine Co negotiation question",
     "body": "Another Irvine Co negotiation question\nHello,\nI tried to find a similar post but couldn\u2019t, so here goes my question.\nWe are up for a lease renewal. We have been here nearly 2 years. The Irvine co wants to raise our rent by $100, which is n Hello,\nI tried to find a similar post but couldn\u2019t, so here goes my question.\nWe are up for a lease renewal. We have been here nearly 2 years. The Irvine co wants to raise our rent by $100, which is not a lot, but the apartments where we live (same sq, BD, and BR) are leasing for $300 UNDER what we currently pay. How do we negotiate? I doesn\u2019t make sense for us to pay $400 more than someone new for the same space\u2026 any tips?\nWe really don\u2019t want to move but may have no option \ud83d\ude14",
     "url": "https://old.reddit.com/r/irvine/comments/1vffb71/another_irvine_co_negotiation_question/",
-    "categories": [
-      "housing"
-    ],
+    "categories": [],
     "published_utc": "2026-08-04",
     "metadata": {
       "author": "miedosaclub",
@@ -17,13 +15,10 @@
       "search_query": "irvine",
       "flair": null,
       "classification": {
-        "scores": {
-          "housing": 0.9
-        },
-        "confidence": 0.9,
-        "method": "model",
-        "model_version": "nb-v1",
-        "rescued": true
+        "scores": {},
+        "confidence": 0.904,
+        "method": "none",
+        "model_version": "nb-v1"
       }
     }
   },
@@ -34,7 +29,7 @@
     "body": "Giving Away Twin Box Springs and Coffee Table\nHave two twin size box springs to give away - free. One is completely brand new and in the box. It needs to be assembled, it uses wooden slats, and is super easy to put together. The other one is alre Have two twin size box springs to give away - free. One is completely brand new and in the box. It needs to be assembled, it uses wooden slats, and is super easy to put together. The other one is already put together, was slightly used (so, still like new) before being put away, and is metal, instead of wood. Again, both are twin size.\nThen I have a used coffee table to give away, also. Rectangle shape, about 2ft by 3.5ft., metal legs (black), and dark wood color top. Like I said, it's used, so it does have some marks from my kids coloring with acrylic markers and a few scratches.\nFeel free to DM me if you're interested! I'll be getting rid of it all by the end of this week if no one takes them. Also, you'll have to pick up from me, as I cannot deliver them to you or meet you anywhere. I don't have pictures to post either. Sorry. TIA to everyone reading this and for anyone taking these items!\nAlso, thanks to Mod for allowing me to post.\nEdit: to help anyone deciding, my location is the West Park area of Irvine.",
     "url": "https://old.reddit.com/r/irvine/comments/1vff5g1/giving_away_twin_box_springs_and_coffee_table/",
     "categories": [
-      "housing"
+      "public_safety"
     ],
     "published_utc": "2026-08-04",
     "metadata": {
@@ -46,7 +41,7 @@
       "flair": null,
       "classification": {
         "scores": {
-          "housing": 0.9
+          "public_safety": 0.9
         },
         "confidence": 0.9,
         "method": "model",
@@ -115,9 +110,7 @@
     "title": "Anyone have a recommendation for someone local who can help solder something quickly for me?",
     "body": "Anyone have a recommendation for someone local who can help solder something quickly for me?\nThis point got torn out so I\u2019ve been struggling to get it done. This plug in part is for the rumble component and after my first try, the rumble still didn\u2019t work. Any suggestions for a go to guy woul This point got torn out so I\u2019ve been struggling to get it done. This plug in part is for the rumble component and after my first try, the rumble still didn\u2019t work. Any suggestions for a go to guy would be great because my first quote was for $100.\nGot advice from soldering gurus and got it fixed up. Thanks for reading friends.",
     "url": "https://old.reddit.com/r/irvine/comments/1vdwpeu/anyone_have_a_recommendation_for_someone_local/",
-    "categories": [
-      "violent_crime"
-    ],
+    "categories": [],
     "published_utc": "2026-08-02",
     "metadata": {
       "author": "PauLogical",
@@ -127,13 +120,10 @@
       "search_query": "irvine",
       "flair": null,
       "classification": {
-        "scores": {
-          "violent_crime": 0.78
-        },
-        "confidence": 0.78,
-        "method": "model",
-        "model_version": "nb-v1",
-        "rescued": true
+        "scores": {},
+        "confidence": 0.793,
+        "method": "none",
+        "model_version": "nb-v1"
       }
     }
   },
@@ -173,6 +163,7 @@
     "body": "Emergency Exit Tustin Market Place Regal\nMy theater and probably I think the full building was just evacuated does anyone know what happened? It\u2019s a big movie night with Spider-Man. We were 20 minutes into the movie and an emergency exit mes My theater and probably I think the full building was just evacuated does anyone know what happened? It\u2019s a big movie night with Spider-Man. We were 20 minutes into the movie and an emergency exit message showed up on the screen. Really scary.",
     "url": "https://old.reddit.com/r/irvine/comments/1vcbmd9/emergency_exit_tustin_market_place_regal/",
     "categories": [
+      "public_safety",
       "emergencies"
     ],
     "published_utc": "2026-08-01",
@@ -185,10 +176,11 @@
       "flair": null,
       "classification": {
         "scores": {
-          "emergencies": 0.8
+          "emergencies": 0.8,
+          "public_safety": 0.9
         },
-        "confidence": 0.8,
-        "method": "keywords",
+        "confidence": 0.85,
+        "method": "keywords+model",
         "model_version": "nb-v1"
       }
     }
@@ -256,7 +248,6 @@
     "body": "Spotted ICE agents arresting Asian man on Irvine Blvd near Woodbury\nI passed Irvine PD cruiser making a traffic stop on a white Tesla.  The officer was in the process of asking the driver to step out of the vehicle.  The Asian man was young- approximately early 30\u2019s o I passed Irvine PD cruiser making a traffic stop on a white Tesla.  The officer was in the process of asking the driver to step out of the vehicle.  The Asian man was young- approximately early 30\u2019s or late 20\u2019s.  The driver was stepping out of the vehicle as ai passed.\nOn my way back from my errand approximately 20 minutes later I passed the same traffic stop going the other direction on Irvine Blvd. This time, there were two additional unmarked cars with law enforcement lights and dark tint.  One was a Honda Odyssey minivan, the other was a Jeep Grand Cherokee.  There were about 5 ICE agents surrounding the Asian gentleman who was now in handcuffs and sitting on the curb.\nHas there been a lot of ICE activity in Irvine area targeting people of Asian descent?  Sorry, no pics since I was driving at the time.",
     "url": "https://old.reddit.com/r/irvine/comments/1va384r/spotted_ice_agents_arresting_asian_man_on_irvine/",
     "categories": [
-      "violent_crime",
       "public_safety",
       "immigration"
     ],
@@ -271,11 +262,10 @@
       "classification": {
         "scores": {
           "public_safety": 0.7,
-          "immigration": 0.7,
-          "violent_crime": 0.9
+          "immigration": 0.7
         },
-        "confidence": 0.767,
-        "method": "keywords+model",
+        "confidence": 0.7,
+        "method": "keywords",
         "model_version": "nb-v1"
       }
     }
@@ -288,7 +278,6 @@
     "url": "https://old.reddit.com/r/irvine/comments/1v9s0xy/police_activity/",
     "categories": [
       "public_safety",
-      "violent_crime",
       "housing"
     ],
     "published_utc": "2026-07-29",
@@ -301,11 +290,10 @@
       "flair": null,
       "classification": {
         "scores": {
-          "public_safety": 0.8,
-          "housing": 0.7,
-          "violent_crime": 0.774
+          "public_safety": 0.87,
+          "housing": 0.7
         },
-        "confidence": 0.758,
+        "confidence": 0.785,
         "method": "keywords+model",
         "model_version": "nb-v1"
       }
@@ -330,9 +318,65 @@
       "flair": null,
       "classification": {
         "scores": {
-          "noise": 0.713
+          "noise": 0.88
         },
-        "confidence": 0.713,
+        "confidence": 0.88,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
+  },
+  {
+    "source": "reddit",
+    "outlet": "r/irvine",
+    "title": "Affordable Dog X Rays",
+    "body": "Affordable Dog X Rays\nWe have Figo pet insurance, but so far they have rarely covered anything.\nOur dog is limping (front right paw) and will need to be sedated, does anyone know where we can get more affordable x rays don We have Figo pet insurance, but so far they have rarely covered anything.\nOur dog is limping (front right paw) and will need to be sedated, does anyone know where we can get more affordable x rays done?",
+    "url": "https://old.reddit.com/r/irvine/comments/1vbu8p3/affordable_dog_x_rays/",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-07-31",
+    "metadata": {
+      "author": "Intelligent-Frame113",
+      "post_id": "1vbu8p3",
+      "score": 5,
+      "comment_count": 3,
+      "search_query": "irvine",
+      "flair": null,
+      "classification": {
+        "scores": {
+          "public_safety": 0.9
+        },
+        "confidence": 0.9,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
+  },
+  {
+    "source": "reddit",
+    "outlet": "r/irvine",
+    "title": "Petco Order Wrong - Hill\u2019s Prescription Cat Food",
+    "body": "Petco Order Wrong - Hill\u2019s Prescription Cat Food\nHello!\nI received the wrong order and received someone\u2019s Hill\u2019s Prescription Diet for Urinary Care. If this is you, please message me. I would love to get this in the correct hands if you can provide  Hello!\nI received the wrong order and received someone\u2019s Hill\u2019s Prescription Diet for Urinary Care. If this is you, please message me. I would love to get this in the correct hands if you can provide proof. I will bring to Irvine animal shelter if not claimed.",
+    "url": "https://old.reddit.com/r/irvine/comments/1v9jgsq/petco_order_wrong_hills_prescription_cat_food/",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-07-29",
+    "metadata": {
+      "author": "TopTittyTy",
+      "post_id": "1v9jgsq",
+      "score": 10,
+      "comment_count": 3,
+      "search_query": "irvine",
+      "flair": null,
+      "classification": {
+        "scores": {
+          "public_safety": 0.834
+        },
+        "confidence": 0.834,
         "method": "model",
         "model_version": "nb-v1",
         "rescued": true

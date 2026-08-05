@@ -20,7 +20,7 @@
       "verified": false,
       "classification": {
         "scores": {},
-        "confidence": 0.639,
+        "confidence": 0.34,
         "method": "none",
         "model_version": "nb-v1"
       }
