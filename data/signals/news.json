@@ -11,7 +11,7 @@
       "outlet_id": "irvine-standard",
       "classification": {
         "scores": {},
-        "confidence": 0.772,
+        "confidence": 0.578,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -29,7 +29,7 @@
       "outlet_id": "irvine-standard",
       "classification": {
         "scores": {},
-        "confidence": 0.825,
+        "confidence": 0.869,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -47,7 +47,7 @@
       "outlet_id": "irvine-standard",
       "classification": {
         "scores": {},
-        "confidence": 0.78,
+        "confidence": 0.805,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -65,7 +65,7 @@
       "outlet_id": "irvine-standard",
       "classification": {
         "scores": {},
-        "confidence": 0.752,
+        "confidence": 0.925,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -77,20 +77,14 @@
     "title": "Wide-open opportunities for volunteers",
     "body": "A nestling red-tailed hawk, its white head visible above a large nest atop a coast live oak, seems to stand sentry over its two siblings while their parents are off [\u2026]",
     "url": "https://www.irvinestandard.com/2026/wide-open-opportunities-for-volunteers/",
-    "categories": [
-      "traffic_safety",
-      "emergencies"
-    ],
+    "categories": [],
     "published_utc": "2026-06-30",
     "metadata": {
       "outlet_id": "irvine-standard",
       "classification": {
-        "scores": {
-          "traffic_safety": 0.6,
-          "emergencies": 0.6
-        },
-        "confidence": 0.6,
-        "method": "legacy",
+        "scores": {},
+        "confidence": 0.694,
+        "method": "none",
         "model_version": "nb-v1"
       }
     }

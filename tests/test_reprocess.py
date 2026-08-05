@@ -24,14 +24,29 @@ def test_keyword_row_gets_classification_method():
     assert isinstance(cls["scores"], dict)
 
 
-def test_inherited_tiktok_comment_keeps_categories():
+def test_short_inherited_comment_cleared():
     rows = _load("tiktok.json")
-    inherited = next(r for r in rows if r["metadata"].get("inherited_from_video"))
-    # Weak comment text alone should not classify; inheritance path applies.
-    reclassify_row(inherited)
-    assert inherited["categories"] == ["potholes"]
-    cls = inherited["metadata"]["classification"]
-    assert cls["method"] in {"inherited", "outlet_default", "legacy", "keywords", "keywords+model", "model"}
+    short = next(
+        r for r in rows
+        if r["metadata"].get("inherited_from_video") and r["body"] == "lol same"
+    )
+    reclassify_row(short)
+    assert short["categories"] == []
+    cls = short["metadata"]["classification"]
+    assert cls["method"] == "none"
+
+
+def test_long_inherited_comment_keeps_categories():
+    rows = _load("tiktok.json")
+    long_comment = next(
+        r for r in rows
+        if r["metadata"].get("inherited_from_video")
+        and "intersection" in r["body"]
+    )
+    reclassify_row(long_comment)
+    assert long_comment["categories"]
+    cls = long_comment["metadata"]["classification"]
+    assert cls["method"] in {"inherited", "keywords", "keywords+model", "model"}
     assert 0 <= cls["confidence"] <= 1
 
 
@@ -39,7 +54,6 @@ def test_thread_consensus_for_tiktok():
     rows = _load("tiktok.json")
     consensus = thread_consensus(rows)
     assert isinstance(consensus, dict)
-    # Video 1001 has a strong pothole comment in the thread.
     assert "https://www.tiktok.com/@user/video/1001" in consensus
     assert "potholes" in consensus["https://www.tiktok.com/@user/video/1001"]
 
@@ -58,3 +72,17 @@ def test_empty_civic_text_clears_or_marks_none():
     assert cls["method"] in {"none", "model", "keywords", "keywords+model"}
     assert isinstance(row["categories"], list)
     assert 0 <= cls["confidence"] <= 1
+
+
+def test_old_categories_cleared_when_classifier_returns_nothing():
+    row = {
+        "source": "news",
+        "title": "Summer concert series at the amphitheater",
+        "body": "Live music every Friday with food trucks and lawn games",
+        "url": "https://example.com/concerts",
+        "categories": ["housing"],
+        "metadata": {"classification": {"method": "legacy", "confidence": 0.6}},
+    }
+    reclassify_row(row)
+    assert row["categories"] == []
+    assert row["metadata"]["classification"]["method"] == "none"

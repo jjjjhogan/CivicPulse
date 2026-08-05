@@ -71,6 +71,7 @@ _STOPWORDS = frozenset(
 # defaults). Kept here so pipelines and reprocessing agree on the numbers.
 INHERITED_CONFIDENCE = 0.4
 OUTLET_DEFAULT_CONFIDENCE = 0.3
+MIN_INHERIT_WORDS = 5
 
 
 @dataclass

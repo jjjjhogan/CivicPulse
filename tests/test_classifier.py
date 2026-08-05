@@ -42,10 +42,32 @@ def test_to_dict_shape():
 
 
 def test_model_paraphrase_from_labels():
-    # Hand-labeled paraphrase without the literal keyword "pothole".
     result = classify_signal(
         "Hit a huge dip on Irvine Blvd and my rim is bent"
     )
     assert "potholes" in result.categories
     assert result.method in {"model", "keywords+model", "keywords"}
     assert result.confidence > 0
+
+
+def test_event_listing_is_none():
+    result = classify_signal(
+        "Free concert at the amphitheater this weekend, food trucks and lawn games"
+    )
+    assert result.categories == []
+    assert result.method == "none"
+
+
+def test_housing_ad_is_not_housing_issue():
+    result = classify_signal(
+        "Three bed two bath condo available for lease near the park, pool and gym"
+    )
+    assert "housing" not in result.categories
+
+
+def test_multi_category_assignment():
+    result = classify_signal(
+        "Gas leak forced the block to evacuate, fire trucks and police everywhere"
+    )
+    assert len(result.categories) >= 1
+    assert "emergencies" in result.categories
