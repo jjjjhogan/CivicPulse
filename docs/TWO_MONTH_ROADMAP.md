@@ -218,9 +218,10 @@ Embeddings, cloud TikTok, multi-city, LLM chat literature review.
 | **5** | **Phase B** keyword surgery + reprocess; start **Phase D** (method + honest confidence copy) | Gold sample false positives down; UI less misleading |
 | **6** | **Phase C** label batch #1 (errors + none) + reprocess | Labels committed; gold sample re-checked |
 | **7** | Research model + `POST/GET /api/researches` (SQLite) | Create/list research in API + minimal UI |
+| **7.5** | **Phase C #2** hygiene: keyword pass + manual remove/clear bad signals + reprocess + gold re-score | Fewer live FPs; corpus clean enough for archive demos |
 | **8** | Archive matcher → `research_hits` + retro (Firestore schema sketch) | “Housing” research mostly sensible hits; Session 9 owner named |
 
-**Week 2 exit:** Classification visibly less embarrassing on the gold sample; mayor can create a research and see **archive** hits that aren’t random.
+**Week 2 exit:** Classification visibly less embarrassing on the gold sample; mayor can create a research and see **archive** hits that aren’t random. Run **7.5 before 8** so archive matching isn’t flooded with lifestyle/ads FPs.
 
 ### Weeks 3–4 — Firebase, then Render (Person B keeps Phase C)
 
