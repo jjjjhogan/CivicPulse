@@ -26,6 +26,7 @@ sys.path.insert(0, str(ROOT))
 
 from scrapers.feed import rebuild_landing_feed  # noqa: E402
 from scrapers.reprocess import reclassify_row, thread_consensus  # noqa: E402
+from backend.db_backup import backup_database  # noqa: E402
 
 SIGNALS_DIR = ROOT / "data" / "signals"
 SOURCES = ("tiktok", "reddit", "twitter", "news")
@@ -134,11 +135,19 @@ def main() -> None:
         print(f"Rebuilt landing-page feed with {feed_count} signals")
 
         # Keep SQLite as source of truth for the dashboard API.
-        from backend.signals_import import import_signals_from_dir
+        from backend.signals_import import import_signals_from_dir, prune_orphan_signals
+
+        backup_path = backup_database()
+        if backup_path:
+            print(f"DB backup: {backup_path.relative_to(ROOT)}")
+        else:
+            print("DB backup: skipped (no data/civicpulse.db yet)")
 
         totals = import_signals_from_dir(sources=tuple(processed))
+        pruned = prune_orphan_signals(sources=tuple(processed))
         print(
-            f"Synced SQLite: inserted={totals['inserted']} updated={totals['updated']}"
+            f"Synced SQLite: inserted={totals['inserted']} updated={totals['updated']} "
+            f"orphans_removed={pruned}"
         )
 
 

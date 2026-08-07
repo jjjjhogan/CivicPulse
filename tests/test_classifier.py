@@ -65,6 +65,31 @@ def test_housing_ad_is_not_housing_issue():
     assert "housing" not in result.categories
 
 
+def test_soft_housing_rent_burden_assigns():
+    result = classify_signal("My rent is sixty percent of my paycheck now")
+    assert "housing" in result.categories
+
+
+def test_soft_housing_vetoes_lifestyle_rent_complaint():
+    result = classify_signal("The rent is the scariest thing in Irvine!")
+    assert "housing" not in result.categories
+
+
+def test_soft_housing_blocklists_themed_housing():
+    result = classify_signal(
+        "may I ask how you found your roommates? and if you know how themed housing works"
+    )
+    assert "housing" not in result.categories
+
+
+def test_hard_housing_phrase_still_assigns():
+    result = classify_signal(
+        "Average rent prices have risen from 300 to over 2000 a month"
+    )
+    assert "housing" in result.categories
+    assert result.method in {"keywords", "keywords+model"}
+
+
 def test_multi_category_assignment():
     result = classify_signal(
         "Gas leak forced the block to evacuate, fire trucks and police everywhere"

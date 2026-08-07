@@ -170,22 +170,40 @@ CATEGORY_KEYWORDS: dict[str, list[str]] = {
         "street light",
         "fbi",
     ],
+    # Hard phrases always assign housing. Bare rent/housing/homeless live in
+    # HOUSING_SOFT_KEYWORDS and only count when the classifier's soft+veto
+    # path agrees (model does not prefer "none", and ad blocklist misses).
     "housing": [
         "eviction",
         "evicted",
         "rent increase",
         "rent hike",
         "rent price",
+        "rent prices",
         "rent control",
+        "rent burden",
+        "average rent",
+        "raised the rent",
+        "raising rent",
         "affordable housing",
-        "homeless",
-        "unhoused",
         "housing crisis",
         "housing cost",
         "housing shortage",
+        "housing prices",
+        "section 8",
+        "below-market",
+        "sleeping in cars",
+        "homeless encampment",
+        "homelessness crisis",
+        "homeless services",
+        "homeless shelter",
+        "unhoused residents",
+        "unhoused population",
+        "mold and roaches",
         "zoning",
         "landlord",
         "tenant",
+        "utility price hike",
     ],
     "immigration": [
         "immigration",
@@ -200,6 +218,37 @@ CATEGORY_KEYWORDS: dict[str, list[str]] = {
         "asylum",
     ],
 }
+
+# Soft housing tokens — propose only; scrapers/classifier.py may veto.
+HOUSING_SOFT_KEYWORDS: list[str] = [
+    "rent",
+    "housing",
+    "homeless",
+    "unhoused",
+]
+
+# Listing / amenity / dorm speak that should never become housing via soft hits.
+HOUSING_AD_BLOCKLIST: list[str] = [
+    "for rent",
+    "for lease",
+    "now leasing",
+    "now available",
+    "available for lease",
+    "list price",
+    "sq ft",
+    "sqft",
+    "amenities",
+    "pool and gym",
+    "floor plan",
+    "themed housing",
+    "roommate",
+    "roommates",
+    "moving company",
+    "3 bed",
+    "2 bath",
+    "3 bath",
+    "br/ba",
+]
 
 
 class CivicIssueCategory(str, Enum):
@@ -226,7 +275,7 @@ DEFAULT_SEARCH_TERMS: dict[CivicIssueCategory, list[str]] = {
     CivicIssueCategory.TRAFFIC_SAFETY: ["car crash", "hit and run", "speeding"],
     CivicIssueCategory.EMERGENCIES: ["wildfire", "flooding", "evacuation"],
     CivicIssueCategory.PUBLIC_SAFETY: ["crime", "police", "streetlight out"],
-    CivicIssueCategory.HOUSING: ["rent increase", "affordable housing", "homeless"],
+    CivicIssueCategory.HOUSING: ["rent increase", "affordable housing", "housing prices"],
     CivicIssueCategory.IMMIGRATION: ["immigration", "ice protest", "deportation"],
 }
 

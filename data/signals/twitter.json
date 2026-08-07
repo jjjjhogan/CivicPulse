@@ -55,9 +55,9 @@
       "verified": false,
       "classification": {
         "scores": {
-          "public_safety": 0.816
+          "public_safety": 0.873
         },
-        "confidence": 0.816,
+        "confidence": 0.873,
         "method": "model",
         "model_version": "nb-v1",
         "rescued": true

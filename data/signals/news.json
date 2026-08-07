@@ -11,7 +11,7 @@
       "outlet_id": "irvine-standard",
       "classification": {
         "scores": {},
-        "confidence": 0.687,
+        "confidence": 0.694,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -29,7 +29,7 @@
       "outlet_id": "irvine-standard",
       "classification": {
         "scores": {},
-        "confidence": 0.83,
+        "confidence": 0.836,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -47,7 +47,7 @@
       "outlet_id": "irvine-standard",
       "classification": {
         "scores": {},
-        "confidence": 0.603,
+        "confidence": 0.6,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -65,7 +65,7 @@
       "outlet_id": "irvine-standard",
       "classification": {
         "scores": {},
-        "confidence": 0.728,
+        "confidence": 0.727,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -106,7 +106,7 @@
       "outlet_id": "irvine-standard",
       "classification": {
         "scores": {},
-        "confidence": 0.643,
+        "confidence": 0.645,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -142,7 +142,7 @@
       "outlet_id": "irvine-standard",
       "classification": {
         "scores": {},
-        "confidence": 0.927,
+        "confidence": 0.92,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -160,7 +160,7 @@
       "outlet_id": "irvine-standard",
       "classification": {
         "scores": {},
-        "confidence": 0.763,
+        "confidence": 0.766,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -294,7 +294,7 @@
       "outlet_id": "irvine-weekly",
       "classification": {
         "scores": {},
-        "confidence": 0.961,
+        "confidence": 0.918,
         "method": "none",
         "model_version": "nb-v1"
       }

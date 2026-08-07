@@ -113,3 +113,38 @@ def sync_signals_after_scrape(source: str | None = None) -> dict:
     else:
         sources = SOURCE_FILES
     return import_signals_from_dir(sources=sources)
+
+
+def prune_orphan_signals(
+    signals_dir: Path | None = None,
+    *,
+    sources: tuple[str, ...] = SOURCE_FILES,
+) -> int:
+    """Delete DB signals that are not present in the current JSON files.
+
+    Upsert alone leaves stale rows when scrapes/reprocess shrink the JSON
+    corpus; the dashboard reads SQLite so orphans keep old categories.
+    """
+    init_db()
+    directory = signals_dir or SIGNALS_DIR
+    json_keys: set[tuple[str, str, str]] = set()
+    for source in sources:
+        for row in _read_signal_rows(directory / f"{source}.json"):
+            src = (row.get("source") or "").strip()
+            if not src:
+                continue
+            json_keys.add((src, row.get("url") or "", row.get("title") or ""))
+
+    db = SessionLocal()
+    try:
+        orphans = [
+            row
+            for row in db.scalars(select(Signal)).all()
+            if (row.source, row.url or "", row.title or "") not in json_keys
+        ]
+        for row in orphans:
+            db.delete(row)
+        db.commit()
+        return len(orphans)
+    finally:
+        db.close()

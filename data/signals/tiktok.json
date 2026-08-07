@@ -91,7 +91,7 @@
       "hashtags": [],
       "classification": {
         "scores": {},
-        "confidence": 0.845,
+        "confidence": 0.844,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -253,7 +253,7 @@
       "hashtags": [],
       "classification": {
         "scores": {},
-        "confidence": 0.673,
+        "confidence": 0.67,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -471,7 +471,7 @@
       "hashtags": [],
       "classification": {
         "scores": {},
-        "confidence": 0.849,
+        "confidence": 0.848,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -561,7 +561,7 @@
       "hashtags": [],
       "classification": {
         "scores": {},
-        "confidence": 0.794,
+        "confidence": 0.793,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -591,7 +591,7 @@
       "hashtags": [],
       "classification": {
         "scores": {},
-        "confidence": 0.845,
+        "confidence": 0.844,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -621,9 +621,9 @@
       "hashtags": [],
       "classification": {
         "scores": {
-          "housing": 0.9
+          "housing": 0.7
         },
-        "confidence": 0.9,
+        "confidence": 0.7,
         "method": "keywords",
         "model_version": "nb-v1"
       }
@@ -938,9 +938,9 @@
       "classification": {
         "scores": {
           "emergencies": 0.7,
-          "violent_crime": 0.858
+          "violent_crime": 0.855
         },
-        "confidence": 0.779,
+        "confidence": 0.777,
         "method": "keywords+model",
         "model_version": "nb-v1"
       }
@@ -1159,7 +1159,7 @@
       "hashtags": [],
       "classification": {
         "scores": {},
-        "confidence": 0.754,
+        "confidence": 0.753,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -1189,7 +1189,7 @@
       "hashtags": [],
       "classification": {
         "scores": {},
-        "confidence": 0.755,
+        "confidence": 0.754,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -1349,7 +1349,7 @@
       "hashtags": [],
       "classification": {
         "scores": {},
-        "confidence": 0.857,
+        "confidence": 0.861,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -1709,7 +1709,7 @@
       "hashtags": [],
       "classification": {
         "scores": {},
-        "confidence": 0.351,
+        "confidence": 0.375,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -1833,7 +1833,7 @@
       "hashtags": [],
       "classification": {
         "scores": {},
-        "confidence": 0.754,
+        "confidence": 0.753,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -2524,7 +2524,7 @@
       "weak_trusted_default": false,
       "classification": {
         "scores": {},
-        "confidence": 0.686,
+        "confidence": 0.692,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -2565,8 +2565,65 @@
       ],
       "classification": {
         "scores": {},
-        "confidence": 0.829,
+        "confidence": 0.828,
         "method": "none",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #newportbeach",
+    "title": "inland city kids ,just rich people live here, their parents work 3 jobs so they are never around because the greedy landlords keep raisin...",
+    "body": "inland city kids ,just rich people live here, their parents work 3 jobs so they are never around because the greedy landlords keep raising the rent because the taxes keep going up t,it's only going to get worse,anyone with real money has already left, .and emotionally charged ego media has divided our country . .and Jesus isn't going to save anybody,only we are , solution mode . so let's make things nice again, remove lawyers,court,release all non violent prisoners on endless probation, start fresh Swith county everything,non violent Unity WE ARE ONE . remove probation, they have created a culture that does all the damage, politicians need to be removed, NOT SOCIAL ISM. look after each other love respect and protect",
+    "url": "https://www.tiktok.com/@mkorkutata/video/7659261534392028429",
+    "categories": [
+      "housing"
+    ],
+    "published_utc": "2026-07-08",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "mkorkutata",
+      "tag": "newportbeach",
+      "search_query": "tag:newportbeach",
+      "like_count": "2332",
+      "comment_count": "97",
+      "classification": {
+        "scores": {
+          "housing": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "I grew up in Irvine and Irvine Company is the devil. Lived in an apartment for 7 years and the last year and a half we g...",
+    "body": "I grew up in Irvine and Irvine Company is the devil. Lived in an apartment for 7 years and the last year and a half we got a broken water heater than brought mold and roaches and yet we were blamed.",
+    "url": "https://www.tiktok.com/@cloveerika/video/7667408384592792863",
+    "categories": [
+      "housing"
+    ],
+    "published_utc": "2026-07-20",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "cloveerika",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [],
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "housing": 0.77
+        },
+        "confidence": 0.77,
+        "method": "keywords+model",
         "model_version": "nb-v1"
       }
     }

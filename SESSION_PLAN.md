@@ -1,69 +1,144 @@
-# CivicPulse — session plan (day-to-day)
+# CivicPulse — session plan (Path A: Research)
 
-**For:** next-session checklists and prompts to your coworker / coding agent.  
-**Not** the 8-week strategy — that lives in [`docs/TWO_MONTH_ROADMAP.md`](docs/TWO_MONTH_ROADMAP.md).
+**For:** Path A coworker / coding agent — Research product sessions.  
+**Not** the 8-week strategy — that lives in [`docs/TWO_MONTH_ROADMAP.md`](docs/TWO_MONTH_ROADMAP.md).  
+**Not** Path B (data durability / DB rewiring) — separate owner; this file only says what Path A must **avoid**.
 
 **Pace:** One theme per session → PR → manual QA → merge.
 
-**North star:** Research workspace on **Firestore** → **Render**; plus **classifier quality loop** (Phases A–E) so categories are trustworthy enough for demos.
+**Goal:** Mayor can create a Research (e.g. “housing prices in Irvine”) and see **archive hits** from existing signals.
 
 ---
 
-## Done — Session 7.5: Phase C #2 hygiene (pre-archive)
+## Stay off (do not touch)
 
-**Goal:** Cut remaining live false positives before Session 8 archive matching — keyword tune, labels for hard/none cases, **manual remove or clear** junk signals, reprocess, re-score gold.
+Someone else owns storage durability. Path A must **not**:
 
-**Branch:** `feature/phase-c-hygiene-s7-5`
+- Redesign SQLite schema / add a new store abstraction / Firestore
+- Change orphan prune, backup/restore, or scrape→JSON→DB sync
+- Delete or reshape `data/signals/*` / `data/raw/*` for storage experiments
+- Run classifier keyword surgery or `reprocess_signals` unless explicitly asked
+- Add cleanup scripts, schema drops, or silent data deletes
 
-### Checklist
-
-- [x] Spot live FPs (dashboard / gold leftovers from Session 6 notes)
-- [x] Keyword tweaks in `CATEGORY_KEYWORDS` only where clearly justified
-- [x] Add hard/wrong/**none** rows to `labeled_signals.json` as needed
-- [x] Manual: delete or clear categories on obvious junk (lifestyle ads, non-civic fluff)
-- [x] `reprocess_signals` + sync DB; `rescore_gold.py` before/after
-- [x] `pytest -q` green; PR
-
-### Notes
-
-- **Before:** 38/78 (48.7%), 1 regression (id=128)
-- **After:** 40/78 (51.3%), 0 regressions, 22 improvements, +4.3pp vs S5 baseline
-- **Keywords:** replaced bare `accident` with compound phrases (`car accident`, `traffic accident`, `vehicle accident`, `fatal accident`, `accident scene`); removed broad `overpriced` from housing
-- **Labels:** +17 examples (218 total, 55 negatives): legal ads, pet/vet posts, furniture giveaways, restaurant reviews, pharmacy, event listings, lost pet, staffing promo; +2 positives (city safety ranking, FBI scene)
-- **Regression fix:** id=128 "city to raise a family" recovered — conflicting S6 negative replaced with distinct puff-news example
-- **Model rescues:** 9→4 model-only after negatives strengthened `__none__` class
+**If Research seems to need better persistence:** stub on today’s Signal table / `/api/signals`, leave a one-line note for Path B, and move on.
 
 ---
 
-## Week 2 status
+## Agent prompt (Path A)
+
+Copy into a new agent chat:
+
+```text
+Repo: CivicPulse (Ryan/). You are on Path A — Research product only.
+
+Read SESSION_PLAN.md and follow Session 7 first, then Session 8.
+
+Do:
+- Session 7: Research model + POST/GET /api/researches (+ detail) and a minimal create/list UI, using the same SQLAlchemy/SQLite patterns as existing resources.
+- Session 8: Archive matcher → research_hits + POST archive endpoint + Research detail Archive tab. Demo topic: “housing prices in Irvine” using existing live signals.
+- pytest -q for anything you add. One PR per session slice.
+
+Do NOT:
+- Redesign or rewire the database, prune/backup pipelines, or scrape→JSON→DB flow.
+- Touch Firebase/Firestore/Render.
+- Delete or rewrite signal/raw data files.
+- Change classifier keywords or run reprocess unless the user explicitly asks.
+- Mix Path B / data-durability work into your PR.
+
+If persistence feels insufficient, stub against current /api/signals + existing models and note a follow-up — do not invent a second database story.
+```
+
+---
+
+## Preconditions (done)
+
+- [x] Sessions 5–6 classifier loop
+- [x] Session **7.5** hygiene (fewer live FPs before archive demos)
+- [x] Small civic housing batch exists for demos (corpus still thin — Archive UI must handle low hit counts)
+
+Use existing housing signals for the demo. Prefer matcher/UI filters over global classifier changes if hits look noisy.
+
+---
+
+## Session 7 — Research API spike
+
+**Goal:** Create/list Research via API + thin UI. No archive matching yet.
+
+**Branch:** `feature/research-api-s7`
+
+### Build
+
+- [ ] `Research` model with: `title`, `topic`, `keywords[]`, `categories[]`, `status` (`draft` → …), timestamps, optional `notes` (`job_ids[]` can be empty)
+- [ ] `POST /api/researches` — create
+- [ ] `GET /api/researches` — list
+- [ ] `GET /api/researches/<id>` — detail
+- [ ] Minimal UI: create form + list (dashboard nav is enough)
+- [ ] Same SQLAlchemy/SQLite patterns as other resources — no Firestore
+
+### Exit
+
+- [ ] Can create “Housing prices — Irvine” and see it listed
+- [ ] `pytest -q` green for new routes/models
+- [ ] PR
+
+### Out of scope
+
+Archive matcher, topic-scoped scrapes, summary/print, any storage-pipeline work.
+
+---
+
+## Session 8 — Archive matcher + Research detail
+
+**Goal:** Archive pass attaches sensible existing signals (housing demo). Sketch Firestore needs in the PR notes only — no Firebase code.
+
+**Branch:** `feature/research-archive-s8`  
+**Depends on:** Session 7 merged (or stacked on top).
+
+### Build
+
+- [ ] Match rules (v1): category overlap with Research `categories[]` **and/or** keyword hit from `keywords[]` in signal title/body
+- [ ] Persist `research_hits`: research id, signal id/key, match reason, timestamp
+- [ ] `POST /api/researches/<id>/archive` — run against current signals read path
+- [ ] Detail UI: **Archive** tab + click-through; empty/low-hit state that doesn’t look broken
+- [ ] Manual QA: categories=`housing`, keywords like `rent` / `housing prices` → run archive → spot-check hits
+
+### Exit
+
+- [ ] “Housing prices” Research shows mostly plausible archive hits
+- [ ] `pytest -q` for matcher + hits
+- [ ] PR (optional one-line note: what Firestore would need later — sketch only)
+
+### Out of scope
+
+Firebase/Render, import/prune/backup rewrites, new gather jobs, embeddings, classifier keyword passes.
+
+---
+
+## Working rules
+
+1. One slice per session → PR (API before big UI).
+2. Read signals the same way the dashboard does (`/api/signals` / existing models).
+3. `pytest -q` when behavior changes.
+4. Never ship orphan-delete / cleanup / schema-drop work on Path A branches.
+
+---
+
+## Status
 
 | Session | Status |
 |---------|--------|
-| **5** Phase B + Phase D start | Done |
-| **6** Phase C batch #1 + inheritance | Done |
-| **7** Research API spike (SQLite) | Pending / parallel OK |
-| **7.5** Phase C #2 hygiene | **Next** |
-| **8** Archive matcher + retro | After 7.5 |
+| **5–6** Classifier loop | Done |
+| **7.5** Hygiene | Done |
+| **7** Research API | **Next** |
+| **8** Archive matcher | After 7 |
 
 ---
 
-## Done — Sessions 1–4 (Week 1)
+## Earlier sessions (abbrev)
 
-- S1–S3: platform, soak, UX harden (PRs #12–#14)
-- S4: Phase A hand gold (PR #15) — `review_batch_02_hand.md`, clusters 1–7
-
-### Session 5–6 (abbrev)
-
-- **S5:** Broad housing/sanitation tokens → phrases; reprocess clear-on-empty; method/confidence UI; gold ~42%→47% correct.
-- **S6:** +59 labels; `MIN_INHERIT_WORDS=5`; no legacy keep; `rescore_gold.py`; inheritance clusters addressed.
-
----
-
-## How we work
-
-1. One slice per session → PR.  
-2. After keyword/label change: **reprocess** + gold re-score.  
-3. `pytest -q` when behavior changes.  
-4. No Firebase before the week table says so.
+- **S1–S4:** platform, soak, UX, Phase A gold (PRs #12–#15)
+- **S5:** keyword phrases; method/confidence UI; gold ~47%
+- **S6:** +59 labels; inheritance gate; `rescore_gold.py`
+- **S7.5:** FP hygiene; gold 40/78 (51.3%), 0 regressions
 
 **Roadmap:** [`docs/TWO_MONTH_ROADMAP.md`](docs/TWO_MONTH_ROADMAP.md)

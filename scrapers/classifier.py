@@ -16,6 +16,9 @@ Layered on top of the keyword lists in scrapers/categories.py:
 classify_signal() combines both: keyword hits always assign a category;
 the model can add categories on its own only above MODEL_THRESHOLD, which
 is what rescues "missed stories" that keywords alone would have dropped.
+Housing also has a soft-keyword path: bare rent/housing/homeless propose
+housing unless an ad blocklist hits or the none-class probability exceeds
+housing (model veto).
 
 The result carries per-category scores, an overall confidence, and the
 method that produced the labels, embedded in signals as
@@ -30,7 +33,12 @@ import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from scrapers.categories import CATEGORY_KEYWORDS, _CATEGORY_PATTERNS
+from scrapers.categories import (
+    CATEGORY_KEYWORDS,
+    HOUSING_AD_BLOCKLIST,
+    HOUSING_SOFT_KEYWORDS,
+    _CATEGORY_PATTERNS,
+)
 
 MODEL_VERSION = "nb-v1"
 LABELS_PATH = Path(__file__).resolve().parent.parent / "data" / "labels" / "labeled_signals.json"
@@ -44,6 +52,9 @@ MODEL_THRESHOLD = 0.7
 MODEL_SUPPORT = 0.5  # model agreement that boosts an existing keyword match
 MIN_MODEL_TOKENS = 3
 MIN_EVIDENCE = 2
+
+# Soft housing hits score below a hard phrase hit; veto when none wins.
+SOFT_HOUSING_SCORE = 0.65
 
 # The negative examples form their own class, so chatter that merely *looks
 # casual* ("lost my cat", "who wants to play pickup") competes against real
@@ -128,8 +139,20 @@ def keyword_hits(text: str) -> dict[str, int]:
     return hits
 
 
+def _housing_ad_blocked(text: str) -> bool:
+    text_lower = (text or "").lower()
+    return any(phrase in text_lower for phrase in HOUSING_AD_BLOCKLIST)
+
+
+def _soft_housing_hit(text: str) -> bool:
+    text_lower = (text or "").lower()
+    return any(
+        re.search(r"\b" + re.escape(kw), text_lower) for kw in HOUSING_SOFT_KEYWORDS
+    )
+
+
 class _NaiveBayes:
-    """Multiclass multinomial Naive Bayes: 6 categories + a "none" class."""
+    """Multiclass multinomial Naive Bayes: categories + a "none" class."""
 
     def __init__(self, examples: list[dict]):
         self.vocab: set[str] = set()
@@ -192,15 +215,29 @@ def classify_signal(text: str) -> Classification:
     model = _get_model()
     probs = model.probabilities(tokens)
     model_probs = {category: probs[category] for category in CATEGORY_KEYWORDS}
+    p_none = probs.get(NONE_CLASS, 0.0)
 
     scores: dict[str, float] = {}
     used_model = False
+    soft_housing = False
     for category, count in hits.items():
         score = _keyword_score(count)
         if model_probs[category] >= MODEL_SUPPORT:
             score = min(0.97, score + 0.07)
             used_model = True
         scores[category] = round(score, 3)
+
+    # Soft housing: bare rent/housing/homeless propose housing unless an ad
+    # blocklist hits or the none class outranks housing (model veto).
+    if "housing" not in scores and _soft_housing_hit(text) and not _housing_ad_blocked(text):
+        p_housing = model_probs.get("housing", 0.0)
+        if p_none <= p_housing:
+            soft_score = SOFT_HOUSING_SCORE
+            if p_housing >= MODEL_SUPPORT:
+                soft_score = min(0.9, soft_score + 0.07)
+            scores["housing"] = round(soft_score, 3)
+            used_model = True
+            soft_housing = True
 
     rescued = False
     content = _content_words(text)
@@ -212,14 +249,14 @@ def classify_signal(text: str) -> Classification:
                 continue
             scores[category] = round(min(prob, 0.9), 3)
             used_model = True
-            if not hits:
+            if not hits and not soft_housing:
                 rescued = True
 
     categories = sorted(scores, key=lambda c: -scores[c])
     if not categories:
         method = "none"
         confidence = round(1 - max(model_probs.values(), default=0.0), 3)
-    elif hits:
+    elif hits or soft_housing:
         method = "keywords+model" if used_model else "keywords"
         confidence = round(sum(scores.values()) / len(scores), 3)
     else:
