@@ -1,4 +1,4 @@
-"""ORM models: User, Signal, ScrapeJob, IssueVote."""
+"""ORM models: User, Signal, ScrapeJob, IssueVote, Research."""
 
 from __future__ import annotations
 
@@ -127,3 +127,32 @@ class IssueVote(Base):
 
     signal: Mapped[Signal] = relationship(back_populates="votes")
     user: Mapped[User] = relationship(back_populates="votes")
+
+
+class Research(Base):
+    __tablename__ = "researches"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    title: Mapped[str] = mapped_column(String(255), nullable=False)
+    topic: Mapped[str] = mapped_column(Text, nullable=False, default="")
+    keywords: Mapped[list] = mapped_column(JSON, nullable=False, default=list)
+    categories: Mapped[list] = mapped_column(JSON, nullable=False, default=list)
+    status: Mapped[str] = mapped_column(String(32), nullable=False, default="draft")
+    notes: Mapped[str] = mapped_column(Text, nullable=False, default="")
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=utcnow, onupdate=utcnow
+    )
+
+    def to_dict(self) -> dict:
+        return {
+            "id": self.id,
+            "title": self.title,
+            "topic": self.topic,
+            "keywords": self.keywords or [],
+            "categories": self.categories or [],
+            "status": self.status,
+            "notes": self.notes or "",
+            "created_at": self.created_at.isoformat() if self.created_at else None,
+            "updated_at": self.updated_at.isoformat() if self.updated_at else None,
+        }
