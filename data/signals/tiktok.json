@@ -91,7 +91,7 @@
       "hashtags": [],
       "classification": {
         "scores": {},
-        "confidence": 0.848,
+        "confidence": 0.845,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -253,7 +253,7 @@
       "hashtags": [],
       "classification": {
         "scores": {},
-        "confidence": 0.675,
+        "confidence": 0.673,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -351,7 +351,7 @@
       "hashtags": [],
       "classification": {
         "scores": {},
-        "confidence": 0.912,
+        "confidence": 0.911,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -441,7 +441,7 @@
       "hashtags": [],
       "classification": {
         "scores": {},
-        "confidence": 0.918,
+        "confidence": 0.917,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -471,7 +471,7 @@
       "hashtags": [],
       "classification": {
         "scores": {},
-        "confidence": 0.85,
+        "confidence": 0.849,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -561,7 +561,7 @@
       "hashtags": [],
       "classification": {
         "scores": {},
-        "confidence": 0.796,
+        "confidence": 0.794,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -591,7 +591,7 @@
       "hashtags": [],
       "classification": {
         "scores": {},
-        "confidence": 0.847,
+        "confidence": 0.845,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -938,9 +938,9 @@
       "classification": {
         "scores": {
           "emergencies": 0.7,
-          "violent_crime": 0.856
+          "violent_crime": 0.858
         },
-        "confidence": 0.778,
+        "confidence": 0.779,
         "method": "keywords+model",
         "model_version": "nb-v1"
       }
@@ -1159,7 +1159,7 @@
       "hashtags": [],
       "classification": {
         "scores": {},
-        "confidence": 0.759,
+        "confidence": 0.754,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -1189,7 +1189,7 @@
       "hashtags": [],
       "classification": {
         "scores": {},
-        "confidence": 0.759,
+        "confidence": 0.755,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -1249,7 +1249,7 @@
       "hashtags": [],
       "classification": {
         "scores": {},
-        "confidence": 0.766,
+        "confidence": 0.758,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -1349,7 +1349,7 @@
       "hashtags": [],
       "classification": {
         "scores": {},
-        "confidence": 0.851,
+        "confidence": 0.857,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -1693,9 +1693,7 @@
     "title": "Joey is open until midnight weekdays and 1 am on weekends. Decent food but definitely better than fast food. Gelsons is open until 11 if ...",
     "body": "Joey is open until midnight weekdays and 1 am on weekends. Decent food but definitely better than fast food. Gelsons is open until 11 if you want a good grocery store otherwise Ralph\u2019s is open until midnight everyday as well \u2764\ufe0f",
     "url": "https://www.tiktok.com/@emma.erdman/video/7660299880019152158",
-    "categories": [
-      "noise"
-    ],
+    "categories": [],
     "published_utc": "2026-07-15",
     "metadata": {
       "author": "unknown",
@@ -1710,13 +1708,10 @@
       "video_categories": [],
       "hashtags": [],
       "classification": {
-        "scores": {
-          "noise": 0.818
-        },
-        "confidence": 0.818,
-        "method": "model",
-        "model_version": "nb-v1",
-        "rescued": true
+        "scores": {},
+        "confidence": 0.351,
+        "method": "none",
+        "model_version": "nb-v1"
       }
     }
   },
@@ -1776,7 +1771,7 @@
       "hashtags": [],
       "classification": {
         "scores": {},
-        "confidence": 0.793,
+        "confidence": 0.824,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -1838,7 +1833,7 @@
       "hashtags": [],
       "classification": {
         "scores": {},
-        "confidence": 0.759,
+        "confidence": 0.754,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -2141,7 +2136,7 @@
       "hashtags": [],
       "classification": {
         "scores": {},
-        "confidence": 0.912,
+        "confidence": 0.911,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -2529,7 +2524,7 @@
       "weak_trusted_default": false,
       "classification": {
         "scores": {},
-        "confidence": 0.443,
+        "confidence": 0.686,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -2570,7 +2565,7 @@
       ],
       "classification": {
         "scores": {},
-        "confidence": 0.811,
+        "confidence": 0.829,
         "method": "none",
         "model_version": "nb-v1"
       }

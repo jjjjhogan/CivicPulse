@@ -5,7 +5,9 @@
     "title": "Irvine Homes for Sale \u2013 Live Update Irvine continues to stand out for buyers who value planning, lifestyle, schools, and long-term stabil...",
     "body": "Irvine Homes for Sale \u2013 Live Update\n\nIrvine continues to stand out for buyers who value planning, lifestyle, schools, and long-term stability.\n\n\ud83d\udccc View today's Irvine homes\n\ud83d\udc49 https://t.co/FT9wj1sTbd\n Irvine Homes for Sale \u2013 Live Update\n\nIrvine continues to stand out for buyers who value planning, lifestyle, schools, and long-term stability.\n\n\ud83d\udccc View today's Irvine homes\n\ud83d\udc49 https://t.co/FT9wj1sTbd\n\nIf something stands out, message me and I'll help you\nhttps://t.co/SrDlDgtnaU https://t.co/qMJb1asYSd",
     "url": "https://x.com/haghighatusa/status/2084679552270553598",
-    "categories": [],
+    "categories": [
+      "public_safety"
+    ],
     "published_utc": "2026-08-04",
     "metadata": {
       "author_name": "Amin Haghighat | Luxury Real Estate Agent",
@@ -19,10 +21,13 @@
       "views": 58,
       "verified": false,
       "classification": {
-        "scores": {},
-        "confidence": 0.34,
-        "method": "none",
-        "model_version": "nb-v1"
+        "scores": {
+          "public_safety": 0.816
+        },
+        "confidence": 0.816,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
       }
     }
   },
