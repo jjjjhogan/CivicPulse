@@ -9,34 +9,29 @@
 
 ---
 
-## Next — Session 7.5: Phase C #2 hygiene (pre-archive)
+## Done — Session 7.5: Phase C #2 hygiene (pre-archive)
 
 **Goal:** Cut remaining live false positives before Session 8 archive matching — keyword tune, labels for hard/none cases, **manual remove or clear** junk signals, reprocess, re-score gold.
 
-**Scope:** Phase C hygiene only. **No** Research UI, Firebase, or Phase E.
-
-**Branch:** `feature/phase-c-hygiene-s7-5` (from latest `main`).
+**Branch:** `feature/phase-c-hygiene-s7-5`
 
 ### Checklist
 
-- [ ] Spot live FPs (dashboard / gold leftovers from Session 6 notes)
-- [ ] Keyword tweaks in `CATEGORY_KEYWORDS` only where clearly justified
-- [ ] Add hard/wrong/**none** rows to `labeled_signals.json` as needed
-- [ ] Manual: delete or clear categories on obvious junk (lifestyle ads, non-civic fluff)
-- [ ] `reprocess_signals` + sync DB; `rescore_gold.py` before/after
-- [ ] `pytest -q` green; PR
-
-### Agent prompt
-
-> Repo: CivicPulse (`Ryan/`). **Session 7.5** — Phase C #2 hygiene before archive.  
-> Pull `main`. Branch `feature/phase-c-hygiene-s7-5`.  
-> Context: gold = `data/labels/review_batch_02_hand.*`; failures = `failure_clusters_draft.md`; Session 6 left ~9 none-verdict FPs (DB-only news, keyword/model hits).  
-> Do: (1) tighten leftover broad keywords, (2) add none/hard labels, (3) manually remove or uncategorize junk signals in JSON/DB, (4) reprocess + rescore gold (don’t rewrite human verdicts), (5) short before/after note.  
-> Don’t: Research API/UI, Firebase, embeddings, scrape-more-as-fix. Commit only when asked.
+- [x] Spot live FPs (dashboard / gold leftovers from Session 6 notes)
+- [x] Keyword tweaks in `CATEGORY_KEYWORDS` only where clearly justified
+- [x] Add hard/wrong/**none** rows to `labeled_signals.json` as needed
+- [x] Manual: delete or clear categories on obvious junk (lifestyle ads, non-civic fluff)
+- [x] `reprocess_signals` + sync DB; `rescore_gold.py` before/after
+- [x] `pytest -q` green; PR
 
 ### Notes
 
--
+- **Before:** 38/78 (48.7%), 1 regression (id=128)
+- **After:** 40/78 (51.3%), 0 regressions, 22 improvements, +4.3pp vs S5 baseline
+- **Keywords:** replaced bare `accident` with compound phrases (`car accident`, `traffic accident`, `vehicle accident`, `fatal accident`, `accident scene`); removed broad `overpriced` from housing
+- **Labels:** +17 examples (218 total, 55 negatives): legal ads, pet/vet posts, furniture giveaways, restaurant reviews, pharmacy, event listings, lost pet, staffing promo; +2 positives (city safety ranking, FBI scene)
+- **Regression fix:** id=128 "city to raise a family" recovered — conflicting S6 negative replaced with distinct puff-news example
+- **Model rescues:** 9→4 model-only after negatives strengthened `__none__` class
 
 ---
 

@@ -207,7 +207,7 @@
     { "text": "The scariest thing around here is the cost of living honestly", "categories": [] },
     { "text": "South Korean condo listed for forty five hundred a month, three bedrooms and two baths", "categories": [] },
     { "text": "Just saw a really cool CBS story about a homeless guy who got help from the community", "categories": [] },
-    { "text": "City ranked among the top places to raise a family again this year", "categories": [] },
+    { "text": "City voted best college town in a travel magazine readers poll this year", "categories": [] },
     { "text": "Amenities at the new complex include coworking lounge and resort style pool", "categories": [] },
     { "text": "Summer camp sign ups are open, the kids loved it last year", "categories": [] },
 
@@ -221,6 +221,25 @@
 
     { "text": "Somebody swiped every Amazon package off our porch on the same day they were delivered", "categories": ["property_crime"] },
     { "text": "Security camera caught a guy going through glove boxes on the block at four in the morning", "categories": ["property_crime"] },
-    { "text": "They spray painted over the mural we just finished and smashed the window next to it", "categories": ["property_crime"] }
+    { "text": "They spray painted over the mural we just finished and smashed the window next to it", "categories": ["property_crime"] },
+
+    { "text": "After an accident, what helps a personal injury claim the most according to legal experts", "categories": [] },
+    { "text": "Top rated personal injury and accident attorneys serving clients throughout the county", "categories": [] },
+    { "text": "If you were injured in a car wreck, call our experienced trial lawyers for a free consultation", "categories": [] },
+    { "text": "Giving away twin box springs, free if you can pick up today, located near the plaza", "categories": [] },
+    { "text": "Affordable dog x-rays and vet checkups at the clinic on Barranca, walk-ins welcome", "categories": [] },
+    { "text": "Petco sent the wrong order again, anyone else having issues with their deliveries lately", "categories": [] },
+    { "text": "Best pharmacy and manufacturer for generic Vyvanse, looking for recommendations", "categories": [] },
+    { "text": "Possibly fun events happening this weekend, farmers market and outdoor movie night", "categories": [] },
+    { "text": "Joey's restaurant on Main has the best pasta in town, go try the mushroom ravioli", "categories": [] },
+    { "text": "Why so many people choose to start their careers with a local staffing agency and make a change", "categories": [] },
+    { "text": "Beautiful furnished apartment for rent in Gangnam, three rooms with parking included", "categories": [] },
+    { "text": "Who has the best pet food delivery service around here, my dog is super picky", "categories": [] },
+    { "text": "Splash into summer with free swim lessons and pool parties at the community center", "categories": [] },
+    { "text": "Asian identity video talking about growing up near the big apartment complex", "categories": [] },
+    { "text": "Lost my cat near the shopping center, orange tabby answers to Mochi, please help", "categories": [] },
+
+    { "text": "City named one of the safest in America to raise a family based on crime stats and school ratings", "categories": ["public_safety"] },
+    { "text": "FBI agents seen outside an office building downtown, multiple unmarked vehicles on scene", "categories": ["public_safety", "immigration"] }
   ]
 }

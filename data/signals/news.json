@@ -11,7 +11,7 @@
       "outlet_id": "irvine-standard",
       "classification": {
         "scores": {},
-        "confidence": 0.694,
+        "confidence": 0.687,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -29,7 +29,7 @@
       "outlet_id": "irvine-standard",
       "classification": {
         "scores": {},
-        "confidence": 0.936,
+        "confidence": 0.83,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -47,7 +47,7 @@
       "outlet_id": "irvine-standard",
       "classification": {
         "scores": {},
-        "confidence": 0.624,
+        "confidence": 0.603,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -65,7 +65,7 @@
       "outlet_id": "irvine-standard",
       "classification": {
         "scores": {},
-        "confidence": 0.705,
+        "confidence": 0.728,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -77,15 +77,20 @@
     "title": "No. 3 city in America to raise a family",
     "body": "Irvine landed at No. 3 on Wallet\u00adHub\u2019s national \u201cBest Places to Raise a Family\u201d ranking, driven by its safety record, strong schools and low divorce rates. Analysts compared 182 U.S. [\u2026]",
     "url": "https://www.irvinestandard.com/2026/no-3-city-in-america-to-raise-a-family-2/",
-    "categories": [],
+    "categories": [
+      "public_safety"
+    ],
     "published_utc": "2026-06-30",
     "metadata": {
       "outlet_id": "irvine-standard",
       "classification": {
-        "scores": {},
-        "confidence": 0.998,
-        "method": "none",
-        "model_version": "nb-v1"
+        "scores": {
+          "public_safety": 0.9
+        },
+        "confidence": 0.9,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
       }
     }
   },
@@ -101,7 +106,7 @@
       "outlet_id": "irvine-standard",
       "classification": {
         "scores": {},
-        "confidence": 0.731,
+        "confidence": 0.643,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -119,7 +124,7 @@
       "outlet_id": "irvine-standard",
       "classification": {
         "scores": {},
-        "confidence": 0.998,
+        "confidence": 0.994,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -137,7 +142,7 @@
       "outlet_id": "irvine-standard",
       "classification": {
         "scores": {},
-        "confidence": 0.938,
+        "confidence": 0.927,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -155,7 +160,7 @@
       "outlet_id": "irvine-standard",
       "classification": {
         "scores": {},
-        "confidence": 0.76,
+        "confidence": 0.763,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -167,20 +172,15 @@
     "title": "Why So Many People Choose to Start with Ryan and Change",
     "body": "One of the biggest reasons so many people struggle to start isn\u2019t a lack of opportunity. It\u2019s a lack of direction. When you\u2019re trying to build an e-commerce business on your own, it\u2019s easy to become overwhelmed. One person tells you to sell one type of product, another tells you to use a completely different [\u2026] \n The post  Why So Many People Choose to Start with Ryan and Change  appeared first on  Irvine Weekly .",
     "url": "https://irvineweekly.com/why-so-many-people-choose-to-start-with-ryan-and-change/?utm_source=rss&utm_medium=rss&utm_campaign=why-so-many-people-choose-to-start-with-ryan-and-change",
-    "categories": [
-      "public_safety"
-    ],
+    "categories": [],
     "published_utc": "2026-07-24",
     "metadata": {
       "outlet_id": "irvine-weekly",
       "classification": {
-        "scores": {
-          "public_safety": 0.9
-        },
-        "confidence": 0.9,
-        "method": "model",
-        "model_version": "nb-v1",
-        "rescued": true
+        "scores": {},
+        "confidence": 0.994,
+        "method": "none",
+        "model_version": "nb-v1"
       }
     }
   },
@@ -190,18 +190,14 @@
     "title": "After an Accident: What Helps a Personal Injury Claim Most",
     "body": "Details start slipping faster than people expect after an accident. A street name goes fuzzy, the weather becomes a blur, and the exact order of events starts to wobble by the time the day is over. That\u2019s usually why early documents are important. For anyone trying to understand what may help a claim later, the [\u2026] \n The post  After an Accident: What Helps a Personal Injury Claim Most  appeared first on  Irvine Weekly .",
     "url": "https://irvineweekly.com/after-an-accident-what-helps-a-personal-injury-claim-most/?utm_source=rss&utm_medium=rss&utm_campaign=after-an-accident-what-helps-a-personal-injury-claim-most",
-    "categories": [
-      "traffic_safety"
-    ],
+    "categories": [],
     "published_utc": "2026-03-24",
     "metadata": {
       "outlet_id": "irvine-weekly",
       "classification": {
-        "scores": {
-          "traffic_safety": 0.7
-        },
-        "confidence": 0.7,
-        "method": "keywords",
+        "scores": {},
+        "confidence": 1.0,
+        "method": "none",
         "model_version": "nb-v1"
       }
     }
@@ -240,7 +236,7 @@
       "outlet_id": "irvine-weekly",
       "classification": {
         "scores": {},
-        "confidence": 0.89,
+        "confidence": 0.963,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -274,18 +270,14 @@
     "title": "Karns and Karns Personal Injury and Accident Attorneys Enhances Presence in Orange County, California",
     "body": "Karns and Karns Personal Injury and Accident Attorneys, a leading personal injury law firm, is proud to announce expanding its services with new locations throughout Orange County, California. This strategic growth strengthens the firm\u2019s commitment to providing accessible and exceptional legal representation to accident victims across the vibrant communities of Orange County and the surrounding [\u2026] \n The post  Karns and Karns Personal Injury and Accident Attorneys Enhances Presence in Orange County, California  appeared first on  Irvine Weekly .",
     "url": "https://irvineweekly.com/karns-and-karns-personal-injury-and-accident-attorneys-enhances-presence-in-orange-county-california/?utm_source=rss&utm_medium=rss&utm_campaign=karns-and-karns-personal-injury-and-accident-attorneys-enhances-presence-in-orange-county-california",
-    "categories": [
-      "traffic_safety"
-    ],
+    "categories": [],
     "published_utc": "2025-06-04",
     "metadata": {
       "outlet_id": "irvine-weekly",
       "classification": {
-        "scores": {
-          "traffic_safety": 0.7
-        },
-        "confidence": 0.7,
-        "method": "keywords",
+        "scores": {},
+        "confidence": 1.0,
+        "method": "none",
         "model_version": "nb-v1"
       }
     }
@@ -302,7 +294,7 @@
       "outlet_id": "irvine-weekly",
       "classification": {
         "scores": {},
-        "confidence": 0.977,
+        "confidence": 0.961,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -342,7 +334,7 @@
       "outlet_id": "voice-of-oc",
       "classification": {
         "scores": {},
-        "confidence": 0.579,
+        "confidence": 0.895,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -355,16 +347,16 @@
     "body": "The shooting came after police had been called to the house multiple times, but family members say Daniel Meltvedt could have been talked down.  \n Voice of OC is Orange County's nonprofit newsroom. We rely on donations from people like you to sustain our news agency. Please make a contribution today: https://voiceofoc.org/donate",
     "url": "https://voiceofoc.org/2026/07/family-of-autistic-man-killed-by-irvine-police-question-what-went-wrong-in-fatal-encounter/",
     "categories": [
-      "violent_crime",
-      "public_safety"
+      "public_safety",
+      "violent_crime"
     ],
     "published_utc": "2026-07-28",
     "metadata": {
       "outlet_id": "voice-of-oc",
       "classification": {
         "scores": {
-          "violent_crime": 0.77,
-          "public_safety": 0.7
+          "violent_crime": 0.7,
+          "public_safety": 0.77
         },
         "confidence": 0.735,
         "method": "keywords+model",

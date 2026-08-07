@@ -379,9 +379,7 @@
   {
     "outlet": "TikTok #newportbeach",
     "title": "Joey is open until midnight weekdays and 1 am on weekends. Decent food but definitely better than fast food. Gelsons is open until 11 if ...",
-    "categories": [
-      "noise"
-    ],
+    "categories": [],
     "published_utc": "2026-07-15"
   },
   {
@@ -565,9 +563,7 @@
   {
     "outlet": "r/irvine",
     "title": "Giving Away Twin Box Springs and Coffee Table",
-    "categories": [
-      "public_safety"
-    ],
+    "categories": [],
     "published_utc": "2026-08-04"
   },
   {
@@ -605,33 +601,29 @@
     "outlet": "r/irvine",
     "title": "Emergency Exit Tustin Market Place Regal",
     "categories": [
-      "public_safety",
-      "emergencies"
-    ],
-    "published_utc": "2026-08-01"
-  },
-  {
-    "outlet": "r/irvine",
-    "title": "Pharmacy & Manufacturer for Vyvanse",
-    "categories": [
+      "emergencies",
       "public_safety"
     ],
     "published_utc": "2026-08-01"
   },
   {
     "outlet": "r/irvine",
+    "title": "Pharmacy & Manufacturer for Vyvanse",
+    "categories": [],
+    "published_utc": "2026-08-01"
+  },
+  {
+    "outlet": "r/irvine",
     "title": "Possibly fun events coming up in Irvine...",
-    "categories": [
-      "sanitation"
-    ],
+    "categories": [],
     "published_utc": "2026-07-31"
   },
   {
     "outlet": "r/irvine",
     "title": "Spotted ICE agents arresting Asian man on Irvine Blvd near Woodbury",
     "categories": [
-      "public_safety",
-      "immigration"
+      "immigration",
+      "public_safety"
     ],
     "published_utc": "2026-07-29"
   },
@@ -663,9 +655,7 @@
   {
     "outlet": "r/irvine",
     "title": "Petco Order Wrong - Hill\u2019s Prescription Cat Food",
-    "categories": [
-      "public_safety"
-    ],
+    "categories": [],
     "published_utc": "2026-07-29"
   },
   {
@@ -676,6 +666,14 @@
       "property_crime"
     ],
     "published_utc": "2026-07-29"
+  },
+  {
+    "outlet": "@haghighatusa",
+    "title": "Irvine Homes for Sale \u2013 Live Update Irvine continues to stand out for buyers who value planning, lifestyle, schools, and long-term stabil...",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-04"
   },
   {
     "outlet": "Irvine Standard",
@@ -704,7 +702,9 @@
   {
     "outlet": "Irvine Standard",
     "title": "No. 3 city in America to raise a family",
-    "categories": [],
+    "categories": [
+      "public_safety"
+    ],
     "published_utc": "2026-06-30"
   },
   {
@@ -734,17 +734,13 @@
   {
     "outlet": "Irvine Weekly",
     "title": "Why So Many People Choose to Start with Ryan and Change",
-    "categories": [
-      "public_safety"
-    ],
+    "categories": [],
     "published_utc": "2026-07-24"
   },
   {
     "outlet": "Irvine Weekly",
     "title": "After an Accident: What Helps a Personal Injury Claim Most",
-    "categories": [
-      "traffic_safety"
-    ],
+    "categories": [],
     "published_utc": "2026-03-24"
   },
   {
@@ -772,9 +768,7 @@
   {
     "outlet": "Irvine Weekly",
     "title": "Karns and Karns Personal Injury and Accident Attorneys Enhances Presence in Orange County, California",
-    "categories": [
-      "traffic_safety"
-    ],
+    "categories": [],
     "published_utc": "2025-06-04"
   },
   {
@@ -801,8 +795,8 @@
     "outlet": "Voice of OC",
     "title": "Family of Autistic Man Killed by Irvine Police Question What Went Wrong in Fatal Encounter",
     "categories": [
-      "violent_crime",
-      "public_safety"
+      "public_safety",
+      "violent_crime"
     ],
     "published_utc": "2026-07-28"
   },

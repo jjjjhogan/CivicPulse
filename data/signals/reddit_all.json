@@ -16,7 +16,7 @@
       "flair": null,
       "classification": {
         "scores": {},
-        "confidence": 0.967,
+        "confidence": 0.998,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -39,7 +39,7 @@
       "flair": null,
       "classification": {
         "scores": {},
-        "confidence": 0.836,
+        "confidence": 0.943,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -62,7 +62,7 @@
       "flair": null,
       "classification": {
         "scores": {},
-        "confidence": 0.904,
+        "confidence": 0.97,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -74,9 +74,7 @@
     "title": "Giving Away Twin Box Springs and Coffee Table",
     "body": "Giving Away Twin Box Springs and Coffee Table\nHave two twin size box springs to give away - free. One is completely brand new and in the box. It needs to be assembled, it uses wooden slats, and is super easy to put together. The other one is alre Have two twin size box springs to give away - free. One is completely brand new and in the box. It needs to be assembled, it uses wooden slats, and is super easy to put together. The other one is already put together, was slightly used (so, still like new) before being put away, and is metal, instead of wood. Again, both are twin size.\nThen I have a used coffee table to give away, also. Rectangle shape, about 2ft by 3.5ft., metal legs (black), and dark wood color top. Like I said, it's used, so it does have some marks from my kids coloring with acrylic markers and a few scratches.\nFeel free to DM me if you're interested! I'll be getting rid of it all by the end of this week if no one takes them. Also, you'll have to pick up from me, as I cannot deliver them to you or meet you anywhere. I don't have pictures to post either. Sorry. TIA to everyone reading this and for anyone taking these items!\nAlso, thanks to Mod for allowing me to post.\nEdit: to help anyone deciding, my location is the West Park area of Irvine.",
     "url": "https://old.reddit.com/r/irvine/comments/1vff5g1/giving_away_twin_box_springs_and_coffee_table/",
-    "categories": [
-      "public_safety"
-    ],
+    "categories": [],
     "published_utc": "2026-08-04",
     "metadata": {
       "author": "musical_pizza",
@@ -86,13 +84,10 @@
       "search_query": "irvine",
       "flair": null,
       "classification": {
-        "scores": {
-          "public_safety": 0.9
-        },
-        "confidence": 0.9,
-        "method": "model",
-        "model_version": "nb-v1",
-        "rescued": true
+        "scores": {},
+        "confidence": 1.0,
+        "method": "none",
+        "model_version": "nb-v1"
       }
     }
   },
@@ -113,7 +108,7 @@
       "flair": null,
       "classification": {
         "scores": {},
-        "confidence": 0.832,
+        "confidence": 0.831,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -136,7 +131,7 @@
       "flair": null,
       "classification": {
         "scores": {},
-        "confidence": 0.711,
+        "confidence": 1.0,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -213,7 +208,7 @@
       "flair": null,
       "classification": {
         "scores": {},
-        "confidence": 0.793,
+        "confidence": 0.997,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -259,7 +254,7 @@
       "flair": null,
       "classification": {
         "scores": {},
-        "confidence": 0.83,
+        "confidence": 0.827,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -311,7 +306,7 @@
       "flair": null,
       "classification": {
         "scores": {},
-        "confidence": 0.947,
+        "confidence": 0.999,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -334,7 +329,7 @@
       "flair": null,
       "classification": {
         "scores": {},
-        "confidence": 0.798,
+        "confidence": 0.859,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -357,7 +352,7 @@
       "flair": null,
       "classification": {
         "scores": {},
-        "confidence": 0.768,
+        "confidence": 0.766,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -370,8 +365,8 @@
     "body": "Emergency Exit Tustin Market Place Regal\nMy theater and probably I think the full building was just evacuated does anyone know what happened? It\u2019s a big movie night with Spider-Man. We were 20 minutes into the movie and an emergency exit mes My theater and probably I think the full building was just evacuated does anyone know what happened? It\u2019s a big movie night with Spider-Man. We were 20 minutes into the movie and an emergency exit message showed up on the screen. Really scary.",
     "url": "https://old.reddit.com/r/irvine/comments/1vcbmd9/emergency_exit_tustin_market_place_regal/",
     "categories": [
-      "public_safety",
-      "emergencies"
+      "emergencies",
+      "public_safety"
     ],
     "published_utc": "2026-08-01",
     "metadata": {
@@ -384,9 +379,9 @@
       "classification": {
         "scores": {
           "emergencies": 0.8,
-          "public_safety": 0.9
+          "public_safety": 0.746
         },
-        "confidence": 0.85,
+        "confidence": 0.773,
         "method": "keywords+model",
         "model_version": "nb-v1"
       }
@@ -398,9 +393,7 @@
     "title": "Pharmacy & Manufacturer for Vyvanse",
     "body": "Pharmacy & Manufacturer for Vyvanse\nTLDR: if you\u2019re on generic Vyvanse with Lannett pharmaceuticals listed as the manufacturer on the bottle, what pharmacy in Irvine did you get it from?\nFor those who take Vyvanse: where do you pick it  TLDR: if you\u2019re on generic Vyvanse with Lannett pharmaceuticals listed as the manufacturer on the bottle, what pharmacy in Irvine did you get it from?\nFor those who take Vyvanse: where do you pick it up and what manufacturer is listed on the bottle?\nI was taking generic vyvanse 40mg for years, and it was instrumental in my daily functioning. Its manufacturer was Lannett and I would pick it up from CVS. after around February 2025, CVS started giving me the same medicine, but from different manufacturers. Hikma pharmaceuticals has been the primary one. And since then, I\u2019ve had horrendous focus and executive functioning. The medicine keeps me awake and that\u2019s it. I even went up to 50mg in May 2025, but it didn\u2019t make a difference. Last month, I requested that my doctor send in a prescription for name brand Vyvanse, as I am deeply struggling with the generic\u2019s inaffectiveness. This time, it was from Takeda pharmaceuticals. It didn\u2019t make any difference.\nBefore you call me crazy, please see [r/ThisAintAdderall](r/ThisAintAdderall), there are hundreds of people saying their ADHD medications have stopped working in the past 1-2 years. I have never misused this medication nor do I plan to.\nThe only time I\u2019ve had success is with generic Vyvanse 40mg from Lannett. I am asking if anyone who currently takes generic Vyvanse has had Lannett as the manufacturer, and what pharmacy they use. My CVS only uses Hikma for generic vyvanse. Please comment if you know a pharmacy in Irvine or have had a similar experience.",
     "url": "https://old.reddit.com/r/irvine/comments/1vc88s1/pharmacy_manufacturer_for_vyvanse/",
-    "categories": [
-      "public_safety"
-    ],
+    "categories": [],
     "published_utc": "2026-08-01",
     "metadata": {
       "author": "frogenjoyer500",
@@ -410,13 +403,10 @@
       "search_query": "irvine",
       "flair": null,
       "classification": {
-        "scores": {
-          "public_safety": 0.9
-        },
-        "confidence": 0.9,
-        "method": "model",
-        "model_version": "nb-v1",
-        "rescued": true
+        "scores": {},
+        "confidence": 1.0,
+        "method": "none",
+        "model_version": "nb-v1"
       }
     }
   },
@@ -426,9 +416,7 @@
     "title": "Possibly fun events coming up in Irvine...",
     "body": "Possibly fun events coming up in Irvine...\nI subscribe to the City of Irvine email blasts.\nThere are some interesting things coming up. Sure, not for everybody but could be fun.\nAugust 8 - Some kind of Homecoming Dance at The Great Park. Celeb I subscribe to the City of Irvine email blasts.\nThere are some interesting things coming up. Sure, not for everybody but could be fun.\nAugust 8 - Some kind of Homecoming Dance at The Great Park. Celebrating 55 years of Irvine.\nI believe there is a ribbon cutting coming up for the new Jeffrey Open Space Trail Bridge over the 5. Also in August.\nDaisy Festival...or whatever that is called at The Great Park.\nSubscribe to the email blasts if you'd like.",
     "url": "https://old.reddit.com/r/irvine/comments/1vc0eje/possibly_fun_events_coming_up_in_irvine/",
-    "categories": [
-      "sanitation"
-    ],
+    "categories": [],
     "published_utc": "2026-07-31",
     "metadata": {
       "author": "plepster",
@@ -438,13 +426,10 @@
       "search_query": "irvine",
       "flair": null,
       "classification": {
-        "scores": {
-          "sanitation": 0.9
-        },
-        "confidence": 0.9,
-        "method": "model",
-        "model_version": "nb-v1",
-        "rescued": true
+        "scores": {},
+        "confidence": 0.818,
+        "method": "none",
+        "model_version": "nb-v1"
       }
     }
   },
@@ -467,9 +452,9 @@
       "flair": null,
       "classification": {
         "scores": {
-          "public_safety": 0.9
+          "public_safety": 0.846
         },
-        "confidence": 0.9,
+        "confidence": 0.846,
         "method": "model",
         "model_version": "nb-v1",
         "rescued": true
@@ -493,7 +478,7 @@
       "flair": null,
       "classification": {
         "scores": {},
-        "confidence": 0.71,
+        "confidence": 0.694,
         "method": "none",
         "model_version": "nb-v1"
       }
@@ -506,8 +491,8 @@
     "body": "Spotted ICE agents arresting Asian man on Irvine Blvd near Woodbury\nI passed Irvine PD cruiser making a traffic stop on a white Tesla.  The officer was in the process of asking the driver to step out of the vehicle.  The Asian man was young- approximately early 30\u2019s o I passed Irvine PD cruiser making a traffic stop on a white Tesla.  The officer was in the process of asking the driver to step out of the vehicle.  The Asian man was young- approximately early 30\u2019s or late 20\u2019s.  The driver was stepping out of the vehicle as ai passed.\nOn my way back from my errand approximately 20 minutes later I passed the same traffic stop going the other direction on Irvine Blvd. This time, there were two additional unmarked cars with law enforcement lights and dark tint.  One was a Honda Odyssey minivan, the other was a Jeep Grand Cherokee.  There were about 5 ICE agents surrounding the Asian gentleman who was now in handcuffs and sitting on the curb.\nHas there been a lot of ICE activity in Irvine area targeting people of Asian descent?  Sorry, no pics since I was driving at the time.",
     "url": "https://old.reddit.com/r/irvine/comments/1va384r/spotted_ice_agents_arresting_asian_man_on_irvine/",
     "categories": [
-      "public_safety",
-      "immigration"
+      "immigration",
+      "public_safety"
     ],
     "published_utc": "2026-07-29",
     "metadata": {
@@ -520,10 +505,10 @@
       "classification": {
         "scores": {
           "public_safety": 0.7,
-          "immigration": 0.7
+          "immigration": 0.77
         },
-        "confidence": 0.7,
-        "method": "keywords",
+        "confidence": 0.735,
+        "method": "keywords+model",
         "model_version": "nb-v1"
       }
     }
@@ -576,9 +561,9 @@
       "flair": null,
       "classification": {
         "scores": {
-          "noise": 0.88
+          "noise": 0.887
         },
-        "confidence": 0.88,
+        "confidence": 0.887,
         "method": "model",
         "model_version": "nb-v1",
         "rescued": true
@@ -591,9 +576,7 @@
     "title": "Petco Order Wrong - Hill\u2019s Prescription Cat Food",
     "body": "Petco Order Wrong - Hill\u2019s Prescription Cat Food\nHello!\nI received the wrong order and received someone\u2019s Hill\u2019s Prescription Diet for Urinary Care. If this is you, please message me. I would love to get this in the correct hands if you can provide  Hello!\nI received the wrong order and received someone\u2019s Hill\u2019s Prescription Diet for Urinary Care. If this is you, please message me. I would love to get this in the correct hands if you can provide proof. I will bring to Irvine animal shelter if not claimed.",
     "url": "https://old.reddit.com/r/irvine/comments/1v9jgsq/petco_order_wrong_hills_prescription_cat_food/",
-    "categories": [
-      "public_safety"
-    ],
+    "categories": [],
     "published_utc": "2026-07-29",
     "metadata": {
       "author": "TopTittyTy",
@@ -603,13 +586,10 @@
       "search_query": "irvine",
       "flair": null,
       "classification": {
-        "scores": {
-          "public_safety": 0.834
-        },
-        "confidence": 0.834,
-        "method": "model",
-        "model_version": "nb-v1",
-        "rescued": true
+        "scores": {},
+        "confidence": 0.991,
+        "method": "none",
+        "model_version": "nb-v1"
       }
     }
   },
@@ -630,7 +610,7 @@
       "flair": null,
       "classification": {
         "scores": {},
-        "confidence": 0.488,
+        "confidence": 0.406,
         "method": "none",
         "model_version": "nb-v1"
       }

@@ -107,7 +107,11 @@ CATEGORY_KEYWORDS: dict[str, list[str]] = {
     "traffic_safety": [
         "traffic collision",
         "crash",
-        "accident",
+        "car accident",
+        "traffic accident",
+        "vehicle accident",
+        "fatal accident",
+        "accident scene",
         "hit and run",
         "speeding",
         "reckless driving",
@@ -182,7 +186,6 @@ CATEGORY_KEYWORDS: dict[str, list[str]] = {
         "zoning",
         "landlord",
         "tenant",
-        "overpriced",
     ],
     "immigration": [
         "immigration",
