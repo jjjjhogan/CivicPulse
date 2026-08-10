@@ -222,3 +222,83 @@
   font-size: 0.92rem;
   color: var(--ink-deep);
 }
+
+.panel-head-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-sm {
+  font-size: 0.82rem;
+  padding: 7px 16px;
+}
+
+/* ── archive hits ────────────────────────────────────── */
+
+.hits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.hit-card {
+  padding: 14px 18px;
+  border: 1.5px solid #e4e8dc;
+  border-radius: 12px;
+}
+
+.hit-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.hit-title {
+  font-weight: 600;
+  font-size: 0.94rem;
+  color: var(--ink-deep);
+  text-decoration: none;
+}
+
+.hit-title:hover {
+  text-decoration: underline;
+}
+
+.hit-score {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #7a8a6c;
+  white-space: nowrap;
+}
+
+.hit-body {
+  font-size: 0.85rem;
+  color: #5a6b4a;
+  margin: 6px 0 0;
+  line-height: 1.45;
+}
+
+.hit-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+  align-items: center;
+}
+
+.hit-source {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #7a8a6c;
+  letter-spacing: 0.04em;
+}
+
+.hit-reason {
+  font-size: 0.72rem;
+  color: #999;
+  margin-left: auto;
+}

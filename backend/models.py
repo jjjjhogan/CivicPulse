@@ -1,10 +1,10 @@
-"""ORM models: User, Signal, ScrapeJob, IssueVote, Research."""
+"""ORM models: User, Signal, ScrapeJob, IssueVote, Research, ResearchHit."""
 
 from __future__ import annotations
 
 from datetime import datetime, timezone
 
-from sqlalchemy import DateTime, ForeignKey, Integer, String, Text, UniqueConstraint
+from sqlalchemy import DateTime, Float, ForeignKey, Integer, String, Text, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.types import JSON
 
@@ -144,8 +144,12 @@ class Research(Base):
         DateTime(timezone=True), default=utcnow, onupdate=utcnow
     )
 
-    def to_dict(self) -> dict:
-        return {
+    hits: Mapped[list[ResearchHit]] = relationship(
+        back_populates="research", cascade="all, delete-orphan"
+    )
+
+    def to_dict(self, *, include_hits: bool = False) -> dict:
+        payload = {
             "id": self.id,
             "title": self.title,
             "topic": self.topic,
@@ -155,4 +159,40 @@ class Research(Base):
             "notes": self.notes or "",
             "created_at": self.created_at.isoformat() if self.created_at else None,
             "updated_at": self.updated_at.isoformat() if self.updated_at else None,
+        }
+        if include_hits:
+            payload["hits"] = [h.to_dict() for h in self.hits]
+            payload["hit_count"] = len(self.hits)
+        return payload
+
+
+class ResearchHit(Base):
+    __tablename__ = "research_hits"
+    __table_args__ = (
+        UniqueConstraint("research_id", "signal_id", name="uq_research_hit"),
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    research_id: Mapped[int] = mapped_column(
+        ForeignKey("researches.id", ondelete="CASCADE"), nullable=False, index=True
+    )
+    signal_id: Mapped[int] = mapped_column(
+        ForeignKey("signals.id", ondelete="CASCADE"), nullable=False, index=True
+    )
+    match_reason: Mapped[str] = mapped_column(String(255), nullable=False, default="")
+    score: Mapped[float] = mapped_column(Float, nullable=False, default=0.0)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+    research: Mapped[Research] = relationship(back_populates="hits")
+    signal: Mapped[Signal] = relationship()
+
+    def to_dict(self) -> dict:
+        return {
+            "id": self.id,
+            "research_id": self.research_id,
+            "signal_id": self.signal_id,
+            "match_reason": self.match_reason,
+            "score": self.score,
+            "signal": self.signal.to_dict() if self.signal else None,
+            "created_at": self.created_at.isoformat() if self.created_at else None,
         }
