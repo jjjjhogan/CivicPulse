@@ -9,6 +9,7 @@ import sys
 import threading
 
 from backend.config import (
+    DATA_BACKEND,
     NEWS_DEFAULTS,
     PROCESS_REDDIT,
     PROCESS_TWITTER,
@@ -18,12 +19,12 @@ from backend.config import (
     SCRAPE_TIKTOK,
     TIKTOK_DEFAULTS,
 )
-from backend.db import SessionLocal
-from backend.models import ScrapeJob, utcnow
+from backend.models import utcnow
+from backend.store import get_job_store_standalone
 from scrapers.json_payload import ImportPayloadError, parse_import_payload
 
 _job_lock = threading.Lock()
-_running_job_id: int | None = None
+_running_job_id = None
 
 
 def _news_outlet_ids() -> list[str]:
@@ -194,7 +195,6 @@ def friendly_scraper_error(*, source: str | None, returncode: int, log: str) -> 
             "See docs/TIKTOK_SCRAPE.md."
         )
 
-    # Prefer the last non-empty log line when it already looks explanatory.
     for line in reversed(text.splitlines()):
         stripped = line.strip()
         if stripped and not stripped.startswith("Traceback"):
@@ -209,8 +209,9 @@ def friendly_scraper_error(*, source: str | None, returncode: int, log: str) -> 
     return f"Scraper exited with code {returncode}"
 
 
-def _run_job(job_id: int, cmd: list[str]) -> None:
+def _run_job(job_id, cmd: list[str]) -> None:
     global _running_job_id
+    store = get_job_store_standalone()
     try:
         env = os.environ.copy()
         env.setdefault("PYTHONIOENCODING", "utf-8")
@@ -225,66 +226,65 @@ def _run_job(job_id: int, cmd: list[str]) -> None:
             env=env,
         )
         log = (result.stdout or "") + (result.stderr or "")
-        sync_source = None
-        db = SessionLocal()
-        try:
-            job = db.get(ScrapeJob, job_id)
-            if job is None:
-                return
-            sync_source = job.source
-            job.log = log
-            job.exit_code = result.returncode
-            job.finished_at = utcnow()
-            if result.returncode == 0:
-                job.status = "completed"
-                job.error = None
-            else:
-                job.status = "failed"
-                job.error = friendly_scraper_error(
+        job = store.get_job(job_id)
+        if job is None:
+            return
+        sync_source = job["source"]
+        if result.returncode == 0:
+            store.update_job(
+                job_id,
+                log=log,
+                exit_code=result.returncode,
+                finished_at=utcnow(),
+                status="completed",
+                error=None,
+            )
+        else:
+            store.update_job(
+                job_id,
+                log=log,
+                exit_code=result.returncode,
+                finished_at=utcnow(),
+                status="failed",
+                error=friendly_scraper_error(
                     source=sync_source,
                     returncode=result.returncode,
                     log=log,
-                )
-            db.commit()
-        finally:
-            db.close()
+                ),
+            )
 
-        if result.returncode == 0 and sync_source:
+        if result.returncode == 0 and sync_source and DATA_BACKEND == "sqlite":
             try:
                 from backend.signals_import import sync_signals_after_scrape
 
                 sync_signals_after_scrape(sync_source)
             except Exception as sync_exc:  # noqa: BLE001
-                db = SessionLocal()
-                try:
-                    job = db.get(ScrapeJob, job_id)
-                    if job is not None:
-                        job.log = (job.log or "") + f"\n[signal sync warning] {sync_exc}"
-                        db.commit()
-                finally:
-                    db.close()
+                existing = store.get_job(job_id)
+                if existing is not None:
+                    store.update_job(
+                        job_id,
+                        log=(existing.get("log") or "") + f"\n[signal sync warning] {sync_exc}",
+                    )
     except Exception as exc:  # noqa: BLE001
-        db = SessionLocal()
-        try:
-            job = db.get(ScrapeJob, job_id)
-            if job is not None:
-                job.status = "failed"
-                job.error = friendly_scraper_error(
-                    source=job.source,
+        job = store.get_job(job_id)
+        if job is not None:
+            store.update_job(
+                job_id,
+                status="failed",
+                error=friendly_scraper_error(
+                    source=job.get("source"),
                     returncode=-1,
                     log=str(exc),
-                )
-                job.finished_at = utcnow()
-                db.commit()
-        finally:
-            db.close()
+                ),
+                finished_at=utcnow(),
+            )
     finally:
         with _job_lock:
             if _running_job_id == job_id:
                 _running_job_id = None
 
 
-def start_job(job_id: int, cmd: list[str]) -> bool:
+def start_job(job_id, cmd: list[str]) -> bool:
     """Mark job running and spawn worker. Returns False if another job is active."""
     global _running_job_id
     with _job_lock:
@@ -292,22 +292,22 @@ def start_job(job_id: int, cmd: list[str]) -> bool:
             return False
         _running_job_id = job_id
 
-    db = SessionLocal()
-    try:
-        job = db.get(ScrapeJob, job_id)
-        if job is None:
-            with _job_lock:
-                _running_job_id = None
-            return False
-        job.status = "running"
-        job.command = " ".join(cmd)
-        job.started_at = utcnow()
-        job.error = None
-        job.log = ""
-        job.exit_code = None
-        db.commit()
-    finally:
-        db.close()
+    store = get_job_store_standalone()
+    job = store.get_job(job_id)
+    if job is None:
+        with _job_lock:
+            _running_job_id = None
+        return False
+
+    store.update_job(
+        job_id,
+        status="running",
+        command=" ".join(cmd),
+        started_at=utcnow(),
+        error=None,
+        log="",
+        exit_code=None,
+    )
 
     thread = threading.Thread(target=_run_job, args=(job_id, cmd), daemon=True)
     thread.start()

@@ -105,6 +105,71 @@ Firebase/Render, import/prune/backup rewrites, new gather jobs, embeddings, clas
 
 ---
 
+## Done — Session 9: Firestore project + emulator docs
+
+**Branch:** `feature/firestore-s9-11`
+
+### Build
+
+- [x] `firebase.json`, `firestore.rules`, `firestore.indexes.json`
+- [x] `backend/firestore.py` — lazy Firestore client via Firebase Admin SDK
+- [x] `backend/config.py` — `DATA_BACKEND` env var (`sqlite` | `firestore`)
+- [x] `.env.example` — Firestore env vars documented
+- [x] `docs/FIRESTORE_SETUP.md` — full emulator setup guide
+- [x] `requirements.txt` — `firebase-admin>=6.4.0`
+
+### Exit
+
+- [x] `firebase emulators:start --only firestore` documented
+- [x] `pytest -q` green — 75 tests, 0 regressions
+
+---
+
+## Done — Session 10: Store interface + Firestore signals
+
+**Branch:** `feature/firestore-s9-11`
+
+### Build
+
+- [x] `backend/store.py` — `SignalStore` protocol + `get_signal_store()` factory
+- [x] `backend/store_sqlite.py` — SQLite implementation wrapping existing queries
+- [x] `backend/store_firestore.py` — Firestore implementation
+- [x] `backend/routes/signals.py` — `/api/signals` and `/api/signals/feed` use store
+- [x] `DATA_BACKEND` switches between sqlite and firestore at runtime
+
+### Exit
+
+- [x] `/api/signals` works with `DATA_BACKEND=sqlite` (default)
+- [x] `/api/signals` wired for `DATA_BACKEND=firestore` (Firestore store)
+- [x] `pytest -q` green — 83 tests (8 new store tests: 4 SQLite, 4 Firestore mock)
+
+---
+
+## Done — Session 11: Port users, jobs, votes, reports to Firestore
+
+**Branch:** `feature/firestore-s9-11`
+
+### Build
+
+- [x] `backend/store.py` — `UserStore`, `JobStore`, `VoteStore` protocols + factories + standalone job store
+- [x] `backend/store_sqlite.py` — SQLite implementations for all resources
+- [x] `backend/store_firestore.py` — Firestore implementations for all resources
+- [x] `backend/auth.py` — uses `UserStore` instead of direct ORM queries
+- [x] `backend/routes/auth.py` — signup/login/me use store, return dicts via `public_user()`
+- [x] `backend/routes/reports.py` — create/list reports + votes use `SignalStore` + `VoteStore`
+- [x] `backend/routes/jobs.py` — create/list/get/status use `JobStore`
+- [x] `backend/jobs.py` — background runner uses `get_job_store_standalone()`
+
+### Exit
+
+- [x] Login/signup works with both backends
+- [x] Vote casting/summary works with both backends
+- [x] Job create/list/status works with both backends
+- [x] Reports create/list works with both backends
+- [x] `pytest -q` green — 104 tests (21 new store tests, 0 regressions)
+
+---
+
 ## Working rules
 
 1. One slice per session → PR (API before big UI).
@@ -122,6 +187,9 @@ Firebase/Render, import/prune/backup rewrites, new gather jobs, embeddings, clas
 | **7.5** Hygiene | Done |
 | **7** Research API | Done |
 | **8** Archive matcher | Done |
+| **9** Firestore project + emulator docs | Done |
+| **10** Store interface + Firestore signals | Done |
+| **11** Port users, jobs, votes, reports | Done |
 
 ---
 
@@ -133,5 +201,8 @@ Firebase/Render, import/prune/backup rewrites, new gather jobs, embeddings, clas
 - **S7.5:** FP hygiene; gold 40/78 (51.3%), 0 regressions
 - **S7:** Research model + API (create/list/detail); 7 tests
 - **S8:** Archive matcher + research_hits + detail Archive tab; 8 tests; housing demo 15 hits
+- **S9:** Firestore project config + emulator docs; firebase-admin; DATA_BACKEND config
+- **S10:** Store protocol (SignalStore) + SQLite/Firestore impls; /api/signals uses store; 8 new tests (83 total)
+- **S11:** UserStore, JobStore, VoteStore; all routes use store abstraction; background job runner ported; 21 new store tests (104 total)
 
 **Roadmap:** [`docs/TWO_MONTH_ROADMAP.md`](docs/TWO_MONTH_ROADMAP.md)

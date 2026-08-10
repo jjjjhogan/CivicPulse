@@ -1,4 +1,4 @@
-"""Signals + config API (DB-backed with JSON fallback)."""
+"""Signals + config API (store-backed with JSON fallback)."""
 
 from __future__ import annotations
 
@@ -7,9 +7,8 @@ import sys
 
 from flask import Blueprint, jsonify
 
-from backend.config import NEWS_DEFAULTS, ROOT, SIGNALS_DIR, TIKTOK_DEFAULTS
-from backend.db import get_session
-from backend.models import Signal
+from backend.config import DATA_BACKEND, NEWS_DEFAULTS, ROOT, SIGNALS_DIR, TIKTOK_DEFAULTS
+from backend.store import get_signal_store
 
 bp = Blueprint("signals", __name__)
 
@@ -19,12 +18,6 @@ def _read_json(path, default):
         return default
     with open(path, encoding="utf-8") as handle:
         return json.load(handle)
-
-
-def _signals_from_db() -> list[dict]:
-    db = get_session()
-    rows = db.query(Signal).order_by(Signal.id.asc()).all()
-    return [row.to_dict() for row in rows]
 
 
 def _signals_from_json() -> list[dict]:
@@ -37,24 +30,30 @@ def _signals_from_json() -> list[dict]:
 
 @bp.get("/api/signals")
 def api_signals():
-    """Prefer SQLite after import; JSON files are fallback only when the table is empty."""
-    signals = _signals_from_db()
+    """Store-backed signal list; JSON files are fallback only for sqlite with empty table."""
+    store = get_signal_store()
+    signals = store.list_signals()
     if signals:
-        return jsonify({"count": len(signals), "signals": signals, "storage": "db"})
-    signals = _signals_from_json()
-    return jsonify({"count": len(signals), "signals": signals, "storage": "json"})
+        return jsonify({"count": len(signals), "signals": signals, "storage": DATA_BACKEND})
+    if DATA_BACKEND == "sqlite":
+        signals = _signals_from_json()
+        if signals:
+            return jsonify({"count": len(signals), "signals": signals, "storage": "json"})
+    return jsonify({"count": 0, "signals": [], "storage": DATA_BACKEND})
 
 
 @bp.get("/api/signals/feed")
 def api_feed():
-    """Landing feed from SQLite when present; else data/signals/feed.json."""
-    db = get_session()
-    rows = db.query(Signal).order_by(Signal.id.asc()).all()
-    if rows:
-        feed = [row.to_feed_dict() for row in rows]
-        return jsonify({"count": len(feed), "signals": feed, "storage": "db"})
-    feed = _read_json(SIGNALS_DIR / "feed.json", [])
-    return jsonify({"count": len(feed), "signals": feed, "storage": "json"})
+    """Landing feed from store; JSON fallback for sqlite only."""
+    store = get_signal_store()
+    feed = store.list_feed_signals()
+    if feed:
+        return jsonify({"count": len(feed), "signals": feed, "storage": DATA_BACKEND})
+    if DATA_BACKEND == "sqlite":
+        feed = _read_json(SIGNALS_DIR / "feed.json", [])
+        if feed:
+            return jsonify({"count": len(feed), "signals": feed, "storage": "json"})
+    return jsonify({"count": 0, "signals": [], "storage": DATA_BACKEND})
 
 
 @bp.get("/api/manifest")

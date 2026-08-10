@@ -3,13 +3,13 @@
 from __future__ import annotations
 
 import json
+from datetime import datetime
 
 from flask import Blueprint, jsonify, request
 
 from backend.auth import get_current_user, login_required
-from backend.db import get_session
 from backend.jobs import build_command, is_job_running, normalize_source, start_job
-from backend.models import ScrapeJob
+from backend.store import get_job_store
 from scrapers.json_payload import ImportPayloadError, parse_import_payload
 
 bp = Blueprint("jobs", __name__)
@@ -63,25 +63,19 @@ def _create_and_start_job(*, source: str, settings: dict):
         return jsonify({"error": "A scrape is already running."}), 409
 
     user = get_current_user()
-    db = get_session()
-    job = ScrapeJob(
+    store = get_job_store()
+    job = store.create_job(
         source=source,
-        status="pending",
         settings=settings or {},
-        user_id=user.id if user else None,
+        user_id=user["id"] if user else None,
     )
-    db.add(job)
-    db.commit()
-    db.refresh(job)
 
-    if not start_job(job.id, cmd):
-        job.status = "failed"
-        job.error = "A scrape is already running."
-        db.commit()
+    if not start_job(job["id"], cmd):
+        store.update_job(job["id"], status="failed", error="A scrape is already running.")
         return jsonify({"error": "A scrape is already running."}), 409
 
-    db.refresh(job)
-    return jsonify({"id": job.id, "status": job.status, "command": job.command}), 202
+    refreshed = store.get_job(job["id"])
+    return jsonify({"id": job["id"], "status": refreshed["status"], "command": refreshed.get("command")}), 202
 
 
 @bp.post("/api/jobs")
@@ -124,59 +118,49 @@ def create_job():
 @bp.get("/api/jobs")
 @login_required
 def list_jobs():
-    """Recent jobs (newest first). Browser GET /api/jobs used to 404 without this."""
+    """Recent jobs (newest first)."""
     limit = request.args.get("limit", 20, type=int)
     limit = max(1, min(limit or 20, 100))
-    db = get_session()
-    jobs = (
-        db.query(ScrapeJob)
-        .order_by(ScrapeJob.id.desc())
-        .limit(limit)
-        .all()
-    )
-    return jsonify({"count": len(jobs), "jobs": [job.to_dict() for job in jobs]})
+    store = get_job_store()
+    jobs = store.list_jobs(limit=limit)
+    return jsonify({"count": len(jobs), "jobs": jobs})
 
 
-@bp.get("/api/jobs/<int:job_id>")
+@bp.get("/api/jobs/<job_id>")
 @login_required
-def get_job(job_id: int):
-    db = get_session()
-    job = db.get(ScrapeJob, job_id)
+def get_job(job_id):
+    store = get_job_store()
+    job = store.get_job(job_id)
     if job is None:
         return jsonify({"error": "Job not found."}), 404
-    return jsonify(job.to_dict())
+    return jsonify(job)
 
 
 @bp.get("/api/scrape/status")
 @login_required
 def scrape_status_compat():
     """Legacy single-slot status for older clients; prefers the active/latest job."""
-    db = get_session()
-    running = (
-        db.query(ScrapeJob)
-        .filter(ScrapeJob.status == "running")
-        .order_by(ScrapeJob.id.desc())
-        .first()
-    )
-    job = running or db.query(ScrapeJob).order_by(ScrapeJob.id.desc()).first()
+    store = get_job_store()
+    job = store.get_running_job() or store.get_latest_job()
     if job is None:
-        return jsonify(
-            {
-                "status": "idle",
-                "source": None,
-                "started_at": None,
-                "finished_at": None,
-                "exit_code": None,
-                "command": None,
-                "log": "",
-                "error": None,
-            }
-        )
-    payload = job.to_dict()
-    # Match previous shape where timestamps were epoch seconds.
+        return jsonify({
+            "status": "idle",
+            "source": None,
+            "started_at": None,
+            "finished_at": None,
+            "exit_code": None,
+            "command": None,
+            "log": "",
+            "error": None,
+        })
+    payload = dict(job)
     for key in ("started_at", "finished_at"):
-        if getattr(job, key) is not None:
-            payload[key] = getattr(job, key).timestamp()
+        val = payload.get(key)
+        if val is not None:
+            if isinstance(val, str):
+                payload[key] = datetime.fromisoformat(val).timestamp()
+            elif hasattr(val, "timestamp"):
+                payload[key] = val.timestamp()
     return jsonify(payload)
 
 

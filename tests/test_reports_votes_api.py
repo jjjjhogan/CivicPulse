@@ -35,12 +35,12 @@ def test_create_and_list_report(client):
     assert listed.status_code == 200
     data = listed.get_json()
     assert data["count"] >= 1
-    assert data["storage"] == "db"
+    assert data["storage"] == "sqlite"
     assert any(row["id"] == signal["id"] for row in data["signals"])
 
     # Included in main signals feed from SQLite.
     all_signals = client.get("/api/signals").get_json()
-    assert all_signals["storage"] == "db"
+    assert all_signals["storage"] == "sqlite"
     assert any(row["id"] == signal["id"] for row in all_signals["signals"])
 
 
