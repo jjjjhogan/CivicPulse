@@ -60,57 +60,113 @@ Use existing housing signals for the demo. Prefer matcher/UI filters over global
 
 ---
 
-## Session 7 — Research API spike
-
-**Goal:** Create/list Research via API + thin UI. No archive matching yet.
+## Done — Session 7: Research API spike
 
 **Branch:** `feature/research-api-s7`
 
 ### Build
 
-- [ ] `Research` model with: `title`, `topic`, `keywords[]`, `categories[]`, `status` (`draft` → …), timestamps, optional `notes` (`job_ids[]` can be empty)
-- [ ] `POST /api/researches` — create
-- [ ] `GET /api/researches` — list
-- [ ] `GET /api/researches/<id>` — detail
-- [ ] Minimal UI: create form + list (dashboard nav is enough)
-- [ ] Same SQLAlchemy/SQLite patterns as other resources — no Firestore
+- [x] `Research` model (title, topic, keywords[], categories[], status, notes, timestamps)
+- [x] `POST /api/researches` — create
+- [x] `GET /api/researches` — list
+- [x] `GET /api/researches/<id>` — detail
+- [x] Minimal UI: create form + list + detail page, dashboard sidebar link
+- [x] Same SQLAlchemy/SQLite patterns — no Firestore
 
 ### Exit
 
-- [ ] Can create “Housing prices — Irvine” and see it listed
-- [ ] `pytest -q` green for new routes/models
-- [ ] PR
-
-### Out of scope
-
-Archive matcher, topic-scoped scrapes, summary/print, any storage-pipeline work.
+- [x] Can create “Housing prices — Irvine” and see it listed
+- [x] `pytest -q` green — 7 new API tests (67 total)
+- [x] PR pushed
 
 ---
 
-## Session 8 — Archive matcher + Research detail
+## Done — Session 8: Archive matcher + Research detail
 
-**Goal:** Archive pass attaches sensible existing signals (housing demo). Sketch Firestore needs in the PR notes only — no Firebase code.
-
-**Branch:** `feature/research-archive-s8`  
-**Depends on:** Session 7 merged (or stacked on top).
+**Branch:** `feature/research-api-s7` (stacked on Session 7)
 
 ### Build
 
-- [ ] Match rules (v1): category overlap with Research `categories[]` **and/or** keyword hit from `keywords[]` in signal title/body
-- [ ] Persist `research_hits`: research id, signal id/key, match reason, timestamp
-- [ ] `POST /api/researches/<id>/archive` — run against current signals read path
-- [ ] Detail UI: **Archive** tab + click-through; empty/low-hit state that doesn’t look broken
-- [ ] Manual QA: categories=`housing`, keywords like `rent` / `housing prices` → run archive → spot-check hits
+- [x] Match rules (v1): category overlap + keyword hit (\b word-boundary) in title/body, scored 0.5/cat + 0.3/kw
+- [x] `ResearchHit` model: research_id, signal_id, match_reason, score, timestamp (unique constraint)
+- [x] `POST /api/researches/<id>/archive` — runs matcher, persists hits, sets status=active
+- [x] Detail UI: Archive tab with hit cards (score, source, categories, match reason, click-through)
+- [x] Manual QA: “housing prices in Irvine” → 15 hits, top results are housing-categorized + rent-keyword signals
 
 ### Exit
 
-- [ ] “Housing prices” Research shows mostly plausible archive hits
-- [ ] `pytest -q` for matcher + hits
-- [ ] PR (optional one-line note: what Firestore would need later — sketch only)
+- [x] Housing Research shows plausible archive hits — top 2 are category+keyword combos (score 0.8)
+- [x] `pytest -q` green — 8 new archive tests (75 total)
+- [x] PR pushed. Firestore note in commit message.
 
 ### Out of scope
 
 Firebase/Render, import/prune/backup rewrites, new gather jobs, embeddings, classifier keyword passes.
+
+---
+
+## Done — Session 9: Firestore project + emulator docs
+
+**Branch:** `feature/firestore-s9-11`
+
+### Build
+
+- [x] `firebase.json`, `firestore.rules`, `firestore.indexes.json`
+- [x] `backend/firestore.py` — lazy Firestore client via Firebase Admin SDK
+- [x] `backend/config.py` — `DATA_BACKEND` env var (`sqlite` | `firestore`)
+- [x] `.env.example` — Firestore env vars documented
+- [x] `docs/FIRESTORE_SETUP.md` — full emulator setup guide
+- [x] `requirements.txt` — `firebase-admin>=6.4.0`
+
+### Exit
+
+- [x] `firebase emulators:start --only firestore` documented
+- [x] `pytest -q` green — 75 tests, 0 regressions
+
+---
+
+## Done — Session 10: Store interface + Firestore signals
+
+**Branch:** `feature/firestore-s9-11`
+
+### Build
+
+- [x] `backend/store.py` — `SignalStore` protocol + `get_signal_store()` factory
+- [x] `backend/store_sqlite.py` — SQLite implementation wrapping existing queries
+- [x] `backend/store_firestore.py` — Firestore implementation
+- [x] `backend/routes/signals.py` — `/api/signals` and `/api/signals/feed` use store
+- [x] `DATA_BACKEND` switches between sqlite and firestore at runtime
+
+### Exit
+
+- [x] `/api/signals` works with `DATA_BACKEND=sqlite` (default)
+- [x] `/api/signals` wired for `DATA_BACKEND=firestore` (Firestore store)
+- [x] `pytest -q` green — 83 tests (8 new store tests: 4 SQLite, 4 Firestore mock)
+
+---
+
+## Done — Session 11: Port users, jobs, votes, reports to Firestore
+
+**Branch:** `feature/firestore-s9-11`
+
+### Build
+
+- [x] `backend/store.py` — `UserStore`, `JobStore`, `VoteStore` protocols + factories + standalone job store
+- [x] `backend/store_sqlite.py` — SQLite implementations for all resources
+- [x] `backend/store_firestore.py` — Firestore implementations for all resources
+- [x] `backend/auth.py` — uses `UserStore` instead of direct ORM queries
+- [x] `backend/routes/auth.py` — signup/login/me use store, return dicts via `public_user()`
+- [x] `backend/routes/reports.py` — create/list reports + votes use `SignalStore` + `VoteStore`
+- [x] `backend/routes/jobs.py` — create/list/get/status use `JobStore`
+- [x] `backend/jobs.py` — background runner uses `get_job_store_standalone()`
+
+### Exit
+
+- [x] Login/signup works with both backends
+- [x] Vote casting/summary works with both backends
+- [x] Job create/list/status works with both backends
+- [x] Reports create/list works with both backends
+- [x] `pytest -q` green — 104 tests (21 new store tests, 0 regressions)
 
 ---
 
@@ -129,8 +185,11 @@ Firebase/Render, import/prune/backup rewrites, new gather jobs, embeddings, clas
 |---------|--------|
 | **5–6** Classifier loop | Done |
 | **7.5** Hygiene | Done |
-| **7** Research API | **Next** |
-| **8** Archive matcher | After 7 |
+| **7** Research API | Done |
+| **8** Archive matcher | Done |
+| **9** Firestore project + emulator docs | Done |
+| **10** Store interface + Firestore signals | Done |
+| **11** Port users, jobs, votes, reports | Done |
 
 ---
 
@@ -140,5 +199,10 @@ Firebase/Render, import/prune/backup rewrites, new gather jobs, embeddings, clas
 - **S5:** keyword phrases; method/confidence UI; gold ~47%
 - **S6:** +59 labels; inheritance gate; `rescore_gold.py`
 - **S7.5:** FP hygiene; gold 40/78 (51.3%), 0 regressions
+- **S7:** Research model + API (create/list/detail); 7 tests
+- **S8:** Archive matcher + research_hits + detail Archive tab; 8 tests; housing demo 15 hits
+- **S9:** Firestore project config + emulator docs; firebase-admin; DATA_BACKEND config
+- **S10:** Store protocol (SignalStore) + SQLite/Firestore impls; /api/signals uses store; 8 new tests (83 total)
+- **S11:** UserStore, JobStore, VoteStore; all routes use store abstraction; background job runner ported; 21 new store tests (104 total)
 
 **Roadmap:** [`docs/TWO_MONTH_ROADMAP.md`](docs/TWO_MONTH_ROADMAP.md)

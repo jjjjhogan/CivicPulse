@@ -12,7 +12,7 @@ def test_signals_from_db(client, imported_signals):
     data = res.get_json()
     assert data["count"] == imported_signals
     assert len(data["signals"]) == imported_signals
-    assert data["storage"] == "db"
+    assert data["storage"] == "sqlite"
     for row in data["signals"]:
         assert "source" in row
         assert "title" in row
@@ -23,7 +23,7 @@ def test_signals_feed_from_db(client, imported_signals):
     res = client.get("/api/signals/feed")
     assert res.status_code == 200
     data = res.get_json()
-    assert data["storage"] == "db"
+    assert data["storage"] == "sqlite"
     assert data["count"] == imported_signals
     assert len(data["signals"]) == imported_signals
 
@@ -43,7 +43,7 @@ def test_signals_prefer_db_over_stale_json(client, tmp_path, monkeypatch, import
 
     res = client.get("/api/signals")
     data = res.get_json()
-    assert data["storage"] == "db"
+    assert data["storage"] == "sqlite"
     titles = {row["title"] for row in data["signals"]}
     assert "STALE JSON ONLY" not in titles
     assert data["count"] == imported_signals

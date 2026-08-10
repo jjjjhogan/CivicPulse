@@ -1,11 +1,13 @@
-"""Resident reports + community verification votes (SQLite)."""
+"""Resident reports + community verification votes."""
 
 from __future__ import annotations
 
 from flask import Blueprint, jsonify, request
-from sqlalchemy import select
 
 from backend.auth import get_current_user, login_required
+from backend.config import DATA_BACKEND
+from backend.models import utcnow
+from backend.store import get_signal_store, get_vote_store
 from backend.db import get_session
 from backend.models import IssueVote, Signal, utcnow
 from backend.stable_id import compute_stable_id
@@ -13,28 +15,8 @@ from backend.stable_id import compute_stable_id
 bp = Blueprint("reports", __name__)
 
 
-def _summarize_votes(db, signal_ids: list[int], *, user_id: int | None) -> dict[str, dict]:
-    """Return {signal_id_str: {up, down, mine}} for the given signals."""
-    result = {str(sid): {"up": 0, "down": 0, "mine": None} for sid in signal_ids}
-    if not signal_ids:
-        return result
-
-    rows = db.scalars(
-        select(IssueVote).where(IssueVote.signal_id.in_(signal_ids))
-    ).all()
-
-    for row in rows:
-        bucket = result[str(row.signal_id)]
-        if row.choice in {"up", "down"}:
-            bucket[row.choice] += 1
-        if user_id is not None and row.user_id == user_id:
-            bucket["mine"] = row.choice
-
-    return result
-
-
-def _vote_payload(db, signal_id: int, *, user_id: int | None) -> dict:
-    summary = _summarize_votes(db, [signal_id], user_id=user_id).get(
+def _vote_payload(vote_store, signal_id, *, user_id):
+    summary = vote_store.summarize_votes([signal_id], user_id=user_id).get(
         str(signal_id), {"up": 0, "down": 0, "mine": None}
     )
     return {"signal_id": signal_id, **summary}
@@ -42,7 +24,7 @@ def _vote_payload(db, signal_id: int, *, user_id: int | None) -> dict:
 
 @bp.post("/api/reports")
 def create_report():
-    """Create a resident CivicSignal row in SQLite."""
+    """Create a resident CivicSignal row."""
     body = request.get_json(silent=True)
     if not isinstance(body, dict):
         return jsonify({"error": "Request body must be a JSON object."}), 400
@@ -86,6 +68,9 @@ def create_report():
     if not published:
         published = utcnow().date().isoformat()
 
+    store = get_signal_store()
+    signal = store.create_signal(
+        source="resident",
     db = get_session()
     source = "resident"
     url = (body.get("url") or "").strip()
@@ -101,17 +86,21 @@ def create_report():
         url=url,
         categories=categories,
         published_utc=published,
-        extra=metadata,
+        metadata=metadata,
     )
-    db.add(signal)
-    db.commit()
-    db.refresh(signal)
-    return jsonify({"signal": signal.to_dict()}), 201
+    return jsonify({"signal": signal}), 201
 
 
 @bp.get("/api/reports")
 def list_reports():
     """Resident signals only (also included in GET /api/signals)."""
+    store = get_signal_store()
+    signals = store.list_signals_by_source("resident")
+    return jsonify({
+        "count": len(signals),
+        "signals": signals,
+        "storage": DATA_BACKEND,
+    })
     db = get_session()
     rows = (
         db.query(Signal)
@@ -131,17 +120,13 @@ def list_reports():
 @bp.get("/api/votes")
 def list_votes():
     """Vote tallies for resident reports. Includes mine when logged in."""
-    db = get_session()
     user = get_current_user()
-    rows = (
-        db.query(Signal)
-        .filter(Signal.source == "resident")
-        .order_by(Signal.id.asc())
-        .all()
-    )
-    signal_ids = [row.id for row in rows]
-    votes = _summarize_votes(
-        db, signal_ids, user_id=user.id if user else None
+    store = get_signal_store()
+    signals = store.list_signals_by_source("resident")
+    signal_ids = [s["id"] for s in signals]
+    vote_store = get_vote_store()
+    votes = vote_store.summarize_votes(
+        signal_ids, user_id=user["id"] if user else None,
     )
     return jsonify({"count": len(votes), "votes": votes})
 
@@ -154,8 +139,11 @@ def cast_vote():
     if not isinstance(body, dict):
         return jsonify({"error": "Request body must be a JSON object."}), 400
 
+    signal_id = body.get("signal_id")
+    if signal_id is None:
+        return jsonify({"error": "signal_id is required."}), 400
     try:
-        signal_id = int(body.get("signal_id"))
+        signal_id = int(signal_id) if DATA_BACKEND == "sqlite" else signal_id
     except (TypeError, ValueError):
         return jsonify({"error": "signal_id is required."}), 400
 
@@ -166,33 +154,11 @@ def cast_vote():
     user = get_current_user()
     assert user is not None
 
-    db = get_session()
-    signal = db.get(Signal, signal_id)
-    if signal is None or signal.source != "resident":
+    sig_store = get_signal_store()
+    signal = sig_store.get_signal(signal_id)
+    if signal is None or signal.get("source") != "resident":
         return jsonify({"error": "Resident report not found."}), 404
 
-    existing = db.scalar(
-        select(IssueVote).where(
-            IssueVote.signal_id == signal_id,
-            IssueVote.user_id == user.id,
-        )
-    )
-
-    if existing is not None and existing.choice == choice:
-        db.delete(existing)
-        db.commit()
-    elif existing is not None:
-        existing.choice = choice
-        existing.updated_at = utcnow()
-        db.commit()
-    else:
-        db.add(
-            IssueVote(
-                signal_id=signal_id,
-                user_id=user.id,
-                choice=choice,
-            )
-        )
-        db.commit()
-
-    return jsonify(_vote_payload(db, signal_id, user_id=user.id))
+    vote_store = get_vote_store()
+    vote_store.cast_vote(signal_id=signal_id, user_id=user["id"], choice=choice)
+    return jsonify(_vote_payload(vote_store, signal_id, user_id=user["id"]))

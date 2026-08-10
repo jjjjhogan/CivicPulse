@@ -40,6 +40,9 @@ NEWS_DEFAULTS = {
 }
 
 
+DATA_BACKEND = os.environ.get("DATA_BACKEND", "sqlite")
+
+
 def database_url() -> str:
     url = os.environ.get("DATABASE_URL")
     if not url:

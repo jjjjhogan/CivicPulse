@@ -7,8 +7,7 @@ from functools import wraps
 from flask import jsonify, session
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from backend.db import get_session
-from backend.models import User
+from backend.store import get_user_store
 
 SESSION_USER_KEY = "user_id"
 
@@ -21,17 +20,17 @@ def verify_password(password_hash: str, password: str) -> bool:
     return check_password_hash(password_hash, password)
 
 
-def get_current_user() -> User | None:
+def get_current_user() -> dict | None:
     user_id = session.get(SESSION_USER_KEY)
     if not user_id:
         return None
-    db = get_session()
-    return db.get(User, user_id)
+    store = get_user_store()
+    return store.get_user(user_id)
 
 
-def login_user(user: User) -> None:
+def login_user(user: dict) -> None:
     session.clear()
-    session[SESSION_USER_KEY] = user.id
+    session[SESSION_USER_KEY] = user["id"]
     session.permanent = True
 
 

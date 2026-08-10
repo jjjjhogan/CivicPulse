@@ -1,4 +1,4 @@
-"""Signals + config API (DB-backed with JSON fallback)."""
+"""Signals + config API (store-backed with JSON fallback)."""
 
 from __future__ import annotations
 
@@ -7,6 +7,7 @@ import sys
 
 from flask import Blueprint, jsonify
 
+from backend.config import DATA_BACKEND, NEWS_DEFAULTS, ROOT, SIGNALS_DIR, TIKTOK_DEFAULTS
 from backend.config import NEWS_DEFAULTS, ROOT, SIGNALS_DIR, TIKTOK_DEFAULTS
 from backend.db import get_session
 from backend.models import Signal
@@ -36,16 +37,30 @@ def _signals_from_json() -> list[dict]:
 
 @bp.get("/api/signals")
 def api_signals():
-    """Prefer SQLite after import; JSON files are fallback only when the table is empty."""
-    signals = _signals_from_db()
+    """Store-backed signal list; JSON files are fallback only for sqlite with empty table."""
+    store = get_signal_store()
+    signals = store.list_signals()
     if signals:
-        return jsonify({"count": len(signals), "signals": signals, "storage": "db"})
-    signals = _signals_from_json()
-    return jsonify({"count": len(signals), "signals": signals, "storage": "json"})
+        return jsonify({"count": len(signals), "signals": signals, "storage": DATA_BACKEND})
+    if DATA_BACKEND == "sqlite":
+        signals = _signals_from_json()
+        if signals:
+            return jsonify({"count": len(signals), "signals": signals, "storage": "json"})
+    return jsonify({"count": 0, "signals": [], "storage": DATA_BACKEND})
 
 
 @bp.get("/api/signals/feed")
 def api_feed():
+    """Landing feed from store; JSON fallback for sqlite only."""
+    store = get_signal_store()
+    feed = store.list_feed_signals()
+    if feed:
+        return jsonify({"count": len(feed), "signals": feed, "storage": DATA_BACKEND})
+    if DATA_BACKEND == "sqlite":
+        feed = _read_json(SIGNALS_DIR / "feed.json", [])
+        if feed:
+            return jsonify({"count": len(feed), "signals": feed, "storage": "json"})
+    return jsonify({"count": 0, "signals": [], "storage": DATA_BACKEND})
     """Landing feed from SQLite when present; else data/signals/feed.json."""
     db = get_session()
     rows = (

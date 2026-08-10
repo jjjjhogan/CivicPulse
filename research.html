@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CivicPulse — Research</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="research.css">
+</head>
+<body class="dashboard-body">
+
+  <div class="dash-layout">
+
+    <!-- ── left side panel ───────────────────────────────── -->
+    <aside class="sidebar">
+      <a class="logo sidebar-logo" href="index.html">CivicPulse</a>
+
+      <nav class="sidebar-nav" id="sidebarNav">
+        <a href="dashboard.html" class="side-link">
+          <span class="side-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 13h6V4H4v9Zm0 7h6v-5H4v5Zm10 0h6v-9h-6v9Zm0-16v5h6V4h-6Z"/></svg>
+          </span>
+          Dashboard
+        </a>
+        <a href="research.html" class="side-link active">
+          <span class="side-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5Zm-6 0A4.5 4.5 0 1 1 14 9.5 4.49 4.49 0 0 1 9.5 14Z"/></svg>
+          </span>
+          Research
+        </a>
+      </nav>
+
+      <div class="sidebar-foot">
+        <a href="index.html" class="side-link">
+          <span class="side-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="m12 3 9 8h-3v9h-4v-6h-4v6H6v-9H3l9-8Z"/></svg>
+          </span>
+          Back to home
+        </a>
+      </div>
+    </aside>
+
+    <!-- ── main content ──────────────────────────────────── -->
+    <main class="dash">
+
+      <section class="dash-section" id="researchHeader">
+        <div class="dash-head">
+          <div>
+            <h1>Research</h1>
+            <p class="dash-sub">Create a research topic, then run archive matching to find relevant civic signals.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- create form -->
+      <section class="dash-section panel" id="createSection">
+        <div class="panel-head">
+          <h2>New Research</h2>
+        </div>
+        <form class="research-form" id="createForm" novalidate>
+          <label class="field">
+            <span class="field-label">Title <em>*</em></span>
+            <input type="text" name="title" id="fieldTitle" required
+                   placeholder="e.g. Housing prices in Irvine">
+          </label>
+          <label class="field">
+            <span class="field-label">Topic</span>
+            <input type="text" name="topic" id="fieldTopic"
+                   placeholder="e.g. Track housing cost trends and resident complaints">
+          </label>
+          <div class="form-row">
+            <label class="field">
+              <span class="field-label">Keywords <span class="field-hint">(comma-separated)</span></span>
+              <input type="text" name="keywords" id="fieldKeywords"
+                     placeholder="e.g. rent, housing prices, lease">
+            </label>
+            <label class="field">
+              <span class="field-label">Categories <span class="field-hint">(comma-separated)</span></span>
+              <input type="text" name="categories" id="fieldCategories"
+                     placeholder="e.g. housing">
+            </label>
+          </div>
+          <label class="field">
+            <span class="field-label">Notes</span>
+            <textarea name="notes" id="fieldNotes" rows="2"
+                      placeholder="Optional context or goals for this research"></textarea>
+          </label>
+          <div class="form-actions">
+            <button type="submit" class="btn">Create Research</button>
+            <span class="form-msg" id="formMsg"></span>
+          </div>
+        </form>
+      </section>
+
+      <!-- list -->
+      <section class="dash-section panel" id="listSection">
+        <div class="panel-head">
+          <h2>Your Researches</h2>
+          <span class="panel-hint" id="listCount"></span>
+        </div>
+        <div id="researchList" class="research-list"></div>
+        <p class="empty-msg" id="emptyMsg" hidden>No researches yet. Create one above to get started.</p>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="research.js"></script>
+</body>
+</html>
