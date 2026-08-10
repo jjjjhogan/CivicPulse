@@ -2,52 +2,6 @@
   {
     "source": "reddit",
     "outlet": "r/irvine",
-    "title": "Another Irvine Co negotiation question",
-    "body": "Another Irvine Co negotiation question\nHello,\nI tried to find a similar post but couldn\u2019t, so here goes my question.\nWe are up for a lease renewal. We have been here nearly 2 years. The Irvine co wants to raise our rent by $100, which is n Hello,\nI tried to find a similar post but couldn\u2019t, so here goes my question.\nWe are up for a lease renewal. We have been here nearly 2 years. The Irvine co wants to raise our rent by $100, which is not a lot, but the apartments where we live (same sq, BD, and BR) are leasing for $300 UNDER what we currently pay. How do we negotiate? I doesn\u2019t make sense for us to pay $400 more than someone new for the same space\u2026 any tips?\nWe really don\u2019t want to move but may have no option \ud83d\ude14",
-    "url": "https://old.reddit.com/r/irvine/comments/1vffb71/another_irvine_co_negotiation_question/",
-    "categories": [],
-    "published_utc": "2026-08-04",
-    "metadata": {
-      "author": "miedosaclub",
-      "post_id": "1vffb71",
-      "score": 31,
-      "comment_count": 29,
-      "search_query": "irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 0.908,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "Giving Away Twin Box Springs and Coffee Table",
-    "body": "Giving Away Twin Box Springs and Coffee Table\nHave two twin size box springs to give away - free. One is completely brand new and in the box. It needs to be assembled, it uses wooden slats, and is super easy to put together. The other one is alre Have two twin size box springs to give away - free. One is completely brand new and in the box. It needs to be assembled, it uses wooden slats, and is super easy to put together. The other one is already put together, was slightly used (so, still like new) before being put away, and is metal, instead of wood. Again, both are twin size.\nThen I have a used coffee table to give away, also. Rectangle shape, about 2ft by 3.5ft., metal legs (black), and dark wood color top. Like I said, it's used, so it does have some marks from my kids coloring with acrylic markers and a few scratches.\nFeel free to DM me if you're interested! I'll be getting rid of it all by the end of this week if no one takes them. Also, you'll have to pick up from me, as I cannot deliver them to you or meet you anywhere. I don't have pictures to post either. Sorry. TIA to everyone reading this and for anyone taking these items!\nAlso, thanks to Mod for allowing me to post.\nEdit: to help anyone deciding, my location is the West Park area of Irvine.",
-    "url": "https://old.reddit.com/r/irvine/comments/1vff5g1/giving_away_twin_box_springs_and_coffee_table/",
-    "categories": [],
-    "published_utc": "2026-08-04",
-    "metadata": {
-      "author": "musical_pizza",
-      "post_id": "1vff5g1",
-      "score": 3,
-      "comment_count": 0,
-      "search_query": "irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 1.0,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
     "title": "Irvine market place power outage 24 Hour Fitness",
     "body": "Irvine market place power outage 24 Hour Fitness\nThe section of the Irvine Marketplace on Jamboree with 24 Hour Fitness is having a power outage.  The gym has light but they can't check people in.",
     "url": "https://old.reddit.com/r/irvine/comments/1vetc3v/irvine_market_place_power_outage_24_hour_fitness/",
@@ -69,8 +23,10 @@
         "confidence": 0.7,
         "method": "keywords",
         "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "dae867309af07e38517f70890f5e641251793a3e"
+    },
+    "stable_id": "dae867309af07e38517f70890f5e641251793a3e"
   },
   {
     "source": "reddit",
@@ -96,31 +52,10 @@
         "confidence": 0.7,
         "method": "keywords",
         "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "Anyone have a recommendation for someone local who can help solder something quickly for me?",
-    "body": "Anyone have a recommendation for someone local who can help solder something quickly for me?\nThis point got torn out so I\u2019ve been struggling to get it done. This plug in part is for the rumble component and after my first try, the rumble still didn\u2019t work. Any suggestions for a go to guy woul This point got torn out so I\u2019ve been struggling to get it done. This plug in part is for the rumble component and after my first try, the rumble still didn\u2019t work. Any suggestions for a go to guy would be great because my first quote was for $100.\nGot advice from soldering gurus and got it fixed up. Thanks for reading friends.",
-    "url": "https://old.reddit.com/r/irvine/comments/1vdwpeu/anyone_have_a_recommendation_for_someone_local/",
-    "categories": [],
-    "published_utc": "2026-08-02",
-    "metadata": {
-      "author": "PauLogical",
-      "post_id": "1vdwpeu",
-      "score": 13,
-      "comment_count": 3,
-      "search_query": "irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 0.997,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "e8bdf2bea7fba91d191dcb32e36b48e8e94997d0"
+    },
+    "stable_id": "e8bdf2bea7fba91d191dcb32e36b48e8e94997d0"
   },
   {
     "source": "reddit",
@@ -148,8 +83,10 @@
         "confidence": 0.8,
         "method": "keywords+model",
         "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "4c39fca8e2e89bb2e92867e2262e783112bf2e42"
+    },
+    "stable_id": "4c39fca8e2e89bb2e92867e2262e783112bf2e42"
   },
   {
     "source": "reddit",
@@ -177,54 +114,10 @@
         "confidence": 0.77,
         "method": "keywords+model",
         "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "Pharmacy & Manufacturer for Vyvanse",
-    "body": "Pharmacy & Manufacturer for Vyvanse\nTLDR: if you\u2019re on generic Vyvanse with Lannett pharmaceuticals listed as the manufacturer on the bottle, what pharmacy in Irvine did you get it from?\nFor those who take Vyvanse: where do you pick it  TLDR: if you\u2019re on generic Vyvanse with Lannett pharmaceuticals listed as the manufacturer on the bottle, what pharmacy in Irvine did you get it from?\nFor those who take Vyvanse: where do you pick it up and what manufacturer is listed on the bottle?\nI was taking generic vyvanse 40mg for years, and it was instrumental in my daily functioning. Its manufacturer was Lannett and I would pick it up from CVS. after around February 2025, CVS started giving me the same medicine, but from different manufacturers. Hikma pharmaceuticals has been the primary one. And since then, I\u2019ve had horrendous focus and executive functioning. The medicine keeps me awake and that\u2019s it. I even went up to 50mg in May 2025, but it didn\u2019t make a difference. Last month, I requested that my doctor send in a prescription for name brand Vyvanse, as I am deeply struggling with the generic\u2019s inaffectiveness. This time, it was from Takeda pharmaceuticals. It didn\u2019t make any difference.\nBefore you call me crazy, please see [r/ThisAintAdderall](r/ThisAintAdderall), there are hundreds of people saying their ADHD medications have stopped working in the past 1-2 years. I have never misused this medication nor do I plan to.\nThe only time I\u2019ve had success is with generic Vyvanse 40mg from Lannett. I am asking if anyone who currently takes generic Vyvanse has had Lannett as the manufacturer, and what pharmacy they use. My CVS only uses Hikma for generic vyvanse. Please comment if you know a pharmacy in Irvine or have had a similar experience.",
-    "url": "https://old.reddit.com/r/irvine/comments/1vc88s1/pharmacy_manufacturer_for_vyvanse/",
-    "categories": [],
-    "published_utc": "2026-08-01",
-    "metadata": {
-      "author": "frogenjoyer500",
-      "post_id": "1vc88s1",
-      "score": 14,
-      "comment_count": 7,
-      "search_query": "irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 1.0,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "Possibly fun events coming up in Irvine...",
-    "body": "Possibly fun events coming up in Irvine...\nI subscribe to the City of Irvine email blasts.\nThere are some interesting things coming up. Sure, not for everybody but could be fun.\nAugust 8 - Some kind of Homecoming Dance at The Great Park. Celeb I subscribe to the City of Irvine email blasts.\nThere are some interesting things coming up. Sure, not for everybody but could be fun.\nAugust 8 - Some kind of Homecoming Dance at The Great Park. Celebrating 55 years of Irvine.\nI believe there is a ribbon cutting coming up for the new Jeffrey Open Space Trail Bridge over the 5. Also in August.\nDaisy Festival...or whatever that is called at The Great Park.\nSubscribe to the email blasts if you'd like.",
-    "url": "https://old.reddit.com/r/irvine/comments/1vc0eje/possibly_fun_events_coming_up_in_irvine/",
-    "categories": [],
-    "published_utc": "2026-07-31",
-    "metadata": {
-      "author": "plepster",
-      "post_id": "1vc0eje",
-      "score": 20,
-      "comment_count": 3,
-      "search_query": "irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 0.842,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "cbfd2375b8db8d0e15816ae08a856ba3e4877b1e"
+    },
+    "stable_id": "cbfd2375b8db8d0e15816ae08a856ba3e4877b1e"
   },
   {
     "source": "reddit",
@@ -252,8 +145,10 @@
         "confidence": 0.735,
         "method": "keywords+model",
         "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "93b4230fca5405d3957cdee0a9a2c41f6bf7f4ce"
+    },
+    "stable_id": "93b4230fca5405d3957cdee0a9a2c41f6bf7f4ce"
   },
   {
     "source": "reddit",
@@ -279,8 +174,10 @@
         "confidence": 0.87,
         "method": "keywords+model",
         "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "aa2c82ef2b14557e4d87c9091846ed772eeabdfb"
+    },
+    "stable_id": "aa2c82ef2b14557e4d87c9091846ed772eeabdfb"
   },
   {
     "source": "reddit",
@@ -307,8 +204,10 @@
         "method": "model",
         "model_version": "nb-v1",
         "rescued": true
-      }
-    }
+      },
+      "stable_id": "9be2bbf681621b335e6904a7423c9e48e691a6af"
+    },
+    "stable_id": "9be2bbf681621b335e6904a7423c9e48e691a6af"
   },
   {
     "source": "reddit",
@@ -335,31 +234,10 @@
         "method": "model",
         "model_version": "nb-v1",
         "rescued": true
-      }
-    }
-  },
-  {
-    "source": "reddit",
-    "outlet": "r/irvine",
-    "title": "Petco Order Wrong - Hill\u2019s Prescription Cat Food",
-    "body": "Petco Order Wrong - Hill\u2019s Prescription Cat Food\nHello!\nI received the wrong order and received someone\u2019s Hill\u2019s Prescription Diet for Urinary Care. If this is you, please message me. I would love to get this in the correct hands if you can provide  Hello!\nI received the wrong order and received someone\u2019s Hill\u2019s Prescription Diet for Urinary Care. If this is you, please message me. I would love to get this in the correct hands if you can provide proof. I will bring to Irvine animal shelter if not claimed.",
-    "url": "https://old.reddit.com/r/irvine/comments/1v9jgsq/petco_order_wrong_hills_prescription_cat_food/",
-    "categories": [],
-    "published_utc": "2026-07-29",
-    "metadata": {
-      "author": "TopTittyTy",
-      "post_id": "1v9jgsq",
-      "score": 10,
-      "comment_count": 3,
-      "search_query": "irvine",
-      "flair": null,
-      "classification": {
-        "scores": {},
-        "confidence": 0.992,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "b07a77d1410c0813305bf3d3db2efc3fb67aef58"
+    },
+    "stable_id": "b07a77d1410c0813305bf3d3db2efc3fb67aef58"
   },
   {
     "source": "reddit",
@@ -385,7 +263,9 @@
         "confidence": 0.97,
         "method": "keywords+model",
         "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "c2f2b37d5b3fb5aa738f6b9ef205e89ad4b062d6"
+    },
+    "stable_id": "c2f2b37d5b3fb5aa738f6b9ef205e89ad4b062d6"
   }
 ]

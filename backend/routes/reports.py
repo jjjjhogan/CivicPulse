@@ -8,6 +8,7 @@ from sqlalchemy import select
 from backend.auth import get_current_user, login_required
 from backend.db import get_session
 from backend.models import IssueVote, Signal, utcnow
+from backend.stable_id import compute_stable_id
 
 bp = Blueprint("reports", __name__)
 
@@ -86,12 +87,18 @@ def create_report():
         published = utcnow().date().isoformat()
 
     db = get_session()
+    source = "resident"
+    url = (body.get("url") or "").strip()
+    body_text = (body.get("body") or "").strip()
+    stable_id = compute_stable_id(source, url, title, body_text, metadata=metadata)
+    metadata = {**metadata, "stable_id": stable_id}
     signal = Signal(
-        source="resident",
+        stable_id=stable_id,
+        source=source,
         outlet=(body.get("outlet") or "Resident report").strip() or "Resident report",
         title=title,
-        body=(body.get("body") or "").strip(),
-        url=(body.get("url") or "").strip(),
+        body=body_text,
+        url=url,
         categories=categories,
         published_utc=published,
         extra=metadata,
@@ -108,7 +115,7 @@ def list_reports():
     db = get_session()
     rows = (
         db.query(Signal)
-        .filter(Signal.source == "resident")
+        .filter(Signal.source == "resident", Signal.archived_at.is_(None))
         .order_by(Signal.id.desc())
         .all()
     )

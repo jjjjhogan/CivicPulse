@@ -16,6 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
+from backend.pool import merge_into_pond  # noqa: E402
 from scrapers.feed import rebuild_landing_feed  # noqa: E402
 from scrapers.news.export import process_news_to_signals  # noqa: E402
 from scrapers.news.scrape import NEWS_SOURCES  # noqa: E402
@@ -77,6 +78,11 @@ def main() -> None:
         outlets=args.outlets,
         max_articles=args.max_articles,
         require_category_match=not args.no_require_category,
+    )
+    pond_stats = merge_into_pond("news", [s.to_dict() for s in signals])
+    print(
+        f"Pond news: inserted={pond_stats['inserted']} updated={pond_stats['updated']} "
+        f"total={pond_stats['total']}"
     )
     print(f"Wrote {count} news signals -> {args.output}")
     for signal in signals[:15]:

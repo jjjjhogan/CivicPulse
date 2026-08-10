@@ -1,0 +1,429 @@
+[
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "Wide-open opportunities for volunteers",
+    "body": "A nestling red-tailed hawk, its white head visible above a large nest atop a coast live oak, seems to stand sentry over its two siblings while their parents are off [\u2026]",
+    "url": "https://www.irvinestandard.com/2026/wide-open-opportunities-for-volunteers/",
+    "categories": [],
+    "published_utc": "2026-06-30",
+    "metadata": {
+      "outlet_id": "irvine-standard",
+      "classification": {
+        "scores": {},
+        "confidence": 0.694,
+        "method": "none",
+        "model_version": "nb-v1"
+      },
+      "stable_id": "e07ef3848e16a7bfd72340020ad3d26986fc5db8"
+    },
+    "stable_id": "e07ef3848e16a7bfd72340020ad3d26986fc5db8"
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "Irvine softball teams win championships",
+    "body": "Northwood High School\u2019s softball team won the Division 5 final to earn its first CIF title. Irvine High School captured its second CIF softball title with a victory in the [\u2026]",
+    "url": "https://www.irvinestandard.com/2026/irvine-softball-teams-win-championships/",
+    "categories": [],
+    "published_utc": "2026-06-30",
+    "metadata": {
+      "outlet_id": "irvine-standard",
+      "classification": {
+        "scores": {},
+        "confidence": 0.836,
+        "method": "none",
+        "model_version": "nb-v1"
+      },
+      "stable_id": "22633b7bc7d801290e23c1bec55c2efaa69edb23"
+    },
+    "stable_id": "22633b7bc7d801290e23c1bec55c2efaa69edb23"
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "How freeway improvements impact Irvine",
+    "body": "Mobility in Irvine is about more than getting from point A to point B; it is about the integration of neighborhoods, retail centers, schools, parks and primary business hubs. Central [\u2026]",
+    "url": "https://www.irvinestandard.com/2026/how-freeway-improvements-impact-irvine/",
+    "categories": [],
+    "published_utc": "2026-06-30",
+    "metadata": {
+      "outlet_id": "irvine-standard",
+      "classification": {
+        "scores": {},
+        "confidence": 0.6,
+        "method": "none",
+        "model_version": "nb-v1"
+      },
+      "stable_id": "e66c923073fb01e1aa4a1d20b84a840ae7df3c37"
+    },
+    "stable_id": "e66c923073fb01e1aa4a1d20b84a840ae7df3c37"
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "Irvine parks are ranked second highest in nation again",
+    "body": "Allison Plette-Dalton grew up in Irvine, where some of her most important memories \u2013 including birthday parties, learning to ride her bike and after-school playdates \u2013 all took place in [\u2026]",
+    "url": "https://www.irvinestandard.com/2026/irvine-parks-are-ranked-second-highest-in-nation-again/",
+    "categories": [],
+    "published_utc": "2026-06-30",
+    "metadata": {
+      "outlet_id": "irvine-standard",
+      "classification": {
+        "scores": {},
+        "confidence": 0.727,
+        "method": "none",
+        "model_version": "nb-v1"
+      },
+      "stable_id": "06ce8752ea5bd0ae9d3d66f439f8868d2cd149eb"
+    },
+    "stable_id": "06ce8752ea5bd0ae9d3d66f439f8868d2cd149eb"
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "No. 3 city in America to raise a family",
+    "body": "Irvine landed at No. 3 on Wallet\u00adHub\u2019s national \u201cBest Places to Raise a Family\u201d ranking, driven by its safety record, strong schools and low divorce rates. Analysts compared 182 U.S. [\u2026]",
+    "url": "https://www.irvinestandard.com/2026/no-3-city-in-america-to-raise-a-family-2/",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-06-30",
+    "metadata": {
+      "outlet_id": "irvine-standard",
+      "classification": {
+        "scores": {
+          "public_safety": 0.9
+        },
+        "confidence": 0.9,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      },
+      "stable_id": "43202f4caf04bbd5edadf77afe965ea24f09a158"
+    },
+    "stable_id": "43202f4caf04bbd5edadf77afe965ea24f09a158"
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "Four named National Merit Scholars",
+    "body": "Irvine high school students accounted for four of 11 seniors in the county who were awarded prestigious college-sponsored National Merit Scholarships. The Irvine winners are Xiao Jiang (University High), Pragnya [\u2026]",
+    "url": "https://www.irvinestandard.com/2026/four-named-national-merit-scholars/",
+    "categories": [],
+    "published_utc": "2026-06-30",
+    "metadata": {
+      "outlet_id": "irvine-standard",
+      "classification": {
+        "scores": {},
+        "confidence": 0.645,
+        "method": "none",
+        "model_version": "nb-v1"
+      },
+      "stable_id": "9e17af1b64277ad7b349e91f0932edf00c04eb0d"
+    },
+    "stable_id": "9e17af1b64277ad7b349e91f0932edf00c04eb0d"
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "Cutting-Edge Connectivity",
+    "body": "New Irvine Community Pacifica Place Debuts First-of-Its-Kind 3 Gig Wi-Fi 7 Network as High-Speed Internet Becomes a Must-Have Residential Amenity",
+    "url": "https://www.irvinestandard.com/2026/cutting-edge-connectivity/",
+    "categories": [],
+    "published_utc": "2026-06-17",
+    "metadata": {
+      "outlet_id": "irvine-standard",
+      "classification": {
+        "scores": {},
+        "confidence": 0.994,
+        "method": "none",
+        "model_version": "nb-v1"
+      },
+      "stable_id": "97b62b2c845f5fa21353eb899cdc2da39b576424"
+    },
+    "stable_id": "97b62b2c845f5fa21353eb899cdc2da39b576424"
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "Getting wild at OC Zoo for a day",
+    "body": "About 455 runners of all ages took part in the Run Wild 5K event at the OC Zoo in Irvine Regional Park last month. Proceeds from the 5K are earmarked [\u2026]",
+    "url": "https://www.irvinestandard.com/2026/getting-wild-at-oc-zoo-for-a-day/",
+    "categories": [],
+    "published_utc": "2026-06-05",
+    "metadata": {
+      "outlet_id": "irvine-standard",
+      "classification": {
+        "scores": {},
+        "confidence": 0.92,
+        "method": "none",
+        "model_version": "nb-v1"
+      },
+      "stable_id": "71c1a7899eafb6e25eeb24941a628fe1ed30476c"
+    },
+    "stable_id": "71c1a7899eafb6e25eeb24941a628fe1ed30476c"
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "Amenities abound at Spectrum Terrace",
+    "body": "Some folks spend work breaks gulping coffee, gobbling doughnuts or playing word games on their phones. Bharat Ananth hits the trails. \u201cI\u2019m a big outdoor person,\u201d says Ananth, vice president [\u2026]",
+    "url": "https://www.irvinestandard.com/2026/amenities-abound-at-spectrum-terrace/",
+    "categories": [],
+    "published_utc": "2026-06-04",
+    "metadata": {
+      "outlet_id": "irvine-standard",
+      "classification": {
+        "scores": {},
+        "confidence": 0.766,
+        "method": "none",
+        "model_version": "nb-v1"
+      },
+      "stable_id": "f0e87eb593ff7b157771b63fc9eb73f62f5c8b6d"
+    },
+    "stable_id": "f0e87eb593ff7b157771b63fc9eb73f62f5c8b6d"
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Weekly",
+    "title": "Why So Many People Choose to Start with Ryan and Change",
+    "body": "One of the biggest reasons so many people struggle to start isn\u2019t a lack of opportunity. It\u2019s a lack of direction. When you\u2019re trying to build an e-commerce business on your own, it\u2019s easy to become overwhelmed. One person tells you to sell one type of product, another tells you to use a completely different [\u2026] \n The post  Why So Many People Choose to Start with Ryan and Change  appeared first on  Irvine Weekly .",
+    "url": "https://irvineweekly.com/why-so-many-people-choose-to-start-with-ryan-and-change/?utm_source=rss&utm_medium=rss&utm_campaign=why-so-many-people-choose-to-start-with-ryan-and-change",
+    "categories": [],
+    "published_utc": "2026-07-24",
+    "metadata": {
+      "outlet_id": "irvine-weekly",
+      "classification": {
+        "scores": {},
+        "confidence": 0.994,
+        "method": "none",
+        "model_version": "nb-v1"
+      },
+      "stable_id": "d0f693c4fe12ff7fc034cd6110a501ee1330a044"
+    },
+    "stable_id": "d0f693c4fe12ff7fc034cd6110a501ee1330a044"
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Weekly",
+    "title": "After an Accident: What Helps a Personal Injury Claim Most",
+    "body": "Details start slipping faster than people expect after an accident. A street name goes fuzzy, the weather becomes a blur, and the exact order of events starts to wobble by the time the day is over. That\u2019s usually why early documents are important. For anyone trying to understand what may help a claim later, the [\u2026] \n The post  After an Accident: What Helps a Personal Injury Claim Most  appeared first on  Irvine Weekly .",
+    "url": "https://irvineweekly.com/after-an-accident-what-helps-a-personal-injury-claim-most/?utm_source=rss&utm_medium=rss&utm_campaign=after-an-accident-what-helps-a-personal-injury-claim-most",
+    "categories": [],
+    "published_utc": "2026-03-24",
+    "metadata": {
+      "outlet_id": "irvine-weekly",
+      "classification": {
+        "scores": {},
+        "confidence": 1.0,
+        "method": "none",
+        "model_version": "nb-v1"
+      },
+      "stable_id": "ff65e63ee35981643fcc5f2c4b56837eb5d2cbd7"
+    },
+    "stable_id": "ff65e63ee35981643fcc5f2c4b56837eb5d2cbd7"
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Weekly",
+    "title": "Local Wellness Entrepreneur Launches $250K Initiative Supporting California Firefighters",
+    "body": "Dialed Labs Founder Hosts Linda Isle Gala to Debut Dialed & Defend Charity; Fountain Valley and Pechanga Fire Stations First to Receive Recovery Equipment When Ali Garawi watched firefighters battle the devastating January 2025 Los Angeles wildfires, he knew he\u2019d found the cause he and his brother had been waiting for. The brothers had built [\u2026] \n The post  Local Wellness Entrepreneur Launches $250K Initiative Supporting California Firefighters  appeared first on  Irvine Weekly .",
+    "url": "https://irvineweekly.com/local-wellness-entrepreneur-launches-250k-initiative-supporting-california-firefighters/?utm_source=rss&utm_medium=rss&utm_campaign=local-wellness-entrepreneur-launches-250k-initiative-supporting-california-firefighters",
+    "categories": [
+      "emergencies"
+    ],
+    "published_utc": "2026-01-10",
+    "metadata": {
+      "outlet_id": "irvine-weekly",
+      "classification": {
+        "scores": {
+          "emergencies": 0.8
+        },
+        "confidence": 0.8,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      },
+      "stable_id": "ae3c21846e22ae3f8c0c13eb64c0a513f9ba3d56"
+    },
+    "stable_id": "ae3c21846e22ae3f8c0c13eb64c0a513f9ba3d56"
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Weekly",
+    "title": "The Emotional Sobriety Method for Professional Women Who Drink Too Much",
+    "body": "As founder and CEO of Emotional Sobriety Coaching\u00a9, an intuitive drinking coach, and host of the top 1% podcast It\u2019s Not About the Alcohol, Colleen Freeland Kachmann is changing the way women engage with alcohol. Colleen\u2019s holistic approach helps her professional female clients, including entrepreneurs, executives and career moms, correct the dysfunctional thinking patterns that [\u2026] \n The post  The Emotional Sobriety Method for Professional Women Who Drink Too Much  appeared first on  Irvine Weekly .",
+    "url": "https://irvineweekly.com/the-emotional-sobriety-method-for-professional-women-who-drink-too-much/?utm_source=rss&utm_medium=rss&utm_campaign=the-emotional-sobriety-method-for-professional-women-who-drink-too-much",
+    "categories": [],
+    "published_utc": "2025-06-10",
+    "metadata": {
+      "outlet_id": "irvine-weekly",
+      "classification": {
+        "scores": {},
+        "confidence": 0.963,
+        "method": "none",
+        "model_version": "nb-v1"
+      },
+      "stable_id": "79dda92333d4bf81cac34d26822300db7a26ef86"
+    },
+    "stable_id": "79dda92333d4bf81cac34d26822300db7a26ef86"
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Weekly",
+    "title": "America: Illegal Immigrants Are Bankrolling You",
+    "body": "Step into any restaurant kitchen, construction site, or agricultural field, and you\u2019ll find them\u2014working tirelessly in the shadows, sustaining the industries that make American life comfortable. The undocumented workforce is not a faceless statistic; it is the silent engine of the U.S. economy. Yet in national debates, they are scapegoated, demonized, and used as political [\u2026] \n The post  America: Illegal Immigrants Are Bankrolling You  appeared first on  Irvine Weekly .",
+    "url": "https://irvineweekly.com/america-illegal-immigrants-are-bankrolling-you/?utm_source=rss&utm_medium=rss&utm_campaign=america-illegal-immigrants-are-bankrolling-you",
+    "categories": [
+      "immigration"
+    ],
+    "published_utc": "2025-06-05",
+    "metadata": {
+      "outlet_id": "irvine-weekly",
+      "classification": {
+        "scores": {
+          "immigration": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      },
+      "stable_id": "4a25851f37d85efa921d9279bbbdc76f088e541e"
+    },
+    "stable_id": "4a25851f37d85efa921d9279bbbdc76f088e541e"
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Weekly",
+    "title": "Karns and Karns Personal Injury and Accident Attorneys Enhances Presence in Orange County, California",
+    "body": "Karns and Karns Personal Injury and Accident Attorneys, a leading personal injury law firm, is proud to announce expanding its services with new locations throughout Orange County, California. This strategic growth strengthens the firm\u2019s commitment to providing accessible and exceptional legal representation to accident victims across the vibrant communities of Orange County and the surrounding [\u2026] \n The post  Karns and Karns Personal Injury and Accident Attorneys Enhances Presence in Orange County, California  appeared first on  Irvine Weekly .",
+    "url": "https://irvineweekly.com/karns-and-karns-personal-injury-and-accident-attorneys-enhances-presence-in-orange-county-california/?utm_source=rss&utm_medium=rss&utm_campaign=karns-and-karns-personal-injury-and-accident-attorneys-enhances-presence-in-orange-county-california",
+    "categories": [],
+    "published_utc": "2025-06-04",
+    "metadata": {
+      "outlet_id": "irvine-weekly",
+      "classification": {
+        "scores": {},
+        "confidence": 1.0,
+        "method": "none",
+        "model_version": "nb-v1"
+      },
+      "stable_id": "e40f30a1bbc911af8f705040d279d9ab5b25f3f1"
+    },
+    "stable_id": "e40f30a1bbc911af8f705040d279d9ab5b25f3f1"
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Weekly",
+    "title": "Richard Sullivan: Four Decades of Leadership in Family Law",
+    "body": "For almost 50 years,\u00a0Richard P. Sullivan, Esq.\u00a0has stood as a pillar of strength, advocacy, and legal excellence in Orange County\u2019s family law community. As the founder and managing attorney of\u00a0Sullivan Law & Associates, Sullivan has built a legacy defined by unwavering dedication to the families he serves, integrity, and courtroom excellence. A Legacy of Legal [\u2026] \n The post  Richard Sullivan: Four Decades of Leadership in Family Law  appeared first on  Irvine Weekly .",
+    "url": "https://irvineweekly.com/richard-sullivan-four-decades-of-leadership-in-family-law/?utm_source=rss&utm_medium=rss&utm_campaign=richard-sullivan-four-decades-of-leadership-in-family-law",
+    "categories": [],
+    "published_utc": "2025-05-14",
+    "metadata": {
+      "outlet_id": "irvine-weekly",
+      "classification": {
+        "scores": {},
+        "confidence": 0.918,
+        "method": "none",
+        "model_version": "nb-v1"
+      },
+      "stable_id": "ccf5aaa81bc78e85d1feda4b0c0e263f71b724fc"
+    },
+    "stable_id": "ccf5aaa81bc78e85d1feda4b0c0e263f71b724fc"
+  },
+  {
+    "source": "news",
+    "outlet": "Voice of OC",
+    "title": "Orange County\u2019s Biggest Civic Headlines as Schools Move to Limit Phone Use",
+    "body": "School districts across California are limiting phone use under a new state law, Irvine faces questions over the shooting death of an autistic man \u2013 these are some of this week\u2019s biggest civic headlines.  \n Voice of OC is Orange County's nonprofit newsroom. We rely on donations from people like you to sustain our news agency. Please make a contribution today: https://voiceofoc.org/donate",
+    "url": "https://voiceofoc.org/2026/07/orange-countys-biggest-civic-headlines-as-schools-move-to-limit-phone-use/",
+    "categories": [
+      "violent_crime"
+    ],
+    "published_utc": "2026-07-31",
+    "metadata": {
+      "outlet_id": "voice-of-oc",
+      "classification": {
+        "scores": {
+          "violent_crime": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      },
+      "stable_id": "a0a2cd7f63d93d228f8dbf3f65d6475b61720623"
+    },
+    "stable_id": "a0a2cd7f63d93d228f8dbf3f65d6475b61720623"
+  },
+  {
+    "source": "news",
+    "outlet": "Voice of OC",
+    "title": "Irvine Moves to Ban Synthetic Kratom and Whippets",
+    "body": "City leaders are looking to ban the sale of the substances in the city, following the lead of several other Orange County cities that have already made the move. \n Voice of OC is Orange County's nonprofit newsroom. We rely on donations from people like you to sustain our news agency. Please make a contribution today: https://voiceofoc.org/donate",
+    "url": "https://voiceofoc.org/2026/07/irvine-moves-to-ban-synthetic-kratom-and-whippets/",
+    "categories": [],
+    "published_utc": "2026-07-30",
+    "metadata": {
+      "outlet_id": "voice-of-oc",
+      "classification": {
+        "scores": {},
+        "confidence": 0.895,
+        "method": "none",
+        "model_version": "nb-v1"
+      },
+      "stable_id": "1d8b6634735a797a7555c75577e63da139f707cf"
+    },
+    "stable_id": "1d8b6634735a797a7555c75577e63da139f707cf"
+  },
+  {
+    "source": "news",
+    "outlet": "Voice of OC",
+    "title": "Family of Autistic Man Killed by Irvine Police Question What Went Wrong in Fatal Encounter",
+    "body": "The shooting came after police had been called to the house multiple times, but family members say Daniel Meltvedt could have been talked down.  \n Voice of OC is Orange County's nonprofit newsroom. We rely on donations from people like you to sustain our news agency. Please make a contribution today: https://voiceofoc.org/donate",
+    "url": "https://voiceofoc.org/2026/07/family-of-autistic-man-killed-by-irvine-police-question-what-went-wrong-in-fatal-encounter/",
+    "categories": [
+      "public_safety",
+      "violent_crime"
+    ],
+    "published_utc": "2026-07-28",
+    "metadata": {
+      "outlet_id": "voice-of-oc",
+      "classification": {
+        "scores": {
+          "violent_crime": 0.7,
+          "public_safety": 0.77
+        },
+        "confidence": 0.735,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      },
+      "stable_id": "bb5f78f8af6f9d71b765f0a83dfd3acca7a3fe5c"
+    },
+    "stable_id": "bb5f78f8af6f9d71b765f0a83dfd3acca7a3fe5c"
+  },
+  {
+    "source": "news",
+    "outlet": "Voice of OC",
+    "title": "Santana: Ladera Ranch Sparks National Debate on Tackling Toxics",
+    "body": "Facing mounting concerns about kids getting rare cancers, Ladera Ranch residents are asking tough questions about the health impacts from herbicides and pesticides used in landscaping as well as other environmental factors like power lines.  \n Voice of OC is Orange County's nonprofit newsroom. We rely on donations from people like you to sustain our news agency. Please make a contribution today: https://voiceofoc.org/donate",
+    "url": "https://voiceofoc.org/2026/07/santana-ladera-ranch-sparks-national-debate-on-tackling-toxics/",
+    "categories": [
+      "emergencies"
+    ],
+    "published_utc": "2026-07-28",
+    "metadata": {
+      "outlet_id": "voice-of-oc",
+      "classification": {
+        "scores": {
+          "emergencies": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      },
+      "stable_id": "d7064e5dc1fc1eda1279383c807daf14943a6027"
+    },
+    "stable_id": "d7064e5dc1fc1eda1279383c807daf14943a6027"
+  }
+]

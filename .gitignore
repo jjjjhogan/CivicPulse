@@ -3,6 +3,8 @@ data/*
 !data/raw/.gitkeep
 !data/signals/
 !data/signals/.gitkeep
+!data/pool/
+!data/pool/.gitkeep
 !data/labels/
 .vscode/
 .venv/

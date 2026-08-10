@@ -52,13 +52,18 @@ def get_engine() -> Engine:
     return engine
 
 
-def init_db() -> None:
+def init_db(*, run_migrate: bool = True) -> None:
     eng = get_engine()
     if str(eng.url).startswith("sqlite"):
         DB_PATH.parent.mkdir(parents=True, exist_ok=True)
     from backend import models  # noqa: F401
 
     Base.metadata.create_all(bind=eng)
+    if run_migrate:
+        from backend.migrate import run_migrations
+
+        run_migrations(create_tables=False)
+
 
 
 def get_session() -> Session:
