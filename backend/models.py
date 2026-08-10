@@ -35,6 +35,7 @@ class Signal(Base):
     __tablename__ = "signals"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    stable_id: Mapped[str] = mapped_column(String(64), nullable=False, unique=True, index=True)
     source: Mapped[str] = mapped_column(String(64), nullable=False, index=True)
     outlet: Mapped[str] = mapped_column(String(255), nullable=False, default="")
     title: Mapped[str] = mapped_column(Text, nullable=False, default="")
@@ -44,6 +45,12 @@ class Signal(Base):
     published_utc: Mapped[str] = mapped_column(String(64), nullable=False, default="")
     extra: Mapped[dict] = mapped_column("metadata", JSON, nullable=False, default=dict)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=utcnow, onupdate=utcnow
+    )
+    last_seen_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    archived_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    ingest_job_id: Mapped[int | None] = mapped_column(Integer, nullable=True, index=True)
 
     votes: Mapped[list[IssueVote]] = relationship(back_populates="signal")
 
@@ -67,6 +74,15 @@ class Signal(Base):
             "categories": self.categories or [],
             "published_utc": self.published_utc,
         }
+
+
+class SchemaVersion(Base):
+    __tablename__ = "schema_version"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    version: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    applied_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
 
 
 class ScrapeJob(Base):

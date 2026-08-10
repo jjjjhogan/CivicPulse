@@ -12,7 +12,9 @@ backend/                              # Flask app, SQLAlchemy models, jobs
 scrapers/                             # categories, schema, tiktok/news/reddit/twitter
 scripts/                              # dashboard_server, import_signals, scrape/process CLIs
 data/raw/                             # scrape / import payloads
-data/signals/                         # normalized CivicSignal JSON (imported into SQLite)
+data/pool/                            # giant-pool ponds (cumulative, pre-filter)
+data/signals/                         # derived CivicSignal JSON (API projection via SQLite)
+docs/DATA_DURABILITY.md               # Path B pool/pond/signal + runbook
 docs/INTEGRATION.md                   # API + signal contract
 docs/TWO_MONTH_ROADMAP.md             # 8-week strategy (canonical)
 docs/TIKTOK_SCRAPE.md                 # Chrome profile + TikTok operator notes
@@ -24,7 +26,7 @@ Note: root `main.py` is a legacy UCLA Selenium prototype, unrelated to CivicPuls
 
 ## Local demo (cold start, ~10 minutes)
 
-SQLite is the source of truth for the dashboard. JSON under `data/signals/` is the ingest/export format; load it into the DB before serving.
+SQLite is the source of truth for the dashboard. Ponds under `data/pool/` hold the cumulative scrape corpus; `data/signals/` is the derived civic export. See [`docs/DATA_DURABILITY.md`](docs/DATA_DURABILITY.md).
 
 ```bash
 python -m venv .venv
@@ -33,8 +35,10 @@ python -m venv .venv
 pip install -r requirements.txt
 copy .env.example .env         # optional (Windows); or: cp .env.example .env
 
+python scripts/migrate_db.py
+python scripts/bootstrap_pool.py      # seed ponds from signals + *_all.json
 python scripts/import_signals.py
-python scripts/reprocess_signals.py   # refresh classification metadata on JSON, then re-sync DB
+python scripts/reprocess_signals.py   # reclassify from ponds → signals → SQLite
 python scripts/dashboard_server.py
 ```
 
@@ -44,14 +48,18 @@ Verify DB-backed signals: http://127.0.0.1:8080/api/signals — response include
 
 | Step | Purpose |
 |------|---------|
+| `bootstrap_pool.py` | Seed `data/pool/*.json` from existing signals / `*_all` |
 | `import_signals.py` | Load `data/signals/*.json` → SQLite (`data/civicpulse.db`) |
-| `reprocess_signals.py` | Reclassify JSON, rebuild feed, sync rows back into SQLite |
+| `reprocess_signals.py` | Reclassify from ponds, rewrite signals, upsert SQLite (no prune by default) |
 | `dashboard_server.py` | Flask app: auth, signals, scrape jobs |
 
 Useful flags:
 
 ```bash
-python scripts/import_signals.py --replace   # wipe Signal table, then import
+python scripts/import_signals.py --replace   # wipe Signal table (backs up DB first)
+python scripts/reprocess_signals.py --archive-missing
+python scripts/reprocess_signals.py --prune
+python scripts/verify_signal_counts.py
 ```
 
 ## Testing

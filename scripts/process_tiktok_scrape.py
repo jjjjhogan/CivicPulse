@@ -15,6 +15,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
+from backend.pool import merge_into_pond  # noqa: E402
 from scrapers.feed import rebuild_landing_feed  # noqa: E402
 from scrapers.tiktok.export import (  # noqa: E402
     tag_results_to_signals,
@@ -71,9 +72,15 @@ def main() -> None:
         print(f"Removed {removed} duplicate video(s) while loading")
 
     results = tag_results_from_payload(payload)
-    signals = tag_results_to_signals(
-        results,
-        civic_only=not args.include_all_comments,
+    all_signals = tag_results_to_signals(results, civic_only=False)
+    pond_stats = merge_into_pond("tiktok", [s.to_dict() for s in all_signals])
+    print(
+        f"Pond tiktok: inserted={pond_stats['inserted']} updated={pond_stats['updated']} "
+        f"total={pond_stats['total']}"
+    )
+
+    signals = (
+        all_signals if args.include_all_comments else [s for s in all_signals if s.categories]
     )
     count = write_signals_json(signals, args.output)
     write_ingest_manifest(str(Path(args.output).parent / "manifest.json"), sources=["tiktok"])

@@ -10,12 +10,14 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
+from backend.pool import merge_into_pond  # noqa: E402
 from scrapers.feed import rebuild_landing_feed  # noqa: E402
 from scrapers.reddit.export import process_scrape_file  # noqa: E402
 
@@ -56,9 +58,7 @@ def main() -> None:
     if not input_path.is_file():
         raise SystemExit(f"Input file not found: {input_path}")
 
-    include_all_path = None
-    if args.include_all:
-        include_all_path = str(Path(args.output).with_name("reddit_all.json"))
+    include_all_path = str(Path(args.output).with_name("reddit_all.json"))
 
     total, civic = process_scrape_file(
         str(input_path),
@@ -67,6 +67,14 @@ def main() -> None:
         include_all_path=include_all_path,
     )
     print(f"Processed {total} Reddit posts -> {civic} civic signals -> {args.output}")
+
+    with open(include_all_path, encoding="utf-8") as handle:
+        pond_rows = json.load(handle)
+    pond_stats = merge_into_pond("reddit", pond_rows if isinstance(pond_rows, list) else [])
+    print(
+        f"Pond reddit: inserted={pond_stats['inserted']} updated={pond_stats['updated']} "
+        f"total={pond_stats['total']}"
+    )
 
     if not args.no_feed:
         count = rebuild_landing_feed(ROOT / "data" / "signals", Path(args.feed))

@@ -30,8 +30,10 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "a85d4cef191ffd38c540c0f664942fa6229defd1"
+    },
+    "stable_id": "a85d4cef191ffd38c540c0f664942fa6229defd1"
   },
   {
     "source": "tiktok",
@@ -64,68 +66,10 @@
         "confidence": 0.7,
         "method": "keywords",
         "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "its on the 5 freeway. is it really Irvine? \ud83d\ude01",
-    "body": "its on the 5 freeway. is it really Irvine? \ud83d\ude01",
-    "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "ktlanews",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "3196",
-      "comment_count": "51",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "public_safety"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.844,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "That's Tustin \ud83d\ude02\ud83d\ude02\ud83d\ude02",
-    "body": "That's Tustin \ud83d\ude02\ud83d\ude02\ud83d\ude02",
-    "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "ktlanews",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "3196",
-      "comment_count": "51",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "public_safety"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "996f5a2cf46234b1b4da14c07b564f1d04108909"
+    },
+    "stable_id": "996f5a2cf46234b1b4da14c07b564f1d04108909"
   },
   {
     "source": "tiktok",
@@ -158,8 +102,10 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "388b9636f31e07bbb4ae84b7f52d9e5561ec8085"
+    },
+    "stable_id": "388b9636f31e07bbb4ae84b7f52d9e5561ec8085"
   },
   {
     "source": "tiktok",
@@ -192,8 +138,10 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "3a10b5ada2b2abebfe83baa1b385d9936bbcee59"
+    },
+    "stable_id": "3a10b5ada2b2abebfe83baa1b385d9936bbcee59"
   },
   {
     "source": "tiktok",
@@ -226,38 +174,10 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "The man can\u2019t be from Irvine. I see a truck and not a Tesla.",
-    "body": "The man can\u2019t be from Irvine. I see a truck and not a Tesla.",
-    "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "ktlanews",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "3196",
-      "comment_count": "51",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "public_safety"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.67,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "134a188d664b0e294339360beffe83b0123a3140"
+    },
+    "stable_id": "134a188d664b0e294339360beffe83b0123a3140"
   },
   {
     "source": "tiktok",
@@ -290,8 +210,10 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "5557491cb30c3eddeb6977eb8fe1c0eaa1ee5f37"
+    },
+    "stable_id": "5557491cb30c3eddeb6977eb8fe1c0eaa1ee5f37"
   },
   {
     "source": "tiktok",
@@ -324,278 +246,10 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "Did the OC blame this on LA too!!\ud83d\ude02\ud83d\ude02",
-    "body": "Did the OC blame this on LA too!!\ud83d\ude02\ud83d\ude02",
-    "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "ktlanews",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "3196",
-      "comment_count": "51",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "public_safety"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.911,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "*** Tustin \ud83d\ude06",
-    "body": "*** Tustin \ud83d\ude06",
-    "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "ktlanews",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "3196",
-      "comment_count": "51",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "public_safety"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "\ud83d\udc4f\ud83d\udc4f\ud83d\udc4fIPD\ud83d\udc4f\ud83d\udc4f\ud83d\udc4f",
-    "body": "\ud83d\udc4f\ud83d\udc4f\ud83d\udc4fIPD\ud83d\udc4f\ud83d\udc4f\ud83d\udc4f",
-    "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "ktlanews",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "3196",
-      "comment_count": "51",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "public_safety"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "So it wasn\u2019t successful lol",
-    "body": "So it wasn\u2019t successful lol",
-    "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "ktlanews",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "3196",
-      "comment_count": "51",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "public_safety"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.917,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "Thats where i work jeesh",
-    "body": "Thats where i work jeesh",
-    "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "ktlanews",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "3196",
-      "comment_count": "51",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "public_safety"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.848,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "At least they got him fast",
-    "body": "At least they got him fast",
-    "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "ktlanews",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "3196",
-      "comment_count": "51",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "public_safety"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "So is she OK??",
-    "body": "So is she OK??",
-    "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "ktlanews",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "3196",
-      "comment_count": "51",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "public_safety"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "GAAASSSSPPP. I was just there!",
-    "body": "GAAASSSSPPP. I was just there!",
-    "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "ktlanews",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "3196",
-      "comment_count": "51",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "public_safety"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.793,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "I had a front row view when he got caught!",
-    "body": "I had a front row view when he got caught!",
-    "url": "https://www.tiktok.com/@ktlanews/video/7662503385417010446",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "ktlanews",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
-      "like_count": "3196",
-      "comment_count": "51",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "public_safety"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.844,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "c9a8d729cfaced4a93ccb1858e18d39d61e84b13"
+    },
+    "stable_id": "c9a8d729cfaced4a93ccb1858e18d39d61e84b13"
   },
   {
     "source": "tiktok",
@@ -626,8 +280,10 @@
         "confidence": 0.7,
         "method": "keywords",
         "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "283998a771fd5cd2eccf15eea26abcd5d507949e"
+    },
+    "stable_id": "283998a771fd5cd2eccf15eea26abcd5d507949e"
   },
   {
     "source": "tiktok",
@@ -658,8 +314,10 @@
         "confidence": 0.77,
         "method": "keywords+model",
         "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "9fb3b5e6aa2cb736cee87a89a8b3862e288f0698"
+    },
+    "stable_id": "9fb3b5e6aa2cb736cee87a89a8b3862e288f0698"
   },
   {
     "source": "tiktok",
@@ -701,8 +359,10 @@
         "confidence": 0.77,
         "method": "keywords+model",
         "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "bf9d1910a4b09a2a4473db76c2bd1a426a9f642c"
+    },
+    "stable_id": "bf9d1910a4b09a2a4473db76c2bd1a426a9f642c"
   },
   {
     "source": "tiktok",
@@ -744,8 +404,10 @@
         "confidence": 0.7,
         "method": "keywords",
         "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "9349de4205a1a35d4a15a2ea9c830c32cd55e209"
+    },
+    "stable_id": "9349de4205a1a35d4a15a2ea9c830c32cd55e209"
   },
   {
     "source": "tiktok",
@@ -781,8 +443,10 @@
         "confidence": 0.7,
         "method": "keywords",
         "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "5f1032c2e3b928760e853a5608ad8b6bb0b59611"
+    },
+    "stable_id": "5f1032c2e3b928760e853a5608ad8b6bb0b59611"
   },
   {
     "source": "tiktok",
@@ -813,8 +477,10 @@
         "confidence": 0.8,
         "method": "keywords",
         "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "ea70483e399ead093dbaa5296e9a4c2567f3a11e"
+    },
+    "stable_id": "ea70483e399ead093dbaa5296e9a4c2567f3a11e"
   },
   {
     "source": "tiktok",
@@ -845,8 +511,10 @@
         "confidence": 0.8,
         "method": "keywords",
         "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "f3989dc022f6b4f5bf07cf23f3ba522b0ca0cb99"
+    },
+    "stable_id": "f3989dc022f6b4f5bf07cf23f3ba522b0ca0cb99"
   },
   {
     "source": "tiktok",
@@ -877,8 +545,10 @@
         "confidence": 0.8,
         "method": "keywords",
         "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "4a3f1918c0aa35a85e1ab272f176876c562b708c"
+    },
+    "stable_id": "4a3f1918c0aa35a85e1ab272f176876c562b708c"
   },
   {
     "source": "tiktok",
@@ -909,8 +579,10 @@
         "confidence": 0.8,
         "method": "keywords",
         "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "359968d0db388bcff03acae0bf704ec9a3f567c9"
+    },
+    "stable_id": "359968d0db388bcff03acae0bf704ec9a3f567c9"
   },
   {
     "source": "tiktok",
@@ -943,8 +615,10 @@
         "confidence": 0.777,
         "method": "keywords+model",
         "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "4c667e65caed61b61441cc6725572d3ed5b2f2bc"
+    },
+    "stable_id": "4c667e65caed61b61441cc6725572d3ed5b2f2bc"
   },
   {
     "source": "tiktok",
@@ -975,8 +649,10 @@
         "confidence": 0.8,
         "method": "keywords",
         "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "b4418c5d5679d9911346b1ea1b8979b63b34fa0f"
+    },
+    "stable_id": "b4418c5d5679d9911346b1ea1b8979b63b34fa0f"
   },
   {
     "source": "tiktok",
@@ -1008,8 +684,10 @@
         "method": "model",
         "model_version": "nb-v1",
         "rescued": true
-      }
-    }
+      },
+      "stable_id": "adf15e34b981c370ff20bb60418b46f986a7c0f7"
+    },
+    "stable_id": "adf15e34b981c370ff20bb60418b46f986a7c0f7"
   },
   {
     "source": "tiktok",
@@ -1040,8 +718,10 @@
         "confidence": 0.7,
         "method": "keywords",
         "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "acc6e7103ec1d819f4795559ee4cfae959655217"
+    },
+    "stable_id": "acc6e7103ec1d819f4795559ee4cfae959655217"
   },
   {
     "source": "tiktok",
@@ -1072,188 +752,10 @@
         "confidence": 0.77,
         "method": "keywords+model",
         "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "Social media ruined us",
-    "body": "Social media ruined us",
-    "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "60K",
-      "comment_count": "497",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "noise"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "Orange County is the Florida of California",
-    "body": "Orange County is the Florida of California",
-    "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "60K",
-      "comment_count": "497",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "noise"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "We\u2019re the kids parents",
-    "body": "We\u2019re the kids parents",
-    "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "60K",
-      "comment_count": "497",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "noise"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.753,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "I wish I could have two homes",
-    "body": "I wish I could have two homes",
-    "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "60K",
-      "comment_count": "497",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "noise"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.754,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "well well well",
-    "body": "well well well",
-    "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "60K",
-      "comment_count": "497",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "noise"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "Kids enjoying the beach on a holiday",
-    "body": "Kids enjoying the beach on a holiday",
-    "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "60K",
-      "comment_count": "497",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "noise"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.758,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "c9379ff624e2abe0eba691a89f8c3a487d775461"
+    },
+    "stable_id": "c9379ff624e2abe0eba691a89f8c3a487d775461"
   },
   {
     "source": "tiktok",
@@ -1286,8 +788,10 @@
         "confidence": 0.7,
         "method": "keywords",
         "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "6e1da3aa7e917747ad330b0328ffe7a873a8bbe1"
+    },
+    "stable_id": "6e1da3aa7e917747ad330b0328ffe7a873a8bbe1"
   },
   {
     "source": "tiktok",
@@ -1322,38 +826,10 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "And other 1/2 local??",
-    "body": "And other 1/2 local??",
-    "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "60K",
-      "comment_count": "497",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "noise"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.861,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "22e89cce283a1bf02572283612997274bee18e5d"
+    },
+    "stable_id": "22e89cce283a1bf02572283612997274bee18e5d"
   },
   {
     "source": "tiktok",
@@ -1388,8 +864,10 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "12ab8b7cf25663bf39ce232d67ee995a1794f8cf"
+    },
+    "stable_id": "12ab8b7cf25663bf39ce232d67ee995a1794f8cf"
   },
   {
     "source": "tiktok",
@@ -1424,38 +902,10 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "Arizona?!",
-    "body": "Arizona?!",
-    "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "60K",
-      "comment_count": "497",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "noise"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "d40819a1cba1b0a4511579ee564482fd0cda6ae8"
+    },
+    "stable_id": "d40819a1cba1b0a4511579ee564482fd0cda6ae8"
   },
   {
     "source": "tiktok",
@@ -1490,68 +940,10 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "Thoughts and prayers",
-    "body": "Thoughts and prayers",
-    "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "60K",
-      "comment_count": "497",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "noise"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "I\u2019m tired",
-    "body": "I\u2019m tired",
-    "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "60K",
-      "comment_count": "497",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "noise"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "a66d4259a96ac9effafd8b38999f3961a80fdec5"
+    },
+    "stable_id": "a66d4259a96ac9effafd8b38999f3961a80fdec5"
   },
   {
     "source": "tiktok",
@@ -1586,38 +978,10 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "OMGG im fatigueddd",
-    "body": "OMGG im fatigueddd",
-    "url": "https://www.tiktok.com/@abc7la/video/7660348129555844366",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "60K",
-      "comment_count": "497",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "noise"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "3a41ebdb5f3b37bf2e139a2c0969ad9669b7f60a"
+    },
+    "stable_id": "3a41ebdb5f3b37bf2e139a2c0969ad9669b7f60a"
   },
   {
     "source": "tiktok",
@@ -1652,8 +1016,10 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "5dc536bb4d85b9860bf76eb6786b6aee54bab691"
+    },
+    "stable_id": "5dc536bb4d85b9860bf76eb6786b6aee54bab691"
   },
   {
     "source": "tiktok",
@@ -1684,160 +1050,10 @@
         "confidence": 0.8,
         "method": "keywords",
         "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "Joey is open until midnight weekdays and 1 am on weekends. Decent food but definitely better than fast food. Gelsons is open until 11 if ...",
-    "body": "Joey is open until midnight weekdays and 1 am on weekends. Decent food but definitely better than fast food. Gelsons is open until 11 if you want a good grocery store otherwise Ralph\u2019s is open until midnight everyday as well \u2764\ufe0f",
-    "url": "https://www.tiktok.com/@emma.erdman/video/7660299880019152158",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "emma.erdman",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "705",
-      "comment_count": "84",
-      "content_type": "comment",
-      "inherited_from_video": false,
-      "trusted_outlet": false,
-      "video_categories": [],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.375,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "What no fatigue comments? That's weird \ud83e\udd14",
-    "body": "What no fatigue comments? That's weird \ud83e\udd14",
-    "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "14K",
-      "comment_count": "746",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "traffic_safety",
-        "public_safety"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "Most of those kids are local",
-    "body": "Most of those kids are local",
-    "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "14K",
-      "comment_count": "746",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "traffic_safety",
-        "public_safety"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.824,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "extremely fatigued",
-    "body": "extremely fatigued",
-    "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "14K",
-      "comment_count": "746",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "traffic_safety",
-        "public_safety"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "Those kid do not live in Newport",
-    "body": "Those kid do not live in Newport",
-    "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "14K",
-      "comment_count": "746",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "traffic_safety",
-        "public_safety"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.753,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "97b62118b419725bff154cafbf7393df286585c9"
+    },
+    "stable_id": "97b62118b419725bff154cafbf7393df286585c9"
   },
   {
     "source": "tiktok",
@@ -1871,39 +1087,10 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "well well well",
-    "body": "well well well",
-    "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "14K",
-      "comment_count": "746",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "traffic_safety",
-        "public_safety"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "7cdb30ce7bc98c2361bee66640a4e79c0eb00aa7"
+    },
+    "stable_id": "7cdb30ce7bc98c2361bee66640a4e79c0eb00aa7"
   },
   {
     "source": "tiktok",
@@ -1937,8 +1124,10 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "e57f93ad598fa68545648fa357cc4ff5fc514bec"
+    },
+    "stable_id": "e57f93ad598fa68545648fa357cc4ff5fc514bec"
   },
   {
     "source": "tiktok",
@@ -1972,8 +1161,10 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "c55e8572e9df6e6172d2022037b7cad9d59208f9"
+    },
+    "stable_id": "c55e8572e9df6e6172d2022037b7cad9d59208f9"
   },
   {
     "source": "tiktok",
@@ -2007,39 +1198,10 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "[Sticker]",
-    "body": "[Sticker]",
-    "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "14K",
-      "comment_count": "746",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "traffic_safety",
-        "public_safety"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "1f8f8a322df8e92473dc206b23d652fc065b74b0"
+    },
+    "stable_id": "1f8f8a322df8e92473dc206b23d652fc065b74b0"
   },
   {
     "source": "tiktok",
@@ -2073,8 +1235,10 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "035e4c95d5142f283c0bdc3a949e4b265556b90c"
+    },
+    "stable_id": "035e4c95d5142f283c0bdc3a949e4b265556b90c"
   },
   {
     "source": "tiktok",
@@ -2108,163 +1272,10 @@
         "confidence": 0.7,
         "method": "keywords",
         "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "Folks too gentle with the comments.",
-    "body": "Folks too gentle with the comments.",
-    "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "14K",
-      "comment_count": "746",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "traffic_safety",
-        "public_safety"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.911,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "stay safe officers \u2705\ufe0f\ud83d\udc4d \u2764\ufe0f\ud83c\uddfa\ud83c\uddf8",
-    "body": "stay safe officers \u2705\ufe0f\ud83d\udc4d \u2764\ufe0f\ud83c\uddfa\ud83c\uddf8",
-    "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "14K",
-      "comment_count": "746",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "traffic_safety",
-        "public_safety"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.838,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "Well well well.",
-    "body": "Well well well.",
-    "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "14K",
-      "comment_count": "746",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "traffic_safety",
-        "public_safety"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "Well Well Well",
-    "body": "Well Well Well",
-    "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "14K",
-      "comment_count": "746",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "traffic_safety",
-        "public_safety"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "Well well well\u2026\u2026.",
-    "body": "Well well well\u2026\u2026.",
-    "url": "https://www.tiktok.com/@abc7la/video/7659460863350361357",
-    "categories": [],
-    "published_utc": "2026-07-15",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "abc7la",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "14K",
-      "comment_count": "746",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": true,
-      "video_categories": [
-        "traffic_safety",
-        "public_safety"
-      ],
-      "hashtags": [],
-      "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "d479dd43671672bd90c03efc913954854f1c4923"
+    },
+    "stable_id": "d479dd43671672bd90c03efc913954854f1c4923"
   },
   {
     "source": "tiktok",
@@ -2301,8 +1312,10 @@
         "confidence": 0.7,
         "method": "keywords",
         "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "242285d7a62a3eeb81fa318981f9f6d63783109d"
+    },
+    "stable_id": "242285d7a62a3eeb81fa318981f9f6d63783109d"
   },
   {
     "source": "tiktok",
@@ -2337,48 +1350,10 @@
         "confidence": 0.7,
         "method": "keywords",
         "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "nope",
-    "body": "nope",
-    "url": "https://www.tiktok.com/@spain7174/video/7664638696594885902",
-    "categories": [],
-    "published_utc": "2026-07-20",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "spain7174",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "3",
-      "comment_count": "1",
-      "content_type": "comment",
-      "inherited_from_video": false,
-      "trusted_outlet": false,
-      "video_categories": [
-        "public_safety"
-      ],
-      "hashtags": [
-        "usa",
-        "newportbeach",
-        "fourthofjuly",
-        "chaos",
-        "riot",
-        "china",
-        "africa",
-        "laborrights",
-        "humanrights"
-      ],
-      "classification": {
-        "scores": {},
-        "confidence": 0.909,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "8a43a14e6d0198c13558e28dcc7d425a6f087e13"
+    },
+    "stable_id": "8a43a14e6d0198c13558e28dcc7d425a6f087e13"
   },
   {
     "source": "tiktok",
@@ -2416,8 +1391,10 @@
         "confidence": 0.7,
         "method": "keywords",
         "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "e02878da274e1c240b31d87bc7ca99c9347ae3d9"
+    },
+    "stable_id": "e02878da274e1c240b31d87bc7ca99c9347ae3d9"
   },
   {
     "source": "tiktok",
@@ -2455,8 +1432,10 @@
         "confidence": 0.7,
         "method": "keywords",
         "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "0c7b887eba339ef12c59addefe244b336ec6822c"
+    },
+    "stable_id": "0c7b887eba339ef12c59addefe244b336ec6822c"
   },
   {
     "source": "tiktok",
@@ -2494,82 +1473,10 @@
         "confidence": 0.7,
         "method": "keywords",
         "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok @vlogsfromlen",
-    "title": "Trying to get back into regular vlogging again! #ucirvine #uci #university #student #college #icecream #oc #socal #dessert #food",
-    "body": "Trying to get back into regular vlogging again! #ucirvine #uci #university #student #college #icecream #oc #socal #dessert #food",
-    "url": "https://www.tiktok.com/@vlogsfromlen/video/7661184449589103902",
-    "categories": [],
-    "published_utc": "2026-07-20",
-    "metadata": {
-      "tag": "uci",
-      "content_type": "video_caption",
-      "trusted_outlet": false,
-      "hashtags": [
-        "ucirvine",
-        "uci",
-        "university",
-        "student",
-        "college",
-        "icecream",
-        "oc",
-        "socal",
-        "dessert",
-        "food"
-      ],
-      "weak_trusted_default": false,
-      "classification": {
-        "scores": {},
-        "confidence": 0.692,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #uci",
-    "title": "wait what did you get at cafe espresso",
-    "body": "wait what did you get at cafe espresso",
-    "url": "https://www.tiktok.com/@vlogsfromlen/video/7661184449589103902",
-    "categories": [],
-    "published_utc": "2026-07-20",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "vlogsfromlen",
-      "tag": "uci",
-      "search_query": "tag:uci",
-      "like_count": "217",
-      "comment_count": "2",
-      "content_type": "comment",
-      "inherited_from_video": true,
-      "trusted_outlet": false,
-      "video_categories": [
-        "sanitation"
-      ],
-      "hashtags": [
-        "ucirvine",
-        "uci",
-        "university",
-        "student",
-        "college",
-        "icecream",
-        "oc",
-        "socal",
-        "dessert",
-        "food"
-      ],
-      "classification": {
-        "scores": {},
-        "confidence": 0.828,
-        "method": "none",
-        "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "aa158fbfa58498addbd8d402f721fe37866b90f4"
+    },
+    "stable_id": "aa158fbfa58498addbd8d402f721fe37866b90f4"
   },
   {
     "source": "tiktok",
@@ -2595,8 +1502,10 @@
         "confidence": 0.7,
         "method": "keywords",
         "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "d9f934c3971dcb69b08ab12a44ecd39dd3cdb8b7"
+    },
+    "stable_id": "d9f934c3971dcb69b08ab12a44ecd39dd3cdb8b7"
   },
   {
     "source": "tiktok",
@@ -2625,7 +1534,9 @@
         "confidence": 0.77,
         "method": "keywords+model",
         "model_version": "nb-v1"
-      }
-    }
+      },
+      "stable_id": "2569aff1f41c56457ac4632c19cb515ca7865673"
+    },
+    "stable_id": "2569aff1f41c56457ac4632c19cb515ca7865673"
   }
 ]

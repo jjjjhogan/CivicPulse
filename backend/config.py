@@ -11,7 +11,9 @@ ROOT = Path(__file__).resolve().parent.parent
 load_dotenv(ROOT / ".env")
 
 SIGNALS_DIR = ROOT / "data" / "signals"
+POOL_DIR = ROOT / "data" / "pool"
 RAW_DIR = ROOT / "data" / "raw"
+BACKUP_DIR = ROOT / "data" / "backups"
 DB_PATH = ROOT / "data" / "civicpulse.db"
 
 SCRAPE_TIKTOK = ROOT / "scripts" / "scrape_tiktok.py"

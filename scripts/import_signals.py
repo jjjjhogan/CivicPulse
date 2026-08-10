@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from backend.db import SessionLocal, init_db  # noqa: E402
+from backend.db_backup import require_backup  # noqa: E402
 from backend.models import Signal  # noqa: E402
 from backend.signals_import import import_signals_from_dir  # noqa: E402
 
@@ -26,11 +27,13 @@ def main() -> None:
     parser.add_argument(
         "--replace",
         action="store_true",
-        help="Delete existing signal rows before import.",
+        help="Delete existing signal rows before import (requires DB backup).",
     )
     args = parser.parse_args()
 
     if args.replace:
+        backup = require_backup()
+        print(f"DB backup: {backup}")
         init_db()
         db = SessionLocal()
         try:
