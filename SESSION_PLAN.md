@@ -60,53 +60,44 @@ Use existing housing signals for the demo. Prefer matcher/UI filters over global
 
 ---
 
-## Session 7 — Research API spike
-
-**Goal:** Create/list Research via API + thin UI. No archive matching yet.
+## Done — Session 7: Research API spike
 
 **Branch:** `feature/research-api-s7`
 
 ### Build
 
-- [ ] `Research` model with: `title`, `topic`, `keywords[]`, `categories[]`, `status` (`draft` → …), timestamps, optional `notes` (`job_ids[]` can be empty)
-- [ ] `POST /api/researches` — create
-- [ ] `GET /api/researches` — list
-- [ ] `GET /api/researches/<id>` — detail
-- [ ] Minimal UI: create form + list (dashboard nav is enough)
-- [ ] Same SQLAlchemy/SQLite patterns as other resources — no Firestore
+- [x] `Research` model (title, topic, keywords[], categories[], status, notes, timestamps)
+- [x] `POST /api/researches` — create
+- [x] `GET /api/researches` — list
+- [x] `GET /api/researches/<id>` — detail
+- [x] Minimal UI: create form + list + detail page, dashboard sidebar link
+- [x] Same SQLAlchemy/SQLite patterns — no Firestore
 
 ### Exit
 
-- [ ] Can create “Housing prices — Irvine” and see it listed
-- [ ] `pytest -q` green for new routes/models
-- [ ] PR
-
-### Out of scope
-
-Archive matcher, topic-scoped scrapes, summary/print, any storage-pipeline work.
+- [x] Can create “Housing prices — Irvine” and see it listed
+- [x] `pytest -q` green — 7 new API tests (67 total)
+- [x] PR pushed
 
 ---
 
-## Session 8 — Archive matcher + Research detail
+## Done — Session 8: Archive matcher + Research detail
 
-**Goal:** Archive pass attaches sensible existing signals (housing demo). Sketch Firestore needs in the PR notes only — no Firebase code.
-
-**Branch:** `feature/research-archive-s8`  
-**Depends on:** Session 7 merged (or stacked on top).
+**Branch:** `feature/research-api-s7` (stacked on Session 7)
 
 ### Build
 
-- [ ] Match rules (v1): category overlap with Research `categories[]` **and/or** keyword hit from `keywords[]` in signal title/body
-- [ ] Persist `research_hits`: research id, signal id/key, match reason, timestamp
-- [ ] `POST /api/researches/<id>/archive` — run against current signals read path
-- [ ] Detail UI: **Archive** tab + click-through; empty/low-hit state that doesn’t look broken
-- [ ] Manual QA: categories=`housing`, keywords like `rent` / `housing prices` → run archive → spot-check hits
+- [x] Match rules (v1): category overlap + keyword hit (\b word-boundary) in title/body, scored 0.5/cat + 0.3/kw
+- [x] `ResearchHit` model: research_id, signal_id, match_reason, score, timestamp (unique constraint)
+- [x] `POST /api/researches/<id>/archive` — runs matcher, persists hits, sets status=active
+- [x] Detail UI: Archive tab with hit cards (score, source, categories, match reason, click-through)
+- [x] Manual QA: “housing prices in Irvine” → 15 hits, top results are housing-categorized + rent-keyword signals
 
 ### Exit
 
-- [ ] “Housing prices” Research shows mostly plausible archive hits
-- [ ] `pytest -q` for matcher + hits
-- [ ] PR (optional one-line note: what Firestore would need later — sketch only)
+- [x] Housing Research shows plausible archive hits — top 2 are category+keyword combos (score 0.8)
+- [x] `pytest -q` green — 8 new archive tests (75 total)
+- [x] PR pushed. Firestore note in commit message.
 
 ### Out of scope
 
@@ -129,8 +120,8 @@ Firebase/Render, import/prune/backup rewrites, new gather jobs, embeddings, clas
 |---------|--------|
 | **5–6** Classifier loop | Done |
 | **7.5** Hygiene | Done |
-| **7** Research API | **Next** |
-| **8** Archive matcher | After 7 |
+| **7** Research API | Done |
+| **8** Archive matcher | Done |
 
 ---
 
@@ -140,5 +131,7 @@ Firebase/Render, import/prune/backup rewrites, new gather jobs, embeddings, clas
 - **S5:** keyword phrases; method/confidence UI; gold ~47%
 - **S6:** +59 labels; inheritance gate; `rescore_gold.py`
 - **S7.5:** FP hygiene; gold 40/78 (51.3%), 0 regressions
+- **S7:** Research model + API (create/list/detail); 7 tests
+- **S8:** Archive matcher + research_hits + detail Archive tab; 8 tests; housing demo 15 hits
 
 **Roadmap:** [`docs/TWO_MONTH_ROADMAP.md`](docs/TWO_MONTH_ROADMAP.md)
