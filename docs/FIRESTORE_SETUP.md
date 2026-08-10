@@ -1,91 +1,111 @@
-# Firestore setup (local emulator)
+# Firestore / Firebase (real project + optional emulator)
 
-CivicPulse can run against **Cloud Firestore** instead of SQLite.
-For local development, use the Firebase Emulator Suite — no Google
-Cloud project or credentials required.
+CivicPulse switches storage with `DATA_BACKEND=firestore`.
+The Admin SDK talks to **your Firebase project** (or a local emulator).
+There is **no database URL** like Postgres — you need a **Project ID** and a
+**service-account JSON**.
 
-## Prerequisites
+Store layout: [`backend/store.py`](../backend/store.py),
+[`backend/store_sqlite.py`](../backend/store_sqlite.py),
+[`backend/store_firestore.py`](../backend/store_firestore.py).
 
-1. **Node.js** (v18+) — [nodejs.org](https://nodejs.org/)
-2. **Java** (JDK 11+) — required by the Firestore emulator
-3. **Firebase CLI**:
-   ```bash
-   npm install -g firebase-tools
-   ```
-4. **firebase-admin** Python package (already in `requirements.txt`):
-   ```bash
-   pip install firebase-admin
-   ```
+## What to get from Firebase Console
 
-## Start the emulator
+1. **Project ID** — Project settings → General (also in the console URL:
+   `https://console.firebase.google.com/project/<PROJECT_ID>/...`).
+2. **Service account JSON** — Project settings → Service accounts →
+   *Generate new private key*. Save outside the repo (or under a gitignored path).
+3. Enable **Cloud Firestore** in the console (Native mode).
 
-From the project root (where `firebase.json` lives):
+Put values in `.env` (see [`.env.example`](../.env.example)):
 
-```bash
-firebase emulators:start --only firestore
+```env
+DATA_BACKEND=firestore
+FIREBASE_PROJECT_ID=your-firebase-project-id
+GOOGLE_CLOUD_PROJECT=your-firebase-project-id
+GOOGLE_APPLICATION_CREDENTIALS=C:/secure/path/civicpulse-sa.json
 ```
 
-This starts:
-- Firestore emulator on `127.0.0.1:8081`
-- Emulator UI on `http://localhost:4000` (browse collections, run queries)
+**Unset** `FIRESTORE_EMULATOR_HOST` when targeting the real project.
 
-The emulator automatically sets `FIRESTORE_EMULATOR_HOST` for child
-processes. For the Flask server running in a separate terminal, set it
-manually:
+Also set `"default"` in [`.firebaserc`](../.firebaserc) to the same project id
+(for CLI deploy of rules/indexes).
 
-```bash
-# Linux/macOS
-export FIRESTORE_EMULATOR_HOST=127.0.0.1:8081
+## Migrate SQLite signals → real Firestore
 
-# Windows PowerShell
-$env:FIRESTORE_EMULATOR_HOST = "127.0.0.1:8081"
-```
+Keep ponds/signals healthy on SQLite first ([`DATA_DURABILITY.md`](DATA_DURABILITY.md)).
 
-## Run CivicPulse with Firestore
+```powershell
+# .env already points at the real project (no emulator host)
+$env:DATA_BACKEND = "firestore"
+# or rely on .env loaded by the app
 
-```bash
-# Terminal 1 — emulator
-firebase emulators:start --only firestore
-
-# Terminal 2 — Flask server
-export FIRESTORE_EMULATOR_HOST=127.0.0.1:8081
-export DATA_BACKEND=firestore
+python scripts/export_signals_ndjson.py -o data/exports/signals.ndjson
+python scripts/import_signals_firestore.py -i data/exports/signals.ndjson
 python scripts/dashboard_server.py
+```
+
+Doc id = **`stable_id`**. Soft-archived rows are omitted from default list APIs.
+
+**Still on SQLite until Session 12:** Research / `research_hits`.
+Signals, users, votes, and scrape jobs use Firestore after seed.
+
+Deploy indexes/rules (once CLI is logged into the project):
+
+```bash
+firebase deploy --only firestore:indexes,firestore:rules
 ```
 
 ## Environment variables
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `DATA_BACKEND` | `sqlite` | `sqlite` or `firestore` |
-| `FIRESTORE_EMULATOR_HOST` | *(unset)* | Set to `127.0.0.1:8081` for local emulator |
-| `GOOGLE_CLOUD_PROJECT` | `civicpulse-local` | Project ID (emulator accepts any value) |
-| `GOOGLE_APPLICATION_CREDENTIALS` | *(unset)* | Path to service-account JSON (prod only) |
+| Variable | Required for real project | Description |
+|----------|---------------------------|-------------|
+| `DATA_BACKEND` | `firestore` | Backend switch |
+| `FIREBASE_PROJECT_ID` | yes | Firebase project id |
+| `GOOGLE_CLOUD_PROJECT` | recommended (same id) | Alias used by Google libs |
+| `GOOGLE_APPLICATION_CREDENTIALS` | yes | Absolute path to SA JSON |
+| `FIRESTORE_EMULATOR_HOST` | must be **unset** | Only for local emulator |
 
 ## Firestore collections
 
-| Collection | SQLite equivalent | Key fields |
-|------------|-------------------|------------|
-| `signals` | `signals` table | source, title, body, url, categories, published_utc, metadata |
-| `users` | `users` table | email, name, password_hash |
-| `scrape_jobs` | `scrape_jobs` table | source, status, settings, log |
-| `issue_votes` | `issue_votes` table | signal_id, user_id, choice |
-| `researches` | `researches` table | title, topic, keywords, categories, status |
-| `research_hits` | `research_hits` table | research_id, signal_id, match_reason, score |
+| Collection | Doc id | Key fields |
+|------------|--------|------------|
+| `signals` | `stable_id` | source, outlet, title, body, url, categories, published_utc, metadata, archived_at, timestamps, ingest_job_id |
+| `users` | auto | email, name, password_hash |
+| `scrape_jobs` | auto | source, status, settings, log |
+| `issue_votes` | `{signal_id}_{user_id}` | signal_id, user_id, choice |
+| `researches` / `research_hits` | *(not ported)* | still SQLite |
 
-## Running tests against Firestore
+Indexes: [`firestore.indexes.json`](../firestore.indexes.json).
+
+## Smoke checklist (real project)
+
+1. `GET /api/signals` → `"storage": "firestore"`, expected count after seed
+2. Signup / login
+3. Create report + vote
+4. Create scrape job (post-scrape sync upserts into Firestore)
+5. Confirm docs in Firebase Console → Firestore
+
+## Optional: local emulator
+
+For offline work without cloud credentials:
 
 ```bash
-export FIRESTORE_EMULATOR_HOST=127.0.0.1:8081
-export DATA_BACKEND=firestore
-py -m pytest -q
+firebase emulators:start --only firestore
+# FIRESTORE_EMULATOR_HOST=127.0.0.1:8081
+# DATA_BACKEND=firestore
 ```
-
-Tests use the emulator and clear collections between runs.
-The default (`DATA_BACKEND=sqlite`) uses in-memory SQLite as before.
 
 ## Production (Render)
 
-On Render, set `DATA_BACKEND=firestore` and point
-`GOOGLE_APPLICATION_CREDENTIALS` to the service-account JSON (stored
-as a Render secret file). Do **not** commit service-account JSON.
+Same env vars: `DATA_BACKEND=firestore`, project id, and
+`GOOGLE_APPLICATION_CREDENTIALS` pointing at a Render **secret file**.
+Never commit the service-account JSON.
+
+## Tests
+
+```bash
+pytest -q
+```
+
+Default suite uses SQLite + mocked Firestore (no cloud call).

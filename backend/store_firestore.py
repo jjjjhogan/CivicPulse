@@ -5,6 +5,8 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from typing import Any
 
+from backend.stable_id import compute_stable_id, ensure_stable_id
+
 
 def _utcnow_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
@@ -15,9 +17,10 @@ def _utcnow_iso() -> str:
 # ---------------------------------------------------------------------------
 
 def _doc_to_signal_dict(doc) -> dict:
-    data = doc.to_dict()
+    data = doc.to_dict() or {}
     return {
         "id": doc.id,
+        "stable_id": data.get("stable_id") or doc.id,
         "source": data.get("source", ""),
         "outlet": data.get("outlet", ""),
         "title": data.get("title", ""),
@@ -30,13 +33,17 @@ def _doc_to_signal_dict(doc) -> dict:
 
 
 def _doc_to_feed_dict(doc) -> dict:
-    data = doc.to_dict()
+    data = doc.to_dict() or {}
     return {
         "outlet": data.get("outlet", ""),
         "title": data.get("title", ""),
         "categories": data.get("categories", []),
         "published_utc": data.get("published_utc", ""),
     }
+
+
+def _is_archived(data: dict) -> bool:
+    return bool(data.get("archived_at"))
 
 
 class FirestoreSignalStore:
@@ -48,12 +55,22 @@ class FirestoreSignalStore:
     def _coll(self):
         return self._db.collection(self.COLLECTION)
 
-    def list_signals(self) -> list[dict]:
-        docs = self._coll().order_by("created_at").stream()
+    def _filter_archived(self, docs, *, include_archived: bool) -> list:
+        out = []
+        for doc in docs:
+            data = doc.to_dict() or {}
+            if include_archived or not _is_archived(data):
+                out.append(doc)
+        return out
+
+    def list_signals(self, *, include_archived: bool = False) -> list[dict]:
+        docs = list(self._coll().order_by("created_at").stream())
+        docs = self._filter_archived(docs, include_archived=include_archived)
         return [_doc_to_signal_dict(doc) for doc in docs]
 
-    def list_feed_signals(self) -> list[dict]:
-        docs = self._coll().order_by("created_at").stream()
+    def list_feed_signals(self, *, include_archived: bool = False) -> list[dict]:
+        docs = list(self._coll().order_by("created_at").stream())
+        docs = self._filter_archived(docs, include_archived=include_archived)
         return [_doc_to_feed_dict(doc) for doc in docs]
 
     def get_signal(self, signal_id: int | str) -> dict | None:
@@ -63,28 +80,113 @@ class FirestoreSignalStore:
         return _doc_to_signal_dict(doc)
 
     def create_signal(self, **fields: Any) -> dict:
+        metadata = fields.get("metadata") or {}
+        if not isinstance(metadata, dict):
+            metadata = {}
+        source = fields.get("source", "")
+        title = fields.get("title", "")
+        body = fields.get("body", "")
+        url = fields.get("url", "")
+        stable_id = (fields.get("stable_id") or "").strip()
+        if not stable_id:
+            stable_id = compute_stable_id(source, url, title, body, metadata=metadata)
+        metadata = {**metadata, "stable_id": stable_id}
+        now = _utcnow_iso()
         data = {
-            "source": fields.get("source", ""),
+            "stable_id": stable_id,
+            "source": source,
             "outlet": fields.get("outlet", ""),
-            "title": fields.get("title", ""),
-            "body": fields.get("body", ""),
-            "url": fields.get("url", ""),
+            "title": title,
+            "body": body,
+            "url": url,
             "categories": fields.get("categories", []),
             "published_utc": fields.get("published_utc", ""),
-            "metadata": fields.get("metadata", {}),
-            "created_at": _utcnow_iso(),
+            "metadata": metadata,
+            "created_at": now,
+            "updated_at": now,
+            "last_seen_at": now,
+            "archived_at": None,
+            "ingest_job_id": fields.get("ingest_job_id"),
         }
-        _, doc_ref = self._coll().add(data)
-        return {**data, "id": doc_ref.id}
+        self._coll().document(stable_id).set(data, merge=True)
+        return {
+            "id": stable_id,
+            "stable_id": stable_id,
+            "source": data["source"],
+            "outlet": data["outlet"],
+            "title": data["title"],
+            "body": data["body"],
+            "url": data["url"],
+            "categories": data["categories"],
+            "published_utc": data["published_utc"],
+            "metadata": metadata,
+        }
 
-    def list_signals_by_source(self, source: str) -> list[dict]:
-        docs = (
+    def list_signals_by_source(
+        self, source: str, *, include_archived: bool = False,
+    ) -> list[dict]:
+        docs = list(
             self._coll()
             .where("source", "==", source)
             .order_by("created_at", direction="DESCENDING")
             .stream()
         )
+        docs = self._filter_archived(docs, include_archived=include_archived)
         return [_doc_to_signal_dict(doc) for doc in docs]
+
+    def upsert_many(
+        self, rows: list[dict], *, ingest_job_id: int | None = None,
+    ) -> dict:
+        inserted = 0
+        updated = 0
+        now = _utcnow_iso()
+        batch = self._db.batch()
+        ops = 0
+        for row in rows:
+            if not isinstance(row, dict):
+                continue
+            if not (row.get("source") or "").strip():
+                continue
+            ensure_stable_id(row)
+            stable_id = row["stable_id"]
+            ref = self._coll().document(stable_id)
+            existing = ref.get()
+            metadata = row.get("metadata") or {}
+            if not isinstance(metadata, dict):
+                metadata = {}
+            metadata = {**metadata, "stable_id": stable_id}
+            data = {
+                "stable_id": stable_id,
+                "source": row.get("source") or "",
+                "outlet": row.get("outlet") or "",
+                "title": row.get("title") or "",
+                "body": row.get("body") or "",
+                "url": row.get("url") or "",
+                "categories": row.get("categories") or [],
+                "published_utc": row.get("published_utc") or "",
+                "metadata": metadata,
+                "updated_at": now,
+                "last_seen_at": now,
+                "archived_at": None,
+            }
+            if ingest_job_id is not None:
+                data["ingest_job_id"] = ingest_job_id
+            if existing.exists:
+                updated += 1
+                if not (existing.to_dict() or {}).get("created_at"):
+                    data["created_at"] = now
+            else:
+                inserted += 1
+                data["created_at"] = now
+            batch.set(ref, data, merge=True)
+            ops += 1
+            if ops >= 400:
+                batch.commit()
+                batch = self._db.batch()
+                ops = 0
+        if ops:
+            batch.commit()
+        return {"inserted": inserted, "updated": updated}
 
 
 # ---------------------------------------------------------------------------

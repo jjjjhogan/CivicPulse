@@ -106,11 +106,30 @@ def import_signals_from_dir(
     sources: tuple[str, ...] = SOURCE_FILES,
     ingest_job_id: int | None = None,
 ) -> dict:
-    """Load data/signals/<source>.json into SQLite. Returns counts."""
-    init_db()
+    """Load data/signals/<source>.json into the active backend. Returns counts."""
+    from backend.config import DATA_BACKEND
+
     directory = signals_dir or SIGNALS_DIR
     totals = {"inserted": 0, "updated": 0, "by_source": {}}
 
+    if DATA_BACKEND == "firestore":
+        from backend.firestore import get_firestore_client
+        from backend.store_firestore import FirestoreSignalStore
+
+        store = FirestoreSignalStore(get_firestore_client())
+        for source in sources:
+            rows = _read_signal_rows(directory / f"{source}.json")
+            counts = store.upsert_many(rows, ingest_job_id=ingest_job_id)
+            totals["inserted"] += counts["inserted"]
+            totals["updated"] += counts["updated"]
+            totals["by_source"][source] = {
+                "rows": len(rows),
+                "inserted": counts["inserted"],
+                "updated": counts["updated"],
+            }
+        return totals
+
+    init_db()
     db = SessionLocal()
     try:
         for source in sources:

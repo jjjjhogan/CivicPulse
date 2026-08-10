@@ -8,9 +8,6 @@ import sys
 from flask import Blueprint, jsonify
 
 from backend.config import DATA_BACKEND, NEWS_DEFAULTS, ROOT, SIGNALS_DIR, TIKTOK_DEFAULTS
-from backend.config import NEWS_DEFAULTS, ROOT, SIGNALS_DIR, TIKTOK_DEFAULTS
-from backend.db import get_session
-from backend.models import Signal
 from backend.store import get_signal_store
 
 bp = Blueprint("signals", __name__)
@@ -21,10 +18,6 @@ def _read_json(path, default):
         return default
     with open(path, encoding="utf-8") as handle:
         return json.load(handle)
-
-
-def _signals_from_db() -> list[dict]:
-    return get_signal_store().list_signals(include_archived=False)
 
 
 def _signals_from_json() -> list[dict]:
@@ -61,19 +54,6 @@ def api_feed():
         if feed:
             return jsonify({"count": len(feed), "signals": feed, "storage": "json"})
     return jsonify({"count": 0, "signals": [], "storage": DATA_BACKEND})
-    """Landing feed from SQLite when present; else data/signals/feed.json."""
-    db = get_session()
-    rows = (
-        db.query(Signal)
-        .filter(Signal.archived_at.is_(None))
-        .order_by(Signal.id.asc())
-        .all()
-    )
-    if rows:
-        feed = [row.to_feed_dict() for row in rows]
-        return jsonify({"count": len(feed), "signals": feed, "storage": "db"})
-    feed = _read_json(SIGNALS_DIR / "feed.json", [])
-    return jsonify({"count": len(feed), "signals": feed, "storage": "json"})
 
 
 @bp.get("/api/manifest")

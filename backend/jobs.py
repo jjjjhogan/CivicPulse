@@ -9,7 +9,6 @@ import sys
 import threading
 
 from backend.config import (
-    DATA_BACKEND,
     NEWS_DEFAULTS,
     PROCESS_REDDIT,
     PROCESS_TWITTER,
@@ -253,7 +252,7 @@ def _run_job(job_id, cmd: list[str]) -> None:
                 ),
             )
 
-        if result.returncode == 0 and sync_source and DATA_BACKEND == "sqlite":
+        if result.returncode == 0 and sync_source:
             try:
                 from backend.signals_import import sync_signals_after_scrape
 

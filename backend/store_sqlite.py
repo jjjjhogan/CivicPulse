@@ -8,6 +8,8 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from backend.models import IssueVote, ScrapeJob, Signal, User, utcnow
+from backend.signals_import import upsert_signals
+from backend.stable_id import compute_stable_id
 
 
 # ---------------------------------------------------------------------------
@@ -18,12 +20,18 @@ class SQLiteSignalStore:
     def __init__(self, db: Session) -> None:
         self._db = db
 
-    def list_signals(self) -> list[dict]:
-        rows = self._db.query(Signal).order_by(Signal.id.asc()).all()
+    def _active_query(self, *, include_archived: bool = False):
+        q = self._db.query(Signal)
+        if not include_archived:
+            q = q.filter(Signal.archived_at.is_(None))
+        return q
+
+    def list_signals(self, *, include_archived: bool = False) -> list[dict]:
+        rows = self._active_query(include_archived=include_archived).order_by(Signal.id.asc()).all()
         return [row.to_dict() for row in rows]
 
-    def list_feed_signals(self) -> list[dict]:
-        rows = self._db.query(Signal).order_by(Signal.id.asc()).all()
+    def list_feed_signals(self, *, include_archived: bool = False) -> list[dict]:
+        rows = self._active_query(include_archived=include_archived).order_by(Signal.id.asc()).all()
         return [row.to_feed_dict() for row in rows]
 
     def get_signal(self, signal_id: int | str) -> dict | None:
@@ -31,21 +39,55 @@ class SQLiteSignalStore:
         return row.to_dict() if row else None
 
     def create_signal(self, **fields: Any) -> dict:
-        metadata = fields.pop("metadata", {})
-        sig = Signal(**fields, extra=metadata)
+        metadata = fields.pop("metadata", {}) or {}
+        if not isinstance(metadata, dict):
+            metadata = {}
+        stable_id = (fields.pop("stable_id", None) or "").strip()
+        source = fields.get("source") or ""
+        title = fields.get("title") or ""
+        body = fields.get("body") or ""
+        url = fields.get("url") or ""
+        if not stable_id:
+            stable_id = compute_stable_id(source, url, title, body, metadata=metadata)
+        metadata = {**metadata, "stable_id": stable_id}
+        now = utcnow()
+        sig = Signal(
+            stable_id=stable_id,
+            source=source,
+            outlet=fields.get("outlet") or "",
+            title=title,
+            body=body,
+            url=url,
+            categories=fields.get("categories") or [],
+            published_utc=fields.get("published_utc") or "",
+            extra=metadata,
+            updated_at=now,
+            last_seen_at=now,
+            archived_at=None,
+            ingest_job_id=fields.get("ingest_job_id"),
+        )
         self._db.add(sig)
         self._db.commit()
         self._db.refresh(sig)
         return sig.to_dict()
 
-    def list_signals_by_source(self, source: str) -> list[dict]:
+    def list_signals_by_source(
+        self, source: str, *, include_archived: bool = False,
+    ) -> list[dict]:
         rows = (
-            self._db.query(Signal)
+            self._active_query(include_archived=include_archived)
             .filter(Signal.source == source)
             .order_by(Signal.id.desc())
             .all()
         )
         return [row.to_dict() for row in rows]
+
+    def upsert_many(
+        self, rows: list[dict], *, ingest_job_id: int | None = None,
+    ) -> dict:
+        inserted, updated = upsert_signals(self._db, rows, ingest_job_id=ingest_job_id)
+        self._db.commit()
+        return {"inserted": inserted, "updated": updated}
 
 
 # ---------------------------------------------------------------------------

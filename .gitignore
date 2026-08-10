@@ -12,3 +12,6 @@ __pycache__/
 *.pyc
 *.db
 .env
+*-firebase-adminsdk*.json
+**/service-account*.json
+secrets/

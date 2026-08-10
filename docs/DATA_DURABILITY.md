@@ -34,14 +34,20 @@ Keyword/NLP changes: re-read ponds → rewrite signals → upsert DB (no re-scra
 
 Tests use a temp SQLite via `DATABASE_URL` and never touch `data/civicpulse.db`.
 
-## Firestore cutover checklist (later)
+## Firestore cutover checklist (real Firebase project)
 
-1. Run emulator; set `FIRESTORE_EMULATOR_HOST`.
-2. `python scripts/export_signals_ndjson.py -o data/exports/signals.ndjson`.
-3. Bulk-load NDJSON into Firestore (`signals/{stable_id}`).
-4. Flip `DATA_BACKEND=firestore` locally; compare counts vs SQLite.
-5. Optional: export ponds → NDJSON → `raw_items/{stable_id}` (not required for Sessions 9–10).
-6. Render: service-account secret; never commit SA JSON.
-7. Disable SQLite in prod after smoke checks.
+Full steps: [`FIRESTORE_SETUP.md`](FIRESTORE_SETUP.md).
 
-See also [`TWO_MONTH_ROADMAP.md`](TWO_MONTH_ROADMAP.md) Sessions 9–14.
+Firebase is **not** a connection URL. You need **Project ID** + **service-account JSON**.
+
+1. SQLite healthy: ponds + signals + migrate/import/reprocess.
+2. Put in `.env`: `DATA_BACKEND=firestore`, `FIREBASE_PROJECT_ID=…`, `GOOGLE_APPLICATION_CREDENTIALS=…` (no `FIRESTORE_EMULATOR_HOST`).
+3. `python scripts/export_signals_ndjson.py -o data/exports/signals.ndjson`
+4. `python scripts/import_signals_firestore.py -i data/exports/signals.ndjson` → cloud docs at `signals/{stable_id}`
+5. Smoke `/api/signals`, auth, votes, jobs. Research stays on SQLite until Session 12.
+6. `firebase deploy --only firestore:indexes,firestore:rules` when ready.
+7. Render: same env + SA secret file; never commit SA JSON.
+
+Store switch: `backend/store.py` → sqlite or firestore impl. Path B ponds remain local JSON.
+
+

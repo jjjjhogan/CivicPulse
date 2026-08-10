@@ -162,7 +162,7 @@ def test_api_lists_after_import(client, imported_signals):
     res = client.get("/api/signals")
     assert res.status_code == 200
     payload = res.get_json()
-    assert payload["storage"] == "db"
+    assert payload["storage"] == "sqlite"
     assert payload["count"] == imported_signals
 
 

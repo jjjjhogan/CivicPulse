@@ -1,208 +1,93 @@
-# CivicPulse — session plan (Path A: Research)
+# CivicPulse — session plan (Real Firebase cutover)
 
-**For:** Path A coworker / coding agent — Research product sessions.  
-**Not** the 8-week strategy — that lives in [`docs/TWO_MONTH_ROADMAP.md`](docs/TWO_MONTH_ROADMAP.md).  
-**Not** Path B (data durability / DB rewiring) — separate owner; this file only says what Path A must **avoid**.
+**For:** Coworker / coding agent owning Firebase Console access and the live Firestore project.  
+**Goal this session:** Collect the right Firebase credentials and wire `.env` so CivicPulse can run against the **real** Firestore project and migrate signals from SQLite.
 
-**Pace:** One theme per session → PR → manual QA → merge.
-
-**Goal:** Mayor can create a Research (e.g. “housing prices in Irvine”) and see **archive hits** from existing signals.
+**Not** Research product work. **Not** classifier / Path A UI.  
+**Canonical setup docs:** [`docs/FIRESTORE_SETUP.md`](docs/FIRESTORE_SETUP.md) · durability: [`docs/DATA_DURABILITY.md`](docs/DATA_DURABILITY.md)
 
 ---
 
-## Stay off (do not touch)
+## Context (already in the repo)
 
-Someone else owns storage durability. Path A must **not**:
-
-- Redesign SQLite schema / add a new store abstraction / Firestore
-- Change orphan prune, backup/restore, or scrape→JSON→DB sync
-- Delete or reshape `data/signals/*` / `data/raw/*` for storage experiments
-- Run classifier keyword surgery or `reprocess_signals` unless explicitly asked
-- Add cleanup scripts, schema drops, or silent data deletes
-
-**If Research seems to need better persistence:** stub on today’s Signal table / `/api/signals`, leave a one-line note for Path B, and move on.
+- App switches storage with `DATA_BACKEND=sqlite|firestore` ([`backend/store.py`](backend/store.py)).
+- Real cloud client: [`backend/firestore.py`](backend/firestore.py) — needs **project id** + **service-account JSON path**. There is **no** Postgres-style database URL.
+- Signal docs use id = `stable_id`. Seed scripts:
+  - `python scripts/export_signals_ndjson.py -o data/exports/signals.ndjson`
+  - `python scripts/import_signals_firestore.py -i data/exports/signals.ndjson`
+- Emulator is optional only. For the real project, **do not** set `FIRESTORE_EMULATOR_HOST`.
+- Research / `research_hits` still use SQLite until a later session — signals, users, votes, jobs are the Firestore cutover target now.
+- Never commit service-account JSON (gitignored). Put the file outside the repo or under a private path and point `.env` at it.
 
 ---
 
-## Agent prompt (Path A)
+## Stay off
 
-Copy into a new agent chat:
+- Do not paste private keys or full SA JSON into chat, PRs, or `SESSION_PLAN.md`.
+- Do not commit `*-firebase-adminsdk*.json` or `.env`.
+- Do not wipe SQLite / ponds while validating Firestore — keep SQLite as rollback until smoke passes.
+- Do not port Research to Firestore in this session.
+
+---
+
+## What we need from Firebase (checklist)
+
+Hand these to the agent that has Console access (values go in **local `.env` only**):
+
+| Item | Where in Firebase Console | Env var / file |
+|------|---------------------------|----------------|
+| **Project ID** | Project settings → General (also in console URL: `…/project/<PROJECT_ID>/…`) | `FIREBASE_PROJECT_ID` and `GOOGLE_CLOUD_PROJECT` (same value) |
+| **Service-account JSON** | Project settings → Service accounts → *Generate new private key* | Save file privately; set `GOOGLE_APPLICATION_CREDENTIALS` to its **absolute path** |
+| **Firestore enabled** | Build → Firestore Database → create DB if missing (**Native** mode) | — |
+| **Confirm region** | Shown when creating Firestore (e.g. `nam5` / `us-central`) | Note in PR/description only; not an env var for Admin SDK |
+| **`.firebaserc` default** | Same project id | Edit [`.firebaserc`](.firebaserc) `"default"` for CLI index/rules deploy |
+
+Optional later (not blocking seed): Firebase CLI login + `firebase deploy --only firestore:indexes,firestore:rules`.
+
+---
+
+## Agent prompt (copy into coworker agent chat)
 
 ```text
-Repo: CivicPulse (Ryan/). You are on Path A — Research product only.
+Repo: CivicPulse (Ryan/). You own the real Firebase project cutover credentials.
 
-Read SESSION_PLAN.md and follow Session 7 first, then Session 8.
+Read SESSION_PLAN.md and docs/FIRESTORE_SETUP.md.
 
-Do:
-- Session 7: Research model + POST/GET /api/researches (+ detail) and a minimal create/list UI, using the same SQLAlchemy/SQLite patterns as existing resources.
-- Session 8: Archive matcher → research_hits + POST archive endpoint + Research detail Archive tab. Demo topic: “housing prices in Irvine” using existing live signals.
-- pytest -q for anything you add. One PR per session slice.
+Your job:
+1. From Firebase Console, collect ONLY:
+   - Project ID (string)
+   - A service-account JSON key file saved on disk (never commit it; never paste the private key into chat)
+   - Confirm Cloud Firestore is created in Native mode
+2. Update local .env (gitignored) with:
+   DATA_BACKEND=firestore
+   FIREBASE_PROJECT_ID=<project-id>
+   GOOGLE_CLOUD_PROJECT=<project-id>
+   GOOGLE_APPLICATION_CREDENTIALS=<absolute-path-to-sa.json>
+   Do NOT set FIRESTORE_EMULATOR_HOST.
+3. Set .firebaserc "default" to the same project id.
+4. With SQLite data already healthy, run:
+   python scripts/export_signals_ndjson.py -o data/exports/signals.ndjson
+   python scripts/import_signals_firestore.py -i data/exports/signals.ndjson
+5. Start dashboard_server.py and smoke:
+   - GET /api/signals returns storage "firestore" and a non-zero count
+   - signup/login, create a report, cast a vote
+6. Report back: project id (ok to share), whether seed count matched SQLite active signals, and any errors. Do not share the service-account JSON contents.
 
 Do NOT:
-- Redesign or rewire the database, prune/backup pipelines, or scrape→JSON→DB flow.
-- Touch Firebase/Firestore/Render.
-- Delete or rewrite signal/raw data files.
-- Change classifier keywords or run reprocess unless the user explicitly asks.
-- Mix Path B / data-durability work into your PR.
-
-If persistence feels insufficient, stub against current /api/signals + existing models and note a follow-up — do not invent a second database story.
+- Commit .env or the SA JSON
+- Delete local SQLite / data/pool / data/signals
+- Port Research/research_hits to Firestore
+- Point at the emulator for this cutover
 ```
 
 ---
 
-## Preconditions (done)
+## Exit criteria
 
-- [x] Sessions 5–6 classifier loop
-- [x] Session **7.5** hygiene (fewer live FPs before archive demos)
-- [x] Small civic housing batch exists for demos (corpus still thin — Archive UI must handle low hit counts)
+- [ ] `.env` configured for real project (SA path works; no emulator host)
+- [ ] Signals seeded into cloud Firestore (`signals/{stable_id}`)
+- [ ] `/api/signals` shows `"storage": "firestore"` with expected count
+- [ ] Auth + report + vote smoke OK
+- [ ] Coworker confirms project id + seed result (no secrets in chat/PR)
 
-Use existing housing signals for the demo. Prefer matcher/UI filters over global classifier changes if hits look noisy.
-
----
-
-## Done — Session 7: Research API spike
-
-**Branch:** `feature/research-api-s7`
-
-### Build
-
-- [x] `Research` model (title, topic, keywords[], categories[], status, notes, timestamps)
-- [x] `POST /api/researches` — create
-- [x] `GET /api/researches` — list
-- [x] `GET /api/researches/<id>` — detail
-- [x] Minimal UI: create form + list + detail page, dashboard sidebar link
-- [x] Same SQLAlchemy/SQLite patterns — no Firestore
-
-### Exit
-
-- [x] Can create “Housing prices — Irvine” and see it listed
-- [x] `pytest -q` green — 7 new API tests (67 total)
-- [x] PR pushed
-
----
-
-## Done — Session 8: Archive matcher + Research detail
-
-**Branch:** `feature/research-api-s7` (stacked on Session 7)
-
-### Build
-
-- [x] Match rules (v1): category overlap + keyword hit (\b word-boundary) in title/body, scored 0.5/cat + 0.3/kw
-- [x] `ResearchHit` model: research_id, signal_id, match_reason, score, timestamp (unique constraint)
-- [x] `POST /api/researches/<id>/archive` — runs matcher, persists hits, sets status=active
-- [x] Detail UI: Archive tab with hit cards (score, source, categories, match reason, click-through)
-- [x] Manual QA: “housing prices in Irvine” → 15 hits, top results are housing-categorized + rent-keyword signals
-
-### Exit
-
-- [x] Housing Research shows plausible archive hits — top 2 are category+keyword combos (score 0.8)
-- [x] `pytest -q` green — 8 new archive tests (75 total)
-- [x] PR pushed. Firestore note in commit message.
-
-### Out of scope
-
-Firebase/Render, import/prune/backup rewrites, new gather jobs, embeddings, classifier keyword passes.
-
----
-
-## Done — Session 9: Firestore project + emulator docs
-
-**Branch:** `feature/firestore-s9-11`
-
-### Build
-
-- [x] `firebase.json`, `firestore.rules`, `firestore.indexes.json`
-- [x] `backend/firestore.py` — lazy Firestore client via Firebase Admin SDK
-- [x] `backend/config.py` — `DATA_BACKEND` env var (`sqlite` | `firestore`)
-- [x] `.env.example` — Firestore env vars documented
-- [x] `docs/FIRESTORE_SETUP.md` — full emulator setup guide
-- [x] `requirements.txt` — `firebase-admin>=6.4.0`
-
-### Exit
-
-- [x] `firebase emulators:start --only firestore` documented
-- [x] `pytest -q` green — 75 tests, 0 regressions
-
----
-
-## Done — Session 10: Store interface + Firestore signals
-
-**Branch:** `feature/firestore-s9-11`
-
-### Build
-
-- [x] `backend/store.py` — `SignalStore` protocol + `get_signal_store()` factory
-- [x] `backend/store_sqlite.py` — SQLite implementation wrapping existing queries
-- [x] `backend/store_firestore.py` — Firestore implementation
-- [x] `backend/routes/signals.py` — `/api/signals` and `/api/signals/feed` use store
-- [x] `DATA_BACKEND` switches between sqlite and firestore at runtime
-
-### Exit
-
-- [x] `/api/signals` works with `DATA_BACKEND=sqlite` (default)
-- [x] `/api/signals` wired for `DATA_BACKEND=firestore` (Firestore store)
-- [x] `pytest -q` green — 83 tests (8 new store tests: 4 SQLite, 4 Firestore mock)
-
----
-
-## Done — Session 11: Port users, jobs, votes, reports to Firestore
-
-**Branch:** `feature/firestore-s9-11`
-
-### Build
-
-- [x] `backend/store.py` — `UserStore`, `JobStore`, `VoteStore` protocols + factories + standalone job store
-- [x] `backend/store_sqlite.py` — SQLite implementations for all resources
-- [x] `backend/store_firestore.py` — Firestore implementations for all resources
-- [x] `backend/auth.py` — uses `UserStore` instead of direct ORM queries
-- [x] `backend/routes/auth.py` — signup/login/me use store, return dicts via `public_user()`
-- [x] `backend/routes/reports.py` — create/list reports + votes use `SignalStore` + `VoteStore`
-- [x] `backend/routes/jobs.py` — create/list/get/status use `JobStore`
-- [x] `backend/jobs.py` — background runner uses `get_job_store_standalone()`
-
-### Exit
-
-- [x] Login/signup works with both backends
-- [x] Vote casting/summary works with both backends
-- [x] Job create/list/status works with both backends
-- [x] Reports create/list works with both backends
-- [x] `pytest -q` green — 104 tests (21 new store tests, 0 regressions)
-
----
-
-## Working rules
-
-1. One slice per session → PR (API before big UI).
-2. Read signals the same way the dashboard does (`/api/signals` / existing models).
-3. `pytest -q` when behavior changes.
-4. Never ship orphan-delete / cleanup / schema-drop work on Path A branches.
-
----
-
-## Status
-
-| Session | Status |
-|---------|--------|
-| **5–6** Classifier loop | Done |
-| **7.5** Hygiene | Done |
-| **7** Research API | Done |
-| **8** Archive matcher | Done |
-| **9** Firestore project + emulator docs | Done |
-| **10** Store interface + Firestore signals | Done |
-| **11** Port users, jobs, votes, reports | Done |
-
----
-
-## Earlier sessions (abbrev)
-
-- **S1–S4:** platform, soak, UX, Phase A gold (PRs #12–#15)
-- **S5:** keyword phrases; method/confidence UI; gold ~47%
-- **S6:** +59 labels; inheritance gate; `rescore_gold.py`
-- **S7.5:** FP hygiene; gold 40/78 (51.3%), 0 regressions
-- **S7:** Research model + API (create/list/detail); 7 tests
-- **S8:** Archive matcher + research_hits + detail Archive tab; 8 tests; housing demo 15 hits
-- **S9:** Firestore project config + emulator docs; firebase-admin; DATA_BACKEND config
-- **S10:** Store protocol (SignalStore) + SQLite/Firestore impls; /api/signals uses store; 8 new tests (83 total)
-- **S11:** UserStore, JobStore, VoteStore; all routes use store abstraction; background job runner ported; 21 new store tests (104 total)
-
-**Roadmap:** [`docs/TWO_MONTH_ROADMAP.md`](docs/TWO_MONTH_ROADMAP.md)
+**Roadmap pointer:** Weeks 3–4 cutover in [`docs/TWO_MONTH_ROADMAP.md`](docs/TWO_MONTH_ROADMAP.md) (Sessions 12–14 still cover Research port + Render).

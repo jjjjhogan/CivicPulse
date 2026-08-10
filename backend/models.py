@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 
-from sqlalchemy import DateTime, Float, ForeignKey, Integer, String, Text, UniqueConstraint
+from sqlalchemy import DateTime, Float, ForeignKey, Integer, String, Text, UniqueConstraint, event
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.types import JSON
 
@@ -74,6 +74,26 @@ class Signal(Base):
             "categories": self.categories or [],
             "published_utc": self.published_utc,
         }
+
+
+@event.listens_for(Signal, "before_insert")
+def _signal_ensure_stable_id(mapper, connection, target: Signal) -> None:  # noqa: ARG001
+    if target.stable_id:
+        return
+    from backend.stable_id import compute_stable_id
+
+    meta = target.extra if isinstance(target.extra, dict) else {}
+    target.stable_id = compute_stable_id(
+        target.source or "",
+        target.url or "",
+        target.title or "",
+        target.body or "",
+        metadata=meta,
+    )
+    if isinstance(target.extra, dict):
+        target.extra = {**target.extra, "stable_id": target.stable_id}
+    else:
+        target.extra = {"stable_id": target.stable_id}
 
 
 class SchemaVersion(Base):

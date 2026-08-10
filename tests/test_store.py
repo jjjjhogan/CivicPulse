@@ -21,17 +21,28 @@ from backend.store_sqlite import (
 
 
 def _insert_signal(db, **overrides):
+    from backend.stable_id import compute_stable_id
+    import uuid
+
     defaults = {
         "source": "news",
         "outlet": "Test Outlet",
         "title": "Test signal",
         "body": "Some body text",
-        "url": "http://example.com/1",
+        "url": f"http://example.com/{uuid.uuid4().hex}",
         "categories": ["housing"],
         "published_utc": "2026-01-15",
         "extra": {},
     }
     defaults.update(overrides)
+    if not defaults.get("stable_id"):
+        defaults["stable_id"] = compute_stable_id(
+            defaults.get("source") or "",
+            defaults.get("url") or "",
+            defaults.get("title") or "",
+            defaults.get("body") or "",
+            metadata=defaults.get("extra") if isinstance(defaults.get("extra"), dict) else {},
+        )
     sig = Signal(**defaults)
     db.add(sig)
     db.commit()
@@ -312,19 +323,72 @@ def test_firestore_get_signal():
     assert result["id"] == "sig123"
 
 
-def test_firestore_get_signal_not_found():
-    doc = MagicMock()
-    doc.exists = False
+def test_firestore_list_signals_hides_archived():
+    docs = [
+        _make_mock_doc("abc", {
+            "source": "tiktok", "outlet": "TikTok", "title": "Active",
+            "body": "body1", "url": "http://fs.example/1",
+            "categories": ["public_safety"], "published_utc": "2026-02-01",
+            "metadata": {}, "created_at": "2026-02-01T00:00:00Z",
+        }),
+        _make_mock_doc("def", {
+            "source": "news", "outlet": "IS", "title": "Archived",
+            "body": "body2", "url": "http://fs.example/2",
+            "categories": ["housing"], "published_utc": "2026-02-02",
+            "metadata": {}, "created_at": "2026-02-02T00:00:00Z",
+            "archived_at": "2026-02-03T00:00:00Z",
+        }),
+    ]
     mock_db = MagicMock()
-    mock_db.collection.return_value.document.return_value.get.return_value = doc
+    mock_db.collection.return_value.order_by.return_value.stream.return_value = iter(docs)
 
     store = FirestoreSignalStore(mock_db)
-    assert store.get_signal("missing") is None
+    active = store.list_signals()
+    assert len(active) == 1
+    assert active[0]["title"] == "Active"
+
+    mock_db.collection.return_value.order_by.return_value.stream.return_value = iter(docs)
+    assert len(store.list_signals(include_archived=True)) == 2
 
 
-# =====================================================================
-# Firestore User Store (mocked)
-# =====================================================================
+def test_firestore_create_signal_uses_stable_id():
+    mock_db = MagicMock()
+    mock_doc = MagicMock()
+    mock_db.collection.return_value.document.return_value = mock_doc
+
+    store = FirestoreSignalStore(mock_db)
+    sig = store.create_signal(
+        stable_id="stable123abc",
+        source="resident",
+        outlet="Report",
+        title="New",
+        body="body",
+        url="",
+        categories=["housing"],
+        published_utc="2026-05-01",
+        metadata={"lat": 33.0},
+    )
+    mock_db.collection.return_value.document.assert_called_with("stable123abc")
+    mock_doc.set.assert_called()
+    assert sig["id"] == "stable123abc"
+    assert sig["stable_id"] == "stable123abc"
+
+
+def test_sqlite_list_signals_hides_archived(app):
+    from backend.models import utcnow
+
+    db = SessionLocal()
+    _insert_signal(db, title="Active")
+    archived = _insert_signal(db, title="Gone")
+    archived.archived_at = utcnow()
+    db.commit()
+    db.close()
+
+    with app.app_context():
+        store = SQLiteSignalStore(SessionLocal())
+        signals = store.list_signals()
+    assert len(signals) == 1
+    assert signals[0]["title"] == "Active"
 
 
 def test_firestore_create_user():
