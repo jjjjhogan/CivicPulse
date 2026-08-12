@@ -15,3 +15,6 @@ __pycache__/
 *-firebase-adminsdk*.json
 **/service-account*.json
 secrets/
+# Never commit Firebase service-account keys (even if dropped under docs/)
+docs/*firebase-adminsdk*.json
+docs/*-adminsdk-*.json

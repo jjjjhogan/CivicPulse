@@ -210,16 +210,13 @@
     "title": "After an Accident: What Helps a Personal Injury Claim Most",
     "body": "Details start slipping faster than people expect after an accident. A street name goes fuzzy, the weather becomes a blur, and the exact order of events starts to wobble by the time the day is over. That\u2019s usually why early documents are important. For anyone trying to understand what may help a claim later, the [\u2026] \n The post  After an Accident: What Helps a Personal Injury Claim Most  appeared first on  Irvine Weekly .",
     "url": "https://irvineweekly.com/after-an-accident-what-helps-a-personal-injury-claim-most/?utm_source=rss&utm_medium=rss&utm_campaign=after-an-accident-what-helps-a-personal-injury-claim-most",
-    "categories": [],
+    "categories": [
+      "traffic_safety",
+      "public_safety"
+    ],
     "published_utc": "2026-03-24",
     "metadata": {
       "outlet_id": "irvine-weekly",
-      "classification": {
-        "scores": {},
-        "confidence": 1.0,
-        "method": "none",
-        "model_version": "nb-v1"
-      },
       "stable_id": "ff65e63ee35981643fcc5f2c4b56837eb5d2cbd7"
     },
     "stable_id": "ff65e63ee35981643fcc5f2c4b56837eb5d2cbd7"
@@ -231,19 +228,13 @@
     "body": "Dialed Labs Founder Hosts Linda Isle Gala to Debut Dialed & Defend Charity; Fountain Valley and Pechanga Fire Stations First to Receive Recovery Equipment When Ali Garawi watched firefighters battle the devastating January 2025 Los Angeles wildfires, he knew he\u2019d found the cause he and his brother had been waiting for. The brothers had built [\u2026] \n The post  Local Wellness Entrepreneur Launches $250K Initiative Supporting California Firefighters  appeared first on  Irvine Weekly .",
     "url": "https://irvineweekly.com/local-wellness-entrepreneur-launches-250k-initiative-supporting-california-firefighters/?utm_source=rss&utm_medium=rss&utm_campaign=local-wellness-entrepreneur-launches-250k-initiative-supporting-california-firefighters",
     "categories": [
-      "emergencies"
+      "emergencies",
+      "public_safety",
+      "traffic_safety"
     ],
     "published_utc": "2026-01-10",
     "metadata": {
       "outlet_id": "irvine-weekly",
-      "classification": {
-        "scores": {
-          "emergencies": 0.8
-        },
-        "confidence": 0.8,
-        "method": "keywords",
-        "model_version": "nb-v1"
-      },
       "stable_id": "ae3c21846e22ae3f8c0c13eb64c0a513f9ba3d56"
     },
     "stable_id": "ae3c21846e22ae3f8c0c13eb64c0a513f9ba3d56"
@@ -280,14 +271,6 @@
     "published_utc": "2025-06-05",
     "metadata": {
       "outlet_id": "irvine-weekly",
-      "classification": {
-        "scores": {
-          "immigration": 0.7
-        },
-        "confidence": 0.7,
-        "method": "keywords",
-        "model_version": "nb-v1"
-      },
       "stable_id": "4a25851f37d85efa921d9279bbbdc76f088e541e"
     },
     "stable_id": "4a25851f37d85efa921d9279bbbdc76f088e541e"
@@ -298,16 +281,12 @@
     "title": "Karns and Karns Personal Injury and Accident Attorneys Enhances Presence in Orange County, California",
     "body": "Karns and Karns Personal Injury and Accident Attorneys, a leading personal injury law firm, is proud to announce expanding its services with new locations throughout Orange County, California. This strategic growth strengthens the firm\u2019s commitment to providing accessible and exceptional legal representation to accident victims across the vibrant communities of Orange County and the surrounding [\u2026] \n The post  Karns and Karns Personal Injury and Accident Attorneys Enhances Presence in Orange County, California  appeared first on  Irvine Weekly .",
     "url": "https://irvineweekly.com/karns-and-karns-personal-injury-and-accident-attorneys-enhances-presence-in-orange-county-california/?utm_source=rss&utm_medium=rss&utm_campaign=karns-and-karns-personal-injury-and-accident-attorneys-enhances-presence-in-orange-county-california",
-    "categories": [],
+    "categories": [
+      "traffic_safety"
+    ],
     "published_utc": "2025-06-04",
     "metadata": {
       "outlet_id": "irvine-weekly",
-      "classification": {
-        "scores": {},
-        "confidence": 1.0,
-        "method": "none",
-        "model_version": "nb-v1"
-      },
       "stable_id": "e40f30a1bbc911af8f705040d279d9ab5b25f3f1"
     },
     "stable_id": "e40f30a1bbc911af8f705040d279d9ab5b25f3f1"
@@ -318,16 +297,12 @@
     "title": "Richard Sullivan: Four Decades of Leadership in Family Law",
     "body": "For almost 50 years,\u00a0Richard P. Sullivan, Esq.\u00a0has stood as a pillar of strength, advocacy, and legal excellence in Orange County\u2019s family law community. As the founder and managing attorney of\u00a0Sullivan Law & Associates, Sullivan has built a legacy defined by unwavering dedication to the families he serves, integrity, and courtroom excellence. A Legacy of Legal [\u2026] \n The post  Richard Sullivan: Four Decades of Leadership in Family Law  appeared first on  Irvine Weekly .",
     "url": "https://irvineweekly.com/richard-sullivan-four-decades-of-leadership-in-family-law/?utm_source=rss&utm_medium=rss&utm_campaign=richard-sullivan-four-decades-of-leadership-in-family-law",
-    "categories": [],
+    "categories": [
+      "violent_crime"
+    ],
     "published_utc": "2025-05-14",
     "metadata": {
       "outlet_id": "irvine-weekly",
-      "classification": {
-        "scores": {},
-        "confidence": 0.918,
-        "method": "none",
-        "model_version": "nb-v1"
-      },
       "stable_id": "ccf5aaa81bc78e85d1feda4b0c0e263f71b724fc"
     },
     "stable_id": "ccf5aaa81bc78e85d1feda4b0c0e263f71b724fc"
@@ -425,5 +400,85 @@
       "stable_id": "d7064e5dc1fc1eda1279383c807daf14943a6027"
     },
     "stable_id": "d7064e5dc1fc1eda1279383c807daf14943a6027"
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "A 22-MILE ADVENTURE",
+    "body": "Epic and exhilarating: The Mountains to Sea Trail will lift your spirits",
+    "url": "https://www.irvinestandard.com/2026/a-22-mile-adventure/",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-06",
+    "metadata": {
+      "outlet_id": "irvine-standard",
+      "stable_id": "be98ec9a2ceffd3b51dbb43b6c0fa6ec5340712b"
+    },
+    "stable_id": "be98ec9a2ceffd3b51dbb43b6c0fa6ec5340712b"
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "City launches bike share program",
+    "body": "Irvine has launched a new fixed\u2011station Bike Share Pilot Program. Pedal-assist e-bikes have a maximum assist speed of 18 mph and a battery range of 30 miles. The program starts [\u2026]",
+    "url": "https://www.irvinestandard.com/2026/city-launches-bike-share-program/",
+    "categories": [
+      "potholes"
+    ],
+    "published_utc": "2026-08-06",
+    "metadata": {
+      "outlet_id": "irvine-standard",
+      "stable_id": "77d99bc2cb24c69d905a2e1ef66aaa224663bbc6"
+    },
+    "stable_id": "77d99bc2cb24c69d905a2e1ef66aaa224663bbc6"
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "Charlie Zhang embodies the American dream",
+    "body": "When Xianghua \u201cCharlie\u201d Zhang first came to the U.S. at age 24, he brought just $20 and his cherished clarinet. Zhang had received a music scholarship to attend Pasadena City [\u2026]",
+    "url": "https://www.irvinestandard.com/2026/charlie-zhang-embodies-the-american-dream/",
+    "categories": [
+      "immigration"
+    ],
+    "published_utc": "2026-08-06",
+    "metadata": {
+      "outlet_id": "irvine-standard",
+      "stable_id": "7915188769b5c8c1224673b9574726fd7d832000"
+    },
+    "stable_id": "7915188769b5c8c1224673b9574726fd7d832000"
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "Star-studded music festival heads to Irvine",
+    "body": "Summer 2026 has been a boon for Irvine in terms of grabbing attention on a national scale. A music festival late this month promises to solidify that status. To start [\u2026]",
+    "url": "https://www.irvinestandard.com/2026/star-studded-music-festival-heads-to-irvine/",
+    "categories": [
+      "sanitation"
+    ],
+    "published_utc": "2026-08-06",
+    "metadata": {
+      "outlet_id": "irvine-standard",
+      "stable_id": "54dc7ed83a1e6cb8b347861d156696247ff322f8"
+    },
+    "stable_id": "54dc7ed83a1e6cb8b347861d156696247ff322f8"
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "Area\u2019s least-stressed city is also the fittest",
+    "body": "Irvine is the least-stressed city in Southern California and the seventh least-stressed in the nation, according to a recent WalletHub study. Irvine is also the fittest city in Southern California [\u2026]",
+    "url": "https://www.irvinestandard.com/2026/areas-least-stressed-city-is-also-the-fittest/",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-06",
+    "metadata": {
+      "outlet_id": "irvine-standard",
+      "stable_id": "9a3743a09bf1581e15524c5efd39a8eecf36b2c4"
+    },
+    "stable_id": "9a3743a09bf1581e15524c5efd39a8eecf36b2c4"
   }
 ]
