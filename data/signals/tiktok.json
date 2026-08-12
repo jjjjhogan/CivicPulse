@@ -30,10 +30,8 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      },
-      "stable_id": "a85d4cef191ffd38c540c0f664942fa6229defd1"
-    },
-    "stable_id": "a85d4cef191ffd38c540c0f664942fa6229defd1"
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -66,10 +64,8 @@
         "confidence": 0.7,
         "method": "keywords",
         "model_version": "nb-v1"
-      },
-      "stable_id": "996f5a2cf46234b1b4da14c07b564f1d04108909"
-    },
-    "stable_id": "996f5a2cf46234b1b4da14c07b564f1d04108909"
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -102,10 +98,8 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      },
-      "stable_id": "388b9636f31e07bbb4ae84b7f52d9e5561ec8085"
-    },
-    "stable_id": "388b9636f31e07bbb4ae84b7f52d9e5561ec8085"
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -138,10 +132,8 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      },
-      "stable_id": "3a10b5ada2b2abebfe83baa1b385d9936bbcee59"
-    },
-    "stable_id": "3a10b5ada2b2abebfe83baa1b385d9936bbcee59"
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -174,10 +166,8 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      },
-      "stable_id": "134a188d664b0e294339360beffe83b0123a3140"
-    },
-    "stable_id": "134a188d664b0e294339360beffe83b0123a3140"
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -210,10 +200,8 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      },
-      "stable_id": "5557491cb30c3eddeb6977eb8fe1c0eaa1ee5f37"
-    },
-    "stable_id": "5557491cb30c3eddeb6977eb8fe1c0eaa1ee5f37"
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -246,10 +234,8 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      },
-      "stable_id": "c9a8d729cfaced4a93ccb1858e18d39d61e84b13"
-    },
-    "stable_id": "c9a8d729cfaced4a93ccb1858e18d39d61e84b13"
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -280,10 +266,41 @@
         "confidence": 0.7,
         "method": "keywords",
         "model_version": "nb-v1"
-      },
-      "stable_id": "283998a771fd5cd2eccf15eea26abcd5d507949e"
-    },
-    "stable_id": "283998a771fd5cd2eccf15eea26abcd5d507949e"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "you got it all wrong. Irvine is awesome if you\u2019re into sports or fitness. There are tons of trails for running and cycling, and you can r...",
+    "body": "you got it all wrong. Irvine is awesome if you\u2019re into sports or fitness. There are tons of trails for running and cycling, and you can ride for miles if you actually want to get out there. You can\u2019t compare it to NYC\u2014they\u2019re completely different cities with totally different lifestyles.\"",
+    "url": "https://www.tiktok.com/@rot_bot/video/7669955646128721182",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-05",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "rot_bot",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "50.8K",
+      "comment_count": "1311",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [],
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.838
+        },
+        "confidence": 0.838,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -314,10 +331,41 @@
         "confidence": 0.77,
         "method": "keywords+model",
         "model_version": "nb-v1"
-      },
-      "stable_id": "9fb3b5e6aa2cb736cee87a89a8b3862e288f0698"
-    },
-    "stable_id": "9fb3b5e6aa2cb736cee87a89a8b3862e288f0698"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "a friend of mine who studied sociology and the development of Irvine told me the streets were designed to be winding to make poor people ...",
+    "body": "a friend of mine who studied sociology and the development of Irvine told me the streets were designed to be winding to make poor people feel out of place \ud83d\ude02",
+    "url": "https://www.tiktok.com/@rot_bot/video/7669955646128721182",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-05",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "rot_bot",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "50.8K",
+      "comment_count": "1311",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [],
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "public_safety": 0.704
+        },
+        "confidence": 0.704,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -359,10 +407,52 @@
         "confidence": 0.77,
         "method": "keywords+model",
         "model_version": "nb-v1"
-      },
-      "stable_id": "bf9d1910a4b09a2a4473db76c2bd1a426a9f642c"
-    },
-    "stable_id": "bf9d1910a4b09a2a4473db76c2bd1a426a9f642c"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "Security be like: And when do these kids go back to school?",
+    "body": "Security be like: And when do these kids go back to school?",
+    "url": "https://www.tiktok.com/@notge0rg3/video/7668614075621985566",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-05",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "notge0rg3",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "36.8K",
+      "comment_count": "513",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [],
+      "hashtags": [
+        "xyzbca",
+        "irvine",
+        "wtf",
+        "funny",
+        "wetzelpretzels",
+        "shopwithme",
+        "shopwithus",
+        "comeshoppingwithme",
+        "irvinespectrumcenter",
+        "shopping"
+      ],
+      "classification": {
+        "scores": {
+          "public_safety": 0.793
+        },
+        "confidence": 0.793,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -399,15 +489,57 @@
       ],
       "classification": {
         "scores": {
-          "public_safety": 0.7
+          "public_safety": 0.77
         },
-        "confidence": 0.7,
-        "method": "keywords",
+        "confidence": 0.77,
+        "method": "keywords+model",
         "model_version": "nb-v1"
-      },
-      "stable_id": "9349de4205a1a35d4a15a2ea9c830c32cd55e209"
-    },
-    "stable_id": "9349de4205a1a35d4a15a2ea9c830c32cd55e209"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "Got flashbacks to when I fell into there when I was a kid \ud83d\ude2d",
+    "body": "Got flashbacks to when I fell into there when I was a kid \ud83d\ude2d",
+    "url": "https://www.tiktok.com/@notge0rg3/video/7668614075621985566",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-05",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "notge0rg3",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "36.8K",
+      "comment_count": "513",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [],
+      "hashtags": [
+        "xyzbca",
+        "irvine",
+        "wtf",
+        "funny",
+        "wetzelpretzels",
+        "shopwithme",
+        "shopwithus",
+        "comeshoppingwithme",
+        "irvinespectrumcenter",
+        "shopping"
+      ],
+      "classification": {
+        "scores": {
+          "public_safety": 0.863
+        },
+        "confidence": 0.863,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -443,10 +575,3314 @@
         "confidence": 0.7,
         "method": "keywords",
         "model_version": "nb-v1"
-      },
-      "stable_id": "5f1032c2e3b928760e853a5608ad8b6bb0b59611"
-    },
-    "stable_id": "5f1032c2e3b928760e853a5608ad8b6bb0b59611"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "I grew up in Irvine and Irvine Company is the devil. Lived in an apartment for 7 years and the last year and a half we got a broken water...",
+    "body": "I grew up in Irvine and Irvine Company is the devil. Lived in an apartment for 7 years and the last year and a half we got a broken water heater than brought mold and roaches and yet we were blamed.",
+    "url": "https://www.tiktok.com/@cloveerika/video/7667408384592792863",
+    "categories": [
+      "housing"
+    ],
+    "published_utc": "2026-08-05",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "cloveerika",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "88",
+      "comment_count": "6",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [],
+      "hashtags": [
+        "foryoupage",
+        "irvine",
+        "xyzbca",
+        "newapartment"
+      ],
+      "classification": {
+        "scores": {
+          "housing": 0.77
+        },
+        "confidence": 0.77,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "Most people park next to the H Mart.",
+    "body": "Most people park next to the H Mart.",
+    "url": "https://www.tiktok.com/@dlover_ofcandies/video/7636195385249189134",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-05",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "dlover_ofcandies",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "25.5K",
+      "comment_count": "1169",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [],
+      "hashtags": [
+        "oc",
+        "hike",
+        "irvine",
+        "california",
+        "usa",
+        "shopping",
+        "fyp"
+      ],
+      "classification": {
+        "scores": {
+          "public_safety": 0.762
+        },
+        "confidence": 0.762,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "Just off Alton and Technology. I love that trail.",
+    "body": "Just off Alton and Technology. I love that trail.",
+    "url": "https://www.tiktok.com/@s4shav/video/7661776536965516558",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-05",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "s4shav",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "8072",
+      "comment_count": "184",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [],
+      "hashtags": [
+        "irvine",
+        "california",
+        "usa",
+        "shopping",
+        "fyp"
+      ],
+      "classification": {
+        "scores": {
+          "public_safety": 0.743
+        },
+        "confidence": 0.743,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "Does anyone know why they removed the wheel?",
+    "body": "Does anyone know why they removed the wheel?",
+    "url": "https://www.tiktok.com/@its.losangeles.living/video/7637649346044939533",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-05",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "its.losangeles.living",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "10.5K",
+      "comment_count": "89",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [],
+      "hashtags": [
+        "irvine",
+        "california",
+        "usa",
+        "shopping",
+        "fyp"
+      ],
+      "classification": {
+        "scores": {
+          "public_safety": 0.703
+        },
+        "confidence": 0.703,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok @cbsla",
+    "title": "Hundreds of residents came out earlier today for the opening of Irvine\u2019s new largest bridge. #Irvine #IrvineCA #walkability",
+    "body": "Hundreds of residents came out earlier today for the opening of Irvine\u2019s new largest bridge. #Irvine #IrvineCA #walkability",
+    "url": "https://www.tiktok.com/@cbsla/video/7672920310278049038",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "tag": "irvine",
+      "content_type": "video_caption",
+      "trusted_outlet": true,
+      "hashtags": [
+        "Irvine",
+        "IrvineCA",
+        "walkability"
+      ],
+      "weak_trusted_default": true,
+      "classification": {
+        "scores": {
+          "public_safety": 0.3
+        },
+        "confidence": 0.3,
+        "method": "outlet_default",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "Wonderful, zero shade and walking a considerable distance over a polluted freeway",
+    "body": "Wonderful, zero shade and walking a considerable distance over a polluted freeway",
+    "url": "https://www.tiktok.com/@cbsla/video/7672920310278049038",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "cbsla",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "8768",
+      "comment_count": "256",
+      "content_type": "comment",
+      "inherited_from_video": true,
+      "trusted_outlet": true,
+      "video_categories": [
+        "public_safety"
+      ],
+      "hashtags": [
+        "Irvine",
+        "IrvineCA",
+        "walkability"
+      ],
+      "classification": {
+        "scores": {
+          "public_safety": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "i\u2019m a big back and i\u2019m out of shape on CBS is crazy work\ud83d\ude2d",
+    "body": "i\u2019m a big back and i\u2019m out of shape on CBS is crazy work\ud83d\ude2d",
+    "url": "https://www.tiktok.com/@cbsla/video/7672920310278049038",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "cbsla",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "8768",
+      "comment_count": "256",
+      "content_type": "comment",
+      "inherited_from_video": true,
+      "trusted_outlet": true,
+      "video_categories": [
+        "public_safety"
+      ],
+      "hashtags": [
+        "Irvine",
+        "IrvineCA",
+        "walkability"
+      ],
+      "classification": {
+        "scores": {
+          "public_safety": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "these comments are not it! this bridge connects trails that lead to the san bernardino mountains all the way to the ocean! let\u2019s celebrat...",
+    "body": "these comments are not it! this bridge connects trails that lead to the san bernardino mountains all the way to the ocean! let\u2019s celebrate bridging these gaps!",
+    "url": "https://www.tiktok.com/@cbsla/video/7672920310278049038",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "cbsla",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "8768",
+      "comment_count": "256",
+      "content_type": "comment",
+      "inherited_from_video": true,
+      "trusted_outlet": true,
+      "video_categories": [
+        "public_safety"
+      ],
+      "hashtags": [
+        "Irvine",
+        "IrvineCA",
+        "walkability"
+      ],
+      "classification": {
+        "scores": {
+          "public_safety": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "A good start but with how long the construction took, I'm shocked at how plain and boring it looks. Look at The High Line in NYC. It's ab...",
+    "body": "A good start but with how long the construction took, I'm shocked at how plain and boring it looks. Look at The High Line in NYC. It's absolutely gorgeous and full of native New York flora. This could've been a smaller scale version of that",
+    "url": "https://www.tiktok.com/@cbsla/video/7672920310278049038",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "cbsla",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "8768",
+      "comment_count": "256",
+      "content_type": "comment",
+      "inherited_from_video": true,
+      "trusted_outlet": true,
+      "video_categories": [
+        "public_safety"
+      ],
+      "hashtags": [
+        "Irvine",
+        "IrvineCA",
+        "walkability"
+      ],
+      "classification": {
+        "scores": {
+          "public_safety": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "whats up with los \u00e1ngeles and treeless public spaces",
+    "body": "whats up with los \u00e1ngeles and treeless public spaces",
+    "url": "https://www.tiktok.com/@cbsla/video/7672920310278049038",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "cbsla",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "8768",
+      "comment_count": "256",
+      "content_type": "comment",
+      "inherited_from_video": true,
+      "trusted_outlet": true,
+      "video_categories": [
+        "public_safety"
+      ],
+      "hashtags": [
+        "Irvine",
+        "IrvineCA",
+        "walkability"
+      ],
+      "classification": {
+        "scores": {
+          "public_safety": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "I thought the goal, 15 years ago, was for a WILDLIFE CORRIDOR since LENNAR DESTROYED ALL THE REMAINING WILDLIFE HABITATS.",
+    "body": "I thought the goal, 15 years ago, was for a WILDLIFE CORRIDOR since LENNAR DESTROYED ALL THE REMAINING WILDLIFE HABITATS.",
+    "url": "https://www.tiktok.com/@cbsla/video/7672920310278049038",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "cbsla",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "8768",
+      "comment_count": "256",
+      "content_type": "comment",
+      "inherited_from_video": true,
+      "trusted_outlet": true,
+      "video_categories": [
+        "public_safety"
+      ],
+      "hashtags": [
+        "Irvine",
+        "IrvineCA",
+        "walkability"
+      ],
+      "classification": {
+        "scores": {
+          "public_safety": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "One direction of travel with no exits. Essentially a funnel of potential robberies.",
+    "body": "One direction of travel with no exits. Essentially a funnel of potential robberies.",
+    "url": "https://www.tiktok.com/@cbsla/video/7672920310278049038",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "cbsla",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "8768",
+      "comment_count": "256",
+      "content_type": "comment",
+      "inherited_from_video": true,
+      "trusted_outlet": true,
+      "video_categories": [
+        "public_safety"
+      ],
+      "hashtags": [
+        "Irvine",
+        "IrvineCA",
+        "walkability"
+      ],
+      "classification": {
+        "scores": {
+          "public_safety": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "yeah but then you'll get the idiots with the electric bikes and the electric scooters",
+    "body": "yeah but then you'll get the idiots with the electric bikes and the electric scooters",
+    "url": "https://www.tiktok.com/@cbsla/video/7672920310278049038",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "cbsla",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "8768",
+      "comment_count": "256",
+      "content_type": "comment",
+      "inherited_from_video": true,
+      "trusted_outlet": true,
+      "video_categories": [
+        "public_safety"
+      ],
+      "hashtags": [
+        "Irvine",
+        "IrvineCA",
+        "walkability"
+      ],
+      "classification": {
+        "scores": {
+          "public_safety": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "Cost millions just to add zero shade \ud83d\ude1c",
+    "body": "Cost millions just to add zero shade \ud83d\ude1c",
+    "url": "https://www.tiktok.com/@cbsla/video/7672920310278049038",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "cbsla",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "8768",
+      "comment_count": "256",
+      "content_type": "comment",
+      "inherited_from_video": true,
+      "trusted_outlet": true,
+      "video_categories": [
+        "public_safety"
+      ],
+      "hashtags": [
+        "Irvine",
+        "IrvineCA",
+        "walkability"
+      ],
+      "classification": {
+        "scores": {
+          "public_safety": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "[Sticker] Yes!!!! We need more space for us pedestrians \ud83d\udeb6\u200d\u2640\ufe0fwalk lovers!!! \u2764\ufe0f",
+    "body": "[Sticker] Yes!!!! We need more space for us pedestrians \ud83d\udeb6\u200d\u2640\ufe0fwalk lovers!!! \u2764\ufe0f",
+    "url": "https://www.tiktok.com/@cbsla/video/7672920310278049038",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "cbsla",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "8768",
+      "comment_count": "256",
+      "content_type": "comment",
+      "inherited_from_video": true,
+      "trusted_outlet": true,
+      "video_categories": [
+        "public_safety"
+      ],
+      "hashtags": [
+        "Irvine",
+        "IrvineCA",
+        "walkability"
+      ],
+      "classification": {
+        "scores": {
+          "public_safety": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "Yell yeah.!!!",
+    "body": "Yell yeah.!!!",
+    "url": "https://www.tiktok.com/@brodiddy14/video/7671097272016325918",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "brodiddy14",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "947",
+      "comment_count": "60",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [],
+      "hashtags": [
+        "tuff",
+        "Irvine",
+        "night"
+      ],
+      "classification": {
+        "scores": {
+          "public_safety": 0.759
+        },
+        "confidence": 0.759,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "nice one zeke",
+    "body": "nice one zeke",
+    "url": "https://www.tiktok.com/@brodiddy14/video/7671097272016325918",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "brodiddy14",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "947",
+      "comment_count": "60",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [],
+      "hashtags": [
+        "tuff",
+        "Irvine",
+        "night"
+      ],
+      "classification": {
+        "scores": {
+          "public_safety": 0.835
+        },
+        "confidence": 0.835,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok @lilyybluu",
+    "title": "I would say because I came from Santa Ana going to UCI was still a culture shock! I would say UCI experience was really good but did take...",
+    "body": "I would say because I came from Santa Ana going to UCI was still a culture shock! I would say UCI experience was really good but did take a while to be included and it only happened when I took action :) #uci #ucirvine #irvine #fall2026 #incomingfreshman",
+    "url": "https://www.tiktok.com/@lilyybluu/video/7671767678662544671",
+    "categories": [
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "tag": "irvine",
+      "content_type": "video_caption",
+      "trusted_outlet": false,
+      "hashtags": [
+        "uci",
+        "ucirvine",
+        "irvine",
+        "fall2026",
+        "incomingfreshman"
+      ],
+      "weak_trusted_default": false,
+      "classification": {
+        "scores": {
+          "violent_crime": 0.798
+        },
+        "confidence": 0.798,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "I\u2019m Mexican, majored in engineering. The Asians in my physics and math classes asked me for help \ud83d\ude02\ud83d\ude02\ud83d\ude02\ud83d\ude02",
+    "body": "I\u2019m Mexican, majored in engineering. The Asians in my physics and math classes asked me for help \ud83d\ude02\ud83d\ude02\ud83d\ude02\ud83d\ude02",
+    "url": "https://www.tiktok.com/@lilyybluu/video/7671767678662544671",
+    "categories": [
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "lilyybluu",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "7438",
+      "comment_count": "430",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uci",
+        "ucirvine",
+        "irvine",
+        "fall2026",
+        "incomingfreshman"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.739
+        },
+        "confidence": 0.739,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "As a brown latino that commuted there it\u2019s nice but damn can campus be so quick to feel unwelcoming. A lot of affluent East Asian student...",
+    "body": "As a brown latino that commuted there it\u2019s nice but damn can campus be so quick to feel unwelcoming. A lot of affluent East Asian students there were kinda quick to dismiss me but shoutout to my Vietnamese and Filipino cousins that were always chill and the occasional quirked up white boy",
+    "url": "https://www.tiktok.com/@lilyybluu/video/7671767678662544671",
+    "categories": [
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "lilyybluu",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "7438",
+      "comment_count": "430",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uci",
+        "ucirvine",
+        "irvine",
+        "fall2026",
+        "incomingfreshman"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.793
+        },
+        "confidence": 0.793,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "No, you didn\u2019t",
+    "body": "No, you didn\u2019t",
+    "url": "https://www.tiktok.com/@lilyybluu/video/7671767678662544671",
+    "categories": [
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "lilyybluu",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "7438",
+      "comment_count": "430",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uci",
+        "ucirvine",
+        "irvine",
+        "fall2026",
+        "incomingfreshman"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.798
+        },
+        "confidence": 0.798,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "Please don\u2019t ever \u201cget used to it.\u201d Be an activist.",
+    "body": "Please don\u2019t ever \u201cget used to it.\u201d Be an activist.",
+    "url": "https://www.tiktok.com/@lilyybluu/video/7671767678662544671",
+    "categories": [
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "lilyybluu",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "7438",
+      "comment_count": "430",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uci",
+        "ucirvine",
+        "irvine",
+        "fall2026",
+        "incomingfreshman"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.754
+        },
+        "confidence": 0.754,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "girl i\u2019m asian and they were also racist towards me",
+    "body": "girl i\u2019m asian and they were also racist towards me",
+    "url": "https://www.tiktok.com/@lilyybluu/video/7671767678662544671",
+    "categories": [
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "lilyybluu",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "7438",
+      "comment_count": "430",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uci",
+        "ucirvine",
+        "irvine",
+        "fall2026",
+        "incomingfreshman"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.788
+        },
+        "confidence": 0.788,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "As a bio major I faced a lot of micro aggressions by Asian classmates in bio labs, sometimes I felt like I had to prove myself smart enou...",
+    "body": "As a bio major I faced a lot of micro aggressions by Asian classmates in bio labs, sometimes I felt like I had to prove myself smart enough or \u201cworthy\u201d of being in their group",
+    "url": "https://www.tiktok.com/@lilyybluu/video/7671767678662544671",
+    "categories": [
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "lilyybluu",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "7438",
+      "comment_count": "430",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uci",
+        "ucirvine",
+        "irvine",
+        "fall2026",
+        "incomingfreshman"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.9
+        },
+        "confidence": 0.9,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "Dang, UCI is the UC I wanna go to as a Hispanic, this is making me second guess my decision now\u2026",
+    "body": "Dang, UCI is the UC I wanna go to as a Hispanic, this is making me second guess my decision now\u2026",
+    "url": "https://www.tiktok.com/@lilyybluu/video/7671767678662544671",
+    "categories": [
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "lilyybluu",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "7438",
+      "comment_count": "430",
+      "content_type": "comment",
+      "inherited_from_video": true,
+      "trusted_outlet": false,
+      "video_categories": [
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uci",
+        "ucirvine",
+        "irvine",
+        "fall2026",
+        "incomingfreshman"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "I went to UCI and I got into a \u201ccompetitive\u201d major and was told by someone who I thought was a friend, that I only got in because I was H...",
+    "body": "I went to UCI and I got into a \u201ccompetitive\u201d major and was told by someone who I thought was a friend, that I only got in because I was Hispanic. Mind you I did way better than her in all classes. It breaks my heart that people quit because of these experiences. I understand the feeling for years to follow I suffered from imposter syndrome because no one in the room looked like me. I eventually moved on to have a wonderful career, got my master's, and completed additional training at USC and Harvard. All I can tell you is to keep going. They are projecting their insecurities. I can honestly say I don\u2019t care about the microaggressions anymore. I often like to make people uncomfortable with a pause or say what do you mean by that? It's funny seeing them panic. Also after working at \u201ctop\u201d places I am not impressed by high-profile leaders. They are not better than you. We are all the same, I see everyone as babies in suits. We all have insecurities but one thing I don\u2019t stand for is putting other people down. Screw them and you shine.",
+    "url": "https://www.tiktok.com/@lilyybluu/video/7671767678662544671",
+    "categories": [
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "lilyybluu",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "7438",
+      "comment_count": "430",
+      "content_type": "comment",
+      "inherited_from_video": true,
+      "trusted_outlet": false,
+      "video_categories": [
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uci",
+        "ucirvine",
+        "irvine",
+        "fall2026",
+        "incomingfreshman"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "As a Mexican American that grew up in Irvine, yes. I was the only Hispanic kid in predominantly white and Asian classes. Kids would call ...",
+    "body": "As a Mexican American that grew up in Irvine, yes. I was the only Hispanic kid in predominantly white and Asian classes. Kids would call me Oprah bc I was chubby, tan with big lips. I started getting treated better when I lost weight.",
+    "url": "https://www.tiktok.com/@lilyybluu/video/7671767678662544671",
+    "categories": [
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "lilyybluu",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "7438",
+      "comment_count": "430",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uci",
+        "ucirvine",
+        "irvine",
+        "fall2026",
+        "incomingfreshman"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.813
+        },
+        "confidence": 0.813,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "No girl trust me ! That was one reason I was mentally exhausted at UCI , and I tried to talk to everyone but people were not open minded ...",
+    "body": "No girl trust me ! That was one reason I was mentally exhausted at UCI , and I tried to talk to everyone but people were not open minded at all !!!",
+    "url": "https://www.tiktok.com/@lilyybluu/video/7671767678662544671",
+    "categories": [
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "lilyybluu",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "7438",
+      "comment_count": "430",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uci",
+        "ucirvine",
+        "irvine",
+        "fall2026",
+        "incomingfreshman"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.886
+        },
+        "confidence": 0.886,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "Ima show my mom this, i told her i chose a diverse school for a reason. Like no shade to white people but i Js cant relate to them and do...",
+    "body": "Ima show my mom this, i told her i chose a diverse school for a reason. Like no shade to white people but i Js cant relate to them and don't see myself fitting in. I already have social anxiety & very awkward.",
+    "url": "https://www.tiktok.com/@lilyybluu/video/7671767678662544671",
+    "categories": [
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "lilyybluu",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "7438",
+      "comment_count": "430",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uci",
+        "ucirvine",
+        "irvine",
+        "fall2026",
+        "incomingfreshman"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.79
+        },
+        "confidence": 0.79,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "y\u2019all need to start reporting them or someone needs to sue the school",
+    "body": "y\u2019all need to start reporting them or someone needs to sue the school",
+    "url": "https://www.tiktok.com/@lilyybluu/video/7671767678662544671",
+    "categories": [
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "lilyybluu",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "7438",
+      "comment_count": "430",
+      "content_type": "comment",
+      "inherited_from_video": true,
+      "trusted_outlet": false,
+      "video_categories": [
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uci",
+        "ucirvine",
+        "irvine",
+        "fall2026",
+        "incomingfreshman"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "Why do you guys let people who have to come from the other side of the world put you down? You are Mexican and you and your family are na...",
+    "body": "Why do you guys let people who have to come from the other side of the world put you down? You are Mexican and you and your family are native to this land. Remember that!!!!!!! Especially if you are a Californian Mexican don\u2019t let anyone tell you nothing.",
+    "url": "https://www.tiktok.com/@lilyybluu/video/7671767678662544671",
+    "categories": [
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "lilyybluu",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "7438",
+      "comment_count": "430",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uci",
+        "ucirvine",
+        "irvine",
+        "fall2026",
+        "incomingfreshman"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.9
+        },
+        "confidence": 0.9,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "Ppl were so rude to my sister when she talked to ppl during admitted students day esp when we said we\u2019re from south central. I was shook ...",
+    "body": "Ppl were so rude to my sister when she talked to ppl during admitted students day esp when we said we\u2019re from south central. I was shook bc I experienced more micro aggressions in 4 hours than in my 4yrs at UCLA",
+    "url": "https://www.tiktok.com/@lilyybluu/video/7671767678662544671",
+    "categories": [
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "lilyybluu",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "7438",
+      "comment_count": "430",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uci",
+        "ucirvine",
+        "irvine",
+        "fall2026",
+        "incomingfreshman"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.882
+        },
+        "confidence": 0.882,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "uci is a hispanic serving institution yet the asian ppl make it feel as if not asian = u dont belong",
+    "body": "uci is a hispanic serving institution yet the asian ppl make it feel as if not asian = u dont belong",
+    "url": "https://www.tiktok.com/@lilyybluu/video/7671767678662544671",
+    "categories": [
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "lilyybluu",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "7438",
+      "comment_count": "430",
+      "content_type": "comment",
+      "inherited_from_video": true,
+      "trusted_outlet": false,
+      "video_categories": [
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uci",
+        "ucirvine",
+        "irvine",
+        "fall2026",
+        "incomingfreshman"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.4
+        },
+        "confidence": 0.4,
+        "method": "inherited",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "i\u2019m from santa ana as well. it was very isolating and hard to transition into that environment, but i always tell myself that i was admit...",
+    "body": "i\u2019m from santa ana as well. it was very isolating and hard to transition into that environment, but i always tell myself that i was admitted for a reason and i deserve to be there!!",
+    "url": "https://www.tiktok.com/@lilyybluu/video/7671767678662544671",
+    "categories": [
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "lilyybluu",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "7438",
+      "comment_count": "430",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uci",
+        "ucirvine",
+        "irvine",
+        "fall2026",
+        "incomingfreshman"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.9
+        },
+        "confidence": 0.9,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "Me when I was walking around ring road with a friend and when we passed by an Asian frat selling tacos they yelled even louder directly a...",
+    "body": "Me when I was walking around ring road with a friend and when we passed by an Asian frat selling tacos they yelled even louder directly at us \ud83d\ude0d\ud83d\ude0d",
+    "url": "https://www.tiktok.com/@lilyybluu/video/7671767678662544671",
+    "categories": [
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "lilyybluu",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "7438",
+      "comment_count": "430",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uci",
+        "ucirvine",
+        "irvine",
+        "fall2026",
+        "incomingfreshman"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.88
+        },
+        "confidence": 0.88,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "I\u2019m a black student and i just completed my first year at UCI, and let me tell you it was brutal. The amount of racism I experienced was ...",
+    "body": "I\u2019m a black student and i just completed my first year at UCI, and let me tell you it was brutal. The amount of racism I experienced was crazy",
+    "url": "https://www.tiktok.com/@lilyybluu/video/7671767678662544671",
+    "categories": [
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "lilyybluu",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "7438",
+      "comment_count": "430",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uci",
+        "ucirvine",
+        "irvine",
+        "fall2026",
+        "incomingfreshman"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.9
+        },
+        "confidence": 0.9,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "literally never suffered thru sm micro aggressions in my life than my 2 yrs already at uci\ud83d\ude2d\ud83d\ude2d\ud83d\ude2d\ud83d\ude2d which is why i just go to class and leave ...",
+    "body": "literally never suffered thru sm micro aggressions in my life than my 2 yrs already at uci\ud83d\ude2d\ud83d\ude2d\ud83d\ude2d\ud83d\ude2d which is why i just go to class and leave back home",
+    "url": "https://www.tiktok.com/@lilyybluu/video/7671767678662544671",
+    "categories": [
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "lilyybluu",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "7438",
+      "comment_count": "430",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uci",
+        "ucirvine",
+        "irvine",
+        "fall2026",
+        "incomingfreshman"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.828
+        },
+        "confidence": 0.828,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "same school that deported students for protesting",
+    "body": "same school that deported students for protesting",
+    "url": "https://www.tiktok.com/@lilyybluu/video/7671767678662544671",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "lilyybluu",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "7438",
+      "comment_count": "430",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uci",
+        "ucirvine",
+        "irvine",
+        "fall2026",
+        "incomingfreshman"
+      ],
+      "classification": {
+        "scores": {
+          "public_safety": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok @abc7la",
+    "title": "(7/21/26) A deadly police shooting unfolded in Irvine after police say a man armed with a knife, who was experiencing a mental health cri...",
+    "body": "(7/21/26) A deadly police shooting unfolded in Irvine after police say a man armed with a knife, who was experiencing a mental health crisis, called 911. Read more at the link. #uk #scotland #crime",
+    "url": "https://www.tiktok.com/@abc7la/video/7665153245450374414",
+    "categories": [
+      "public_safety",
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "tag": "irvine",
+      "content_type": "video_caption",
+      "trusted_outlet": true,
+      "hashtags": [
+        "uk",
+        "scotland",
+        "crime"
+      ],
+      "weak_trusted_default": false,
+      "classification": {
+        "scores": {
+          "violent_crime": 0.77,
+          "public_safety": 0.8
+        },
+        "confidence": 0.785,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "Why not tase him knowing he is sick and taking him out is so wrong",
+    "body": "Why not tase him knowing he is sick and taking him out is so wrong",
+    "url": "https://www.tiktok.com/@abc7la/video/7665153245450374414",
+    "categories": [
+      "public_safety",
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "abc7la",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "4607",
+      "comment_count": "155",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": true,
+      "video_categories": [
+        "public_safety",
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uk",
+        "scotland",
+        "crime"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.77,
+          "public_safety": 0.8
+        },
+        "confidence": 0.785,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "Please remove that cop from duty immediately",
+    "body": "Please remove that cop from duty immediately",
+    "url": "https://www.tiktok.com/@abc7la/video/7665153245450374414",
+    "categories": [
+      "public_safety",
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "abc7la",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "4607",
+      "comment_count": "155",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": true,
+      "video_categories": [
+        "public_safety",
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uk",
+        "scotland",
+        "crime"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.77,
+          "public_safety": 0.8
+        },
+        "confidence": 0.785,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "I\u2019m shocked it\u2019s even reported. They cover up everything in south OC",
+    "body": "I\u2019m shocked it\u2019s even reported. They cover up everything in south OC",
+    "url": "https://www.tiktok.com/@abc7la/video/7665153245450374414",
+    "categories": [
+      "public_safety",
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "abc7la",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "4607",
+      "comment_count": "155",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": true,
+      "video_categories": [
+        "public_safety",
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uk",
+        "scotland",
+        "crime"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.77,
+          "public_safety": 0.8
+        },
+        "confidence": 0.785,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "irvine? yall be in a lot of mess lately. \ud83d\ude33",
+    "body": "irvine? yall be in a lot of mess lately. \ud83d\ude33",
+    "url": "https://www.tiktok.com/@abc7la/video/7665153245450374414",
+    "categories": [
+      "public_safety",
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "abc7la",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "4607",
+      "comment_count": "155",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": true,
+      "video_categories": [
+        "public_safety",
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uk",
+        "scotland",
+        "crime"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.77,
+          "public_safety": 0.8
+        },
+        "confidence": 0.785,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "it doesn't sound like they handled it properly, all he had was a knife and he was the one that called and they killed him??? Sounds like ...",
+    "body": "it doesn't sound like they handled it properly, all he had was a knife and he was the one that called and they killed him??? Sounds like they need better training",
+    "url": "https://www.tiktok.com/@abc7la/video/7665153245450374414",
+    "categories": [
+      "public_safety",
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "abc7la",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "4607",
+      "comment_count": "155",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": true,
+      "video_categories": [
+        "public_safety",
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uk",
+        "scotland",
+        "crime"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.77,
+          "public_safety": 0.8
+        },
+        "confidence": 0.785,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "He needed help!!!! RIP young man \ud83d\ude22",
+    "body": "He needed help!!!! RIP young man \ud83d\ude22",
+    "url": "https://www.tiktok.com/@abc7la/video/7665153245450374414",
+    "categories": [
+      "public_safety",
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "abc7la",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "4607",
+      "comment_count": "155",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": true,
+      "video_categories": [
+        "public_safety",
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uk",
+        "scotland",
+        "crime"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.77,
+          "public_safety": 0.8
+        },
+        "confidence": 0.785,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "wtf is happening to Irvine",
+    "body": "wtf is happening to Irvine",
+    "url": "https://www.tiktok.com/@abc7la/video/7665153245450374414",
+    "categories": [
+      "public_safety",
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "abc7la",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "4607",
+      "comment_count": "155",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": true,
+      "video_categories": [
+        "public_safety",
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uk",
+        "scotland",
+        "crime"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.77,
+          "public_safety": 0.8
+        },
+        "confidence": 0.785,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "We need more highly trained police officers who are skilled in de-escalation, especially in mental health crisis situations, instead of s...",
+    "body": "We need more highly trained police officers who are skilled in de-escalation, especially in mental health crisis situations, instead of situations ending with gunshots and the loss of innocent lives. This young man called for help and deserved a response focused on safety and support.",
+    "url": "https://www.tiktok.com/@abc7la/video/7665153245450374414",
+    "categories": [
+      "public_safety",
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "abc7la",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "4607",
+      "comment_count": "155",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": true,
+      "video_categories": [
+        "public_safety",
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uk",
+        "scotland",
+        "crime"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.8,
+          "public_safety": 0.87
+        },
+        "confidence": 0.835,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "Why the F would they choose to shoot him dead? How about you shoot a thigh or an arm? Dafuq!",
+    "body": "Why the F would they choose to shoot him dead? How about you shoot a thigh or an arm? Dafuq!",
+    "url": "https://www.tiktok.com/@abc7la/video/7665153245450374414",
+    "categories": [
+      "public_safety",
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "abc7la",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "4607",
+      "comment_count": "155",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": true,
+      "video_categories": [
+        "public_safety",
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uk",
+        "scotland",
+        "crime"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.77,
+          "public_safety": 0.8
+        },
+        "confidence": 0.785,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "mental health is treated as a joke, and police only use murder as a solution.",
+    "body": "mental health is treated as a joke, and police only use murder as a solution.",
+    "url": "https://www.tiktok.com/@abc7la/video/7665153245450374414",
+    "categories": [
+      "violent_crime",
+      "public_safety"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "abc7la",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "4607",
+      "comment_count": "155",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": true,
+      "video_categories": [
+        "public_safety",
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uk",
+        "scotland",
+        "crime"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.87,
+          "public_safety": 0.8
+        },
+        "confidence": 0.835,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "Comments are braindead lol",
+    "body": "Comments are braindead lol",
+    "url": "https://www.tiktok.com/@abc7la/video/7665153245450374414",
+    "categories": [
+      "public_safety",
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "abc7la",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "4607",
+      "comment_count": "155",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": true,
+      "video_categories": [
+        "public_safety",
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uk",
+        "scotland",
+        "crime"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.77,
+          "public_safety": 0.8
+        },
+        "confidence": 0.785,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "so their patience is an hour \u2705",
+    "body": "so their patience is an hour \u2705",
+    "url": "https://www.tiktok.com/@abc7la/video/7665153245450374414",
+    "categories": [
+      "public_safety",
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "abc7la",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "4607",
+      "comment_count": "155",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": true,
+      "video_categories": [
+        "public_safety",
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uk",
+        "scotland",
+        "crime"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.77,
+          "public_safety": 0.8
+        },
+        "confidence": 0.785,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "So they can use all the less-than-lethal rounds, tasers, gas, etc on protesters, but when a person is having a mental crisis that is not ...",
+    "body": "So they can use all the less-than-lethal rounds, tasers, gas, etc on protesters, but when a person is having a mental crisis that is not an option? You would think switching to rubber bullets to fire at someone would give them a chance.",
+    "url": "https://www.tiktok.com/@abc7la/video/7665153245450374414",
+    "categories": [
+      "public_safety",
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "abc7la",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "4607",
+      "comment_count": "155",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": true,
+      "video_categories": [
+        "public_safety",
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uk",
+        "scotland",
+        "crime"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.7,
+          "public_safety": 0.97
+        },
+        "confidence": 0.835,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "His name was Daniel he was my co worker he had autism and had the brightest smile I\u2019ve seen he was very passionate about his hobbies and ...",
+    "body": "His name was Daniel he was my co worker he had autism and had the brightest smile I\u2019ve seen he was very passionate about his hobbies and loved talking about them, he called the police himself saying he needed help and had a knife, Daniel just wanted help instead he had his life taken. Rest in peace Daniel",
+    "url": "https://www.tiktok.com/@abc7la/video/7665153245450374414",
+    "categories": [
+      "public_safety",
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "abc7la",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "4607",
+      "comment_count": "155",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": true,
+      "video_categories": [
+        "public_safety",
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uk",
+        "scotland",
+        "crime"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.77,
+          "public_safety": 0.8
+        },
+        "confidence": 0.785,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "As if Irvine PD had so much to do that they really needed to wrap this one up quick",
+    "body": "As if Irvine PD had so much to do that they really needed to wrap this one up quick",
+    "url": "https://www.tiktok.com/@abc7la/video/7665153245450374414",
+    "categories": [
+      "public_safety",
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "abc7la",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "4607",
+      "comment_count": "155",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": true,
+      "video_categories": [
+        "public_safety",
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uk",
+        "scotland",
+        "crime"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.7,
+          "public_safety": 0.87
+        },
+        "confidence": 0.785,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "He called for help. This is terrible.",
+    "body": "He called for help. This is terrible.",
+    "url": "https://www.tiktok.com/@abc7la/video/7665153245450374414",
+    "categories": [
+      "public_safety",
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "abc7la",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "4607",
+      "comment_count": "155",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": true,
+      "video_categories": [
+        "public_safety",
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uk",
+        "scotland",
+        "crime"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.77,
+          "public_safety": 0.8
+        },
+        "confidence": 0.785,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "wtf first Santa Ana with a child now Irvine ???? Dam",
+    "body": "wtf first Santa Ana with a child now Irvine ???? Dam",
+    "url": "https://www.tiktok.com/@abc7la/video/7665153245450374414",
+    "categories": [
+      "public_safety",
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "abc7la",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "4607",
+      "comment_count": "155",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": true,
+      "video_categories": [
+        "public_safety",
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uk",
+        "scotland",
+        "crime"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.77,
+          "public_safety": 0.8
+        },
+        "confidence": 0.785,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "This is why mental health clinicians need to go along on calls like this!! What a horrible situation.",
+    "body": "This is why mental health clinicians need to go along on calls like this!! What a horrible situation.",
+    "url": "https://www.tiktok.com/@abc7la/video/7665153245450374414",
+    "categories": [
+      "public_safety",
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "abc7la",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "4607",
+      "comment_count": "155",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": true,
+      "video_categories": [
+        "public_safety",
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uk",
+        "scotland",
+        "crime"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.77,
+          "public_safety": 0.8
+        },
+        "confidence": 0.785,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "They knew he had issues, and he called for help again and got taken out \ud83d\ude2d",
+    "body": "They knew he had issues, and he called for help again and got taken out \ud83d\ude2d",
+    "url": "https://www.tiktok.com/@abc7la/video/7665153245450374414",
+    "categories": [
+      "public_safety",
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "abc7la",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "4607",
+      "comment_count": "155",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": true,
+      "video_categories": [
+        "public_safety",
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uk",
+        "scotland",
+        "crime"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.77,
+          "public_safety": 0.8
+        },
+        "confidence": 0.785,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "\u201cThe officer suffered minor injuries.\u201d What happened?",
+    "body": "\u201cThe officer suffered minor injuries.\u201d What happened?",
+    "url": "https://www.tiktok.com/@abc7la/video/7665153245450374414",
+    "categories": [
+      "public_safety",
+      "violent_crime"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "abc7la",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "4607",
+      "comment_count": "155",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": true,
+      "video_categories": [
+        "public_safety",
+        "violent_crime"
+      ],
+      "hashtags": [
+        "uk",
+        "scotland",
+        "crime"
+      ],
+      "classification": {
+        "scores": {
+          "violent_crime": 0.77,
+          "public_safety": 0.8
+        },
+        "confidence": 0.785,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok @david.yegenian",
+    "title": "Rent in Irvine for under $1,000 a month? Yes, but it\u2019s strictly for the people who need it most. \ud83c\udfe2\ud83d\udd11 #irvine #irvinerealestate #orangecoun...",
+    "body": "Rent in Irvine for under $1,000 a month? Yes, but it\u2019s strictly for the people who need it most. \ud83c\udfe2\ud83d\udd11 #irvine #irvinerealestate #orangecountyrealestate #affordablehousing #workforcehousing #ocdevelopment #californiarealestate #housingmarket #ocrealtor #apartmenthunting #orangecounty #affordable #fyp #rent",
+    "url": "https://www.tiktok.com/@david.yegenian/video/7658822698532932877",
+    "categories": [
+      "housing"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "tag": "irvine",
+      "content_type": "video_caption",
+      "trusted_outlet": false,
+      "hashtags": [
+        "irvine",
+        "irvinerealestate",
+        "orangecountyrealestate",
+        "affordablehousing",
+        "workforcehousing",
+        "ocdevelopment",
+        "californiarealestate",
+        "housingmarket",
+        "ocrealtor",
+        "apartmenthunting",
+        "orangecounty",
+        "affordable",
+        "fyp",
+        "rent"
+      ],
+      "weak_trusted_default": false,
+      "classification": {
+        "scores": {
+          "housing": 0.72
+        },
+        "confidence": 0.72,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "That\u2019s a deal",
+    "body": "That\u2019s a deal",
+    "url": "https://www.tiktok.com/@david.yegenian/video/7658822698532932877",
+    "categories": [
+      "housing"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "david.yegenian",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "464",
+      "comment_count": "34",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "housing"
+      ],
+      "hashtags": [
+        "irvine",
+        "irvinerealestate",
+        "orangecountyrealestate",
+        "affordablehousing",
+        "workforcehousing",
+        "ocdevelopment",
+        "californiarealestate",
+        "housingmarket",
+        "ocrealtor",
+        "apartmenthunting",
+        "orangecounty",
+        "affordable",
+        "fyp",
+        "rent"
+      ],
+      "classification": {
+        "scores": {
+          "housing": 0.72
+        },
+        "confidence": 0.72,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "You\u2019ll be kicked out within two or three years",
+    "body": "You\u2019ll be kicked out within two or three years",
+    "url": "https://www.tiktok.com/@david.yegenian/video/7658822698532932877",
+    "categories": [
+      "housing"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "david.yegenian",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "464",
+      "comment_count": "34",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "housing"
+      ],
+      "hashtags": [
+        "irvine",
+        "irvinerealestate",
+        "orangecountyrealestate",
+        "affordablehousing",
+        "workforcehousing",
+        "ocdevelopment",
+        "californiarealestate",
+        "housingmarket",
+        "ocrealtor",
+        "apartmenthunting",
+        "orangecounty",
+        "affordable",
+        "fyp",
+        "rent"
+      ],
+      "classification": {
+        "scores": {
+          "housing": 0.72
+        },
+        "confidence": 0.72,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "This housing in Irvine for low income or all of that is rigged.",
+    "body": "This housing in Irvine for low income or all of that is rigged.",
+    "url": "https://www.tiktok.com/@david.yegenian/video/7658822698532932877",
+    "categories": [
+      "housing"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "david.yegenian",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "464",
+      "comment_count": "34",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "housing"
+      ],
+      "hashtags": [
+        "irvine",
+        "irvinerealestate",
+        "orangecountyrealestate",
+        "affordablehousing",
+        "workforcehousing",
+        "ocdevelopment",
+        "californiarealestate",
+        "housingmarket",
+        "ocrealtor",
+        "apartmenthunting",
+        "orangecounty",
+        "affordable",
+        "fyp",
+        "rent"
+      ],
+      "classification": {
+        "scores": {
+          "housing": 0.72
+        },
+        "confidence": 0.72,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "Do you have to work in Irvine to get one of these apartments?",
+    "body": "Do you have to work in Irvine to get one of these apartments?",
+    "url": "https://www.tiktok.com/@david.yegenian/video/7658822698532932877",
+    "categories": [
+      "housing"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "david.yegenian",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "464",
+      "comment_count": "34",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "housing"
+      ],
+      "hashtags": [
+        "irvine",
+        "irvinerealestate",
+        "orangecountyrealestate",
+        "affordablehousing",
+        "workforcehousing",
+        "ocdevelopment",
+        "californiarealestate",
+        "housingmarket",
+        "ocrealtor",
+        "apartmenthunting",
+        "orangecounty",
+        "affordable",
+        "fyp",
+        "rent"
+      ],
+      "classification": {
+        "scores": {
+          "housing": 0.72
+        },
+        "confidence": 0.72,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "I got approved for Cartwrights\u2019s low income housing. They offered me a 2/2 for more than what I was paying for a 2/2 in irvine at that ti...",
+    "body": "I got approved for Cartwrights\u2019s low income housing. They offered me a 2/2 for more than what I was paying for a 2/2 in irvine at that time, Over $3K, it\u2019s BS.",
+    "url": "https://www.tiktok.com/@david.yegenian/video/7658822698532932877",
+    "categories": [
+      "housing"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "david.yegenian",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "464",
+      "comment_count": "34",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "housing"
+      ],
+      "hashtags": [
+        "irvine",
+        "irvinerealestate",
+        "orangecountyrealestate",
+        "affordablehousing",
+        "workforcehousing",
+        "ocdevelopment",
+        "californiarealestate",
+        "housingmarket",
+        "ocrealtor",
+        "apartmenthunting",
+        "orangecounty",
+        "affordable",
+        "fyp",
+        "rent"
+      ],
+      "classification": {
+        "scores": {
+          "housing": 0.72
+        },
+        "confidence": 0.72,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "there goes Irvine \ud83d\ude33",
+    "body": "there goes Irvine \ud83d\ude33",
+    "url": "https://www.tiktok.com/@david.yegenian/video/7658822698532932877",
+    "categories": [
+      "housing"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "david.yegenian",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "464",
+      "comment_count": "34",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "housing"
+      ],
+      "hashtags": [
+        "irvine",
+        "irvinerealestate",
+        "orangecountyrealestate",
+        "affordablehousing",
+        "workforcehousing",
+        "ocdevelopment",
+        "californiarealestate",
+        "housingmarket",
+        "ocrealtor",
+        "apartmenthunting",
+        "orangecounty",
+        "affordable",
+        "fyp",
+        "rent"
+      ],
+      "classification": {
+        "scores": {
+          "housing": 0.72
+        },
+        "confidence": 0.72,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "Where is this coming from? Because whenever I call shit about $1800-$2000 I literally got maps out right now as we speak and I\u2019m clicking...",
+    "body": "Where is this coming from? Because whenever I call shit about $1800-$2000 I literally got maps out right now as we speak and I\u2019m clicking on everything out here and calling every place. Nothing is $1000 dude let alone below I don\u2019t know where you\u2019re getting this information from.",
+    "url": "https://www.tiktok.com/@david.yegenian/video/7658822698532932877",
+    "categories": [
+      "housing"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "david.yegenian",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "464",
+      "comment_count": "34",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "housing"
+      ],
+      "hashtags": [
+        "irvine",
+        "irvinerealestate",
+        "orangecountyrealestate",
+        "affordablehousing",
+        "workforcehousing",
+        "ocdevelopment",
+        "californiarealestate",
+        "housingmarket",
+        "ocrealtor",
+        "apartmenthunting",
+        "orangecounty",
+        "affordable",
+        "fyp",
+        "rent"
+      ],
+      "classification": {
+        "scores": {
+          "housing": 0.72
+        },
+        "confidence": 0.72,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "How do I apply for low income apartment?",
+    "body": "How do I apply for low income apartment?",
+    "url": "https://www.tiktok.com/@david.yegenian/video/7658822698532932877",
+    "categories": [
+      "housing"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "david.yegenian",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "464",
+      "comment_count": "34",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "housing"
+      ],
+      "hashtags": [
+        "irvine",
+        "irvinerealestate",
+        "orangecountyrealestate",
+        "affordablehousing",
+        "workforcehousing",
+        "ocdevelopment",
+        "californiarealestate",
+        "housingmarket",
+        "ocrealtor",
+        "apartmenthunting",
+        "orangecounty",
+        "affordable",
+        "fyp",
+        "rent"
+      ],
+      "classification": {
+        "scores": {
+          "housing": 0.72
+        },
+        "confidence": 0.72,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "How do we learn about future units?",
+    "body": "How do we learn about future units?",
+    "url": "https://www.tiktok.com/@david.yegenian/video/7658822698532932877",
+    "categories": [
+      "housing"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "david.yegenian",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "464",
+      "comment_count": "34",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "housing"
+      ],
+      "hashtags": [
+        "irvine",
+        "irvinerealestate",
+        "orangecountyrealestate",
+        "affordablehousing",
+        "workforcehousing",
+        "ocdevelopment",
+        "californiarealestate",
+        "housingmarket",
+        "ocrealtor",
+        "apartmenthunting",
+        "orangecounty",
+        "affordable",
+        "fyp",
+        "rent"
+      ],
+      "classification": {
+        "scores": {
+          "housing": 0.72
+        },
+        "confidence": 0.72,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "Value",
+    "body": "Value",
+    "url": "https://www.tiktok.com/@david.yegenian/video/7658822698532932877",
+    "categories": [
+      "housing"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "david.yegenian",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "464",
+      "comment_count": "34",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "housing"
+      ],
+      "hashtags": [
+        "irvine",
+        "irvinerealestate",
+        "orangecountyrealestate",
+        "affordablehousing",
+        "workforcehousing",
+        "ocdevelopment",
+        "californiarealestate",
+        "housingmarket",
+        "ocrealtor",
+        "apartmenthunting",
+        "orangecounty",
+        "affordable",
+        "fyp",
+        "rent"
+      ],
+      "classification": {
+        "scores": {
+          "housing": 0.72
+        },
+        "confidence": 0.72,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "Nice!",
+    "body": "Nice!",
+    "url": "https://www.tiktok.com/@david.yegenian/video/7658822698532932877",
+    "categories": [
+      "housing"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "david.yegenian",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "464",
+      "comment_count": "34",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "housing"
+      ],
+      "hashtags": [
+        "irvine",
+        "irvinerealestate",
+        "orangecountyrealestate",
+        "affordablehousing",
+        "workforcehousing",
+        "ocdevelopment",
+        "californiarealestate",
+        "housingmarket",
+        "ocrealtor",
+        "apartmenthunting",
+        "orangecounty",
+        "affordable",
+        "fyp",
+        "rent"
+      ],
+      "classification": {
+        "scores": {
+          "housing": 0.72
+        },
+        "confidence": 0.72,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "How can we apply? How can we get the application?",
+    "body": "How can we apply? How can we get the application?",
+    "url": "https://www.tiktok.com/@david.yegenian/video/7658822698532932877",
+    "categories": [
+      "housing"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "david.yegenian",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "464",
+      "comment_count": "34",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "housing"
+      ],
+      "hashtags": [
+        "irvine",
+        "irvinerealestate",
+        "orangecountyrealestate",
+        "affordablehousing",
+        "workforcehousing",
+        "ocdevelopment",
+        "californiarealestate",
+        "housingmarket",
+        "ocrealtor",
+        "apartmenthunting",
+        "orangecounty",
+        "affordable",
+        "fyp",
+        "rent"
+      ],
+      "classification": {
+        "scores": {
+          "housing": 0.72
+        },
+        "confidence": 0.72,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "Hi",
+    "body": "Hi",
+    "url": "https://www.tiktok.com/@david.yegenian/video/7658822698532932877",
+    "categories": [
+      "housing"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "david.yegenian",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "464",
+      "comment_count": "34",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "housing"
+      ],
+      "hashtags": [
+        "irvine",
+        "irvinerealestate",
+        "orangecountyrealestate",
+        "affordablehousing",
+        "workforcehousing",
+        "ocdevelopment",
+        "californiarealestate",
+        "housingmarket",
+        "ocrealtor",
+        "apartmenthunting",
+        "orangecounty",
+        "affordable",
+        "fyp",
+        "rent"
+      ],
+      "classification": {
+        "scores": {
+          "housing": 0.72
+        },
+        "confidence": 0.72,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "How do I apply for this",
+    "body": "How do I apply for this",
+    "url": "https://www.tiktok.com/@david.yegenian/video/7658822698532932877",
+    "categories": [
+      "housing"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "david.yegenian",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "464",
+      "comment_count": "34",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "housing"
+      ],
+      "hashtags": [
+        "irvine",
+        "irvinerealestate",
+        "orangecountyrealestate",
+        "affordablehousing",
+        "workforcehousing",
+        "ocdevelopment",
+        "californiarealestate",
+        "housingmarket",
+        "ocrealtor",
+        "apartmenthunting",
+        "orangecounty",
+        "affordable",
+        "fyp",
+        "rent"
+      ],
+      "classification": {
+        "scores": {
+          "housing": 0.72
+        },
+        "confidence": 0.72,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "The website says for Veterans",
+    "body": "The website says for Veterans",
+    "url": "https://www.tiktok.com/@david.yegenian/video/7658822698532932877",
+    "categories": [
+      "housing"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "david.yegenian",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "464",
+      "comment_count": "34",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "housing"
+      ],
+      "hashtags": [
+        "irvine",
+        "irvinerealestate",
+        "orangecountyrealestate",
+        "affordablehousing",
+        "workforcehousing",
+        "ocdevelopment",
+        "californiarealestate",
+        "housingmarket",
+        "ocrealtor",
+        "apartmenthunting",
+        "orangecounty",
+        "affordable",
+        "fyp",
+        "rent"
+      ],
+      "classification": {
+        "scores": {
+          "housing": 0.72
+        },
+        "confidence": 0.72,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "How do I apply?",
+    "body": "How do I apply?",
+    "url": "https://www.tiktok.com/@david.yegenian/video/7658822698532932877",
+    "categories": [
+      "housing"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "david.yegenian",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "464",
+      "comment_count": "34",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "housing"
+      ],
+      "hashtags": [
+        "irvine",
+        "irvinerealestate",
+        "orangecountyrealestate",
+        "affordablehousing",
+        "workforcehousing",
+        "ocdevelopment",
+        "californiarealestate",
+        "housingmarket",
+        "ocrealtor",
+        "apartmenthunting",
+        "orangecounty",
+        "affordable",
+        "fyp",
+        "rent"
+      ],
+      "classification": {
+        "scores": {
+          "housing": 0.72
+        },
+        "confidence": 0.72,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "Every apartment is already fully leased? What is the point then???\ud83d\ude44",
+    "body": "Every apartment is already fully leased? What is the point then???\ud83d\ude44",
+    "url": "https://www.tiktok.com/@david.yegenian/video/7658822698532932877",
+    "categories": [
+      "housing"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "david.yegenian",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "464",
+      "comment_count": "34",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "housing"
+      ],
+      "hashtags": [
+        "irvine",
+        "irvinerealestate",
+        "orangecountyrealestate",
+        "affordablehousing",
+        "workforcehousing",
+        "ocdevelopment",
+        "californiarealestate",
+        "housingmarket",
+        "ocrealtor",
+        "apartmenthunting",
+        "orangecounty",
+        "affordable",
+        "fyp",
+        "rent"
+      ],
+      "classification": {
+        "scores": {
+          "housing": 0.72
+        },
+        "confidence": 0.72,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "Info",
+    "body": "Info",
+    "url": "https://www.tiktok.com/@david.yegenian/video/7658822698532932877",
+    "categories": [
+      "housing"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "david.yegenian",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "464",
+      "comment_count": "34",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "housing"
+      ],
+      "hashtags": [
+        "irvine",
+        "irvinerealestate",
+        "orangecountyrealestate",
+        "affordablehousing",
+        "workforcehousing",
+        "ocdevelopment",
+        "californiarealestate",
+        "housingmarket",
+        "ocrealtor",
+        "apartmenthunting",
+        "orangecounty",
+        "affordable",
+        "fyp",
+        "rent"
+      ],
+      "classification": {
+        "scores": {
+          "housing": 0.72
+        },
+        "confidence": 0.72,
+        "method": "keywords+model",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #irvine",
+    "title": "Js need one cast",
+    "body": "Js need one cast",
+    "url": "https://www.tiktok.com/@dlrlifestylee/video/7610896070104583455",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "dlrlifestylee",
+      "tag": "irvine",
+      "search_query": "tag:irvine",
+      "like_count": "23.2K",
+      "comment_count": "74",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [],
+      "hashtags": [
+        "fashionisland",
+        "irvine",
+        "newport",
+        "mall",
+        "shopping",
+        "losangeles",
+        "anakrantau",
+        "amerika",
+        "mallamerika"
+      ],
+      "classification": {
+        "scores": {
+          "public_safety": 0.849
+        },
+        "confidence": 0.849,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -477,10 +3913,8 @@
         "confidence": 0.8,
         "method": "keywords",
         "model_version": "nb-v1"
-      },
-      "stable_id": "ea70483e399ead093dbaa5296e9a4c2567f3a11e"
-    },
-    "stable_id": "ea70483e399ead093dbaa5296e9a4c2567f3a11e"
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -511,10 +3945,8 @@
         "confidence": 0.8,
         "method": "keywords",
         "model_version": "nb-v1"
-      },
-      "stable_id": "f3989dc022f6b4f5bf07cf23f3ba522b0ca0cb99"
-    },
-    "stable_id": "f3989dc022f6b4f5bf07cf23f3ba522b0ca0cb99"
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -545,10 +3977,8 @@
         "confidence": 0.8,
         "method": "keywords",
         "model_version": "nb-v1"
-      },
-      "stable_id": "4a3f1918c0aa35a85e1ab272f176876c562b708c"
-    },
-    "stable_id": "4a3f1918c0aa35a85e1ab272f176876c562b708c"
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -579,10 +4009,41 @@
         "confidence": 0.8,
         "method": "keywords",
         "model_version": "nb-v1"
-      },
-      "stable_id": "359968d0db388bcff03acae0bf704ec9a3f567c9"
-    },
-    "stable_id": "359968d0db388bcff03acae0bf704ec9a3f567c9"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #newportbeach",
+    "title": "Omg if that salt water you gotta power wash the bottom of your car. We learned the hard way months later when the axels corroded and snap...",
+    "body": "Omg if that salt water you gotta power wash the bottom of your car. We learned the hard way months later when the axels corroded and snap in our truck. Rust is car cancer.",
+    "url": "https://www.tiktok.com/@vikkzavalaa/video/7662453144110009614",
+    "categories": [
+      "emergencies"
+    ],
+    "published_utc": "2026-07-15",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "vikkzavalaa",
+      "tag": "newportbeach",
+      "search_query": "tag:newportbeach",
+      "like_count": "808",
+      "comment_count": "76",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [],
+      "hashtags": [],
+      "classification": {
+        "scores": {
+          "emergencies": 0.798
+        },
+        "confidence": 0.798,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -615,10 +4076,8 @@
         "confidence": 0.777,
         "method": "keywords+model",
         "model_version": "nb-v1"
-      },
-      "stable_id": "4c667e65caed61b61441cc6725572d3ed5b2f2bc"
-    },
-    "stable_id": "4c667e65caed61b61441cc6725572d3ed5b2f2bc"
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -649,10 +4108,8 @@
         "confidence": 0.8,
         "method": "keywords",
         "model_version": "nb-v1"
-      },
-      "stable_id": "b4418c5d5679d9911346b1ea1b8979b63b34fa0f"
-    },
-    "stable_id": "b4418c5d5679d9911346b1ea1b8979b63b34fa0f"
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -678,16 +4135,14 @@
       "hashtags": [],
       "classification": {
         "scores": {
-          "violent_crime": 0.9
+          "violent_crime": 0.892
         },
-        "confidence": 0.9,
+        "confidence": 0.892,
         "method": "model",
         "model_version": "nb-v1",
         "rescued": true
-      },
-      "stable_id": "adf15e34b981c370ff20bb60418b46f986a7c0f7"
-    },
-    "stable_id": "adf15e34b981c370ff20bb60418b46f986a7c0f7"
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -718,10 +4173,8 @@
         "confidence": 0.7,
         "method": "keywords",
         "model_version": "nb-v1"
-      },
-      "stable_id": "acc6e7103ec1d819f4795559ee4cfae959655217"
-    },
-    "stable_id": "acc6e7103ec1d819f4795559ee4cfae959655217"
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -752,10 +4205,8 @@
         "confidence": 0.77,
         "method": "keywords+model",
         "model_version": "nb-v1"
-      },
-      "stable_id": "c9379ff624e2abe0eba691a89f8c3a487d775461"
-    },
-    "stable_id": "c9379ff624e2abe0eba691a89f8c3a487d775461"
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -778,6 +4229,7 @@
       "inherited_from_video": false,
       "trusted_outlet": true,
       "video_categories": [
+        "public_safety",
         "noise"
       ],
       "hashtags": [],
@@ -788,10 +4240,8 @@
         "confidence": 0.7,
         "method": "keywords",
         "model_version": "nb-v1"
-      },
-      "stable_id": "6e1da3aa7e917747ad330b0328ffe7a873a8bbe1"
-    },
-    "stable_id": "6e1da3aa7e917747ad330b0328ffe7a873a8bbe1"
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -815,6 +4265,7 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [
+        "public_safety",
         "noise"
       ],
       "hashtags": [],
@@ -826,10 +4277,8 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      },
-      "stable_id": "22e89cce283a1bf02572283612997274bee18e5d"
-    },
-    "stable_id": "22e89cce283a1bf02572283612997274bee18e5d"
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -853,6 +4302,7 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [
+        "public_safety",
         "noise"
       ],
       "hashtags": [],
@@ -864,10 +4314,8 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      },
-      "stable_id": "12ab8b7cf25663bf39ce232d67ee995a1794f8cf"
-    },
-    "stable_id": "12ab8b7cf25663bf39ce232d67ee995a1794f8cf"
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -891,6 +4339,7 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [
+        "public_safety",
         "noise"
       ],
       "hashtags": [],
@@ -902,10 +4351,8 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      },
-      "stable_id": "d40819a1cba1b0a4511579ee564482fd0cda6ae8"
-    },
-    "stable_id": "d40819a1cba1b0a4511579ee564482fd0cda6ae8"
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -929,6 +4376,7 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [
+        "public_safety",
         "noise"
       ],
       "hashtags": [],
@@ -940,10 +4388,8 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      },
-      "stable_id": "a66d4259a96ac9effafd8b38999f3961a80fdec5"
-    },
-    "stable_id": "a66d4259a96ac9effafd8b38999f3961a80fdec5"
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -967,6 +4413,7 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [
+        "public_safety",
         "noise"
       ],
       "hashtags": [],
@@ -978,10 +4425,8 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      },
-      "stable_id": "3a41ebdb5f3b37bf2e139a2c0969ad9669b7f60a"
-    },
-    "stable_id": "3a41ebdb5f3b37bf2e139a2c0969ad9669b7f60a"
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -1005,6 +4450,7 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [
+        "public_safety",
         "noise"
       ],
       "hashtags": [],
@@ -1016,10 +4462,8 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      },
-      "stable_id": "5dc536bb4d85b9860bf76eb6786b6aee54bab691"
-    },
-    "stable_id": "5dc536bb4d85b9860bf76eb6786b6aee54bab691"
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -1050,10 +4494,8 @@
         "confidence": 0.8,
         "method": "keywords",
         "model_version": "nb-v1"
-      },
-      "stable_id": "97b62118b419725bff154cafbf7393df286585c9"
-    },
-    "stable_id": "97b62118b419725bff154cafbf7393df286585c9"
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -1076,7 +4518,6 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [
-        "traffic_safety",
         "public_safety"
       ],
       "hashtags": [],
@@ -1087,10 +4528,8 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      },
-      "stable_id": "7cdb30ce7bc98c2361bee66640a4e79c0eb00aa7"
-    },
-    "stable_id": "7cdb30ce7bc98c2361bee66640a4e79c0eb00aa7"
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -1113,7 +4552,6 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [
-        "traffic_safety",
         "public_safety"
       ],
       "hashtags": [],
@@ -1124,10 +4562,8 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      },
-      "stable_id": "e57f93ad598fa68545648fa357cc4ff5fc514bec"
-    },
-    "stable_id": "e57f93ad598fa68545648fa357cc4ff5fc514bec"
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -1150,7 +4586,6 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [
-        "traffic_safety",
         "public_safety"
       ],
       "hashtags": [],
@@ -1161,10 +4596,8 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      },
-      "stable_id": "c55e8572e9df6e6172d2022037b7cad9d59208f9"
-    },
-    "stable_id": "c55e8572e9df6e6172d2022037b7cad9d59208f9"
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -1187,7 +4620,6 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [
-        "traffic_safety",
         "public_safety"
       ],
       "hashtags": [],
@@ -1198,10 +4630,8 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      },
-      "stable_id": "1f8f8a322df8e92473dc206b23d652fc065b74b0"
-    },
-    "stable_id": "1f8f8a322df8e92473dc206b23d652fc065b74b0"
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -1224,7 +4654,6 @@
       "inherited_from_video": true,
       "trusted_outlet": true,
       "video_categories": [
-        "traffic_safety",
         "public_safety"
       ],
       "hashtags": [],
@@ -1235,10 +4664,8 @@
         "confidence": 0.4,
         "method": "inherited",
         "model_version": "nb-v1"
-      },
-      "stable_id": "035e4c95d5142f283c0bdc3a949e4b265556b90c"
-    },
-    "stable_id": "035e4c95d5142f283c0bdc3a949e4b265556b90c"
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -1261,7 +4688,6 @@
       "inherited_from_video": false,
       "trusted_outlet": true,
       "video_categories": [
-        "traffic_safety",
         "public_safety"
       ],
       "hashtags": [],
@@ -1272,10 +4698,8 @@
         "confidence": 0.7,
         "method": "keywords",
         "model_version": "nb-v1"
-      },
-      "stable_id": "d479dd43671672bd90c03efc913954854f1c4923"
-    },
-    "stable_id": "d479dd43671672bd90c03efc913954854f1c4923"
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -1312,10 +4736,8 @@
         "confidence": 0.7,
         "method": "keywords",
         "model_version": "nb-v1"
-      },
-      "stable_id": "242285d7a62a3eeb81fa318981f9f6d63783109d"
-    },
-    "stable_id": "242285d7a62a3eeb81fa318981f9f6d63783109d"
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -1350,10 +4772,96 @@
         "confidence": 0.7,
         "method": "keywords",
         "model_version": "nb-v1"
-      },
-      "stable_id": "8a43a14e6d0198c13558e28dcc7d425a6f087e13"
-    },
-    "stable_id": "8a43a14e6d0198c13558e28dcc7d425a6f087e13"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #newportbeach",
+    "title": "nope",
+    "body": "nope",
+    "url": "https://www.tiktok.com/@spain7174/video/7664638696594885902",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-07-20",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "spain7174",
+      "tag": "newportbeach",
+      "search_query": "tag:newportbeach",
+      "like_count": "3",
+      "comment_count": "1",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [
+        "public_safety"
+      ],
+      "hashtags": [
+        "usa",
+        "newportbeach",
+        "fourthofjuly",
+        "chaos",
+        "riot",
+        "china",
+        "africa",
+        "laborrights",
+        "humanrights"
+      ],
+      "classification": {
+        "scores": {
+          "public_safety": 0.7
+        },
+        "confidence": 0.7,
+        "method": "keywords",
+        "model_version": "nb-v1"
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #newportbeach",
+    "title": "I used to ride the Wedge way back when (80s). I was a Cylinders guy mostly. But one wave gave me a reality check when I went over the fal...",
+    "body": "I used to ride the Wedge way back when (80s). I was a Cylinders guy mostly. But one wave gave me a reality check when I went over the falls and landed on my back. Yikes!! (I was 15 skinny and limber kid no injury). Even a small 3-4 footer can throw you around. Careful out there \u270c\ufe0f\ud83c\udfc4\u200d\u2642\ufe0f",
+    "url": "https://www.tiktok.com/@watersafetyhawaii/video/7667037914047515918",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-05",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "watersafetyhawaii",
+      "tag": "newportbeach",
+      "search_query": "tag:newportbeach",
+      "like_count": "65",
+      "comment_count": "21",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [],
+      "hashtags": [
+        "thewedge",
+        "newportbeach",
+        "lifeguards",
+        "californialifeguards",
+        "watersafety",
+        "drowningprevention",
+        "selfrescue",
+        "survivalswimlessons",
+        "isr",
+        "infantswimmingresource"
+      ],
+      "classification": {
+        "scores": {
+          "public_safety": 0.9
+        },
+        "confidence": 0.9,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -1386,15 +4894,13 @@
       ],
       "classification": {
         "scores": {
-          "public_safety": 0.7
+          "public_safety": 0.77
         },
-        "confidence": 0.7,
-        "method": "keywords",
+        "confidence": 0.77,
+        "method": "keywords+model",
         "model_version": "nb-v1"
-      },
-      "stable_id": "e02878da274e1c240b31d87bc7ca99c9347ae3d9"
-    },
-    "stable_id": "e02878da274e1c240b31d87bc7ca99c9347ae3d9"
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -1432,10 +4938,8 @@
         "confidence": 0.7,
         "method": "keywords",
         "model_version": "nb-v1"
-      },
-      "stable_id": "0c7b887eba339ef12c59addefe244b336ec6822c"
-    },
-    "stable_id": "0c7b887eba339ef12c59addefe244b336ec6822c"
+      }
+    }
   },
   {
     "source": "tiktok",
@@ -1473,70 +4977,179 @@
         "confidence": 0.7,
         "method": "keywords",
         "model_version": "nb-v1"
-      },
-      "stable_id": "aa158fbfa58498addbd8d402f721fe37866b90f4"
-    },
-    "stable_id": "aa158fbfa58498addbd8d402f721fe37866b90f4"
+      }
+    }
   },
   {
     "source": "tiktok",
-    "outlet": "TikTok #newportbeach",
-    "title": "inland city kids ,just rich people live here, their parents work 3 jobs so they are never around because the greedy landlords keep raisin...",
-    "body": "inland city kids ,just rich people live here, their parents work 3 jobs so they are never around because the greedy landlords keep raising the rent because the taxes keep going up t,it's only going to get worse,anyone with real money has already left, .and emotionally charged ego media has divided our country . .and Jesus isn't going to save anybody,only we are , solution mode . so let's make things nice again, remove lawyers,court,release all non violent prisoners on endless probation, start fresh Swith county everything,non violent Unity WE ARE ONE . remove probation, they have created a culture that does all the damage, politicians need to be removed, NOT SOCIAL ISM. look after each other love respect and protect",
-    "url": "https://www.tiktok.com/@mkorkutata/video/7659261534392028429",
+    "outlet": "TikTok #uci",
+    "title": "wait this set up kinda fire",
+    "body": "wait this set up kinda fire",
+    "url": "https://www.tiktok.com/@irenek4ng/video/7348686958173916458",
     "categories": [
-      "housing"
-    ],
-    "published_utc": "2026-07-08",
-    "metadata": {
-      "author": "unknown",
-      "video_author": "mkorkutata",
-      "tag": "newportbeach",
-      "search_query": "tag:newportbeach",
-      "like_count": "2332",
-      "comment_count": "97",
-      "classification": {
-        "scores": {
-          "housing": 0.7
-        },
-        "confidence": 0.7,
-        "method": "keywords",
-        "model_version": "nb-v1"
-      },
-      "stable_id": "d9f934c3971dcb69b08ab12a44ecd39dd3cdb8b7"
-    },
-    "stable_id": "d9f934c3971dcb69b08ab12a44ecd39dd3cdb8b7"
-  },
-  {
-    "source": "tiktok",
-    "outlet": "TikTok #irvine",
-    "title": "I grew up in Irvine and Irvine Company is the devil. Lived in an apartment for 7 years and the last year and a half we g...",
-    "body": "I grew up in Irvine and Irvine Company is the devil. Lived in an apartment for 7 years and the last year and a half we got a broken water heater than brought mold and roaches and yet we were blamed.",
-    "url": "https://www.tiktok.com/@cloveerika/video/7667408384592792863",
-    "categories": [
-      "housing"
+      "emergencies"
     ],
     "published_utc": "2026-07-20",
     "metadata": {
       "author": "unknown",
-      "video_author": "cloveerika",
-      "tag": "irvine",
-      "search_query": "tag:irvine",
+      "video_author": "irenek4ng",
+      "tag": "uci",
+      "search_query": "tag:uci",
+      "like_count": "11.1K",
+      "comment_count": "91",
       "content_type": "comment",
       "inherited_from_video": false,
       "trusted_outlet": false,
       "video_categories": [],
-      "hashtags": [],
+      "hashtags": [
+        "uci",
+        "dormtour",
+        "freshmandorm",
+        "mesacourt",
+        "mesatowers",
+        "ucidorms",
+        "irvine",
+        "anteater",
+        "dorm",
+        "freshmanyear",
+        "college",
+        "leaving",
+        "fyp"
+      ],
       "classification": {
         "scores": {
-          "housing": 0.77
+          "emergencies": 0.758
         },
-        "confidence": 0.77,
-        "method": "keywords+model",
-        "model_version": "nb-v1"
-      },
-      "stable_id": "2569aff1f41c56457ac4632c19cb515ca7865673"
-    },
-    "stable_id": "2569aff1f41c56457ac4632c19cb515ca7865673"
+        "confidence": 0.758,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #uci",
+    "title": "No one should be mad: UCI has a very long history of racism (especially anti-blackness but that wasn\u2019t what that video was about). No one...",
+    "body": "No one should be mad: UCI has a very long history of racism (especially anti-blackness but that wasn\u2019t what that video was about). No one wants to talk about it, but it\u2019s there",
+    "url": "https://www.tiktok.com/@lilyybluu/video/7672940671027776798",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "lilyybluu",
+      "tag": "uci",
+      "search_query": "tag:uci",
+      "like_count": "165",
+      "comment_count": "6",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [],
+      "hashtags": [
+        "uci",
+        "ucirvine",
+        "irvine",
+        "fall2026",
+        "ucigrad",
+        "illit",
+        "wonhee",
+        "illitbomb",
+        "illitearphones",
+        "inears",
+        "kpopfyp",
+        "kpopmerch",
+        "kpopunboxing"
+      ],
+      "classification": {
+        "scores": {
+          "public_safety": 0.771
+        },
+        "confidence": 0.771,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #uci",
+    "title": "U don\u2019t rly see black people in California unless you go to specific neighborhoods",
+    "body": "U don\u2019t rly see black people in California unless you go to specific neighborhoods",
+    "url": "https://www.tiktok.com/@stefannwegner/video/7602823663758527758",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "stefannwegner",
+      "tag": "uci",
+      "search_query": "tag:uci",
+      "like_count": "10.4K",
+      "comment_count": "263",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [],
+      "hashtags": [
+        "OC",
+        "UCI",
+        "Irvine",
+        "fyp",
+        "viral"
+      ],
+      "classification": {
+        "scores": {
+          "public_safety": 0.849
+        },
+        "confidence": 0.849,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
+  },
+  {
+    "source": "tiktok",
+    "outlet": "TikTok #uci",
+    "title": "I went to UC Irvine and was worried it would be too \u201cAsian,\u201d and then I befriended a bunch of Asian people and discovered they were not a...",
+    "body": "I went to UC Irvine and was worried it would be too \u201cAsian,\u201d and then I befriended a bunch of Asian people and discovered they were not a monolith, they all had unique personalities, and the model minority myth is a bunch of bullshit. I loved my time at UC Irvine and am thankful for the way it showed me I was ignorant. You\u2019re not an \u201coutsider.\u201d I felt way more welcomed at UC Irvine than my predominantly white high school. Just get to know people before judging them for their race. P.S. I also befriended a lot of Latino students there too!",
+    "url": "https://www.tiktok.com/@stefannwegner/video/7602823663758527758",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-12",
+    "metadata": {
+      "author": "unknown",
+      "video_author": "stefannwegner",
+      "tag": "uci",
+      "search_query": "tag:uci",
+      "like_count": "10.4K",
+      "comment_count": "263",
+      "content_type": "comment",
+      "inherited_from_video": false,
+      "trusted_outlet": false,
+      "video_categories": [],
+      "hashtags": [
+        "OC",
+        "UCI",
+        "Irvine",
+        "fyp",
+        "viral"
+      ],
+      "classification": {
+        "scores": {
+          "public_safety": 0.809
+        },
+        "confidence": 0.809,
+        "method": "model",
+        "model_version": "nb-v1",
+        "rescued": true
+      }
+    }
   }
 ]

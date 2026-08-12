@@ -2,27 +2,87 @@
   {
     "source": "news",
     "outlet": "Irvine Standard",
-    "title": "No. 3 city in America to raise a family",
-    "body": "Irvine landed at No. 3 on Wallet\u00adHub\u2019s national \u201cBest Places to Raise a Family\u201d ranking, driven by its safety record, strong schools and low divorce rates. Analysts compared 182 U.S. [\u2026]",
-    "url": "https://www.irvinestandard.com/2026/no-3-city-in-america-to-raise-a-family-2/",
+    "title": "A 22-MILE ADVENTURE",
+    "body": "Epic and exhilarating: The Mountains to Sea Trail will lift your spirits",
+    "url": "https://www.irvinestandard.com/2026/a-22-mile-adventure/",
     "categories": [
       "public_safety"
     ],
-    "published_utc": "2026-06-30",
+    "published_utc": "2026-08-06",
     "metadata": {
-      "outlet_id": "irvine-standard",
-      "classification": {
-        "scores": {
-          "public_safety": 0.9
-        },
-        "confidence": 0.9,
-        "method": "model",
-        "model_version": "nb-v1",
-        "rescued": true
-      },
-      "stable_id": "43202f4caf04bbd5edadf77afe965ea24f09a158"
-    },
-    "stable_id": "43202f4caf04bbd5edadf77afe965ea24f09a158"
+      "outlet_id": "irvine-standard"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "City launches bike share program",
+    "body": "Irvine has launched a new fixed\u2011station Bike Share Pilot Program. Pedal-assist e-bikes have a maximum assist speed of 18 mph and a battery range of 30 miles. The program starts [\u2026]",
+    "url": "https://www.irvinestandard.com/2026/city-launches-bike-share-program/",
+    "categories": [
+      "potholes"
+    ],
+    "published_utc": "2026-08-06",
+    "metadata": {
+      "outlet_id": "irvine-standard"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "Charlie Zhang embodies the American dream",
+    "body": "When Xianghua \u201cCharlie\u201d Zhang first came to the U.S. at age 24, he brought just $20 and his cherished clarinet. Zhang had received a music scholarship to attend Pasadena City [\u2026]",
+    "url": "https://www.irvinestandard.com/2026/charlie-zhang-embodies-the-american-dream/",
+    "categories": [
+      "immigration"
+    ],
+    "published_utc": "2026-08-06",
+    "metadata": {
+      "outlet_id": "irvine-standard"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "Star-studded music festival heads to Irvine",
+    "body": "Summer 2026 has been a boon for Irvine in terms of grabbing attention on a national scale. A music festival late this month promises to solidify that status. To start [\u2026]",
+    "url": "https://www.irvinestandard.com/2026/star-studded-music-festival-heads-to-irvine/",
+    "categories": [
+      "sanitation"
+    ],
+    "published_utc": "2026-08-06",
+    "metadata": {
+      "outlet_id": "irvine-standard"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Standard",
+    "title": "Area\u2019s least-stressed city is also the fittest",
+    "body": "Irvine is the least-stressed city in Southern California and the seventh least-stressed in the nation, according to a recent WalletHub study. Irvine is also the fittest city in Southern California [\u2026]",
+    "url": "https://www.irvinestandard.com/2026/areas-least-stressed-city-is-also-the-fittest/",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-06",
+    "metadata": {
+      "outlet_id": "irvine-standard"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Weekly",
+    "title": "After an Accident: What Helps a Personal Injury Claim Most",
+    "body": "Details start slipping faster than people expect after an accident. A street name goes fuzzy, the weather becomes a blur, and the exact order of events starts to wobble by the time the day is over. That\u2019s usually why early documents are important. For anyone trying to understand what may help a claim later, the [\u2026] \n The post  After an Accident: What Helps a Personal Injury Claim Most  appeared first on  Irvine Weekly .",
+    "url": "https://irvineweekly.com/after-an-accident-what-helps-a-personal-injury-claim-most/?utm_source=rss&utm_medium=rss&utm_campaign=after-an-accident-what-helps-a-personal-injury-claim-most",
+    "categories": [
+      "traffic_safety",
+      "public_safety"
+    ],
+    "published_utc": "2026-03-24",
+    "metadata": {
+      "outlet_id": "irvine-weekly"
+    }
   },
   {
     "source": "news",
@@ -31,22 +91,14 @@
     "body": "Dialed Labs Founder Hosts Linda Isle Gala to Debut Dialed & Defend Charity; Fountain Valley and Pechanga Fire Stations First to Receive Recovery Equipment When Ali Garawi watched firefighters battle the devastating January 2025 Los Angeles wildfires, he knew he\u2019d found the cause he and his brother had been waiting for. The brothers had built [\u2026] \n The post  Local Wellness Entrepreneur Launches $250K Initiative Supporting California Firefighters  appeared first on  Irvine Weekly .",
     "url": "https://irvineweekly.com/local-wellness-entrepreneur-launches-250k-initiative-supporting-california-firefighters/?utm_source=rss&utm_medium=rss&utm_campaign=local-wellness-entrepreneur-launches-250k-initiative-supporting-california-firefighters",
     "categories": [
-      "emergencies"
+      "emergencies",
+      "public_safety",
+      "traffic_safety"
     ],
     "published_utc": "2026-01-10",
     "metadata": {
-      "outlet_id": "irvine-weekly",
-      "classification": {
-        "scores": {
-          "emergencies": 0.8
-        },
-        "confidence": 0.8,
-        "method": "keywords",
-        "model_version": "nb-v1"
-      },
-      "stable_id": "ae3c21846e22ae3f8c0c13eb64c0a513f9ba3d56"
-    },
-    "stable_id": "ae3c21846e22ae3f8c0c13eb64c0a513f9ba3d56"
+      "outlet_id": "irvine-weekly"
+    }
   },
   {
     "source": "news",
@@ -59,91 +111,35 @@
     ],
     "published_utc": "2025-06-05",
     "metadata": {
-      "outlet_id": "irvine-weekly",
-      "classification": {
-        "scores": {
-          "immigration": 0.7
-        },
-        "confidence": 0.7,
-        "method": "keywords",
-        "model_version": "nb-v1"
-      },
-      "stable_id": "4a25851f37d85efa921d9279bbbdc76f088e541e"
-    },
-    "stable_id": "4a25851f37d85efa921d9279bbbdc76f088e541e"
+      "outlet_id": "irvine-weekly"
+    }
   },
   {
     "source": "news",
-    "outlet": "Voice of OC",
-    "title": "Orange County\u2019s Biggest Civic Headlines as Schools Move to Limit Phone Use",
-    "body": "School districts across California are limiting phone use under a new state law, Irvine faces questions over the shooting death of an autistic man \u2013 these are some of this week\u2019s biggest civic headlines.  \n Voice of OC is Orange County's nonprofit newsroom. We rely on donations from people like you to sustain our news agency. Please make a contribution today: https://voiceofoc.org/donate",
-    "url": "https://voiceofoc.org/2026/07/orange-countys-biggest-civic-headlines-as-schools-move-to-limit-phone-use/",
+    "outlet": "Irvine Weekly",
+    "title": "Karns and Karns Personal Injury and Accident Attorneys Enhances Presence in Orange County, California",
+    "body": "Karns and Karns Personal Injury and Accident Attorneys, a leading personal injury law firm, is proud to announce expanding its services with new locations throughout Orange County, California. This strategic growth strengthens the firm\u2019s commitment to providing accessible and exceptional legal representation to accident victims across the vibrant communities of Orange County and the surrounding [\u2026] \n The post  Karns and Karns Personal Injury and Accident Attorneys Enhances Presence in Orange County, California  appeared first on  Irvine Weekly .",
+    "url": "https://irvineweekly.com/karns-and-karns-personal-injury-and-accident-attorneys-enhances-presence-in-orange-county-california/?utm_source=rss&utm_medium=rss&utm_campaign=karns-and-karns-personal-injury-and-accident-attorneys-enhances-presence-in-orange-county-california",
+    "categories": [
+      "traffic_safety"
+    ],
+    "published_utc": "2025-06-04",
+    "metadata": {
+      "outlet_id": "irvine-weekly"
+    }
+  },
+  {
+    "source": "news",
+    "outlet": "Irvine Weekly",
+    "title": "Richard Sullivan: Four Decades of Leadership in Family Law",
+    "body": "For almost 50 years,\u00a0Richard P. Sullivan, Esq.\u00a0has stood as a pillar of strength, advocacy, and legal excellence in Orange County\u2019s family law community. As the founder and managing attorney of\u00a0Sullivan Law & Associates, Sullivan has built a legacy defined by unwavering dedication to the families he serves, integrity, and courtroom excellence. A Legacy of Legal [\u2026] \n The post  Richard Sullivan: Four Decades of Leadership in Family Law  appeared first on  Irvine Weekly .",
+    "url": "https://irvineweekly.com/richard-sullivan-four-decades-of-leadership-in-family-law/?utm_source=rss&utm_medium=rss&utm_campaign=richard-sullivan-four-decades-of-leadership-in-family-law",
     "categories": [
       "violent_crime"
     ],
-    "published_utc": "2026-07-31",
+    "published_utc": "2025-05-14",
     "metadata": {
-      "outlet_id": "voice-of-oc",
-      "classification": {
-        "scores": {
-          "violent_crime": 0.7
-        },
-        "confidence": 0.7,
-        "method": "keywords",
-        "model_version": "nb-v1"
-      },
-      "stable_id": "a0a2cd7f63d93d228f8dbf3f65d6475b61720623"
-    },
-    "stable_id": "a0a2cd7f63d93d228f8dbf3f65d6475b61720623"
-  },
-  {
-    "source": "news",
-    "outlet": "Voice of OC",
-    "title": "Family of Autistic Man Killed by Irvine Police Question What Went Wrong in Fatal Encounter",
-    "body": "The shooting came after police had been called to the house multiple times, but family members say Daniel Meltvedt could have been talked down.  \n Voice of OC is Orange County's nonprofit newsroom. We rely on donations from people like you to sustain our news agency. Please make a contribution today: https://voiceofoc.org/donate",
-    "url": "https://voiceofoc.org/2026/07/family-of-autistic-man-killed-by-irvine-police-question-what-went-wrong-in-fatal-encounter/",
-    "categories": [
-      "public_safety",
-      "violent_crime"
-    ],
-    "published_utc": "2026-07-28",
-    "metadata": {
-      "outlet_id": "voice-of-oc",
-      "classification": {
-        "scores": {
-          "violent_crime": 0.7,
-          "public_safety": 0.77
-        },
-        "confidence": 0.735,
-        "method": "keywords+model",
-        "model_version": "nb-v1"
-      },
-      "stable_id": "bb5f78f8af6f9d71b765f0a83dfd3acca7a3fe5c"
-    },
-    "stable_id": "bb5f78f8af6f9d71b765f0a83dfd3acca7a3fe5c"
-  },
-  {
-    "source": "news",
-    "outlet": "Voice of OC",
-    "title": "Santana: Ladera Ranch Sparks National Debate on Tackling Toxics",
-    "body": "Facing mounting concerns about kids getting rare cancers, Ladera Ranch residents are asking tough questions about the health impacts from herbicides and pesticides used in landscaping as well as other environmental factors like power lines.  \n Voice of OC is Orange County's nonprofit newsroom. We rely on donations from people like you to sustain our news agency. Please make a contribution today: https://voiceofoc.org/donate",
-    "url": "https://voiceofoc.org/2026/07/santana-ladera-ranch-sparks-national-debate-on-tackling-toxics/",
-    "categories": [
-      "emergencies"
-    ],
-    "published_utc": "2026-07-28",
-    "metadata": {
-      "outlet_id": "voice-of-oc",
-      "classification": {
-        "scores": {
-          "emergencies": 0.7
-        },
-        "confidence": 0.7,
-        "method": "keywords",
-        "model_version": "nb-v1"
-      },
-      "stable_id": "d7064e5dc1fc1eda1279383c807daf14943a6027"
-    },
-    "stable_id": "d7064e5dc1fc1eda1279383c807daf14943a6027"
+      "outlet_id": "irvine-weekly"
+    }
   }
 ]
