@@ -41,7 +41,7 @@ Full steps: [`FIRESTORE_SETUP.md`](FIRESTORE_SETUP.md).
 Firebase is **not** a connection URL. You need **Project ID** + **service-account JSON**.
 
 1. SQLite healthy: ponds + signals + migrate/import/reprocess.
-2. Put in `.env`: `DATA_BACKEND=firestore`, `FIREBASE_PROJECT_ID=…`, `GOOGLE_APPLICATION_CREDENTIALS=…` (no `FIRESTORE_EMULATOR_HOST`).
+2. Put in `.env`: `DATA_BACKEND=firestore`, `FIREBASE_PROJECT_ID=…`, `GOOGLE_APPLICATION_CREDENTIALS=…`.
 3. `python scripts/export_signals_ndjson.py -o data/exports/signals.ndjson`
 4. `python scripts/import_signals_firestore.py -i data/exports/signals.ndjson` → cloud docs at `signals/{stable_id}`
 5. Smoke `/api/signals`, auth, votes, jobs. Research stays on SQLite until Session 12.

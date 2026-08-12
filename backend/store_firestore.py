@@ -128,8 +128,11 @@ class FirestoreSignalStore:
         docs = list(
             self._coll()
             .where("source", "==", source)
-            .order_by("created_at", direction="DESCENDING")
             .stream()
+        )
+        docs.sort(
+            key=lambda d: (d.to_dict() or {}).get("created_at", ""),
+            reverse=True,
         )
         docs = self._filter_archived(docs, include_archived=include_archived)
         return [_doc_to_signal_dict(doc) for doc in docs]
@@ -311,11 +314,15 @@ class FirestoreJobStore:
         docs = list(
             self._coll()
             .where("status", "==", "running")
-            .order_by("created_at", direction="DESCENDING")
-            .limit(1)
             .stream()
         )
-        return self._to_dict(docs[0]) if docs else None
+        if not docs:
+            return None
+        docs.sort(
+            key=lambda d: (d.to_dict() or {}).get("created_at", ""),
+            reverse=True,
+        )
+        return self._to_dict(docs[0])
 
     def get_latest_job(self) -> dict | None:
         docs = list(

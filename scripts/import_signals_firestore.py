@@ -1,11 +1,7 @@
 """
-Load signals NDJSON into Firestore (emulator or live project).
+Load signals NDJSON into live Firestore project.
 
 Usage:
-    # Terminal 1: firebase emulators:start --only firestore
-    # Terminal 2:
-    set FIRESTORE_EMULATOR_HOST=127.0.0.1:8081
-    set DATA_BACKEND=firestore
     python scripts/export_signals_ndjson.py -o data/exports/signals.ndjson
     python scripts/import_signals_firestore.py -i data/exports/signals.ndjson
 """
@@ -35,21 +31,19 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    if not os.environ.get("FIRESTORE_EMULATOR_HOST"):
-        cred = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
-        project = os.environ.get("FIREBASE_PROJECT_ID") or os.environ.get(
-            "GOOGLE_CLOUD_PROJECT"
+    cred = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
+    project = os.environ.get("FIREBASE_PROJECT_ID") or os.environ.get(
+        "GOOGLE_CLOUD_PROJECT"
+    )
+    if not project or not cred:
+        print(
+            "Firestore needs FIREBASE_PROJECT_ID and "
+            "GOOGLE_APPLICATION_CREDENTIALS in the environment.",
+            file=sys.stderr,
         )
-        if not project or not cred:
-            print(
-                "Real Firestore needs FIREBASE_PROJECT_ID and "
-                "GOOGLE_APPLICATION_CREDENTIALS in the environment "
-                "(or set FIRESTORE_EMULATOR_HOST for local emulator).",
-                file=sys.stderr,
-            )
-            raise SystemExit(2)
-        if not Path(cred).is_file():
-            raise SystemExit(f"Service-account file not found: {cred}")
+        raise SystemExit(2)
+    if not Path(cred).is_file():
+        raise SystemExit(f"Service-account file not found: {cred}")
 
     path = Path(args.input)
     if not path.is_file():
