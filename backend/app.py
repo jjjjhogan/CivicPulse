@@ -11,6 +11,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from flask import Flask, abort, redirect, send_from_directory
 
+import backend.config as _cfg
 from backend.db import configure_engine, init_db, remove_session
 from backend.routes import register_blueprints
 
@@ -25,6 +26,8 @@ def create_app(test_config: dict | None = None) -> Flask:
     app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(days=14)
     app.config["SESSION_COOKIE_HTTPONLY"] = True
     app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
+    if os.environ.get("RENDER"):
+        app.config["SESSION_COOKIE_SECURE"] = True
 
     if test_config:
         app.config.update(test_config)
@@ -34,7 +37,8 @@ def create_app(test_config: dict | None = None) -> Flask:
         if test_config.get("SECRET_KEY"):
             app.secret_key = test_config["SECRET_KEY"]
 
-    init_db()
+    if _cfg.DATA_BACKEND != "firestore":
+        init_db()
     register_blueprints(app)
 
     @app.teardown_appcontext

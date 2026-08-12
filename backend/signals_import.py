@@ -196,7 +196,14 @@ def archive_missing_signals(
     sources: tuple[str, ...] = SOURCE_FILES,
     allow_empty: bool = False,
 ) -> int:
-    """Soft-archive DB rows for `sources` whose stable_id is absent from JSON."""
+    """Soft-archive DB rows for `sources` whose stable_id is absent from JSON.
+
+    SQLite only — Firestore signals are managed via upsert_many.
+    """
+    from backend.config import DATA_BACKEND
+
+    if DATA_BACKEND == "firestore":
+        raise RuntimeError("archive_missing_signals is not supported with Firestore.")
     init_db()
     directory = signals_dir or SIGNALS_DIR
     _assert_signal_files_ok(directory, sources, allow_empty=allow_empty)
@@ -228,7 +235,12 @@ def prune_orphan_signals(
     """Hard-delete DB signals for `sources` not present in current JSON files.
 
     Scoped to `sources` only (never deletes other sources). Prefer soft-archive.
+    SQLite only — Firestore signals are managed via upsert_many.
     """
+    from backend.config import DATA_BACKEND
+
+    if DATA_BACKEND == "firestore":
+        raise RuntimeError("prune_orphan_signals is not supported with Firestore.")
     init_db()
     directory = signals_dir or SIGNALS_DIR
     _assert_signal_files_ok(directory, sources, allow_empty=allow_empty)

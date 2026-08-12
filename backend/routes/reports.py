@@ -5,7 +5,7 @@ from __future__ import annotations
 from flask import Blueprint, jsonify, request
 
 from backend.auth import get_current_user, login_required
-from backend.config import DATA_BACKEND
+import backend.config as _cfg
 from backend.models import utcnow
 from backend.stable_id import compute_stable_id
 from backend.store import get_signal_store, get_vote_store
@@ -95,7 +95,7 @@ def list_reports():
     return jsonify({
         "count": len(signals),
         "signals": signals,
-        "storage": DATA_BACKEND,
+        "storage": _cfg.DATA_BACKEND,
     })
 
 
@@ -125,7 +125,7 @@ def cast_vote():
     if signal_id is None:
         return jsonify({"error": "signal_id is required."}), 400
     try:
-        signal_id = int(signal_id) if DATA_BACKEND == "sqlite" else signal_id
+        signal_id = int(signal_id) if _cfg.DATA_BACKEND == "sqlite" else signal_id
     except (TypeError, ValueError):
         return jsonify({"error": "signal_id is required."}), 400
 

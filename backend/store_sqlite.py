@@ -7,7 +7,7 @@ from typing import Any
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from backend.models import IssueVote, ScrapeJob, Signal, User, utcnow
+from backend.models import IssueVote, Research, ResearchHit, ScrapeJob, Signal, User, utcnow
 from backend.signals_import import upsert_signals
 from backend.stable_id import compute_stable_id
 
@@ -213,4 +213,67 @@ class SQLiteVoteStore:
             existing.updated_at = utcnow()
         else:
             self._db.add(IssueVote(signal_id=signal_id, user_id=user_id, choice=choice))
+        self._db.commit()
+
+
+# ---------------------------------------------------------------------------
+# Researches
+# ---------------------------------------------------------------------------
+
+class SQLiteResearchStore:
+    def __init__(self, db: Session) -> None:
+        self._db = db
+
+    @staticmethod
+    def _to_dict(r: Research, *, include_hits: bool = False) -> dict:
+        return r.to_dict(include_hits=include_hits)
+
+    def create_research(
+        self, *, title: str, topic: str = "", keywords: list | None = None,
+        categories: list | None = None, notes: str = "",
+    ) -> dict:
+        research = Research(
+            title=title,
+            topic=topic,
+            keywords=keywords or [],
+            categories=categories or [],
+            notes=notes,
+        )
+        self._db.add(research)
+        self._db.commit()
+        self._db.refresh(research)
+        return self._to_dict(research)
+
+    def list_researches(self) -> list[dict]:
+        rows = self._db.query(Research).order_by(Research.id.desc()).all()
+        return [self._to_dict(r) for r in rows]
+
+    def get_research(self, research_id: int | str) -> dict | None:
+        row = self._db.get(Research, int(research_id))
+        return self._to_dict(row) if row else None
+
+    def get_research_with_hits(self, research_id: int | str) -> dict | None:
+        row = self._db.get(Research, int(research_id))
+        if row is None:
+            return None
+        return self._to_dict(row, include_hits=True)
+
+    def replace_hits(self, research_id: int | str, hits: list[dict]) -> None:
+        rid = int(research_id)
+        self._db.query(ResearchHit).filter(ResearchHit.research_id == rid).delete()
+        for h in hits:
+            self._db.add(ResearchHit(
+                research_id=rid,
+                signal_id=h["signal_id"],
+                match_reason=h.get("match_reason", ""),
+                score=h.get("score", 0.0),
+            ))
+        self._db.commit()
+
+    def update_research(self, research_id: int | str, **fields: Any) -> None:
+        row = self._db.get(Research, int(research_id))
+        if row is None:
+            return
+        for k, v in fields.items():
+            setattr(row, k, v)
         self._db.commit()

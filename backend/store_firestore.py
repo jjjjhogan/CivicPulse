@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from datetime import datetime, timezone
 from typing import Any
 
@@ -394,3 +395,132 @@ class FirestoreVoteStore:
                 "created_at": _utcnow_iso(),
                 "updated_at": _utcnow_iso(),
             })
+
+
+# ---------------------------------------------------------------------------
+# Researches
+# ---------------------------------------------------------------------------
+
+class FirestoreResearchStore:
+    COLLECTION = "researches"
+
+    def __init__(self, db) -> None:
+        self._db = db
+
+    def _coll(self):
+        return self._db.collection(self.COLLECTION)
+
+    def _hits_coll(self, research_id: str):
+        return self._coll().document(research_id).collection("hits")
+
+    @staticmethod
+    def _to_dict(doc) -> dict:
+        data = doc.to_dict() or {}
+        return {
+            "id": doc.id,
+            "title": data.get("title", ""),
+            "topic": data.get("topic", ""),
+            "keywords": data.get("keywords", []),
+            "categories": data.get("categories", []),
+            "status": data.get("status", "draft"),
+            "notes": data.get("notes", ""),
+            "created_at": data.get("created_at"),
+            "updated_at": data.get("updated_at"),
+        }
+
+    def create_research(
+        self, *, title: str, topic: str = "", keywords: list | None = None,
+        categories: list | None = None, notes: str = "",
+    ) -> dict:
+        now = _utcnow_iso()
+        data = {
+            "title": title,
+            "topic": topic,
+            "keywords": keywords or [],
+            "categories": categories or [],
+            "status": "draft",
+            "notes": notes,
+            "created_at": now,
+            "updated_at": now,
+        }
+        _, doc_ref = self._coll().add(data)
+        return {**data, "id": doc_ref.id}
+
+    def list_researches(self) -> list[dict]:
+        docs = list(self._coll().order_by("created_at", direction="DESCENDING").stream())
+        return [self._to_dict(doc) for doc in docs]
+
+    def get_research(self, research_id: int | str) -> dict | None:
+        doc = self._coll().document(str(research_id)).get()
+        if not doc.exists:
+            return None
+        return self._to_dict(doc)
+
+    def get_research_with_hits(self, research_id: int | str) -> dict | None:
+        rid = str(research_id)
+        doc = self._coll().document(rid).get()
+        if not doc.exists:
+            return None
+        research = self._to_dict(doc)
+        hit_docs = list(self._hits_coll(rid).stream())
+        signal_ids = [h.to_dict().get("signal_id") for h in hit_docs]
+        signals_by_id: dict[str, dict] = {}
+        signals_coll = self._db.collection("signals")
+        for sid in signal_ids:
+            if sid:
+                sdoc = signals_coll.document(str(sid)).get()
+                if sdoc.exists:
+                    signals_by_id[str(sid)] = _doc_to_signal_dict(sdoc)
+
+        hits = []
+        for h in hit_docs:
+            hdata = h.to_dict() or {}
+            sid = str(hdata.get("signal_id", ""))
+            hits.append({
+                "id": h.id,
+                "research_id": rid,
+                "signal_id": sid,
+                "match_reason": hdata.get("match_reason", ""),
+                "score": hdata.get("score", 0.0),
+                "signal": signals_by_id.get(sid),
+                "created_at": hdata.get("created_at"),
+            })
+        hits.sort(key=lambda h: -(h.get("score") or 0))
+        research["hits"] = hits
+        research["hit_count"] = len(hits)
+        return research
+
+    def replace_hits(self, research_id: int | str, hits: list[dict]) -> None:
+        rid = str(research_id)
+        hits_ref = self._hits_coll(rid)
+        existing = list(hits_ref.stream())
+        batch = self._db.batch()
+        ops = 0
+        for doc in existing:
+            batch.delete(doc.reference)
+            ops += 1
+            if ops >= 400:
+                batch.commit()
+                batch = self._db.batch()
+                ops = 0
+        now = _utcnow_iso()
+        for h in hits:
+            sid = str(h["signal_id"])
+            ref = hits_ref.document(sid)
+            batch.set(ref, {
+                "signal_id": sid,
+                "match_reason": h.get("match_reason", ""),
+                "score": h.get("score", 0.0),
+                "created_at": now,
+            })
+            ops += 1
+            if ops >= 400:
+                batch.commit()
+                batch = self._db.batch()
+                ops = 0
+        if ops:
+            batch.commit()
+
+    def update_research(self, research_id: int | str, **fields: Any) -> None:
+        fields["updated_at"] = _utcnow_iso()
+        self._coll().document(str(research_id)).update(fields)

@@ -46,6 +46,20 @@ class VoteStore(Protocol):
     ) -> None: ...
 
 
+class ResearchStore(Protocol):
+    def create_research(
+        self, *, title: str, topic: str = "", keywords: list | None = None,
+        categories: list | None = None, notes: str = "",
+    ) -> dict: ...
+    def list_researches(self) -> list[dict]: ...
+    def get_research(self, research_id: int | str) -> dict | None: ...
+    def get_research_with_hits(self, research_id: int | str) -> dict | None: ...
+    def replace_hits(
+        self, research_id: int | str, hits: list[dict],
+    ) -> None: ...
+    def update_research(self, research_id: int | str, **fields: Any) -> None: ...
+
+
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
@@ -101,6 +115,17 @@ def get_vote_store() -> VoteStore:
     from backend.db import get_session
     from backend.store_sqlite import SQLiteVoteStore
     return SQLiteVoteStore(get_session())
+
+
+def get_research_store() -> ResearchStore:
+    from backend.config import DATA_BACKEND
+    if DATA_BACKEND == "firestore":
+        from backend.firestore import get_firestore_client
+        from backend.store_firestore import FirestoreResearchStore
+        return FirestoreResearchStore(get_firestore_client())
+    from backend.db import get_session
+    from backend.store_sqlite import SQLiteResearchStore
+    return SQLiteResearchStore(get_session())
 
 
 # ---------------------------------------------------------------------------

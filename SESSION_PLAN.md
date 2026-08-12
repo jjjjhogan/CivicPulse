@@ -1,93 +1,83 @@
-# CivicPulse — session plan (Real Firebase cutover)
+# CivicPulse — session plan (Session 14: Render + Firebase credentials)
 
-**For:** Coworker / coding agent owning Firebase Console access and the live Firestore project.  
-**Goal this session:** Collect the right Firebase credentials and wire `.env` so CivicPulse can run against the **real** Firestore project and migrate signals from SQLite.
-
-**Not** Research product work. **Not** classifier / Path A UI.  
-**Canonical setup docs:** [`docs/FIRESTORE_SETUP.md`](docs/FIRESTORE_SETUP.md) · durability: [`docs/DATA_DURABILITY.md`](docs/DATA_DURABILITY.md)
+**Goal:** Make CivicPulse deployable to Render with Firestore as the production backend.
 
 ---
 
-## Context (already in the repo)
+## Session 14 — Render deployment config
 
-- App switches storage with `DATA_BACKEND=sqlite|firestore` ([`backend/store.py`](backend/store.py)).
-- Real cloud client: [`backend/firestore.py`](backend/firestore.py) — needs **project id** + **service-account JSON path**. There is **no** Postgres-style database URL.
-- Signal docs use id = `stable_id`. Seed scripts:
-  - `python scripts/export_signals_ndjson.py -o data/exports/signals.ndjson`
-  - `python scripts/import_signals_firestore.py -i data/exports/signals.ndjson`
-- Emulator is optional only. For the real project, **do not** set `FIRESTORE_EMULATOR_HOST`.
-- Research / `research_hits` still use SQLite until a later session — signals, users, votes, jobs are the Firestore cutover target now.
-- Never commit service-account JSON (gitignored). Put the file outside the repo or under a private path and point `.env` at it.
+### Completed
 
----
+- [x] Added `gunicorn>=22.0.0` to requirements, created `wsgi.py` entry point
+- [x] Created `requirements-render.txt` (production deps without Selenium/Chrome)
+- [x] Created `render.yaml` blueprint — web service, gunicorn start command, env vars
+- [x] Modified `backend/firestore.py` to accept `GOOGLE_CREDENTIALS_JSON` env var (raw JSON string) in addition to file path — Render can't use file-based SA credentials
+- [x] `_build_credential()` tries `GOOGLE_CREDENTIALS_JSON` first, falls back to `GOOGLE_APPLICATION_CREDENTIALS`
+- [x] `backend/app.py`: skip `init_db()` when `DATA_BACKEND=firestore` (no SQLite on Render's ephemeral disk)
+- [x] `backend/app.py`: set `SESSION_COOKIE_SECURE=True` when `RENDER` env var is present (HTTPS)
+- [x] Updated `.env.example` with `GOOGLE_CREDENTIALS_JSON` option
+- [x] Updated `docs/FIRESTORE_SETUP.md`:
+  - Render deployment section with env vars and commands
+  - Updated collections table (researches + hits now ported)
+  - Updated credential env var table
+- [x] Verified all import chains work without Selenium (no Chrome deps in route imports)
+- [x] Scrape jobs use subprocess — graceful failure on Render, not a crash
+- [x] All 128 tests pass
+- [x] Local server starts cleanly with all changes
 
-## Stay off
+### New files
 
-- Do not paste private keys or full SA JSON into chat, PRs, or `SESSION_PLAN.md`.
-- Do not commit `*-firebase-adminsdk*.json` or `.env`.
-- Do not wipe SQLite / ponds while validating Firestore — keep SQLite as rollback until smoke passes.
-- Do not port Research to Firestore in this session.
+| File | Purpose |
+|------|---------|
+| `wsgi.py` | Gunicorn WSGI entry point (`from backend.app import create_app`) |
+| `render.yaml` | Render blueprint (service config, env vars, build/start commands) |
+| `requirements-render.txt` | Production dependencies (no Selenium/Chrome) |
 
----
+### Modified files
 
-## What we need from Firebase (checklist)
+| File | Change |
+|------|--------|
+| `backend/firestore.py` | `_build_credential()` — JSON string or file path |
+| `backend/app.py` | Skip `init_db` for Firestore; secure cookie on Render |
+| `requirements.txt` | Added gunicorn, organized into sections |
+| `.env.example` | Added `GOOGLE_CREDENTIALS_JSON` option |
+| `docs/FIRESTORE_SETUP.md` | Render section, updated collections + env vars |
 
-Hand these to the agent that has Console access (values go in **local `.env` only**):
+### Render deployment steps (for the deployer)
 
-| Item | Where in Firebase Console | Env var / file |
-|------|---------------------------|----------------|
-| **Project ID** | Project settings → General (also in console URL: `…/project/<PROJECT_ID>/…`) | `FIREBASE_PROJECT_ID` and `GOOGLE_CLOUD_PROJECT` (same value) |
-| **Service-account JSON** | Project settings → Service accounts → *Generate new private key* | Save file privately; set `GOOGLE_APPLICATION_CREDENTIALS` to its **absolute path** |
-| **Firestore enabled** | Build → Firestore Database → create DB if missing (**Native** mode) | — |
-| **Confirm region** | Shown when creating Firestore (e.g. `nam5` / `us-central`) | Note in PR/description only; not an env var for Admin SDK |
-| **`.firebaserc` default** | Same project id | Edit [`.firebaserc`](.firebaserc) `"default"` for CLI index/rules deploy |
+1. Create a new **Web Service** on Render from the repo
+2. Render auto-detects `render.yaml` — or set manually:
+   - **Build:** `pip install -r requirements-render.txt`
+   - **Start:** `gunicorn wsgi:app --bind 0.0.0.0:$PORT --workers 2 --timeout 120`
+3. Set env vars on Render dashboard:
+   - `DATA_BACKEND` = `firestore`
+   - `FIREBASE_PROJECT_ID` = your project id
+   - `GOOGLE_CLOUD_PROJECT` = same project id
+   - `GOOGLE_CREDENTIALS_JSON` = paste the full SA JSON content
+   - `FLASK_SECRET_KEY` = auto-generated by render.yaml
+4. Deploy — public URL should load the login page
+5. Signals are already in Firestore from the local seed (Session 13)
 
-Optional later (not blocking seed): Firebase CLI login + `firebase deploy --only firestore:indexes,firestore:rules`.
+### Notes
 
----
-
-## Agent prompt (copy into coworker agent chat)
-
-```text
-Repo: CivicPulse (Ryan/). You own the real Firebase project cutover credentials.
-
-Read SESSION_PLAN.md and docs/FIRESTORE_SETUP.md.
-
-Your job:
-1. From Firebase Console, collect ONLY:
-   - Project ID (string)
-   - A service-account JSON key file saved on disk (never commit it; never paste the private key into chat)
-   - Confirm Cloud Firestore is created in Native mode
-2. Update local .env (gitignored) with:
-   DATA_BACKEND=firestore
-   FIREBASE_PROJECT_ID=<project-id>
-   GOOGLE_CLOUD_PROJECT=<project-id>
-   GOOGLE_APPLICATION_CREDENTIALS=<absolute-path-to-sa.json>
-   Do NOT set FIRESTORE_EMULATOR_HOST.
-3. Set .firebaserc "default" to the same project id.
-4. With SQLite data already healthy, run:
-   python scripts/export_signals_ndjson.py -o data/exports/signals.ndjson
-   python scripts/import_signals_firestore.py -i data/exports/signals.ndjson
-5. Start dashboard_server.py and smoke:
-   - GET /api/signals returns storage "firestore" and a non-zero count
-   - signup/login, create a report, cast a vote
-6. Report back: project id (ok to share), whether seed count matched SQLite active signals, and any errors. Do not share the service-account JSON contents.
-
-Do NOT:
-- Commit .env or the SA JSON
-- Delete local SQLite / data/pool / data/signals
-- Port Research/research_hits to Firestore
-- Point at the emulator for this cutover
-```
+- TikTok scraping stays desktop-only — `undetected-chromedriver` and `selenium` are excluded from `requirements-render.txt`
+- If a user triggers a TikTok scrape job from the dashboard on the hosted version, it will fail gracefully (subprocess error, job status = failed)
+- News scraping, Reddit/Twitter imports work on Render (no Chrome dependency)
+- `FLASK_SECRET_KEY` must not stay as the dev default in production — `render.yaml` auto-generates one
 
 ---
 
 ## Exit criteria
 
-- [ ] `.env` configured for real project (SA path works; no emulator host)
-- [ ] Signals seeded into cloud Firestore (`signals/{stable_id}`)
-- [ ] `/api/signals` shows `"storage": "firestore"` with expected count
-- [ ] Auth + report + vote smoke OK
-- [ ] Coworker confirms project id + seed result (no secrets in chat/PR)
+- [x] `render.yaml` + `wsgi.py` + `requirements-render.txt` ready
+- [x] SA JSON credential from env var (no file needed on Render)
+- [x] `init_db` skipped for Firestore backend
+- [x] Secure session cookie on Render (HTTPS)
+- [x] `pytest -q` — 128 tests pass
+- [x] Local server verified working with all changes
 
-**Roadmap pointer:** Weeks 3–4 cutover in [`docs/TWO_MONTH_ROADMAP.md`](docs/TWO_MONTH_ROADMAP.md) (Sessions 12–14 still cover Research port + Render).
+---
+
+## Next: Session 15 — Seed/import on hosted; desktop-only Selenium messaging
+
+Per [`docs/TWO_MONTH_ROADMAP.md`](docs/TWO_MONTH_ROADMAP.md): verify hosted deploy works end-to-end, make TikTok desktop-only story clear in UI.

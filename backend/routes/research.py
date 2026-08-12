@@ -6,34 +6,35 @@ import re
 
 from flask import Blueprint, jsonify, request
 
-from backend.db import get_session
-from backend.models import Research, ResearchHit, Signal
+from backend.store import get_research_store, get_signal_store
 
 bp = Blueprint("research", __name__)
 
 
-def _match_signals(db, research: Research) -> list[dict]:
-    """Find signals matching a research's categories and/or keywords.
+def _match_signals(
+    signals: list[dict],
+    categories: list[str],
+    keywords: list[str],
+) -> list[dict]:
+    """Find signals matching given categories and/or keywords.
 
     Returns a list of dicts with signal_id, match_reason, and score.
-    Score is the sum of category matches (0.5 each) + keyword matches (0.3 each).
     """
-    signals = db.query(Signal).all()
-    research_cats = set(research.categories or [])
-    research_kws = [kw.lower() for kw in (research.keywords or []) if kw.strip()]
+    research_cats = set(categories or [])
+    research_kws = [kw.lower() for kw in (keywords or []) if kw.strip()]
 
     hits = []
     for signal in signals:
         reasons = []
         score = 0.0
 
-        signal_cats = set(signal.categories or [])
+        signal_cats = set(signal.get("categories") or [])
         overlap = research_cats & signal_cats
         if overlap:
             reasons.append("category:" + ",".join(sorted(overlap)))
             score += 0.5 * len(overlap)
 
-        text = ((signal.title or "") + " " + (signal.body or "")).lower()
+        text = ((signal.get("title") or "") + " " + (signal.get("body") or "")).lower()
         matched_kws = []
         for kw in research_kws:
             if re.search(r"\b" + re.escape(kw), text):
@@ -45,7 +46,7 @@ def _match_signals(db, research: Research) -> list[dict]:
 
         if reasons:
             hits.append({
-                "signal_id": signal.id,
+                "signal_id": signal["id"],
                 "match_reason": "; ".join(reasons),
                 "score": round(score, 2),
             })
@@ -77,67 +78,49 @@ def create_research():
 
     notes = (body.get("notes") or "").strip()
 
-    db = get_session()
-    research = Research(
-        title=title,
-        topic=topic,
-        keywords=keywords,
-        categories=categories,
-        notes=notes,
+    store = get_research_store()
+    research = store.create_research(
+        title=title, topic=topic, keywords=keywords,
+        categories=categories, notes=notes,
     )
-    db.add(research)
-    db.commit()
-    db.refresh(research)
-    return jsonify({"research": research.to_dict()}), 201
+    return jsonify({"research": research}), 201
 
 
 @bp.get("/api/researches")
 def list_researches():
-    db = get_session()
-    rows = db.query(Research).order_by(Research.id.desc()).all()
-    return jsonify({
-        "count": len(rows),
-        "researches": [r.to_dict() for r in rows],
-    })
+    store = get_research_store()
+    rows = store.list_researches()
+    return jsonify({"count": len(rows), "researches": rows})
 
 
-@bp.get("/api/researches/<int:research_id>")
-def get_research(research_id: int):
-    db = get_session()
-    research = db.get(Research, research_id)
+@bp.get("/api/researches/<research_id>")
+def get_research(research_id: str):
+    store = get_research_store()
+    research = store.get_research_with_hits(research_id)
     if research is None:
         return jsonify({"error": "Research not found."}), 404
-    return jsonify({"research": research.to_dict(include_hits=True)})
+    return jsonify({"research": research})
 
 
-@bp.post("/api/researches/<int:research_id>/archive")
-def run_archive(research_id: int):
-    db = get_session()
-    research = db.get(Research, research_id)
+@bp.post("/api/researches/<research_id>/archive")
+def run_archive(research_id: str):
+    research_store = get_research_store()
+    research = research_store.get_research(research_id)
     if research is None:
         return jsonify({"error": "Research not found."}), 404
 
-    if not (research.categories or research.keywords):
+    if not (research.get("categories") or research.get("keywords")):
         return jsonify({"error": "Research needs at least one category or keyword."}), 400
 
-    db.query(ResearchHit).filter(ResearchHit.research_id == research_id).delete()
+    signal_store = get_signal_store()
+    all_signals = signal_store.list_signals()
+    matched = _match_signals(
+        all_signals, research.get("categories", []), research.get("keywords", []),
+    )
 
-    matched = _match_signals(db, research)
-    for m in matched:
-        db.add(ResearchHit(
-            research_id=research_id,
-            signal_id=m["signal_id"],
-            match_reason=m["match_reason"],
-            score=m["score"],
-        ))
+    research_store.replace_hits(research_id, matched)
+    if research.get("status") == "draft":
+        research_store.update_research(research_id, status="active")
 
-    if research.status == "draft":
-        research.status = "active"
-
-    db.commit()
-    db.refresh(research)
-
-    return jsonify({
-        "research": research.to_dict(include_hits=True),
-        "matched": len(matched),
-    })
+    updated = research_store.get_research_with_hits(research_id)
+    return jsonify({"research": updated, "matched": len(matched)})

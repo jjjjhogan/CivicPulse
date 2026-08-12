@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: civicpulse
+    runtime: python
+    buildCommand: pip install -r requirements-render.txt
+    startCommand: gunicorn wsgi:app --bind 0.0.0.0:$PORT --workers 2 --timeout 120
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12"
+      - key: DATA_BACKEND
+        value: firestore
+      - key: FIREBASE_PROJECT_ID
+        sync: false
+      - key: GOOGLE_CLOUD_PROJECT
+        sync: false
+      - key: GOOGLE_CREDENTIALS_JSON
+        sync: false
+      - key: FLASK_SECRET_KEY
+        generateValue: true

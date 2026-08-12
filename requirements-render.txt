@@ -1,4 +1,4 @@
-# --- Core (server) ---
+# Production dependencies for Render (no Selenium/Chrome).
 flask>=3.0.0
 gunicorn>=22.0.0
 sqlalchemy>=2.0.0
@@ -9,10 +9,3 @@ requests>=2.31.0
 html5lib>=1.1
 feedparser>=6.0.0
 setuptools>=69.0.0
-
-# --- Scraping (desktop only, not needed on Render) ---
-undetected-chromedriver>=3.5.5
-selenium>=4.15.0
-
-# --- Dev / test ---
-pytest>=8.0.0

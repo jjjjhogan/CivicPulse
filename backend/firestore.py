@@ -1,8 +1,10 @@
 """Firestore client initialization.
 
-Requires:
-  - FIREBASE_PROJECT_ID or GOOGLE_CLOUD_PROJECT
-  - GOOGLE_APPLICATION_CREDENTIALS = path to service-account JSON
+Credential lookup order:
+  1. GOOGLE_CREDENTIALS_JSON — raw JSON string (for Render / hosted envs)
+  2. GOOGLE_APPLICATION_CREDENTIALS — local file path (for dev)
+
+Both require FIREBASE_PROJECT_ID or GOOGLE_CLOUD_PROJECT.
 
 Never import this module at the top of app.py — it is loaded lazily
 when DATA_BACKEND=firestore so the SQLite-only path stays dependency-free.
@@ -10,6 +12,7 @@ when DATA_BACKEND=firestore so the SQLite-only path stays dependency-free.
 
 from __future__ import annotations
 
+import json
 import os
 from pathlib import Path
 
@@ -28,6 +31,25 @@ def _project_id() -> str | None:
     )
 
 
+def _build_credential():
+    """Return a firebase_admin Credential from env vars."""
+    raw_json = (os.environ.get("GOOGLE_CREDENTIALS_JSON") or "").strip()
+    if raw_json:
+        info = json.loads(raw_json)
+        return credentials.Certificate(info)
+
+    cred_path = (os.environ.get("GOOGLE_APPLICATION_CREDENTIALS") or "").strip()
+    if not cred_path:
+        raise RuntimeError(
+            "Firestore requires GOOGLE_CREDENTIALS_JSON (raw JSON) or "
+            "GOOGLE_APPLICATION_CREDENTIALS (file path)."
+        )
+    path = Path(cred_path)
+    if not path.is_file():
+        raise RuntimeError(f"Service-account file not found: {path}")
+    return credentials.Certificate(str(path))
+
+
 def get_firestore_client():
     """Return a cached Firestore client, initializing on first call."""
     global _app, _db
@@ -39,16 +61,7 @@ def get_firestore_client():
         raise RuntimeError(
             "Firestore requires FIREBASE_PROJECT_ID (or GOOGLE_CLOUD_PROJECT)."
         )
-    cred_path = (os.environ.get("GOOGLE_APPLICATION_CREDENTIALS") or "").strip()
-    if not cred_path:
-        raise RuntimeError(
-            "Firestore requires GOOGLE_APPLICATION_CREDENTIALS pointing to a "
-            "service-account JSON file (never commit that file)."
-        )
-    path = Path(cred_path)
-    if not path.is_file():
-        raise RuntimeError(f"Service-account file not found: {path}")
-    cred = credentials.Certificate(str(path))
+    cred = _build_credential()
     try:
         _app = firebase_admin.initialize_app(cred, {"projectId": project_id})
     except ValueError:

@@ -16,22 +16,15 @@ def _create_research(client, **overrides):
 
 
 def _create_signal(client, title, categories, body="", source="news"):
-    """Insert a signal via the reports endpoint (source=resident) or directly."""
-    from backend.db import get_session
-    from backend.models import Signal
+    """Insert a signal via the store."""
+    from backend.store import get_signal_store
 
     with client.application.app_context():
-        db = get_session()
-        signal = Signal(
-            source=source,
-            title=title,
-            body=body,
-            categories=categories,
+        store = get_signal_store()
+        signal = store.create_signal(
+            source=source, title=title, body=body, categories=categories,
         )
-        db.add(signal)
-        db.commit()
-        db.refresh(signal)
-        return signal.id
+        return signal["id"]
 
 
 def test_archive_category_match(client):

@@ -15,6 +15,7 @@ FIXTURES_SIGNALS = Path(__file__).resolve().parent / "fixtures" / "signals"
 @pytest.fixture()
 def app(tmp_path, monkeypatch):
     monkeypatch.setenv("FLASK_SECRET_KEY", "test-secret-key")
+    monkeypatch.setattr("backend.config.DATA_BACKEND", "sqlite")
     db_path = tmp_path / "test.db"
     # Absolute path for sqlite URL on Windows.
     db_url = f"sqlite:///{db_path.as_posix()}"

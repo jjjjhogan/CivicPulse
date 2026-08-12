@@ -7,7 +7,8 @@ import sys
 
 from flask import Blueprint, jsonify
 
-from backend.config import DATA_BACKEND, NEWS_DEFAULTS, ROOT, SIGNALS_DIR, TIKTOK_DEFAULTS
+import backend.config as _cfg
+from backend.config import NEWS_DEFAULTS, ROOT, SIGNALS_DIR, TIKTOK_DEFAULTS
 from backend.store import get_signal_store
 
 bp = Blueprint("signals", __name__)
@@ -34,12 +35,12 @@ def api_signals():
     store = get_signal_store()
     signals = store.list_signals()
     if signals:
-        return jsonify({"count": len(signals), "signals": signals, "storage": DATA_BACKEND})
-    if DATA_BACKEND == "sqlite":
+        return jsonify({"count": len(signals), "signals": signals, "storage": _cfg.DATA_BACKEND})
+    if _cfg.DATA_BACKEND == "sqlite":
         signals = _signals_from_json()
         if signals:
             return jsonify({"count": len(signals), "signals": signals, "storage": "json"})
-    return jsonify({"count": 0, "signals": [], "storage": DATA_BACKEND})
+    return jsonify({"count": 0, "signals": [], "storage": _cfg.DATA_BACKEND})
 
 
 @bp.get("/api/signals/feed")
@@ -48,12 +49,12 @@ def api_feed():
     store = get_signal_store()
     feed = store.list_feed_signals()
     if feed:
-        return jsonify({"count": len(feed), "signals": feed, "storage": DATA_BACKEND})
-    if DATA_BACKEND == "sqlite":
+        return jsonify({"count": len(feed), "signals": feed, "storage": _cfg.DATA_BACKEND})
+    if _cfg.DATA_BACKEND == "sqlite":
         feed = _read_json(SIGNALS_DIR / "feed.json", [])
         if feed:
             return jsonify({"count": len(feed), "signals": feed, "storage": "json"})
-    return jsonify({"count": 0, "signals": [], "storage": DATA_BACKEND})
+    return jsonify({"count": 0, "signals": [], "storage": _cfg.DATA_BACKEND})
 
 
 @bp.get("/api/manifest")

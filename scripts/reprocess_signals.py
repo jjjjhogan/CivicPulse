@@ -165,36 +165,45 @@ def main() -> None:
     )
     print(f"Rebuilt landing-page feed with {feed_count} signals")
 
-    from backend.signals_import import (
-        archive_missing_signals,
-        import_signals_from_dir,
-        prune_orphan_signals,
-    )
+    from backend.config import DATA_BACKEND
+    from backend.signals_import import import_signals_from_dir
 
-    if args.archive_missing or args.prune:
-        backup_path = require_backup()
-        print(f"DB backup: {backup_path.relative_to(ROOT)}")
-    else:
-        backup_path = backup_database()
-        if backup_path:
+    is_firestore = DATA_BACKEND == "firestore"
+
+    if not is_firestore:
+        if args.archive_missing or args.prune:
+            backup_path = require_backup()
             print(f"DB backup: {backup_path.relative_to(ROOT)}")
         else:
-            print("DB backup: skipped (no SQLite file yet)")
+            backup_path = backup_database()
+            if backup_path:
+                print(f"DB backup: {backup_path.relative_to(ROOT)}")
+            else:
+                print("DB backup: skipped (no SQLite file yet)")
 
     totals = import_signals_from_dir(sources=tuple(processed))
     archived = 0
     pruned = 0
-    if args.archive_missing:
-        archived = archive_missing_signals(
-            sources=tuple(processed), allow_empty=args.allow_empty
+    if not is_firestore:
+        from backend.signals_import import (
+            archive_missing_signals,
+            prune_orphan_signals,
         )
-    if args.prune:
-        pruned = prune_orphan_signals(
-            sources=tuple(processed), allow_empty=args.allow_empty
-        )
+
+        if args.archive_missing:
+            archived = archive_missing_signals(
+                sources=tuple(processed), allow_empty=args.allow_empty
+            )
+        if args.prune:
+            pruned = prune_orphan_signals(
+                sources=tuple(processed), allow_empty=args.allow_empty
+            )
+    elif args.archive_missing or args.prune:
+        print("archive/prune skipped (Firestore manages signals via upsert)")
+
     print(
-        f"Synced SQLite: inserted={totals['inserted']} updated={totals['updated']} "
-        f"archived={archived} pruned={pruned}"
+        f"Synced {DATA_BACKEND}: inserted={totals['inserted']} "
+        f"updated={totals['updated']} archived={archived} pruned={pruned}"
     )
 
 

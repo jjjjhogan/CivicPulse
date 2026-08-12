@@ -8,12 +8,14 @@ from backend.db import SessionLocal
 from backend.models import Signal
 from backend.store_firestore import (
     FirestoreJobStore,
+    FirestoreResearchStore,
     FirestoreSignalStore,
     FirestoreUserStore,
     FirestoreVoteStore,
 )
 from backend.store_sqlite import (
     SQLiteJobStore,
+    SQLiteResearchStore,
     SQLiteSignalStore,
     SQLiteUserStore,
     SQLiteVoteStore,
@@ -534,3 +536,192 @@ def test_firestore_summarize_votes():
     assert summary["s1"]["up"] == 1
     assert summary["s1"]["down"] == 1
     assert summary["s1"]["mine"] == "up"
+
+
+# =====================================================================
+# SQLite Research Store
+# =====================================================================
+
+
+def test_sqlite_create_and_get_research(app):
+    with app.app_context():
+        store = SQLiteResearchStore(SessionLocal())
+        r = store.create_research(
+            title="Housing prices", topic="Track costs",
+            keywords=["rent", "lease"], categories=["housing"],
+            notes="Demo research",
+        )
+    assert r["title"] == "Housing prices"
+    assert r["status"] == "draft"
+    assert r["keywords"] == ["rent", "lease"]
+    assert r["id"] >= 1
+
+    with app.app_context():
+        store2 = SQLiteResearchStore(SessionLocal())
+        found = store2.get_research(r["id"])
+    assert found is not None
+    assert found["title"] == "Housing prices"
+
+
+def test_sqlite_list_researches(app):
+    with app.app_context():
+        store = SQLiteResearchStore(SessionLocal())
+        store.create_research(title="First")
+        store.create_research(title="Second")
+        rows = store.list_researches()
+    assert len(rows) == 2
+    assert rows[0]["title"] == "Second"
+
+
+def test_sqlite_research_not_found(app):
+    with app.app_context():
+        store = SQLiteResearchStore(SessionLocal())
+        assert store.get_research(99999) is None
+        assert store.get_research_with_hits(99999) is None
+
+
+def test_sqlite_replace_hits_and_get_with_hits(app):
+    db = SessionLocal()
+    sig = _insert_signal(db, title="Housing signal", source="news")
+    sig_id = sig.id
+    db.close()
+
+    with app.app_context():
+        store = SQLiteResearchStore(SessionLocal())
+        r = store.create_research(
+            title="Housing", keywords=["rent"], categories=["housing"],
+        )
+        store.replace_hits(r["id"], [
+            {"signal_id": sig_id, "match_reason": "category:housing", "score": 0.5},
+        ])
+        full = store.get_research_with_hits(r["id"])
+    assert full is not None
+    assert full["hit_count"] == 1
+    assert full["hits"][0]["signal"]["title"] == "Housing signal"
+
+
+def test_sqlite_update_research(app):
+    with app.app_context():
+        store = SQLiteResearchStore(SessionLocal())
+        r = store.create_research(title="Draft")
+        assert r["status"] == "draft"
+        store.update_research(r["id"], status="active")
+        updated = store.get_research(r["id"])
+    assert updated["status"] == "active"
+
+
+# =====================================================================
+# Firestore Research Store (mocked)
+# =====================================================================
+
+
+def test_firestore_create_research():
+    mock_db = MagicMock()
+    mock_ref = MagicMock()
+    mock_ref.id = "res_abc"
+    mock_db.collection.return_value.add.return_value = (None, mock_ref)
+
+    store = FirestoreResearchStore(mock_db)
+    r = store.create_research(
+        title="Housing prices", keywords=["rent"], categories=["housing"],
+    )
+    assert r["id"] == "res_abc"
+    assert r["title"] == "Housing prices"
+    assert r["status"] == "draft"
+
+
+def test_firestore_list_researches():
+    docs = [
+        _make_mock_doc("r1", {
+            "title": "Second", "topic": "", "keywords": [], "categories": [],
+            "status": "draft", "notes": "",
+            "created_at": "2026-02-01T00:00:00Z", "updated_at": "2026-02-01T00:00:00Z",
+        }),
+        _make_mock_doc("r2", {
+            "title": "First", "topic": "", "keywords": [], "categories": [],
+            "status": "active", "notes": "",
+            "created_at": "2026-01-01T00:00:00Z", "updated_at": "2026-01-01T00:00:00Z",
+        }),
+    ]
+    mock_db = MagicMock()
+    mock_db.collection.return_value.order_by.return_value.stream.return_value = iter(docs)
+
+    store = FirestoreResearchStore(mock_db)
+    rows = store.list_researches()
+    assert len(rows) == 2
+    assert rows[0]["id"] == "r1"
+
+
+def test_firestore_get_research():
+    doc = _make_mock_doc("r1", {
+        "title": "Housing", "topic": "costs", "keywords": ["rent"],
+        "categories": ["housing"], "status": "draft", "notes": "",
+        "created_at": "2026-01-01T00:00:00Z", "updated_at": "2026-01-01T00:00:00Z",
+    })
+    mock_db = MagicMock()
+    mock_db.collection.return_value.document.return_value.get.return_value = doc
+
+    store = FirestoreResearchStore(mock_db)
+    r = store.get_research("r1")
+    assert r is not None
+    assert r["title"] == "Housing"
+    assert r["keywords"] == ["rent"]
+
+
+def test_firestore_get_research_not_found():
+    doc = MagicMock()
+    doc.exists = False
+    mock_db = MagicMock()
+    mock_db.collection.return_value.document.return_value.get.return_value = doc
+
+    store = FirestoreResearchStore(mock_db)
+    assert store.get_research("missing") is None
+
+
+def test_firestore_get_research_with_hits():
+    research_doc = _make_mock_doc("r1", {
+        "title": "Housing", "topic": "", "keywords": ["rent"],
+        "categories": ["housing"], "status": "active", "notes": "",
+        "created_at": "2026-01-01T00:00:00Z", "updated_at": "2026-01-01T00:00:00Z",
+    })
+    hit_doc = _make_mock_doc("sig_abc", {
+        "signal_id": "sig_abc",
+        "match_reason": "category:housing",
+        "score": 0.5,
+        "created_at": "2026-01-02T00:00:00Z",
+    })
+    signal_doc = _make_mock_doc("sig_abc", {
+        "source": "news", "outlet": "IS", "title": "Housing signal",
+        "body": "", "url": "http://example.com/1",
+        "categories": ["housing"], "published_utc": "2026-01-01",
+        "metadata": {},
+    })
+
+    mock_db = MagicMock()
+    mock_db.collection.return_value.document.return_value.get.return_value = research_doc
+    mock_db.collection.return_value.document.return_value.collection.return_value.stream.return_value = iter([hit_doc])
+    mock_signals_coll = MagicMock()
+    mock_signals_coll.document.return_value.get.return_value = signal_doc
+
+    def _collection(name):
+        if name == "signals":
+            return mock_signals_coll
+        coll = MagicMock()
+        coll.document.return_value.get.return_value = research_doc
+        coll.document.return_value.collection.return_value.stream.return_value = iter([hit_doc])
+        return coll
+
+    mock_db.collection.side_effect = _collection
+
+    store = FirestoreResearchStore(mock_db)
+    full = store.get_research_with_hits("r1")
+    assert full is not None
+    assert full["hit_count"] == 1
+    assert full["hits"][0]["signal"]["title"] == "Housing signal"
+
+
+def test_firestore_update_research():
+    mock_db = MagicMock()
+    store = FirestoreResearchStore(mock_db)
+    store.update_research("r1", status="active")
+    mock_db.collection.return_value.document.return_value.update.assert_called_once()
