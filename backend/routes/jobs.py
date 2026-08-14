@@ -50,7 +50,7 @@ def _extract_import_payload() -> dict:
     return body
 
 
-def _create_and_start_job(*, source: str, settings: dict):
+def _create_and_start_job(*, source: str, settings: dict, research_id=None):
     source = normalize_source(source)
 
     if source == "tiktok" and not selenium_available():
@@ -78,6 +78,7 @@ def _create_and_start_job(*, source: str, settings: dict):
         source=source,
         settings=settings or {},
         user_id=user["id"] if user else None,
+        research_id=research_id,
     )
 
     if not start_job(job["id"], cmd):
@@ -122,7 +123,8 @@ def create_job():
             except (ValueError, json.JSONDecodeError) as exc:
                 return jsonify({"error": str(exc)}), 400
 
-    return _create_and_start_job(source=source, settings=settings)
+    research_id = body.get("research_id")
+    return _create_and_start_job(source=source, settings=settings, research_id=research_id)
 
 
 @bp.get("/api/jobs")

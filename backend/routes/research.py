@@ -2,57 +2,12 @@
 
 from __future__ import annotations
 
-import re
-
 from flask import Blueprint, jsonify, request
 
-from backend.store import get_research_store, get_signal_store
+from backend.research_match import match_signals as _match_signals
+from backend.store import get_job_store, get_research_store, get_signal_store
 
 bp = Blueprint("research", __name__)
-
-
-def _match_signals(
-    signals: list[dict],
-    categories: list[str],
-    keywords: list[str],
-) -> list[dict]:
-    """Find signals matching given categories and/or keywords.
-
-    Returns a list of dicts with signal_id, match_reason, and score.
-    """
-    research_cats = set(categories or [])
-    research_kws = [kw.lower() for kw in (keywords or []) if kw.strip()]
-
-    hits = []
-    for signal in signals:
-        reasons = []
-        score = 0.0
-
-        signal_cats = set(signal.get("categories") or [])
-        overlap = research_cats & signal_cats
-        if overlap:
-            reasons.append("category:" + ",".join(sorted(overlap)))
-            score += 0.5 * len(overlap)
-
-        text = ((signal.get("title") or "") + " " + (signal.get("body") or "")).lower()
-        matched_kws = []
-        for kw in research_kws:
-            if re.search(r"\b" + re.escape(kw), text):
-                matched_kws.append(kw)
-                score += 0.3
-
-        if matched_kws:
-            reasons.append("keyword:" + ",".join(matched_kws))
-
-        if reasons:
-            hits.append({
-                "signal_id": signal["id"],
-                "match_reason": "; ".join(reasons),
-                "score": round(score, 2),
-            })
-
-    hits.sort(key=lambda h: -h["score"])
-    return hits
 
 
 @bp.post("/api/researches")
@@ -173,3 +128,14 @@ def run_archive(research_id: str):
 
     updated = research_store.get_research_with_hits(research_id)
     return jsonify({"research": updated, "matched": len(matched)})
+
+
+@bp.get("/api/researches/<research_id>/jobs")
+def list_research_jobs(research_id: str):
+    research_store = get_research_store()
+    research = research_store.get_research(research_id)
+    if research is None:
+        return jsonify({"error": "Research not found."}), 404
+    job_store = get_job_store()
+    jobs = job_store.list_jobs_for_research(research_id)
+    return jsonify({"jobs": jobs})

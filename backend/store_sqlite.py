@@ -130,8 +130,11 @@ class SQLiteJobStore:
     def __init__(self, db: Session) -> None:
         self._db = db
 
-    def create_job(self, *, source: str, settings: dict, user_id: Any = None) -> dict:
-        job = ScrapeJob(source=source, status="pending", settings=settings or {}, user_id=user_id)
+    def create_job(self, *, source: str, settings: dict, user_id: Any = None, research_id: Any = None) -> dict:
+        job = ScrapeJob(
+            source=source, status="pending", settings=settings or {},
+            user_id=user_id, research_id=int(research_id) if research_id else None,
+        )
         self._db.add(job)
         self._db.commit()
         self._db.refresh(job)
@@ -170,6 +173,15 @@ class SQLiteJobStore:
     def get_latest_job(self) -> dict | None:
         row = self._db.query(ScrapeJob).order_by(ScrapeJob.id.desc()).first()
         return row.to_dict() if row else None
+
+    def list_jobs_for_research(self, research_id: int | str) -> list[dict]:
+        rows = (
+            self._db.query(ScrapeJob)
+            .filter(ScrapeJob.research_id == int(research_id))
+            .order_by(ScrapeJob.id.desc())
+            .all()
+        )
+        return [row.to_dict() for row in rows]
 
 
 # ---------------------------------------------------------------------------
@@ -269,6 +281,28 @@ class SQLiteResearchStore:
                 score=h.get("score", 0.0),
             ))
         self._db.commit()
+
+    def add_hits(self, research_id: int | str, hits: list[dict]) -> int:
+        rid = int(research_id)
+        existing_sids = {
+            row.signal_id
+            for row in self._db.query(ResearchHit).filter(ResearchHit.research_id == rid).all()
+        }
+        added = 0
+        for h in hits:
+            sid = h["signal_id"]
+            if sid in existing_sids:
+                continue
+            self._db.add(ResearchHit(
+                research_id=rid,
+                signal_id=sid,
+                match_reason=h.get("match_reason", ""),
+                score=h.get("score", 0.0),
+            ))
+            added += 1
+        if added:
+            self._db.commit()
+        return added
 
     def update_research(self, research_id: int | str, **fields: Any) -> None:
         row = self._db.get(Research, int(research_id))

@@ -265,12 +265,13 @@ class FirestoreJobStore:
             "error": data.get("error"),
             "exit_code": data.get("exit_code"),
             "user_id": data.get("user_id"),
+            "research_id": data.get("research_id"),
             "created_at": data.get("created_at"),
             "started_at": data.get("started_at"),
             "finished_at": data.get("finished_at"),
         }
 
-    def create_job(self, *, source: str, settings: dict, user_id: Any = None) -> dict:
+    def create_job(self, *, source: str, settings: dict, user_id: Any = None, research_id: Any = None) -> dict:
         data = {
             "source": source,
             "status": "pending",
@@ -280,6 +281,7 @@ class FirestoreJobStore:
             "error": None,
             "exit_code": None,
             "user_id": str(user_id) if user_id else None,
+            "research_id": str(research_id) if research_id else None,
             "created_at": _utcnow_iso(),
             "started_at": None,
             "finished_at": None,
@@ -333,6 +335,18 @@ class FirestoreJobStore:
             .stream()
         )
         return self._to_dict(docs[0]) if docs else None
+
+    def list_jobs_for_research(self, research_id: int | str) -> list[dict]:
+        docs = list(
+            self._coll()
+            .where("research_id", "==", str(research_id))
+            .stream()
+        )
+        docs.sort(
+            key=lambda d: (d.to_dict() or {}).get("created_at", ""),
+            reverse=True,
+        )
+        return [self._to_dict(doc) for doc in docs]
 
 
 # ---------------------------------------------------------------------------
@@ -520,6 +534,32 @@ class FirestoreResearchStore:
                 ops = 0
         if ops:
             batch.commit()
+
+    def add_hits(self, research_id: int | str, hits: list[dict]) -> int:
+        rid = str(research_id)
+        hits_ref = self._hits_coll(rid)
+        existing_sids = {doc.id for doc in hits_ref.stream()}
+        batch = self._db.batch()
+        added = 0
+        now = _utcnow_iso()
+        for h in hits:
+            sid = str(h["signal_id"])
+            if sid in existing_sids:
+                continue
+            ref = hits_ref.document(sid)
+            batch.set(ref, {
+                "signal_id": sid,
+                "match_reason": h.get("match_reason", ""),
+                "score": h.get("score", 0.0),
+                "created_at": now,
+            })
+            added += 1
+            if added % 400 == 0:
+                batch.commit()
+                batch = self._db.batch()
+        if added % 400 != 0:
+            batch.commit()
+        return added
 
     def update_research(self, research_id: int | str, **fields: Any) -> None:
         fields["updated_at"] = _utcnow_iso()

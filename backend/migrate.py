@@ -7,7 +7,7 @@ from sqlalchemy import inspect, text
 from backend.db import get_engine
 from backend.stable_id import compute_stable_id
 
-TARGET_VERSION = 1
+TARGET_VERSION = 2
 
 
 def _current_version(conn) -> int:
@@ -80,6 +80,15 @@ def migrate_to_v1(conn) -> None:
     )
 
 
+def migrate_to_v2(conn) -> None:
+    cols = _column_names(conn, "scrape_jobs")
+    if not cols:
+        return
+    if "research_id" not in cols:
+        conn.execute(text("ALTER TABLE scrape_jobs ADD COLUMN research_id INTEGER REFERENCES researches(id) ON DELETE SET NULL"))
+        conn.execute(text("CREATE INDEX IF NOT EXISTS ix_scrape_jobs_research_id ON scrape_jobs (research_id)"))
+
+
 def run_migrations(*, create_tables: bool = False) -> int:
     """Apply pending migrations. Returns current schema version."""
     if create_tables:
@@ -108,4 +117,13 @@ def run_migrations(*, create_tables: bool = False) -> int:
                 )
             )
             version = 1
+        if version < 2:
+            migrate_to_v2(conn)
+            conn.execute(
+                text(
+                    "INSERT INTO schema_version (version, applied_at) "
+                    "VALUES (2, CURRENT_TIMESTAMP)"
+                )
+            )
+            version = 2
     return version

@@ -1389,5 +1389,75 @@
       "violent_crime"
     ],
     "published_utc": "2025-05-14"
+  },
+  {
+    "outlet": "Voice of OC",
+    "title": "OC\u2019s Civic Headlines as Audit Shows More Contracting Issues at County",
+    "categories": [
+      "potholes",
+      "housing"
+    ],
+    "published_utc": "2026-08-14"
+  },
+  {
+    "outlet": "Voice of OC",
+    "title": "Residents Might Get Compensation for Garden Grove Chemical Tank Emergency",
+    "categories": [
+      "emergencies",
+      "public_safety"
+    ],
+    "published_utc": "2026-08-14"
+  },
+  {
+    "outlet": "Voice of OC",
+    "title": "Irvine Officials Look to Increase Job Protections For Grocery Store Workers",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-13"
+  },
+  {
+    "outlet": "Voice of OC",
+    "title": "Irvine Looks to Protect Grocery Worker Jobs",
+    "categories": [
+      "sanitation"
+    ],
+    "published_utc": "2026-08-12"
+  },
+  {
+    "outlet": "Voice of OC",
+    "title": "Santana: Who\u2019s Influencing Orange County\u2019s Government",
+    "categories": [
+      "public_safety"
+    ],
+    "published_utc": "2026-08-11"
+  },
+  {
+    "outlet": "Voice of OC",
+    "title": "How Much is a City Council Member\u2019s Time Worth?",
+    "categories": [
+      "housing"
+    ],
+    "published_utc": "2026-08-10"
+  },
+  {
+    "outlet": "Voice of OC",
+    "title": "Palumbo and Olin: As Philanthropic Giving Tightens Up, Nonprofits Must Rethink Capital \u2014 Here\u2019s How",
+    "categories": [
+      "violent_crime",
+      "housing",
+      "immigration"
+    ],
+    "published_utc": "2026-08-08"
+  },
+  {
+    "outlet": "Voice of OC",
+    "title": "OC\u2019s Biggest Headlines as Newport Beach Sues Over Ballot Measure",
+    "categories": [
+      "public_safety",
+      "traffic_safety",
+      "housing"
+    ],
+    "published_utc": "2026-08-07"
   }
 ]

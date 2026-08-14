@@ -128,3 +128,93 @@ def test_list_includes_hit_count(client):
     r = next(x for x in listing["researches"] if x["id"] == rid)
     assert "hit_count" in r
     assert r["hit_count"] == 0
+
+
+def test_list_research_jobs_empty(client):
+    created = client.post("/api/researches", json=_sample_research()).get_json()
+    rid = created["research"]["id"]
+    res = client.get(f"/api/researches/{rid}/jobs")
+    assert res.status_code == 200
+    assert res.get_json()["jobs"] == []
+
+
+def test_list_research_jobs_not_found(client):
+    res = client.get("/api/researches/9999/jobs")
+    assert res.status_code == 404
+
+
+def test_create_job_with_research_id(auth_client, monkeypatch):
+    import subprocess
+
+    monkeypatch.setattr(
+        "backend.jobs.subprocess.run",
+        lambda *a, **k: subprocess.CompletedProcess(
+            args=a[0] if a else [], returncode=0, stdout="ok\n", stderr=""
+        ),
+    )
+    monkeypatch.setattr("backend.jobs.threading.Thread", lambda target, args=(), kwargs=None, daemon=None: type("T", (), {"start": lambda self: target(*args, **(kwargs or {}))})())
+    monkeypatch.setattr(
+        "backend.signals_import.sync_signals_after_scrape",
+        lambda source=None: {"inserted": 0, "updated": 0},
+    )
+
+    created = auth_client.post("/api/researches", json=_sample_research()).get_json()
+    rid = created["research"]["id"]
+
+    res = auth_client.post(
+        "/api/jobs",
+        json={"source": "irvine-news", "research_id": rid},
+    )
+    assert res.status_code == 202
+    job_id = res.get_json()["id"]
+
+    job = auth_client.get(f"/api/jobs/{job_id}").get_json()
+    assert job["research_id"] == rid
+
+    jobs_for_research = auth_client.get(f"/api/researches/{rid}/jobs").get_json()
+    assert len(jobs_for_research["jobs"]) == 1
+    assert jobs_for_research["jobs"][0]["id"] == job_id
+
+
+def test_tiktok_job_returns_501_when_unavailable(auth_client, monkeypatch):
+    monkeypatch.setattr("backend.routes.jobs.selenium_available", lambda: False)
+    created = auth_client.post("/api/researches", json=_sample_research()).get_json()
+    rid = created["research"]["id"]
+
+    res = auth_client.post(
+        "/api/jobs",
+        json={"source": "tiktok", "research_id": rid},
+    )
+    assert res.status_code == 501
+    data = res.get_json()
+    assert "desktop" in data["error"].lower()
+
+
+def test_tiktok_job_passes_settings(auth_client, monkeypatch):
+    import subprocess
+
+    captured = {}
+
+    def fake_run(*a, **k):
+        captured["cmd"] = a[0] if a else k.get("args", [])
+        return subprocess.CompletedProcess(args=captured["cmd"], returncode=0, stdout="ok\n", stderr="")
+
+    monkeypatch.setattr("backend.routes.jobs.selenium_available", lambda: True)
+    monkeypatch.setattr("backend.jobs.subprocess.run", fake_run)
+    monkeypatch.setattr("backend.jobs.threading.Thread", lambda target, args=(), kwargs=None, daemon=None: type("T", (), {"start": lambda self: target(*args, **(kwargs or {}))})())
+    monkeypatch.setattr(
+        "backend.signals_import.sync_signals_after_scrape",
+        lambda source=None: {"inserted": 0, "updated": 0},
+    )
+
+    res = auth_client.post(
+        "/api/jobs",
+        json={
+            "source": "tiktok",
+            "settings": {"tag_urls": ["https://www.tiktok.com/tag/irvine"]},
+        },
+    )
+    assert res.status_code == 202
+    cmd = captured.get("cmd", [])
+    assert "--tag-url" in cmd
+    assert "https://www.tiktok.com/tag/irvine" in cmd

@@ -1,84 +1,100 @@
-# CivicPulse — session plan (Sessions 19–20: Topic keyword assist + category picker)
+# CivicPulse — session plan (Sessions 21–22: Research-scoped jobs)
 
-**Goal:** Make research creation and editing feel guided — category picker with clickable buttons, keyword suggestions from curated lists.
+**Goal:** Wire scrape jobs to research topics so the Jobs tab fills after a news job, and new signals auto-match into the research.
 
 ---
 
-## Sessions 19–20 — Topic keyword assist + category picker
+## Sessions 21–22 — Research-scoped jobs
 
 ### Completed
 
-**Backend:**
-- [x] `/api/config` returns `category_keywords` — curated suggestions per category from `DEFAULT_SEARCH_TERMS`
+**Backend model + migration:**
+- [x] Added `research_id` FK to `ScrapeJob` model (nullable, ON DELETE SET NULL)
+- [x] `to_dict()` includes `research_id` in job responses
+- [x] Schema migration v2: `ALTER TABLE scrape_jobs ADD COLUMN research_id`
 
-**Research create form (`research.html` + `research.js`):**
-- [x] Category picker — clickable toggle buttons replace free-text categories input
-- [x] Keyword suggestions — chips appear when categories are selected, clicking appends to keyword input
-- [x] Suggestions filtered against already-entered keywords
-- [x] Chips removed after clicking, section hides when no suggestions remain
-- [x] Form reset clears picker state and suggestions
+**Store protocol + implementations:**
+- [x] `JobStore.create_job` accepts optional `research_id`
+- [x] `JobStore.list_jobs_for_research(research_id)` — query jobs linked to a research
+- [x] `ResearchStore.add_hits` — incremental hit addition (skips duplicates)
+- [x] All four store implementations updated (SQLite, Firestore, standalone)
 
-**Research detail workspace (`research-detail.js`):**
-- [x] Fetches `/api/config` on load for categories + keyword suggestions
-- [x] Category edit uses picker buttons instead of CSV text input
-- [x] Pre-selects current research categories when entering edit mode
-- [x] Keyword suggestions appear during category edit based on selected categories
-- [x] Clicking suggestion chips appends keywords to the keyword input
-- [x] Cancel resets picker and hides suggestions
+**Post-job matching hook:**
+- [x] `_match_research_after_job` in `backend/jobs.py` — after job completes + signals sync, auto-matches all signals against the linked research using shared `match_signals()` function
+- [x] Extracted `_match_signals` from `routes/research.py` into shared `backend/research_match.py`
+
+**API:**
+- [x] `POST /api/jobs` accepts optional `research_id` to link a job to a research
+- [x] `GET /api/researches/<id>/jobs` — list jobs linked to a research
+
+**Frontend (`research-detail.js`):**
+- [x] Jobs tab (renamed from "New") shows linked job cards with source, status, time
+- [x] Source selector (irvine-news, tiktok if available) + "Start Job" button
+- [x] Job cards show color-coded status badges (completed/running/failed/pending)
+- [x] Tab count badge shows number of linked jobs
+- [x] Fetches jobs in parallel with research data on page load
 
 **CSS (`research.css`):**
-- [x] `.cat-picker`, `.cat-pick-btn`, `.cat-pick-btn.selected` — toggle button styles
-- [x] `.kw-suggestions`, `.kw-chips`, `.kw-chip` — suggestion chip styles
-- [x] `.detail-value-col`, `.inline-actions`, `.inline-row` — detail page edit layout
+- [x] `.jobs-list`, `.job-card`, `.job-card-top` — job card layout
+- [x] `.job-source`, `.job-status`, `.job-time`, `.job-error` — job card elements
+- [x] Status-specific colors: completed (green), running (blue), failed (red)
 
 **Tests:**
-- [x] All 136 tests pass (no new tests needed — existing PATCH/DELETE tests cover the API)
+- [x] `test_list_research_jobs_empty` — GET returns empty jobs array
+- [x] `test_list_research_jobs_not_found` — 404 for missing research
+- [x] `test_create_job_with_research_id` — job creation with research_id, verify linkage
+- [x] All 139 tests pass
 
 ### Modified files
 
 | File | Change |
 |------|--------|
-| `backend/routes/signals.py` | Added `category_keywords` to `/api/config` response |
-| `research.html` | Category picker div + keyword suggestions area in create form |
-| `research.js` | Category picker + keyword assist logic in create flow |
-| `research-detail.js` | Config loading, category picker in edit mode, keyword suggestions |
-| `research.css` | Category picker, keyword chip, detail edit layout styles |
+| `backend/models.py` | Added `research_id` FK to ScrapeJob |
+| `backend/migrate.py` | v2 migration for research_id column |
+| `backend/store.py` | Updated JobStore + ResearchStore protocols, standalone store |
+| `backend/store_sqlite.py` | `research_id` in create_job, `list_jobs_for_research`, `add_hits` |
+| `backend/store_firestore.py` | Same updates for Firestore |
+| `backend/research_match.py` | New — shared `match_signals()` extracted from routes |
+| `backend/jobs.py` | `_match_research_after_job` post-completion hook |
+| `backend/routes/jobs.py` | Accept `research_id` in job creation |
+| `backend/routes/research.py` | Uses shared matcher, `GET /api/researches/<id>/jobs` |
+| `research-detail.js` | Jobs tab with cards, source picker, Start Job button |
+| `research.css` | Job card styles |
+| `tests/test_research_api.py` | 3 new tests for research-job linking |
 
 ### Browser verification
 
-- [x] Create form: 10 category buttons rendered from `/api/config`
-- [x] Create form: selecting categories shows keyword suggestion chips
-- [x] Detail page: Edit categories shows picker with current categories pre-selected
-- [x] Detail page: keyword suggestions appear (e.g. "car crash", "hit and run" for traffic_safety)
-- [x] Detail page: clicking chip appends keyword to input, chip removed
-- [x] Detail page: Cancel resets edit state and hides suggestions
+- [x] Jobs tab shows "Jobs 0" initially (no linked jobs)
+- [x] Source selector shows irvine-news + tiktok options
+- [x] After starting a news job: job card appears with "irvine-news" + "completed" status
+- [x] Archive hit count increased (142 → 146) after job ran, confirming auto-match hook
 - [x] No console errors
 
 ---
 
 ## Exit criteria
 
-- [x] `/api/config` serves `category_keywords` from `DEFAULT_SEARCH_TERMS`
-- [x] Create form uses clickable category picker instead of text input
-- [x] Keyword suggestions appear based on selected categories
-- [x] Detail page inline edit uses same picker pattern
-- [x] 136 tests pass
-- [x] Browser verification — picker and suggestions working in both create and edit flows
+- [x] `research_id` FK on ScrapeJob with migration
+- [x] Job creation API accepts `research_id`
+- [x] Post-job hook auto-matches signals against linked research
+- [x] Research jobs endpoint lists linked jobs
+- [x] Jobs tab in workspace shows cards + Start Job button
+- [x] 139 tests pass
+- [x] Browser verification — full flow working
 
 ---
 
 ## Previous sessions
 
+- **Sessions 19–20** — Topic keyword assist + category picker
 - **Sessions 17–18** — Research workspace UI (PATCH/DELETE, tabs, inline edit, filters)
 - **Session 16** — GitHub Actions CI workflow
 - **Session 15** — Desktop-only Selenium messaging
 - **Session 14** — Render deployment config
 - **Session 13** — Cold demo end-to-end on Firestore
-- **Session 12** — Research store (SQLite + Firestore)
-- **Session 11** — Port users, jobs, votes, reports to Firestore
 
 ---
 
-## Next: Sessions 21–22 — Phase C batch #3 + research-scoped jobs
+## Next: Sessions 23–24 — TikTok/desktop job link + operator copy
 
-Per [`docs/TWO_MONTH_ROADMAP.md`](docs/TWO_MONTH_ROADMAP.md): Phase C label batch #3 to improve classifier accuracy; link scrape jobs to research topics so the "New" tab populates.
+Per [`docs/TWO_MONTH_ROADMAP.md`](docs/TWO_MONTH_ROADMAP.md): Link TikTok desktop scrape jobs to research; operator-facing copy in UI explaining desktop-only flow. Pending desktop scrape without hanging Render.

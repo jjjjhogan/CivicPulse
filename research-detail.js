@@ -1,4 +1,4 @@
-/* research-detail.js — research workspace: archive/new tabs, edit, status, delete */
+/* research-detail.js — research workspace: archive/new tabs, edit, status, delete, jobs */
 
 (function () {
   var params = new URLSearchParams(window.location.search);
@@ -7,6 +7,7 @@
   var currentResearch = null;
   var activeTab = "archive";
   var configData = null;
+  var researchJobs = [];
 
   function esc(s) {
     var el = document.createElement("span");
@@ -41,6 +42,24 @@
 
   async function apiRunArchive() {
     return fetch("/api/researches/" + id + "/archive", { method: "POST" });
+  }
+
+  async function apiGetJobs() {
+    try {
+      var res = await fetch("/api/researches/" + id + "/jobs");
+      if (!res.ok) return [];
+      return (await res.json()).jobs || [];
+    } catch (e) { return []; }
+  }
+
+  async function apiStartJob(source, settings) {
+    var payload = { source: source, research_id: id };
+    if (settings) payload.settings = settings;
+    return fetch("/api/jobs", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
   }
 
   async function loadConfig() {
@@ -84,6 +103,68 @@
     return ["draft", "active", "gathering", "ready", "stale"].map(function (s) {
       return "<option" + (s === current ? " selected" : "") + ">" + esc(s) + "</option>";
     }).join("");
+  }
+
+  function renderJobCard(job) {
+    var statusCls = "job-status-" + esc(job.status);
+    var time = job.created_at ? new Date(job.created_at).toLocaleString() : "";
+    var errorHtml = "";
+    if (job.error) {
+      var isDesktopOnly = job.source === "tiktok" && /selenium|desktop|chrome/i.test(job.error);
+      if (isDesktopOnly) {
+        errorHtml = '<div class="scraper-notice" style="margin-top:6px">' +
+          "This job requires a desktop machine. Run locally:" +
+          '<pre style="margin:6px 0 0;font-size:0.8rem">py scripts/scrape_tiktok.py</pre></div>';
+      } else {
+        errorHtml = '<p class="job-error">' + esc(job.error) + "</p>";
+      }
+    }
+    return '<div class="job-card">' +
+      '<div class="job-card-top">' +
+      '<span class="job-source">' + esc(job.source) + "</span>" +
+      '<span class="job-status ' + statusCls + '">' + esc(job.status) + "</span></div>" +
+      '<time class="job-time">' + time + "</time>" +
+      errorHtml + "</div>";
+  }
+
+  function renderNewPanel() {
+    var jobsHtml = "";
+    if (researchJobs.length) {
+      jobsHtml = '<div class="jobs-list">' +
+        researchJobs.map(renderJobCard).join("") + "</div>";
+    } else {
+      jobsHtml = '<p class="empty-msg">No jobs linked to this research yet.</p>';
+    }
+
+    var tiktokOk = configData && configData.tiktok_available;
+    var sourceOptions =
+      '<option value="irvine-news">irvine-news</option>' +
+      '<option value="tiktok">tiktok</option>';
+
+    var desktopBadge = !tiktokOk
+      ? ' <span class="scraper-badge desktop-only">Desktop only</span>'
+      : "";
+
+    var desktopNotice = !tiktokOk
+      ? '<div class="scraper-notice" id="tiktokNotice" hidden>' +
+        "TikTok scraping requires Selenium + Chrome on a desktop machine. " +
+        "Run <code>scripts/scrape_tiktok.py</code> locally, then signals sync to this server.</div>"
+      : "";
+
+    var tiktokSettings = '<div id="tiktokSettings" hidden>' +
+      '<label class="field-label" style="font-size:0.82rem;margin:8px 0 4px">Tag URL</label>' +
+      '<input type="text" class="inline-edit" id="tiktokTagUrl" ' +
+      'placeholder="https://www.tiktok.com/tag/irvine">' +
+      '</div>';
+
+    return '<div class="panel-toolbar">' +
+      '<select class="status-select" id="jobSourceSelect">' + sourceOptions + "</select>" +
+      desktopBadge +
+      '<button class="btn btn-sm" id="startJobBtn"' +
+      (!tiktokOk ? "" : "") + ">Start Job</button>" +
+      '<span class="panel-hint" id="jobHint">' +
+      researchJobs.length + " job" + (researchJobs.length !== 1 ? "s" : "") + "</span></div>" +
+      desktopNotice + tiktokSettings + jobsHtml;
   }
 
   // ── Main render ──────────────────────────────────────
@@ -153,7 +234,7 @@
       '<button class="tab-btn' + (activeTab === "archive" ? " active" : "") +
       '" data-tab="archive">Archive <span class="tab-count">' + hitCount + "</span></button>" +
       '<button class="tab-btn' + (activeTab === "new" ? " active" : "") +
-      '" data-tab="new">New</button></div>' +
+      '" data-tab="new">Jobs <span class="tab-count">' + researchJobs.length + "</span></button></div>" +
       // Archive panel
       '<div class="tab-panel" id="archivePanel"' + (activeTab !== "archive" ? " hidden" : "") + ">" +
       '<div class="panel-toolbar">' +
@@ -161,9 +242,9 @@
       '<span class="panel-hint" id="archiveHint">' + hitCount +
       " signal" + (hitCount !== 1 ? "s" : "") + " matched</span></div>" +
       renderHits(r.hits) + "</div>" +
-      // New panel
+      // New/Jobs panel
       '<div class="tab-panel" id="newPanel"' + (activeTab !== "new" ? " hidden" : "") + ">" +
-      '<p class="empty-msg">New signals from topic-scoped scrape jobs will appear here once jobs are linked to this research.</p></div>';
+      renderNewPanel() + "</div>";
 
     bindEvents();
   }
@@ -215,6 +296,65 @@
         this.textContent = "Run Archive";
       }
     });
+
+    // Start Job — source selector + TikTok settings
+    var startBtn = document.getElementById("startJobBtn");
+    var sourceSelect = document.getElementById("jobSourceSelect");
+    var tiktokSettings = document.getElementById("tiktokSettings");
+    var tiktokNotice = document.getElementById("tiktokNotice");
+    var tiktokOk = configData && configData.tiktok_available;
+
+    function updateSourceUI() {
+      var isTiktok = sourceSelect.value === "tiktok";
+      if (tiktokSettings) tiktokSettings.hidden = !isTiktok;
+      if (tiktokNotice) tiktokNotice.hidden = !isTiktok;
+      if (startBtn) startBtn.disabled = isTiktok && !tiktokOk;
+    }
+
+    if (sourceSelect) {
+      sourceSelect.addEventListener("change", updateSourceUI);
+      updateSourceUI();
+    }
+
+    if (startBtn) {
+      startBtn.addEventListener("click", async function () {
+        var source = sourceSelect.value;
+        var settings = null;
+        if (source === "tiktok") {
+          var tagInput = document.getElementById("tiktokTagUrl");
+          var tagUrl = tagInput ? tagInput.value.trim() : "";
+          if (tagUrl) {
+            settings = { tag_urls: [tagUrl] };
+          }
+        }
+        startBtn.disabled = true;
+        startBtn.textContent = "Starting...";
+        try {
+          var res = await apiStartJob(source, settings);
+          var data = await res.json();
+          if (!res.ok) {
+            if (res.status === 501) {
+              alert(
+                "TikTok scraping requires Selenium + Chrome on a desktop machine.\n\n" +
+                "Run locally:\n  py scripts/scrape_tiktok.py" +
+                (settings && settings.tag_urls ? " --tag-url " + settings.tag_urls[0] : "")
+              );
+            } else {
+              alert(data.error || "Failed to start job.");
+            }
+            startBtn.disabled = false;
+            startBtn.textContent = "Start Job";
+            return;
+          }
+          researchJobs = await apiGetJobs();
+          render(currentResearch);
+        } catch (e) {
+          alert("Network error.");
+          startBtn.disabled = false;
+          startBtn.textContent = "Start Job";
+        }
+      });
+    }
 
     // Category edit (picker-based)
     bindCatEdit();
@@ -355,7 +495,9 @@
     }
     await loadConfig();
     try {
-      var r = await apiGet();
+      var results = await Promise.all([apiGet(), apiGetJobs()]);
+      var r = results[0];
+      researchJobs = results[1];
       if (!r) {
         container.innerHTML = '<p class="error-msg">Research not found.</p>';
         return;

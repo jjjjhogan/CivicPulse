@@ -117,6 +117,9 @@ class ScrapeJob(Base):
     error: Mapped[str | None] = mapped_column(Text, nullable=True)
     exit_code: Mapped[int | None] = mapped_column(Integer, nullable=True)
     user_id: Mapped[int | None] = mapped_column(ForeignKey("users.id"), nullable=True)
+    research_id: Mapped[int | None] = mapped_column(
+        ForeignKey("researches.id", ondelete="SET NULL"), nullable=True, index=True,
+    )
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
     started_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     finished_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
@@ -134,6 +137,7 @@ class ScrapeJob(Base):
             "error": self.error,
             "exit_code": self.exit_code,
             "user_id": self.user_id,
+            "research_id": self.research_id,
             "created_at": self.created_at.isoformat() if self.created_at else None,
             "started_at": self.started_at.isoformat() if self.started_at else None,
             "finished_at": self.finished_at.isoformat() if self.finished_at else None,

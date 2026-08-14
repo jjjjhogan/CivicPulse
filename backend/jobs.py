@@ -217,6 +217,41 @@ def friendly_scraper_error(*, source: str | None, returncode: int, log: str) -> 
     return f"Scraper exited with code {returncode}"
 
 
+def _match_research_after_job(job_id, job_store) -> None:
+    """If this job is linked to a research, match new signals against it."""
+    try:
+        job = job_store.get_job(job_id)
+        if not job or not job.get("research_id"):
+            return
+        rid = job["research_id"]
+        from backend.config import DATA_BACKEND
+        if DATA_BACKEND == "firestore":
+            from backend.firestore import get_firestore_client
+            from backend.store_firestore import FirestoreResearchStore, FirestoreSignalStore
+            db = get_firestore_client()
+            rs = FirestoreResearchStore(db)
+            ss = FirestoreSignalStore(db)
+        else:
+            from backend.db import SessionLocal, get_engine
+            from backend.store_sqlite import SQLiteResearchStore, SQLiteSignalStore
+            get_engine()
+            session = SessionLocal()
+            rs = SQLiteResearchStore(session)
+            ss = SQLiteSignalStore(session)
+        research = rs.get_research(rid)
+        if not research:
+            return
+        from backend.research_match import match_signals
+        signals = ss.list_signals()
+        hits = match_signals(signals, research.get("categories", []), research.get("keywords", []))
+        if hits:
+            rs.add_hits(rid, hits)
+        if DATA_BACKEND != "firestore":
+            session.close()
+    except Exception:  # noqa: BLE001
+        pass
+
+
 def _run_job(job_id, cmd: list[str]) -> None:
     global _running_job_id
     store = get_job_store_standalone()
@@ -273,6 +308,8 @@ def _run_job(job_id, cmd: list[str]) -> None:
                         job_id,
                         log=(existing.get("log") or "") + f"\n[signal sync warning] {sync_exc}",
                     )
+
+            _match_research_after_job(job_id, store)
     except Exception as exc:  # noqa: BLE001
         job = store.get_job(job_id)
         if job is not None:
