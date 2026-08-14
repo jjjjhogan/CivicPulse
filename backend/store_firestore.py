@@ -214,6 +214,7 @@ class FirestoreUserStore:
             "email": data.get("email", ""),
             "name": data.get("name", ""),
             "password_hash": data.get("password_hash", ""),
+            "is_dev": bool(data.get("is_dev", False)),
         }
 
     def get_user(self, user_id: int | str) -> dict | None:
@@ -233,6 +234,7 @@ class FirestoreUserStore:
             "email": email,
             "name": name,
             "password_hash": password_hash,
+            "is_dev": False,
             "created_at": _utcnow_iso(),
         }
         _, doc_ref = self._coll().add(data)

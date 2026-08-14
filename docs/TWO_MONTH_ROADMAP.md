@@ -3,7 +3,7 @@
 **Canonical copy** of the Cursor plan “Two month roadmap.”  
 Day-to-day session prompts live in [`SESSION_PLAN.md`](../SESSION_PLAN.md) (not this file).
 
-**Last updated:** 2026-07-20 — Research workspace + Firestore-before-Render + **classifier quality loop** (wrong categories / misleading high confidence).
+**Last updated:** 2026-08-14 — Dev-gated local scrapers (`is_dev` + hide on Render) + Research workspace + Firestore-before-Render + **classifier quality loop**.
 
 ---
 
@@ -32,9 +32,9 @@ A **logged-in mayor-office demo** (Firestore locally; **Render + Firestore** hos
    - **Searches the archive** (existing signals already ingested)
    - **Pulls new material** via topic-scoped scrape/import jobs
    - Presents a **workspace**: archive vs newly gathered
-3. Keeps feed, map, resident reports/votes, scrape panel
+3. Keeps feed, map, resident reports/votes. The **scrape panel is not on Render** — only a local `is_dev` operator account sees and runs scrapers
 4. Produces a **research summary** (topic briefing) for a mayor handout
-5. TikTok stays **operator desktop** (not Selenium-on-Render)
+5. Scraping (including TikTok Selenium) stays on a **dedicated operator machine**, not the hosted site
 
 **Deferred if time slips:** full resolution workflow, citywide daily briefing, map clustering v2, Firebase Auth, hotline, cloud TikTok, vector/embedding search (Phase E only if needed).
 
@@ -233,7 +233,7 @@ Embeddings, cloud TikTok, multi-city, LLM chat literature review.
 | **12** | Port researches + hits; SQLite→Firestore export | Research still works |
 | **13** | Cut over local demo to Firestore | Cold demo on Firestore |
 | **14** | Render + Firebase credentials | Public URL loads login |
-| **15** | Seed/import on hosted; desktop-only Selenium messaging | Clear TikTok story on server |
+| **15** | Seed/import on hosted; **`is_dev` + local-only scraper gate** | Render hides scrapers; local `is_dev` user can run jobs; 403 otherwise |
 | **16** | CI + buffer; **Phase C** batch #2 if gold sample still weak | PR checks green |
 
 **Weeks 3–4 exit:** Render + Firestore; Research archive path works; SQLite not required in prod.
@@ -245,7 +245,7 @@ Embeddings, cloud TikTok, multi-city, LLM chat literature review.
 | **17–18** | Research workspace UI (list/detail, archive/new, status) | Staff drives research without API tools |
 | **19–20** | Topic → keyword assist + category picker; **Phase C** batch #3 on research false hits | Creating “housing prices” feels guided |
 | **21–22** | Wire news/import jobs to research; auto-attach matching signals | New tab fills after a news job |
-| **23–24** | TikTok/desktop job link + operator copy in UI | Pending desktop scrape without hanging Render |
+| **23–24** | TikTok/desktop job link + operator copy in UI | Pending desktop scrape on local `is_dev` machine; Render never starts jobs |
 | **Buffer** | Hit ranking, empty states, refresh archive | 5-minute mayor walkthrough works |
 
 **Weeks 5–6 exit:** Create topic → archive hits → gather → new hits → open signals.
@@ -304,6 +304,7 @@ Classifier quality is **Person B–led** but both re-score the gold sample after
 - Hotline / call-transcript ingestion  
 - Embedding / vector search (**Phase E** only if forced)  
 - Always-on TikTok Selenium in the cloud  
+- Scrapers on the Render dashboard (hosted jobs) — operators scrape locally with `is_dev`  
 - Multi-tenant / multi-city / native mobile  
 - Pure Firebase client rewrite  
 
@@ -318,7 +319,7 @@ Classifier quality is **Person B–led** but both re-score the gold sample after
 - [ ] ≥1 **new gather** path attaches signals into that research  
 - [ ] Research **summary** printable without hand-editing  
 - [ ] Confidence UI shows **method**; demo script doesn’t lean on fake precision  
-- [ ] TikTok = desktop worker; server doesn’t hang  
+- [ ] TikTok / scrapers = local `is_dev` operator only; Render never shows or starts jobs  
 - [ ] `pytest -q` green (CI if enabled)  
 
 ---

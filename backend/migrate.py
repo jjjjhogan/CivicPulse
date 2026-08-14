@@ -81,12 +81,11 @@ def migrate_to_v1(conn) -> None:
 
 
 def migrate_to_v2(conn) -> None:
-    cols = _column_names(conn, "scrape_jobs")
+    cols = _column_names(conn, "users")
     if not cols:
         return
-    if "research_id" not in cols:
-        conn.execute(text("ALTER TABLE scrape_jobs ADD COLUMN research_id INTEGER REFERENCES researches(id) ON DELETE SET NULL"))
-        conn.execute(text("CREATE INDEX IF NOT EXISTS ix_scrape_jobs_research_id ON scrape_jobs (research_id)"))
+    if "is_dev" not in cols:
+        conn.execute(text("ALTER TABLE users ADD COLUMN is_dev BOOLEAN DEFAULT 0 NOT NULL"))
 
 
 def run_migrations(*, create_tables: bool = False) -> int:

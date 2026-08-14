@@ -72,7 +72,7 @@ One of `GOOGLE_APPLICATION_CREDENTIALS` or `GOOGLE_CREDENTIALS_JSON` is required
 | Collection | Doc id | Key fields |
 |------------|--------|------------|
 | `signals` | `stable_id` | source, outlet, title, body, url, categories, published_utc, metadata, archived_at, timestamps, ingest_job_id |
-| `users` | auto | email, name, password_hash |
+| `users` | auto | email, name, password_hash, **`is_dev`** (bool, default false) |
 | `scrape_jobs` | auto | source, status, settings, log |
 | `issue_votes` | `{signal_id}_{user_id}` | signal_id, user_id, choice |
 | `researches` | auto | title, topic, keywords, categories, status, notes, timestamps |
@@ -80,12 +80,27 @@ One of `GOOGLE_APPLICATION_CREDENTIALS` or `GOOGLE_CREDENTIALS_JSON` is required
 
 Indexes: [`firestore.indexes.json`](../firestore.indexes.json).
 
+## Dev accounts (`is_dev`)
+
+Scrapers are **not** part of the hosted mayor dashboard. They run only on a
+local operator machine when **both** are true:
+
+1. The process is **not** on Render (`RENDER` env unset)
+2. The logged-in user’s Firestore doc has **`is_dev: true`**
+
+Signup always creates `is_dev: false`. Promote an operator **manually** in
+Firebase Console → Firestore → `users` → pick the user document → add field
+`is_dev` (boolean) = `true`. Missing/`false` is treated as a normal account.
+
+On Render the scraper nav/section is hidden and `POST /api/jobs` returns 403
+even if someone sets `is_dev` on a hosted session.
+
 ## Smoke checklist (real project)
 
 1. `GET /api/signals` → `"storage": "firestore"`, expected count after seed
 2. Signup / login
 3. Create report + vote
-4. Create scrape job (post-scrape sync upserts into Firestore)
+4. Create scrape job **locally as an `is_dev` user** (post-scrape sync upserts into Firestore). On Render, jobs API should 403
 5. Confirm docs in Firebase Console → Firestore
 
 ## Production (Render)

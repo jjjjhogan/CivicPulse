@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 from functools import wraps
 
 from flask import jsonify, session
@@ -10,6 +11,9 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from backend.store import get_user_store
 
 SESSION_USER_KEY = "user_id"
+SCRAPERS_FORBIDDEN_MSG = (
+    "Scrapers run only on a local operator machine with a dev account."
+)
 
 
 def hash_password(password: str) -> str:
@@ -36,6 +40,18 @@ def login_user(user: dict) -> None:
 
 def logout_user() -> None:
     session.clear()
+
+
+def scrapers_host_ok() -> bool:
+    """Scrapers are never available on Render's hosted instance."""
+    return not bool(os.environ.get("RENDER"))
+
+
+def scrapers_allowed(user: dict | None) -> bool:
+    """True only off Render when the logged-in user has is_dev set."""
+    if not scrapers_host_ok():
+        return False
+    return bool(user and user.get("is_dev"))
 
 
 def login_required(view):

@@ -74,7 +74,12 @@ class ResearchStore(Protocol):
 
 def public_user(user: dict) -> dict:
     """Strip password_hash from a user dict for API responses."""
-    return {"id": user["id"], "email": user["email"], "name": user["name"]}
+    return {
+        "id": user["id"],
+        "email": user["email"],
+        "name": user["name"],
+        "is_dev": bool(user.get("is_dev", False)),
+    }
 
 
 # ---------------------------------------------------------------------------

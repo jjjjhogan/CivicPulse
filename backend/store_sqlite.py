@@ -104,6 +104,7 @@ class SQLiteUserStore:
             "email": user.email,
             "name": user.name,
             "password_hash": user.password_hash,
+            "is_dev": bool(user.is_dev),
         }
 
     def get_user(self, user_id: int | str) -> dict | None:
