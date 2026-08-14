@@ -26,6 +26,15 @@ _job_lock = threading.Lock()
 _running_job_id = None
 
 
+def selenium_available() -> bool:
+    """Check if Selenium + Chrome are importable (desktop-only deps)."""
+    try:
+        import selenium  # noqa: F401
+        return True
+    except ImportError:
+        return False
+
+
 def build_tiktok_command(payload: dict) -> list[str]:
     mode = payload.get("mode", "tags")
     cmd = [sys.executable, str(SCRAPE_TIKTOK)]
