@@ -67,13 +67,19 @@ def api_manifest():
 @bp.get("/api/config")
 def api_config():
     sys.path.insert(0, str(ROOT))
-    from scrapers.categories import CivicIssueCategory  # noqa: WPS433
+    from scrapers.categories import CivicIssueCategory, DEFAULT_SEARCH_TERMS  # noqa: WPS433
     from scrapers.news.scrape import NEWS_SOURCES  # noqa: WPS433
+    from backend.jobs import selenium_available  # noqa: WPS433
 
     return jsonify(
         {
             "categories": [c.value for c in CivicIssueCategory],
+            "category_keywords": {
+                cat.value: terms
+                for cat, terms in DEFAULT_SEARCH_TERMS.items()
+            },
             "tiktok_defaults": TIKTOK_DEFAULTS,
+            "tiktok_available": selenium_available(),
             "news_defaults": NEWS_DEFAULTS,
             "news_outlets": [
                 {"id": source["id"], "name": source["name"], "scope": source["scope"]}

@@ -1,4 +1,4 @@
-"""Research API — create, list, detail."""
+"""Research API — create, list, detail, update, delete."""
 
 from __future__ import annotations
 
@@ -72,3 +72,59 @@ def test_get_research_detail(client):
 def test_get_research_not_found(client):
     res = client.get("/api/researches/9999")
     assert res.status_code == 404
+
+
+def test_update_research(client):
+    created = client.post("/api/researches", json=_sample_research()).get_json()
+    rid = created["research"]["id"]
+    res = client.patch(
+        f"/api/researches/{rid}",
+        json={"keywords": ["mortgage", "rent"], "status": "active"},
+    )
+    assert res.status_code == 200
+    data = res.get_json()["research"]
+    assert data["keywords"] == ["mortgage", "rent"]
+    assert data["status"] == "active"
+
+
+def test_update_research_invalid_status(client):
+    created = client.post("/api/researches", json=_sample_research()).get_json()
+    rid = created["research"]["id"]
+    res = client.patch(f"/api/researches/{rid}", json={"status": "bogus"})
+    assert res.status_code == 400
+    assert "status" in res.get_json()["error"].lower()
+
+
+def test_update_research_empty_title_rejected(client):
+    created = client.post("/api/researches", json=_sample_research()).get_json()
+    rid = created["research"]["id"]
+    res = client.patch(f"/api/researches/{rid}", json={"title": ""})
+    assert res.status_code == 400
+
+
+def test_update_research_not_found(client):
+    res = client.patch("/api/researches/9999", json={"status": "active"})
+    assert res.status_code == 404
+
+
+def test_delete_research(client):
+    created = client.post("/api/researches", json=_sample_research()).get_json()
+    rid = created["research"]["id"]
+    res = client.delete(f"/api/researches/{rid}")
+    assert res.status_code == 200
+    assert res.get_json()["deleted"] is True
+    assert client.get(f"/api/researches/{rid}").status_code == 404
+
+
+def test_delete_research_not_found(client):
+    res = client.delete("/api/researches/9999")
+    assert res.status_code == 404
+
+
+def test_list_includes_hit_count(client):
+    created = client.post("/api/researches", json=_sample_research()).get_json()
+    rid = created["research"]["id"]
+    listing = client.get("/api/researches").get_json()
+    r = next(x for x in listing["researches"] if x["id"] == rid)
+    assert "hit_count" in r
+    assert r["hit_count"] == 0

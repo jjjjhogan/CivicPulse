@@ -61,6 +61,16 @@ def _create_and_start_job(*, source: str, settings: dict):
         return jsonify({"error": SCRAPERS_FORBIDDEN_MSG}), 403
 
     source = normalize_source(source)
+
+    if source == "tiktok" and not selenium_available():
+        return jsonify({
+            "error": (
+                "TikTok scraping requires Selenium + Chrome, which are only "
+                "available on a desktop machine. Run the scraper locally with "
+                "scripts/scrape_tiktok.py."
+            ),
+        }), 501
+
     try:
         cmd = build_command(source, settings)
     except ValueError as exc:

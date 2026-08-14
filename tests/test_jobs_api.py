@@ -95,7 +95,8 @@ def test_friendly_scraper_error_login_wall():
     assert "TIKTOK_SCRAPE" in msg
 
 
-def test_failed_tiktok_job_surfaces_login_wall(dev_client, monkeypatch):
+def test_failed_tiktok_job_surfaces_login_wall(auth_client, monkeypatch):
+    monkeypatch.setattr("backend.routes.jobs.selenium_available", lambda: True)
     monkeypatch.setattr(
         "backend.jobs.subprocess.run",
         lambda *a, **k: subprocess.CompletedProcess(
@@ -138,6 +139,23 @@ def test_failed_tiktok_job_surfaces_login_wall(dev_client, monkeypatch):
 
 
 def test_concurrent_job_rejected(dev_client, monkeypatch):
+def test_tiktok_501_without_selenium(auth_client, monkeypatch):
+    monkeypatch.setattr("backend.routes.jobs.selenium_available", lambda: False)
+    res = auth_client.post(
+        "/api/jobs",
+        json={
+            "source": "tiktok",
+            "settings": {
+                "mode": "tags",
+                "tag_urls": ["https://www.tiktok.com/tag/irvine"],
+            },
+        },
+    )
+    assert res.status_code == 501
+    assert "Selenium" in res.get_json()["error"]
+
+
+def test_concurrent_job_rejected(auth_client, monkeypatch):
     import backend.jobs as jobs
 
     monkeypatch.setattr(

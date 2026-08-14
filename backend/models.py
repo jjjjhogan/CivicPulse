@@ -199,12 +199,12 @@ class Research(Base):
             "categories": self.categories or [],
             "status": self.status,
             "notes": self.notes or "",
+            "hit_count": len(self.hits),
             "created_at": self.created_at.isoformat() if self.created_at else None,
             "updated_at": self.updated_at.isoformat() if self.updated_at else None,
         }
         if include_hits:
             payload["hits"] = [h.to_dict() for h in self.hits]
-            payload["hit_count"] = len(self.hits)
         return payload
 
 
