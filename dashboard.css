@@ -74,6 +74,11 @@ html {
   transition: background 0.15s ease;
 }
 
+/* display:flex above would otherwise override HTML [hidden] */
+.side-link[hidden] {
+  display: none !important;
+}
+
 .side-link:hover {
   background: rgba(255, 255, 255, 0.45);
 }

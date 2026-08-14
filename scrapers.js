@@ -219,6 +219,8 @@ async function start() {
   const session = await sessionRes.json();
   if (!session.authenticated) return window.location.assign("login.html");
   if (!session.scrapers_allowed) return window.location.assign("dashboard.html");
+  const scrapersNav = document.getElementById("scrapersNav");
+  if (scrapersNav) scrapersNav.hidden = false;
   document.getElementById("signedInUser").textContent = session.user.name || session.user.email;
   document.getElementById("signedInUser").hidden = false;
   document.getElementById("logoutBtn").addEventListener("click", async (event) => {
