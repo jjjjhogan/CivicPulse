@@ -1,9 +1,8 @@
-"""Scrape job API."""
+"""Scrape job API (local is_dev operators only)."""
 
 from __future__ import annotations
 
 import json
-from datetime import datetime
 
 from flask import Blueprint, jsonify, request
 
@@ -18,6 +17,13 @@ from backend.store import get_job_store
 from scrapers.json_payload import ImportPayloadError, parse_import_payload
 
 bp = Blueprint("jobs", __name__)
+
+
+def _require_scraper_access():
+    user = get_current_user()
+    if not scrapers_allowed(user):
+        return None, (jsonify({"error": SCRAPERS_FORBIDDEN_MSG}), 403)
+    return user, None
 
 
 def _parse_json_payload(raw) -> dict:
@@ -56,9 +62,9 @@ def _extract_import_payload() -> dict:
 
 
 def _create_and_start_job(*, source: str, settings: dict):
-    user = get_current_user()
-    if not scrapers_allowed(user):
-        return jsonify({"error": SCRAPERS_FORBIDDEN_MSG}), 403
+    user, denied = _require_scraper_access()
+    if denied is not None:
+        return denied
 
     source = normalize_source(source)
     try:
@@ -126,7 +132,10 @@ def create_job():
 @bp.get("/api/jobs")
 @login_required
 def list_jobs():
-    """Recent jobs (newest first)."""
+    """Recent jobs (newest first). Local is_dev operators only."""
+    _, denied = _require_scraper_access()
+    if denied is not None:
+        return denied
     limit = request.args.get("limit", 20, type=int)
     limit = max(1, min(limit or 20, 100))
     store = get_job_store()
@@ -137,55 +146,11 @@ def list_jobs():
 @bp.get("/api/jobs/<job_id>")
 @login_required
 def get_job(job_id):
+    _, denied = _require_scraper_access()
+    if denied is not None:
+        return denied
     store = get_job_store()
     job = store.get_job(job_id)
     if job is None:
         return jsonify({"error": "Job not found."}), 404
     return jsonify(job)
-
-
-@bp.get("/api/scrape/status")
-@login_required
-def scrape_status_compat():
-    """Legacy single-slot status for older clients; prefers the active/latest job."""
-    store = get_job_store()
-    job = store.get_running_job() or store.get_latest_job()
-    if job is None:
-        return jsonify({
-            "status": "idle",
-            "source": None,
-            "started_at": None,
-            "finished_at": None,
-            "exit_code": None,
-            "command": None,
-            "log": "",
-            "error": None,
-        })
-    payload = dict(job)
-    for key in ("started_at", "finished_at"):
-        val = payload.get(key)
-        if val is not None:
-            if isinstance(val, str):
-                payload[key] = datetime.fromisoformat(val).timestamp()
-            elif hasattr(val, "timestamp"):
-                payload[key] = val.timestamp()
-    return jsonify(payload)
-
-
-@bp.post("/api/scrape/<source>")
-@login_required
-def scrape_source_compat(source: str):
-    """Legacy scrape endpoints — create a job under the hood."""
-    source = normalize_source(source)
-
-    if source in {"reddit", "twitter"}:
-        try:
-            payload = _extract_import_payload()
-        except (ValueError, json.JSONDecodeError) as exc:
-            return jsonify({"error": str(exc)}), 400
-        return _create_and_start_job(source=source, settings={"payload": payload})
-
-    body = request.get_json(silent=True) or {}
-    if not isinstance(body, dict):
-        return jsonify({"error": "Request body must be a JSON object."}), 400
-    return _create_and_start_job(source=source, settings=body)

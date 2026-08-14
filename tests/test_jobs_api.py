@@ -222,6 +222,11 @@ def test_jobs_forbidden_for_non_dev(auth_client):
     assert "dev account" in res.get_json()["error"].lower()
 
 
+def test_job_reads_forbidden_for_non_dev(auth_client):
+    assert auth_client.get("/api/jobs").status_code == 403
+    assert auth_client.get("/api/jobs/1").status_code == 403
+
+
 def test_jobs_forbidden_on_render_even_for_dev(dev_client, monkeypatch):
     monkeypatch.setenv("RENDER", "true")
     res = dev_client.post(
@@ -233,8 +238,10 @@ def test_jobs_forbidden_on_render_even_for_dev(dev_client, monkeypatch):
     )
     assert res.status_code == 403
     assert "local operator" in res.get_json()["error"].lower()
+    assert dev_client.get("/api/jobs").status_code == 403
 
 
-def test_legacy_scrape_forbidden_for_non_dev(auth_client):
-    res = auth_client.post("/api/scrape/irvine-news", json={"max_articles": 1})
-    assert res.status_code == 403
+def test_legacy_scrape_routes_removed(auth_client, dev_client):
+    # Unknown /api/* paths may 404 or 405 (static catch-all is GET-only).
+    assert auth_client.post("/api/scrape/irvine-news", json={"max_articles": 1}).status_code in {404, 405}
+    assert dev_client.get("/api/scrape/status").status_code == 404

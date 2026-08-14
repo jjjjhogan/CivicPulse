@@ -102,11 +102,12 @@ Open http://127.0.0.1:8080/login.html — create an account (session cookie), th
 | `GET /api/reports` | List resident signals only |
 | `GET /api/votes` | Vote tallies for resident reports (`mine` when logged in) |
 | `POST /api/votes` | Toggle up/down vote `{signal_id, choice}` (auth required) |
-| `GET /api/config` | Categories, TikTok/news defaults, news outlets |
-| `POST /api/jobs` | Start scrape job `{source, settings}` → `{id, status}` (auth required) |
-| `GET /api/jobs/<id>` | Job status + log (auth required); TikTok/Chrome failures include readable `error` text |
-| `POST /api/scrape/<source>` | Legacy scrape API (auth required; creates a job) |
-| `GET /api/scrape/status` | Legacy status poll (auth required) |
+| `GET /api/config` | Categories, TikTok/news defaults, news outlets; `scrapers_available` (false on Render) |
+| `POST /api/jobs` | Start scrape job `{source, settings}` → `{id, status}` (**local `is_dev` only**) |
+| `GET /api/jobs` | Recent jobs (**local `is_dev` only**) |
+| `GET /api/jobs/<id>` | Job status + log (**local `is_dev` only**); TikTok/Chrome failures include readable `error` text |
+
+Scraper UI: `scrapers.html` (not on the mayor dashboard). Non-dev / Render get 403 on all job APIs.
 
 Package layout: `backend/` (models, auth, jobs, routes). Entry point remains `scripts/dashboard_server.py`.
 
