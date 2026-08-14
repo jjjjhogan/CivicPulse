@@ -26,6 +26,15 @@ _job_lock = threading.Lock()
 _running_job_id = None
 
 
+def selenium_available() -> bool:
+    """Check if Selenium + Chrome are importable (desktop-only deps)."""
+    try:
+        import selenium  # noqa: F401
+        return True
+    except ImportError:
+        return False
+
+
 def _news_outlet_ids() -> list[str]:
     sys.path.insert(0, str(ROOT))
     from scrapers.news.scrape import NEWS_SOURCES  # noqa: WPS433

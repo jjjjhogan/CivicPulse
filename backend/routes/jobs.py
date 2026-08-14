@@ -8,7 +8,7 @@ from datetime import datetime
 from flask import Blueprint, jsonify, request
 
 from backend.auth import get_current_user, login_required
-from backend.jobs import build_command, is_job_running, normalize_source, start_job
+from backend.jobs import build_command, is_job_running, normalize_source, selenium_available, start_job
 from backend.store import get_job_store
 from scrapers.json_payload import ImportPayloadError, parse_import_payload
 
@@ -52,6 +52,16 @@ def _extract_import_payload() -> dict:
 
 def _create_and_start_job(*, source: str, settings: dict):
     source = normalize_source(source)
+
+    if source == "tiktok" and not selenium_available():
+        return jsonify({
+            "error": (
+                "TikTok scraping requires Selenium + Chrome, which are only "
+                "available on a desktop machine. Run the scraper locally with "
+                "scripts/scrape_tiktok.py."
+            ),
+        }), 501
+
     try:
         cmd = build_command(source, settings)
     except ValueError as exc:

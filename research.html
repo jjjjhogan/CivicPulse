@@ -73,17 +73,18 @@
             <input type="text" name="topic" id="fieldTopic"
                    placeholder="e.g. Track housing cost trends and resident complaints">
           </label>
-          <div class="form-row">
-            <label class="field">
-              <span class="field-label">Keywords <span class="field-hint">(comma-separated)</span></span>
-              <input type="text" name="keywords" id="fieldKeywords"
-                     placeholder="e.g. rent, housing prices, lease">
-            </label>
-            <label class="field">
-              <span class="field-label">Categories <span class="field-hint">(comma-separated)</span></span>
-              <input type="text" name="categories" id="fieldCategories"
-                     placeholder="e.g. housing">
-            </label>
+          <div class="field">
+            <span class="field-label">Categories</span>
+            <div class="cat-picker" id="catPicker"></div>
+          </div>
+          <div class="field">
+            <span class="field-label">Keywords</span>
+            <div class="kw-suggestions" id="kwSuggestions" hidden>
+              <span class="field-hint">Suggested:</span>
+              <div class="kw-chips" id="kwChips"></div>
+            </div>
+            <input type="text" name="keywords" id="fieldKeywords"
+                   placeholder="e.g. rent, housing prices, lease (comma-separated)">
           </div>
           <label class="field">
             <span class="field-label">Notes</span>
@@ -103,6 +104,7 @@
           <h2>Your Researches</h2>
           <span class="panel-hint" id="listCount"></span>
         </div>
+        <div class="filter-bar" id="filterBar"></div>
         <div id="researchList" class="research-list"></div>
         <p class="empty-msg" id="emptyMsg" hidden>No researches yet. Create one above to get started.</p>
       </section>

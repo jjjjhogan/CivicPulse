@@ -10,6 +10,7 @@ const SCRAPERS = [
     name: "TikTok scraper",
     desc: "Selenium scraper for Irvine tags & comments (scripts/scrape_tiktok.py)",
     signalSource: "tiktok",
+    desktopOnly: true,
   },
   {
     id: "irvine-news",
@@ -1063,14 +1064,29 @@ function renderImportSettings(card, scraper) {
 function renderScrapers() {
   const el = document.getElementById("scraperGrid");
   el.innerHTML = "";
+  const tiktokOk = state.config.tiktok_available !== false;
+
   for (const scraper of SCRAPERS) {
     const card = document.createElement("div");
     card.className = "scraper-card";
     card.dataset.scraper = scraper.id;
 
+    const header = document.createElement("div");
+    header.className = "scraper-header";
+
     const name = document.createElement("div");
     name.className = "scraper-name";
     name.textContent = scraper.name;
+
+    header.appendChild(name);
+
+    if (scraper.desktopOnly) {
+      const badge = document.createElement("span");
+      badge.className = "scraper-badge desktop-only";
+      badge.textContent = "Desktop only";
+      badge.title = "Requires a local machine with Google Chrome installed";
+      header.appendChild(badge);
+    }
 
     const desc = document.createElement("div");
     desc.className = "scraper-desc";
@@ -1081,7 +1097,18 @@ function renderScrapers() {
     analytics.href = `source.html?source=${encodeURIComponent(scraper.source || scraper.signalSource || scraper.id)}`;
     analytics.textContent = "View analytics →";
 
-    card.append(name, desc, analytics);
+    card.append(header, desc, analytics);
+
+    const isDisabled = scraper.desktopOnly && !tiktokOk;
+
+    if (isDisabled) {
+      const notice = document.createElement("div");
+      notice.className = "scraper-notice";
+      notice.textContent =
+        "TikTok scraping requires Selenium + Chrome on a desktop machine. " +
+        "Run scripts/scrape_tiktok.py locally, then the signals sync to this server.";
+      card.appendChild(notice);
+    }
 
     if (scraper.id === "tiktok") renderTikTokSettings(card);
     else if (scraper.id === "irvine-news") renderNewsSettings(card);
@@ -1093,11 +1120,12 @@ function renderScrapers() {
     row.className = "scraper-row";
     const status = document.createElement("span");
     status.className = "scraper-status";
-    status.textContent = "Idle";
+    status.textContent = isDisabled ? "Not available" : "Idle";
     const btn = document.createElement("button");
     btn.className = "btn btn-sm";
     btn.textContent = scraper.id === "reddit" || scraper.id === "twitter" ? "Import" : "Run";
     btn.dataset.scraperRun = scraper.id;
+    btn.disabled = isDisabled;
     btn.addEventListener("click", () => runScraper(scraper, card, status, btn));
     row.append(status, btn);
 

@@ -524,3 +524,23 @@ class FirestoreResearchStore:
     def update_research(self, research_id: int | str, **fields: Any) -> None:
         fields["updated_at"] = _utcnow_iso()
         self._coll().document(str(research_id)).update(fields)
+
+    def delete_research(self, research_id: int | str) -> bool:
+        rid = str(research_id)
+        doc = self._coll().document(rid).get()
+        if not doc.exists:
+            return False
+        hits_ref = self._hits_coll(rid)
+        existing = list(hits_ref.stream())
+        batch = self._db.batch()
+        ops = 0
+        for h in existing:
+            batch.delete(h.reference)
+            ops += 1
+            if ops >= 400:
+                batch.commit()
+                batch = self._db.batch()
+                ops = 0
+        batch.delete(self._coll().document(rid))
+        batch.commit()
+        return True

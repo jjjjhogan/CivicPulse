@@ -277,3 +277,13 @@ class SQLiteResearchStore:
         for k, v in fields.items():
             setattr(row, k, v)
         self._db.commit()
+
+    def delete_research(self, research_id: int | str) -> bool:
+        rid = int(research_id)
+        row = self._db.get(Research, rid)
+        if row is None:
+            return False
+        self._db.query(ResearchHit).filter(ResearchHit.research_id == rid).delete()
+        self._db.delete(row)
+        self._db.commit()
+        return True

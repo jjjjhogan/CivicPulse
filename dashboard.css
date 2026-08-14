@@ -336,6 +336,32 @@ html {
 .scraper-status.failed,
 .scraper-status.error { color: #b04a3a; }
 
+.scraper-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.scraper-badge.desktop-only {
+  font-size: 0.68rem;
+  font-weight: 600;
+  background: #f0e6d2;
+  color: #8a6d3b;
+  padding: 2px 8px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.scraper-notice {
+  font-size: 0.8rem;
+  color: #8a6d3b;
+  background: #fdf8ef;
+  border: 1px solid #f0e6d2;
+  border-radius: 10px;
+  padding: 10px 14px;
+  line-height: 1.45;
+}
+
 .btn-sm {
   padding: 8px 18px;
   font-size: 0.85rem;
