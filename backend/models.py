@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 
-from sqlalchemy import DateTime, Float, ForeignKey, Integer, String, Text, UniqueConstraint, event
+from sqlalchemy import Boolean, DateTime, Float, ForeignKey, Integer, String, Text, UniqueConstraint, event
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.types import JSON
 
@@ -22,13 +22,19 @@ class User(Base):
     email: Mapped[str] = mapped_column(String(255), unique=True, nullable=False, index=True)
     name: Mapped[str] = mapped_column(String(255), nullable=False)
     password_hash: Mapped[str] = mapped_column(String(255), nullable=False)
+    is_dev: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False, server_default="0")
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
 
     jobs: Mapped[list[ScrapeJob]] = relationship(back_populates="user")
     votes: Mapped[list[IssueVote]] = relationship(back_populates="user")
 
     def to_public_dict(self) -> dict:
-        return {"id": self.id, "email": self.email, "name": self.name}
+        return {
+            "id": self.id,
+            "email": self.email,
+            "name": self.name,
+            "is_dev": bool(self.is_dev),
+        }
 
 
 class Signal(Base):

@@ -155,6 +155,7 @@ def test_sqlite_create_and_get_user(app):
     assert user["name"] == "Alice"
     assert user["email"] == "alice@test.com"
     assert user["password_hash"] == "hash123"
+    assert user["is_dev"] is False
     assert user["id"] >= 1
 
     with app.app_context():
@@ -162,6 +163,28 @@ def test_sqlite_create_and_get_user(app):
         found = store2.get_user(user["id"])
     assert found is not None
     assert found["name"] == "Alice"
+    assert found["is_dev"] is False
+
+
+def test_sqlite_user_is_dev_round_trip(app):
+    from backend.models import User
+
+    with app.app_context():
+        store = SQLiteUserStore(SessionLocal())
+        user = store.create_user(name="Op", email="op@test.com", password_hash="pw")
+
+    db = SessionLocal()
+    try:
+        row = db.get(User, user["id"])
+        row.is_dev = True
+        db.commit()
+    finally:
+        db.close()
+
+    with app.app_context():
+        store2 = SQLiteUserStore(SessionLocal())
+        found = store2.get_user(user["id"])
+    assert found["is_dev"] is True
 
 
 def test_sqlite_get_user_by_email(app):
@@ -404,6 +427,7 @@ def test_firestore_create_user():
     assert user["id"] == "user_abc"
     assert user["name"] == "Alice"
     assert user["email"] == "alice@test.com"
+    assert user["is_dev"] is False
 
 
 def test_firestore_get_user():
@@ -417,6 +441,19 @@ def test_firestore_get_user():
     user = store.get_user("u1")
     assert user["id"] == "u1"
     assert user["name"] == "Bob"
+    assert user["is_dev"] is False
+
+
+def test_firestore_get_user_is_dev_true():
+    doc = _make_mock_doc("u1d", {
+        "email": "dev@test.com", "name": "Dev", "password_hash": "pw", "is_dev": True,
+    })
+    mock_db = MagicMock()
+    mock_db.collection.return_value.document.return_value.get.return_value = doc
+
+    store = FirestoreUserStore(mock_db)
+    user = store.get_user("u1d")
+    assert user["is_dev"] is True
 
 
 def test_firestore_get_user_by_email():

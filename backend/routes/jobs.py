@@ -7,8 +7,13 @@ from datetime import datetime
 
 from flask import Blueprint, jsonify, request
 
-from backend.auth import get_current_user, login_required
-from backend.jobs import build_command, is_job_running, normalize_source, selenium_available, start_job
+from backend.auth import (
+    SCRAPERS_FORBIDDEN_MSG,
+    get_current_user,
+    login_required,
+    scrapers_allowed,
+)
+from backend.jobs import build_command, is_job_running, normalize_source, start_job
 from backend.store import get_job_store
 from scrapers.json_payload import ImportPayloadError, parse_import_payload
 
@@ -51,6 +56,10 @@ def _extract_import_payload() -> dict:
 
 
 def _create_and_start_job(*, source: str, settings: dict):
+    user = get_current_user()
+    if not scrapers_allowed(user):
+        return jsonify({"error": SCRAPERS_FORBIDDEN_MSG}), 403
+
     source = normalize_source(source)
 
     if source == "tiktok" and not selenium_available():
@@ -72,7 +81,6 @@ def _create_and_start_job(*, source: str, settings: dict):
     if is_job_running():
         return jsonify({"error": "A scrape is already running."}), 409
 
-    user = get_current_user()
     store = get_job_store()
     job = store.create_job(
         source=source,

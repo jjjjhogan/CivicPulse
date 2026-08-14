@@ -84,3 +84,11 @@ def test_config_endpoint(client):
     assert "tiktok_defaults" in data
     assert "news_defaults" in data
     assert "news_outlets" in data
+    assert data["scrapers_available"] is True
+
+
+def test_config_scrapers_unavailable_on_render(client, monkeypatch):
+    monkeypatch.setenv("RENDER", "true")
+    data = client.get("/api/config").get_json()
+    assert data["scrapers_available"] is False
+

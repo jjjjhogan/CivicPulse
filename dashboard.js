@@ -3,38 +3,6 @@
 // Signal data, the CivicSignal schema notes, and shared helpers live in
 // signals-data.js (loaded before this file).
 
-const SCRAPERS = [
-  {
-    id: "tiktok",
-    source: "tiktok",
-    name: "TikTok scraper",
-    desc: "Selenium scraper for Irvine tags & comments (scripts/scrape_tiktok.py)",
-    signalSource: "tiktok",
-    desktopOnly: true,
-  },
-  {
-    id: "irvine-news",
-    source: "news",
-    name: "Irvine news scraper",
-    desc: "Local outlets: Voice of OC, Irvine Standard, Irvine Weekly",
-    signalSource: "news",
-  },
-  {
-    id: "reddit",
-    source: "reddit",
-    name: "Reddit import",
-    desc: "Paste or upload a Reddit scrape JSON export, then process into signals",
-    signalSource: "reddit",
-  },
-  {
-    id: "twitter",
-    source: "twitter",
-    name: "Twitter import",
-    desc: "Paste or upload a Twitter/X scrape JSON export, then process into signals",
-    signalSource: "twitter",
-  },
-];
-
 // Feed items rendered per page; "Show more" reveals the next batch.
 const FEED_PAGE_SIZE = 20;
 
@@ -43,28 +11,6 @@ const state = {
   selectedCategories: new Set(),
   keyword: "",
   feedShown: FEED_PAGE_SIZE,
-  config: {
-    tiktok_defaults: {
-      tag_urls: [
-        "https://www.tiktok.com/tag/irvine",
-        "https://www.tiktok.com/tag/newportbeach",
-      ],
-      max_videos: 10,
-      max_comments: 25,
-    },
-    news_defaults: {
-      outlets: ["irvine-standard", "irvine-weekly", "voice-of-oc"],
-      max_articles: 50,
-      require_category_match: true,
-    },
-    news_outlets: [
-      { id: "irvine-standard", name: "Irvine Standard" },
-      { id: "irvine-weekly", name: "Irvine Weekly" },
-      { id: "voice-of-oc", name: "Voice of OC" },
-    ],
-  },
-  scrapeRunning: false,
-  activeJobId: null,
   user: null,
   // Where the signal list came from: "loading" until the first fetch
   // resolves, then "live", "empty" (API up, nothing scraped yet),
@@ -583,15 +529,8 @@ function focusOnMap(record) {
   marker.openPopup();
 }
 
-// ── scraper panel ───────────────────────────────────────
-
 function logLine(text) {
-  const el = document.getElementById("scraperLog");
-  if (!el) return;
-  el.hidden = false;
-  const time = new Date().toLocaleTimeString();
-  el.textContent += `[${time}] ${text}\n`;
-  el.scrollTop = el.scrollHeight;
+  console.info(`[CivicPulse] ${text}`);
 }
 
 function mergeSignals(liveSignals) {
@@ -1217,18 +1156,26 @@ async function requireAuth() {
     // API unhealthy but reachable: stay on the dashboard so feed/map/verify
     // can show their own error states instead of bouncing to login.
     if (!res.ok) {
-      return { name: "Unavailable", offline: true };
+      return {
+        user: { name: "Unavailable", offline: true },
+        scrapers_allowed: false,
+        scrapers_host_ok: false,
+      };
     }
     const data = await res.json();
     if (!data.authenticated) {
       window.location.href = "login.html";
       return null;
     }
-    return data.user;
+    return data;
   } catch {
     // Server unreachable (e.g. dashboard_server stopped) — stay put so
     // panels can explain the outage rather than redirecting to login.
-    return { name: "Offline", offline: true };
+    return {
+      user: { name: "Offline", offline: true },
+      scrapers_allowed: false,
+      scrapers_host_ok: false,
+    };
   }
 }
 
@@ -1268,13 +1215,13 @@ function renderLoadingPlaceholder() {
 initSidebar();
 initMap();
 renderLoadingPlaceholder();
-requireAuth().then((user) => {
-  if (!user) return;
+requireAuth().then((session) => {
+  if (!session) return;
+  const user = session.user;
   showSignedInUser(user);
+  const scrapersNav = document.getElementById("scrapersNav");
+  if (scrapersNav) scrapersNav.hidden = !session.scrapers_allowed;
   if (user.offline) {
-    // Skip scraper config / job polling when the API is unreachable;
-    // still paint scraper cards and load sample signal states.
-    renderScrapers();
     return loadSignals().then(render);
   }
   const logoutBtn = document.getElementById("logoutBtn");
@@ -1282,11 +1229,5 @@ requireAuth().then((user) => {
     event.preventDefault();
     logout();
   });
-  return loadScraperConfig()
-    .then(() => {
-      renderScrapers();
-      showLastJobs();
-      return loadSignals();
-    })
-    .then(render);
+  return loadSignals().then(render);
 });

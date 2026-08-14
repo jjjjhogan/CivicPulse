@@ -8,6 +8,7 @@ import sys
 from flask import Blueprint, jsonify
 
 import backend.config as _cfg
+from backend.auth import scrapers_host_ok
 from backend.config import NEWS_DEFAULTS, ROOT, SIGNALS_DIR, TIKTOK_DEFAULTS
 from backend.store import get_signal_store
 
@@ -84,5 +85,6 @@ def api_config():
                 {"id": source["id"], "name": source["name"], "scope": source["scope"]}
                 for source in NEWS_SOURCES
             ],
+            "scrapers_available": scrapers_host_ok(),
         }
     )
