@@ -1,7 +1,6 @@
-import json
 import time
 import urllib.parse
-from dataclasses import asdict, dataclass
+from dataclasses import dataclass
 
 from selenium.common.exceptions import NoSuchWindowException, WebDriverException
 from selenium.webdriver.common.by import By
@@ -364,26 +363,3 @@ def scrape_comments_for_area(config: TikTokScrapeConfig) -> list[TikTokComment]:
     return all_comments
 
 
-def _write_comments_json(comments: list[TikTokComment], output_path: str) -> int:
-    with open(output_path, "w", encoding="utf-8") as f:
-        json.dump([asdict(c) for c in comments], f, indent=2)
-    return len(comments)
-
-
-def scrape_comments_to_json(config: TikTokScrapeConfig, output_path: str) -> int:
-    return _write_comments_json(scrape_comments_for_area(config), output_path)
-
-
-def scrape_video_to_json(
-    video_url: str,
-    output_path: str,
-    *,
-    max_comments: int = 25,
-    headless: bool = False,
-) -> int:
-    comments = scrape_comments_from_video(
-        video_url,
-        max_comments=max_comments,
-        headless=headless,
-    )
-    return _write_comments_json(comments, output_path)

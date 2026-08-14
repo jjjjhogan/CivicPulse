@@ -11,9 +11,9 @@ Real auth, SQLite + ORM, scrape job API, migrate signals off JSON-only storage.
 - Package: `backend/` (models, auth, jobs, routes); entry `scripts/dashboard_server.py`
 - SQLite models: `User`, `Signal`, `ScrapeJob` — import via `python scripts/import_signals.py`
 - `/api/auth` signup/login/logout/me (session cookie + hashed passwords)
-- `/api/jobs` POST/GET wrapping existing scrapers; legacy `/api/scrape/*` kept (auth-gated)
+- `/api/jobs` POST/GET wrapping existing scrapers (**local `is_dev` only**; legacy `/api/scrape/*` removed)
 - `/api/signals` + `/api/signals/feed` prefer SQLite (`storage: "db"`); JSON only when table empty
-- UI: `login.js` + dashboard gate/logout + scrapers panel → job endpoints
+- UI: `login.js` + dashboard gate/logout; scrapers live on `scrapers.html` (dev-only nav)
 - TikTok: persistent Chrome profile + login-wall errors — see `docs/TIKTOK_SCRAPE.md`
 - Local demo runbook: root `README.md`
 

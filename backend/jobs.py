@@ -35,13 +35,6 @@ def selenium_available() -> bool:
         return False
 
 
-def _news_outlet_ids() -> list[str]:
-    sys.path.insert(0, str(ROOT))
-    from scrapers.news.scrape import NEWS_SOURCES  # noqa: WPS433
-
-    return [source["id"] for source in NEWS_SOURCES]
-
-
 def build_tiktok_command(payload: dict) -> list[str]:
     mode = payload.get("mode", "tags")
     cmd = [sys.executable, str(SCRAPE_TIKTOK)]

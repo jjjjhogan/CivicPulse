@@ -95,7 +95,7 @@ def test_friendly_scraper_error_login_wall():
     assert "TIKTOK_SCRAPE" in msg
 
 
-def test_failed_tiktok_job_surfaces_login_wall(auth_client, monkeypatch):
+def test_failed_tiktok_job_surfaces_login_wall(dev_client, monkeypatch):
     monkeypatch.setattr("backend.routes.jobs.selenium_available", lambda: True)
     monkeypatch.setattr(
         "backend.jobs.subprocess.run",
@@ -138,10 +138,9 @@ def test_failed_tiktok_job_surfaces_login_wall(auth_client, monkeypatch):
     assert "login" in (status.get("error") or "").lower()
 
 
-def test_concurrent_job_rejected(dev_client, monkeypatch):
-def test_tiktok_501_without_selenium(auth_client, monkeypatch):
+def test_tiktok_501_without_selenium(dev_client, monkeypatch):
     monkeypatch.setattr("backend.routes.jobs.selenium_available", lambda: False)
-    res = auth_client.post(
+    res = dev_client.post(
         "/api/jobs",
         json={
             "source": "tiktok",
@@ -155,7 +154,7 @@ def test_tiktok_501_without_selenium(auth_client, monkeypatch):
     assert "Selenium" in res.get_json()["error"]
 
 
-def test_concurrent_job_rejected(auth_client, monkeypatch):
+def test_concurrent_job_rejected(dev_client, monkeypatch):
     import backend.jobs as jobs
 
     monkeypatch.setattr(
@@ -240,6 +239,11 @@ def test_jobs_forbidden_for_non_dev(auth_client):
     assert "dev account" in res.get_json()["error"].lower()
 
 
+def test_job_reads_forbidden_for_non_dev(auth_client):
+    assert auth_client.get("/api/jobs").status_code == 403
+    assert auth_client.get("/api/jobs/1").status_code == 403
+
+
 def test_jobs_forbidden_on_render_even_for_dev(dev_client, monkeypatch):
     monkeypatch.setenv("RENDER", "true")
     res = dev_client.post(
@@ -251,8 +255,10 @@ def test_jobs_forbidden_on_render_even_for_dev(dev_client, monkeypatch):
     )
     assert res.status_code == 403
     assert "local operator" in res.get_json()["error"].lower()
+    assert dev_client.get("/api/jobs").status_code == 403
 
 
-def test_legacy_scrape_forbidden_for_non_dev(auth_client):
-    res = auth_client.post("/api/scrape/irvine-news", json={"max_articles": 1})
-    assert res.status_code == 403
+def test_legacy_scrape_routes_removed(auth_client, dev_client):
+    # Unknown /api/* paths may 404 or 405 (static catch-all is GET-only).
+    assert auth_client.post("/api/scrape/irvine-news", json={"max_articles": 1}).status_code in {404, 405}
+    assert dev_client.get("/api/scrape/status").status_code == 404
