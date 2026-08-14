@@ -17,7 +17,7 @@ def _inline_thread(target, args=(), kwargs=None, daemon=None):
     return _Immediate()
 
 
-def test_create_and_complete_news_job(auth_client, monkeypatch):
+def test_create_and_complete_news_job(dev_client, monkeypatch):
     monkeypatch.setattr(
         "backend.jobs.subprocess.run",
         lambda *a, **k: subprocess.CompletedProcess(
@@ -30,7 +30,7 @@ def test_create_and_complete_news_job(auth_client, monkeypatch):
         lambda source=None: {"inserted": 0, "updated": 0},
     )
 
-    res = auth_client.post(
+    res = dev_client.post(
         "/api/jobs",
         json={
             "source": "irvine-news",
@@ -45,7 +45,7 @@ def test_create_and_complete_news_job(auth_client, monkeypatch):
     # Inline thread finishes before response in most cases; poll briefly.
     status = None
     for _ in range(20):
-        poll = auth_client.get(f"/api/jobs/{job_id}")
+        poll = dev_client.get(f"/api/jobs/{job_id}")
         assert poll.status_code == 200
         status = poll.get_json()
         if status["status"] in {"completed", "failed"}:
@@ -57,14 +57,14 @@ def test_create_and_complete_news_job(auth_client, monkeypatch):
     assert status["exit_code"] == 0
     assert "ok" in (status.get("log") or "")
 
-    listing = auth_client.get("/api/jobs")
+    listing = dev_client.get("/api/jobs")
     assert listing.status_code == 200
     jobs = listing.get_json()["jobs"]
     assert any(j["id"] == job_id for j in jobs)
 
 
-def test_invalid_source(auth_client):
-    res = auth_client.post(
+def test_invalid_source(dev_client):
+    res = dev_client.post(
         "/api/jobs",
         json={"source": "myspace", "settings": {}},
     )
@@ -95,7 +95,7 @@ def test_friendly_scraper_error_login_wall():
     assert "TIKTOK_SCRAPE" in msg
 
 
-def test_failed_tiktok_job_surfaces_login_wall(auth_client, monkeypatch):
+def test_failed_tiktok_job_surfaces_login_wall(dev_client, monkeypatch):
     monkeypatch.setattr(
         "backend.jobs.subprocess.run",
         lambda *a, **k: subprocess.CompletedProcess(
@@ -107,7 +107,7 @@ def test_failed_tiktok_job_surfaces_login_wall(auth_client, monkeypatch):
     )
     monkeypatch.setattr("backend.jobs.threading.Thread", _inline_thread)
 
-    res = auth_client.post(
+    res = dev_client.post(
         "/api/jobs",
         json={
             "source": "tiktok",
@@ -124,7 +124,7 @@ def test_failed_tiktok_job_surfaces_login_wall(auth_client, monkeypatch):
 
     status = None
     for _ in range(20):
-        poll = auth_client.get(f"/api/jobs/{job_id}")
+        poll = dev_client.get(f"/api/jobs/{job_id}")
         assert poll.status_code == 200
         status = poll.get_json()
         if status["status"] in {"completed", "failed"}:
@@ -137,7 +137,7 @@ def test_failed_tiktok_job_surfaces_login_wall(auth_client, monkeypatch):
     assert "login" in (status.get("error") or "").lower()
 
 
-def test_concurrent_job_rejected(auth_client, monkeypatch):
+def test_concurrent_job_rejected(dev_client, monkeypatch):
     import backend.jobs as jobs
 
     monkeypatch.setattr(
@@ -152,7 +152,7 @@ def test_concurrent_job_rejected(auth_client, monkeypatch):
         lambda *a, **k: type("T", (), {"start": lambda self: None})(),
     )
 
-    first = auth_client.post(
+    first = dev_client.post(
         "/api/jobs",
         json={
             "source": "irvine-news",
@@ -162,7 +162,7 @@ def test_concurrent_job_rejected(auth_client, monkeypatch):
     assert first.status_code == 202
     assert jobs._running_job_id is not None
 
-    second = auth_client.post(
+    second = dev_client.post(
         "/api/jobs",
         json={
             "source": "irvine-news",
@@ -175,7 +175,7 @@ def test_concurrent_job_rejected(auth_client, monkeypatch):
         jobs._running_job_id = None
 
 
-def test_reddit_import_accepts_devtools_dump(auth_client, monkeypatch, tmp_path):
+def test_reddit_import_accepts_devtools_dump(dev_client, monkeypatch, tmp_path):
     """Pasted DevTools tree dumps should be coerced before the process script runs."""
     written = {}
 
@@ -201,10 +201,40 @@ def test_reddit_import_accepts_devtools_dump(auth_client, monkeypatch, tmp_path)
         '{3}blocked: falsequery: "irvine"items: [1]'
         '0: {3}id: "abc"title: "Pothole on Culver"previewText: "Still open"'
     )
-    res = auth_client.post(
+    res = dev_client.post(
         "/api/jobs",
         json={"source": "reddit", "settings": {"payload": dump}},
     )
     assert res.status_code == 202, res.get_json()
     assert written["payload"]["query"] == "irvine"
     assert written["payload"]["items"][0]["id"] == "abc"
+
+
+def test_jobs_forbidden_for_non_dev(auth_client):
+    res = auth_client.post(
+        "/api/jobs",
+        json={
+            "source": "irvine-news",
+            "settings": {"max_articles": 1, "outlets": ["irvine-standard"]},
+        },
+    )
+    assert res.status_code == 403
+    assert "dev account" in res.get_json()["error"].lower()
+
+
+def test_jobs_forbidden_on_render_even_for_dev(dev_client, monkeypatch):
+    monkeypatch.setenv("RENDER", "true")
+    res = dev_client.post(
+        "/api/jobs",
+        json={
+            "source": "irvine-news",
+            "settings": {"max_articles": 1, "outlets": ["irvine-standard"]},
+        },
+    )
+    assert res.status_code == 403
+    assert "local operator" in res.get_json()["error"].lower()
+
+
+def test_legacy_scrape_forbidden_for_non_dev(auth_client):
+    res = auth_client.post("/api/scrape/irvine-news", json={"max_articles": 1})
+    assert res.status_code == 403

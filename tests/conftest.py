@@ -48,7 +48,7 @@ def _reset_job_slot():
 
 @pytest.fixture()
 def auth_client(client):
-    """Signed-up + logged-in test client (session cookie)."""
+    """Signed-up + logged-in test client (session cookie). is_dev is false."""
     res = client.post(
         "/api/auth/signup",
         json={
@@ -59,6 +59,21 @@ def auth_client(client):
     )
     assert res.status_code == 201, res.get_json()
     return client
+
+
+@pytest.fixture()
+def dev_client(auth_client):
+    """Logged-in operator with is_dev=True (local scrapers allowed)."""
+    from backend.models import User
+
+    db = SessionLocal()
+    try:
+        user = db.query(User).filter_by(email="tester@example.com").one()
+        user.is_dev = True
+        db.commit()
+    finally:
+        db.close()
+    return auth_client
 
 
 @pytest.fixture()

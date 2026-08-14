@@ -9,6 +9,8 @@ from backend.auth import (
     hash_password,
     login_user,
     logout_user,
+    scrapers_allowed,
+    scrapers_host_ok,
     verify_password,
 )
 from backend.store import get_user_store, public_user
@@ -28,8 +30,18 @@ def _is_valid_email(email: str) -> bool:
 def me():
     user = get_current_user()
     if user is None:
-        return jsonify({"authenticated": False, "user": None})
-    return jsonify({"authenticated": True, "user": public_user(user)})
+        return jsonify({
+            "authenticated": False,
+            "user": None,
+            "scrapers_allowed": False,
+            "scrapers_host_ok": scrapers_host_ok(),
+        })
+    return jsonify({
+        "authenticated": True,
+        "user": public_user(user),
+        "scrapers_allowed": scrapers_allowed(user),
+        "scrapers_host_ok": scrapers_host_ok(),
+    })
 
 
 @bp.post("/signup")

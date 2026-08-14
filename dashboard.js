@@ -3,37 +3,6 @@
 // Signal data, the CivicSignal schema notes, and shared helpers live in
 // signals-data.js (loaded before this file).
 
-const SCRAPERS = [
-  {
-    id: "tiktok",
-    source: "tiktok",
-    name: "TikTok scraper",
-    desc: "Selenium scraper for Irvine tags & comments (scripts/scrape_tiktok.py)",
-    signalSource: "tiktok",
-  },
-  {
-    id: "irvine-news",
-    source: "news",
-    name: "Irvine news scraper",
-    desc: "Local outlets: Voice of OC, Irvine Standard, Irvine Weekly",
-    signalSource: "news",
-  },
-  {
-    id: "reddit",
-    source: "reddit",
-    name: "Reddit import",
-    desc: "Paste or upload a Reddit scrape JSON export, then process into signals",
-    signalSource: "reddit",
-  },
-  {
-    id: "twitter",
-    source: "twitter",
-    name: "Twitter import",
-    desc: "Paste or upload a Twitter/X scrape JSON export, then process into signals",
-    signalSource: "twitter",
-  },
-];
-
 // Feed items rendered per page; "Show more" reveals the next batch.
 const FEED_PAGE_SIZE = 20;
 
@@ -42,28 +11,6 @@ const state = {
   selectedCategories: new Set(),
   keyword: "",
   feedShown: FEED_PAGE_SIZE,
-  config: {
-    tiktok_defaults: {
-      tag_urls: [
-        "https://www.tiktok.com/tag/irvine",
-        "https://www.tiktok.com/tag/newportbeach",
-      ],
-      max_videos: 10,
-      max_comments: 25,
-    },
-    news_defaults: {
-      outlets: ["irvine-standard", "irvine-weekly", "voice-of-oc"],
-      max_articles: 50,
-      require_category_match: true,
-    },
-    news_outlets: [
-      { id: "irvine-standard", name: "Irvine Standard" },
-      { id: "irvine-weekly", name: "Irvine Weekly" },
-      { id: "voice-of-oc", name: "Voice of OC" },
-    ],
-  },
-  scrapeRunning: false,
-  activeJobId: null,
   user: null,
   // Where the signal list came from: "loading" until the first fetch
   // resolves, then "live", "empty" (API up, nothing scraped yet),
@@ -582,15 +529,8 @@ function focusOnMap(record) {
   marker.openPopup();
 }
 
-// ── scraper panel ───────────────────────────────────────
-
 function logLine(text) {
-  const el = document.getElementById("scraperLog");
-  if (!el) return;
-  el.hidden = false;
-  const time = new Date().toLocaleTimeString();
-  el.textContent += `[${time}] ${text}\n`;
-  el.scrollTop = el.scrollHeight;
+  console.info(`[CivicPulse] ${text}`);
 }
 
 function mergeSignals(liveSignals) {
@@ -619,490 +559,6 @@ async function loadSignals() {
     logLine("Signals API returned an error — showing sample / resident data.");
   } else if (state.live === "offline") {
     logLine("Couldn't reach the signals API — showing sample / resident data.");
-  }
-}
-
-async function loadScraperConfig() {
-  try {
-    const res = await fetch("/api/config");
-    if (!res.ok) return;
-    const data = await res.json();
-    state.config = {
-      ...state.config,
-      ...data,
-      tiktok_defaults: {
-        ...state.config.tiktok_defaults,
-        ...(data.tiktok_defaults || {}),
-      },
-      news_defaults: {
-        ...state.config.news_defaults,
-        ...(data.news_defaults || {}),
-      },
-      news_outlets: data.news_outlets || state.config.news_outlets,
-    };
-  } catch {
-    // Keep offline defaults.
-  }
-}
-
-function setRunButtonsDisabled(disabled) {
-  state.scrapeRunning = disabled;
-  for (const btn of document.querySelectorAll("[data-scraper-run]")) {
-    btn.disabled = disabled;
-  }
-}
-
-// Python colorizes tracebacks with ANSI escapes; strip them for the browser.
-function stripAnsi(text) {
-  return (text || "").replace(/\u001b\[[0-9;]*m/g, "");
-}
-
-// Pull the most informative line out of a failed job's output so the log
-// reads like a sentence, not just "exited with code 1".
-function readableJobFailure(data) {
-  const lines = stripAnsi(data.log)
-    .split(/\r?\n/)
-    .map((line) => line.trim())
-    .filter(Boolean);
-  const errorLine = [...lines]
-    .reverse()
-    .find((line) => /error|exception|failed|traceback|invalid|not found/i.test(line));
-  const detail = errorLine || lines[lines.length - 1] || "";
-  const base = data.error || "Scrape failed.";
-  return detail && !base.includes(detail) ? `${base} — ${detail}` : base;
-}
-
-// Relative "2h ago" for job timestamps (ISO strings from /api/jobs).
-// Timestamps are UTC but may arrive without an offset (SQLite drops the
-// tzinfo on round-trip), so offset-less strings are read as UTC.
-function timeAgo(iso) {
-  if (!iso) return "";
-  const hasOffset = /(?:Z|[+-]\d{2}:?\d{2})$/.test(iso);
-  const then = new Date(hasOffset ? iso : `${iso}Z`);
-  if (Number.isNaN(then.getTime())) return "";
-  const secs = Math.max(0, (Date.now() - then.getTime()) / 1000);
-  if (secs < 60) return "just now";
-  if (secs < 3600) return `${Math.round(secs / 60)}m ago`;
-  if (secs < 86400) return `${Math.round(secs / 3600)}h ago`;
-  return `${Math.round(secs / 86400)}d ago`;
-}
-
-// Show each scraper card's most recent job outcome instead of "Idle", and
-// resume watching a job that is still running (e.g. after a page reload).
-async function showLastJobs() {
-  let jobs;
-  try {
-    const res = await fetch("/api/jobs?limit=50", { credentials: "same-origin" });
-    if (!res.ok) {
-      logLine("Couldn't load job history — the server returned an error.");
-      return;
-    }
-    jobs = (await res.json()).jobs || [];
-  } catch {
-    logLine("Couldn't load job history — the server may be offline.");
-    return;
-  }
-
-  // Jobs come newest-first, so the first one seen per source is the latest.
-  const newestBySource = {};
-  for (const job of jobs) {
-    if (!newestBySource[job.source]) newestBySource[job.source] = job;
-  }
-
-  for (const scraper of SCRAPERS) {
-    const job = newestBySource[scraper.id];
-    if (!job) continue;
-    const statusEl = document.querySelector(
-      `[data-scraper="${scraper.id}"] .scraper-status`
-    );
-    if (!statusEl) continue;
-
-    const when = timeAgo(job.finished_at || job.started_at || job.created_at);
-    if (job.status === "completed") {
-      statusEl.textContent = when ? `Done ${when}` : "Done";
-      statusEl.className = "scraper-status done";
-    } else if (job.status === "failed") {
-      statusEl.textContent = when ? `Failed ${when}` : "Failed";
-      statusEl.className = "scraper-status failed";
-      statusEl.title = readableJobFailure(job);
-    } else if (job.status === "running" || job.status === "pending") {
-      statusEl.textContent = "Running…";
-      statusEl.className = "scraper-status running";
-      setRunButtonsDisabled(true);
-      pollJobStatus(job.id, statusEl).then(async (ok) => {
-        if (ok) {
-          await loadSignals();
-          render();
-        }
-        setRunButtonsDisabled(false);
-      });
-    }
-  }
-}
-
-async function pollJobStatus(jobId, statusEl) {
-  const logEl = document.getElementById("scraperLog");
-  let misses = 0;
-  while (true) {
-    let data;
-    try {
-      const res = await fetch(`/api/jobs/${jobId}`, { credentials: "same-origin" });
-      if (res.status === 401) {
-        window.location.href = "login.html";
-        return false;
-      }
-      if (!res.ok) throw new Error(`API returned ${res.status}`);
-      data = await res.json();
-      misses = 0;
-    } catch {
-      // A transient blip shouldn't kill the poll, but after ~15s of
-      // silence stop with an honest message instead of spinning forever.
-      misses += 1;
-      if (misses >= 6) {
-        statusEl.textContent = "Unknown";
-        statusEl.className = "scraper-status error";
-        logLine(
-          `Lost contact with the server while job #${jobId} was running — refresh the page to check on it.`
-        );
-        return false;
-      }
-      await new Promise((r) => setTimeout(r, 2500));
-      continue;
-    }
-    if (data.log) {
-      logEl.hidden = false;
-      logEl.textContent = stripAnsi(data.log);
-      logEl.scrollTop = logEl.scrollHeight;
-    }
-    if (data.status === "completed") {
-      statusEl.textContent = "Done";
-      statusEl.className = "scraper-status done";
-      return true;
-    }
-    if (data.status === "failed") {
-      const reason = readableJobFailure(data);
-      statusEl.textContent = "Failed";
-      statusEl.className = "scraper-status failed";
-      statusEl.title = reason;
-      logLine(`Job #${jobId} failed: ${reason}`);
-      return false;
-    }
-    await new Promise((r) => setTimeout(r, 1500));
-  }
-}
-
-function collectTikTokPayload(card) {
-  const maxVideos = Number(card.querySelector("[data-field=max_videos]").value);
-  const maxComments = Number(card.querySelector("[data-field=max_comments]").value);
-  const tagUrls = card
-    .querySelector("[data-field=tag_urls]")
-    .value.split("\n")
-    .map((line) => line.trim())
-    .filter(Boolean);
-  return {
-    mode: "tags",
-    max_videos: Number.isFinite(maxVideos) ? maxVideos : state.config.tiktok_defaults.max_videos,
-    max_comments: Number.isFinite(maxComments)
-      ? maxComments
-      : state.config.tiktok_defaults.max_comments,
-    tag_urls: tagUrls,
-  };
-}
-
-function collectNewsPayload(card) {
-  const outlets = [...card.querySelectorAll("[data-outlet]:checked")].map(
-    (input) => input.value
-  );
-  const maxArticles = Number(card.querySelector("[data-field=max_articles]").value);
-  const requireCategory = card.querySelector("[data-field=require_category]").checked;
-  return {
-    outlets,
-    max_articles: Number.isFinite(maxArticles)
-      ? maxArticles
-      : state.config.news_defaults.max_articles,
-    require_category_match: requireCategory,
-  };
-}
-
-async function buildJobRequest(scraper, card) {
-  if (scraper.id === "tiktok") {
-    return {
-      body: JSON.stringify({ source: "tiktok", settings: collectTikTokPayload(card) }),
-      headers: { "Content-Type": "application/json" },
-    };
-  }
-  if (scraper.id === "irvine-news") {
-    return {
-      body: JSON.stringify({
-        source: "irvine-news",
-        settings: collectNewsPayload(card),
-      }),
-      headers: { "Content-Type": "application/json" },
-    };
-  }
-  if (scraper.id === "reddit" || scraper.id === "twitter") {
-    const fileInput = card.querySelector("[data-field=file]");
-    const paste = (card.querySelector("[data-field=paste]").value || "").trim();
-    if (fileInput?.files?.length) {
-      const form = new FormData();
-      form.append("source", scraper.id);
-      form.append("file", fileInput.files[0]);
-      return { body: form, isForm: true };
-    }
-    if (!paste) {
-      throw new Error("Paste JSON (or a DevTools object dump) or choose a .json file first.");
-    }
-    // Send the raw paste — the server accepts strict JSON, missing braces,
-    // and browser DevTools tree dumps (leading ▾ / {N} size markers).
-    return {
-      body: JSON.stringify({
-        source: scraper.id,
-        settings: { payload: paste },
-      }),
-      headers: { "Content-Type": "application/json" },
-    };
-  }
-  return { body: null };
-}
-
-async function runScraper(scraper, card, statusEl, btn) {
-  if (state.scrapeRunning) {
-    statusEl.textContent = "Busy";
-    logLine("Another scrape is already running.");
-    return;
-  }
-
-  let request;
-  try {
-    request = await buildJobRequest(scraper, card);
-  } catch (err) {
-    statusEl.textContent = "Needs input";
-    statusEl.className = "scraper-status";
-    logLine(err.message || String(err));
-    return;
-  }
-
-  setRunButtonsDisabled(true);
-  btn.disabled = true;
-  statusEl.textContent = "Running…";
-  statusEl.className = "scraper-status running";
-  logLine(`Starting ${scraper.name}…`);
-
-  try {
-    const res = await fetch("/api/jobs", {
-      method: "POST",
-      credentials: "same-origin",
-      body: request.body,
-      headers: request.headers,
-    });
-    if (res.status === 401) {
-      window.location.href = "login.html";
-      return;
-    }
-    if (res.status === 501) {
-      const body = await res.json();
-      statusEl.textContent = "Not available";
-      statusEl.className = "scraper-status";
-      logLine(body.error || `${scraper.name} is not implemented yet.`);
-      setRunButtonsDisabled(false);
-      return;
-    }
-    if (res.status === 409) {
-      statusEl.textContent = "Busy";
-      statusEl.className = "scraper-status";
-      logLine("Another scrape is already running.");
-      setRunButtonsDisabled(false);
-      return;
-    }
-    if (!res.ok) {
-      const body = await res.json().catch(() => ({}));
-      throw new Error(body.error || `API returned ${res.status}`);
-    }
-
-    const started = await res.json();
-    logLine(`Job #${started.id} started.`);
-    const ok = await pollJobStatus(started.id, statusEl);
-    if (ok) {
-      await loadSignals();
-      const source = scraper.signalSource || scraper.id;
-      const count = state.signals.filter((s) => s.source === source).length;
-      logLine(`${scraper.name} finished — ${count} ${source} signals loaded.`);
-      render();
-    }
-  } catch (err) {
-    statusEl.textContent = "Offline";
-    statusEl.className = "scraper-status";
-    logLine(
-      err?.message && !String(err.message).includes("Failed to fetch")
-        ? err.message
-        : `${scraper.name} could not start — run python scripts/dashboard_server.py and try again.`
-    );
-  }
-
-  setRunButtonsDisabled(false);
-}
-
-function buildField(labelText, input) {
-  const wrap = document.createElement("label");
-  wrap.className = "scraper-field";
-  const label = document.createElement("span");
-  label.className = "scraper-field-label";
-  label.textContent = labelText;
-  wrap.append(label, input);
-  return wrap;
-}
-
-function renderTikTokSettings(card) {
-  const defaults = state.config.tiktok_defaults;
-  const settings = document.createElement("div");
-  settings.className = "scraper-settings";
-
-  const maxVideos = document.createElement("input");
-  maxVideos.type = "number";
-  maxVideos.min = "1";
-  maxVideos.max = "50";
-  maxVideos.value = String(defaults.max_videos ?? 10);
-  maxVideos.dataset.field = "max_videos";
-
-  const maxComments = document.createElement("input");
-  maxComments.type = "number";
-  maxComments.min = "1";
-  maxComments.max = "200";
-  maxComments.value = String(defaults.max_comments ?? 25);
-  maxComments.dataset.field = "max_comments";
-
-  const nums = document.createElement("div");
-  nums.className = "scraper-fields-row";
-  nums.append(
-    buildField("Max videos", maxVideos),
-    buildField("Max comments", maxComments)
-  );
-
-  const tags = document.createElement("textarea");
-  tags.rows = 3;
-  tags.dataset.field = "tag_urls";
-  tags.placeholder = "One TikTok tag URL per line";
-  tags.value = (defaults.tag_urls || []).join("\n");
-
-  settings.append(nums, buildField("Tag URLs", tags));
-  card.appendChild(settings);
-}
-
-function renderNewsSettings(card) {
-  const defaults = state.config.news_defaults;
-  const outlets = state.config.news_outlets || [];
-  const settings = document.createElement("div");
-  settings.className = "scraper-settings";
-
-  const outletList = document.createElement("div");
-  outletList.className = "scraper-outlet-list";
-  const selected = new Set(defaults.outlets || []);
-  for (const outlet of outlets) {
-    const row = document.createElement("label");
-    row.className = "scraper-check";
-    const input = document.createElement("input");
-    input.type = "checkbox";
-    input.value = outlet.id;
-    input.dataset.outlet = outlet.id;
-    input.checked = selected.size === 0 || selected.has(outlet.id);
-    const text = document.createElement("span");
-    text.textContent = outlet.name;
-    row.append(input, text);
-    outletList.appendChild(row);
-  }
-
-  const maxArticles = document.createElement("input");
-  maxArticles.type = "number";
-  maxArticles.min = "1";
-  maxArticles.max = "200";
-  maxArticles.value = String(defaults.max_articles ?? 50);
-  maxArticles.dataset.field = "max_articles";
-
-  const requireCategory = document.createElement("label");
-  requireCategory.className = "scraper-check";
-  const requireInput = document.createElement("input");
-  requireInput.type = "checkbox";
-  requireInput.dataset.field = "require_category";
-  requireInput.checked = defaults.require_category_match !== false;
-  const requireText = document.createElement("span");
-  requireText.textContent = "Require civic category match";
-  requireCategory.append(requireInput, requireText);
-
-  settings.append(
-    buildField("Outlets", outletList),
-    buildField("Max articles", maxArticles),
-    requireCategory
-  );
-  card.appendChild(settings);
-}
-
-function renderImportSettings(card, scraper) {
-  const settings = document.createElement("div");
-  settings.className = "scraper-settings";
-
-  const paste = document.createElement("textarea");
-  paste.rows = 5;
-  paste.dataset.field = "paste";
-  paste.placeholder =
-    scraper.id === "reddit"
-      ? 'Paste Reddit scrape JSON or DevTools dump ({ "items": [...] } or tree copy)'
-      : 'Paste Twitter scrape JSON or DevTools dump ({ "tweets": [...] } or tree copy)';
-
-  const file = document.createElement("input");
-  file.type = "file";
-  file.accept = "application/json,.json";
-  file.dataset.field = "file";
-
-  settings.append(
-    buildField("Paste JSON", paste),
-    buildField("Or upload .json", file)
-  );
-  card.appendChild(settings);
-}
-
-function renderScrapers() {
-  const el = document.getElementById("scraperGrid");
-  el.innerHTML = "";
-  for (const scraper of SCRAPERS) {
-    const card = document.createElement("div");
-    card.className = "scraper-card";
-    card.dataset.scraper = scraper.id;
-
-    const name = document.createElement("div");
-    name.className = "scraper-name";
-    name.textContent = scraper.name;
-
-    const desc = document.createElement("div");
-    desc.className = "scraper-desc";
-    desc.textContent = scraper.desc;
-
-    const analytics = document.createElement("a");
-    analytics.className = "scraper-analytics";
-    analytics.href = `source.html?source=${encodeURIComponent(scraper.source || scraper.signalSource || scraper.id)}`;
-    analytics.textContent = "View analytics →";
-
-    card.append(name, desc, analytics);
-
-    if (scraper.id === "tiktok") renderTikTokSettings(card);
-    else if (scraper.id === "irvine-news") renderNewsSettings(card);
-    else if (scraper.id === "reddit" || scraper.id === "twitter") {
-      renderImportSettings(card, scraper);
-    }
-
-    const row = document.createElement("div");
-    row.className = "scraper-row";
-    const status = document.createElement("span");
-    status.className = "scraper-status";
-    status.textContent = "Idle";
-    const btn = document.createElement("button");
-    btn.className = "btn btn-sm";
-    btn.textContent = scraper.id === "reddit" || scraper.id === "twitter" ? "Import" : "Run";
-    btn.dataset.scraperRun = scraper.id;
-    btn.addEventListener("click", () => runScraper(scraper, card, status, btn));
-    row.append(status, btn);
-
-    card.appendChild(row);
-    el.appendChild(card);
   }
 }
 
@@ -1189,18 +645,26 @@ async function requireAuth() {
     // API unhealthy but reachable: stay on the dashboard so feed/map/verify
     // can show their own error states instead of bouncing to login.
     if (!res.ok) {
-      return { name: "Unavailable", offline: true };
+      return {
+        user: { name: "Unavailable", offline: true },
+        scrapers_allowed: false,
+        scrapers_host_ok: false,
+      };
     }
     const data = await res.json();
     if (!data.authenticated) {
       window.location.href = "login.html";
       return null;
     }
-    return data.user;
+    return data;
   } catch {
     // Server unreachable (e.g. dashboard_server stopped) — stay put so
     // panels can explain the outage rather than redirecting to login.
-    return { name: "Offline", offline: true };
+    return {
+      user: { name: "Offline", offline: true },
+      scrapers_allowed: false,
+      scrapers_host_ok: false,
+    };
   }
 }
 
@@ -1240,13 +704,13 @@ function renderLoadingPlaceholder() {
 initSidebar();
 initMap();
 renderLoadingPlaceholder();
-requireAuth().then((user) => {
-  if (!user) return;
+requireAuth().then((session) => {
+  if (!session) return;
+  const user = session.user;
   showSignedInUser(user);
+  const scrapersNav = document.getElementById("scrapersNav");
+  if (scrapersNav) scrapersNav.hidden = !session.scrapers_allowed;
   if (user.offline) {
-    // Skip scraper config / job polling when the API is unreachable;
-    // still paint scraper cards and load sample signal states.
-    renderScrapers();
     return loadSignals().then(render);
   }
   const logoutBtn = document.getElementById("logoutBtn");
@@ -1254,11 +718,5 @@ requireAuth().then((user) => {
     event.preventDefault();
     logout();
   });
-  return loadScraperConfig()
-    .then(() => {
-      renderScrapers();
-      showLastJobs();
-      return loadSignals();
-    })
-    .then(render);
+  return loadSignals().then(render);
 });
