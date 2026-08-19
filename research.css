@@ -1091,6 +1091,69 @@
   margin-left: auto;
 }
 
+/* ── summary preview ───────────────────────────────── */
+
+.summary-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.summary-stat {
+  font-size: 0.85rem;
+  color: #5a6b4a;
+  padding: 8px 16px;
+  border: 1.5px solid #e4e8dc;
+  border-radius: 10px;
+}
+
+.summary-stat strong {
+  color: var(--ink-deep);
+  font-weight: 600;
+}
+
+.summary-date-range {
+  font-size: 0.82rem;
+  color: #7a8a6c;
+  margin-bottom: 14px;
+}
+
+.summary-section-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #7a8a6c;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+
+.summary-signal {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 0;
+  border-bottom: 1px solid #eef0ea;
+}
+
+.summary-signal:last-child {
+  border-bottom: none;
+}
+
+.summary-signal-title {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--ink-deep);
+}
+
+.summary-signal-meta {
+  font-size: 0.72rem;
+  color: #8a9a7c;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
 /* ── tiktok settings in jobs panel ──────────────────── */
 
 #tiktokSettings {

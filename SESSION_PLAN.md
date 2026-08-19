@@ -1,91 +1,90 @@
-# CivicPulse — session plan (Sessions 21–22: Research-scoped jobs)
+# CivicPulse — session plan (Sessions 25–26: Research summary + print)
 
-**Goal:** Wire scrape jobs to research topics so the Jobs tab fills after a news job, and new signals auto-match into the research.
+**Goal:** Add a summary API + print-ready HTML page so a research topic produces a one-pager briefing for the mayor.
 
 ---
 
-## Sessions 21–22 — Research-scoped jobs
+## Sessions 25–26 — Research summary API + print/HTML
 
 ### Completed
 
-**Backend model + migration:**
-- [x] Added `research_id` FK to `ScrapeJob` model (nullable, ON DELETE SET NULL)
-- [x] `to_dict()` includes `research_id` in job responses
-- [x] Schema migration v2: `ALTER TABLE scrape_jobs ADD COLUMN research_id`
+**Backend API (`routes/research.py`):**
+- [x] `GET /api/researches/<id>/summary` — structured summary with hit stats, category/source breakdown, date range, top 10 signals, linked jobs
+- [x] Returns aggregated `by_category`, `by_source`, `date_range`, `top_signals`, `jobs`
 
-**Store protocol + implementations:**
-- [x] `JobStore.create_job` accepts optional `research_id`
-- [x] `JobStore.list_jobs_for_research(research_id)` — query jobs linked to a research
-- [x] `ResearchStore.add_hits` — incremental hit addition (skips duplicates)
-- [x] All four store implementations updated (SQLite, Firestore, standalone)
-
-**Post-job matching hook:**
-- [x] `_match_research_after_job` in `backend/jobs.py` — after job completes + signals sync, auto-matches all signals against the linked research using shared `match_signals()` function
-- [x] Extracted `_match_signals` from `routes/research.py` into shared `backend/research_match.py`
-
-**API:**
-- [x] `POST /api/jobs` accepts optional `research_id` to link a job to a research
-- [x] `GET /api/researches/<id>/jobs` — list jobs linked to a research
+**Print page (`research-summary.html`):**
+- [x] Standalone page fetches summary API and renders clean one-pager
+- [x] Header: brand, title, topic, status, signal count, date range, created date
+- [x] Category/keyword tags
+- [x] Stats grid with total + per-category signal counts
+- [x] Top 10 signals with title, body excerpt, source, categories, date
+- [x] Data collection jobs table (source, status, date)
+- [x] Notes section
+- [x] Footer with generated date
+- [x] Print/Save PDF button + back-to-workspace link
+- [x] `@media print` hides toolbar
 
 **Frontend (`research-detail.js`):**
-- [x] Jobs tab (renamed from "New") shows linked job cards with source, status, time
-- [x] Source selector (irvine-news, tiktok if available) + "Start Job" button
-- [x] Job cards show color-coded status badges (completed/running/failed/pending)
-- [x] Tab count badge shows number of linked jobs
-- [x] Fetches jobs in parallel with research data on page load
+- [x] Summary tab added (third tab alongside Archive and Jobs)
+- [x] Inline summary preview: stat cards, date range, top 5 signals
+- [x] "Print Summary" button opens `research-summary.html` in new tab
+- [x] Summary loads lazily on first tab click, cached after
 
 **CSS (`research.css`):**
-- [x] `.jobs-list`, `.job-card`, `.job-card-top` — job card layout
-- [x] `.job-source`, `.job-status`, `.job-time`, `.job-error` — job card elements
-- [x] Status-specific colors: completed (green), running (blue), failed (red)
+- [x] `.summary-stats`, `.summary-stat` — stat card layout
+- [x] `.summary-date-range` — date range text
+- [x] `.summary-section-label` — section headers
+- [x] `.summary-signal`, `.summary-signal-title`, `.summary-signal-meta` — signal list
 
-**Tests:**
-- [x] `test_list_research_jobs_empty` — GET returns empty jobs array
-- [x] `test_list_research_jobs_not_found` — 404 for missing research
-- [x] `test_create_job_with_research_id` — job creation with research_id, verify linkage
-- [x] All 139 tests pass
+**Bug fixes (pre-existing):**
+- [x] Fixed `_create_and_start_job` missing `research_id` parameter
+- [x] Fixed `selenium_available` missing from `routes/jobs.py` import
+- [x] Fixed `test_concurrent_job_rejected` empty stub causing IndentationError
+- [x] Fixed job tests using `auth_client` instead of `dev_client` (scrapers_allowed guard)
+
+**Tests (`test_research_api.py`):**
+- [x] `test_research_summary` — summary endpoint returns structured data
+- [x] `test_research_summary_not_found` — 404 for missing research
+- [x] All 151 tests pass
 
 ### Modified files
 
 | File | Change |
 |------|--------|
-| `backend/models.py` | Added `research_id` FK to ScrapeJob |
-| `backend/migrate.py` | v2 migration for research_id column |
-| `backend/store.py` | Updated JobStore + ResearchStore protocols, standalone store |
-| `backend/store_sqlite.py` | `research_id` in create_job, `list_jobs_for_research`, `add_hits` |
-| `backend/store_firestore.py` | Same updates for Firestore |
-| `backend/research_match.py` | New — shared `match_signals()` extracted from routes |
-| `backend/jobs.py` | `_match_research_after_job` post-completion hook |
-| `backend/routes/jobs.py` | Accept `research_id` in job creation |
-| `backend/routes/research.py` | Uses shared matcher, `GET /api/researches/<id>/jobs` |
-| `research-detail.js` | Jobs tab with cards, source picker, Start Job button |
-| `research.css` | Job card styles |
-| `tests/test_research_api.py` | 3 new tests for research-job linking |
+| `backend/routes/research.py` | `GET /api/researches/<id>/summary` endpoint |
+| `backend/routes/jobs.py` | Fixed `research_id` param + `selenium_available` import |
+| `research-summary.html` | New — print-ready summary page |
+| `research-detail.js` | Summary tab + inline preview + Print button |
+| `research.css` | Summary preview styles |
+| `tests/test_research_api.py` | 2 new summary tests + fixed `dev_client` fixture usage |
+| `tests/test_jobs_api.py` | Fixed empty stub + `dev_client` fixture usage |
 
 ### Browser verification
 
-- [x] Jobs tab shows "Jobs 0" initially (no linked jobs)
-- [x] Source selector shows irvine-news + tiktok options
-- [x] After starting a news job: job card appears with "irvine-news" + "completed" status
-- [x] Archive hit count increased (142 → 146) after job ran, confirming auto-match hook
+- [x] Summary tab appears in workspace (Archive / Jobs / Summary)
+- [x] Clicking Summary tab loads inline preview with stat cards + top signals
+- [x] Print Summary button links to `research-summary.html?id=...`
+- [x] Print page renders: header, stats grid, top signals, footer
+- [x] Print page back link returns to workspace
 - [x] No console errors
 
 ---
 
 ## Exit criteria
 
-- [x] `research_id` FK on ScrapeJob with migration
-- [x] Job creation API accepts `research_id`
-- [x] Post-job hook auto-matches signals against linked research
-- [x] Research jobs endpoint lists linked jobs
-- [x] Jobs tab in workspace shows cards + Start Job button
-- [x] 139 tests pass
-- [x] Browser verification — full flow working
+- [x] Summary API returns structured aggregation of research data
+- [x] Print page renders one-pager with stats, signals, jobs, notes
+- [x] Summary tab in workspace shows inline preview
+- [x] Print/Save PDF button works
+- [x] 151 tests pass
+- [x] Browser verification
 
 ---
 
 ## Previous sessions
 
+- **Sessions 23–24** — TikTok/desktop job link + operator copy
+- **Sessions 21–22** — Research-scoped jobs (research_id FK, post-job matching, Jobs tab)
 - **Sessions 19–20** — Topic keyword assist + category picker
 - **Sessions 17–18** — Research workspace UI (PATCH/DELETE, tabs, inline edit, filters)
 - **Session 16** — GitHub Actions CI workflow
@@ -95,6 +94,6 @@
 
 ---
 
-## Next: Sessions 23–24 — TikTok/desktop job link + operator copy
+## Next: Sessions 27–28 — Map filter by research + Phase D confidence polish
 
-Per [`docs/TWO_MONTH_ROADMAP.md`](docs/TWO_MONTH_ROADMAP.md): Link TikTok desktop scrape jobs to research; operator-facing copy in UI explaining desktop-only flow. Pending desktop scrape without hanging Render.
+Per [`docs/TWO_MONTH_ROADMAP.md`](docs/TWO_MONTH_ROADMAP.md): Map filter pins by active research; Phase D confidence/method UX polish if demos still confuse.

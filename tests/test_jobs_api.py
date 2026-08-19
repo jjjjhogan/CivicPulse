@@ -163,7 +163,6 @@ def test_concurrent_job_rejected(dev_client, monkeypatch):
             args=[], returncode=0, stdout="", stderr=""
         ),
     )
-    # Do not run the worker — leave the slot occupied.
     monkeypatch.setattr(
         "backend.jobs.threading.Thread",
         lambda *a, **k: type("T", (), {"start": lambda self: None})(),

@@ -143,7 +143,7 @@ def test_list_research_jobs_not_found(client):
     assert res.status_code == 404
 
 
-def test_create_job_with_research_id(auth_client, monkeypatch):
+def test_create_job_with_research_id(dev_client, monkeypatch):
     import subprocess
 
     monkeypatch.setattr(
@@ -158,30 +158,30 @@ def test_create_job_with_research_id(auth_client, monkeypatch):
         lambda source=None: {"inserted": 0, "updated": 0},
     )
 
-    created = auth_client.post("/api/researches", json=_sample_research()).get_json()
+    created = dev_client.post("/api/researches", json=_sample_research()).get_json()
     rid = created["research"]["id"]
 
-    res = auth_client.post(
+    res = dev_client.post(
         "/api/jobs",
         json={"source": "irvine-news", "research_id": rid},
     )
     assert res.status_code == 202
     job_id = res.get_json()["id"]
 
-    job = auth_client.get(f"/api/jobs/{job_id}").get_json()
+    job = dev_client.get(f"/api/jobs/{job_id}").get_json()
     assert job["research_id"] == rid
 
-    jobs_for_research = auth_client.get(f"/api/researches/{rid}/jobs").get_json()
+    jobs_for_research = dev_client.get(f"/api/researches/{rid}/jobs").get_json()
     assert len(jobs_for_research["jobs"]) == 1
     assert jobs_for_research["jobs"][0]["id"] == job_id
 
 
-def test_tiktok_job_returns_501_when_unavailable(auth_client, monkeypatch):
+def test_tiktok_job_returns_501_when_unavailable(dev_client, monkeypatch):
     monkeypatch.setattr("backend.routes.jobs.selenium_available", lambda: False)
-    created = auth_client.post("/api/researches", json=_sample_research()).get_json()
+    created = dev_client.post("/api/researches", json=_sample_research()).get_json()
     rid = created["research"]["id"]
 
-    res = auth_client.post(
+    res = dev_client.post(
         "/api/jobs",
         json={"source": "tiktok", "research_id": rid},
     )
@@ -190,7 +190,7 @@ def test_tiktok_job_returns_501_when_unavailable(auth_client, monkeypatch):
     assert "desktop" in data["error"].lower()
 
 
-def test_tiktok_job_passes_settings(auth_client, monkeypatch):
+def test_tiktok_job_passes_settings(dev_client, monkeypatch):
     import subprocess
 
     captured = {}
@@ -207,7 +207,7 @@ def test_tiktok_job_passes_settings(auth_client, monkeypatch):
         lambda source=None: {"inserted": 0, "updated": 0},
     )
 
-    res = auth_client.post(
+    res = dev_client.post(
         "/api/jobs",
         json={
             "source": "tiktok",
@@ -218,3 +218,26 @@ def test_tiktok_job_passes_settings(auth_client, monkeypatch):
     cmd = captured.get("cmd", [])
     assert "--tag-url" in cmd
     assert "https://www.tiktok.com/tag/irvine" in cmd
+
+
+def test_research_summary(client):
+    created = client.post("/api/researches", json=_sample_research()).get_json()
+    rid = created["research"]["id"]
+    res = client.get(f"/api/researches/{rid}/summary")
+    assert res.status_code == 200
+    s = res.get_json()["summary"]
+    assert s["title"] == "Housing prices in Irvine"
+    assert s["topic"] == "Track housing cost trends and resident complaints"
+    assert s["categories"] == ["housing"]
+    assert s["keywords"] == ["rent", "housing prices", "lease"]
+    assert s["hit_count"] == 0
+    assert s["by_category"] == {}
+    assert s["by_source"] == {}
+    assert s["top_signals"] == []
+    assert s["date_range"]["earliest"] is None
+    assert "jobs" in s
+
+
+def test_research_summary_not_found(client):
+    res = client.get("/api/researches/9999/summary")
+    assert res.status_code == 404

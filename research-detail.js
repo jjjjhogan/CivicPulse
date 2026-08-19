@@ -69,6 +69,64 @@
     } catch (e) { /* optional */ }
   }
 
+  // ── Summary preview ──────────────────────────────────
+
+  var summaryLoaded = false;
+
+  function loadSummaryPreview() {
+    if (summaryLoaded) return;
+    var el = document.getElementById("summaryPreview");
+    if (!el) return;
+
+    fetch("/api/researches/" + id + "/summary")
+      .then(function (res) { return res.ok ? res.json() : null; })
+      .then(function (data) {
+        if (!data) { el.innerHTML = '<p class="empty-msg">Failed to load summary.</p>'; return; }
+        summaryLoaded = true;
+        var s = data.summary;
+
+        function fmtDate(iso) {
+          if (!iso) return "";
+          try { return new Date(iso).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" }); }
+          catch (e) { return iso; }
+        }
+
+        var byCat = s.by_category || {};
+        var catKeys = Object.keys(byCat).sort(function (a, b) { return byCat[b] - byCat[a]; });
+        var statsHtml = '<div class="summary-stats">' +
+          '<div class="summary-stat"><strong>' + s.hit_count + '</strong> signals</div>';
+        catKeys.forEach(function (c) {
+          statsHtml += '<div class="summary-stat"><strong>' + byCat[c] + '</strong> ' + esc(c) + '</div>';
+        });
+        statsHtml += '</div>';
+
+        var dateRange = "";
+        if (s.date_range && s.date_range.earliest) {
+          dateRange = fmtDate(s.date_range.earliest);
+          if (s.date_range.latest && s.date_range.latest !== s.date_range.earliest) {
+            dateRange += " — " + fmtDate(s.date_range.latest);
+          }
+          dateRange = '<p class="summary-date-range">Signal period: ' + dateRange + '</p>';
+        }
+
+        var topHtml = '';
+        (s.top_signals || []).slice(0, 5).forEach(function (sig) {
+          topHtml += '<div class="summary-signal">' +
+            '<span class="summary-signal-title">' + esc(sig.title || "(no title)") + '</span>' +
+            '<span class="summary-signal-meta">' + esc(sig.source || "") +
+            (sig.published_utc ? ' · ' + fmtDate(sig.published_utc) : '') + '</span></div>';
+        });
+        if (topHtml) {
+          topHtml = '<div class="summary-section-label">Top signals</div>' + topHtml;
+        }
+
+        el.innerHTML = statsHtml + dateRange + topHtml;
+      })
+      .catch(function () {
+        el.innerHTML = '<p class="empty-msg">Failed to load summary.</p>';
+      });
+  }
+
   // ── Render helpers ───────────────────────────────────
 
   function renderTags(arr, cls) {
@@ -234,7 +292,9 @@
       '<button class="tab-btn' + (activeTab === "archive" ? " active" : "") +
       '" data-tab="archive">Archive <span class="tab-count">' + hitCount + "</span></button>" +
       '<button class="tab-btn' + (activeTab === "new" ? " active" : "") +
-      '" data-tab="new">Jobs <span class="tab-count">' + researchJobs.length + "</span></button></div>" +
+      '" data-tab="new">Jobs <span class="tab-count">' + researchJobs.length + "</span></button>" +
+      '<button class="tab-btn' + (activeTab === "summary" ? " active" : "") +
+      '" data-tab="summary">Summary</button></div>' +
       // Archive panel
       '<div class="tab-panel" id="archivePanel"' + (activeTab !== "archive" ? " hidden" : "") + ">" +
       '<div class="panel-toolbar">' +
@@ -244,7 +304,14 @@
       renderHits(r.hits) + "</div>" +
       // New/Jobs panel
       '<div class="tab-panel" id="newPanel"' + (activeTab !== "new" ? " hidden" : "") + ">" +
-      renderNewPanel() + "</div>";
+      renderNewPanel() + "</div>" +
+      // Summary panel
+      '<div class="tab-panel" id="summaryPanel"' + (activeTab !== "summary" ? " hidden" : "") + ">" +
+      '<div class="panel-toolbar">' +
+      '<a class="btn btn-sm" id="printSummaryBtn" href="research-summary.html?id=' +
+      encodeURIComponent(id) + '" target="_blank">Print Summary</a>' +
+      '<span class="panel-hint">One-page research briefing</span></div>' +
+      '<div id="summaryPreview"><p class="empty-msg">Loading summary...</p></div></div>';
 
     bindEvents();
   }
@@ -273,6 +340,8 @@
         });
         document.getElementById("archivePanel").hidden = activeTab !== "archive";
         document.getElementById("newPanel").hidden = activeTab !== "new";
+        document.getElementById("summaryPanel").hidden = activeTab !== "summary";
+        if (activeTab === "summary") loadSummaryPreview();
       });
     });
 

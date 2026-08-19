@@ -139,3 +139,73 @@ def list_research_jobs(research_id: str):
     job_store = get_job_store()
     jobs = job_store.list_jobs_for_research(research_id)
     return jsonify({"jobs": jobs})
+
+
+@bp.get("/api/researches/<research_id>/summary")
+def research_summary(research_id: str):
+    research_store = get_research_store()
+    research = research_store.get_research_with_hits(research_id)
+    if research is None:
+        return jsonify({"error": "Research not found."}), 404
+
+    hits = research.get("hits") or []
+    by_category: dict[str, int] = {}
+    by_source: dict[str, int] = {}
+    dates: list[str] = []
+
+    for h in hits:
+        sig = h.get("signal") or {}
+        for cat in sig.get("categories") or []:
+            by_category[cat] = by_category.get(cat, 0) + 1
+        src = sig.get("source") or "unknown"
+        by_source[src] = by_source.get(src, 0) + 1
+        pub = sig.get("published_utc") or ""
+        if pub:
+            dates.append(pub)
+
+    dates.sort()
+    top_hits = sorted(hits, key=lambda h: h.get("score", 0), reverse=True)[:10]
+    top_signals = []
+    for h in top_hits:
+        sig = h.get("signal") or {}
+        top_signals.append({
+            "title": sig.get("title", ""),
+            "body": (sig.get("body") or "")[:300],
+            "source": sig.get("source", ""),
+            "categories": sig.get("categories") or [],
+            "url": sig.get("url", ""),
+            "published_utc": sig.get("published_utc", ""),
+            "score": h.get("score", 0),
+            "match_reason": h.get("match_reason", ""),
+        })
+
+    job_store = get_job_store()
+    jobs = job_store.list_jobs_for_research(research_id)
+    job_summary = []
+    for j in jobs:
+        job_summary.append({
+            "source": j.get("source", ""),
+            "status": j.get("status", ""),
+            "created_at": j.get("created_at", ""),
+        })
+
+    return jsonify({
+        "summary": {
+            "title": research.get("title", ""),
+            "topic": research.get("topic", ""),
+            "status": research.get("status", ""),
+            "categories": research.get("categories") or [],
+            "keywords": research.get("keywords") or [],
+            "notes": research.get("notes", ""),
+            "created_at": research.get("created_at", ""),
+            "hit_count": len(hits),
+            "by_category": by_category,
+            "by_source": by_source,
+            "date_range": {
+                "earliest": dates[0] if dates else None,
+                "latest": dates[-1] if dates else None,
+            },
+            "top_signals": top_signals,
+            "jobs": job_summary,
+        },
+    })
