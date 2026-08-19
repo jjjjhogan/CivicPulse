@@ -11,12 +11,12 @@
   var expansionMeta = [];
 
   var LISTEN_SOURCES = [
-    { id: "twitter", title: "X / Twitter", blurb: "Public posts and civic hashtags", on: true },
-    { id: "reddit", title: "Reddit", blurb: "Local subs and housing threads", on: true },
-    { id: "youtube", title: "YouTube comments", blurb: "Council streams and news clips", on: true },
-    { id: "tiktok", title: "TikTok comments", blurb: "Short-form city talk", on: true },
-    { id: "news311", title: "Local news + 311 logs", blurb: "Outlets and service requests", on: true },
-    { id: "facebook", title: "Facebook public groups", blurb: "Public groups only — no DMs", on: false },
+    { id: "news311", title: "Local news + 311 logs", blurb: "Outlets and service requests", on: true, ready: true },
+    { id: "tiktok", title: "TikTok comments", blurb: "Short-form city talk (desktop only)", on: true, ready: true },
+    { id: "twitter", title: "X / Twitter", blurb: "Public posts and civic hashtags", on: true, ready: false },
+    { id: "reddit", title: "Reddit", blurb: "Local subs and housing threads", on: true, ready: false },
+    { id: "youtube", title: "YouTube comments", blurb: "Council streams and news clips", on: true, ready: false },
+    { id: "facebook", title: "Facebook public groups", blurb: "Public groups only — no DMs", on: false, ready: false },
   ];
 
   var EXTRACT_OPTIONS = [
@@ -109,22 +109,37 @@
   }
 
   function updateMetrics() {
-    var sourcesOn = sourceState().length;
+    var totalSignals = (configData && configData.signal_count) || 0;
+    var bySource = (configData && configData.signals_by_source) || {};
+    var enabledSources = sourceState();
+
+    var sourceMap = { news311: ["irvine-news", "news"], tiktok: ["tiktok"], twitter: ["twitter"], reddit: ["reddit"], youtube: ["youtube"], facebook: ["facebook"] };
+    var archiveHits = 0;
+    enabledSources.forEach(function (src) {
+      (sourceMap[src] || [src]).forEach(function (key) {
+        archiveHits += bySource[key] || 0;
+      });
+    });
+
     var windowMul = { "7d": 0.35, "30d": 1, "90d": 2.4, ytd: 3.1 };
     var mul = windowMul[document.getElementById("fieldTimeWindow").value] || 1;
-    var voices = Math.round((4200 + sourcesOn * 6100) * mul);
-    var coverage = Math.min(97, 48 + sourcesOn * 8);
-    var cost = (8 + sourcesOn * 4.5 * mul).toFixed(0);
-    var insight = sourcesOn >= 4 ? "~6 min after launch" : "~12 min after launch";
+    var voices = Math.round(archiveHits * mul);
+    var coverage = totalSignals > 0
+      ? Math.min(99, Math.round((archiveHits / totalSignals) * 100))
+      : 0;
+    var readySources = enabledSources.filter(function (s) {
+      return LISTEN_SOURCES.some(function (ls) { return ls.id === s && ls.ready; });
+    });
+    var insight = readySources.length >= 2 ? "~6 min after launch" : readySources.length ? "~12 min after launch" : "Archive only";
     var refresh = document.getElementById("fieldTimeWindow").value === "7d"
       ? "Every 30 min + spike alerts"
       : "Hourly + live spike alerts";
 
     document.getElementById("metricVoices").textContent =
-      voices.toLocaleString() + " voices estimated this week";
-    document.getElementById("metricCoverage").textContent = coverage + "% of likely public voices";
+      voices.toLocaleString() + " signals in archive for selected sources";
+    document.getElementById("metricCoverage").textContent = coverage + "% of " + totalSignals.toLocaleString() + " total signals";
     document.getElementById("metricInsight").textContent = insight;
-    document.getElementById("metricCost").textContent = "$" + cost + " per refresh cycle";
+    document.getElementById("metricCost").textContent = readySources.length + " of " + enabledSources.length + " sources live";
     document.getElementById("metricRefresh").textContent = refresh;
   }
 
@@ -241,11 +256,12 @@
     LISTEN_SOURCES.forEach(function (src) {
       var card = document.createElement("button");
       card.type = "button";
-      card.className = "listen-card" + (src.on ? " on" : "");
+      card.className = "listen-card" + (src.on ? " on" : "") + (src.ready ? "" : " coming-soon");
       card.setAttribute("aria-pressed", src.on ? "true" : "false");
+      var badge = src.ready ? "" : '<span class="listen-badge">Archive only</span>';
       card.innerHTML =
-        '<div class="listen-copy"><strong>' + esc(src.title) + "</strong><span>" +
-        esc(src.blurb) + '</span></div><span class="switch" aria-hidden="true"></span>';
+        '<div class="listen-copy"><strong>' + esc(src.title) + "</strong>" + badge +
+        "<span>" + esc(src.blurb) + '</span></div><span class="switch" aria-hidden="true"></span>';
       card.addEventListener("click", function () {
         src.on = !src.on;
         renderListenGrid();
@@ -343,12 +359,15 @@
       }
       var research = data.research;
       if (mode === "launch") {
-        formMsg.textContent = "Created — opening workspace…";
-        if (payload.keywords.length || payload.categories.length) {
-          try {
-            await fetch(API + "/" + research.id + "/archive", { method: "POST" });
-          } catch (err) { /* archive is best-effort on launch */ }
-        }
+        formMsg.textContent = "Launching — running archive + queuing jobs…";
+        var enabledSources = sourceState();
+        try {
+          await fetch(API + "/" + research.id + "/launch", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ sources: enabledSources }),
+          });
+        } catch (err) { /* launch is best-effort */ }
         window.location.href = "research-detail.html?id=" + research.id;
         return;
       }
@@ -470,15 +489,33 @@
     document.getElementById(id).addEventListener("change", updateMetrics);
   });
 
-  document.getElementById("btnSaveDraft").addEventListener("click", function () {
-    submitResearch("draft");
+  var launchBtn = document.getElementById("btnLaunch");
+  var draftBtn = document.getElementById("btnSaveDraft");
+
+  draftBtn.addEventListener("click", function () {
+    draftBtn.disabled = true;
+    draftBtn.textContent = "Saving…";
+    submitResearch("draft").finally(function () {
+      draftBtn.disabled = false;
+      draftBtn.textContent = "Save draft";
+    });
   });
-  document.getElementById("btnLaunch").addEventListener("click", function () {
-    submitResearch("launch");
+  launchBtn.addEventListener("click", function () {
+    launchBtn.disabled = true;
+    launchBtn.textContent = "Launching…";
+    submitResearch("launch").finally(function () {
+      launchBtn.disabled = false;
+      launchBtn.textContent = "Launch scrape";
+    });
   });
   document.getElementById("createForm").addEventListener("submit", function (e) {
     e.preventDefault();
-    submitResearch("launch");
+    launchBtn.disabled = true;
+    launchBtn.textContent = "Launching…";
+    submitResearch("launch").finally(function () {
+      launchBtn.disabled = false;
+      launchBtn.textContent = "Launch scrape";
+    });
   });
 
   document.getElementById("customKwAdd").addEventListener("click", function () {

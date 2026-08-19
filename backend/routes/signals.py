@@ -71,6 +71,13 @@ def api_config():
     from scrapers.news.scrape import NEWS_SOURCES  # noqa: WPS433
     from backend.jobs import selenium_available  # noqa: WPS433
 
+    store = get_signal_store()
+    signals = store.list_signals()
+    by_source: dict[str, int] = {}
+    for sig in signals:
+        src = sig.get("source") or "unknown"
+        by_source[src] = by_source.get(src, 0) + 1
+
     return jsonify(
         {
             "categories": [c.value for c in CivicIssueCategory],
@@ -86,5 +93,7 @@ def api_config():
                 for source in NEWS_SOURCES
             ],
             "scrapers_available": scrapers_host_ok(),
+            "signal_count": len(signals),
+            "signals_by_source": by_source,
         }
     )

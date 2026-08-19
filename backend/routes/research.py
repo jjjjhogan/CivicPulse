@@ -1,11 +1,19 @@
-"""Research topics — create, list, detail, archive matching."""
+"""Research topics — create, list, detail, archive matching, launch."""
 
 from __future__ import annotations
 
+import logging
+
 from flask import Blueprint, jsonify, request
 
+from backend.auth import get_current_user, scrapers_allowed
 from backend.research_match import match_signals as _match_signals
 from backend.store import get_job_store, get_research_store, get_signal_store
+
+log = logging.getLogger(__name__)
+
+LAUNCHABLE_SOURCES = {"irvine-news", "tiktok"}
+SOURCE_NORMALIZE = {"news311": "irvine-news", "news": "irvine-news"}
 
 bp = Blueprint("research", __name__)
 
@@ -128,6 +136,84 @@ def run_archive(research_id: str):
 
     updated = research_store.get_research_with_hits(research_id)
     return jsonify({"research": updated, "matched": len(matched)})
+
+
+@bp.post("/api/researches/<research_id>/launch")
+def launch_research(research_id: str):
+    """Set gathering, run archive match, queue jobs for enabled sources."""
+    body = request.get_json(silent=True) or {}
+    sources = body.get("sources") or []
+
+    research_store = get_research_store()
+    research = research_store.get_research(research_id)
+    if research is None:
+        return jsonify({"error": "Research not found."}), 404
+
+    research_store.update_research(research_id, status="gathering")
+
+    archive_count = 0
+    if research.get("categories") or research.get("keywords"):
+        signal_store = get_signal_store()
+        all_signals = signal_store.list_signals()
+        matched = _match_signals(
+            all_signals,
+            research.get("categories", []),
+            research.get("keywords", []),
+        )
+        research_store.replace_hits(research_id, matched)
+        archive_count = len(matched)
+
+    jobs_started = []
+    jobs_skipped = []
+
+    user = get_current_user()
+    can_scrape = scrapers_allowed(user)
+
+    for src in sources:
+        normalized = SOURCE_NORMALIZE.get(src, src)
+        if normalized not in LAUNCHABLE_SOURCES:
+            jobs_skipped.append({"source": src, "reason": "not yet implemented"})
+            continue
+        if not can_scrape:
+            jobs_skipped.append({"source": src, "reason": "requires dev account"})
+            continue
+        if normalized == "tiktok":
+            from backend.jobs import selenium_available
+            if not selenium_available():
+                jobs_skipped.append({"source": src, "reason": "requires desktop"})
+                continue
+        try:
+            from backend.jobs import build_command, is_job_running, start_job
+            settings = {}
+            cmd = build_command(normalized, settings)
+            if is_job_running():
+                jobs_skipped.append({"source": src, "reason": "a scrape is already running"})
+                continue
+            job_store = get_job_store()
+            job = job_store.create_job(
+                source=normalized,
+                settings=settings,
+                user_id=user["id"] if user else None,
+                research_id=research_id,
+            )
+            if start_job(job["id"], cmd):
+                jobs_started.append({"source": normalized, "job_id": job["id"]})
+            else:
+                job_store.update_job(
+                    job["id"], status="failed", error="A scrape is already running.",
+                )
+                jobs_skipped.append({"source": src, "reason": "a scrape is already running"})
+        except Exception as exc:
+            log.warning("Failed to start job for %s: %s", src, exc)
+            jobs_skipped.append({"source": src, "reason": str(exc)})
+
+    updated = research_store.get_research_with_hits(research_id)
+    return jsonify({
+        "research": updated,
+        "archive_hits": archive_count,
+        "jobs_started": jobs_started,
+        "jobs_skipped": jobs_skipped,
+    })
 
 
 @bp.get("/api/researches/<research_id>/jobs")

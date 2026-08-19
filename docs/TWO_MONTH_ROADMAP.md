@@ -289,8 +289,8 @@ Finish that contract in sessions **25–28**. Keep summary + freeze in **29–32
 - [x] Metrics rail is labeled estimate; ethics gate is mock/static
 - [x] Template buttons prefill title/chips only — **no template CRUD**
 - [ ] Research model/API stores listen + extract + window/lang/geo (not only `notes`) — **Session 25**
-- [ ] Launch scrape queues jobs for enabled sources — **Session 27**
-- [ ] Metrics cite a real archive denominator — **Session 28**
+- [x] Launch scrape queues jobs for enabled sources — **Session 27**
+- [x] Metrics cite a real archive denominator — **Session 28**
 
 **Phase E** only if gold sample still fails after batches — park for month 3 by default.
 

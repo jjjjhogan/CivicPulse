@@ -241,3 +241,66 @@ def test_research_summary(client):
 def test_research_summary_not_found(client):
     res = client.get("/api/researches/9999/summary")
     assert res.status_code == 404
+
+
+def test_launch_research_sets_gathering(client):
+    created = client.post("/api/researches", json=_sample_research()).get_json()
+    rid = created["research"]["id"]
+    res = client.post(f"/api/researches/{rid}/launch", json={"sources": []})
+    assert res.status_code == 200
+    data = res.get_json()
+    assert data["research"]["status"] == "gathering"
+    assert "archive_hits" in data
+    assert data["jobs_started"] == []
+    assert data["jobs_skipped"] == []
+
+
+def test_launch_skips_unimplemented_sources(client):
+    created = client.post("/api/researches", json=_sample_research()).get_json()
+    rid = created["research"]["id"]
+    res = client.post(
+        f"/api/researches/{rid}/launch",
+        json={"sources": ["twitter", "facebook", "youtube"]},
+    )
+    assert res.status_code == 200
+    data = res.get_json()
+    assert len(data["jobs_skipped"]) == 3
+    assert all(s["reason"] == "not yet implemented" for s in data["jobs_skipped"])
+    assert data["jobs_started"] == []
+
+
+def test_launch_research_not_found(client):
+    res = client.post("/api/researches/9999/launch", json={"sources": []})
+    assert res.status_code == 404
+
+
+def test_launch_queues_news_job(dev_client, monkeypatch):
+    import subprocess
+
+    monkeypatch.setattr(
+        "backend.jobs.subprocess.run",
+        lambda *a, **k: subprocess.CompletedProcess(
+            args=a[0] if a else [], returncode=0, stdout="ok\n", stderr=""
+        ),
+    )
+    monkeypatch.setattr(
+        "backend.jobs.threading.Thread",
+        lambda target, args=(), kwargs=None, daemon=None: type(
+            "T", (), {"start": lambda self: target(*args, **(kwargs or {}))}
+        )(),
+    )
+    monkeypatch.setattr(
+        "backend.signals_import.sync_signals_after_scrape",
+        lambda source=None: {"inserted": 0, "updated": 0},
+    )
+
+    created = dev_client.post("/api/researches", json=_sample_research()).get_json()
+    rid = created["research"]["id"]
+    res = dev_client.post(
+        f"/api/researches/{rid}/launch",
+        json={"sources": ["news311"]},
+    )
+    assert res.status_code == 200
+    data = res.get_json()
+    assert len(data["jobs_started"]) == 1
+    assert data["jobs_started"][0]["source"] == "irvine-news"

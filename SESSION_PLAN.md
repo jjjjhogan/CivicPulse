@@ -1,88 +1,88 @@
-# CivicPulse — session plan (Sessions 25–26: Research summary + print)
+# CivicPulse — session plan (Sessions 27–28: Launch flow + real metrics)
 
-**Goal:** Add a summary API + print-ready HTML page so a research topic produces a one-pager briefing for the mayor.
+**Goal:** Wire "Save draft" vs "Launch scrape" in the compose UI, and replace fake right-rail metrics with real archive data.
 
 ---
 
-## Sessions 25–26 — Research summary API + print/HTML
+## Sessions 27–28 — Launch flow + real metrics
 
 ### Completed
 
-**Backend API (`routes/research.py`):**
-- [x] `GET /api/researches/<id>/summary` — structured summary with hit stats, category/source breakdown, date range, top 10 signals, linked jobs
-- [x] Returns aggregated `by_category`, `by_source`, `date_range`, `top_signals`, `jobs`
+**Backend (`routes/research.py`):**
+- [x] `POST /api/researches/<id>/launch` — sets status to `gathering`, runs archive match, queues jobs for enabled sources
+- [x] Launchable sources: `irvine-news` and `tiktok` (auto-start); twitter, reddit, youtube, facebook skipped as "not yet implemented"
+- [x] Handles `scrapers_allowed` check — non-dev users still get archive match + gathering status, jobs gracefully skipped
+- [x] Returns `{ research, archive_hits, jobs_started, jobs_skipped }`
 
-**Print page (`research-summary.html`):**
-- [x] Standalone page fetches summary API and renders clean one-pager
-- [x] Header: brand, title, topic, status, signal count, date range, created date
-- [x] Category/keyword tags
-- [x] Stats grid with total + per-category signal counts
-- [x] Top 10 signals with title, body excerpt, source, categories, date
-- [x] Data collection jobs table (source, status, date)
-- [x] Notes section
-- [x] Footer with generated date
-- [x] Print/Save PDF button + back-to-workspace link
-- [x] `@media print` hides toolbar
+**Backend (`routes/signals.py`):**
+- [x] `/api/config` now includes `signal_count` and `signals_by_source` from real archive data
 
-**Frontend (`research-detail.js`):**
-- [x] Summary tab added (third tab alongside Archive and Jobs)
-- [x] Inline summary preview: stat cards, date range, top 5 signals
-- [x] "Print Summary" button opens `research-summary.html` in new tab
-- [x] Summary loads lazily on first tab click, cached after
+**Frontend (`research.js`):**
+- [x] "Launch scrape" calls `POST /launch` with enabled sources list, then redirects to workspace
+- [x] "Save draft" creates research and stays on compose page (unchanged behavior, now with button disable/re-enable)
+- [x] Both buttons disable during submit to prevent double-clicks
+- [x] Listen sources reordered: ready sources first (news311, tiktok), then archive-only (twitter, reddit, youtube, facebook)
+- [x] `ready: true/false` flag on each source to distinguish live scrapers from archive-only
+- [x] Listen grid shows "Archive only" badge on sources without live scrapers
+- [x] Right rail metrics use real `signal_count` and `signals_by_source` from `/api/config`
+- [x] "Voices" tile → shows signals in archive matching selected sources × time window
+- [x] "Coverage" tile → shows % of total signals covered by selected sources
+- [x] "Source status" tile (was "Compute cost") → shows "N of M sources live"
+- [x] "First insight" tile → adjusts based on how many ready sources are enabled
+- [x] Kicker changed from "Live preview — streaming" to "Estimate from archive"
+
+**HTML (`research.html`):**
+- [x] Metrics card labels updated: kicker, tile labels match real data semantics
 
 **CSS (`research.css`):**
-- [x] `.summary-stats`, `.summary-stat` — stat card layout
-- [x] `.summary-date-range` — date range text
-- [x] `.summary-section-label` — section headers
-- [x] `.summary-signal`, `.summary-signal-title`, `.summary-signal-meta` — signal list
-
-**Bug fixes (pre-existing):**
-- [x] Fixed `_create_and_start_job` missing `research_id` parameter
-- [x] Fixed `selenium_available` missing from `routes/jobs.py` import
-- [x] Fixed `test_concurrent_job_rejected` empty stub causing IndentationError
-- [x] Fixed job tests using `auth_client` instead of `dev_client` (scrapers_allowed guard)
+- [x] `.listen-badge` style for "Archive only" indicator
 
 **Tests (`test_research_api.py`):**
-- [x] `test_research_summary` — summary endpoint returns structured data
-- [x] `test_research_summary_not_found` — 404 for missing research
-- [x] All 151 tests pass
+- [x] `test_launch_research_sets_gathering` — launch sets status to `gathering`
+- [x] `test_launch_skips_unimplemented_sources` — twitter/facebook/youtube skipped
+- [x] `test_launch_research_not_found` — 404 for missing research
+- [x] `test_launch_queues_news_job` — news311 source queues irvine-news job (dev_client)
+- [x] All 156 tests pass
 
 ### Modified files
 
 | File | Change |
 |------|--------|
-| `backend/routes/research.py` | `GET /api/researches/<id>/summary` endpoint |
-| `backend/routes/jobs.py` | Fixed `research_id` param + `selenium_available` import |
-| `research-summary.html` | New — print-ready summary page |
-| `research-detail.js` | Summary tab + inline preview + Print button |
-| `research.css` | Summary preview styles |
-| `tests/test_research_api.py` | 2 new summary tests + fixed `dev_client` fixture usage |
-| `tests/test_jobs_api.py` | Fixed empty stub + `dev_client` fixture usage |
+| `backend/routes/research.py` | `POST /api/researches/<id>/launch` endpoint |
+| `backend/routes/signals.py` | `signal_count` + `signals_by_source` in `/api/config` |
+| `research.js` | Launch flow, source badges, real metrics |
+| `research.html` | Updated rail labels |
+| `research.css` | `.listen-badge` style |
+| `tests/test_research_api.py` | 4 new launch tests |
 
 ### Browser verification
 
-- [x] Summary tab appears in workspace (Archive / Jobs / Summary)
-- [x] Clicking Summary tab loads inline preview with stat cards + top signals
-- [x] Print Summary button links to `research-summary.html?id=...`
-- [x] Print page renders: header, stats grid, top signals, footer
-- [x] Print page back link returns to workspace
-- [x] No console errors
+- [x] Listen grid shows "Archive only" badges on 4 non-ready sources
+- [x] Metrics rail shows "Estimate from archive" kicker
+- [x] Metrics cite real signal counts (0 in empty DB, correct)
+- [x] Source status tile updates when toggling sources (e.g. "2 of 2 sources live")
+- [x] Save draft: creates research, clears form, shows "Draft saved.", stays on compose
+- [x] Launch scrape: creates research, calls launch endpoint, redirects to workspace
+- [x] Workspace shows status "gathering" after launch
+- [x] No console errors on compose or workspace pages
 
 ---
 
 ## Exit criteria
 
-- [x] Summary API returns structured aggregation of research data
-- [x] Print page renders one-pager with stats, signals, jobs, notes
-- [x] Summary tab in workspace shows inline preview
-- [x] Print/Save PDF button works
-- [x] 151 tests pass
+- [x] Launch endpoint sets gathering + runs archive + queues jobs for implemented sources
+- [x] Save draft stays on compose page
+- [x] Unimplemented sources show "Archive only" badge
+- [x] Right rail metrics cite real archive data, not hardcoded estimates
+- [x] Metrics update reactively when toggles/window change
+- [x] 156 tests pass
 - [x] Browser verification
 
 ---
 
 ## Previous sessions
 
+- **Sessions 25–26** — Research summary API + print/HTML
 - **Sessions 23–24** — TikTok/desktop job link + operator copy
 - **Sessions 21–22** — Research-scoped jobs (research_id FK, post-job matching, Jobs tab)
 - **Sessions 19–20** — Topic keyword assist + category picker
@@ -94,6 +94,6 @@
 
 ---
 
-## Next: Sessions 27–28 — Map filter by research + Phase D confidence polish
+## Next: Sessions 29–30 — Summary extract flags + map filter by research
 
-Per [`docs/TWO_MONTH_ROADMAP.md`](docs/TWO_MONTH_ROADMAP.md): Map filter pins by active research; Phase D confidence/method UX polish if demos still confuse.
+Per [`docs/TWO_MONTH_ROADMAP.md`](docs/TWO_MONTH_ROADMAP.md): Summary uses extract flags (sentiment/clustering/policy sections); map filter pins by active research.
