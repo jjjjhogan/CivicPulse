@@ -278,11 +278,12 @@
 .extract-card {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
+  gap: 12px;
   padding: 14px 16px;
   border: 1.5px solid #e4e8dc;
   border-radius: 14px;
   cursor: pointer;
+  min-width: 0;
 }
 
 .extract-card.on {
@@ -290,12 +291,25 @@
   background: #f7fbf4;
 }
 
-.extract-card input {
+.research-form .extract-card input[type="checkbox"] {
   width: 16px;
   height: 16px;
-  margin-top: 3px;
+  margin: 3px 0 0;
+  padding: 0;
+  flex: 0 0 16px;
+  border: none;
+  border-radius: 0;
+  background: none;
   accent-color: var(--ink);
-  flex-shrink: 0;
+  box-shadow: none;
+}
+
+.extract-card span {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
 }
 
 .extract-card strong {
@@ -306,7 +320,7 @@
 
 .extract-card small {
   display: block;
-  margin-top: 2px;
+  margin-top: 0;
   font-size: 0.75rem;
   color: #7a8a6c;
   line-height: 1.4;
