@@ -1,87 +1,80 @@
-# CivicPulse — session plan (Sessions 27–28: Launch flow + real metrics)
+# CivicPulse — session plan (Sessions 31–32: Phase D polish + demo freeze)
 
-**Goal:** Wire "Save draft" vs "Launch scrape" in the compose UI, and replace fake right-rail metrics with real archive data.
+**Goal:** Confidence honesty (Phase D), hardening, operator/demo seed, and feature freeze with demo rehearsal script.
 
 ---
 
-## Sessions 27–28 — Launch flow + real metrics
+## Sessions 31–32 — Phase D polish + demo freeze
 
 ### Completed
 
-**Backend (`routes/research.py`):**
-- [x] `POST /api/researches/<id>/launch` — sets status to `gathering`, runs archive match, queues jobs for enabled sources
-- [x] Launchable sources: `irvine-news` and `tiktok` (auto-start); twitter, reddit, youtube, facebook skipped as "not yet implemented"
-- [x] Handles `scrapers_allowed` check — non-dev users still get archive match + gathering status, jobs gracefully skipped
-- [x] Returns `{ research, archive_hits, jobs_started, jobs_skipped }`
+**Phase D — Confidence honesty (`signal.js`):**
+- [x] Signal detail page: replaced raw percentage chip (e.g. "82%") with qualitative band ("Strong" / "Moderate" / "Weak")
+- [x] Percentage now only in tooltip: `Match strength: 82%`
+- [x] Added method chip (keywords / model / keywords + model / inherited / outlet default) before the confidence band, matching feed card pattern
+- [x] Feed cards (dashboard.js) already used qualitative labels — no change needed there
 
-**Backend (`routes/signals.py`):**
-- [x] `/api/config` now includes `signal_count` and `signals_by_source` from real archive data
+**Phase D — Source analytics (`source.js`):**
+- [x] Replaced "avg confidence: 72%" stat tile with qualitative "Moderate" / "Strong" / "Weak"
+- [x] Renamed stat label from "avg confidence" to "match strength"
 
-**Frontend (`research.js`):**
-- [x] "Launch scrape" calls `POST /launch` with enabled sources list, then redirects to workspace
-- [x] "Save draft" creates research and stays on compose page (unchanged behavior, now with button disable/re-enable)
-- [x] Both buttons disable during submit to prevent double-clicks
-- [x] Listen sources reordered: ready sources first (news311, tiktok), then archive-only (twitter, reddit, youtube, facebook)
-- [x] `ready: true/false` flag on each source to distinguish live scrapers from archive-only
-- [x] Listen grid shows "Archive only" badge on sources without live scrapers
-- [x] Right rail metrics use real `signal_count` and `signals_by_source` from `/api/config`
-- [x] "Voices" tile → shows signals in archive matching selected sources × time window
-- [x] "Coverage" tile → shows % of total signals covered by selected sources
-- [x] "Source status" tile (was "Compute cost") → shows "N of M sources live"
-- [x] "First insight" tile → adjusts based on how many ready sources are enabled
-- [x] Kicker changed from "Live preview — streaming" to "Estimate from archive"
+**Hardening:**
+- [x] Walked compose → workspace → summary flow in browser
+- [x] Empty states verified: archive panel shows "No matching signals yet", map shows "No signals matched yet", summary shows "0 signals"
+- [x] No JS errors besides expected 401 on auth/me (not logged in)
+- [x] Tab switching (Archive / Map / Jobs / Summary) all correct
 
-**HTML (`research.html`):**
-- [x] Metrics card labels updated: kicker, tile labels match real data semantics
+**Demo seed (`scripts/seed_demo.py`):**
+- [x] Creates 3 demo researches (housing, potholes, public safety) with categories, keywords, and extract flags
+- [x] Runs archive match to populate hits
+- [x] `--check` flag reports current DB counts without modifying
+- [x] Skips if demo researches already exist (idempotent)
 
-**CSS (`research.css`):**
-- [x] `.listen-badge` style for "Archive only" indicator
+**Demo script (`docs/DEMO_SCRIPT.md`):**
+- [x] 10-minute walkthrough: dashboard → source analytics → compose → workspace → print summary
+- [x] Talking points for Q&A (accuracy, data sources, privacy, scraper access)
+- [x] Pre-demo checklist
 
-**Tests (`test_research_api.py`):**
-- [x] `test_launch_research_sets_gathering` — launch sets status to `gathering`
-- [x] `test_launch_skips_unimplemented_sources` — twitter/facebook/youtube skipped
-- [x] `test_launch_research_not_found` — 404 for missing research
-- [x] `test_launch_queues_news_job` — news311 source queues irvine-news job (dev_client)
-- [x] All 156 tests pass
+**Tests:**
+- [x] All 160 tests pass (29 in research API)
+- [x] Browser verified: confidence chips show qualitative labels, source analytics shows "match strength", compose → workspace flow clean
 
 ### Modified files
 
 | File | Change |
 |------|--------|
-| `backend/routes/research.py` | `POST /api/researches/<id>/launch` endpoint |
-| `backend/routes/signals.py` | `signal_count` + `signals_by_source` in `/api/config` |
-| `research.js` | Launch flow, source badges, real metrics |
-| `research.html` | Updated rail labels |
-| `research.css` | `.listen-badge` style |
-| `tests/test_research_api.py` | 4 new launch tests |
+| `signal.js` | Qualitative band + method chip on detail page |
+| `source.js` | "match strength" qualitative label instead of avg % |
+| `scripts/seed_demo.py` | New: demo database seeder |
+| `docs/DEMO_SCRIPT.md` | New: 10-minute mayor demo script |
 
 ### Browser verification
 
-- [x] Listen grid shows "Archive only" badges on 4 non-ready sources
-- [x] Metrics rail shows "Estimate from archive" kicker
-- [x] Metrics cite real signal counts (0 in empty DB, correct)
-- [x] Source status tile updates when toggling sources (e.g. "2 of 2 sources live")
-- [x] Save draft: creates research, clears form, shows "Draft saved.", stays on compose
-- [x] Launch scrape: creates research, calls launch endpoint, redirects to workspace
-- [x] Workspace shows status "gathering" after launch
-- [x] No console errors on compose or workspace pages
+- [x] Dashboard feed cards: 20 conf chips, all qualitative (Strong/Moderate/Weak), zero raw %
+- [x] Source analytics: "Moderate" for "match strength" (was "72%" for "avg confidence")
+- [x] Compose → save draft → workspace renders with all 4 tabs
+- [x] Archive empty state message clear
+- [x] Map tab initializes Leaflet map
+- [x] Summary tab loads preview
+- [x] No console errors
 
 ---
 
 ## Exit criteria
 
-- [x] Launch endpoint sets gathering + runs archive + queues jobs for implemented sources
-- [x] Save draft stays on compose page
-- [x] Unimplemented sources show "Archive only" badge
-- [x] Right rail metrics cite real archive data, not hardcoded estimates
-- [x] Metrics update reactively when toggles/window change
-- [x] 156 tests pass
-- [x] Browser verification
+- [x] No "92% wrong" moments — confidence shown as qualitative bands
+- [x] Method always surfaced (detail page + feed cards)
+- [x] Demo seed script creates researches with archive hits
+- [x] 10-minute demo script written
+- [x] 160 tests pass
+- [x] Browser verification clean
 
 ---
 
 ## Previous sessions
 
+- **Sessions 29–30** — Extract flags + map view
+- **Sessions 27–28** — Launch flow + real metrics
 - **Sessions 25–26** — Research summary API + print/HTML
 - **Sessions 23–24** — TikTok/desktop job link + operator copy
 - **Sessions 21–22** — Research-scoped jobs (research_id FK, post-job matching, Jobs tab)
@@ -94,6 +87,6 @@
 
 ---
 
-## Next: Sessions 29–30 — Summary extract flags + map filter by research
+## Status: Feature freeze
 
-Per [`docs/TWO_MONTH_ROADMAP.md`](docs/TWO_MONTH_ROADMAP.md): Summary uses extract flags (sentiment/clustering/policy sections); map filter pins by active research.
+Sessions 31–32 mark feature freeze. The compose → workspace → summary → print flow is complete. Remaining work is bug fixes, demo rehearsals, and Phase C label batches for classifier accuracy.

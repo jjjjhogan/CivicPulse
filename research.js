@@ -334,6 +334,7 @@
       topic: title,
       keywords: keywords,
       categories: categories,
+      extract: extractState(),
       notes: composeNotes(),
     };
   }

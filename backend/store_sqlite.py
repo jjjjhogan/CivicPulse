@@ -243,13 +243,15 @@ class SQLiteResearchStore:
 
     def create_research(
         self, *, title: str, topic: str = "", keywords: list | None = None,
-        categories: list | None = None, notes: str = "",
+        categories: list | None = None, extract: list | None = None,
+        notes: str = "",
     ) -> dict:
         research = Research(
             title=title,
             topic=topic,
             keywords=keywords or [],
             categories=categories or [],
+            extract=extract or [],
             notes=notes,
         )
         self._db.add(research)

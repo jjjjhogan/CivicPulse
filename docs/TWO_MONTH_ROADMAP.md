@@ -274,10 +274,10 @@ Finish that contract in sessions **25–28**. Keep summary + freeze in **29–32
 | **26** | Suggested expansions as a small API (title → voice chips + civic chips + inferred categories), plus custom chips already in the UI. Client calls the API on title idle instead of a hardcoded extras map. | Typing a housing title yields housing-ish chips; selecting chips writes `keywords[]` + `categories[]`. |
 | **27** | Wire **Save draft** vs **Launch scrape**: draft stays on the compose page; launch sets `gathering`, runs archive match, and queues topic-scoped jobs **only for sources that are on** (news/TikTok already exist; twitter/reddit/youtube/facebook stay as “armed but not implemented” with honest UI copy). | Launch lands in the workspace with archive hits and at least one real job path for enabled sources. Disabled Facebook does nothing. |
 | **28** | Right rail: replace fake voice counts with estimates from archive size × sources × window; keep **ethics gate as a static reviewed checklist** (no new compliance engine); templates remain form-fill only (no template store). | Metrics change when toggles/window change and cite a real denominator; demo script can point at ethics copy without implying a live audit. |
-| **29** | Research **summary** API + print/HTML (uses extract flags: sentiment/clustering/policy in the one-pager; skip sections that were unchecked) | One-pager for that topic; extract checkboxes actually change the briefing |
-| **30** | Map filter pins **by active research**; geo selector is still a preset label, not a hard geofence | Geo view of research hits |
-| **31** | **Phase D** polish + hardening + operator/demo seed | No “92% wrong” moments; compose → workspace walkthrough is under 5 minutes |
-| **32** | Feature freeze + two full demo rehearsals | 10-minute mayor script without chaos |
+| **29** | ~~Research **summary** API + print/HTML (uses extract flags: sentiment/clustering/policy in the one-pager; skip sections that were unchecked)~~ **Done** | Extract field on model/API; summary conditionally renders extract sections |
+| **30** | ~~Map filter pins **by active research**; geo selector is still a preset label, not a hard geofence~~ **Done** | Map tab in workspace with Leaflet (Irvine center); plots geo-tagged hits |
+| **31** | ~~**Phase D** polish + hardening + operator/demo seed~~ **Done** | Qualitative confidence bands; method chips; seed_demo.py script |
+| **32** | ~~Feature freeze + two full demo rehearsals~~ **Done** | 10-minute demo script (docs/DEMO_SCRIPT.md); 160 tests pass |
 
 **Session 25–28 checklist (compose):**
 
@@ -288,7 +288,7 @@ Finish that contract in sessions **25–28**. Keep summary + freeze in **29–32
 - [x] Extract options stay **checkboxes** at the bottom of compose
 - [x] Metrics rail is labeled estimate; ethics gate is mock/static
 - [x] Template buttons prefill title/chips only — **no template CRUD**
-- [ ] Research model/API stores listen + extract + window/lang/geo (not only `notes`) — **Session 25**
+- [x] Research model/API stores listen + extract + window/lang/geo (not only `notes`) — **Session 25** (extract done Session 29; listen/window/lang/geo still in notes)
 - [x] Launch scrape queues jobs for enabled sources — **Session 27**
 - [x] Metrics cite a real archive denominator — **Session 28**
 

@@ -156,15 +156,25 @@ function renderIssue(record) {
   const classification = signalClassification(record);
   if (classification) {
     const value = document.createElement("span");
+    const method = classification.method;
+    if (method && method !== "none") {
+      const methodChip = document.createElement("span");
+      methodChip.className = "method-chip";
+      methodChip.textContent = METHOD_SHORT_LABELS[method] || method;
+      methodChip.title = CLASSIFICATION_METHODS[method] || method;
+      value.append(methodChip, " ");
+    }
     const confidence = signalConfidence(record);
     if (confidence != null) {
+      const band = confidenceBand(record);
       const chip = document.createElement("span");
-      chip.className = `conf-chip ${confidenceBand(record)}`;
-      chip.textContent = `${Math.round(confidence * 100)}%`;
+      chip.className = `conf-chip ${band}`;
+      chip.textContent = CONFIDENCE_BANDS[band].label;
+      chip.title = `Match strength: ${Math.round(confidence * 100)}%`;
       value.append(chip, " ");
     }
     value.append(
-      CLASSIFICATION_METHODS[classification.method] || classification.method
+      CLASSIFICATION_METHODS[method] || method
     );
     if (classification.rescued) {
       const badge = document.createElement("span");

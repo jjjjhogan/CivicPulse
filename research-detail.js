@@ -69,6 +69,72 @@
     } catch (e) { /* optional */ }
   }
 
+  // ── Map view ─────────────────────────────────────────
+
+  var mapInstance = null;
+
+  function initMap() {
+    if (mapInstance) { mapInstance.invalidateSize(); return; }
+    var el = document.getElementById("researchMap");
+    if (!el || typeof L === "undefined") return;
+
+    mapInstance = L.map(el).setView([33.6846, -117.8265], 13);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 18,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    }).addTo(mapInstance);
+
+    var hits = (currentResearch && currentResearch.hits) || [];
+    var legend = document.getElementById("mapLegend");
+    if (!hits.length) {
+      legend.textContent = "No signals matched yet — run Archive first.";
+      return;
+    }
+
+    var plotted = 0;
+    var catColors = {
+      housing: "#e07b39",
+      potholes: "#b35900",
+      noise: "#6b7fd7",
+      sanitation: "#3aaa6d",
+      public_safety: "#d94c5a",
+      violent_crime: "#a03040",
+      traffic_safety: "#d4a017",
+      emergencies: "#cc3333",
+    };
+    var defaultColor = "#5a7a4a";
+
+    hits.forEach(function (h) {
+      var sig = h.signal || {};
+      var meta = sig.metadata || {};
+      var lat = parseFloat(meta.lat || meta.latitude);
+      var lng = parseFloat(meta.lng || meta.lon || meta.longitude);
+      if (!isFinite(lat) || !isFinite(lng)) return;
+
+      var cat = (sig.categories || [])[0] || "";
+      var color = catColors[cat] || defaultColor;
+
+      var marker = L.circleMarker([lat, lng], {
+        radius: 6, fillColor: color, color: "#fff",
+        weight: 1.5, fillOpacity: 0.85,
+      }).addTo(mapInstance);
+
+      marker.bindPopup(
+        "<strong>" + esc(sig.title || "(no title)") + "</strong><br>" +
+        '<span style="font-size:0.8em;color:#666">' +
+        esc(sig.source || "") + (cat ? " · " + esc(cat) : "") + "</span>"
+      );
+      plotted++;
+    });
+
+    if (plotted === 0) {
+      legend.textContent = hits.length + " signal" + (hits.length !== 1 ? "s" : "") +
+        " matched, but none have location coordinates. Geo-tagging will be added in a future update.";
+    } else {
+      legend.textContent = plotted + " of " + hits.length + " signals plotted on map.";
+    }
+  }
+
   // ── Summary preview ──────────────────────────────────
 
   var summaryLoaded = false;
@@ -291,6 +357,8 @@
       '<div class="workspace-tabs">' +
       '<button class="tab-btn' + (activeTab === "archive" ? " active" : "") +
       '" data-tab="archive">Archive <span class="tab-count">' + hitCount + "</span></button>" +
+      '<button class="tab-btn' + (activeTab === "map" ? " active" : "") +
+      '" data-tab="map">Map</button>' +
       '<button class="tab-btn' + (activeTab === "new" ? " active" : "") +
       '" data-tab="new">Jobs <span class="tab-count">' + researchJobs.length + "</span></button>" +
       '<button class="tab-btn' + (activeTab === "summary" ? " active" : "") +
@@ -302,6 +370,10 @@
       '<span class="panel-hint" id="archiveHint">' + hitCount +
       " signal" + (hitCount !== 1 ? "s" : "") + " matched</span></div>" +
       renderHits(r.hits) + "</div>" +
+      // Map panel
+      '<div class="tab-panel" id="mapPanel"' + (activeTab !== "map" ? " hidden" : "") + ">" +
+      '<div id="researchMap" style="height:420px;border-radius:10px;background:#e4e8dc"></div>' +
+      '<p class="map-legend" id="mapLegend"></p></div>' +
       // New/Jobs panel
       '<div class="tab-panel" id="newPanel"' + (activeTab !== "new" ? " hidden" : "") + ">" +
       renderNewPanel() + "</div>" +
@@ -313,6 +385,7 @@
       '<span class="panel-hint">One-page research briefing</span></div>' +
       '<div id="summaryPreview"><p class="empty-msg">Loading summary...</p></div></div>';
 
+    if (mapInstance) { mapInstance.remove(); mapInstance = null; }
     bindEvents();
   }
 
@@ -339,8 +412,10 @@
           b.classList.toggle("active", b.dataset.tab === activeTab);
         });
         document.getElementById("archivePanel").hidden = activeTab !== "archive";
+        document.getElementById("mapPanel").hidden = activeTab !== "map";
         document.getElementById("newPanel").hidden = activeTab !== "new";
         document.getElementById("summaryPanel").hidden = activeTab !== "summary";
+        if (activeTab === "map") initMap();
         if (activeTab === "summary") loadSummaryPreview();
       });
     });

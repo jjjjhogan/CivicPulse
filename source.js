@@ -279,9 +279,13 @@ function renderHead() {
   const scored = records
     .map(signalConfidence)
     .filter((confidence) => confidence != null);
-  const avgConfidence = scored.length
-    ? `${Math.round((scored.reduce((a, b) => a + b, 0) / scored.length) * 100)}%`
-    : "—";
+  let avgStrength = "—";
+  if (scored.length) {
+    const avg = scored.reduce((a, b) => a + b, 0) / scored.length;
+    if (avg >= 0.75) avgStrength = "Strong";
+    else if (avg >= 0.5) avgStrength = "Moderate";
+    else avgStrength = "Weak";
+  }
 
   const el = document.getElementById("sourceStats");
   el.innerHTML = "";
@@ -290,7 +294,7 @@ function renderHead() {
     [`${share}%`, "of all signals"],
     [mapped, "on the map"],
     [outlets, "outlets"],
-    [avgConfidence, "avg confidence"],
+    [avgStrength, "match strength"],
   ]) {
     const stat = document.createElement("div");
     stat.className = "stat";

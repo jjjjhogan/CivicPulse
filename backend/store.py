@@ -53,7 +53,8 @@ class VoteStore(Protocol):
 class ResearchStore(Protocol):
     def create_research(
         self, *, title: str, topic: str = "", keywords: list | None = None,
-        categories: list | None = None, notes: str = "",
+        categories: list | None = None, extract: list | None = None,
+        notes: str = "",
     ) -> dict: ...
     def list_researches(self) -> list[dict]: ...
     def get_research(self, research_id: int | str) -> dict | None: ...

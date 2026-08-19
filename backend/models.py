@@ -183,6 +183,7 @@ class Research(Base):
     topic: Mapped[str] = mapped_column(Text, nullable=False, default="")
     keywords: Mapped[list] = mapped_column(JSON, nullable=False, default=list)
     categories: Mapped[list] = mapped_column(JSON, nullable=False, default=list)
+    extract: Mapped[list] = mapped_column(JSON, nullable=False, default=list)
     status: Mapped[str] = mapped_column(String(32), nullable=False, default="draft")
     notes: Mapped[str] = mapped_column(Text, nullable=False, default="")
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
@@ -201,6 +202,7 @@ class Research(Base):
             "topic": self.topic,
             "keywords": self.keywords or [],
             "categories": self.categories or [],
+            "extract": self.extract or [],
             "status": self.status,
             "notes": self.notes or "",
             "hit_count": len(self.hits),

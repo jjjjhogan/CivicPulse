@@ -304,3 +304,37 @@ def test_launch_queues_news_job(dev_client, monkeypatch):
     data = res.get_json()
     assert len(data["jobs_started"]) == 1
     assert data["jobs_started"][0]["source"] == "irvine-news"
+
+
+def test_create_research_with_extract(client):
+    payload = _sample_research(extract=["sentiment", "policy"])
+    res = client.post("/api/researches", json=payload)
+    assert res.status_code == 201
+    data = res.get_json()["research"]
+    assert data["extract"] == ["sentiment", "policy"]
+
+
+def test_create_research_extract_defaults_empty(client):
+    res = client.post("/api/researches", json={"title": "No extract"})
+    assert res.status_code == 201
+    assert res.get_json()["research"]["extract"] == []
+
+
+def test_patch_extract(client):
+    created = client.post("/api/researches", json=_sample_research()).get_json()
+    rid = created["research"]["id"]
+    res = client.patch(
+        f"/api/researches/{rid}",
+        json={"extract": ["clustering", "demographics"]},
+    )
+    assert res.status_code == 200
+    assert res.get_json()["research"]["extract"] == ["clustering", "demographics"]
+
+
+def test_summary_includes_extract(client):
+    payload = _sample_research(extract=["sentiment", "misinfo"])
+    created = client.post("/api/researches", json=payload).get_json()
+    rid = created["research"]["id"]
+    res = client.get(f"/api/researches/{rid}/summary")
+    assert res.status_code == 200
+    assert res.get_json()["summary"]["extract"] == ["sentiment", "misinfo"]

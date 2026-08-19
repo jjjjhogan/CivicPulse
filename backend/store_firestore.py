@@ -446,7 +446,8 @@ class FirestoreResearchStore:
 
     def create_research(
         self, *, title: str, topic: str = "", keywords: list | None = None,
-        categories: list | None = None, notes: str = "",
+        categories: list | None = None, extract: list | None = None,
+        notes: str = "",
     ) -> dict:
         now = _utcnow_iso()
         data = {
@@ -454,6 +455,7 @@ class FirestoreResearchStore:
             "topic": topic,
             "keywords": keywords or [],
             "categories": categories or [],
+            "extract": extract or [],
             "status": "draft",
             "notes": notes,
             "created_at": now,

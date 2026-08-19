@@ -135,6 +135,10 @@
       color: #5a6b4a;
       line-height: 1.5;
     }
+    .placeholder-text {
+      font-style: italic;
+      color: #8a9a7c;
+    }
 
     .jobs-table {
       width: 100%;
@@ -336,6 +340,25 @@
           '<p class="notes-text">' + esc(s.notes) + '</p></div>';
       }
 
+      // Extract-flag sections
+      var extractLabels = {
+        sentiment: "Sentiment & emotion",
+        clustering: "Narrative clustering",
+        demographics: "Voice demographics",
+        policy: "Policy asks",
+        misinfo: "Misinformation flags",
+        bots: "Bot & brigading detection",
+      };
+      var extractHtml = "";
+      var extractFlags = s.extract || [];
+      if (extractFlags.length) {
+        extractFlags.forEach(function (flag) {
+          var label = extractLabels[flag] || flag;
+          extractHtml += '<div class="section"><div class="section-title">' + esc(label) + '</div>' +
+            '<p class="notes-text placeholder-text">Analysis pending — will be populated when data collection completes.</p></div>';
+        });
+      }
+
       container.innerHTML =
         '<div class="summary-header">' +
         '<div class="summary-brand">CivicPulse Research Summary</div>' +
@@ -356,7 +379,7 @@
         (signalsHtml ? '<div class="section"><div class="section-title">Top signals</div>' +
           signalsHtml + '</div>' : '') +
 
-        jobsHtml + notesHtml +
+        extractHtml + jobsHtml + notesHtml +
 
         '<div class="footer">Generated ' + new Date().toLocaleDateString(undefined, {
           year: "numeric", month: "long", day: "numeric"

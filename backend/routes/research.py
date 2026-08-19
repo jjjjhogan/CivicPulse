@@ -39,12 +39,17 @@ def create_research():
         return jsonify({"error": "categories must be an array."}), 400
     categories = [str(c).strip() for c in categories if str(c).strip()]
 
+    extract = body.get("extract") or []
+    if not isinstance(extract, list):
+        return jsonify({"error": "extract must be an array."}), 400
+    extract = [str(e).strip() for e in extract if str(e).strip()]
+
     notes = (body.get("notes") or "").strip()
 
     store = get_research_store()
     research = store.create_research(
         title=title, topic=topic, keywords=keywords,
-        categories=categories, notes=notes,
+        categories=categories, extract=extract, notes=notes,
     )
     return jsonify({"research": research}), 201
 
@@ -76,12 +81,12 @@ def update_research(research_id: str):
     if research is None:
         return jsonify({"error": "Research not found."}), 404
 
-    allowed = {"title", "topic", "keywords", "categories", "notes", "status"}
+    allowed = {"title", "topic", "keywords", "categories", "extract", "notes", "status"}
     updates = {}
     for key in allowed:
         if key in body:
             val = body[key]
-            if key in ("keywords", "categories"):
+            if key in ("keywords", "categories", "extract"):
                 if not isinstance(val, list):
                     return jsonify({"error": f"{key} must be an array."}), 400
                 val = [str(v).strip() for v in val if str(v).strip()]
@@ -282,6 +287,7 @@ def research_summary(research_id: str):
             "status": research.get("status", ""),
             "categories": research.get("categories") or [],
             "keywords": research.get("keywords") or [],
+            "extract": research.get("extract") or [],
             "notes": research.get("notes", ""),
             "created_at": research.get("created_at", ""),
             "hit_count": len(hits),
