@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CivicPulse — Research</title>
+  <title>CivicPulse — New Research</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,30 +14,30 @@
 </head>
 <body class="dashboard-body">
 
-  <div class="dash-layout">
+  <div class="dash-layout research-page">
 
-    <!-- ── left side panel ───────────────────────────────── -->
     <aside class="sidebar">
       <a class="logo sidebar-logo" href="index.html">CivicPulse</a>
+      <p class="sidebar-kicker">Mayor’s Research Suite</p>
 
       <nav class="sidebar-nav" id="sidebarNav">
         <a href="dashboard.html" class="side-link">
           <span class="side-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M4 13h6V4H4v9Zm0 7h6v-5H4v5Zm10 0h6v-9h-6v9Zm0-16v5h6V4h-6Z"/></svg>
           </span>
-          Dashboard
+          Command Center
         </a>
         <a href="research.html" class="side-link active">
           <span class="side-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5Zm-6 0A4.5 4.5 0 1 1 14 9.5 4.49 4.49 0 0 1 9.5 14Z"/></svg>
           </span>
-          Research
+          New Research
         </a>
         <a href="scrapers.html" class="side-link" id="scrapersNav" hidden>
           <span class="side-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8Z"/></svg>
           </span>
-          Scrapers
+          Sources &amp; Team
         </a>
       </nav>
 
@@ -51,71 +51,148 @@
       </div>
     </aside>
 
-    <!-- ── main content ──────────────────────────────────── -->
-    <main class="dash">
+    <div class="research-workspace">
+      <main class="dash research-main">
 
-      <section class="dash-section" id="researchHeader">
-        <div class="dash-head">
+        <header class="compose-head">
           <div>
-            <h1>Research</h1>
-            <p class="dash-sub">Create a research topic, then run archive matching to find relevant civic signals.</p>
+            <p class="compose-step">Step 1 of 3 — Configuration</p>
+            <h1>New Research</h1>
           </div>
-        </div>
-      </section>
+          <div class="compose-head-actions">
+            <button type="button" class="btn btn-ghost" id="btnSaveDraft">Save draft</button>
+            <button type="button" class="btn" id="btnLaunch">Launch scrape</button>
+          </div>
+        </header>
+        <p class="form-msg compose-msg" id="formMsg"></p>
 
-      <!-- create form -->
-      <section class="dash-section panel" id="createSection">
-        <div class="panel-head">
-          <h2>New Research</h2>
-        </div>
-        <form class="research-form" id="createForm" novalidate>
-          <label class="field">
-            <span class="field-label">Title <em>*</em></span>
-            <input type="text" name="title" id="fieldTitle" required
-                   placeholder="e.g. Housing prices in Irvine">
-          </label>
-          <label class="field">
-            <span class="field-label">Topic</span>
-            <input type="text" name="topic" id="fieldTopic"
-                   placeholder="e.g. Track housing cost trends and resident complaints">
-          </label>
-          <div class="field">
-            <span class="field-label">Categories</span>
-            <div class="cat-picker" id="catPicker"></div>
-          </div>
-          <div class="field">
-            <span class="field-label">Keywords</span>
-            <div class="kw-suggestions" id="kwSuggestions" hidden>
-              <span class="field-hint">Suggested:</span>
-              <div class="kw-chips" id="kwChips"></div>
+        <form class="research-form compose-form" id="createForm" novalidate>
+
+          <section class="compose-card">
+            <label class="field topic-field">
+              <span class="field-label">What would you like the city to listen to?</span>
+              <textarea name="title" id="fieldTitle" rows="4" required
+                placeholder="e.g. Affordable housing supply on the East Side — what residents, landlords, and prospective buyers are actually saying."></textarea>
+              <span class="clarity-badge" id="clarityBadge">Topic clarity score — 0%</span>
+            </label>
+
+            <div class="field expansions-field" id="expansionsField">
+              <span class="field-label">Suggested expansions</span>
+              <p class="field-hint" id="expansionsHint">Finish the title, then pause — we’ll suggest extra topics and keywords.</p>
+              <div class="expansion-pills" id="expansionPills"></div>
+              <div class="custom-kw-row" id="customKwRow" hidden>
+                <input type="text" id="customKwInput" placeholder="Add a custom keyword or phrase" maxlength="80">
+                <button type="button" class="btn btn-xs" id="customKwAdd">Add</button>
+                <button type="button" class="btn-ghost btn-xs" id="customKwCancel">Cancel</button>
+              </div>
             </div>
-            <input type="text" name="keywords" id="fieldKeywords"
-                   placeholder="e.g. rent, housing prices, lease (comma-separated)">
-          </div>
-          <label class="field">
-            <span class="field-label">Notes</span>
-            <textarea name="notes" id="fieldNotes" rows="2"
-                      placeholder="Optional context or goals for this research"></textarea>
-          </label>
-          <div class="form-actions">
-            <button type="submit" class="btn">Create Research</button>
-            <span class="form-msg" id="formMsg"></span>
-          </div>
+          </section>
+
+          <section class="selector-row" aria-label="Listen filters">
+            <label class="selector">
+              <span class="selector-label">Time window</span>
+              <select id="fieldTimeWindow">
+                <option value="7d">Last 7 days</option>
+                <option value="30d" selected>Last 30 days + rolling</option>
+                <option value="90d">Last 90 days</option>
+                <option value="ytd">Year to date</option>
+              </select>
+            </label>
+            <label class="selector">
+              <span class="selector-label">Geo radius</span>
+              <select id="fieldGeo">
+                <option value="irvine">Irvine citywide</option>
+                <option value="east" selected>East Irvine (ZIP 92602, 92620)</option>
+                <option value="west">West Irvine (ZIP 92612, 92614)</option>
+                <option value="north">Northwood / Turtle Rock</option>
+              </select>
+            </label>
+            <label class="selector">
+              <span class="selector-label">Language</span>
+              <select id="fieldLanguage">
+                <option value="en">English</option>
+                <option value="en-es" selected>English + Spanish</option>
+                <option value="en-es-zh">English + Spanish + Chinese</option>
+              </select>
+            </label>
+          </section>
+
+          <section class="compose-card">
+            <div class="compose-card-head">
+              <h2>Where to listen</h2>
+              <p>Public sources only. Toggle what this research should ingest.</p>
+            </div>
+            <div class="listen-grid" id="listenGrid"></div>
+          </section>
+
+          <section class="compose-card">
+            <div class="compose-card-head">
+              <h2>What should CivicPulse extract?</h2>
+              <p>All on-platform — no resident PII leaves the city’s cloud.</p>
+            </div>
+            <div class="extract-grid" id="extractGrid"></div>
+          </section>
         </form>
-      </section>
 
-      <!-- list -->
-      <section class="dash-section panel" id="listSection">
-        <div class="panel-head">
-          <h2>Your Researches</h2>
-          <span class="panel-hint" id="listCount"></span>
-        </div>
-        <div class="filter-bar" id="filterBar"></div>
-        <div id="researchList" class="research-list"></div>
-        <p class="empty-msg" id="emptyMsg" hidden>No researches yet. Create one above to get started.</p>
-      </section>
+        <section class="dash-section panel" id="listSection">
+          <div class="panel-head">
+            <h2>Your Researches</h2>
+            <span class="panel-hint" id="listCount"></span>
+          </div>
+          <div class="filter-bar" id="filterBar"></div>
+          <div id="researchList" class="research-list"></div>
+          <p class="empty-msg" id="emptyMsg" hidden>No researches yet. Create one above to get started.</p>
+        </section>
 
-    </main>
+      </main>
+
+      <aside class="research-rail" aria-label="Preview and templates">
+        <section class="metrics-card" id="metricsCard">
+          <p class="metrics-kicker">Live preview — streaming</p>
+          <p class="metrics-hero" id="metricVoices">— voices estimated this week</p>
+          <div class="metrics-tiles">
+            <div>
+              <span class="tile-label">Coverage</span>
+              <strong id="metricCoverage">—</strong>
+            </div>
+            <div>
+              <span class="tile-label">First insight</span>
+              <strong id="metricInsight">—</strong>
+            </div>
+            <div>
+              <span class="tile-label">Compute cost</span>
+              <strong id="metricCost">—</strong>
+            </div>
+            <div>
+              <span class="tile-label">Refresh</span>
+              <strong id="metricRefresh">—</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="ethics-card">
+          <div class="ethics-head">
+            <span class="ethics-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5.25 3.4 10.14 8 11.35C16.6 21.14 20 16.25 20 11V5l-8-3Zm-1 15-4-4 1.41-1.41L11 14.17l5.59-5.59L18 10l-7 7Z"/></svg>
+            </span>
+            <h2>Ethics gate</h2>
+          </div>
+          <ul>
+            <li>Only publicly posted content — no private DMs</li>
+            <li>PII redacted before analyst review</li>
+            <li>Quotes aggregated; individuals not surfaced in briefings</li>
+            <li>Bias audit runs on every demographic inference</li>
+          </ul>
+          <p class="ethics-foot">Reviewed by Irvine City Ethics Board — mock 2026-08-19</p>
+        </section>
+
+        <section class="templates-card">
+          <h2>Start from a template</h2>
+          <p class="field-hint">Fills the form only — templates are not saved as objects yet.</p>
+          <div class="template-list" id="templateList"></div>
+        </section>
+      </aside>
+    </div>
   </div>
 
   <script src="research.js"></script>

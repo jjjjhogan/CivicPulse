@@ -3,7 +3,7 @@
 **Canonical copy** of the Cursor plan “Two month roadmap.”  
 Day-to-day session prompts live in [`SESSION_PLAN.md`](../SESSION_PLAN.md) (not this file).
 
-**Last updated:** 2026-08-14 — Dev-gated local scrapers (`is_dev` + hide on Render) + Research workspace + Firestore-before-Render + **classifier quality loop**.
+**Last updated:** 2026-08-19 — New Research compose UI (expansions, listen toggles, extract checkboxes, mock rail) + Weeks 7–8 sessions to persist and launch that configuration.
 
 ---
 
@@ -142,12 +142,17 @@ flowchart TB
 |-------|---------|
 | `id`, `title` | Display name (“Housing prices — Jul 2026”) |
 | `topic` | Free-text topic / question |
-| `keywords[]` | Search terms (auto-suggested + editable) |
-| `categories[]` | Civic categories from classifier (`housing`, …) |
+| `keywords[]` | Search terms from **suggested expansions** + custom chips |
+| `categories[]` | Civic categories inferred from the title / selected expansions |
+| `time_window` | Listen window (`7d`, `30d` rolling, `90d`, `ytd`) — **Week 7 persist** |
+| `geo_radius` | District / ZIP preset (not a live geofence yet) — **Week 7 persist** |
+| `languages[]` | e.g. `en`, `es`, `zh` — **Week 7 persist** |
+| `listen_sources[]` | Toggles: twitter, reddit, youtube, tiktok, news311, facebook — **Week 7 persist** |
+| `extract[]` | Checkboxes: sentiment, clustering, demographics, policy, misinfo, bots — **Week 7 persist** |
 | `status` | `draft` → `gathering` → `ready` → `stale` |
 | `created_by`, timestamps | Audit |
 | `job_ids[]` | Linked scrape/import jobs |
-| `notes` | Optional staff notes |
+| `notes` | Optional staff notes (compose UI currently serializes listen config here until Week 7) |
 
 ### Two gathering modes
 
@@ -157,7 +162,8 @@ flowchart TB
 
 ### Workspace UI (v1)
 
-List / detail / Archive tab / New tab / job status / refresh archive / print summary.
+**Compose (`research.html`):** topic prompt, suggested expansions, time/geo/language, listen toggles, extract checkboxes, mock metrics + ethics rail.  
+**Workspace (`research-detail.html`):** list / detail / Archive tab / Jobs tab / job status / refresh archive / print summary.
 
 ### Out of scope for Research v1
 
@@ -188,11 +194,17 @@ Embeddings, cloud TikTok, multi-city, LLM chat literature review.
 - [x] SQLite `/api/signals`, runbook, TikTok desktop docs
 - [x] Reports + votes APIs, UI polish, pytest for new APIs
 
+### Shipped — New Research compose shell (2026-08-19)
+
+- [x] `research.html` compose layout: topic textarea, expansion pills on title idle, time/geo/language, listen toggles, extract checkboxes
+- [x] Right rail: mock live-preview metrics, static ethics gate, template buttons (form-fill only)
+- [x] Save draft / Launch scrape still use existing `POST /api/researches` (listen config parked in `notes` until Session 25)
+
 ### Open next
 
 - [ ] Week 1 Sessions 2–4: soak, UX harden, **Phase A measure** (+ light test debt)
 - [ ] Week 2: **Phases B–D** + Research spike
-- [ ] Weeks 3–8: Firebase → Research full → summary/demo (with ongoing Phase C)
+- [ ] Weeks 3–8: Firebase → Research full → **compose persist/launch** → summary/demo (with ongoing Phase C)
 
 ---
 
@@ -250,19 +262,39 @@ Embeddings, cloud TikTok, multi-city, LLM chat literature review.
 
 **Weeks 5–6 exit:** Create topic → archive hits → gather → new hits → open signals.
 
-### Weeks 7–8 — Summary, honesty polish, demo freeze
+### Weeks 7–8 — Compose productize, summary, demo freeze
+
+**Already on `research.html` (shell, not done):** topic textarea + clarity score; suggested-expansion pills after the title idles/blurs; time / geo / language selectors; where-to-listen **toggles**; extract **checkboxes**; right-rail mock metrics + ethics gate; template buttons that **fill the form only**. Save draft / Launch scrape still POST the old research fields and stash listen config in `notes`.
+
+Finish that contract in sessions **25–28**. Keep summary + freeze in **29–32**. Do **not** build a template CMS or real ethics enforcement.
 
 | Session | Focus | Exit |
 |---------|--------|------|
-| **25–26** | Research **summary** API + print/HTML | One-pager for that topic |
-| **27** | Map filter pins **by active research** | Geo view of research hits |
-| **28** | **Phase D** polish pass (confidence/method UX) if demos still confuse | No “92% wrong” moments in script |
-| **29–30** | Hardening, operator guide, seed for demo day; optional thin resolution | Rehearsal notes |
-| **31–32** | Feature freeze + two full demo rehearsals | 10-minute mayor script without chaos |
+| **25** | Persist compose fields on the Research object (`time_window`, `geo_radius`, `languages`, `listen_sources`, `extract`) — SQLite + Firestore + PATCH/GET. Stop stuffing them into `notes`. | Create/detail round-trip shows the same toggles, selectors, and checkboxes. `pytest` for the new JSON fields. |
+| **26** | Suggested expansions as a small API (title → voice chips + civic chips + inferred categories), plus custom chips already in the UI. Client calls the API on title idle instead of a hardcoded extras map. | Typing a housing title yields housing-ish chips; selecting chips writes `keywords[]` + `categories[]`. |
+| **27** | Wire **Save draft** vs **Launch scrape**: draft stays on the compose page; launch sets `gathering`, runs archive match, and queues topic-scoped jobs **only for sources that are on** (news/TikTok already exist; twitter/reddit/youtube/facebook stay as “armed but not implemented” with honest UI copy). | Launch lands in the workspace with archive hits and at least one real job path for enabled sources. Disabled Facebook does nothing. |
+| **28** | Right rail: replace fake voice counts with estimates from archive size × sources × window; keep **ethics gate as a static reviewed checklist** (no new compliance engine); templates remain form-fill only (no template store). | Metrics change when toggles/window change and cite a real denominator; demo script can point at ethics copy without implying a live audit. |
+| **29** | Research **summary** API + print/HTML (uses extract flags: sentiment/clustering/policy in the one-pager; skip sections that were unchecked) | One-pager for that topic; extract checkboxes actually change the briefing |
+| **30** | Map filter pins **by active research**; geo selector is still a preset label, not a hard geofence | Geo view of research hits |
+| **31** | **Phase D** polish + hardening + operator/demo seed | No “92% wrong” moments; compose → workspace walkthrough is under 5 minutes |
+| **32** | Feature freeze + two full demo rehearsals | 10-minute mayor script without chaos |
+
+**Session 25–28 checklist (compose):**
+
+- [x] Expansions regenerate when the title is finished (idle ~600ms or blur) — **client map today; Session 26 = API**
+- [x] Dark “voice” chips vs light “civic” chips; `+ add custom` works
+- [x] Time window + language + geo preset on the compose form
+- [x] Where-to-listen uses toggles; Facebook default off
+- [x] Extract options stay **checkboxes** at the bottom of compose
+- [x] Metrics rail is labeled estimate; ethics gate is mock/static
+- [x] Template buttons prefill title/chips only — **no template CRUD**
+- [ ] Research model/API stores listen + extract + window/lang/geo (not only `notes`) — **Session 25**
+- [ ] Launch scrape queues jobs for enabled sources — **Session 27**
+- [ ] Metrics cite a real archive denominator — **Session 28**
 
 **Phase E** only if gold sample still fails after batches — park for month 3 by default.
 
-**Weeks 7–8 exit:** Demo centered on Research + trustworthy-enough categories; known bugs listed.
+**Weeks 7–8 exit:** Mayor can configure a research from the compose screen, launch it, read a topic summary, and demo without fake-precision classifier theater. Known bugs listed. Templates and live ethics audits remain out of scope.
 
 ---
 
@@ -274,6 +306,8 @@ Embeddings, cloud TikTok, multi-city, LLM chat literature review.
 | Standalone daily city briefing | **Research summary** |
 | Resolution + map clusters as Weeks 5–6 hero | Thin map-by-research; resolution optional |
 | Firebase Auth weeks 7–8 | Stretch |
+| Research **templates as saved objects** | Form-fill chips only (Session 28) |
+| Live ethics / PII scanner | Static ethics-gate copy |
 | Classifier rewrite / embeddings | **Phase E / month 3** unless blocked |
 | Research as month-3-only | Weeks 2–8 |
 
@@ -284,7 +318,7 @@ Embeddings, cloud TikTok, multi-city, LLM chat literature review.
 | Person A (platform) | Person B (product / NLP / research UX) |
 |---|---|
 | Store interface, Firestore, Render, CI | **Phases A–C** (review, keywords, labels), Phase D copy |
-| Jobs ↔ research linking | Research UI, archive matcher, summary/print |
+| Jobs ↔ research linking | Research compose UI, archive matcher, summary/print |
 | Emulator + secrets docs | Gold sample ownership, demo narrative |
 
 Classifier quality is **Person B–led** but both re-score the gold sample after changes.
@@ -315,7 +349,7 @@ Classifier quality is **Person B–led** but both re-score the gold sample after
 - [ ] Cold demo on **Firestore** (local) and **Render**  
 - [ ] **Gold sample** re-scored: clear improvement vs Phase A baseline (track wrong-rate)  
 - [ ] Labels file grown meaningfully (directionally toward ~30+/category, not still ~12)  
-- [ ] Mayor can **create a Research** with sensible **archive hits** for a topic like housing  
+- [ ] Mayor can **compose a Research** (expansions, window/language, listen toggles, extract checkboxes) and get sensible **archive hits** for a topic like housing  
 - [ ] ≥1 **new gather** path attaches signals into that research  
 - [ ] Research **summary** printable without hand-editing  
 - [ ] Confidence UI shows **method**; demo script doesn’t lean on fake precision  
