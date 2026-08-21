@@ -140,10 +140,12 @@ def run_archive(research_id: str):
     if not (research.get("categories") or research.get("keywords")):
         return jsonify({"error": "Research needs at least one category or keyword."}), 400
 
+    listen = research.get("listen_sources", [])
     signal_store = get_signal_store()
     all_signals = signal_store.list_signals()
     matched = _match_signals(
         all_signals, research.get("categories", []), research.get("keywords", []),
+        listen_sources=listen or None,
     )
 
     research_store.replace_hits(research_id, matched)
@@ -165,6 +167,111 @@ def list_research_jobs(research_id: str):
     return jsonify({"jobs": jobs})
 
 
+import re as _re
+
+
+_NEGATIVE_WORDS = {"not", "no", "never", "don't", "doesn't", "can't", "won't", "stop", "against", "hate", "worst", "terrible", "awful", "angry", "fear", "afraid", "unsafe", "dangerous", "failed", "broken", "ruined"}
+_POSITIVE_WORDS = {"love", "great", "good", "best", "happy", "support", "thank", "hope", "better", "improved", "safe", "clean", "beautiful", "wonderful", "excellent", "proud"}
+_POLICY_PATTERNS = [
+    _re.compile(r"\b(should|must|need to|needs to|ought to|has to|have to)\b", _re.I),
+    _re.compile(r"\b(we need|city should|council should|they should|please fix|demand)\b", _re.I),
+]
+_BOT_INDICATORS = _re.compile(r"(follow me|click link|check bio|dm for|free money|giveaway|subscribe)", _re.I)
+
+
+def _run_extract_tools(extract: list[str], hits: list[dict]) -> dict:
+    sections: dict = {}
+
+    signals = [(h.get("signal") or {}) for h in hits]
+
+    if "sentiment" in extract:
+        positive = negative = neutral = 0
+        for sig in signals:
+            text = ((sig.get("title") or "") + " " + (sig.get("body") or "")).lower()
+            words = set(text.split())
+            pos = len(words & _POSITIVE_WORDS)
+            neg = len(words & _NEGATIVE_WORDS)
+            if pos > neg:
+                positive += 1
+            elif neg > pos:
+                negative += 1
+            else:
+                neutral += 1
+        sections["sentiment"] = {
+            "label": "Sentiment & emotion",
+            "total_signals": len(hits),
+            "positive": positive,
+            "negative": negative,
+            "neutral": neutral,
+        }
+
+    if "clustering" in extract:
+        cat_groups: dict[str, int] = {}
+        for sig in signals:
+            for cat in sig.get("categories", []):
+                cat_groups[cat] = cat_groups.get(cat, 0) + 1
+        sections["clustering"] = {
+            "label": "Narrative clustering",
+            "clusters": cat_groups,
+            "cluster_count": len(cat_groups),
+        }
+
+    if "demographics" in extract:
+        source_counts: dict[str, int] = {}
+        for sig in signals:
+            src = sig.get("source", "unknown")
+            source_counts[src] = source_counts.get(src, 0) + 1
+        sections["demographics"] = {
+            "label": "Voice demographics",
+            "by_source": source_counts,
+            "note": "Broken down by source platform. Renter/owner inference not yet available.",
+        }
+
+    if "policy" in extract:
+        asks: list[str] = []
+        for sig in signals:
+            text = (sig.get("title") or "") + " " + (sig.get("body") or "")
+            for pat in _POLICY_PATTERNS:
+                if pat.search(text):
+                    snippet = (sig.get("title") or text[:80]).strip()
+                    if snippet and snippet not in asks:
+                        asks.append(snippet)
+                    break
+        sections["policy"] = {
+            "label": "Policy asks extraction",
+            "asks": asks[:20],
+            "total_detected": len(asks),
+        }
+
+    if "misinfo" in extract:
+        flagged = 0
+        for sig in signals:
+            text = ((sig.get("title") or "") + " " + (sig.get("body") or "")).lower()
+            if "hoax" in text or "fake news" in text or "conspiracy" in text or "debunked" in text:
+                flagged += 1
+        sections["misinfo"] = {
+            "label": "Misinformation flags",
+            "flagged_count": flagged,
+            "total_signals": len(hits),
+            "note": "Conservative keyword-based scan. Full fact-check pipeline not yet available.",
+        }
+
+    if "bots" in extract:
+        suspected = 0
+        for sig in signals:
+            text = ((sig.get("title") or "") + " " + (sig.get("body") or ""))
+            if _BOT_INDICATORS.search(text):
+                suspected += 1
+        sections["bots"] = {
+            "label": "Bot & brigading detection",
+            "suspected_count": suspected,
+            "total_signals": len(hits),
+            "note": "Heuristic keyword scan. ML-based detection not yet available.",
+        }
+
+    return sections
+
+
 @bp.get("/api/researches/<research_id>/summary")
 def research_summary(research_id: str):
     store = get_research_store()
@@ -174,52 +281,7 @@ def research_summary(research_id: str):
 
     extract = research.get("extract", [])
     hits = research.get("hits", [])
-
-    sections: dict = {}
-
-    if "sentiment" in extract:
-        positive = sum(1 for h in hits if (h.get("signal") or {}).get("categories") and True)
-        sections["sentiment"] = {
-            "label": "Sentiment & emotion",
-            "total_signals": len(hits),
-            "note": "Sentiment analysis across matched signals.",
-        }
-
-    if "clustering" in extract:
-        cat_groups: dict[str, int] = {}
-        for h in hits:
-            sig = h.get("signal") or {}
-            for cat in sig.get("categories", []):
-                cat_groups[cat] = cat_groups.get(cat, 0) + 1
-        sections["clustering"] = {
-            "label": "Narrative clustering",
-            "clusters": cat_groups,
-            "note": "Signals grouped by category/topic.",
-        }
-
-    if "demographics" in extract:
-        sections["demographics"] = {
-            "label": "Voice demographics",
-            "note": "Demographic inference not yet implemented — placeholder.",
-        }
-
-    if "policy" in extract:
-        sections["policy"] = {
-            "label": "Policy asks extraction",
-            "note": "Policy extraction not yet implemented — placeholder.",
-        }
-
-    if "misinfo" in extract:
-        sections["misinfo"] = {
-            "label": "Misinformation flags",
-            "note": "Misinformation detection not yet implemented — placeholder.",
-        }
-
-    if "bots" in extract:
-        sections["bots"] = {
-            "label": "Bot & brigading detection",
-            "note": "Bot detection not yet implemented — placeholder.",
-        }
+    sections = _run_extract_tools(extract, hits)
 
     sources_used: list[str] = []
     for h in hits:
@@ -250,14 +312,22 @@ def preview_metrics():
     listen_sources = body.get("listen_sources") or []
     time_window = body.get("time_window") or "30d"
 
+    from backend.research_match import SOURCE_MAP
+
     signal_store = get_signal_store()
     all_signals = signal_store.list_signals()
-    archive_count = len(all_signals)
 
+    if listen_sources:
+        allowed = {SOURCE_MAP.get(s, s) for s in listen_sources}
+        filtered = [s for s in all_signals if s.get("source", "") in allowed]
+    else:
+        filtered = all_signals
+
+    archive_count = len(filtered)
     source_count = len(listen_sources) if listen_sources else 1
     window_mul = {"7d": 0.35, "30d": 1.0, "90d": 2.4, "ytd": 3.1}.get(time_window, 1.0)
 
-    estimated_voices = int(archive_count * source_count * window_mul)
+    estimated_voices = int(archive_count * window_mul)
     coverage = min(97, 48 + source_count * 8)
 
     return jsonify({
@@ -270,12 +340,6 @@ def preview_metrics():
     })
 
 
-IMPLEMENTED_SOURCES: dict[str, str] = {
-    "news311": "irvine-news",
-    "tiktok": "tiktok",
-}
-
-
 @bp.post("/api/researches/<research_id>/launch")
 def launch_research(research_id: str):
     store = get_research_store()
@@ -283,31 +347,30 @@ def launch_research(research_id: str):
     if research is None:
         return jsonify({"error": "Research not found."}), 404
 
-    store.update_research(research_id, status="gathering")
+    store.update_research(research_id, status="active")
 
+    listen = research.get("listen_sources", [])
+    extract = research.get("extract", [])
+
+    matched: list[dict] = []
     if research.get("categories") or research.get("keywords"):
         signal_store = get_signal_store()
         all_signals = signal_store.list_signals()
         matched = _match_signals(
-            all_signals, research.get("categories", []), research.get("keywords", []),
+            all_signals,
+            research.get("categories", []),
+            research.get("keywords", []),
+            listen_sources=listen or None,
         )
         store.replace_hits(research_id, matched)
 
-    listen = research.get("listen_sources", [])
-    queued: list[str] = []
-    skipped: list[str] = []
-    for src in listen:
-        scraper_source = IMPLEMENTED_SOURCES.get(src)
-        if scraper_source:
-            queued.append(src)
-        else:
-            skipped.append(src)
+    sections = _run_extract_tools(extract, matched)
 
     updated = store.get_research_with_hits(research_id)
     return jsonify({
         "research": updated,
-        "queued_sources": queued,
-        "skipped_sources": skipped,
+        "hit_count": len(matched),
+        "extract_sections": list(sections.keys()),
     })
 
 

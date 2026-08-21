@@ -86,31 +86,31 @@ EXIT
 ## Checklist
 
 ### Product / copy
-- [ ] “Launch scrape” → **Launch research**
-- [ ] Docs/comments: Research queries aggregate; scrapes are separate
+- [x] “Launch scrape” → **Launch research**
+- [x] Docs/comments: Research queries aggregate; scrapes are separate
 
 ### Launch path
-- [ ] `/launch` runs archive match + extract tools only
-- [ ] No `POST /api/jobs` / `start_job` from Research compose or detail
-- [ ] Remove or hide Start Job scrape UI on `research-detail`
+- [x] `/launch` runs archive match + extract tools only
+- [x] No `POST /api/jobs` / `start_job` from Research compose or detail
+- [x] Remove or hide Start Job scrape UI on `research-detail`
 
 ### Where to listen
-- [ ] `listen_sources` filters which DB `source`s enter `research_hits`
-- [ ] Empty source = empty contribution (not “queue scrape”)
-- [ ] Preview metrics use real filtered counts
+- [x] `listen_sources` filters which DB `source`s enter `research_hits`
+- [x] Empty source = empty contribution (not “queue scrape”)
+- [x] Preview metrics use real filtered counts
 
 ### Extract tools (build each)
-- [ ] `sentiment` tool → summary + workspace
-- [ ] `clustering` tool → summary + workspace
-- [ ] `demographics` tool (honest sparse v1)
-- [ ] `policy` tool → list of asks
-- [ ] `misinfo` tool (conservative v1)
-- [ ] `bots` tool (heuristic v1)
-- [ ] Unchecked flags omit sections / skip tools
+- [x] `sentiment` tool → summary + workspace
+- [x] `clustering` tool → summary + workspace
+- [x] `demographics` tool (honest sparse v1)
+- [x] `policy` tool → list of asks
+- [x] `misinfo` tool (conservative v1)
+- [x] `bots` tool (heuristic v1)
+- [x] Unchecked flags omit sections / skip tools
 
 ### Verify
-- [ ] `pytest -q`
-- [ ] Browser: toggle listen sources → different hit mix; toggle extract → different summary; Launch research never opens Chrome / news job
+- [x] `pytest -q`
+- [x] Browser: toggle listen sources → different hit mix; toggle extract → different summary; Launch research never opens Chrome / news job
 
 ---
 

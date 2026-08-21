@@ -191,20 +191,30 @@ def test_list_research_jobs_not_found(client):
 def test_launch_research(client):
     created = client.post("/api/researches", json=_sample_research(
         listen_sources=["news311", "tiktok", "twitter"],
+        extract=["sentiment", "clustering"],
     )).get_json()
     rid = created["research"]["id"]
     res = client.post(f"/api/researches/{rid}/launch")
     assert res.status_code == 200
     data = res.get_json()
-    assert data["research"]["status"] == "gathering"
-    assert "news311" in data["queued_sources"]
-    assert "tiktok" in data["queued_sources"]
-    assert "twitter" in data["skipped_sources"]
+    assert data["research"]["status"] == "active"
+    assert "sentiment" in data["extract_sections"]
+    assert "clustering" in data["extract_sections"]
 
 
 def test_launch_research_not_found(client):
     res = client.post("/api/researches/9999/launch")
     assert res.status_code == 404
+
+
+def test_launch_filters_by_listen_sources(client):
+    created = client.post("/api/researches", json=_sample_research(
+        listen_sources=["youtube"],
+    )).get_json()
+    rid = created["research"]["id"]
+    res = client.post(f"/api/researches/{rid}/launch")
+    assert res.status_code == 200
+    assert res.get_json()["hit_count"] == 0
 
 
 def test_draft_does_not_launch(client):

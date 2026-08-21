@@ -5,20 +5,43 @@ from __future__ import annotations
 import re
 
 
+SOURCE_MAP: dict[str, str] = {
+    "twitter": "twitter",
+    "reddit": "reddit",
+    "tiktok": "tiktok",
+    "news311": "news",
+    "youtube": "youtube",
+    "facebook": "facebook",
+}
+
+
 def match_signals(
     signals: list[dict],
     categories: list[str],
     keywords: list[str],
+    *,
+    listen_sources: list[str] | None = None,
 ) -> list[dict]:
     """Find signals matching given categories and/or keywords.
+
+    When listen_sources is provided, only signals whose source matches
+    one of the listed sources are considered.
 
     Returns a list of dicts with signal_id, match_reason, and score.
     """
     research_cats = set(categories or [])
     research_kws = [kw.lower() for kw in (keywords or []) if kw.strip()]
 
+    allowed_sources: set[str] | None = None
+    if listen_sources:
+        allowed_sources = {SOURCE_MAP.get(s, s) for s in listen_sources}
+
     hits = []
     for signal in signals:
+        if allowed_sources is not None:
+            sig_source = signal.get("source", "")
+            if sig_source not in allowed_sources:
+                continue
         reasons = []
         score = 0.0
 

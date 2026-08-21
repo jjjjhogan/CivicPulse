@@ -1,4 +1,4 @@
-/* research-detail.js — research workspace: archive/new tabs, edit, status, delete, jobs */
+/* research-detail.js — research workspace: archive/summary tabs, edit, status, delete */
 
 (function () {
   var params = new URLSearchParams(window.location.search);
@@ -7,7 +7,6 @@
   var currentResearch = null;
   var activeTab = "archive";
   var configData = null;
-  var researchJobs = [];
 
   function esc(s) {
     var el = document.createElement("span");
@@ -42,24 +41,6 @@
 
   async function apiRunArchive() {
     return fetch("/api/researches/" + id + "/archive", { method: "POST" });
-  }
-
-  async function apiGetJobs() {
-    try {
-      var res = await fetch("/api/researches/" + id + "/jobs");
-      if (!res.ok) return [];
-      return (await res.json()).jobs || [];
-    } catch (e) { return []; }
-  }
-
-  async function apiStartJob(source, settings) {
-    var payload = { source: source, research_id: id };
-    if (settings) payload.settings = settings;
-    return fetch("/api/jobs", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
   }
 
   async function loadConfig() {
@@ -103,68 +84,6 @@
     return ["draft", "active", "gathering", "ready", "stale"].map(function (s) {
       return "<option" + (s === current ? " selected" : "") + ">" + esc(s) + "</option>";
     }).join("");
-  }
-
-  function renderJobCard(job) {
-    var statusCls = "job-status-" + esc(job.status);
-    var time = job.created_at ? new Date(job.created_at).toLocaleString() : "";
-    var errorHtml = "";
-    if (job.error) {
-      var isDesktopOnly = job.source === "tiktok" && /selenium|desktop|chrome/i.test(job.error);
-      if (isDesktopOnly) {
-        errorHtml = '<div class="scraper-notice" style="margin-top:6px">' +
-          "This job requires a desktop machine. Run locally:" +
-          '<pre style="margin:6px 0 0;font-size:0.8rem">py scripts/scrape_tiktok.py</pre></div>';
-      } else {
-        errorHtml = '<p class="job-error">' + esc(job.error) + "</p>";
-      }
-    }
-    return '<div class="job-card">' +
-      '<div class="job-card-top">' +
-      '<span class="job-source">' + esc(job.source) + "</span>" +
-      '<span class="job-status ' + statusCls + '">' + esc(job.status) + "</span></div>" +
-      '<time class="job-time">' + time + "</time>" +
-      errorHtml + "</div>";
-  }
-
-  function renderNewPanel() {
-    var jobsHtml = "";
-    if (researchJobs.length) {
-      jobsHtml = '<div class="jobs-list">' +
-        researchJobs.map(renderJobCard).join("") + "</div>";
-    } else {
-      jobsHtml = '<p class="empty-msg">No jobs linked to this research yet.</p>';
-    }
-
-    var tiktokOk = configData && configData.tiktok_available;
-    var sourceOptions =
-      '<option value="irvine-news">irvine-news</option>' +
-      '<option value="tiktok">tiktok</option>';
-
-    var desktopBadge = !tiktokOk
-      ? ' <span class="scraper-badge desktop-only">Desktop only</span>'
-      : "";
-
-    var desktopNotice = !tiktokOk
-      ? '<div class="scraper-notice" id="tiktokNotice" hidden>' +
-        "TikTok scraping requires Selenium + Chrome on a desktop machine. " +
-        "Run <code>scripts/scrape_tiktok.py</code> locally, then signals sync to this server.</div>"
-      : "";
-
-    var tiktokSettings = '<div id="tiktokSettings" hidden>' +
-      '<label class="field-label" style="font-size:0.82rem;margin:8px 0 4px">Tag URL</label>' +
-      '<input type="text" class="inline-edit" id="tiktokTagUrl" ' +
-      'placeholder="https://www.tiktok.com/tag/irvine">' +
-      '</div>';
-
-    return '<div class="panel-toolbar">' +
-      '<select class="status-select" id="jobSourceSelect">' + sourceOptions + "</select>" +
-      desktopBadge +
-      '<button class="btn btn-sm" id="startJobBtn"' +
-      (!tiktokOk ? "" : "") + ">Start Job</button>" +
-      '<span class="panel-hint" id="jobHint">' +
-      researchJobs.length + " job" + (researchJobs.length !== 1 ? "s" : "") + "</span></div>" +
-      desktopNotice + tiktokSettings + jobsHtml;
   }
 
   // ── Main render ──────────────────────────────────────
@@ -234,7 +153,7 @@
       '<button class="tab-btn' + (activeTab === "archive" ? " active" : "") +
       '" data-tab="archive">Archive <span class="tab-count">' + hitCount + "</span></button>" +
       '<button class="tab-btn' + (activeTab === "new" ? " active" : "") +
-      '" data-tab="new">Jobs <span class="tab-count">' + researchJobs.length + "</span></button></div>" +
+      '" data-tab="new">Summary</button></div>' +
       // Archive panel
       '<div class="tab-panel" id="archivePanel"' + (activeTab !== "archive" ? " hidden" : "") + ">" +
       '<div class="panel-toolbar">' +
@@ -242,9 +161,11 @@
       '<span class="panel-hint" id="archiveHint">' + hitCount +
       " signal" + (hitCount !== 1 ? "s" : "") + " matched</span></div>" +
       renderHits(r.hits) + "</div>" +
-      // New/Jobs panel
+      // Summary panel
       '<div class="tab-panel" id="newPanel"' + (activeTab !== "new" ? " hidden" : "") + ">" +
-      renderNewPanel() + "</div>";
+      '<div class="panel-toolbar"><button class="btn btn-sm" id="loadSummaryBtn">Load Summary</button>' +
+      '<span class="panel-hint" id="summaryHint">Select extract options when creating research.</span></div>' +
+      '<div id="summaryContent"></div></div>';
 
     bindEvents();
   }
@@ -297,61 +218,68 @@
       }
     });
 
-    // Start Job — source selector + TikTok settings
-    var startBtn = document.getElementById("startJobBtn");
-    var sourceSelect = document.getElementById("jobSourceSelect");
-    var tiktokSettings = document.getElementById("tiktokSettings");
-    var tiktokNotice = document.getElementById("tiktokNotice");
-    var tiktokOk = configData && configData.tiktok_available;
-
-    function updateSourceUI() {
-      var isTiktok = sourceSelect.value === "tiktok";
-      if (tiktokSettings) tiktokSettings.hidden = !isTiktok;
-      if (tiktokNotice) tiktokNotice.hidden = !isTiktok;
-      if (startBtn) startBtn.disabled = isTiktok && !tiktokOk;
-    }
-
-    if (sourceSelect) {
-      sourceSelect.addEventListener("change", updateSourceUI);
-      updateSourceUI();
-    }
-
-    if (startBtn) {
-      startBtn.addEventListener("click", async function () {
-        var source = sourceSelect.value;
-        var settings = null;
-        if (source === "tiktok") {
-          var tagInput = document.getElementById("tiktokTagUrl");
-          var tagUrl = tagInput ? tagInput.value.trim() : "";
-          if (tagUrl) {
-            settings = { tag_urls: [tagUrl] };
-          }
-        }
-        startBtn.disabled = true;
-        startBtn.textContent = "Starting...";
+    // Summary panel
+    var summaryBtn = document.getElementById("loadSummaryBtn");
+    if (summaryBtn) {
+      summaryBtn.addEventListener("click", async function () {
+        summaryBtn.disabled = true;
+        summaryBtn.textContent = "Loading...";
         try {
-          var res = await apiStartJob(source, settings);
+          var res = await fetch("/api/researches/" + id + "/summary");
           var data = await res.json();
           if (!res.ok) {
-            if (res.status === 501) {
-              alert(
-                "TikTok scraping requires Selenium + Chrome on a desktop machine.\n\n" +
-                "Run locally:\n  py scripts/scrape_tiktok.py" +
-                (settings && settings.tag_urls ? " --tag-url " + settings.tag_urls[0] : "")
-              );
-            } else {
-              alert(data.error || "Failed to start job.");
-            }
-            startBtn.disabled = false;
-            startBtn.textContent = "Start Job";
+            document.getElementById("summaryContent").innerHTML =
+              '<p class="empty-msg">' + esc(data.error || "Failed to load summary.") + "</p>";
+            summaryBtn.disabled = false;
+            summaryBtn.textContent = "Load Summary";
             return;
           }
-          researchJobs = await apiGetJobs();
-          render(currentResearch);
+          var html = '<div class="summary-results">';
+          html += "<p><strong>" + data.hit_count + " signals</strong> matched";
+          if (data.sources_used && data.sources_used.length) {
+            html += " from " + data.sources_used.map(esc).join(", ");
+          }
+          html += ".</p>";
+          var sectionKeys = Object.keys(data.sections || {});
+          if (!sectionKeys.length) {
+            html += '<p class="empty-msg">No extract options selected for this research.</p>';
+          }
+          sectionKeys.forEach(function (key) {
+            var sec = data.sections[key];
+            html += '<div class="summary-section"><h4>' + esc(sec.label) + "</h4>";
+            if (sec.positive !== undefined) {
+              html += "<p>Positive: " + sec.positive + " · Negative: " + sec.negative + " · Neutral: " + sec.neutral + "</p>";
+            }
+            if (sec.clusters) {
+              var cats = Object.keys(sec.clusters);
+              html += "<ul>" + cats.map(function (c) { return "<li>" + esc(c) + ": " + sec.clusters[c] + "</li>"; }).join("") + "</ul>";
+            }
+            if (sec.by_source) {
+              var srcs = Object.keys(sec.by_source);
+              html += "<ul>" + srcs.map(function (s) { return "<li>" + esc(s) + ": " + sec.by_source[s] + "</li>"; }).join("") + "</ul>";
+            }
+            if (sec.asks && sec.asks.length) {
+              html += "<ul>" + sec.asks.slice(0, 10).map(function (a) { return "<li>" + esc(a) + "</li>"; }).join("") + "</ul>";
+              if (sec.total_detected > 10) html += "<p>… and " + (sec.total_detected - 10) + " more</p>";
+            }
+            if (sec.flagged_count !== undefined) {
+              html += "<p>" + sec.flagged_count + " of " + sec.total_signals + " signals flagged.</p>";
+            }
+            if (sec.suspected_count !== undefined) {
+              html += "<p>" + sec.suspected_count + " of " + sec.total_signals + " signals suspected.</p>";
+            }
+            if (sec.note) html += '<p class="panel-hint">' + esc(sec.note) + "</p>";
+            html += "</div>";
+          });
+          html += "</div>";
+          document.getElementById("summaryContent").innerHTML = html;
+          document.getElementById("summaryHint").textContent = sectionKeys.length + " extract section" + (sectionKeys.length !== 1 ? "s" : "");
+          summaryBtn.textContent = "Refresh";
+          summaryBtn.disabled = false;
         } catch (e) {
-          alert("Network error.");
-          startBtn.disabled = false;
-          startBtn.textContent = "Start Job";
+          document.getElementById("summaryContent").innerHTML = '<p class="empty-msg">Network error.</p>';
+          summaryBtn.disabled = false;
+          summaryBtn.textContent = "Load Summary";
         }
       });
     }
@@ -495,9 +423,7 @@
     }
     await loadConfig();
     try {
-      var results = await Promise.all([apiGet(), apiGetJobs()]);
-      var r = results[0];
-      researchJobs = results[1];
+      var r = await apiGet();
       if (!r) {
         container.innerHTML = '<p class="error-msg">Research not found.</p>';
         return;
