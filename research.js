@@ -109,23 +109,30 @@
   }
 
   function updateMetrics() {
-    var sourcesOn = sourceState().length;
-    var windowMul = { "7d": 0.35, "30d": 1, "90d": 2.4, ytd: 3.1 };
-    var mul = windowMul[document.getElementById("fieldTimeWindow").value] || 1;
-    var voices = Math.round((4200 + sourcesOn * 6100) * mul);
-    var coverage = Math.min(97, 48 + sourcesOn * 8);
-    var cost = (8 + sourcesOn * 4.5 * mul).toFixed(0);
-    var insight = sourcesOn >= 4 ? "~6 min after launch" : "~12 min after launch";
-    var refresh = document.getElementById("fieldTimeWindow").value === "7d"
-      ? "Every 30 min + spike alerts"
-      : "Hourly + live spike alerts";
+    var sourcesOn = sourceState();
+    var tw = document.getElementById("fieldTimeWindow").value || "30d";
 
-    document.getElementById("metricVoices").textContent =
-      voices.toLocaleString() + " voices estimated this week";
-    document.getElementById("metricCoverage").textContent = coverage + "% of likely public voices";
-    document.getElementById("metricInsight").textContent = insight;
-    document.getElementById("metricCost").textContent = "$" + cost + " per refresh cycle";
-    document.getElementById("metricRefresh").textContent = refresh;
+    fetch("/api/researches/preview", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ listen_sources: sourcesOn, time_window: tw }),
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        var voices = data.estimated_voices || 0;
+        var coverage = data.coverage_pct || 0;
+        var cost = (8 + (data.sources_on || 1) * 4.5).toFixed(0);
+        var insight = (data.sources_on || 1) >= 4 ? "~6 min after launch" : "~12 min after launch";
+        var refresh = tw === "7d" ? "Every 30 min + spike alerts" : "Hourly + live spike alerts";
+
+        document.getElementById("metricVoices").textContent =
+          voices.toLocaleString() + " voices estimated (from archive)";
+        document.getElementById("metricCoverage").textContent = coverage + "% of likely public voices";
+        document.getElementById("metricInsight").textContent = insight;
+        document.getElementById("metricCost").textContent = "$" + cost + " per refresh cycle";
+        document.getElementById("metricRefresh").textContent = refresh;
+      })
+      .catch(function () {});
   }
 
   function matchCategories(text) {
@@ -221,17 +228,54 @@
   }
 
   function refreshExpansionsFromTitle() {
-    var next = buildExpansions(titleEl.value);
-    var nextKeys = {};
-    next.forEach(function (item) { nextKeys[item.key] = true; });
-    selectedExpansions.forEach(function (key) {
-      if (!nextKeys[key]) selectedExpansions.delete(key);
-    });
-    next.forEach(function (item) {
-      if (item.kind === "voice") selectedExpansions.add(item.key);
-    });
-    expansionMeta = next;
-    renderExpansions();
+    var title = titleEl.value.trim();
+    if (title.length < 12) {
+      expansionMeta = [];
+      selectedExpansions.clear();
+      renderExpansions();
+      return;
+    }
+    fetch("/api/suggest/expansions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title: title }),
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        var next = [];
+        var seen = {};
+        (data.voice_chips || []).forEach(function (label) {
+          var key = label.toLowerCase();
+          if (!seen[key]) { seen[key] = true; next.push({ key: key, label: label, kind: "voice", category: (data.categories || [])[0] || "" }); }
+        });
+        (data.civic_chips || []).forEach(function (label) {
+          var key = label.toLowerCase();
+          if (!seen[key]) { seen[key] = true; next.push({ key: key, label: label, kind: "civic", category: (data.categories || [])[0] || "" }); }
+        });
+        var nextKeys = {};
+        next.forEach(function (item) { nextKeys[item.key] = true; });
+        selectedExpansions.forEach(function (key) {
+          if (!nextKeys[key]) selectedExpansions.delete(key);
+        });
+        next.forEach(function (item) {
+          if (item.kind === "voice") selectedExpansions.add(item.key);
+        });
+        expansionMeta = next;
+        renderExpansions();
+      })
+      .catch(function () {
+        var next = buildExpansions(titleEl.value);
+        var nextKeys = {};
+        next.forEach(function (item) { nextKeys[item.key] = true; });
+        selectedExpansions.forEach(function (key) {
+          if (!nextKeys[key]) selectedExpansions.delete(key);
+        });
+        next.forEach(function (item) {
+          if (item.kind === "voice") selectedExpansions.add(item.key);
+        });
+        expansionMeta = next;
+        renderExpansions();
+      });
     updateClarity();
   }
 
@@ -313,12 +357,18 @@
     var title = titleEl.value.trim();
     var keywords = selectedKeywordList();
     var categories = inferredCategories();
+    var langEl = document.getElementById("fieldLanguage");
     return {
       title: title,
       topic: title,
       keywords: keywords,
       categories: categories,
-      notes: composeNotes(),
+      extract: extractState(),
+      listen_sources: sourceState(),
+      languages: langEl ? [langEl.value] : ["en"],
+      time_window: document.getElementById("fieldTimeWindow").value || "30d",
+      geo_radius: document.getElementById("fieldGeo").value || "irvine",
+      notes: "",
     };
   }
 
@@ -343,12 +393,10 @@
       }
       var research = data.research;
       if (mode === "launch") {
-        formMsg.textContent = "Created — opening workspace…";
-        if (payload.keywords.length || payload.categories.length) {
-          try {
-            await fetch(API + "/" + research.id + "/archive", { method: "POST" });
-          } catch (err) { /* archive is best-effort on launch */ }
-        }
+        formMsg.textContent = "Created — launching…";
+        try {
+          await fetch(API + "/" + research.id + "/launch", { method: "POST" });
+        } catch (err) { /* launch is best-effort */ }
         window.location.href = "research-detail.html?id=" + research.id;
         return;
       }

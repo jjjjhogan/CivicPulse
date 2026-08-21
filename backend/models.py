@@ -183,6 +183,11 @@ class Research(Base):
     topic: Mapped[str] = mapped_column(Text, nullable=False, default="")
     keywords: Mapped[list] = mapped_column(JSON, nullable=False, default=list)
     categories: Mapped[list] = mapped_column(JSON, nullable=False, default=list)
+    extract: Mapped[list] = mapped_column(JSON, nullable=False, default=list)
+    listen_sources: Mapped[list] = mapped_column(JSON, nullable=False, default=list)
+    languages: Mapped[list] = mapped_column(JSON, nullable=False, default=list)
+    time_window: Mapped[str] = mapped_column(String(16), nullable=False, default="30d")
+    geo_radius: Mapped[str] = mapped_column(String(32), nullable=False, default="irvine")
     status: Mapped[str] = mapped_column(String(32), nullable=False, default="draft")
     notes: Mapped[str] = mapped_column(Text, nullable=False, default="")
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
@@ -201,6 +206,11 @@ class Research(Base):
             "topic": self.topic,
             "keywords": self.keywords or [],
             "categories": self.categories or [],
+            "extract": self.extract or [],
+            "listen_sources": self.listen_sources or [],
+            "languages": self.languages or [],
+            "time_window": self.time_window or "30d",
+            "geo_radius": self.geo_radius or "irvine",
             "status": self.status,
             "notes": self.notes or "",
             "hit_count": len(self.hits),

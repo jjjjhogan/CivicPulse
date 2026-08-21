@@ -27,6 +27,24 @@ def test_create_research(client):
     assert data["created_at"] is not None
 
 
+def test_create_research_with_compose_fields(client):
+    payload = _sample_research(
+        extract=["sentiment", "clustering"],
+        listen_sources=["twitter", "news311"],
+        languages=["en", "es"],
+        time_window="90d",
+        geo_radius="5mi",
+    )
+    res = client.post("/api/researches", json=payload)
+    assert res.status_code == 201
+    data = res.get_json()["research"]
+    assert data["extract"] == ["sentiment", "clustering"]
+    assert data["listen_sources"] == ["twitter", "news311"]
+    assert data["languages"] == ["en", "es"]
+    assert data["time_window"] == "90d"
+    assert data["geo_radius"] == "5mi"
+
+
 def test_create_research_minimal(client):
     res = client.post("/api/researches", json={"title": "Quick test"})
     assert res.status_code == 201
@@ -34,6 +52,11 @@ def test_create_research_minimal(client):
     assert data["title"] == "Quick test"
     assert data["keywords"] == []
     assert data["categories"] == []
+    assert data["extract"] == []
+    assert data["listen_sources"] == []
+    assert data["languages"] == []
+    assert data["time_window"] == "30d"
+    assert data["geo_radius"] == "irvine"
 
 
 def test_create_research_missing_title(client):
@@ -85,6 +108,28 @@ def test_update_research(client):
     data = res.get_json()["research"]
     assert data["keywords"] == ["mortgage", "rent"]
     assert data["status"] == "active"
+
+
+def test_update_research_compose_fields(client):
+    created = client.post("/api/researches", json=_sample_research()).get_json()
+    rid = created["research"]["id"]
+    res = client.patch(
+        f"/api/researches/{rid}",
+        json={
+            "extract": ["sentiment", "policy"],
+            "listen_sources": ["tiktok"],
+            "languages": ["en"],
+            "time_window": "7d",
+            "geo_radius": "10mi",
+        },
+    )
+    assert res.status_code == 200
+    data = res.get_json()["research"]
+    assert data["extract"] == ["sentiment", "policy"]
+    assert data["listen_sources"] == ["tiktok"]
+    assert data["languages"] == ["en"]
+    assert data["time_window"] == "7d"
+    assert data["geo_radius"] == "10mi"
 
 
 def test_update_research_invalid_status(client):
@@ -143,7 +188,100 @@ def test_list_research_jobs_not_found(client):
     assert res.status_code == 404
 
 
-def test_create_job_with_research_id(auth_client, monkeypatch):
+def test_launch_research(client):
+    created = client.post("/api/researches", json=_sample_research(
+        listen_sources=["news311", "tiktok", "twitter"],
+    )).get_json()
+    rid = created["research"]["id"]
+    res = client.post(f"/api/researches/{rid}/launch")
+    assert res.status_code == 200
+    data = res.get_json()
+    assert data["research"]["status"] == "gathering"
+    assert "news311" in data["queued_sources"]
+    assert "tiktok" in data["queued_sources"]
+    assert "twitter" in data["skipped_sources"]
+
+
+def test_launch_research_not_found(client):
+    res = client.post("/api/researches/9999/launch")
+    assert res.status_code == 404
+
+
+def test_draft_does_not_launch(client):
+    created = client.post("/api/researches", json=_sample_research(
+        listen_sources=["news311"],
+    )).get_json()
+    data = created["research"]
+    assert data["status"] == "draft"
+    assert data["listen_sources"] == ["news311"]
+
+
+def test_summary_gated_by_extract(client):
+    created = client.post("/api/researches", json=_sample_research(
+        extract=["sentiment", "clustering"],
+    )).get_json()
+    rid = created["research"]["id"]
+    res = client.get(f"/api/researches/{rid}/summary")
+    assert res.status_code == 200
+    data = res.get_json()
+    assert "sentiment" in data["sections"]
+    assert "clustering" in data["sections"]
+    assert "demographics" not in data["sections"]
+    assert "policy" not in data["sections"]
+    assert data["extract"] == ["sentiment", "clustering"]
+
+
+def test_summary_empty_extract(client):
+    created = client.post("/api/researches", json=_sample_research(
+        extract=[],
+    )).get_json()
+    rid = created["research"]["id"]
+    res = client.get(f"/api/researches/{rid}/summary")
+    assert res.status_code == 200
+    data = res.get_json()
+    assert data["sections"] == {}
+
+
+def test_summary_not_found(client):
+    res = client.get("/api/researches/9999/summary")
+    assert res.status_code == 404
+
+
+def test_preview_metrics(client):
+    res = client.post("/api/researches/preview", json={
+        "listen_sources": ["news311", "tiktok"],
+        "time_window": "30d",
+    })
+    assert res.status_code == 200
+    data = res.get_json()
+    assert "archive_count" in data
+    assert "estimated_voices" in data
+    assert "coverage_pct" in data
+    assert data["sources_on"] == 2
+    assert data["label"] == "estimate"
+
+
+def test_suggest_expansions(client):
+    res = client.post("/api/suggest/expansions", json={"title": "Affordable housing supply and rent burden"})
+    assert res.status_code == 200
+    data = res.get_json()
+    assert "voice_chips" in data
+    assert "civic_chips" in data
+    assert "categories" in data
+    assert "housing" in data["categories"]
+    assert len(data["voice_chips"]) > 0
+
+
+def test_suggest_expansions_short_title(client):
+    res = client.post("/api/suggest/expansions", json={"title": "Hi"})
+    assert res.status_code == 200
+    data = res.get_json()
+    assert data["voice_chips"] == []
+    assert data["civic_chips"] == []
+    assert data["categories"] == []
+
+
+def test_create_job_with_research_id(dev_client, monkeypatch):
     import subprocess
 
     monkeypatch.setattr(
@@ -158,30 +296,30 @@ def test_create_job_with_research_id(auth_client, monkeypatch):
         lambda source=None: {"inserted": 0, "updated": 0},
     )
 
-    created = auth_client.post("/api/researches", json=_sample_research()).get_json()
+    created = dev_client.post("/api/researches", json=_sample_research()).get_json()
     rid = created["research"]["id"]
 
-    res = auth_client.post(
+    res = dev_client.post(
         "/api/jobs",
         json={"source": "irvine-news", "research_id": rid},
     )
     assert res.status_code == 202
     job_id = res.get_json()["id"]
 
-    job = auth_client.get(f"/api/jobs/{job_id}").get_json()
+    job = dev_client.get(f"/api/jobs/{job_id}").get_json()
     assert job["research_id"] == rid
 
-    jobs_for_research = auth_client.get(f"/api/researches/{rid}/jobs").get_json()
+    jobs_for_research = dev_client.get(f"/api/researches/{rid}/jobs").get_json()
     assert len(jobs_for_research["jobs"]) == 1
     assert jobs_for_research["jobs"][0]["id"] == job_id
 
 
-def test_tiktok_job_returns_501_when_unavailable(auth_client, monkeypatch):
+def test_tiktok_job_returns_501_when_unavailable(dev_client, monkeypatch):
     monkeypatch.setattr("backend.routes.jobs.selenium_available", lambda: False)
-    created = auth_client.post("/api/researches", json=_sample_research()).get_json()
+    created = dev_client.post("/api/researches", json=_sample_research()).get_json()
     rid = created["research"]["id"]
 
-    res = auth_client.post(
+    res = dev_client.post(
         "/api/jobs",
         json={"source": "tiktok", "research_id": rid},
     )
@@ -190,7 +328,7 @@ def test_tiktok_job_returns_501_when_unavailable(auth_client, monkeypatch):
     assert "desktop" in data["error"].lower()
 
 
-def test_tiktok_job_passes_settings(auth_client, monkeypatch):
+def test_tiktok_job_passes_settings(dev_client, monkeypatch):
     import subprocess
 
     captured = {}
@@ -207,7 +345,7 @@ def test_tiktok_job_passes_settings(auth_client, monkeypatch):
         lambda source=None: {"inserted": 0, "updated": 0},
     )
 
-    res = auth_client.post(
+    res = dev_client.post(
         "/api/jobs",
         json={
             "source": "tiktok",

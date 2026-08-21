@@ -89,28 +89,28 @@ EXIT
 ## Checklist
 
 ### Persist (25)
-- [ ] Research model/stores/API: `time_window`, `geo_radius`, `languages`, `listen_sources`, `extract`
-- [ ] `research.js` posts real fields (not `notes` dump)
-- [ ] Tests pass
+- [x] Research model/stores/API: `time_window`, `geo_radius`, `languages`, `listen_sources`, `extract`
+- [x] `research.js` posts real fields (not `notes` dump)
+- [x] Tests pass
 
 ### Expansions (26)
-- [ ] Backend suggest API
-- [ ] Compose calls it on title idle/blur
+- [x] Backend suggest API
+- [x] Compose calls it on title idle/blur
 
 ### Launch (27)
-- [ ] Draft vs launch
-- [ ] Jobs only for enabled + implemented sources
+- [x] Draft vs launch
+- [x] Jobs only for enabled + implemented sources
 
 ### Metrics (28)
-- [ ] Preview endpoint/estimate from real counts
+- [x] Preview endpoint/estimate from real counts
 
 ### Summary (29)
-- [ ] Your summary/print gated by `extract[]`
+- [x] Your summary/print gated by `extract[]`
 
 ### Verify
-- [ ] `pytest -q`
-- [ ] Browser: compose → draft → launch → workspace → summary reflects extract + listen
-- [ ] Roadmap checklist 25–29 updated
+- [x] `pytest -q` — 161 passed
+- [x] Browser: compose → draft → launch → workspace → summary reflects extract + listen
+- [x] Roadmap checklist 25–29 updated
 
 ---
 

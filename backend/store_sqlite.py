@@ -243,13 +243,21 @@ class SQLiteResearchStore:
 
     def create_research(
         self, *, title: str, topic: str = "", keywords: list | None = None,
-        categories: list | None = None, notes: str = "",
+        categories: list | None = None, extract: list | None = None,
+        listen_sources: list | None = None, languages: list | None = None,
+        time_window: str = "30d", geo_radius: str = "irvine",
+        notes: str = "",
     ) -> dict:
         research = Research(
             title=title,
             topic=topic,
             keywords=keywords or [],
             categories=categories or [],
+            extract=extract or [],
+            listen_sources=listen_sources or [],
+            languages=languages or [],
+            time_window=time_window,
+            geo_radius=geo_radius,
             notes=notes,
         )
         self._db.add(research)

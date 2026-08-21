@@ -53,7 +53,10 @@ class VoteStore(Protocol):
 class ResearchStore(Protocol):
     def create_research(
         self, *, title: str, topic: str = "", keywords: list | None = None,
-        categories: list | None = None, notes: str = "",
+        categories: list | None = None, extract: list | None = None,
+        listen_sources: list | None = None, languages: list | None = None,
+        time_window: str = "30d", geo_radius: str = "irvine",
+        notes: str = "",
     ) -> dict: ...
     def list_researches(self) -> list[dict]: ...
     def get_research(self, research_id: int | str) -> dict | None: ...

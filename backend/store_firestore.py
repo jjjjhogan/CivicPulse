@@ -438,6 +438,11 @@ class FirestoreResearchStore:
             "topic": data.get("topic", ""),
             "keywords": data.get("keywords", []),
             "categories": data.get("categories", []),
+            "extract": data.get("extract", []),
+            "listen_sources": data.get("listen_sources", []),
+            "languages": data.get("languages", []),
+            "time_window": data.get("time_window", "30d"),
+            "geo_radius": data.get("geo_radius", "irvine"),
             "status": data.get("status", "draft"),
             "notes": data.get("notes", ""),
             "created_at": data.get("created_at"),
@@ -446,7 +451,10 @@ class FirestoreResearchStore:
 
     def create_research(
         self, *, title: str, topic: str = "", keywords: list | None = None,
-        categories: list | None = None, notes: str = "",
+        categories: list | None = None, extract: list | None = None,
+        listen_sources: list | None = None, languages: list | None = None,
+        time_window: str = "30d", geo_radius: str = "irvine",
+        notes: str = "",
     ) -> dict:
         now = _utcnow_iso()
         data = {
@@ -454,6 +462,11 @@ class FirestoreResearchStore:
             "topic": topic,
             "keywords": keywords or [],
             "categories": categories or [],
+            "extract": extract or [],
+            "listen_sources": listen_sources or [],
+            "languages": languages or [],
+            "time_window": time_window,
+            "geo_radius": geo_radius,
             "status": "draft",
             "notes": notes,
             "created_at": now,
