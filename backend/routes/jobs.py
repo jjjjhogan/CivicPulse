@@ -67,7 +67,7 @@ def _extract_import_payload() -> dict:
     return body
 
 
-def _create_and_start_job(*, source: str, settings: dict):
+def _create_and_start_job(*, source: str, settings: dict, research_id=None):
     user, denied = _require_scraper_access()
     if denied is not None:
         return denied
