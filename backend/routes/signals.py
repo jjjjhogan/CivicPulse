@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 import sys
 
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 
 import backend.config as _cfg
 from backend.auth import scrapers_host_ok
@@ -13,6 +13,10 @@ from backend.config import NEWS_DEFAULTS, ROOT, SIGNALS_DIR, TIKTOK_DEFAULTS
 from backend.store import get_signal_store
 
 bp = Blueprint("signals", __name__)
+
+# Cap dashboard / default list reads so Firestore free tier is not drained.
+DEFAULT_SIGNAL_LIMIT = 250
+MAX_SIGNAL_LIMIT = 1000
 
 
 def _read_json(path, default):
@@ -30,32 +34,93 @@ def _signals_from_json() -> list[dict]:
     return tiktok + reddit + twitter + news
 
 
+def _parse_paging():
+    raw_limit = request.args.get("limit")
+    raw_offset = request.args.get("offset", 0, type=int) or 0
+    offset = max(0, raw_offset)
+    if raw_limit is None:
+        limit = DEFAULT_SIGNAL_LIMIT
+    else:
+        try:
+            limit = int(raw_limit)
+        except (TypeError, ValueError):
+            limit = DEFAULT_SIGNAL_LIMIT
+        if limit <= 0:
+            limit = DEFAULT_SIGNAL_LIMIT
+        limit = min(limit, MAX_SIGNAL_LIMIT)
+    return limit, offset
+
+
 @bp.get("/api/signals")
 def api_signals():
     """Store-backed signal list; JSON files are fallback only for sqlite with empty table."""
     store = get_signal_store()
-    signals = store.list_signals()
-    if signals:
-        return jsonify({"count": len(signals), "signals": signals, "storage": _cfg.DATA_BACKEND})
+    limit, offset = _parse_paging()
+    total = store.count_signals()
+    signals = store.list_signals(limit=limit, offset=offset)
+    if signals or total:
+        return jsonify({
+            "count": len(signals),
+            "total": total,
+            "limit": limit,
+            "offset": offset,
+            "signals": signals,
+            "storage": _cfg.DATA_BACKEND,
+        })
     if _cfg.DATA_BACKEND == "sqlite":
         signals = _signals_from_json()
         if signals:
-            return jsonify({"count": len(signals), "signals": signals, "storage": "json"})
-    return jsonify({"count": 0, "signals": [], "storage": _cfg.DATA_BACKEND})
+            sliced = signals[offset: offset + limit]
+            return jsonify({
+                "count": len(sliced),
+                "total": len(signals),
+                "limit": limit,
+                "offset": offset,
+                "signals": sliced,
+                "storage": "json",
+            })
+    return jsonify({
+        "count": 0,
+        "total": 0,
+        "limit": limit,
+        "offset": offset,
+        "signals": [],
+        "storage": _cfg.DATA_BACKEND,
+    })
 
 
 @bp.get("/api/signals/feed")
 def api_feed():
     """Landing feed from store; JSON fallback for sqlite only."""
     store = get_signal_store()
-    feed = store.list_feed_signals()
+    limit, offset = _parse_paging()
+    feed = store.list_feed_signals(limit=limit, offset=offset)
     if feed:
-        return jsonify({"count": len(feed), "signals": feed, "storage": _cfg.DATA_BACKEND})
+        return jsonify({
+            "count": len(feed),
+            "limit": limit,
+            "offset": offset,
+            "signals": feed,
+            "storage": _cfg.DATA_BACKEND,
+        })
     if _cfg.DATA_BACKEND == "sqlite":
         feed = _read_json(SIGNALS_DIR / "feed.json", [])
         if feed:
-            return jsonify({"count": len(feed), "signals": feed, "storage": "json"})
-    return jsonify({"count": 0, "signals": [], "storage": _cfg.DATA_BACKEND})
+            sliced = feed[offset: offset + limit]
+            return jsonify({
+                "count": len(sliced),
+                "limit": limit,
+                "offset": offset,
+                "signals": sliced,
+                "storage": "json",
+            })
+    return jsonify({
+        "count": 0,
+        "limit": limit,
+        "offset": offset,
+        "signals": [],
+        "storage": _cfg.DATA_BACKEND,
+    })
 
 
 @bp.get("/api/manifest")

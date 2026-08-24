@@ -26,13 +26,33 @@ class SQLiteSignalStore:
             q = q.filter(Signal.archived_at.is_(None))
         return q
 
-    def list_signals(self, *, include_archived: bool = False) -> list[dict]:
-        rows = self._active_query(include_archived=include_archived).order_by(Signal.id.asc()).all()
-        return [row.to_dict() for row in rows]
+    def list_signals(
+        self, *, include_archived: bool = False, limit: int | None = None, offset: int = 0,
+    ) -> list[dict]:
+        q = self._active_query(include_archived=include_archived).order_by(Signal.id.asc())
+        if offset:
+            q = q.offset(offset)
+        if limit is not None:
+            q = q.limit(limit)
+        return [row.to_dict() for row in q.all()]
 
-    def list_feed_signals(self, *, include_archived: bool = False) -> list[dict]:
-        rows = self._active_query(include_archived=include_archived).order_by(Signal.id.asc()).all()
-        return [row.to_feed_dict() for row in rows]
+    def list_feed_signals(
+        self, *, include_archived: bool = False, limit: int | None = None, offset: int = 0,
+    ) -> list[dict]:
+        q = self._active_query(include_archived=include_archived).order_by(Signal.id.asc())
+        if offset:
+            q = q.offset(offset)
+        if limit is not None:
+            q = q.limit(limit)
+        return [row.to_feed_dict() for row in q.all()]
+
+    def count_signals(
+        self, *, sources: list[str] | None = None, include_archived: bool = False,
+    ) -> int:
+        q = self._active_query(include_archived=include_archived)
+        if sources:
+            q = q.filter(Signal.source.in_(list(sources)))
+        return int(q.count())
 
     def get_signal(self, signal_id: int | str) -> dict | None:
         row = self._db.get(Signal, int(signal_id))

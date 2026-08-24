@@ -64,15 +64,72 @@ class FirestoreSignalStore:
                 out.append(doc)
         return out
 
-    def list_signals(self, *, include_archived: bool = False) -> list[dict]:
-        docs = list(self._coll().order_by("created_at").stream())
+    def list_signals(
+        self, *, include_archived: bool = False, limit: int | None = None, offset: int = 0,
+    ) -> list[dict]:
+        query = self._coll().order_by("created_at")
+        # Over-fetch when filtering archived client-side so pages stay full-ish.
+        fetch_n = None
+        if limit is not None:
+            fetch_n = max(0, offset) + max(1, limit)
+            if not include_archived:
+                fetch_n = min(fetch_n * 2, fetch_n + 200)
+            query = query.limit(fetch_n)
+        docs = list(query.stream())
         docs = self._filter_archived(docs, include_archived=include_archived)
+        if offset:
+            docs = docs[offset:]
+        if limit is not None:
+            docs = docs[:limit]
         return [_doc_to_signal_dict(doc) for doc in docs]
 
-    def list_feed_signals(self, *, include_archived: bool = False) -> list[dict]:
-        docs = list(self._coll().order_by("created_at").stream())
+    def list_feed_signals(
+        self, *, include_archived: bool = False, limit: int | None = None, offset: int = 0,
+    ) -> list[dict]:
+        query = self._coll().order_by("created_at")
+        if limit is not None:
+            fetch_n = max(0, offset) + max(1, limit)
+            if not include_archived:
+                fetch_n = min(fetch_n * 2, fetch_n + 200)
+            query = query.limit(fetch_n)
+        docs = list(query.stream())
         docs = self._filter_archived(docs, include_archived=include_archived)
+        if offset:
+            docs = docs[offset:]
+        if limit is not None:
+            docs = docs[:limit]
         return [_doc_to_feed_dict(doc) for doc in docs]
+
+    def count_signals(
+        self, *, sources: list[str] | None = None, include_archived: bool = False,
+    ) -> int:
+        """Cheap-ish count via aggregation when possible; falls back to streaming."""
+        if sources:
+            total = 0
+            for src in sources:
+                total += self._count_query(
+                    self._coll().where("source", "==", src),
+                    include_archived=include_archived,
+                )
+            return total
+        return self._count_query(self._coll(), include_archived=include_archived)
+
+    def _count_query(self, query, *, include_archived: bool) -> int:
+        try:
+            aggregation = query.count().get()
+            value = 0
+            for result in aggregation:
+                value = int(result[0].value)
+                break
+            if include_archived:
+                return value
+            # archived_at filter is client-side; aggregation is approximate for active-only.
+            # Prefer aggregation total as estimate denominator (quota-safe).
+            return value
+        except Exception:  # noqa: BLE001
+            docs = list(query.stream())
+            docs = self._filter_archived(docs, include_archived=include_archived)
+            return len(docs)
 
     def get_signal(self, signal_id: int | str) -> dict | None:
         doc = self._coll().document(str(signal_id)).get()
@@ -485,6 +542,19 @@ class FirestoreResearchStore:
             return None
         return self._to_dict(doc)
 
+    @staticmethod
+    def _hit_payload(h: dict, *, now: str) -> dict:
+        signal = h.get("signal")
+        if not isinstance(signal, dict):
+            signal = None
+        return {
+            "signal_id": str(h["signal_id"]),
+            "match_reason": h.get("match_reason", ""),
+            "score": h.get("score", 0.0),
+            "signal": signal,
+            "created_at": now,
+        }
+
     def get_research_with_hits(self, research_id: int | str) -> dict | None:
         rid = str(research_id)
         doc = self._coll().document(rid).get()
@@ -492,26 +562,30 @@ class FirestoreResearchStore:
             return None
         research = self._to_dict(doc)
         hit_docs = list(self._hits_coll(rid).stream())
-        signal_ids = [h.to_dict().get("signal_id") for h in hit_docs]
-        signals_by_id: dict[str, dict] = {}
-        signals_coll = self._db.collection("signals")
-        for sid in signal_ids:
-            if sid:
-                sdoc = signals_coll.document(str(sid)).get()
-                if sdoc.exists:
-                    signals_by_id[str(sid)] = _doc_to_signal_dict(sdoc)
-
+        # Prefer denormalized signal snapshots on hit docs — never N+1 fetch signals.
         hits = []
         for h in hit_docs:
             hdata = h.to_dict() or {}
             sid = str(hdata.get("signal_id", ""))
+            signal = hdata.get("signal")
+            if not isinstance(signal, dict):
+                signal = {
+                    "id": sid,
+                    "source": "",
+                    "outlet": "",
+                    "title": "",
+                    "body": "",
+                    "url": "",
+                    "categories": [],
+                    "published_utc": "",
+                }
             hits.append({
                 "id": h.id,
                 "research_id": rid,
                 "signal_id": sid,
                 "match_reason": hdata.get("match_reason", ""),
                 "score": hdata.get("score", 0.0),
-                "signal": signals_by_id.get(sid),
+                "signal": signal,
                 "created_at": hdata.get("created_at"),
             })
         hits.sort(key=lambda h: -(h.get("score") or 0))
@@ -536,12 +610,7 @@ class FirestoreResearchStore:
         for h in hits:
             sid = str(h["signal_id"])
             ref = hits_ref.document(sid)
-            batch.set(ref, {
-                "signal_id": sid,
-                "match_reason": h.get("match_reason", ""),
-                "score": h.get("score", 0.0),
-                "created_at": now,
-            })
+            batch.set(ref, self._hit_payload(h, now=now))
             ops += 1
             if ops >= 400:
                 batch.commit()
@@ -562,12 +631,7 @@ class FirestoreResearchStore:
             if sid in existing_sids:
                 continue
             ref = hits_ref.document(sid)
-            batch.set(ref, {
-                "signal_id": sid,
-                "match_reason": h.get("match_reason", ""),
-                "score": h.get("score", 0.0),
-                "created_at": now,
-            })
+            batch.set(ref, self._hit_payload(h, now=now))
             added += 1
             if added % 400 == 0:
                 batch.commit()

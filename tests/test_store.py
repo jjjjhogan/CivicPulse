@@ -726,35 +726,29 @@ def test_firestore_get_research_with_hits():
         "match_reason": "category:housing",
         "score": 0.5,
         "created_at": "2026-01-02T00:00:00Z",
-    })
-    signal_doc = _make_mock_doc("sig_abc", {
-        "source": "news", "outlet": "IS", "title": "Housing signal",
-        "body": "", "url": "http://example.com/1",
-        "categories": ["housing"], "published_utc": "2026-01-01",
-        "metadata": {},
+        "signal": {
+            "id": "sig_abc",
+            "source": "news",
+            "outlet": "IS",
+            "title": "Housing signal",
+            "body": "",
+            "url": "http://example.com/1",
+            "categories": ["housing"],
+            "published_utc": "2026-01-01",
+        },
     })
 
     mock_db = MagicMock()
     mock_db.collection.return_value.document.return_value.get.return_value = research_doc
     mock_db.collection.return_value.document.return_value.collection.return_value.stream.return_value = iter([hit_doc])
-    mock_signals_coll = MagicMock()
-    mock_signals_coll.document.return_value.get.return_value = signal_doc
-
-    def _collection(name):
-        if name == "signals":
-            return mock_signals_coll
-        coll = MagicMock()
-        coll.document.return_value.get.return_value = research_doc
-        coll.document.return_value.collection.return_value.stream.return_value = iter([hit_doc])
-        return coll
-
-    mock_db.collection.side_effect = _collection
 
     store = FirestoreResearchStore(mock_db)
     full = store.get_research_with_hits("r1")
     assert full is not None
     assert full["hit_count"] == 1
     assert full["hits"][0]["signal"]["title"] == "Housing signal"
+    # Must not N+1 fetch the signals collection
+    mock_db.collection.assert_called_with("researches")
 
 
 def test_firestore_update_research():

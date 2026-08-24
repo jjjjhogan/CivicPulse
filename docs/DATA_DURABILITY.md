@@ -48,6 +48,12 @@ Firebase is **not** a connection URL. You need **Project ID** + **service-accoun
 6. `firebase deploy --only firestore:indexes,firestore:rules` when ready.
 7. Render: same env + SA secret file; never commit SA JSON.
 
-Store switch: `backend/store.py` → sqlite or firestore impl. Path B ponds remain local JSON.
+## Firestore read hygiene
+
+- Prefer `DATA_BACKEND=sqlite` for local UI work; use Firestore for shared/hosted demos.
+- `GET /api/signals` defaults to `limit=250` (see `total` for full count).
+- Research hits store a **signal snapshot** so detail views do not N+1-read every signal.
+- Archive / launch load candidates **by listen source** when possible instead of the full lake.
+- Preview metrics use `count_signals` (aggregation when available), not a full document stream.
 
 

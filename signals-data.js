@@ -413,7 +413,7 @@ function signalUrl(signal) {
 //   storage — "db" | "json" | null
 async function fetchLiveSignalsResult() {
   try {
-    const res = await fetch("/api/signals");
+    const res = await fetch("/api/signals?limit=250");
     if (!res.ok) {
       return { signals: [], storage: null, status: "error" };
     }

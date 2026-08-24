@@ -15,6 +15,41 @@ SOURCE_MAP: dict[str, str] = {
 }
 
 
+def mapped_listen_sources(listen_sources: list[str] | None) -> set[str] | None:
+    if not listen_sources:
+        return None
+    return {SOURCE_MAP.get(s, s) for s in listen_sources}
+
+
+def signal_snapshot(signal: dict) -> dict:
+    """Compact signal fields stored on research hits (avoids N+1 reads)."""
+    body = signal.get("body") or ""
+    if len(body) > 280:
+        body = body[:277] + "..."
+    return {
+        "id": signal.get("id"),
+        "stable_id": signal.get("stable_id") or signal.get("id"),
+        "source": signal.get("source") or "",
+        "outlet": signal.get("outlet") or "",
+        "title": signal.get("title") or "",
+        "body": body,
+        "url": signal.get("url") or "",
+        "categories": list(signal.get("categories") or []),
+        "published_utc": signal.get("published_utc") or "",
+    }
+
+
+def load_candidate_signals(signal_store, listen_sources: list[str] | None = None) -> list[dict]:
+    """Load signals for archive match — prefer per-source queries when listen is set."""
+    allowed = mapped_listen_sources(listen_sources)
+    if allowed is None:
+        return signal_store.list_signals()
+    rows: list[dict] = []
+    for src in sorted(allowed):
+        rows.extend(signal_store.list_signals_by_source(src))
+    return rows
+
+
 def match_signals(
     signals: list[dict],
     categories: list[str],
@@ -27,14 +62,12 @@ def match_signals(
     When listen_sources is provided, only signals whose source matches
     one of the listed sources are considered.
 
-    Returns a list of dicts with signal_id, match_reason, and score.
+    Returns hit dicts with signal_id, match_reason, score, and embedded signal snapshot.
     """
     research_cats = set(categories or [])
     research_kws = [kw.lower() for kw in (keywords or []) if kw.strip()]
 
-    allowed_sources: set[str] | None = None
-    if listen_sources:
-        allowed_sources = {SOURCE_MAP.get(s, s) for s in listen_sources}
+    allowed_sources = mapped_listen_sources(listen_sources)
 
     hits = []
     for signal in signals:
@@ -66,6 +99,7 @@ def match_signals(
                 "signal_id": signal["id"],
                 "match_reason": "; ".join(reasons),
                 "score": round(score, 2),
+                "signal": signal_snapshot(signal),
             })
 
     hits.sort(key=lambda h: -h["score"])

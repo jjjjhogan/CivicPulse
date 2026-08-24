@@ -234,9 +234,14 @@ def _match_research_after_job(job_id, job_store) -> None:
         research = rs.get_research(rid)
         if not research:
             return
-        from backend.research_match import match_signals
-        signals = ss.list_signals()
-        hits = match_signals(signals, research.get("categories", []), research.get("keywords", []))
+        from backend.research_match import load_candidate_signals, match_signals
+        signals = load_candidate_signals(ss, research.get("listen_sources") or None)
+        hits = match_signals(
+            signals,
+            research.get("categories", []),
+            research.get("keywords", []),
+            listen_sources=research.get("listen_sources") or None,
+        )
         if hits:
             rs.add_hits(rid, hits)
         if DATA_BACKEND != "firestore":

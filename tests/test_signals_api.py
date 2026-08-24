@@ -11,12 +11,24 @@ def test_signals_from_db(client, imported_signals):
     assert res.status_code == 200
     data = res.get_json()
     assert data["count"] == imported_signals
+    assert data["total"] == imported_signals
     assert len(data["signals"]) == imported_signals
     assert data["storage"] == "sqlite"
     for row in data["signals"]:
         assert "source" in row
         assert "title" in row
         assert isinstance(row.get("categories"), list)
+
+
+def test_signals_limit_paging(client, imported_signals):
+    res = client.get("/api/signals?limit=3&offset=0")
+    assert res.status_code == 200
+    data = res.get_json()
+    assert data["total"] == imported_signals
+    assert data["count"] == min(3, imported_signals)
+    assert len(data["signals"]) == min(3, imported_signals)
+    assert data["limit"] == 3
+    assert data["offset"] == 0
 
 
 def test_signals_feed_from_db(client, imported_signals):

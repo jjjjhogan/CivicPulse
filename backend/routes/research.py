@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from flask import Blueprint, jsonify, request
 
-from backend.research_match import match_signals as _match_signals
+from backend.research_match import load_candidate_signals, match_signals as _match_signals
 from backend.store import get_job_store, get_research_store, get_signal_store
 
 bp = Blueprint("research", __name__)
@@ -142,7 +142,7 @@ def run_archive(research_id: str):
 
     listen = research.get("listen_sources", [])
     signal_store = get_signal_store()
-    all_signals = signal_store.list_signals()
+    all_signals = load_candidate_signals(signal_store, listen or None)
     matched = _match_signals(
         all_signals, research.get("categories", []), research.get("keywords", []),
         listen_sources=listen or None,
@@ -312,18 +312,13 @@ def preview_metrics():
     listen_sources = body.get("listen_sources") or []
     time_window = body.get("time_window") or "30d"
 
-    from backend.research_match import SOURCE_MAP
+    from backend.research_match import mapped_listen_sources
 
     signal_store = get_signal_store()
-    all_signals = signal_store.list_signals()
+    allowed = mapped_listen_sources(listen_sources)
+    sources = sorted(allowed) if allowed is not None else None
+    archive_count = signal_store.count_signals(sources=sources)
 
-    if listen_sources:
-        allowed = {SOURCE_MAP.get(s, s) for s in listen_sources}
-        filtered = [s for s in all_signals if s.get("source", "") in allowed]
-    else:
-        filtered = all_signals
-
-    archive_count = len(filtered)
     source_count = len(listen_sources) if listen_sources else 1
     window_mul = {"7d": 0.35, "30d": 1.0, "90d": 2.4, "ytd": 3.1}.get(time_window, 1.0)
 
@@ -355,7 +350,7 @@ def launch_research(research_id: str):
     matched: list[dict] = []
     if research.get("categories") or research.get("keywords"):
         signal_store = get_signal_store()
-        all_signals = signal_store.list_signals()
+        all_signals = load_candidate_signals(signal_store, listen or None)
         matched = _match_signals(
             all_signals,
             research.get("categories", []),
