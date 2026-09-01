@@ -21,11 +21,72 @@ SCRAPE_NEWS = ROOT / "scripts" / "scrape_news.py"
 PROCESS_REDDIT = ROOT / "scripts" / "process_reddit_scrape.py"
 PROCESS_TWITTER = ROOT / "scripts" / "process_twitter_scrape.py"
 
+# Curated Irvine / Orange County, CA tag pages for the scraper UI.
+# Avoid ambiguous tags like #orangecountynews (FL) and #irvinenews (UK).
+TIKTOK_TAG_OPTIONS = [
+    {
+        "id": "irvine",
+        "label": "#irvine",
+        "group": "location",
+        "default": True,
+    },
+    {
+        "id": "irvinecalifornia",
+        "label": "#irvinecalifornia",
+        "group": "location",
+        "default": False,
+    },
+    {
+        "id": "ucirvine",
+        "label": "#ucirvine",
+        "group": "location",
+        "default": False,
+    },
+    {
+        "id": "newportbeach",
+        "label": "#newportbeach",
+        "group": "location",
+        "default": True,
+    },
+    {
+        "id": "orangecounty",
+        "label": "#orangecounty",
+        "group": "location",
+        "default": False,
+        "hint": "Some FL noise possible — skip #orangecountynews",
+    },
+    {
+        "id": "ocrundown",
+        "label": "#ocrundown",
+        "group": "news",
+        "default": False,
+    },
+    {
+        "id": "foxla",
+        "label": "#foxla",
+        "group": "news",
+        "default": False,
+    },
+    {
+        "id": "cbsla",
+        "label": "#cbsla",
+        "group": "news",
+        "default": False,
+    },
+    {
+        "id": "ktla",
+        "label": "#ktla",
+        "group": "news",
+        "default": False,
+    },
+]
+
 TIKTOK_DEFAULTS = {
     "mode": "tags",
     "tag_urls": [
-        "https://www.tiktok.com/tag/irvine",
-        "https://www.tiktok.com/tag/newportbeach",
+        f"https://www.tiktok.com/tag/{tag['id']}"
+        for tag in TIKTOK_TAG_OPTIONS
+        if tag.get("default")
     ],
     "max_videos": 10,
     "max_comments": 25,

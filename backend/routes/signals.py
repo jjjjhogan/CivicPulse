@@ -134,6 +134,7 @@ def api_config():
     sys.path.insert(0, str(ROOT))
     from scrapers.categories import CivicIssueCategory, DEFAULT_SEARCH_TERMS  # noqa: WPS433
     from scrapers.news.scrape import NEWS_SOURCES  # noqa: WPS433
+    from backend.config import TIKTOK_TAG_OPTIONS  # noqa: WPS433
     from backend.jobs import selenium_available  # noqa: WPS433
 
     return jsonify(
@@ -144,6 +145,7 @@ def api_config():
                 for cat, terms in DEFAULT_SEARCH_TERMS.items()
             },
             "tiktok_defaults": TIKTOK_DEFAULTS,
+            "tiktok_tags": TIKTOK_TAG_OPTIONS,
             "tiktok_available": selenium_available(),
             "news_defaults": NEWS_DEFAULTS,
             "news_outlets": [

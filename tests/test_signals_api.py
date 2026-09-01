@@ -94,6 +94,8 @@ def test_config_endpoint(client):
     data = res.get_json()
     assert "categories" in data
     assert "tiktok_defaults" in data
+    assert "tiktok_tags" in data
+    assert any(tag["id"] == "irvine" for tag in data["tiktok_tags"])
     assert "news_defaults" in data
     assert "news_outlets" in data
     assert data["scrapers_available"] is True

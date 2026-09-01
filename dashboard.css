@@ -301,9 +301,40 @@ html {
   gap: 6px;
 }
 
+.scraper-tag-list {
+  gap: 8px;
+}
+
+.scraper-tag-group {
+  margin-top: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #6b7280;
+}
+
+.scraper-tag-group:first-child {
+  margin-top: 0;
+}
+
+.scraper-tag-hint {
+  margin-left: 4px;
+  font-size: 0.75rem;
+  color: #8a6a3a;
+}
+
+.scraper-tag-note {
+  margin: 2px 0 0;
+  font-size: 0.78rem;
+  line-height: 1.35;
+  color: #6b7280;
+}
+
 .scraper-check {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 8px;
   font-size: 0.8rem;
   color: #5f6f52;

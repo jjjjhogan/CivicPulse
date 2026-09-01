@@ -8,11 +8,36 @@ const SCRAPERS = [
 const state = {
   config: {
     tiktok_defaults: { tag_urls: ["https://www.tiktok.com/tag/irvine"], max_videos: 10, max_comments: 25 },
+    tiktok_tags: [],
     news_defaults: { outlets: ["irvine-standard", "irvine-weekly", "voice-of-oc"], max_articles: 50, require_category_match: true },
     news_outlets: [],
   },
   scrapeRunning: false,
 };
+
+const TIKTOK_TAG_GROUP_LABELS = {
+  location: "Irvine / OC location tags",
+  news: "Local CA news tags",
+};
+
+function tiktokTagUrl(tagId) {
+  return `https://www.tiktok.com/tag/${encodeURIComponent(tagId)}`;
+}
+
+function selectedTikTokTagIds(defaultUrls) {
+  const ids = new Set();
+  for (const url of defaultUrls || []) {
+    const match = String(url).match(/\/tag\/([^/?#]+)/i);
+    if (match) ids.add(decodeURIComponent(match[1]).toLowerCase());
+  }
+  return ids;
+}
+
+function collectTikTokTagUrls(card) {
+  return [...card.querySelectorAll("[data-tiktok-tag]:checked")].map((input) =>
+    tiktokTagUrl(input.value)
+  );
+}
 
 function logLine(text) {
   const el = document.getElementById("scraperLog");
@@ -76,6 +101,7 @@ function buildField(labelText, input) {
 
 function renderTikTokSettings(card) {
   const defaults = state.config.tiktok_defaults;
+  const tagOptions = state.config.tiktok_tags || [];
   const settings = document.createElement("div");
   settings.className = "scraper-settings";
   const maxVideos = document.createElement("input");
@@ -84,13 +110,46 @@ function renderTikTokSettings(card) {
   const maxComments = document.createElement("input");
   maxComments.type = "number"; maxComments.min = "1"; maxComments.max = "200";
   maxComments.value = String(defaults.max_comments ?? 25); maxComments.dataset.field = "max_comments";
-  const tags = document.createElement("textarea");
-  tags.rows = 3; tags.dataset.field = "tag_urls"; tags.placeholder = "One TikTok tag URL per line";
-  tags.value = (defaults.tag_urls || []).join("\n");
+
+  const selected = selectedTikTokTagIds(defaults.tag_urls);
+  const tagList = document.createElement("div");
+  tagList.className = "scraper-outlet-list scraper-tag-list";
+  const groups = [...new Set(tagOptions.map((tag) => tag.group || "location"))];
+  for (const group of groups) {
+    const heading = document.createElement("div");
+    heading.className = "scraper-tag-group";
+    heading.textContent = TIKTOK_TAG_GROUP_LABELS[group] || group;
+    tagList.appendChild(heading);
+    for (const tag of tagOptions.filter((row) => (row.group || "location") === group)) {
+      const row = document.createElement("label");
+      row.className = "scraper-check";
+      const input = document.createElement("input");
+      input.type = "checkbox";
+      input.value = tag.id;
+      input.dataset.tiktokTag = tag.id;
+      input.checked = selected.size === 0 ? Boolean(tag.default) : selected.has(tag.id);
+      const text = document.createElement("span");
+      text.textContent = tag.label || `#${tag.id}`;
+      row.append(input, text);
+      if (tag.hint) {
+        const hint = document.createElement("span");
+        hint.className = "scraper-tag-hint";
+        hint.textContent = tag.hint;
+        row.appendChild(hint);
+      }
+      tagList.appendChild(row);
+    }
+  }
+
+  const tagNote = document.createElement("p");
+  tagNote.className = "scraper-tag-note";
+  tagNote.textContent =
+    "Stick to Irvine / OC tags. Avoid #orangecountynews and #irvinenews — they pull Florida and UK content.";
+
   const row = document.createElement("div");
   row.className = "scraper-fields-row";
   row.append(buildField("Max videos", maxVideos), buildField("Max comments", maxComments));
-  settings.append(row, buildField("Tag URLs", tags));
+  settings.append(row, buildField("Tags to scrape", tagList), tagNote);
   card.appendChild(settings);
 }
 
@@ -138,7 +197,8 @@ function renderImportSettings(card, scraper) {
 function buildJobRequest(scraper, card) {
   if (scraper.id === "tiktok") {
     const defaults = state.config.tiktok_defaults;
-    const tags = card.querySelector("[data-field=tag_urls]").value.split("\n").map((tag) => tag.trim()).filter(Boolean);
+    const tags = collectTikTokTagUrls(card);
+    if (!tags.length) throw new Error("Select at least one TikTok tag to scrape.");
     return { body: JSON.stringify({ source: "tiktok", settings: { mode: "tags", tag_urls: tags, max_videos: Number(card.querySelector("[data-field=max_videos]").value) || defaults.max_videos, max_comments: Number(card.querySelector("[data-field=max_comments]").value) || defaults.max_comments } }), headers: { "Content-Type": "application/json" } };
   }
   if (scraper.id === "irvine-news") {
@@ -231,7 +291,7 @@ async function start() {
   const configRes = await fetch("/api/config");
   if (configRes.ok) {
     const config = await configRes.json();
-    state.config = { ...state.config, ...config };
+    state.config = { ...state.config, ...config, tiktok_tags: config.tiktok_tags || state.config.tiktok_tags };
   }
   renderScrapers();
 }
