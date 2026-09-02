@@ -1,0 +1,118 @@
+flowchart TB
+  subgraph users [Users]
+    public[Residents / public]
+    staff[Mayor staff / legislators]
+    ops[Local operator is_dev]
+  end
+
+  subgraph frontend [Frontend — static HTML/JS]
+    landing[Landing index.html]
+    login[Login / signup]
+    dash[Dashboard feed + map + verify]
+    report[Resident report form]
+    researchUI[Research compose + workspace]
+    sourceUI[Source analytics]
+    signalUI[Signal detail]
+    scrapersUI[Scrapers panel]
+  end
+
+  subgraph host [Hosted / local server]
+    flask[Flask backend backend/app.py]
+    static[Serves static pages + API]
+  end
+
+  subgraph api [Flask API blueprints]
+    authAPI["/api/auth — sessions"]
+    signalsAPI["/api/signals — cursor pages + filters"]
+    reportsAPI["/api/reports + /api/votes"]
+    researchAPI["/api/researches — archive match + extract"]
+    jobsAPI["/api/jobs — scrape jobs"]
+    configAPI["/api/config"]
+  end
+
+  subgraph storeLayer [Data access layer]
+    storeProto[Store protocols backend/store.py]
+    sqliteStore[SQLite stores]
+    fsStore[Firestore stores]
+  end
+
+  subgraph databases [Databases]
+    sqlite[(SQLite civicpulse.db)]
+    firestore[(Google Cloud Firestore)]
+  end
+
+  subgraph ingest [Ingest pipeline — operator machine]
+    jobsRunner[Job runner backend/jobs.py]
+    scrapers[Scrapers TikTok / news / reddit / twitter]
+    classifier[Classifier keywords + Naive Bayes]
+    ponds[(data/pool ponds)]
+    signalJSON[(data/signals JSON)]
+    importUpsert[import / upsert into store]
+  end
+
+  subgraph external [External systems]
+    tiktok[TikTok via Selenium]
+    newsSites[News outlets]
+    reddit[Reddit]
+    twitter[Twitter / X]
+    osm[OpenStreetMap tiles Leaflet]
+    geocode[Geocoding for report addresses]
+    render[Render.com optional host]
+  end
+
+  public --> landing
+  public --> report
+  staff --> login
+  staff --> dash
+  staff --> researchUI
+  staff --> sourceUI
+  staff --> signalUI
+  ops --> scrapersUI
+
+  landing --> flask
+  login --> authAPI
+  dash --> signalsAPI
+  dash --> reportsAPI
+  report --> reportsAPI
+  researchUI --> researchAPI
+  sourceUI --> signalsAPI
+  signalUI --> signalsAPI
+  scrapersUI --> jobsAPI
+  dash --> configAPI
+
+  flask --> static
+  flask --> authAPI
+  flask --> signalsAPI
+  flask --> reportsAPI
+  flask --> researchAPI
+  flask --> jobsAPI
+  flask --> configAPI
+
+  authAPI --> storeProto
+  signalsAPI --> storeProto
+  reportsAPI --> storeProto
+  researchAPI --> storeProto
+  jobsAPI --> storeProto
+
+  storeProto -->|DATA_BACKEND=sqlite| sqliteStore
+  storeProto -->|DATA_BACKEND=firestore| fsStore
+  sqliteStore --> sqlite
+  fsStore --> firestore
+
+  jobsAPI --> jobsRunner
+  jobsRunner --> scrapers
+  scrapers --> tiktok
+  scrapers --> newsSites
+  scrapers --> reddit
+  scrapers --> twitter
+  scrapers --> ponds
+  ponds --> classifier
+  classifier --> signalJSON
+  signalJSON --> importUpsert
+  importUpsert --> storeProto
+
+  researchAPI -.->|reads candidates only — no scrape| storeProto
+  dash --> osm
+  report --> geocode
+  render -.-> flask
+  render -.-> firestore

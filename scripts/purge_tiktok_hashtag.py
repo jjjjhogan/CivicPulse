@@ -181,7 +181,11 @@ def archive_firestore(stable_ids: list[str]) -> int:
     for sid in stable_ids:
         if not sid:
             continue
-        batch.update(coll.document(sid), {"archived_at": now, "updated_at": now})
+        batch.update(coll.document(sid), {
+            "archived_at": now,
+            "updated_at": now,
+            "active": False,
+        })
         ops += 1
         archived += 1
         if ops >= 400:

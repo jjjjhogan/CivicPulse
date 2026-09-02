@@ -2,14 +2,23 @@
 
 from __future__ import annotations
 
+from datetime import datetime
 from typing import Any
 
-from sqlalchemy import select
+from sqlalchemy import and_, or_, select
 from sqlalchemy.orm import Session
 
 from backend.models import IssueVote, Research, ResearchHit, ScrapeJob, Signal, User, utcnow
+from backend.paging import decode_cursor, encode_cursor
 from backend.signals_import import upsert_signals
 from backend.stable_id import compute_stable_id
+
+
+def _parse_created_at(value: str) -> datetime:
+    text = (value or "").strip()
+    if text.endswith("Z"):
+        text = text[:-1] + "+00:00"
+    return datetime.fromisoformat(text)
 
 
 # ---------------------------------------------------------------------------
@@ -26,32 +35,106 @@ class SQLiteSignalStore:
             q = q.filter(Signal.archived_at.is_(None))
         return q
 
+    def _apply_filters(self, q, *, source: str | None = None, category: str | None = None):
+        if source:
+            q = q.filter(Signal.source == source)
+        if category:
+            # JSON list containment — works for SQLite JSON columns.
+            q = q.filter(Signal.categories.contains([category]))
+        return q
+
+    def _apply_cursor(self, q, cursor: str | None):
+        if not cursor:
+            return q
+        created_at_raw, signal_id_raw = decode_cursor(cursor)
+        created_at = _parse_created_at(created_at_raw)
+        signal_id = int(signal_id_raw)
+        return q.filter(
+            or_(
+                Signal.created_at < created_at,
+                and_(Signal.created_at == created_at, Signal.id < signal_id),
+            )
+        )
+
     def list_signals(
-        self, *, include_archived: bool = False, limit: int | None = None, offset: int = 0,
-    ) -> list[dict]:
-        q = self._active_query(include_archived=include_archived).order_by(Signal.id.asc())
-        if offset:
+        self,
+        *,
+        include_archived: bool = False,
+        limit: int | None = None,
+        offset: int = 0,
+        cursor: str | None = None,
+        source: str | None = None,
+        category: str | None = None,
+    ) -> dict:
+        q = (
+            self._active_query(include_archived=include_archived)
+            .order_by(Signal.created_at.desc(), Signal.id.desc())
+        )
+        q = self._apply_filters(q, source=source, category=category)
+        q = self._apply_cursor(q, cursor)
+        if not cursor and offset:
             q = q.offset(offset)
+        fetch_limit = None
         if limit is not None:
-            q = q.limit(limit)
-        return [row.to_dict() for row in q.all()]
+            fetch_limit = max(1, limit) + 1
+            q = q.limit(fetch_limit)
+        rows = q.all()
+        next_cursor = None
+        if limit is not None and len(rows) > limit:
+            rows = rows[:limit]
+            last = rows[-1]
+            next_cursor = encode_cursor(
+                last.created_at.isoformat() if last.created_at else "",
+                last.id,
+            )
+        return {
+            "signals": [row.to_dict() for row in rows],
+            "next_cursor": next_cursor,
+        }
 
     def list_feed_signals(
-        self, *, include_archived: bool = False, limit: int | None = None, offset: int = 0,
-    ) -> list[dict]:
-        q = self._active_query(include_archived=include_archived).order_by(Signal.id.asc())
-        if offset:
-            q = q.offset(offset)
-        if limit is not None:
-            q = q.limit(limit)
-        return [row.to_feed_dict() for row in q.all()]
+        self,
+        *,
+        include_archived: bool = False,
+        limit: int | None = None,
+        offset: int = 0,
+        cursor: str | None = None,
+        source: str | None = None,
+        category: str | None = None,
+    ) -> dict:
+        page = self.list_signals(
+            include_archived=include_archived,
+            limit=limit,
+            offset=offset,
+            cursor=cursor,
+            source=source,
+            category=category,
+        )
+        return {
+            "signals": [
+                {
+                    "outlet": row.get("outlet", ""),
+                    "title": row.get("title", ""),
+                    "categories": row.get("categories") or [],
+                    "published_utc": row.get("published_utc", ""),
+                }
+                for row in page["signals"]
+            ],
+            "next_cursor": page["next_cursor"],
+        }
 
     def count_signals(
-        self, *, sources: list[str] | None = None, include_archived: bool = False,
+        self,
+        *,
+        sources: list[str] | None = None,
+        include_archived: bool = False,
+        source: str | None = None,
+        category: str | None = None,
     ) -> int:
         q = self._active_query(include_archived=include_archived)
         if sources:
             q = q.filter(Signal.source.in_(list(sources)))
+        q = self._apply_filters(q, source=source, category=category)
         return int(q.count())
 
     def get_signal(self, signal_id: int | str) -> dict | None:
@@ -92,15 +175,16 @@ class SQLiteSignalStore:
         return sig.to_dict()
 
     def list_signals_by_source(
-        self, source: str, *, include_archived: bool = False,
+        self, source: str, *, include_archived: bool = False, limit: int | None = None,
     ) -> list[dict]:
-        rows = (
+        q = (
             self._active_query(include_archived=include_archived)
             .filter(Signal.source == source)
             .order_by(Signal.id.desc())
-            .all()
         )
-        return [row.to_dict() for row in rows]
+        if limit is not None:
+            q = q.limit(limit)
+        return [row.to_dict() for row in q.all()]
 
     def upsert_many(
         self, rows: list[dict], *, ingest_job_id: int | None = None,

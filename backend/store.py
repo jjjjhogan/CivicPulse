@@ -11,18 +11,37 @@ from typing import Any, Protocol
 
 class SignalStore(Protocol):
     def list_signals(
-        self, *, include_archived: bool = False, limit: int | None = None, offset: int = 0,
-    ) -> list[dict]: ...
+        self,
+        *,
+        include_archived: bool = False,
+        limit: int | None = None,
+        offset: int = 0,
+        cursor: str | None = None,
+        source: str | None = None,
+        category: str | None = None,
+    ) -> dict: ...
     def list_feed_signals(
-        self, *, include_archived: bool = False, limit: int | None = None, offset: int = 0,
-    ) -> list[dict]: ...
+        self,
+        *,
+        include_archived: bool = False,
+        limit: int | None = None,
+        offset: int = 0,
+        cursor: str | None = None,
+        source: str | None = None,
+        category: str | None = None,
+    ) -> dict: ...
     def get_signal(self, signal_id: int | str) -> dict | None: ...
     def create_signal(self, **fields: Any) -> dict: ...
     def list_signals_by_source(
-        self, source: str, *, include_archived: bool = False,
+        self, source: str, *, include_archived: bool = False, limit: int | None = None,
     ) -> list[dict]: ...
     def count_signals(
-        self, *, sources: list[str] | None = None, include_archived: bool = False,
+        self,
+        *,
+        sources: list[str] | None = None,
+        include_archived: bool = False,
+        source: str | None = None,
+        category: str | None = None,
     ) -> int: ...
     def upsert_many(
         self, rows: list[dict], *, ingest_job_id: int | None = None,

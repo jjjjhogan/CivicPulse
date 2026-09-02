@@ -407,25 +407,92 @@ function signalUrl(signal) {
   return `signal.html?id=${encodeURIComponent(signalKey(signal))}`;
 }
 
+function signalIdentity(signal) {
+  const stable = signal?.stable_id || signal?.metadata?.stable_id;
+  if (stable) return `stable:${stable}`;
+  if (signal?.id != null) return `id:${signal.id}`;
+  return `key:${signalKey(signal)}`;
+}
+
+// Merge resident reports into the browse page so map/verify always see them,
+// even when they fall outside the current /api/signals limit window.
+function mergeResidentReports(signals, reports) {
+  const byId = new Map();
+  for (const signal of signals || []) {
+    byId.set(signalIdentity(signal), signal);
+  }
+  for (const report of reports || []) {
+    byId.set(signalIdentity(report), report);
+  }
+  return Array.from(byId.values());
+}
+
+async function fetchResidentReports() {
+  try {
+    const res = await fetch("/api/reports");
+    if (!res.ok) return [];
+    const data = await res.json();
+    return data.signals || [];
+  } catch {
+    return [];
+  }
+}
+
+const SIGNAL_PAGE_SIZE = 50;
+
 // Fetch live signals from the Flask backend (SQLite when imported).
-// Returns { signals, storage, status } where:
+// Returns { signals, storage, status, nextCursor, total } where:
 //   status  — "live" | "empty" | "error" | "offline"
 //   storage — "db" | "json" | null
-async function fetchLiveSignalsResult() {
+async function fetchLiveSignalsResult(options = {}) {
+  const {
+    cursor = null,
+    source = null,
+    category = null,
+    limit = SIGNAL_PAGE_SIZE,
+  } = options;
   try {
-    const res = await fetch("/api/signals?limit=250");
-    if (!res.ok) {
-      return { signals: [], storage: null, status: "error" };
+    const params = new URLSearchParams({ limit: String(limit) });
+    if (cursor) params.set("cursor", cursor);
+    if (source) params.set("source", source);
+    if (category) params.set("category", category);
+    const fetchReports = !source || source === "resident";
+    const [signalsRes, reports] = await Promise.all([
+      fetch(`/api/signals?${params}`),
+      fetchReports ? fetchResidentReports() : Promise.resolve([]),
+    ]);
+    if (!signalsRes.ok) {
+      return {
+        signals: [],
+        storage: null,
+        status: "error",
+        nextCursor: null,
+        total: 0,
+      };
     }
-    const data = await res.json();
-    const signals = data.signals || [];
+    const data = await signalsRes.json();
+    let signals = data.signals || [];
+    if (fetchReports && (!source || source === "resident")) {
+      const filteredReports = category
+        ? reports.filter((r) => (r.categories || []).includes(category))
+        : reports;
+      signals = mergeResidentReports(signals, filteredReports);
+    }
     return {
       signals,
       storage: data.storage || null,
       status: signals.length ? "live" : "empty",
+      nextCursor: data.next_cursor || null,
+      total: typeof data.total === "number" ? data.total : signals.length,
     };
   } catch {
-    return { signals: [], storage: null, status: "offline" };
+    return {
+      signals: [],
+      storage: null,
+      status: "offline",
+      nextCursor: null,
+      total: 0,
+    };
   }
 }
 

@@ -1,0 +1,48 @@
+flowchart TB
+  subgraph people [People]
+    residents[Residents]
+    staff[City staff]
+    operator[Operator dev]
+  end
+
+  subgraph ui [Web UI static HTML and JS]
+    pages[Dashboard map feed report research login scrapers]
+  end
+
+  subgraph server [Flask server]
+    api[REST API auth signals reports votes research jobs config]
+  end
+
+  subgraph data [Data store one backend at a time]
+    db[(SQLite local OR Firestore hosted)]
+  end
+
+  subgraph ingest [Ingest local operator only]
+    scrape[Scrapers TikTok news Reddit Twitter]
+    classify[Keyword plus classifier]
+    files[(Pool and signal JSON files)]
+  end
+
+  subgraph outside [External services]
+    sources[Social and news sites]
+    maps[OpenStreetMap tiles]
+    geo[Address geocoding]
+  end
+
+  residents --> pages
+  staff --> pages
+  operator --> pages
+
+  pages --> api
+  api --> db
+
+  operator --> scrape
+  scrape --> sources
+  scrape --> classify
+  classify --> files
+  files --> db
+
+  pages --> maps
+  pages --> geo
+
+  api -.->|research reads archive only| db

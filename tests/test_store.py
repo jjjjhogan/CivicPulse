@@ -73,10 +73,43 @@ def test_sqlite_list_signals(app):
 
     with app.app_context():
         store = SQLiteSignalStore(SessionLocal())
-        signals = store.list_signals()
+        page = store.list_signals()
+    signals = page["signals"]
     assert len(signals) == 2
-    assert signals[0]["title"] == "Alpha"
-    assert signals[1]["title"] == "Beta"
+    # Newest-first so fresh resident reports land in the default page window.
+    assert signals[0]["title"] == "Beta"
+    assert signals[1]["title"] == "Alpha"
+    assert page["next_cursor"] is None
+
+
+def test_sqlite_list_signals_cursor(app):
+    db = SessionLocal()
+    _insert_signal(db, title="Alpha")
+    _insert_signal(db, title="Beta")
+    _insert_signal(db, title="Gamma")
+    db.close()
+
+    with app.app_context():
+        store = SQLiteSignalStore(SessionLocal())
+        first = store.list_signals(limit=2)
+        assert [s["title"] for s in first["signals"]] == ["Gamma", "Beta"]
+        assert first["next_cursor"]
+        second = store.list_signals(limit=2, cursor=first["next_cursor"])
+    assert [s["title"] for s in second["signals"]] == ["Alpha"]
+    assert second["next_cursor"] is None
+
+
+def test_sqlite_list_signals_source_filter(app):
+    db = SessionLocal()
+    _insert_signal(db, title="TikTok", source="tiktok")
+    _insert_signal(db, title="Resident", source="resident")
+    db.close()
+
+    with app.app_context():
+        store = SQLiteSignalStore(SessionLocal())
+        page = store.list_signals(source="resident")
+    assert len(page["signals"]) == 1
+    assert page["signals"][0]["title"] == "Resident"
 
 
 def test_sqlite_list_feed_signals(app):
@@ -87,9 +120,9 @@ def test_sqlite_list_feed_signals(app):
     with app.app_context():
         store = SQLiteSignalStore(SessionLocal())
         feed = store.list_feed_signals()
-    assert len(feed) == 1
-    assert feed[0]["title"] == "Feed item"
-    assert "body" not in feed[0]
+    assert len(feed["signals"]) == 1
+    assert feed["signals"][0]["title"] == "Feed item"
+    assert "body" not in feed["signals"][0]
 
 
 def test_sqlite_get_signal(app):
@@ -293,44 +326,59 @@ def test_sqlite_cast_vote_toggle(app):
 # =====================================================================
 
 
+def _mock_firestore_query(docs):
+    """Chainable query mock: where/order_by/limit/start_after all return self."""
+    query = MagicMock()
+    query.where.return_value = query
+    query.order_by.return_value = query
+    query.limit.return_value = query
+    query.start_after.return_value = query
+    query.stream.return_value = iter(docs)
+    mock_db = MagicMock()
+    mock_db.collection.return_value = query
+    return mock_db, query
+
+
 def test_firestore_list_signals():
+    # Mock stream already newest-first (DESC created_at), matching store order_by.
     docs = [
-        _make_mock_doc("abc", {
-            "source": "tiktok", "outlet": "TikTok", "title": "FS signal 1",
-            "body": "body1", "url": "http://fs.example/1",
-            "categories": ["public_safety"], "published_utc": "2026-02-01",
-            "metadata": {"tag": "test"}, "created_at": "2026-02-01T00:00:00Z",
-        }),
         _make_mock_doc("def", {
             "source": "news", "outlet": "IS", "title": "FS signal 2",
             "body": "body2", "url": "http://fs.example/2",
             "categories": ["housing"], "published_utc": "2026-02-02",
-            "metadata": {}, "created_at": "2026-02-02T00:00:00Z",
+            "metadata": {}, "created_at": "2026-02-02T00:00:00Z", "active": True,
+        }),
+        _make_mock_doc("abc", {
+            "source": "tiktok", "outlet": "TikTok", "title": "FS signal 1",
+            "body": "body1", "url": "http://fs.example/1",
+            "categories": ["public_safety"], "published_utc": "2026-02-01",
+            "metadata": {"tag": "test"}, "created_at": "2026-02-01T00:00:00Z", "active": True,
         }),
     ]
-    mock_db = MagicMock()
-    mock_db.collection.return_value.order_by.return_value.stream.return_value = iter(docs)
+    mock_db, query = _mock_firestore_query(docs)
 
     store = FirestoreSignalStore(mock_db)
-    signals = store.list_signals()
+    page = store.list_signals()
+    signals = page["signals"]
     assert len(signals) == 2
-    assert signals[0]["id"] == "abc"
-    assert signals[1]["title"] == "FS signal 2"
+    assert signals[0]["id"] == "def"
+    assert signals[1]["title"] == "FS signal 1"
+    query.where.assert_called_with("active", "==", True)
+    assert query.order_by.call_count >= 1
 
 
 def test_firestore_list_feed_signals():
     docs = [_make_mock_doc("x1", {
         "outlet": "Voice of OC", "title": "Feed title",
         "categories": ["traffic_safety"], "published_utc": "2026-03-01",
-        "created_at": "2026-03-01T00:00:00Z",
+        "created_at": "2026-03-01T00:00:00Z", "active": True,
     })]
-    mock_db = MagicMock()
-    mock_db.collection.return_value.order_by.return_value.stream.return_value = iter(docs)
+    mock_db, _query = _mock_firestore_query(docs)
 
     store = FirestoreSignalStore(mock_db)
     feed = store.list_feed_signals()
-    assert len(feed) == 1
-    assert "body" not in feed[0]
+    assert len(feed["signals"]) == 1
+    assert "body" not in feed["signals"][0]
 
 
 def test_firestore_get_signal():
@@ -349,31 +397,34 @@ def test_firestore_get_signal():
 
 
 def test_firestore_list_signals_hides_archived():
-    docs = [
+    # Server filters active==True; mock returns only the active doc for that query.
+    active_docs = [
         _make_mock_doc("abc", {
             "source": "tiktok", "outlet": "TikTok", "title": "Active",
             "body": "body1", "url": "http://fs.example/1",
             "categories": ["public_safety"], "published_utc": "2026-02-01",
-            "metadata": {}, "created_at": "2026-02-01T00:00:00Z",
+            "metadata": {}, "created_at": "2026-02-01T00:00:00Z", "active": True,
         }),
+    ]
+    all_docs = active_docs + [
         _make_mock_doc("def", {
             "source": "news", "outlet": "IS", "title": "Archived",
             "body": "body2", "url": "http://fs.example/2",
             "categories": ["housing"], "published_utc": "2026-02-02",
             "metadata": {}, "created_at": "2026-02-02T00:00:00Z",
-            "archived_at": "2026-02-03T00:00:00Z",
+            "archived_at": "2026-02-03T00:00:00Z", "active": False,
         }),
     ]
-    mock_db = MagicMock()
-    mock_db.collection.return_value.order_by.return_value.stream.return_value = iter(docs)
+    mock_db, query = _mock_firestore_query(active_docs)
 
     store = FirestoreSignalStore(mock_db)
     active = store.list_signals()
-    assert len(active) == 1
-    assert active[0]["title"] == "Active"
+    assert len(active["signals"]) == 1
+    assert active["signals"][0]["title"] == "Active"
 
-    mock_db.collection.return_value.order_by.return_value.stream.return_value = iter(docs)
-    assert len(store.list_signals(include_archived=True)) == 2
+    query.stream.return_value = iter(all_docs)
+    archived_page = store.list_signals(include_archived=True)
+    assert len(archived_page["signals"]) == 2
 
 
 def test_firestore_create_signal_uses_stable_id():
@@ -395,6 +446,9 @@ def test_firestore_create_signal_uses_stable_id():
     )
     mock_db.collection.return_value.document.assert_called_with("stable123abc")
     mock_doc.set.assert_called()
+    set_args = mock_doc.set.call_args
+    payload = set_args[0][0]
+    assert payload.get("active") is True
     assert sig["id"] == "stable123abc"
     assert sig["stable_id"] == "stable123abc"
 
@@ -411,7 +465,7 @@ def test_sqlite_list_signals_hides_archived(app):
 
     with app.app_context():
         store = SQLiteSignalStore(SessionLocal())
-        signals = store.list_signals()
+        signals = store.list_signals()["signals"]
     assert len(signals) == 1
     assert signals[0]["title"] == "Active"
 

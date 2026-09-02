@@ -6,6 +6,9 @@ import re
 from datetime import datetime, timezone
 from typing import Any
 
+from google.api_core.exceptions import FailedPrecondition
+
+from backend.paging import decode_cursor, encode_cursor
 from backend.stable_id import compute_stable_id, ensure_stable_id
 
 
@@ -64,55 +67,166 @@ class FirestoreSignalStore:
                 out.append(doc)
         return out
 
-    def list_signals(
-        self, *, include_archived: bool = False, limit: int | None = None, offset: int = 0,
-    ) -> list[dict]:
-        query = self._coll().order_by("created_at")
-        # Over-fetch when filtering archived client-side so pages stay full-ish.
+    def _signals_query(
+        self,
+        *,
+        include_archived: bool = False,
+        source: str | None = None,
+        category: str | None = None,
+    ):
+        query = self._coll()
+        if not include_archived:
+            query = query.where("active", "==", True)
+        if source:
+            query = query.where("source", "==", source)
+        if category:
+            query = query.where("categories", "array_contains", category)
+        return query.order_by("created_at", direction="DESCENDING")
+
+    def _legacy_signals_query(
+        self,
+        *,
+        source: str | None = None,
+        category: str | None = None,
+    ):
+        """Pre-index fallback: filter archived client-side via archived_at."""
+        query = self._coll()
+        if source:
+            query = query.where("source", "==", source)
+        if category:
+            query = query.where("categories", "array_contains", category)
+        return query.order_by("created_at", direction="DESCENDING")
+
+    def _stream_docs(self, query, *, include_archived: bool) -> list:
+        docs = list(query.stream())
+        return self._filter_archived(docs, include_archived=include_archived)
+
+    def _stream_signal_docs(
+        self,
+        *,
+        include_archived: bool = False,
+        source: str | None = None,
+        category: str | None = None,
+        limit: int | None = None,
+        offset: int = 0,
+        cursor: str | None = None,
+    ) -> list:
+        """Run indexed query; fall back when composite indexes are not deployed yet."""
         fetch_n = None
         if limit is not None:
-            fetch_n = max(0, offset) + max(1, limit)
+            fetch_n = max(1, limit) + 1
+            if offset and not cursor:
+                fetch_n = max(0, offset) + fetch_n
             if not include_archived:
                 fetch_n = min(fetch_n * 2, fetch_n + 200)
-            query = query.limit(fetch_n)
-        docs = list(query.stream())
-        docs = self._filter_archived(docs, include_archived=include_archived)
-        if offset:
-            docs = docs[offset:]
-        if limit is not None:
+
+        def _apply_paging(query):
+            if cursor:
+                created_at, _doc_id = decode_cursor(cursor)
+                query = query.start_after(created_at)
+            if fetch_n is not None:
+                query = query.limit(fetch_n)
+            return query
+
+        try:
+            query = _apply_paging(
+                self._signals_query(
+                    include_archived=include_archived,
+                    source=source,
+                    category=category,
+                )
+            )
+            return self._stream_docs(query, include_archived=include_archived)
+        except FailedPrecondition:
+            query = _apply_paging(
+                self._legacy_signals_query(source=source, category=category)
+            )
+            docs = self._stream_docs(query, include_archived=include_archived)
+            if offset and not cursor:
+                docs = docs[offset:]
+            return docs
+
+    def list_signals(
+        self,
+        *,
+        include_archived: bool = False,
+        limit: int | None = None,
+        offset: int = 0,
+        cursor: str | None = None,
+        source: str | None = None,
+        category: str | None = None,
+    ) -> dict:
+        docs = self._stream_signal_docs(
+            include_archived=include_archived,
+            source=source,
+            category=category,
+            limit=limit,
+            offset=offset,
+            cursor=cursor,
+        )
+        next_cursor = None
+        if limit is not None and len(docs) > limit:
             docs = docs[:limit]
-        return [_doc_to_signal_dict(doc) for doc in docs]
+            last = docs[-1]
+            data = last.to_dict() or {}
+            next_cursor = encode_cursor(data.get("created_at", ""), last.id)
+        elif limit is not None:
+            docs = docs[:limit]
+        return {
+            "signals": [_doc_to_signal_dict(doc) for doc in docs],
+            "next_cursor": next_cursor,
+        }
 
     def list_feed_signals(
-        self, *, include_archived: bool = False, limit: int | None = None, offset: int = 0,
-    ) -> list[dict]:
-        query = self._coll().order_by("created_at")
-        if limit is not None:
-            fetch_n = max(0, offset) + max(1, limit)
-            if not include_archived:
-                fetch_n = min(fetch_n * 2, fetch_n + 200)
-            query = query.limit(fetch_n)
-        docs = list(query.stream())
-        docs = self._filter_archived(docs, include_archived=include_archived)
-        if offset:
-            docs = docs[offset:]
-        if limit is not None:
-            docs = docs[:limit]
-        return [_doc_to_feed_dict(doc) for doc in docs]
+        self,
+        *,
+        include_archived: bool = False,
+        limit: int | None = None,
+        offset: int = 0,
+        cursor: str | None = None,
+        source: str | None = None,
+        category: str | None = None,
+    ) -> dict:
+        page = self.list_signals(
+            include_archived=include_archived,
+            limit=limit,
+            offset=offset,
+            cursor=cursor,
+            source=source,
+            category=category,
+        )
+        return {
+            "signals": [
+                {
+                    "outlet": row.get("outlet", ""),
+                    "title": row.get("title", ""),
+                    "categories": row.get("categories") or [],
+                    "published_utc": row.get("published_utc", ""),
+                }
+                for row in page["signals"]
+            ],
+            "next_cursor": page["next_cursor"],
+        }
 
     def count_signals(
-        self, *, sources: list[str] | None = None, include_archived: bool = False,
+        self,
+        *,
+        sources: list[str] | None = None,
+        include_archived: bool = False,
+        source: str | None = None,
+        category: str | None = None,
     ) -> int:
         """Cheap-ish count via aggregation when possible; falls back to streaming."""
         if sources:
             total = 0
             for src in sources:
-                total += self._count_query(
-                    self._coll().where("source", "==", src),
-                    include_archived=include_archived,
+                total += self._count_signals_with_fallback(
+                    include_archived=include_archived, source=src, category=category,
                 )
             return total
-        return self._count_query(self._coll(), include_archived=include_archived)
+        return self._count_signals_with_fallback(
+            include_archived=include_archived, source=source, category=category,
+        )
 
     def _count_query(self, query, *, include_archived: bool) -> int:
         try:
@@ -121,15 +235,33 @@ class FirestoreSignalStore:
             for result in aggregation:
                 value = int(result[0].value)
                 break
-            if include_archived:
-                return value
-            # archived_at filter is client-side; aggregation is approximate for active-only.
-            # Prefer aggregation total as estimate denominator (quota-safe).
             return value
+        except FailedPrecondition:
+            raise
         except Exception:  # noqa: BLE001
             docs = list(query.stream())
             docs = self._filter_archived(docs, include_archived=include_archived)
             return len(docs)
+
+    def _count_signals_with_fallback(
+        self,
+        *,
+        include_archived: bool = False,
+        source: str | None = None,
+        category: str | None = None,
+    ) -> int:
+        try:
+            return self._count_query(
+                self._signals_query(
+                    include_archived=include_archived, source=source, category=category,
+                ),
+                include_archived=include_archived,
+            )
+        except FailedPrecondition:
+            return self._count_query(
+                self._legacy_signals_query(source=source, category=category),
+                include_archived=include_archived,
+            )
 
     def get_signal(self, signal_id: int | str) -> dict | None:
         doc = self._coll().document(str(signal_id)).get()
@@ -164,6 +296,7 @@ class FirestoreSignalStore:
             "updated_at": now,
             "last_seen_at": now,
             "archived_at": None,
+            "active": True,
             "ingest_job_id": fields.get("ingest_job_id"),
         }
         self._coll().document(stable_id).set(data, merge=True)
@@ -181,18 +314,18 @@ class FirestoreSignalStore:
         }
 
     def list_signals_by_source(
-        self, source: str, *, include_archived: bool = False,
+        self, source: str, *, include_archived: bool = False, limit: int | None = None,
     ) -> list[dict]:
-        docs = list(
-            self._coll()
-            .where("source", "==", source)
-            .stream()
-        )
-        docs.sort(
-            key=lambda d: (d.to_dict() or {}).get("created_at", ""),
-            reverse=True,
-        )
-        docs = self._filter_archived(docs, include_archived=include_archived)
+        try:
+            query = self._signals_query(include_archived=include_archived, source=source)
+            if limit is not None:
+                query = query.limit(limit)
+            docs = self._stream_docs(query, include_archived=include_archived)
+        except FailedPrecondition:
+            query = self._legacy_signals_query(source=source)
+            if limit is not None:
+                query = query.limit(limit)
+            docs = self._stream_docs(query, include_archived=include_archived)
         return [_doc_to_signal_dict(doc) for doc in docs]
 
     def upsert_many(
@@ -229,6 +362,7 @@ class FirestoreSignalStore:
                 "updated_at": now,
                 "last_seen_at": now,
                 "archived_at": None,
+                "active": True,
             }
             if ingest_job_id is not None:
                 data["ingest_job_id"] = ingest_job_id

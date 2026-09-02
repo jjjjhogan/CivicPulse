@@ -10,10 +10,11 @@ def test_signals_from_db(client, imported_signals):
     res = client.get("/api/signals")
     assert res.status_code == 200
     data = res.get_json()
-    assert data["count"] == imported_signals
+    assert data["count"] == min(50, imported_signals)
     assert data["total"] == imported_signals
-    assert len(data["signals"]) == imported_signals
+    assert len(data["signals"]) == min(50, imported_signals)
     assert data["storage"] == "sqlite"
+    assert "next_cursor" in data
     for row in data["signals"]:
         assert "source" in row
         assert "title" in row
@@ -31,13 +32,44 @@ def test_signals_limit_paging(client, imported_signals):
     assert data["offset"] == 0
 
 
+def test_signals_cursor_paging(client, imported_signals):
+    if imported_signals < 3:
+        return
+    first = client.get("/api/signals?limit=2").get_json()
+    assert first["count"] == 2
+    assert first["next_cursor"]
+    second = client.get(f"/api/signals?limit=2&cursor={first['next_cursor']}").get_json()
+    assert second["count"] >= 1
+    first_ids = {row["id"] for row in first["signals"]}
+    second_ids = {row["id"] for row in second["signals"]}
+    assert first_ids.isdisjoint(second_ids)
+
+
+def test_signals_source_filter(client, imported_signals):
+    res = client.get("/api/signals?source=reddit&limit=50")
+    assert res.status_code == 200
+    data = res.get_json()
+    assert all(row["source"] == "reddit" for row in data["signals"])
+
+
+def test_signals_newest_first(client, imported_signals):
+    """Default list is newest-first so fresh reports land in the first page."""
+    if imported_signals < 2:
+        return
+    res = client.get("/api/signals?limit=100")
+    assert res.status_code == 200
+    signals = res.get_json()["signals"]
+    ids = [row["id"] for row in signals]
+    assert ids == sorted(ids, reverse=True)
+
+
 def test_signals_feed_from_db(client, imported_signals):
     res = client.get("/api/signals/feed")
     assert res.status_code == 200
     data = res.get_json()
     assert data["storage"] == "sqlite"
-    assert data["count"] == imported_signals
-    assert len(data["signals"]) == imported_signals
+    assert data["count"] == min(50, imported_signals)
+    assert len(data["signals"]) == min(50, imported_signals)
 
 
 def test_signals_prefer_db_over_stale_json(client, tmp_path, monkeypatch, imported_signals):
@@ -58,7 +90,7 @@ def test_signals_prefer_db_over_stale_json(client, tmp_path, monkeypatch, import
     assert data["storage"] == "sqlite"
     titles = {row["title"] for row in data["signals"]}
     assert "STALE JSON ONLY" not in titles
-    assert data["count"] == imported_signals
+    assert data["total"] == imported_signals
 
 
 def test_signals_json_fallback_when_db_empty(client, monkeypatch, tmp_path):
