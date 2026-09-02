@@ -15,7 +15,7 @@ from backend.store import get_signal_store
 bp = Blueprint("signals", __name__)
 
 # Cap dashboard / default list reads so Firestore free tier is not drained.
-DEFAULT_SIGNAL_LIMIT = 250
+DEFAULT_SIGNAL_LIMIT = 50
 MAX_SIGNAL_LIMIT = 1000
 
 
@@ -38,6 +38,7 @@ def _parse_paging():
     raw_limit = request.args.get("limit")
     raw_offset = request.args.get("offset", 0, type=int) or 0
     offset = max(0, raw_offset)
+    cursor = (request.args.get("cursor") or "").strip() or None
     if raw_limit is None:
         limit = DEFAULT_SIGNAL_LIMIT
     else:
@@ -48,62 +49,98 @@ def _parse_paging():
         if limit <= 0:
             limit = DEFAULT_SIGNAL_LIMIT
         limit = min(limit, MAX_SIGNAL_LIMIT)
-    return limit, offset
+    return limit, offset, cursor
+
+
+def _parse_filters():
+    source = (request.args.get("source") or "").strip() or None
+    category = (request.args.get("category") or "").strip() or None
+    return source, category
+
+
+def _page_payload(*, signals, total, limit, offset, cursor, next_cursor, storage):
+    return {
+        "count": len(signals),
+        "total": total,
+        "limit": limit,
+        "offset": offset,
+        "cursor": cursor,
+        "next_cursor": next_cursor,
+        "signals": signals,
+        "storage": storage,
+    }
 
 
 @bp.get("/api/signals")
 def api_signals():
     """Store-backed signal list; JSON files are fallback only for sqlite with empty table."""
     store = get_signal_store()
-    limit, offset = _parse_paging()
-    total = store.count_signals()
-    signals = store.list_signals(limit=limit, offset=offset)
+    limit, offset, cursor = _parse_paging()
+    source, category = _parse_filters()
+    total = store.count_signals(source=source, category=category)
+    page = store.list_signals(
+        limit=limit, offset=offset, cursor=cursor, source=source, category=category,
+    )
+    signals = page["signals"]
+    next_cursor = page.get("next_cursor")
     if signals or total:
-        return jsonify({
-            "count": len(signals),
-            "total": total,
-            "limit": limit,
-            "offset": offset,
-            "signals": signals,
-            "storage": _cfg.DATA_BACKEND,
-        })
-    if _cfg.DATA_BACKEND == "sqlite":
+        return jsonify(_page_payload(
+            signals=signals,
+            total=total,
+            limit=limit,
+            offset=offset,
+            cursor=cursor,
+            next_cursor=next_cursor,
+            storage=_cfg.DATA_BACKEND,
+        ))
+    if _cfg.DATA_BACKEND == "sqlite" and not source and not category:
         signals = _signals_from_json()
         if signals:
+            # JSON fallback has no stable cursor; slice by offset only.
             sliced = signals[offset: offset + limit]
-            return jsonify({
-                "count": len(sliced),
-                "total": len(signals),
-                "limit": limit,
-                "offset": offset,
-                "signals": sliced,
-                "storage": "json",
-            })
-    return jsonify({
-        "count": 0,
-        "total": 0,
-        "limit": limit,
-        "offset": offset,
-        "signals": [],
-        "storage": _cfg.DATA_BACKEND,
-    })
+            more = offset + limit < len(signals)
+            return jsonify(_page_payload(
+                signals=sliced,
+                total=len(signals),
+                limit=limit,
+                offset=offset,
+                cursor=cursor,
+                next_cursor=None if not more else "json-offset",
+                storage="json",
+            ))
+    return jsonify(_page_payload(
+        signals=[],
+        total=0,
+        limit=limit,
+        offset=offset,
+        cursor=cursor,
+        next_cursor=None,
+        storage=_cfg.DATA_BACKEND,
+    ))
 
 
 @bp.get("/api/signals/feed")
 def api_feed():
     """Landing feed from store; JSON fallback for sqlite only."""
     store = get_signal_store()
-    limit, offset = _parse_paging()
-    feed = store.list_feed_signals(limit=limit, offset=offset)
+    limit, offset, cursor = _parse_paging()
+    source, category = _parse_filters()
+    page = store.list_feed_signals(
+        limit=limit, offset=offset, cursor=cursor, source=source, category=category,
+    )
+    feed = page["signals"]
+    next_cursor = page.get("next_cursor")
     if feed:
         return jsonify({
             "count": len(feed),
             "limit": limit,
             "offset": offset,
+            "cursor": cursor,
+            "next_cursor": next_cursor,
             "signals": feed,
             "storage": _cfg.DATA_BACKEND,
         })
-    if _cfg.DATA_BACKEND == "sqlite":
+    if _cfg.DATA_BACKEND == "sqlite" and not source and not category:
         feed = _read_json(SIGNALS_DIR / "feed.json", [])
         if feed:
             sliced = feed[offset: offset + limit]
@@ -111,6 +148,8 @@ def api_feed():
                 "count": len(sliced),
                 "limit": limit,
                 "offset": offset,
+                "cursor": cursor,
+                "next_cursor": None,
                 "signals": sliced,
                 "storage": "json",
             })
@@ -118,6 +157,8 @@ def api_feed():
         "count": 0,
         "limit": limit,
         "offset": offset,
+        "cursor": cursor,
+        "next_cursor": None,
         "signals": [],
         "storage": _cfg.DATA_BACKEND,
     })

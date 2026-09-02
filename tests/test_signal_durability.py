@@ -159,10 +159,11 @@ def test_backup_before_destructive(app, tmp_path, monkeypatch):
 
 
 def test_api_lists_after_import(client, imported_signals):
-    res = client.get("/api/signals")
+    res = client.get("/api/signals?limit=1000")
     assert res.status_code == 200
     payload = res.get_json()
     assert payload["storage"] == "sqlite"
+    assert payload["total"] == imported_signals
     assert payload["count"] == imported_signals
 
 
@@ -178,9 +179,10 @@ def test_api_hides_archived(client, app, signals_dir):
     finally:
         db.close()
 
-    res = client.get("/api/signals")
+    res = client.get("/api/signals?limit=1000")
     payload = res.get_json()
     assert payload["count"] == 9
+    assert payload["total"] == 9
 
 
 def test_bootstrap_and_reprocess_resurrects(tmp_path, signals_dir):

@@ -3,14 +3,18 @@
 // Signal data, the CivicSignal schema notes, and shared helpers live in
 // signals-data.js (loaded before this file).
 
-// Feed items rendered per page; "Show more" reveals the next batch.
-const FEED_PAGE_SIZE = 20;
+// Feed items rendered per page; "Show more" loads the next cursor page.
+const FEED_PAGE_SIZE = SIGNAL_PAGE_SIZE;
 
 const state = {
   signals: buildSignals([]),
   selectedCategories: new Set(),
+  selectedSource: null,
   keyword: "",
   feedShown: FEED_PAGE_SIZE,
+  nextCursor: null,
+  total: 0,
+  loadingMore: false,
   user: null,
   // Where the signal list came from: "loading" until the first fetch
   // resolves, then "live", "empty" (API up, nothing scraped yet),
@@ -74,6 +78,14 @@ function renderStats() {
 
 // ── tag filters ─────────────────────────────────────────
 
+function serverCategoryFilter() {
+  // Firestore array-contains supports one category; multi-select stays client-side.
+  if (state.selectedCategories.size === 1) {
+    return [...state.selectedCategories][0];
+  }
+  return null;
+}
+
 function renderTagFilters() {
   const el = document.getElementById("tagFilters");
   el.innerHTML = "";
@@ -84,13 +96,14 @@ function renderTagFilters() {
     btn.innerHTML =
       `<span class="tag-dot" style="background:${CATEGORY_COLORS[category] || "#666"}"></span>` +
       `${category.replaceAll("_", " ")}<span class="count">${count}</span>`;
-    btn.addEventListener("click", () => {
+    btn.addEventListener("click", async () => {
       if (state.selectedCategories.has(category)) {
         state.selectedCategories.delete(category);
       } else {
         state.selectedCategories.add(category);
       }
       state.feedShown = FEED_PAGE_SIZE;
+      await reloadSignalsFromServer();
       render();
     });
     el.appendChild(btn);
@@ -121,8 +134,9 @@ function renderFeed() {
   const records = [...visibleSignals()].sort((a, b) =>
     (b.published_utc || "").localeCompare(a.published_utc || "")
   );
+  const totalLabel = state.total > 0 ? state.total : state.signals.length;
   document.getElementById("feedCount").textContent =
-    `${records.length} of ${state.signals.length} signals`;
+    `Showing ${Math.min(records.length, state.feedShown)} of ${totalLabel} signals`;
   el.innerHTML = "";
 
   const notice = feedNotice();
@@ -186,16 +200,34 @@ function renderFeed() {
     el.appendChild(item);
   }
 
-  const remaining = records.length - state.feedShown;
-  if (remaining > 0) {
+  const remainingLocal = records.length - state.feedShown;
+  const hasServerMore = Boolean(state.nextCursor);
+  if (remainingLocal > 0 || hasServerMore) {
     const wrap = document.createElement("div");
     wrap.className = "feed-more";
     const btn = document.createElement("button");
     btn.className = "btn btn-sm";
-    btn.textContent = `Show ${Math.min(FEED_PAGE_SIZE, remaining)} more (${remaining} left)`;
-    btn.addEventListener("click", () => {
-      state.feedShown += FEED_PAGE_SIZE;
+    btn.disabled = state.loadingMore;
+    if (state.loadingMore) {
+      btn.textContent = "Loading…";
+    } else if (remainingLocal > 0) {
+      btn.textContent = `Show ${Math.min(FEED_PAGE_SIZE, remainingLocal)} more`;
+    } else {
+      btn.textContent = `Show more (${state.signals.length} of ${totalLabel})`;
+    }
+    btn.addEventListener("click", async () => {
+      if (remainingLocal > 0) {
+        state.feedShown += FEED_PAGE_SIZE;
+        renderFeed();
+        return;
+      }
+      if (!state.nextCursor || state.loadingMore) return;
+      state.loadingMore = true;
       renderFeed();
+      await loadMoreSignals();
+      state.loadingMore = false;
+      state.feedShown = state.signals.length;
+      render();
     });
     wrap.appendChild(btn);
     el.appendChild(wrap);
@@ -466,6 +498,30 @@ function escapeHtml(text) {
 // Markers keyed by signalKey() so feed cards can jump to their marker.
 const markersByKey = new Map();
 
+// Round coords so exact/near-coincident pins spiderfy together.
+function geoClusterKey(lat, lng) {
+  return `${Number(lat).toFixed(5)},${Number(lng).toFixed(5)}`;
+}
+
+// Fan coincident markers into a small ring so each pin is clickable.
+function coincidentOffsets(count) {
+  if (count <= 1) return [{ dLat: 0, dLng: 0 }];
+  const radius = 0.00012 + Math.min(count - 1, 6) * 0.00002;
+  return Array.from({ length: count }, (_, i) => {
+    const angle = (2 * Math.PI * i) / count - Math.PI / 2;
+    return { dLat: Math.cos(angle) * radius, dLng: Math.sin(angle) * radius };
+  });
+}
+
+function markerIcon(color) {
+  return L.divIcon({
+    className: "civic-marker",
+    html: `<span class="civic-marker-dot" style="background:${color}"></span>`,
+    iconSize: [16, 16],
+    iconAnchor: [8, 8],
+  });
+}
+
 function renderMarkers() {
   markerLayer.clearLayers();
   markersByKey.clear();
@@ -496,25 +552,33 @@ function renderMarkers() {
   }
   if (mapOverlay) mapOverlay.hidden = true;
 
+  const groups = new Map();
   for (const record of geoSignals) {
-    const { lat, lng } = record.metadata;
-    const color = CATEGORY_COLORS[record.categories[0]] || "#666";
-    const icon = L.divIcon({
-      className: "civic-marker",
-      html: "",
-      iconSize: [16, 16],
+    const key = geoClusterKey(record.metadata.lat, record.metadata.lng);
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(record);
+  }
+
+  for (const group of groups.values()) {
+    const offsets = coincidentOffsets(group.length);
+    group.forEach((record, index) => {
+      const baseLat = Number(record.metadata.lat);
+      const baseLng = Number(record.metadata.lng);
+      const { dLat, dLng } = offsets[index];
+      const color = CATEGORY_COLORS[record.categories[0]] || "#666";
+      const marker = L.marker([baseLat + dLat, baseLng + dLng], {
+        icon: markerIcon(color),
+      }).addTo(markerLayer);
+      const link = `<a href="${escapeHtml(signalUrl(record))}">View signal →</a>`;
+      const address = record.metadata?.address
+        ? `<div class="popup-meta">📍 ${escapeHtml(record.metadata.address)}</div>`
+        : "";
+      marker.bindPopup(
+        `<div class="popup-title">${escapeHtml(record.title)}</div>
+         <div class="popup-meta">${escapeHtml(record.outlet)} · ${escapeHtml(record.published_utc)}</div>${address}${link}`
+      );
+      markersByKey.set(signalKey(record), marker);
     });
-    const marker = L.marker([lat, lng], { icon }).addTo(markerLayer);
-    marker.getElement().style.background = color;
-    const link = `<a href="${escapeHtml(signalUrl(record))}">View signal →</a>`;
-    const address = record.metadata?.address
-      ? `<div class="popup-meta">📍 ${escapeHtml(record.metadata.address)}</div>`
-      : "";
-    marker.bindPopup(
-      `<div class="popup-title">${escapeHtml(record.title)}</div>
-       <div class="popup-meta">${escapeHtml(record.outlet)} · ${escapeHtml(record.published_utc)}</div>${address}${link}`
-    );
-    markersByKey.set(signalKey(record), marker);
   }
 }
 
@@ -537,21 +601,59 @@ function mergeSignals(liveSignals) {
   state.signals = buildSignals(liveSignals);
 }
 
+function appendSignals(liveSignals) {
+  const byId = new Map();
+  for (const signal of state.signals) {
+    byId.set(signalIdentity(signal), signal);
+  }
+  for (const signal of liveSignals || []) {
+    byId.set(signalIdentity(signal), signal);
+  }
+  state.signals = Array.from(byId.values());
+}
+
+async function reloadSignalsFromServer() {
+  const { signals, storage, status, nextCursor, total } = await fetchLiveSignalsResult({
+    source: state.selectedSource,
+    category: serverCategoryFilter(),
+  });
+  mergeSignals(signals);
+  state.nextCursor = nextCursor;
+  state.total = total || signals.length;
+  state.live = status || "offline";
+  state.feedShown = FEED_PAGE_SIZE;
+  await loadVotesFromServer();
+  renderVerify();
+  return storage;
+}
+
+async function loadMoreSignals() {
+  if (!state.nextCursor) return;
+  const { signals, nextCursor, total, status } = await fetchLiveSignalsResult({
+    cursor: state.nextCursor,
+    source: state.selectedSource,
+    category: serverCategoryFilter(),
+  });
+  if (status === "error" || status === "offline") {
+    logLine("Couldn't load more signals.");
+    return;
+  }
+  appendSignals(signals);
+  state.nextCursor = nextCursor;
+  if (typeof total === "number") state.total = total;
+}
+
 async function loadSignals() {
   const migrated = await migrateLocalReportsToServer();
   if (migrated > 0) {
     logLine(`Migrated ${migrated} local resident report(s) into SQLite.`);
   }
-  const { signals, storage, status } = await fetchLiveSignalsResult();
-  mergeSignals(signals);
-  state.live = status || "offline";
-  await loadVotesFromServer();
-  renderVerify();
-  if (storage === "db") {
-    logLine(`Loaded ${signals.length} signals from SQLite.`);
+  const storage = await reloadSignalsFromServer();
+  if (storage === "db" || storage === "sqlite" || storage === "firestore") {
+    logLine(`Loaded ${state.signals.length} signals from ${storage}.`);
   } else if (storage === "json") {
     logLine(
-      `Loaded ${signals.length} signals from JSON fallback (run import_signals.py to use SQLite).`
+      `Loaded ${state.signals.length} signals from JSON fallback (run import_signals.py to use SQLite).`
     );
   } else if (state.live === "empty") {
     logLine("API is up but returned no signals — showing sample / resident data.");
@@ -1108,12 +1210,14 @@ searchClear.addEventListener("click", () => {
   searchInput.focus();
 });
 
-document.getElementById("clearFilters").addEventListener("click", () => {
+document.getElementById("clearFilters").addEventListener("click", async () => {
   state.selectedCategories.clear();
+  state.selectedSource = null;
   state.keyword = "";
   state.feedShown = FEED_PAGE_SIZE;
   searchInput.value = "";
   searchClear.hidden = true;
+  await reloadSignalsFromServer();
   render();
 });
 

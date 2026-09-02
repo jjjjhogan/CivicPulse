@@ -212,10 +212,14 @@ function renderLocation(record) {
     maxZoom: 19,
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   }).addTo(map);
-  const icon = L.divIcon({ className: "civic-marker", html: "", iconSize: [16, 16] });
-  const marker = L.marker([lat, lng], { icon }).addTo(map);
-  marker.getElement().style.background =
-    CATEGORY_COLORS[(record.categories || [])[0]] || "#666";
+  const color = CATEGORY_COLORS[(record.categories || [])[0]] || "#666";
+  const icon = L.divIcon({
+    className: "civic-marker",
+    html: `<span class="civic-marker-dot" style="background:${color}"></span>`,
+    iconSize: [16, 16],
+    iconAnchor: [8, 8],
+  });
+  L.marker([lat, lng], { icon }).addTo(map);
 }
 
 // ── related signals ─────────────────────────────────────

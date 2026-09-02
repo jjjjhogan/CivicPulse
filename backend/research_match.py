@@ -39,15 +39,25 @@ def signal_snapshot(signal: dict) -> dict:
     }
 
 
+# Hard cap so Research archive match never streams the full lake unbounded.
+RESEARCH_CANDIDATE_CAP = 5000
+
+
 def load_candidate_signals(signal_store, listen_sources: list[str] | None = None) -> list[dict]:
     """Load signals for archive match — prefer per-source queries when listen is set."""
     allowed = mapped_listen_sources(listen_sources)
     if allowed is None:
-        return signal_store.list_signals()
+        page = signal_store.list_signals(limit=RESEARCH_CANDIDATE_CAP)
+        return page["signals"] if isinstance(page, dict) else page
     rows: list[dict] = []
+    per_source = max(1, RESEARCH_CANDIDATE_CAP // max(1, len(allowed)))
     for src in sorted(allowed):
-        rows.extend(signal_store.list_signals_by_source(src))
-    return rows
+        rows.extend(
+            signal_store.list_signals_by_source(src, limit=per_source)
+        )
+        if len(rows) >= RESEARCH_CANDIDATE_CAP:
+            break
+    return rows[:RESEARCH_CANDIDATE_CAP]
 
 
 def match_signals(

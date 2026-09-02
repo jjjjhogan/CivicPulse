@@ -831,9 +831,18 @@ a.source-badge:hover {
 }
 
 .civic-marker {
+  background: transparent;
+  border: none;
+}
+
+.civic-marker-dot {
+  display: block;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   border: 2.5px solid #fff;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
 }
 
 .leaflet-popup-content { font-family: "Poppins", system-ui, sans-serif; }

@@ -51,9 +51,10 @@ Firebase is **not** a connection URL. You need **Project ID** + **service-accoun
 ## Firestore read hygiene
 
 - Prefer `DATA_BACKEND=sqlite` for local UI work; use Firestore for shared/hosted demos.
-- `GET /api/signals` defaults to `limit=250` (see `total` for full count).
-- Research hits store a **signal snapshot** so detail views do not N+1-read every signal.
-- Archive / launch load candidates **by listen source** when possible instead of the full lake.
+- **Dashboard browse** uses cursor pages (`GET /api/signals?limit=50&cursor=…`) — never auto-loads the full lake. `Show more` appends the next page; response includes `next_cursor` and `total`.
+- **Research / archive match** is the “find everything matching X” path: loads candidates by listen source (bounded, see `RESEARCH_CANDIDATE_CAP` in `backend/research_match.py`) and stores hit snapshots so detail views do not N+1-read every signal.
+- Optional filters: `source=` and `category=` (array-contains) so chips refetch from the server instead of filtering a 250-row client window.
+- Active docs: Firestore writes set `active: true` (and `active: false` on archive). Deploy indexes from `firestore.indexes.json`, then backfill once: `python scripts/backfill_signal_active.py`.
 - Preview metrics use `count_signals` (aggregation when available), not a full document stream.
 
 
