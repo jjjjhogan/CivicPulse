@@ -95,7 +95,18 @@ class FirestoreSignalStore:
             query = query.where("source", "==", source)
         if category:
             query = query.where("categories", "array_contains", category)
-        return query.order_by("created_at", direction="DESCENDING")
+        # Equality filters + order_by need composite indexes; sort client-side instead.
+        if not source and not category:
+            return query.order_by("created_at", direction="DESCENDING")
+        return query
+
+    @staticmethod
+    def _sort_docs_newest(docs: list) -> list:
+        return sorted(
+            docs,
+            key=lambda d: (d.to_dict() or {}).get("created_at", ""),
+            reverse=True,
+        )
 
     def _stream_docs(self, query, *, include_archived: bool) -> list:
         docs = list(query.stream())
@@ -142,6 +153,18 @@ class FirestoreSignalStore:
                 self._legacy_signals_query(source=source, category=category)
             )
             docs = self._stream_docs(query, include_archived=include_archived)
+            docs = self._sort_docs_newest(docs)
+            if cursor:
+                created_at, doc_id = decode_cursor(cursor)
+                trimmed = []
+                for doc in docs:
+                    data = doc.to_dict() or {}
+                    doc_created = str(data.get("created_at", ""))
+                    if doc_created < created_at:
+                        trimmed.append(doc)
+                    elif doc_created == created_at and str(doc.id) < doc_id:
+                        trimmed.append(doc)
+                docs = trimmed
             if offset and not cursor:
                 docs = docs[offset:]
             return docs
@@ -323,9 +346,15 @@ class FirestoreSignalStore:
             docs = self._stream_docs(query, include_archived=include_archived)
         except FailedPrecondition:
             query = self._legacy_signals_query(source=source)
-            if limit is not None:
-                query = query.limit(limit)
+            fetch_n = limit
+            if limit is not None and not include_archived:
+                fetch_n = min(limit * 3, limit + 50)
+            if fetch_n is not None:
+                query = query.limit(fetch_n)
             docs = self._stream_docs(query, include_archived=include_archived)
+            docs = self._sort_docs_newest(docs)
+            if limit is not None:
+                docs = docs[:limit]
         return [_doc_to_signal_dict(doc) for doc in docs]
 
     def upsert_many(
@@ -568,20 +597,31 @@ class FirestoreVoteStore:
         if not signal_ids:
             return result
         str_ids = [str(sid) for sid in signal_ids]
+        id_set = set(str_ids)
+
+        def _apply_doc(doc) -> None:
+            data = doc.to_dict() or {}
+            sid = str(data.get("signal_id", ""))
+            if sid not in result:
+                return
+            choice = data.get("choice", "")
+            if choice in {"up", "down"}:
+                result[sid][choice] += 1
+            if user_id is not None and str(data.get("user_id", "")) == str(user_id):
+                result[sid]["mine"] = choice
+
         batch_size = 30
-        for i in range(0, len(str_ids), batch_size):
-            chunk = str_ids[i : i + batch_size]
-            docs = self._coll().where("signal_id", "in", chunk).stream()
-            for doc in docs:
-                data = doc.to_dict()
-                sid = str(data.get("signal_id", ""))
-                if sid not in result:
-                    continue
-                choice = data.get("choice", "")
-                if choice in {"up", "down"}:
-                    result[sid][choice] += 1
-                if user_id is not None and str(data.get("user_id", "")) == str(user_id):
-                    result[sid]["mine"] = choice
+        try:
+            for i in range(0, len(str_ids), batch_size):
+                chunk = str_ids[i : i + batch_size]
+                docs = self._coll().where("signal_id", "in", chunk).stream()
+                for doc in docs:
+                    _apply_doc(doc)
+        except FailedPrecondition:
+            for doc in self._coll().stream():
+                data = doc.to_dict() or {}
+                if str(data.get("signal_id", "")) in id_set:
+                    _apply_doc(doc)
         return result
 
     def cast_vote(self, *, signal_id: Any, user_id: Any, choice: str) -> None:
