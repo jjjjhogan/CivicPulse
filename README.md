@@ -1,5 +1,10 @@
 # CivicPulse
 
+Research links:https://onlinelibrary.wiley.com/doi/full/10.1111/cag.12608
+https://www.ijeetr.com/index.php/ijeetr/article/view/527
+https://ieeexplore.ieee.org/abstract/document/11541407
+
+
 CivicPulse is an AI civic-sentiment research platform for city leadership — ingesting resident voices from social media, classifying issues (potholes, noise, sanitation, public safety, housing, immigration), and surfacing geographic clusters on a map.
 
 Coding Minds Curriculum: https://quest.codingmind.com/view/050A75A529DA4B719F143A7A0D
